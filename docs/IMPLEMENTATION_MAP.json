@@ -165,5 +165,50 @@
     ],
     "save": "Visual asset identifiers never change body geometry or durable game stats",
     "presentation": "128-color atlas, original generated candidates, source/prompt/provenance retained; user-requested rb-lighting-r1 and outlined feedback; user tablet review pending; labeled runtime/atlas package Awaiting User Review, no animation approval"
+  },
+  {
+    "id": "foundation.gate1.closeout",
+    "requirements": [
+      "RB-5-009",
+      "RB-26B-011",
+      "RB-26C-001"
+    ],
+    "sections": [
+      "\u00a75",
+      "\u00a716",
+      "\u00a718",
+      "\u00a726B",
+      "\u00a726C",
+      "T06",
+      "T08",
+      "T14",
+      "T16",
+      "T17"
+    ],
+    "gate": 1,
+    "state": "Verified",
+    "scope": "Ten requested Gate1 camera/strategic/landscape/presentation/preferences/route/input closeout items; complete later tactical/accessibility/roster audit remains Designed",
+    "code": [
+      "src/render/world.ts",
+      "src/render/projection.ts",
+      "src/construction/geometry.ts",
+      "src/app.ts",
+      "src/style.css",
+      "src/persistence/preferences.ts",
+      "assets/source/generate_roles.py"
+    ],
+    "tests": [
+      "tests/unit/gate1-closeout.test.ts",
+      "tests/browser/gate1-closeout.spec.ts",
+      "tests/browser/gate1.spec.ts",
+      "assets/source/validate_roles.py",
+      "scripts/capture-gate1-closeout.mjs"
+    ],
+    "dependencies": [
+      "Verified construction foundation",
+      "conditional rb-lighting-r1 approval"
+    ],
+    "save": "Global meta/preferences.v1; campaign schema1 unchanged; invalid preference payload retained",
+    "presentation": "Strategic 24px icons, patterns/outlines/shapes, native assets, landscape 3-region reflow; physical Android Needs Device Check"
   }
 ]

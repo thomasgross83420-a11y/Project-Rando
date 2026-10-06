@@ -180,3 +180,15 @@ no console/HTTP errors. Local loopback inspection is not public/offline proof.
 Exact evidence: review/GATE1_LIGHTING_R1_EVIDENCE.json. Blueprint SHA256 unchanged.
 Status remains Awaiting User Review; Gate1 incomplete, Gate2/mass roster paused.
 Physical tablet/Android/TalkBack and remaining foundation acceptance stay open.
+
+## Gate 1 closeout — construction foundation verified, 2026-10-06
+
+Conditional user approval recorded in review/USER_VISUAL_APPROVAL.md; rb-lighting-r1 geometry/palette and Core/Sentry/Barricade language approved as foundation only. No final diagnostic mobile or animation approval inferred.
+
+Commands: npm run format, format:check, typecheck/build, lint, test, test:scenario; npm run test:browser; npx playwright test tests/browser/gate1-closeout.spec.ts; foundation, lighting and role atlas validators; node scripts/capture-gate1-closeout.mjs; git diff --check; blueprint SHA256 unchanged. Twelve unit tests and fifteen production-browser tests passed. Final focused closeout rerun covers Core badge anchoring and preservation of invalid global settings. Lint retains only the two existing informational template notices; build retains the existing upstream comment-annotation warnings.
+
+Tests cover distinct Fit Base/Fit Field, four rotations, projection/inverse/pan/zoom, continuous ordinary/heavy/boss clearance witnesses and sealed rejection, exact capacity, placement/investment/history, landscape 3-region geometry at 100%/200%, portrait reflow, global preferences across reload, injected preference abort/retry with unchanged wallet, touch drag/pinch/cancel, keyboard, and competing writer tabs. The Core artwork selection fixture was corrected to explicitly recenter and scroll the canvas into the viewport before real touch, rather than assume the former full-field camera center. Earlier runs had 14/15 passing before that stale input assumption was fixed; no failing run is certified.
+
+Eleven native production screenshots inspected: purchased-land Fit Base, strategic full-field grouped badges, four rotations/route witnesses, valid/invalid reservation ghost, landscape100%/200% and portrait200% high contrast. Core groups now anchor at Core; normal sprites are not enlarged. No persistent overlapping world names. Route feedback is a deterministic legal witness, not combat intelligence. Global preferences load/apply durably; defaults do not overwrite invalid saved payloads without an explicit change. Live closeout capture reload retains both placements,600Credits,capacity2/20 and scale/highContrast/reducedEffects. Known ANGLE capture performance warnings remain separately recorded, with no application/HTTP errors; no hardware-performance claim.
+
+Gate 1 construction acceptance is complete. Full wizard/menu contracts, full roster icon/animation audit and release accessibility/device certification remain later-gate work. Android/TalkBack/orientation/eviction/GPU checks are Needs Device Check. No public deployment/offline readiness is claimed. Gate 2 proceeds only after this verified checkpoint; no mass roster production.

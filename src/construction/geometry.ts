@@ -98,10 +98,22 @@ export function edgeClear(
   }
   return true;
 }
-export function validateRoutes(
+export interface RouteTrace {
+  entrance: number;
+  radius: number;
+  valid: boolean;
+  points: Position[];
+}
+export interface RouteAnalysis {
+  traces: RouteTrace[];
+  failure: string | undefined;
+}
+export function analyzeRoutes(
   rectangles: readonly Rect[],
   profiles: readonly number[] = [461, 768],
-): string | undefined {
+): RouteAnalysis {
+  const traces: RouteTrace[] = [];
+  let failure: string | undefined;
   const solids = [CORE, ...rectangles].map((r) => ({
     x: r.x * 1024,
     y: r.y * 1024,
@@ -119,7 +131,8 @@ export function validateRoutes(
   for (const radius of profiles) {
     const legal = new Uint8Array(size),
       seen = new Uint8Array(size),
-      queue = new Int32Array(size);
+      queue = new Int32Array(size),
+      parent = new Int32Array(size).fill(-1);
     let head = 0,
       tail = 0;
     for (let id = 0; id < size; id++) {
@@ -158,6 +171,7 @@ export function validateRoutes(
         const b = positions[nid];
         if (!b || !edgeClear(a, b, radius, solids)) continue;
         seen[nid] = 1;
+        parent[nid] = id;
         queue[tail++] = nid;
       }
     }
@@ -177,9 +191,29 @@ export function validateRoutes(
         }
       candidates.sort((a, b) => a.distance - b.distance || a.id - b.id);
       const spawn = candidates[0];
-      if (!spawn || !seen[spawn.id])
-        return `Entrance ${i + 1} has no radius ${(radius / 1024).toFixed(3)} GU route to the Core.`;
+      const valid = Boolean(spawn && seen[spawn.id]);
+      const points: Position[] = [];
+      if (spawn) {
+        let node = spawn.id;
+        // A rejected route shows its spawn marker, never a fabricated route.
+        while (node >= 0) {
+          const p = positions[node];
+          if (!p) throw new Error('Missing route node');
+          points.push({ x: p.x / 1024, y: p.y / 1024 });
+          node = valid ? (parent[node] ?? -1) : -1;
+        }
+      }
+      traces.push({ entrance: i + 1, radius, valid, points });
+      if (!valid && !failure)
+        failure = `Entrance ${i + 1} has no radius ${(radius / 1024).toFixed(3)} GU route to the Core.`;
     }
   }
-  return undefined;
+  return { traces, failure };
+}
+
+export function validateRoutes(
+  rectangles: readonly Rect[],
+  profiles: readonly number[] = [461, 768],
+): string | undefined {
+  return analyzeRoutes(rectangles, profiles).failure;
 }

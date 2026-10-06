@@ -59,3 +59,9 @@ pipeline checks, not user style approval or accessibility contrast certification
 Actual runtime four-view/zoom/tablet captures accompany the revised review.
 Lighting ID: `rb-lighting-r1`. Status: **Awaiting User Review**. No new roster,
 animation, audio, save rule or combat mechanic was introduced.
+
+## Gate 1 role presentation and scoped approval
+
+The user conditionally approved the rb-lighting-r1 visual foundation, detailed in review/USER_VISUAL_APPROVAL.md. Manifest review status records foundation approval only, never full frame/animation acceptance. Original alpha/native geometry remain unchanged.
+
+`assets/source/generate_roles.py` derives three 24×24 screen-space strategic icons from the actual Core, Sentry and Barricade silhouettes, using nearest-neighbor reduction and a friendly corner chevron. `roles.png` is 96×32 with four-pixel transparent gutters; roles.json stores source keys, native bounds and hash. `validate_roles.py` checks count, unique keys, native dimensions, bounds, padding and hash. No external asset/dependency/license is added. Full roster icon audit remains Gate 7. No Rifle/Runner diagnostic alternate view is propagated as finished art.

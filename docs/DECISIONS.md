@@ -71,3 +71,11 @@ background/tint; simulation/save/version identities are unchanged. Geometry and
 alpha are compared to the immutable prior review commit. Generated lighting
 guidance is retained but not substituted for runtime sprites. See VIS001 in
 DESIGN_DECISIONS.md and review/GATE1_LIGHTING_R1.md. User approval remains pending.
+
+## ADR008 — Gate 1 strategic and preparation closeout
+
+Fit Base fits purchased [12,48)² land with native-height headroom, four rotations and the ordinary 0.35 minimum zoom. Fit Field fits the whole 60² staging field and has the declared lower-fit exception. The default is Fit Base. No ordinary sprites are enlarged to solve strategic readability: 24px original silhouette badges retain screen size, group overlapping assets and open named selection. Core-containing groups anchor on Core. Detailed sprites remain at native density/zoom; precise selection uses actual alpha rather than transparent frame margins.
+
+Route overlays show actual deterministic clearance witnesses for the selected 0.45/0.75 GU profile against the proposed layout. They complement the exact authoritative placement explanation; neither overlay nor camera changes legality. Reservations use patterns/outlines, selection hollow crosshair and valid/invalid placement check/cross. Landscape preparation reflows a single control set to left tools, middle field and right details, including at 200%.
+
+Global schema1 presentation preferences live in IndexedDB meta/preferences.v1, independent of campaign Undo/Redo and replacement. Changes apply immediately, debounce 250ms and report Saved only on completion. Failure retains current presentation with explicit retry. Invalid stored preferences are preserved until an explicit change. No campaign schema or economy policy is changed. Conditional rb-lighting-r1 approval supersedes the pending-foundation review status in ADR005/007; all exclusions remain in USER_VISUAL_APPROVAL.md.

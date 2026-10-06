@@ -156,10 +156,15 @@ test('high artwork selects the Core inspector in four views without purchasing; 
 }) => {
   await create(page);
   for (let orientation = 0; orientation < 4; orientation++) {
-    await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
+    // Fit Base includes tall-sprite padding; Core recenter is the explicit route
+    // to a centered ground anchor, independent of Base/Field fit or viewport.
+    await page.getByRole('button', { name: 'Core', exact: true }).click();
+    for (let zoom = 0; zoom < 4; zoom++)
+      await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
+    await page.locator('canvas').scrollIntoViewIfNeeded();
     const box = await page.locator('canvas').boundingBox();
     if (!box) throw new Error('Canvas missing');
-    await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2 - 5);
+    await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2 - 40);
     await expect(page.getByRole('dialog')).toBeVisible();
     await expect(page.getByRole('dialog')).toContainText('Harmonic Core');
     await page.getByRole('button', { name: 'Cancel / close', exact: true }).click();

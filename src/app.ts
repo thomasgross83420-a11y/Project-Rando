@@ -11,9 +11,13 @@ import {
 } from './data/foundation';
 import { WorldView } from './render/world';
 import { AudioMixer } from './audio/mixer';
+import { PreferencesStore } from './persistence/preferences';
+import { analyzeRoutes } from './construction/geometry';
+import { solidFootprints, footprint } from './persistence/campaign';
 const root = document.querySelector<HTMLElement>('#app');
 if (!root) throw new Error('Missing application root');
-root.innerHTML = `<header><p class="eyebrow">RESONANCE BASTION · CONSTRUCTION DEVELOPMENT</p><h1>Resonance Bastion</h1><p>Build a permanent fortress. Its defenders will fight autonomously.</p></header><p id="status" role="status">Checking retained storage…</p><div id="title"></div><div id="preparation" hidden><h2 id="campaign-heading"></h2><p id="account"></p><section id="world" aria-label="Fortress field"></section><nav aria-label="Camera controls">${[
+root.innerHTML = `<header><p class="eyebrow">RESONANCE BASTION · CONSTRUCTION DEVELOPMENT</p><h1>Resonance Bastion</h1><p>Build a permanent fortress. Its defenders will fight autonomously.</p></header><p id="status" role="status">Checking retained storage…</p><div id="title"></div><div id="preparation" hidden><h2 id="campaign-heading"></h2><p id="account"></p><div id="prep-layout"><aside id="prep-sidebar" aria-label="Preparation tools"><h3>Camera and build</h3><nav aria-label="Camera controls">${[
+  ['fit-base', 'Fit Base'],
   ['fit', 'Fit field'],
   ['recenter', 'Core'],
   ['rotate', 'Rotate view'],
@@ -27,7 +31,7 @@ root.innerHTML = `<header><p class="eyebrow">RESONANCE BASTION · CONSTRUCTION D
   .map(([id, label]) => `<button data-camera="${id}">${label}</button>`)
   .join(
     '',
-  )}</nav><div id="construction"></div><button id="return-title">Return to title</button></div><dialog id="dialog" aria-labelledby="dialog-heading"><h2 id="dialog-heading"></h2><div id="dialog-body"></div><button id="close-dialog">Cancel / close</button></dialog>`;
+  )}</nav><nav aria-label="Spatial tools"><button id="routes-toggle" aria-pressed="false">Show Routes</button><label>Route clearance <select id="route-radius"><option value="768">Heavy · 0.75 GU</option><option value="461">Ordinary · 0.45 GU</option></select></label><button id="prep-accessibility">Accessibility</button></nav><div id="inventory-host"></div><div id="catalog-host"></div><nav aria-label="Entrance navigation">${[1, 2, 3, 4, 5, 6].map((n) => `<button data-front="${n}">Front ${n}</button>`).join('')}</nav></aside><div id="prep-field"><section id="world" aria-label="Fortress field"></section><p id="camera-summary" aria-live="off"></p><details class="spatial-legend"><summary>Map and marker legend</summary><p>Strategic badges: crystal = Core; barrel = tower; wall = barrier; chevron = friendly; number = grouped assets. Solid line: purchased land. Hatched square: Core reservation. Narrow double hatch: Warden pad. Numbered entrance: Front 1–6. Dashed line: validated route; ×: blocked entrance. Named inventory provides selection and camera jump.</p></details></div><aside id="prep-details" aria-label="Placement and details"><h3>Placement and inspection</h3><div id="construction"></div><p id="route-summary" aria-live="off"></p><button id="return-title">Return to title</button></aside></div></div><dialog id="dialog" aria-labelledby="dialog-heading"><h2 id="dialog-heading"></h2><div id="dialog-body"></div><button id="close-dialog">Cancel / close</button></dialog>`;
 const byId = (id: string): HTMLElement => {
   const e = document.getElementById(id);
   if (!e) throw new Error(`Missing ${id}`);
@@ -77,7 +81,41 @@ if (database) {
   repository = new CampaignRepository(database);
   await repository.acquire();
 }
+const preferences = new PreferencesStore(database, status);
+try {
+  await preferences.load();
+} catch (e) {
+  status(
+    `Saved preferences could not be loaded: ${String(e)}. Campaigns preserved; current defaults retained.`,
+  );
+}
 let preparation: Preparation | undefined, view: WorldView | undefined;
+function openAccessibility(): void {
+  const v = preferences.value;
+  modal(
+    'Accessibility',
+    `<label>Interface scale <select id="ui-scale"><option value="18">100%</option><option value="27">150%</option><option value="36">200%</option></select></label><label><input id="reduce" type="checkbox" ${v.reducedEffects ? 'checked' : ''}> Reduced effects</label><label><input id="contrast" type="checkbox" ${v.highContrast ? 'checked' : ''}> High contrast construction</label><p>High contrast gives land, reservation, route and placement boundaries opaque contrasting edges and patterned state cues. Detailed artwork and simulation are unchanged.</p><button id="retry-preferences">Retry Save Preferences</button>`,
+  );
+  (byId('ui-scale') as HTMLSelectElement).value = String(v.uiScale);
+  byId('ui-scale').onchange = () => {
+    preferences.change({
+      uiScale: Number((byId('ui-scale') as HTMLSelectElement).value) as 18 | 27 | 36,
+    });
+    view?.resize();
+  };
+  byId('reduce').onchange = () =>
+    preferences.change({ reducedEffects: (byId('reduce') as HTMLInputElement).checked });
+  byId('contrast').onchange = () => {
+    preferences.change({ highContrast: (byId('contrast') as HTMLInputElement).checked });
+    if (view) {
+      view.highContrast = preferences.value.highContrast;
+      view.draw();
+    }
+  };
+  button('retry-preferences', () => preferences.save());
+}
+button('prep-accessibility', openAccessibility);
+let routeCacheKey = '';
 let choice: { id: string } | { type: ContentID } | undefined;
 let x = 18,
   y = 18,
@@ -96,6 +134,7 @@ function hidePreparation(): void {
     return;
   }
   byId('preparation').hidden = true;
+  document.body.classList.remove('in-preparation');
   byId('title').hidden = false;
   preparation = undefined;
   choice = undefined;
@@ -145,21 +184,7 @@ async function renderTitle(): Promise<void> {
       '<p>Choose New Game, select one of three slots, a doctrine and a Warden. All assets start in storage.</p><p>Choose an owned Sentry or Barricade, set integer X and Y coordinates, then Place. A world tap sets the coordinates; it never purchases. Move and Store are free. Undo restores the exact previous wallet and layout.</p><p>The amber Core precinct and Warden pad are reserved. Keep routes open for ordinary and heavy bodies. Camera controls work by touch or keyboard arrows and +/−. Combat is not implemented in this milestone.</p>',
     ),
   );
-  button('accessibility', () => {
-    modal(
-      'Accessibility',
-      '<label>Interface scale <select id="ui-scale"><option value="18">100%</option><option value="27">150%</option><option value="36">200%</option></select></label><p>All preparation commands have named buttons and coordinate alternatives. Color is accompanied by text. Focus outlines remain visible.</p><label><input id="reduce" type="checkbox"> Reduced effects</label>',
-    );
-    byId('ui-scale').onchange = () => {
-      document.documentElement.style.fontSize = `${(byId('ui-scale') as HTMLSelectElement).value}px`;
-    };
-    byId('reduce').onchange = () => {
-      document.documentElement.classList.toggle(
-        'reduced-effects',
-        (byId('reduce') as HTMLInputElement).checked,
-      );
-    };
-  });
+  button('accessibility', openAccessibility);
   button('settings', () => {
     modal(
       'Settings',
@@ -259,6 +284,7 @@ async function openCampaign(c: Campaign): Promise<void> {
   choice = undefined;
   byId('title').hidden = true;
   byId('preparation').hidden = false;
+  document.body.classList.add('in-preparation');
   if (!view) {
     view = new WorldView(byId('world'), status);
     view.onSelect = (p) => {
@@ -293,10 +319,14 @@ async function openCampaign(c: Campaign): Promise<void> {
         };
     };
     for (const b of document.querySelectorAll<HTMLButtonElement>('[data-camera]'))
-      b.onclick = () => view?.command(b.dataset.camera ?? '');
+      b.onclick = () => {
+        view?.command(b.dataset.camera ?? '');
+        updateCameraSummary();
+      };
   }
   view.campaign = c;
-  view.command('fit');
+  view.highContrast = preferences.value.highContrast;
+  view.command('fit-base');
   renderPreparation();
   status(
     repository.temporary
@@ -414,7 +444,33 @@ function renderPreparation(): void {
       'Campaign bytes offered for download. Confirm the file was stored externally. Import interface is still Designed.',
     );
   });
+  // Real landscape tools/details regions; preserve one set of semantic controls.
+  const inventory = byId('construction').querySelector('[aria-label="Owned inventory"]');
+  const catalog = byId('construction').querySelector('[aria-label="Construction catalog"]');
+  byId('inventory-host').replaceChildren(...(inventory ? [inventory] : []));
+  byId('catalog-host').replaceChildren(...(catalog ? [catalog] : []));
+  const jump = document.createElement('button');
+  jump.textContent = 'Jump to selected';
+  jump.disabled = !selected?.placement;
+  jump.onclick = () => {
+    if (selected?.placement && view) {
+      const r = footprint(selected);
+      if (r) {
+        view.fitActive = false;
+        view.camera.x = r.x + r.width / 2;
+        view.camera.y = r.y + r.height / 2;
+        view.draw();
+        updateCameraSummary();
+      }
+    }
+  };
+  byId('construction').append(jump);
   updateGhost();
+}
+function updateCameraSummary(): void {
+  if (!view) return;
+  byId('camera-summary').textContent =
+    `Camera ${view.camera.view * 90}° · ${view.camera.zoom < 0.65 ? 'Strategic role icons' : view.camera.zoom > 1.35 ? 'Close detailed sprites' : 'Tactical detailed sprites'} · zoom ${view.camera.zoom.toFixed(3)} · ${view.fitActive ? (view.fitMode === 'base' ? 'Fit Base: purchased terrain plus sprite-height margin (pan if viewport is too narrow at minimum zoom)' : 'Fit Field: full world and staging perimeter') : 'Manual camera'}`;
 }
 function updateGhost(): void {
   if (!view || !preparation) return;
@@ -425,6 +481,7 @@ function updateGhost(): void {
       : undefined;
   const type = choice && 'type' in choice ? choice.type : a?.type;
   let valid = false;
+  let reason = '';
   view.campaign = preparation.campaign;
   if (type && choice) {
     try {
@@ -440,12 +497,38 @@ function updateGhost(): void {
       byId('placement-reason').textContent =
         `Legal placement. After Place: ${preview.credits} Credits; capacity ${totals.capacity}/20; barriers ${totals.barriers}/40; traps ${totals.traps}/8. Commit only with Place.`;
     } catch (error) {
+      reason = String(error);
       (byId('place') as HTMLButtonElement).disabled = true;
       byId('placement-reason').textContent = `Invalid placement: ${String(error)}`;
     }
   }
   view.ghost = type ? { type, x, y, rotation, valid } : undefined;
+  view.invalidReason = reason;
+  const solids = solidFootprints(preparation.campaign).filter(
+    (r) => !a?.placement || r.x !== a.placement.x || r.y !== a.placement.y,
+  );
+  if (type && foundation[type].solid && Number.isInteger(x) && Number.isInteger(y)) {
+    const d = foundation[type];
+    solids.push({
+      x,
+      y,
+      width: rotation % 2 ? d.height : d.width,
+      height: rotation % 2 ? d.width : d.height,
+    });
+  }
+  const key = JSON.stringify(solids);
+  if (key !== routeCacheKey || !view.routeAnalysis) {
+    view.routeAnalysis = analyzeRoutes(solids);
+    routeCacheKey = key;
+  }
+  view.routesVisible =
+    Boolean(choice) || byId('routes-toggle').getAttribute('aria-pressed') === 'true';
+  byId('route-summary').textContent = reason
+    ? `Invalid Placement: ${reason}. ${view.routeAnalysis.failure ?? 'Open routes remain valid; occupancy or reservation prevents this placement.'}`
+    : (view.routeAnalysis.failure ??
+      'Valid Open Route: all six entrances reach Core-adjacent goals with ordinary 0.45 and heavy 0.75 GU clearance. Dashed preview lines are not hidden battle information.');
   view.draw();
+  updateCameraSummary();
 }
 async function transact(work: () => Promise<void>): Promise<void> {
   try {
@@ -462,6 +545,39 @@ async function transact(work: () => Promise<void>): Promise<void> {
   renderPreparation();
 }
 button('return-title', hidePreparation);
+button('routes-toggle', () => {
+  const b = byId('routes-toggle');
+  const shown = b.getAttribute('aria-pressed') !== 'true';
+  b.setAttribute('aria-pressed', String(shown));
+  b.textContent = shown ? 'Hide Routes' : 'Show Routes';
+  updateGhost();
+});
+byId('route-radius').onchange = () => {
+  if (view) {
+    view.routeRadius = Number((byId('route-radius') as HTMLSelectElement).value);
+    view.draw();
+  }
+};
+for (const b of document.querySelectorAll<HTMLButtonElement>('[data-front]'))
+  b.onclick = () => {
+    const fronts = [
+      { x: 3, y: 18 },
+      { x: 3, y: 42 },
+      { x: 18, y: 3 },
+      { x: 42, y: 3 },
+      { x: 57, y: 30 },
+      { x: 30, y: 57 },
+    ];
+    const p = fronts[Number(b.dataset.front) - 1];
+    if (view && p) {
+      view.fitActive = false;
+      view.camera.x = p.x;
+      view.camera.y = p.y;
+      view.draw();
+      updateCameraSummary();
+    }
+  };
+dialog.addEventListener('close', () => void preferences.save());
 window.addEventListener('keydown', (e) => {
   if (dialog.open || (e.target as HTMLElement).matches('input,select,textarea')) return;
   if (e.key === 'Escape') {
@@ -484,8 +600,10 @@ window.addEventListener('keydown', (e) => {
   }
 });
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) void audio.suspend();
-  else void repository?.heartbeat().catch((e) => status(`Writer check failed: ${String(e)}`));
+  if (document.hidden) {
+    void audio.suspend();
+    void preferences.save();
+  } else void repository?.heartbeat().catch((e) => status(`Writer check failed: ${String(e)}`));
 });
 await renderTitle();
 if (database)

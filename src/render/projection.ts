@@ -63,3 +63,27 @@ export function fit(camera: Camera): void {
   camera.y = 30;
   camera.zoom = Math.min((camera.width - 24) / 1920, (camera.height - 72) / 1120, 2.5);
 }
+
+/** Fit purchased terrain plus maximum sprite-height padding, not the staging field.
+ * Unlike whole-field overview, Base respects the ordinary 0.35 lower zoom bound.
+ */
+export function fitBase(camera: Camera): void {
+  const measuring = { ...camera, x: 0, y: 0, zoom: 1, width: 0, height: 0 };
+  const corners = [
+    { x: 12, y: 12 },
+    { x: 48, y: 12 },
+    { x: 48, y: 48 },
+    { x: 12, y: 48 },
+  ].map((p) => project(p, measuring));
+  const minX = Math.min(...corners.map((p) => p.x)),
+    maxX = Math.max(...corners.map((p) => p.x));
+  const minY = Math.min(...corners.map((p) => p.y)) - 96,
+    maxY = Math.max(...corners.map((p) => p.y)) + 16;
+  const center = unproject({ x: (minX + maxX) / 2, y: (minY + maxY) / 2 }, measuring);
+  camera.x = center.x;
+  camera.y = center.y;
+  camera.zoom = Math.max(
+    0.35,
+    Math.min(2.5, (camera.width - 24) / (maxX - minX), (camera.height - 24) / (maxY - minY)),
+  );
+}

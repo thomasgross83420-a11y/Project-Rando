@@ -1,10 +1,10 @@
 {
   "id": "rb-lighting-r1",
-  "status": "Awaiting User Review",
+  "status": "Conditionally Approved Visual Foundation",
   "authority": "User requested less-dark, better-lit, detailed and clearly defined Gate 1 candidates; blueprint section 16",
   "reference": "assets/source/lighting-reference-r1.png",
   "referenceUse": "Lighting guidance only. Generated edge/layout differences are not adopted as runtime geometry.",
-  "spriteChannelGamma": 0.70,
+  "spriteChannelGamma": 0.7,
   "preserveDarkPixelMaximum": 32,
   "terrain": {
     "ink": "#2b3c49",

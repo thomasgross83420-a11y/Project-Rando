@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "lighting": "rb-lighting-r1",
+  "source": "assets/source/generate_roles.py",
+  "padding": 4,
+  "frames": [
+    {
+      "key": "objective.harmonic_core",
+      "role": "Core",
+      "rect": [
+        4,
+        4,
+        24,
+        24
+      ],
+      "native": [
+        24,
+        24
+      ],
+      "source": "objective.harmonic_core.view0",
+      "status": "Gate1 strategic candidate; conditional foundation approval, full roster audit pending"
+    },
+    {
+      "key": "friendly.sentry",
+      "role": "Tower",
+      "rect": [
+        36,
+        4,
+        24,
+        24
+      ],
+      "native": [
+        24,
+        24
+      ],
+      "source": "friendly.sentry.view0",
+      "status": "Gate1 strategic candidate; conditional foundation approval, full roster audit pending"
+    },
+    {
+      "key": "friendly.standard_barricade",
+      "role": "Barrier",
+      "rect": [
+        68,
+        4,
+        24,
+        24
+      ],
+      "native": [
+        24,
+        24
+      ],
+      "source": "friendly.standard_barricade.view0",
+      "status": "Gate1 strategic candidate; conditional foundation approval, full roster audit pending"
+    }
+  ],
+  "sha256": "85ce1cd3b742fb83be43074795a0322fc069c83f3a3a4ce7d31598815ead9d69"
+}

@@ -1,41 +1,14 @@
 # Implementation status
 
-Authority: [unchanged blueprint](blueprint/Resonance_Bastion_Browser_Blueprint_Final.md).
-The complete game remains required; this is a development checkpoint, not a release.
+Authority: [unchanged blueprint](blueprint/Resonance_Bastion_Browser_Blueprint_Final.md). The full game remains required; this is a development checkpoint.
 
 | Gate | State | Evidence / remaining acceptance |
 | --- | --- | --- |
-| 0 | Verified environment smoke | TEST_EVIDENCE.md; real production-subpath Chromium checks |
-| 1 | Implemented, in progress | Construction/persistence/camera subset verified; visual proof Awaiting User Review; final foundation presentation and remaining input/accessibility acceptance still open |
-| 2–8 | Designed | Full autonomous combat, original audio, progression, roster, campaign, modes, all presentation and release checks remain queued |
+| 0 | Verified | TEST_EVIDENCE.md: environment and production-subpath smoke |
+| 1 | Verified construction foundation | review/GATE1_CLOSEOUT.md; conditional visual approval recorded, ten requested closeout corrections implemented and regression-tested |
+| 2 | Designed, next dependency | Authoritative Bulwark/Bastion autonomous tutorial, full representative animation/effects/audio pipeline |
+| 3–8 | Designed | Complete persistence/progression, tactical roster, bosses/modes, full art/audio/accessibility and physical-device release |
 
-Implemented foundation: three campaign slots with named replacement review; exact
-starter grants and 600 Credits; all assets begin stored; durable Sentry/Barricade
-placement/purchase/move/rotate/store; explicit ghost confirmation/cancel; Undo/Redo;
-Rank1 land/reservations/capacity/allowances; continuous .45/.75 radius routes plus
-1.2 radius fixture; four cameras, pan/zoom/Fit; high-artwork picker; native DOM
-controls; explicit Temporary Session; writer fencing; foundation export.
+Gate 1 has three retained slots, atomic Sentry/Barricade construction, exact grants and wallet, capacity and route legality, Undo/Redo, camera transforms/pan/zoom/rotation, distinct Fit Base/Fit Field, strategic role grouping and named selection, patterned reservations, validated route previews, landscape reflow and durable global accessibility presentation. Conditional visual approval is narrowly recorded in [USER_VISUAL_APPROVAL.md](review/USER_VISUAL_APPROVAL.md); it does not approve diagnostic Rifle/Runner alternate views or missing animations.
 
-Original native-size candidates for Core/Sentry/Barricade four camera views, Rifle/
-Runner/Bulwark proof, six basalt variations and title composition are integrated.
-They are Candidate, not approved final art. Structural atlas checks passed. Mobile
-additional directions/animations, portraits, final role icons and damage/wreck art
-remain Designed. No actual music or SFX yet. No playable siege, public hosting,
-offline readiness, full accessibility or Android performance is claimed.
-
-Physical Android/TalkBack/GPU/storage/download/orientation tests: Needs Device Check.
-Full step-by-step wizard, recovery/import/receipts/migrations and durable settings
-are still Designed. Development controls explain unavailable systems explicitly.
-
-905 immutable source blocks and 67 base roster IDs remain covered in TRACEABILITY.csv
-and CONTENT_COVERAGE.json. IMPLEMENTATION_MAP.json links concrete partial foundations
-to source blocks/code/tests; a source block stays Designed until its entire contract
-is fulfilled. No roster category, mode, boss, progression or post-mastery scope was removed.
-
-Gate 1 visual review: [review package/reproduction and checklist](review/GATE1_VISUAL_REVIEW.md).
-Objective overview label/selection and zero-size hidden-canvas defects corrected;
-the original correction checkpoint preserved representative sprites. The subsequent
-user-requested [brighter lighting candidate](review/GATE1_LIGHTING_R1.md) revises
-RGB ramps/background while preserving native geometry and the blueprint art direction.
-Its updated runtime proof is **Awaiting User Review**. Gate 2 and mass roster
-production are paused at this user-review checkpoint.
+Physical Android/TalkBack/GPU/storage/download/orientation checks: Needs Device Check. Complete multi-step creation wizard, all menus, full silhouette/accessibility audit, import, receipts, recovery and save migrations remain assigned to their later dependent implementations. No playable siege, actual music/SFX, public hosting, offline readiness or device performance is claimed at this checkpoint. No scope category has been removed. The 905 immutable source blocks and 67 base roster IDs remain indexed; broad source blocks stay Designed until their entire contracts pass.

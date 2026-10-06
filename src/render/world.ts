@@ -1,11 +1,14 @@
 import Phaser from 'phaser';
 import atlas from '../../public/assets/foundation.json';
+import roles from '../../public/assets/roles.json';
+import { type RouteAnalysis, PAD } from '../construction/geometry';
 import { footprint, type Campaign } from '../persistence/campaign';
-import { foundation, requireDefinition, type ContentID } from '../data/foundation';
+import { foundation, type ContentID } from '../data/foundation';
 import { ENTRANCES } from '../construction/geometry';
 import {
   clientPoint,
   fit as fitWorld,
+  fitBase,
   pan,
   project,
   unproject,
@@ -19,14 +22,28 @@ export class WorldView {
   graphics: Phaser.GameObjects.Graphics | undefined;
   ready = false;
   fitActive = false;
+  fitMode: 'field' | 'base' = 'base';
+  highContrast = false;
+  routeAnalysis: RouteAnalysis | undefined;
+  routesVisible = false;
+  routeRadius = 768;
+  invalidReason = '';
   scene: Phaser.Scene | undefined;
   sprites: Phaser.GameObjects.Image[] = [];
   campaign: Campaign | undefined;
   ghost: { type: ContentID; x: number; y: number; rotation: number; valid: boolean } | undefined;
   onSelect: ((point: Point) => void) | undefined;
   onInspect: ((ids: string[]) => void) | undefined;
-  hitRecords: { id: string; x: number; y: number; width: number; height: number; foot: Point }[] =
-    [];
+  hitRecords: {
+    id: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    foot: Point;
+    frame?: string;
+    scale?: number;
+  }[] = [];
   labels: Phaser.GameObjects.Text[] = [];
   selected: Point = { x: 30, y: 30 };
   constructor(
@@ -37,6 +54,7 @@ export class WorldView {
     class Scene extends Phaser.Scene {
       preload(): void {
         this.load.image('foundation', `${import.meta.env.BASE_URL}assets/foundation.png`);
+        this.load.image('roles', `${import.meta.env.BASE_URL}assets/roles.png`);
       }
       create(): void {
         owner.scene = this;
@@ -46,6 +64,13 @@ export class WorldView {
           if (x === undefined || y === undefined || w === undefined || h === undefined)
             throw new Error('Malformed atlas');
           texture.add(f.key, 0, x, y, w, h);
+        }
+        const icons = this.textures.get('roles');
+        for (const f of roles.frames) {
+          const [x, y, w, h] = f.rect;
+          if (x === undefined || y === undefined || w === undefined || h === undefined)
+            throw new Error('Malformed role icon');
+          icons.add(f.key, 0, x, y, w, h);
         }
         owner.graphics = this.add.graphics();
         owner.ready = true;
@@ -89,7 +114,7 @@ export class WorldView {
     if (width <= 0 || height <= 0) return;
     this.camera.width = width;
     this.camera.height = height;
-    if (this.fitActive) fitWorld(this.camera);
+    if (this.fitActive) (this.fitMode === 'base' ? fitBase : fitWorld)(this.camera);
     if (!this.ready) return;
     this.game.scale.resize(this.camera.width, this.camera.height);
     this.draw();
@@ -180,7 +205,15 @@ export class WorldView {
               screen.x >= r.x &&
               screen.x < r.x + r.width &&
               screen.y >= r.y &&
-              screen.y < r.y + r.height,
+              screen.y < r.y + r.height &&
+              (!r.frame ||
+                !r.scale ||
+                (this.scene?.textures.getPixelAlpha(
+                  Math.floor((screen.x - r.x) / r.scale),
+                  Math.floor((screen.y - r.y) / r.scale),
+                  'foundation',
+                  r.frame,
+                ) ?? 0) >= 128),
           )
           .reverse();
         if (this.onInspect && !this.ghost && hits.length) {
@@ -222,15 +255,19 @@ export class WorldView {
     );
   }
   command(command: string): void {
-    if (command === 'fit') {
+    if (command === 'fit' || command === 'fit-base') {
       this.fitActive = true;
-      fitWorld(this.camera);
+      this.fitMode = command === 'fit' ? 'field' : 'base';
+      (this.fitMode === 'base' ? fitBase : fitWorld)(this.camera);
     } else if (command !== 'rotate') this.fitActive = false;
     if (command === 'recenter') {
       this.camera.x = 30;
       this.camera.y = 30;
     }
-    if (command === 'rotate') this.camera.view = ((this.camera.view + 1) % 4) as Camera['view'];
+    if (command === 'rotate') {
+      this.camera.view = ((this.camera.view + 1) % 4) as Camera['view'];
+      if (this.fitActive) (this.fitMode === 'base' ? fitBase : fitWorld)(this.camera);
+    }
     if (command === 'in' || command === 'out')
       zoomAt(this.camera, this.camera.zoom * (command === 'in' ? 1.25 : 0.8), {
         x: this.camera.width / 2,
@@ -318,65 +355,64 @@ export class WorldView {
         width: w * scale,
         height: h * scale,
         foot: p,
+        frame: `${key}.view${artView}`,
+        scale,
       });
       image(`${key}.view${artView}`, p);
     }
-    // Overview names must not obscure the sprites they identify or one another.
-    // Wait until all body bounds exist before positioning any nameplate.
+    // Strategic icons keep their UI pixel size; ordinary sprites keep native density.
+    // Overlapping icon bounds share one badge and the named multi-object picker.
     if (this.camera.zoom < 0.65 && this.scene) {
-      const occupied = this.hitRecords.map((r) => ({
-        x: r.x - 4,
-        y: r.y - 4,
-        width: r.width + 8,
-        height: r.height + 8,
-      }));
+      const groups: { point: Point; ids: string[]; key: string }[] = [];
       for (const [key, point, id] of objects) {
         const screen = project(point, this.camera);
-        const body = this.hitRecords.find((r) => r.id === id);
-        if (!body) throw new Error('Missing nameplate body bounds');
-        const text = this.scene.add
-          .text(screen.x, screen.y, id === 'core' ? 'Core' : requireDefinition(key).name, {
-            fontFamily: 'system-ui',
-            fontSize: '16px',
-            color: '#ffffff',
-            backgroundColor: '#17232e',
-          })
-          .setOrigin(0.5)
-          .setDepth(99998);
-        let placed = false;
-        for (let row = 0; row < Math.ceil(this.camera.height / (text.height + 8)); row++) {
-          for (const direction of [-1, 1]) {
-            const x = Math.max(
-              text.width / 2 + 4,
-              Math.min(this.camera.width - text.width / 2 - 4, screen.x),
-            );
-            const y =
-              direction < 0
-                ? body.y - 8 - text.height / 2 - row * (text.height + 8)
-                : body.y + body.height + 8 + text.height / 2 + row * (text.height + 8);
-            text.setPosition(x, y);
-            const r = text.getBounds();
-            if (r.top < 4 || r.bottom > this.camera.height - 4) continue;
-            if (
-              occupied.some(
-                (b) =>
-                  r.left < b.x + b.width &&
-                  r.right > b.x &&
-                  r.top < b.y + b.height &&
-                  r.bottom > b.y,
-              )
-            )
-              continue;
-            occupied.push({ x: r.x - 4, y: r.y - 4, width: r.width + 8, height: r.height + 8 });
-            placed = true;
-            break;
+        const group = groups.find(
+          (b) => Math.abs(b.point.x - screen.x) < 28 && Math.abs(b.point.y - screen.y) < 28,
+        );
+        if (group) {
+          group.ids.push(id);
+          if (id === 'core') {
+            group.key = key;
+            group.point = screen;
           }
-          if (placed) break;
+        } else groups.push({ point: screen, ids: [id], key });
+      }
+      this.hitRecords = [];
+      for (const b of groups) {
+        if (!roles.frames.some((f) => f.key === b.key))
+          throw new Error(`Missing strategic icon ${b.key}`);
+        const p = b.point;
+        g.fillStyle(0x111923, 0.96);
+        g.fillRoundedRect(p.x - 16, p.y - 16, 32, 32, 4);
+        g.lineStyle(this.highContrast ? 3 : 2, 0xb8eee0);
+        g.strokeRoundedRect(p.x - 16, p.y - 16, 32, 32, 4);
+        const icon = this.scene.add
+          .image(Math.round(p.x), Math.round(p.y), 'roles', b.key)
+          .setDepth(100000);
+        this.sprites.push(icon);
+        if (b.ids.length > 1)
+          this.labels.push(
+            this.scene.add
+              .text(p.x + 13, p.y - 17, String(b.ids.length), {
+                fontFamily: 'system-ui',
+                fontSize: '16px',
+                color: '#ffffff',
+                backgroundColor: '#111923',
+              })
+              .setDepth(100001),
+          );
+        for (const id of b.ids) {
+          const object = objects.find((o) => o[2] === id);
+          if (object)
+            this.hitRecords.push({
+              id,
+              x: p.x - 18,
+              y: p.y - 18,
+              width: 36,
+              height: 36,
+              foot: object[1],
+            });
         }
-        // A crowded overview retains the accessible named DOM inventory/picker;
-        // suppress an unplaceable caption rather than painting over an object.
-        text.setVisible(placed);
-        this.labels.push(text);
       }
     }
     const outline = (x: number, y: number, w: number, h: number, color: number): void => {
@@ -390,8 +426,8 @@ export class WorldView {
       // A dark backing preserves boundary contrast on brighter terrain and art.
       // Draw the complete backing first so adjacent colored segments stay clear.
       for (const [width, stroke] of [
-        [4, 0x111923],
-        [2, color],
+        [this.highContrast ? 6 : 4, 0x111923],
+        [this.highContrast ? 3 : 2, this.highContrast ? 0xffffff : color],
       ] as const) {
         g.lineStyle(width, stroke);
         for (let i = 1; i < points.length; i++) {
@@ -401,6 +437,49 @@ export class WorldView {
         }
       }
     };
+    if (this.routesVisible && this.routeAnalysis) {
+      for (const trace of this.routeAnalysis.traces.filter((t) => t.radius === this.routeRadius)) {
+        const points = trace.points.map((p) => project(p, this.camera));
+        for (const [width, color] of [
+          [5, 0x111923],
+          [2, this.highContrast ? 0xffffff : 0xb8eee0],
+        ] as const) {
+          g.lineStyle(width, color);
+          // Dashed routes distinguish previews from solid occupancy boundaries.
+          for (let i = 1; i < points.length; i += 2) {
+            const a = points[i - 1],
+              b = points[i];
+            if (a && b) g.lineBetween(a.x, a.y, b.x, b.y);
+          }
+        }
+        if (!trace.valid) {
+          const entrance = ENTRANCES[trace.entrance - 1];
+          if (entrance) {
+            const p = project(entrance, this.camera);
+            g.lineStyle(5, 0x111923);
+            g.strokeCircle(p.x, p.y, 14);
+            g.lineStyle(3, 0xffffff);
+            g.lineBetween(p.x - 9, p.y - 9, p.x + 9, p.y + 9);
+            g.lineBetween(p.x - 9, p.y + 9, p.x + 9, p.y - 9);
+          }
+        }
+      }
+    }
+    // Hatching stays in the precinct's free border, never across the Core body.
+    for (const [r, step] of [
+      [{ x: 27, y: 27, width: 1, height: 6 }, 0.5],
+      [{ x: 32, y: 27, width: 1, height: 6 }, 0.5],
+      [{ x: 28, y: 27, width: 4, height: 1 }, 0.5],
+      [{ x: 28, y: 32, width: 4, height: 1 }, 0.5],
+      [PAD, 0.5],
+    ] as const) {
+      g.lineStyle(1, this.highContrast ? 0xffffff : 0xb8c4cf, 0.65);
+      for (let x = r.x; x < r.x + r.width; x += step) {
+        const a = project({ x, y: r.y }, this.camera),
+          b = project({ x, y: r.y + r.height }, this.camera);
+        g.lineBetween(a.x, a.y, b.x, b.y);
+      }
+    }
     outline(12, 12, 36, 36, 0x9bb9ae);
     outline(27, 27, 6, 6, 0xe1bf7b);
     outline(29, 33, 2, 2, 0x40baa8);
@@ -441,11 +520,22 @@ export class WorldView {
       if (x !== undefined && y !== undefined && w !== undefined && h !== undefined)
         outline(x, y, w, h, 0x617b8d);
     }
-    if (this.ghost) {
+    if (this.ghost && this.scene) {
       const d = foundation[this.ghost.type],
         w = this.ghost.rotation % 2 ? d.height : d.width,
         h = this.ghost.rotation % 2 ? d.width : d.height;
       outline(this.ghost.x, this.ghost.y, w, h, this.ghost.valid ? 0x40baa8 : 0xff6b6b);
+      const p = project({ x: this.ghost.x + w / 2, y: this.ghost.y + h / 2 }, this.camera);
+      this.labels.push(
+        this.scene.add
+          .text(p.x + 12, p.y + 8, this.ghost.valid ? '✓' : '×', {
+            fontFamily: 'system-ui',
+            fontSize: '24px',
+            color: '#ffffff',
+            backgroundColor: '#111923',
+          })
+          .setDepth(100001),
+      );
       if (atlas.frames.some((f) => f.key === `${this.ghost?.type}.view${this.camera.view}`))
         image(
           `${this.ghost.type}.view${(this.camera.view + this.ghost.rotation) % 4}`,
@@ -460,5 +550,14 @@ export class WorldView {
     g.strokeCircle(p.x, p.y, 7);
     g.lineStyle(2, 0x58d7c3);
     g.strokeCircle(p.x, p.y, 7);
+    g.lineBetween(p.x - 10, p.y, p.x + 10, p.y);
+    g.lineBetween(p.x, p.y - 10, p.x, p.y + 10);
+    this.parent.dataset.zoom = String(this.camera.zoom);
+    this.parent.dataset.orientation = String(this.camera.view * 90);
+    this.parent.dataset.presentation = this.camera.zoom < 0.65 ? 'strategic' : 'detailed';
+    this.parent.dataset.fit = this.fitActive ? this.fitMode : 'manual';
+    this.parent.dataset.roleGroups = String(
+      this.camera.zoom < 0.65 ? new Set(this.hitRecords.map((r) => `${r.x},${r.y}`)).size : 0,
+    );
   }
 }
