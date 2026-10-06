@@ -1,0 +1,2 @@
+# Exact source-processing version verified in this environment; not a runtime dependency.
+Pillow==12.3.0
