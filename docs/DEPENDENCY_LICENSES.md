@@ -31,3 +31,14 @@ Platform sources: [IndexedDB transaction lifecycle](https://developer.mozilla.or
 [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers).
 Service-worker scope is feasible on same-origin HTTPS Pages; readiness still needs
 the eventual host and complete-cache/offline tests. No worker is advertised yet.
+
+Source processing selected after official license inspection on 2026-10-06:
+Pillow12.3.0, MIT-CMU, [tagged primary license](https://github.com/python-pillow/Pillow/blob/12.3.0/LICENSE).
+Existing environment installation smoke-tested by actual atlas generation and PNG
+round-trip; exact version recorded, no extra Python packages installed. License
+retained in assets/source/PILLOW_LICENSE.txt and bundled notices.
+Native multi-touch test uses installed Chromium151 CDP `Input.dispatchTouchEvent`;
+parameter contract inspected in the [official protocol source](https://github.com/ChromeDevTools/devtools-protocol/blob/master/json/browser_protocol.json)
+on the same access date. This development interface is not a gameplay dependency
+or Android evidence. Image-generation model/version is not exposed by the tool;
+exact source PNGs, prompts and source hashes identify the reproducible cleanup input.

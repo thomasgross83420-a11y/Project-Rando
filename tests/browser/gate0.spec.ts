@@ -4,7 +4,7 @@ test('Gate 0 production subpath, renderer, storage, gesture, audio and export', 
 }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
-  await page.goto('./');
+  await page.goto('./?diagnostics=gate0');
   await expect(page.locator('canvas')).toBeVisible();
   await expect(page.locator('#storage')).toHaveText('Storage transaction committed');
   await page.getByRole('button', { name: 'Rotate view' }).click();
@@ -30,7 +30,7 @@ test('Gate 0 production subpath, renderer, storage, gesture, audio and export', 
 });
 
 test('IndexedDB abort is reported; failed open offers a temporary session', async ({ page }) => {
-  await page.goto('./');
+  await page.goto('./?diagnostics=gate0');
   await expect(page.locator('#storage')).toContainText('committed');
   await page.evaluate(() => {
     const original = IDBDatabase.prototype.transaction;
@@ -57,7 +57,7 @@ test('IndexedDB abort is reported; failed open offers a temporary session', asyn
 });
 
 test('actual WebGL context loss restores presentation', async ({ page }) => {
-  await page.goto('./');
+  await page.goto('./?diagnostics=gate0');
   await expect(page.locator('canvas')).toBeVisible();
   const available = await page.evaluate(() => {
     const canvas = document.querySelector('canvas');
@@ -78,7 +78,7 @@ test('viewport reflow, touch cancellation, semantic focus and production MIME', 
   page,
   request,
 }) => {
-  await page.goto('./#camera');
+  await page.goto('./?diagnostics=gate0#camera');
   for (const viewport of [
     { width: 360, height: 640 },
     { width: 412, height: 915 },
@@ -103,7 +103,7 @@ test('viewport reflow, touch cancellation, semantic focus and production MIME', 
   await page.reload();
   await expect(page.locator('canvas')).toBeVisible();
   for (const url of await page
-    .locator('script[src],link[href]')
+    .locator('script[src],link[rel=stylesheet][href]')
     .evaluateAll((nodes) =>
       nodes.map((n) => n.getAttribute('src') ?? n.getAttribute('href') ?? ''),
     )) {
@@ -111,5 +111,8 @@ test('viewport reflow, touch cancellation, semantic focus and production MIME', 
     expect(response.ok()).toBe(true);
     expect(response.headers()['content-type']).toMatch(/javascript|css/);
   }
+  const icon = await request.get((await page.locator('link[rel=icon]').getAttribute('href')) ?? '');
+  expect(icon.ok()).toBe(true);
+  expect(icon.headers()['content-type']).toMatch(/image\/png/);
   await page.screenshot({ path: 'test-results/gate0-200-percent.png', fullPage: true });
 });

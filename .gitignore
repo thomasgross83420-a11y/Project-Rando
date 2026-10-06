@@ -10,3 +10,6 @@ coverage/
 *.log
 .DS_Store
 scratch/
+
+# Rejected disposable early proof; editable pipeline retained
+assets/source/foundation-proof.png

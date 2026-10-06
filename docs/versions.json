@@ -1,5 +1,5 @@
 {
-  "build": "0.1.0-gate0",
+  "build": "0.1.0-foundation",
   "content": "rb-content-v1",
   "simulation": "rb-sim-v1",
   "generator": "rb-generator-v1",

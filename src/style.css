@@ -93,3 +93,62 @@ canvas {
     height: 55dvh;
   }
 }
+html [hidden] {
+  display: none;
+}
+label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+}
+input,
+select {
+  max-width: 100%;
+  min-width: 0;
+}
+input[type="number"] {
+  width: 6rem;
+}
+dialog {
+  max-width: min(680px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
+  color: #f2f4f7;
+  background: #17232e;
+  border: 2px solid #e1bf7b;
+  padding: 16px;
+}
+dialog::backdrop {
+  background: #000b;
+}
+form,
+#dialog-body {
+  display: grid;
+  gap: 12px;
+}
+.slot {
+  border: 1px solid #78848b;
+  padding: 12px;
+}
+.notice {
+  border-left: 4px solid #e1bf7b;
+  padding: 12px;
+  background: #25343e;
+}
+h2,
+h3 {
+  overflow-wrap: anywhere;
+}
+a {
+  color: #b8eee0;
+}
+.title-art {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  image-rendering: pixelated;
+  border: 1px solid #78848b;
+}

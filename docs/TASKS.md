@@ -13,3 +13,18 @@
 | 8 | Complete playable production | Physical-device release, deployed origin, backup and offline if tested | T18/T19 + user acceptance |
 
 Never advance a failed gate as complete. Independent fixes/prototypes may proceed with explicit status.
+
+## Current Gate1 remainder, before certifying the gate
+
+- Resolve the pending native-size tablet style review under §16/T17; inspect small
+  silhouette readability and contrast before mass art/animation production.
+- Complete the required representative terrain transitions, approved role icons,
+  camera/facing/animation-state manifests and foundation visual acceptance. Static
+  candidates/diagnostic body views do not certify full directions/animations.
+- Finish exact creation wizard/navigation/inspection behavior, preparation settings
+  persistence, and remaining touch, keyboard, scale, focus and route fixtures under
+  §§5/19/26 and T06/T08/T14/T16. Record each as Verified only after its evidence.
+- Physical tablet proof inspection remains separate from desktop emulation.
+- Then Gate2: authoritative bounded Bulwark/Bastion tutorial (exact authored plan),
+  autonomous Sentry/Rifle/Runner/Raider/support/trap contracts; initial real original
+  music/SFX, captions, pause and muted equivalence. No decorative Siege button now.

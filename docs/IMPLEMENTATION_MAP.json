@@ -1,0 +1,163 @@
+[
+  {
+    "id": "foundation.simulation",
+    "requirements": [
+      "RB-24A.1-001",
+      "RB-24A.1-003"
+    ],
+    "sections": [
+      "\u00a723",
+      "\u00a724B",
+      "T03"
+    ],
+    "gate": 0,
+    "state": "Verified",
+    "scope": "Headless mechanism and seed/stream utilities only; complete combat Designed",
+    "code": [
+      "src/sim/determinism.ts",
+      "scripts/headless.ts"
+    ],
+    "tests": [
+      "tests/unit/foundation.test.ts",
+      "npm run test:scenario"
+    ],
+    "dependencies": [
+      "strict TypeScript",
+      "Web Crypto"
+    ],
+    "save": "Future replay identity/version fields",
+    "presentation": "None authoritative"
+  },
+  {
+    "id": "foundation.space",
+    "requirements": [
+      "RB-5-001",
+      "RB-5-003",
+      "RB-5-004",
+      "RB-5-005",
+      "RB-5-006",
+      "RB-5-009",
+      "RB-5A-001",
+      "RB-5A-002"
+    ],
+    "sections": [
+      "\u00a75",
+      "\u00a75A",
+      "T06"
+    ],
+    "gate": 1,
+    "state": "Implemented",
+    "scope": "Rank 1 footprint/capacity/reservation legality, continuous route clearance and camera transforms; advanced mounts/gates/presets/sealed closure Designed",
+    "code": [
+      "src/construction/geometry.ts",
+      "src/persistence/campaign.ts",
+      "src/render/projection.ts",
+      "src/render/world.ts"
+    ],
+    "tests": [
+      "tests/unit/construction.test.ts",
+      "tests/unit/foundation.test.ts",
+      "tests/browser/gate1.spec.ts"
+    ],
+    "dependencies": [
+      "content identities",
+      "validated owned snapshot"
+    ],
+    "save": "schema1 exact integer placement/rotation; no campaign upgrades yet",
+    "presentation": "Native raster anchors; coordinate and nudge alternatives; static views Candidate"
+  },
+  {
+    "id": "foundation.persistence",
+    "requirements": [
+      "RB-19A-001",
+      "RB-19A-006",
+      "RB-19A-008"
+    ],
+    "sections": [
+      "\u00a719A",
+      "T14"
+    ],
+    "gate": 1,
+    "state": "Implemented",
+    "scope": "Three slots, atomic previous/current, writer generation/revision fence, exact Undo/Redo, explicit temporary session; receipts/import/migrations/recovery Designed",
+    "code": [
+      "src/persistence/database.ts",
+      "src/persistence/repository.ts",
+      "src/persistence/campaign.ts"
+    ],
+    "tests": [
+      "tests/unit/construction.test.ts",
+      "tests/browser/gate1.spec.ts"
+    ],
+    "dependencies": [
+      "IndexedDB smoke",
+      "Zod schemas"
+    ],
+    "save": "Foundation schema1; later extension requires explicit validated migration",
+    "presentation": "Saved only after completion; named replacement confirmation; failures retain state"
+  },
+  {
+    "id": "foundation.navigation",
+    "requirements": [
+      "RB-26A-002",
+      "RB-26A-003",
+      "RB-26A-004",
+      "RB-26B-011"
+    ],
+    "sections": [
+      "\u00a726",
+      "T16"
+    ],
+    "gate": 1,
+    "state": "Implemented",
+    "scope": "Title, slot review/creation/load, accessible camera/construction, help/settings/export foundations; complete menus/modes Designed",
+    "code": [
+      "src/app.ts",
+      "src/style.css"
+    ],
+    "tests": [
+      "tests/browser/gate0.spec.ts",
+      "tests/browser/gate1.spec.ts"
+    ],
+    "dependencies": [
+      "campaign repository",
+      "camera"
+    ],
+    "save": "Last opened maintained separately from ordinary save; preparation history session-only",
+    "presentation": "Semantic DOM, native dialog, 48px targets, keyboard/nudge, 200% reflow; physical TalkBack pending"
+  },
+  {
+    "id": "foundation.art",
+    "requirements": [
+      "RB-16-018",
+      "RB-16-019",
+      "RB-16-020",
+      "RB-16-021",
+      "RB-16-022",
+      "RB-16-023",
+      "RB-16-024"
+    ],
+    "sections": [
+      "\u00a716",
+      "\u00a727F",
+      "T17"
+    ],
+    "gate": 1,
+    "state": "Implemented",
+    "scope": "Native cleaned static candidates, proof, terrain and title; final approval, complete directions/animations/role icons Designed",
+    "code": [
+      "assets/source/generate_foundation.py",
+      "public/assets/foundation.json"
+    ],
+    "tests": [
+      "processor anchor/atlas checks",
+      "human screenshot inspection recorded in TEST_EVIDENCE.md"
+    ],
+    "dependencies": [
+      "original reference PNGs",
+      "Pillow12.3.0"
+    ],
+    "save": "Visual asset identifiers never change body geometry or durable game stats",
+    "presentation": "128-color atlas, original generated candidates, source/prompt/provenance retained; user tablet review pending"
+  }
+]

@@ -1,6 +1,6 @@
 # Architecture decisions
 
-## ADR001 — candidate stack (Gate 0, provisional until smoke checks)
+## ADR001 — selected stack (Gate 0 smoke checks passed)
 
 Phaser 3.90.0 presentation, TypeScript 5.9.3, Vite 7.3.7, Zod schemas, Vitest,
 Playwright and Biome. Rendering uses versioned Phaser 3 source/types; current Phaser
@@ -24,3 +24,32 @@ versions.json. No prior player saves exist in the inspected repository. Blueprin
 remains byte-identical. Traceability source IDs identify immutable source blocks;
 status updates are independent. Real Android and aesthetic approval remain separate
 from automated desktop evidence.
+
+## ADR004 — preparation storage boundary
+
+Validated owned snapshots, previous snapshots and writer generation/revision fence
+commit in one IndexedDB transaction. A command updates displayed ownership/wallet
+and history only after transaction completion. Undo/Redo stores exact snapshots as
+new revisions, never a resale/refund. Continue targets last successfully opened
+slot, independently of ordinary command writes. Temporary Session requires an
+explicit choice and uses the same validation; storage failure in a retained session
+does not convert it. Foundation saves use schema1 with pinned content/simulation/
+generator/economy identity, baseline-only level/investment domains. Gate2/3 extensions
+require isolated validated migrations before supporting previous foundation saves.
+
+## ADR005 — original raster candidate pipeline
+
+Image generation develops original reference/camera views. Inspected crops, hard
+alpha, nearest-neighbor native sizing, bounded undithered palettes and transparent
+atlas gutters are reproducible with Pillow12.3.0. Hand-coded simple objects were
+rejected as final art. Static candidates are integrated under a visible development
+label; unapproved mobile views/animation are not represented as completed gameplay.
+User tablet proof review precedes mass asset production under blueprint§16.
+
+## ADR006 — safe checkpoint publication
+
+Normal Git authenticated push returned HTTP401. The connected GitHub Git Database
+API could publish the exact local blob/tree/commit identities to the work branch.
+The publisher verifies every object hash, parent and expected remote branch before
+a non-force reference update; it never modifies main. Recheck remote after each
+checkpoint. No token or local credential configuration is tracked.

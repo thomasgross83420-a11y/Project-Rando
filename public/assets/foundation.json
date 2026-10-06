@@ -1,0 +1,658 @@
+{
+  "schema": 1,
+  "atlas": "foundation.png",
+  "atlasSize": [
+    1024,
+    1024
+  ],
+  "padding": 4,
+  "sourcePixelsPerScreenPixel": 2,
+  "palette": {
+    "ink": "#0d1721",
+    "shadow": "#17232e",
+    "dark": "#25343e",
+    "stone": "#384954",
+    "face": "#53636a",
+    "light": "#89968f",
+    "edge": "#d4d5bd",
+    "gold": "#b18a52",
+    "goldlight": "#e1bf7b",
+    "teal": "#40baa8",
+    "cyan": "#b8eee0",
+    "rust": "#765548"
+  },
+  "frames": [
+    {
+      "key": "terrain.basalt",
+      "native": [
+        64,
+        32
+      ],
+      "anchor": [
+        32,
+        16
+      ],
+      "cameraView": 0,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        4,
+        4,
+        64,
+        32
+      ]
+    },
+    {
+      "key": "terrain.basalt.variant1",
+      "native": [
+        64,
+        32
+      ],
+      "anchor": [
+        32,
+        16
+      ],
+      "cameraView": 0,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        76,
+        4,
+        64,
+        32
+      ]
+    },
+    {
+      "key": "terrain.basalt.variant2",
+      "native": [
+        64,
+        32
+      ],
+      "anchor": [
+        32,
+        16
+      ],
+      "cameraView": 0,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        148,
+        4,
+        64,
+        32
+      ]
+    },
+    {
+      "key": "terrain.basalt.variant3",
+      "native": [
+        64,
+        32
+      ],
+      "anchor": [
+        32,
+        16
+      ],
+      "cameraView": 0,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        220,
+        4,
+        64,
+        32
+      ]
+    },
+    {
+      "key": "terrain.basalt.variant4",
+      "native": [
+        64,
+        32
+      ],
+      "anchor": [
+        32,
+        16
+      ],
+      "cameraView": 0,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        292,
+        4,
+        64,
+        32
+      ]
+    },
+    {
+      "key": "terrain.basalt.variant5",
+      "native": [
+        64,
+        32
+      ],
+      "anchor": [
+        32,
+        16
+      ],
+      "cameraView": 0,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        364,
+        4,
+        64,
+        32
+      ]
+    },
+    {
+      "key": "objective.harmonic_core.view0",
+      "native": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        152
+      ],
+      "cameraView": 0,
+      "state": "idle",
+      "source": "assets/source/camera-reference.png + generate_foundation.py",
+      "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "rect": [
+        436,
+        4,
+        192,
+        192
+      ]
+    },
+    {
+      "key": "objective.harmonic_core.view1",
+      "native": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        152
+      ],
+      "cameraView": 1,
+      "state": "idle",
+      "source": "assets/source/camera-reference.png + generate_foundation.py",
+      "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "rect": [
+        636,
+        4,
+        192,
+        192
+      ]
+    },
+    {
+      "key": "objective.harmonic_core.view2",
+      "native": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        152
+      ],
+      "cameraView": 2,
+      "state": "idle",
+      "source": "assets/source/camera-reference.png + generate_foundation.py",
+      "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "rect": [
+        4,
+        204,
+        192,
+        192
+      ]
+    },
+    {
+      "key": "objective.harmonic_core.view3",
+      "native": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        152
+      ],
+      "cameraView": 3,
+      "state": "idle",
+      "source": "assets/source/camera-reference.png + generate_foundation.py",
+      "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "rect": [
+        204,
+        204,
+        192,
+        192
+      ]
+    },
+    {
+      "key": "friendly.sentry.view0",
+      "native": [
+        128,
+        144
+      ],
+      "anchor": [
+        64,
+        113
+      ],
+      "cameraView": 0,
+      "state": "idle",
+      "source": "assets/source/camera-reference.png + generate_foundation.py",
+      "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "rect": [
+        404,
+        204,
+        128,
+        144
+      ]
+    },
+    {
+      "key": "friendly.sentry.view1",
+      "native": [
+        128,
+        144
+      ],
+      "anchor": [
+        64,
+        113
+      ],
+      "cameraView": 1,
+      "state": "idle",
+      "source": "assets/source/camera-reference.png + generate_foundation.py",
+      "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "rect": [
+        540,
+        204,
+        128,
+        144
+      ]
+    },
+    {
+      "key": "friendly.sentry.view2",
+      "native": [
+        128,
+        144
+      ],
+      "anchor": [
+        64,
+        113
+      ],
+      "cameraView": 2,
+      "state": "idle",
+      "source": "assets/source/camera-reference.png + generate_foundation.py",
+      "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "rect": [
+        676,
+        204,
+        128,
+        144
+      ]
+    },
+    {
+      "key": "friendly.sentry.view3",
+      "native": [
+        128,
+        144
+      ],
+      "anchor": [
+        64,
+        113
+      ],
+      "cameraView": 3,
+      "state": "idle",
+      "source": "assets/source/camera-reference.png + generate_foundation.py",
+      "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "rect": [
+        812,
+        204,
+        128,
+        144
+      ]
+    },
+    {
+      "key": "friendly.standard_barricade.view0",
+      "native": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        46
+      ],
+      "cameraView": 0,
+      "state": "idle",
+      "source": "assets/source/camera-reference.png + generate_foundation.py",
+      "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "rect": [
+        948,
+        204,
+        64,
+        64
+      ]
+    },
+    {
+      "key": "friendly.standard_barricade.view1",
+      "native": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        46
+      ],
+      "cameraView": 1,
+      "state": "idle",
+      "source": "assets/source/camera-reference.png + generate_foundation.py",
+      "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "rect": [
+        4,
+        404,
+        64,
+        64
+      ]
+    },
+    {
+      "key": "friendly.standard_barricade.view2",
+      "native": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        46
+      ],
+      "cameraView": 2,
+      "state": "idle",
+      "source": "assets/source/camera-reference.png + generate_foundation.py",
+      "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "rect": [
+        76,
+        404,
+        64,
+        64
+      ]
+    },
+    {
+      "key": "friendly.standard_barricade.view3",
+      "native": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        46
+      ],
+      "cameraView": 3,
+      "state": "idle",
+      "source": "assets/source/camera-reference.png + generate_foundation.py",
+      "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "rect": [
+        148,
+        404,
+        64,
+        64
+      ]
+    },
+    {
+      "key": "friendly.rifle_squad.view0",
+      "native": [
+        96,
+        80
+      ],
+      "anchor": [
+        48,
+        66
+      ],
+      "cameraView": 0,
+      "state": "idle",
+      "source": "foundation-reference.png; three individual 48x64 bodies",
+      "review": "Native proof only; per-body facing/animation production Designed",
+      "rect": [
+        220,
+        404,
+        96,
+        80
+      ]
+    },
+    {
+      "key": "enemy.runner.view0",
+      "native": [
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        54
+      ],
+      "cameraView": 0,
+      "state": "idle",
+      "source": "foundation-reference.png + generate_foundation.py",
+      "review": "Native proof only; remaining facing/animation production Designed",
+      "rect": [
+        324,
+        404,
+        48,
+        64
+      ]
+    },
+    {
+      "key": "warden.bulwark.view0",
+      "native": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        68
+      ],
+      "cameraView": 0,
+      "state": "idle",
+      "source": "foundation-reference.png + generate_foundation.py",
+      "review": "Native proof only; remaining facing/animation production Designed",
+      "rect": [
+        380,
+        404,
+        64,
+        80
+      ]
+    },
+    {
+      "key": "friendly.rifle_squad.view1",
+      "native": [
+        96,
+        80
+      ],
+      "anchor": [
+        48,
+        66
+      ],
+      "cameraView": 1,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        452,
+        404,
+        96,
+        80
+      ]
+    },
+    {
+      "key": "enemy.runner.view1",
+      "native": [
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        54
+      ],
+      "cameraView": 1,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        556,
+        404,
+        48,
+        64
+      ]
+    },
+    {
+      "key": "warden.bulwark.view1",
+      "native": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        68
+      ],
+      "cameraView": 1,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        612,
+        404,
+        64,
+        80
+      ]
+    },
+    {
+      "key": "friendly.rifle_squad.view2",
+      "native": [
+        96,
+        80
+      ],
+      "anchor": [
+        48,
+        66
+      ],
+      "cameraView": 2,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        684,
+        404,
+        96,
+        80
+      ]
+    },
+    {
+      "key": "enemy.runner.view2",
+      "native": [
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        54
+      ],
+      "cameraView": 2,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        788,
+        404,
+        48,
+        64
+      ]
+    },
+    {
+      "key": "warden.bulwark.view2",
+      "native": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        68
+      ],
+      "cameraView": 2,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        844,
+        404,
+        64,
+        80
+      ]
+    },
+    {
+      "key": "friendly.rifle_squad.view3",
+      "native": [
+        96,
+        80
+      ],
+      "anchor": [
+        48,
+        66
+      ],
+      "cameraView": 3,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        916,
+        404,
+        96,
+        80
+      ]
+    },
+    {
+      "key": "enemy.runner.view3",
+      "native": [
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        54
+      ],
+      "cameraView": 3,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        4,
+        492,
+        48,
+        64
+      ]
+    },
+    {
+      "key": "warden.bulwark.view3",
+      "native": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        68
+      ],
+      "cameraView": 3,
+      "state": "idle",
+      "source": "assets/source/generate_foundation.py",
+      "review": "Candidate \u2014 visual approval pending",
+      "rect": [
+        60,
+        492,
+        64,
+        80
+      ]
+    }
+  ],
+  "provenance": "Original image generation plus controlled native-size cleanup; deterministic authored terrain. All candidates pending user approval.",
+  "sha256": "97f540bb3102c0a0e31a8d4c5c37f574c64496761c64bd922de8399a91059de3"
+}

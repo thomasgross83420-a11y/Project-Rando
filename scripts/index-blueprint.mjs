@@ -38,7 +38,7 @@ const owners = {
   30: ['content-ids', 5, 'T01'],
   31: ['acceptance', 8, 'T01–T20'],
 };
-let section = '1',
+let section = 'meta',
   ordinal = 0;
 const records = [];
 for (const [index, line] of source.split('\n').entries()) {
@@ -48,7 +48,7 @@ for (const [index, line] of source.split('\n').entries()) {
     ordinal = 0;
   }
   if (!line.trim() || line.startsWith('#') || /^\|[\s|-]+\|$/.test(line)) continue;
-  const main = Number.parseInt(section, 10),
+  const main = section === 'meta' ? 1 : Number.parseInt(section, 10),
     owner = owners[main];
   if (!owner) throw new Error('Unmapped section');
   ordinal++;
@@ -73,6 +73,17 @@ for (const [index, line] of source.split('\n').entries()) {
       ? 'stable art/audio keys; semantic control; T16/T17'
       : 'diagnostics/read-only explanation where applicable',
   });
+}
+if (new Set(records.map((r) => r.id)).size !== records.length)
+  throw new Error('Duplicate requirement identifier');
+const map = JSON.parse(readFileSync('docs/IMPLEMENTATION_MAP.json', 'utf8'));
+for (const record of records) {
+  const evidence = map.find((m) => m.requirements.includes(record.id));
+  if (evidence) {
+    record.code = evidence.code.join('; ');
+    record.test = evidence.tests.join('; ');
+    record.dependency = evidence.dependencies.join('; ');
+  }
 }
 const columns = Object.keys(records[0]);
 const csv =
