@@ -22,7 +22,7 @@ export class WorldView {
   scene: Phaser.Scene | undefined;
   sprites: Phaser.GameObjects.Image[] = [];
   campaign: Campaign | undefined;
-  ghost: { type: ContentID; x: number; y: number; rotation: number } | undefined;
+  ghost: { type: ContentID; x: number; y: number; rotation: number; valid: boolean } | undefined;
   onSelect: ((point: Point) => void) | undefined;
   onInspect: ((ids: string[]) => void) | undefined;
   hitRecords: { id: string; x: number; y: number; width: number; height: number; foot: Point }[] =
@@ -393,12 +393,12 @@ export class WorldView {
       const d = foundation[this.ghost.type],
         w = this.ghost.rotation % 2 ? d.height : d.width,
         h = this.ghost.rotation % 2 ? d.width : d.height;
-      outline(this.ghost.x, this.ghost.y, w, h, 0xffc266);
+      outline(this.ghost.x, this.ghost.y, w, h, this.ghost.valid ? 0x40baa8 : 0xff6b6b);
       if (atlas.frames.some((f) => f.key === `${this.ghost?.type}.view${this.camera.view}`))
         image(
           `${this.ghost.type}.view${(this.camera.view + this.ghost.rotation) % 4}`,
           { x: this.ghost.x + w / 2, y: this.ghost.y + h / 2 },
-          0xe1bf7b,
+          this.ghost.valid ? 0xb9e5d9 : 0xf8ac9e,
           0.6,
         );
     }

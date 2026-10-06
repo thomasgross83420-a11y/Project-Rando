@@ -67,8 +67,11 @@ test('campaign creation, free deployment, atomic purchase, Undo/Redo and reload'
 test('invalid placement and failed persistence preserve money and history', async ({ page }) => {
   await create(page);
   await page.getByRole('button', { name: 'Buy & Place Sentry · 250 Credits', exact: true }).click();
-  await place(page, 28, 28);
-  await expect(page.locator('#status')).toContainText('reserved');
+  await page.getByLabel('X', { exact: true }).fill('28');
+  await page.getByLabel('Y', { exact: true }).fill('28');
+  await page.getByLabel('Y', { exact: true }).press('Tab');
+  await expect(page.getByRole('button', { name: 'Place', exact: true })).toBeDisabled();
+  await expect(page.locator('#placement-reason')).toContainText('reserved');
   await expect(page.locator('#account')).toContainText('600 Credits');
   await page.evaluate(() => {
     const original = IDBDatabase.prototype.transaction;

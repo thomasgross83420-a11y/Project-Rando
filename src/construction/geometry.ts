@@ -70,7 +70,14 @@ export function edgeClear(
   solids: readonly Rect[],
 ): boolean {
   for (const p of [a, b])
-    if (p.x < radius || p.y < radius || p.x >= 61440 - radius || p.y >= 61440 - radius)
+    if (
+      p.x < radius ||
+      p.y < radius ||
+      p.x > 61440 - radius ||
+      p.y > 61440 - radius ||
+      p.x >= 61440 ||
+      p.y >= 61440
+    )
       return false;
   for (const r of solids) {
     if (

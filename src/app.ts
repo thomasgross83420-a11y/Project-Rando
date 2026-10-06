@@ -328,7 +328,7 @@ function renderPreparation(): void {
       })
       .join(
         '',
-      )}</section><nav aria-label="Construction catalog">${constructionTypes.map((t) => `<button data-buy="${t}" ${canEdit ? '' : 'disabled'}>Buy & Place ${foundation[t].name} · ${foundation[t].cost} Credits</button>`).join('')}</nav><section aria-label="Placement"><p>${type ? `${foundation[type].name} · ${foundation[type].width}×${foundation[type].height} GU · ${foundation[type].capacity} capacity · ${selected ? 'Owned: free placement' : `${foundation[type].cost} Credits only when Place succeeds`}` : 'Select an owned asset or Buy & Place.'}</p><label>X <input id="place-x" type="number" min="0" max="59" step="1" value="${x}"></label><label>Y <input id="place-y" type="number" min="0" max="59" step="1" value="${y}"></label><button id="nudge-x-minus">X −1</button><button id="nudge-x-plus">X +1</button><button id="nudge-y-minus">Y −1</button><button id="nudge-y-plus">Y +1</button><button id="rotate-placement">Rotate footprint · ${rotation * 90}°</button><button id="place" ${type && canEdit ? '' : 'disabled'}>Place</button><button id="cancel-placement" ${choice ? '' : 'disabled'}>Cancel Placement</button><button id="store" ${selected?.placement && canEdit ? '' : 'disabled'}>Store Selected</button><output id="placement-reason">${type ? 'Awaiting explicit Place. Every entrance is checked for ordinary and heavy body clearance.' : 'No placement selected.'}</output></section><nav aria-label="Preparation history"><button id="undo" ${p.undoStack.length && canEdit ? '' : 'disabled'}>Undo</button><button id="redo" ${p.redoStack.length && canEdit ? '' : 'disabled'}>Redo</button><button id="export-campaign">Export Campaign</button></nav><p>Core Integrity ${coreBaseline.hp} / ${coreBaseline.hp} · Armor ${coreBaseline.armor}. Sentry: Integrity ${sentryBaseline.hp}, Armor ${sentryBaseline.armor}, ${weapon.damage} damage / ${weapon.intervalTicks / 60} s, range ${weapon.rangeGU} GU, ${weapon.targets} layers. Barricade: Integrity ${barrierBaseline.hp}, Armor ${barrierBaseline.armor}. Autonomous combat, forecasts and siege start remain Designed.</p>`;
+      )}</section><nav aria-label="Construction catalog">${constructionTypes.map((t) => `<button data-buy="${t}" ${canEdit ? '' : 'disabled'}>Buy & Place ${foundation[t].name} · ${foundation[t].cost} Credits</button>`).join('')}</nav><section aria-label="Placement"><p>${type ? `${foundation[type].name} · ${foundation[type].width}×${foundation[type].height} GU · ${foundation[type].capacity} capacity · ${selected ? 'Owned: free placement' : `${foundation[type].cost} Credits only when Place succeeds`}` : 'Select an owned asset or Buy & Place.'}</p><label>X <input id="place-x" type="number" min="0" max="59" step="1" value="${x}"></label><label>Y <input id="place-y" type="number" min="0" max="59" step="1" value="${y}"></label><button id="nudge-x-minus">X −1</button><button id="nudge-x-plus">X +1</button><button id="nudge-y-minus">Y −1</button><button id="nudge-y-plus">Y +1</button><button id="rotate-placement">Rotate footprint · ${rotation * 90}°</button><button id="place" aria-describedby="placement-reason" ${type && canEdit ? '' : 'disabled'}>Place</button><button id="cancel-placement" ${choice ? '' : 'disabled'}>Cancel Placement</button><button id="store" ${selected?.placement && canEdit ? '' : 'disabled'}>Store Selected</button><output id="placement-reason" aria-live="off">${type ? 'Awaiting explicit Place. Every entrance is checked for ordinary and heavy body clearance.' : 'No placement selected.'}</output></section><nav aria-label="Preparation history"><button id="undo" ${p.undoStack.length && canEdit ? '' : 'disabled'}>Undo</button><button id="redo" ${p.redoStack.length && canEdit ? '' : 'disabled'}>Redo</button><button id="export-campaign">Export Campaign</button></nav><p>Core Integrity ${coreBaseline.hp} / ${coreBaseline.hp} · Armor ${coreBaseline.armor}. Sentry: Integrity ${sentryBaseline.hp}, Armor ${sentryBaseline.armor}, ${weapon.damage} damage / ${weapon.intervalTicks / 60} s, range ${weapon.rangeGU} GU, ${weapon.targets} layers. Barricade: Integrity ${barrierBaseline.hp}, Armor ${barrierBaseline.armor}. Autonomous combat, forecasts and siege start remain Designed.</p>`;
   for (const b of document.querySelectorAll<HTMLButtonElement>('[data-owned]'))
     b.onclick = () => {
       const id = b.dataset.owned;
@@ -424,22 +424,28 @@ function updateGhost(): void {
       ? preparation.campaign.assets.find((a) => a.id === chosen.id)
       : undefined;
   const type = choice && 'type' in choice ? choice.type : a?.type;
-  view.ghost = type ? { type, x, y, rotation } : undefined;
+  let valid = false;
   view.campaign = preparation.campaign;
-  view.draw();
   if (type && choice) {
     try {
-      applyCommand(
+      const preview = applyCommand(
         preparation.campaign,
         'id' in choice
           ? { kind: 'place', id: choice.id, x, y, rotation }
           : { kind: 'buy-place', type: choice.type, x, y, rotation },
       );
-      byId('placement-reason').textContent = 'Legal placement. Commit only with Place.';
+      const totals = accounting(preview);
+      valid = true;
+      (byId('place') as HTMLButtonElement).disabled = !repository?.writer || preparation.busy;
+      byId('placement-reason').textContent =
+        `Legal placement. After Place: ${preview.credits} Credits; capacity ${totals.capacity}/20; barriers ${totals.barriers}/40; traps ${totals.traps}/8. Commit only with Place.`;
     } catch (error) {
+      (byId('place') as HTMLButtonElement).disabled = true;
       byId('placement-reason').textContent = `Invalid placement: ${String(error)}`;
     }
   }
+  view.ghost = type ? { type, x, y, rotation, valid } : undefined;
+  view.draw();
 }
 async function transact(work: () => Promise<void>): Promise<void> {
   try {

@@ -12,7 +12,8 @@ remain Designed; this is not the complete game or a production release.
 wallet/grants/L1/1★/E0 and stored inventory; three slots/new-game review/load/Continue;
 Rank1 field/Core precinct/pad/region representation; camera projection/inverse,
 four views/pan/zoom/Fit; body-radius continuous route clearance; occupancy/capacity;
-Sentry/Barricade construction, atomic Buy & Place, free deploy/move/rotate/store,
+Sentry/Barricade construction, legal after-command wallet/capacity previews, disabled
+invalid Place, atomic Buy & Place, free deploy/move/rotate/store,
 explicit cancellation and Undo/Redo; semantic controls/coordinates/nudges/object
 picker; writer generation/revision fence, previous/current commits, explicit
 Temporary Session and current-foundation export. No direct combat controls.
@@ -33,11 +34,9 @@ No extra account, subscription, paid service or LFS was introduced.
 **Commands/evidence:** npm install --ignore-scripts --no-fund --no-audit;
 npm run format / format:check / typecheck / lint / test / test:scenario / build /
 test:browser / traceability; Python generate_foundation.py/validate_foundation.py;
-git diff --check and SHA256. Seven unit fixtures passed. All ten browser fixtures
-passed on the production subpath build across full runs and the affected MIME
-fixture rerun. Last runtime build's full run passed nine; its obsolete all-links-as-
-CSS assertion failed after adding the favicon; corrected PNG/stylesheet assertion
-passed on targeted rerun. No unresolved assertion failure is presented as passed.
+git diff --check and SHA256. Eight unit fixtures passed. All ten browser fixtures
+passed in the full production-subpath suite after the MIME fixture correction.
+Earlier MIME/console failures and their fixes are recorded in TEST_EVIDENCE.md.
 The3600-tick mechanism hash matched five groupings; complete combat is not tested.
 
 **Browser inspection:** title/create/review/slot cancellation; construction and
@@ -79,8 +78,8 @@ emulation proves none of those physical-device outcomes.
 **Git:** verified code checkpoints4976702f85f820b399b2b09220ab41214f31d351 and
 1cdecf310ce8ebfde758fec604e3f4287dbb8f49 were pushed to the work branch. Normal Git
 push returned401; GitHub Git Database API published exact local object identities,
-checking expected parent/ref and never using force. Main unchanged. This report is
-a subsequent documentation checkpoint; branch history records its own identity.
+checking expected parent/ref and never using force. Main unchanged. Report checkpoint a18d55c was also pushed. The placement/slot-boundary follow-up
+is recorded in branch history with its own identity and final publication status.
 
 **Next dependency step:** complete the listed Gate1 presentation/navigation/
 accessibility acceptance and tablet style review; then exact bounded Bulwark/Bastion

@@ -9,6 +9,7 @@ export class CampaignRepository {
   readonly tabID = crypto.randomUUID();
   writer: Writer | undefined;
   readonly memory = new Map<number, Campaign>();
+  private memoryLastOpened: number | undefined;
   readonly temporary: boolean;
   constructor(readonly database: Database | undefined) {
     this.temporary = !database;
@@ -69,7 +70,11 @@ export class CampaignRepository {
           const c = this.database
             ? await this.database.read<unknown>('campaigns', slot)
             : this.memory.get(slot);
-          return c === undefined ? undefined : validateCampaign(c);
+          if (c === undefined) return undefined;
+          const valid = validateCampaign(c);
+          if (valid.slot !== slot)
+            throw new Error('Saved slot identity disagrees with its storage key');
+          return valid;
         } catch (e) {
           return e instanceof Error ? e : new Error(String(e));
         }
@@ -120,7 +125,12 @@ export class CampaignRepository {
       throw new Error('Campaign changed. Reload before retry.');
   }
   async opened(slot: number): Promise<void> {
-    if (!this.database || !this.writer) return;
+    if (!Number.isInteger(slot) || slot < 0 || slot > 2) throw new Error('Invalid campaign slot');
+    if (!this.database) {
+      this.memoryLastOpened = slot;
+      return;
+    }
+    if (!this.writer) return;
     await this.database.transaction(['writer', 'meta'], 'readwrite', (tx, done) => {
       const request = tx.objectStore('writer').get('active');
       request.onsuccess = () => {
@@ -135,7 +145,7 @@ export class CampaignRepository {
     });
   }
   async lastOpened(): Promise<number | undefined> {
-    return this.database?.read<number>('meta', 'lastOpened');
+    return this.database ? this.database.read<number>('meta', 'lastOpened') : this.memoryLastOpened;
   }
 }
 export class Preparation {

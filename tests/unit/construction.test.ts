@@ -24,6 +24,7 @@ test('starter grants, exact wallet, empty field and selected Warden are authorit
     expect(c.assets.reduce((n, a) => n + foundation[a.type].capacity, 0)).toBe(capacity);
   }
   expect(() => createCampaign(' bad\nname ', 0, 'Bastion', 'warden.bulwark')).toThrow();
+  expect(() => createCampaign('Test\t', 0, 'Bastion', 'warden.bulwark')).toThrow();
   expect(() => createCampaign('x'.repeat(33), 0, 'Bastion', 'warden.bulwark')).toThrow();
 });
 test('placement validates precinct, pad, purchased land, occupancy and never charges rejection', () => {
@@ -77,6 +78,8 @@ test('placement validates precinct, pad, purchased land, occupancy and never cha
 });
 test('continuous clearance rejects corner squeeze and accepts touching without penetration', () => {
   const wall = { x: 1024, y: 1024, width: 1024, height: 1024 };
+  expect(edgeClear({ x: 60928, y: 1024 }, { x: 60928, y: 1024 }, 512, [])).toBe(true);
+  expect(edgeClear({ x: 61440, y: 1024 }, { x: 61440, y: 1024 }, 0, [])).toBe(false);
   expect(edgeClear({ x: 512, y: 2048 }, { x: 1024, y: 2560 }, 512, [wall])).toBe(false);
   expect(edgeClear({ x: 512, y: 1024 }, { x: 512, y: 2048 }, 512, [wall])).toBe(true);
   expect(validateRoutes([], [461, 768, 1229])).toBeUndefined();
@@ -117,4 +120,17 @@ test('Undo/Redo writes exact owned state and wallet, not refunds, and new edit c
     }),
   );
   expect(p.redoStack).toHaveLength(0);
+  await repository.opened(0);
+  expect(await repository.lastOpened()).toBe(0);
+});
+
+test('storage-key mismatch is damaged data and cannot be opened as another slot', async () => {
+  const repository = new CampaignRepository(undefined);
+  await repository.acquire();
+  const wrong = createCampaign('Wrong key', 1, 'Bastion', 'warden.bulwark');
+  repository.memory.set(0, wrong);
+  const slots = await repository.slots();
+  expect(slots[0]).toBeInstanceOf(Error);
+  expect(slots[1]).toBeUndefined();
+  expect(repository.memory.get(0)).toEqual(wrong);
 });

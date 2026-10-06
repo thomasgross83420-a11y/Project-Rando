@@ -78,6 +78,7 @@ export function createCampaign(
   doctrine: Campaign['doctrine'],
   warden: Campaign['warden'],
 ): Campaign {
+  if (/[\p{Cc}]/u.test(name)) throw new Error('Campaign name contains a control character');
   const assets: Owned[] = [newAsset(warden)];
   for (const [type, count] of doctrines[doctrine])
     for (let i = 0; i < count; i++) assets.push(newAsset(type));
