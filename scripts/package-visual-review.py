@@ -30,18 +30,18 @@ def card(image, title, captions):
     for line in texts: d.text((12,y),line,font=font,fill=ink); y+=23
     return result
 
-def runtime(i):
-    m=shots[i]; c=m['camera']; v=m['viewport']
+def runtime(i,folder=out,records=shots,lighting=None,title_prefix=''):
+    m=records[i]; c=m['camera']; v=m['viewport']
     camera=f"{c['view']*90} degrees" if c else 'N/A (title/modal)'
     z=c['zoom'] if c else None
     category=('Strategic' if z<.65 else 'Tactical' if z<=1.35 else 'Close') if z else 'N/A'
     captions=[f"Viewport {v['width']}x{v['height']} CSS px | UI {m['interfaceScale']} | Camera {camera}",
               f"Zoom {category}"+(f" = {z:.6f}" if z else ''),
-              f"Mode: {m['mode']}. No high-contrast/quality selector.",
+              f"Mode: {m['mode']}. Lighting: {lighting or manifest.get('lighting',{}).get('id','baseline')}. No high-contrast/quality selector.",
               f"Source: {m['source']}; {m['crop']}.",
               f"Temporary: {m['temporary']}"]
-    im=Image.open(out/m['path']).convert('RGB')
-    result=card(im,m['title'],captions)
+    im=Image.open(folder/m['path']).convert('RGB')
+    result=card(im,title_prefix+m['title'],captions)
     all_cards[i]=result
     return result
 
@@ -55,7 +55,7 @@ def sprite(key):
         temporary+=' Procedural diagnostic view; NOT a finished matching facing.'
     captions=[f"Viewport/UI: N/A (atlas inspection) | Camera {f['cameraView']*90} degrees",
               'Zoom: 2x native pixels = 4x gameplay zoom 1; nearest-neighbor.',
-              f"Mode: raw candidate palette | Source: runtime atlas foundation.png, {key}",
+              f"Mode: raw candidate palette, {manifest.get('lighting',{}).get('id','baseline')} | Source: runtime atlas foundation.png, {key}",
               f"Native {w}x{h}; foot anchor {f['anchor']}; state={f['state']}.",
               f"Temporary: {temporary}"]
     return card(surface.convert('RGB'),key,captions)
@@ -91,6 +91,21 @@ sheets.append(sheet('07-landscape','Landscape / 100% and 200% interface',[runtim
 sheets.append(sheet('08-accessibility-controls','Current accessibility presentation / actual settings and focus',[runtime('15-accessibility'),runtime('17-camera-controls-200')],intro='No high-contrast switch, health mode or quality selector exists yet. The current dark palette, focus ring, 200% and reduced-effects control are shown. Full accessibility acceptance and physical TalkBack checks remain open.'))
 keys=['objective.harmonic_core','friendly.sentry','friendly.standard_barricade','friendly.rifle_squad','enemy.runner']
 sheets.append(sheet('09-static-view-and-animation-coverage','Actual static frame catalog / four camera views',[sprite(f'{key}.view{v}') for key in keys for v in range(4)],cols=4,intro='One idle frame per view only. Movement, attack, hit, damage bands, disabled battle and downed/wreck sequences are NOT implemented. Rifle/Runner views 1-3 are visibly diagnostic candidates. Do not treat these rows as an animation sequence.'))
+baseline=None
+if len(sys.argv)>2:
+    baseline=Path(sys.argv[2])
+    previous=json.loads((baseline/'capture.json').read_text())
+    previous_shots={i['id']:i for i in previous['images']}
+    for key in ('06-together','07-close'):
+        for field in ('viewport','interfaceScale','camera','crop'):
+            assert previous_shots[key][field]==shots[key][field],f'Incomparable {key}: {field}'
+        assert Image.open(baseline/previous_shots[key]['path']).size==Image.open(out/shots[key]['path']).size
+    sheets.append(sheet('10-lighting-before-after','Before / revised lighting at identical runtime scale',[
+        runtime('06-together',baseline,previous_shots,'prior review','Before | '),
+        runtime('06-together',title_prefix='Revised | '),
+        runtime('07-close',baseline,previous_shots,'prior review','Before | '),
+        runtime('07-close',title_prefix='Revised | ')
+    ],intro='Actual production-runtime screenshots, not the generated lighting guide. Same viewport, interface scale, camera and zoom in each pair. Geometry and save rules unchanged. This is a requested candidate revision, awaiting your review.'))
 
 checklist=[
 'Overall artistic direction: does this feel like the intended science-fantasy fortress?',
@@ -107,6 +122,22 @@ checklist=[
 'Revisions: which asset, camera view or terrain detail should change before full-roster production?',
 'Missing-state expectations: are there specific movement/attack/damage cues you want evaluated when those states are implemented?'
 ]
+def luminance(rgb):
+    channels=[c/255 for c in rgb]
+    linear=[c/12.92 if c<=0.04045 else ((c+0.055)/1.055)**2.4 for c in channels]
+    return sum(c*w for c,w in zip(linear,(0.2126,0.7152,0.0722)))
+
+outline_evidence=[]
+for shot,color in [('09-valid',(64,186,168)),('10-invalid',(255,107,107))]:
+    im=Image.open(out/shots[shot]['path']).convert('RGB')
+    backing=(17,25,35)
+    ratio=(luminance(color)+0.05)/(luminance(backing)+0.05)
+    pixels=im.load(); adjacent=0
+    for y in range(1,im.height-1):
+        for x in range(1,im.width-1):
+            if pixels[x,y]==color and any(pixels[x+dx,y+dy]==backing for dx,dy in ((-1,0),(1,0),(0,-1),(0,1))):adjacent+=1
+    assert ratio>=3 and adjacent>0,f'{shot}: missing contrasting runtime outline backing'
+    outline_evidence.append({'capture':shot,'foregroundRGB':color,'adjacentBackingRGB':backing,'contrastRatio':round(ratio,3),'observedAdjacentPixels':adjacent})
 limitations=[
 'Awaiting User Review. No visual approval has been inferred; Gate 1 is not complete.',
 'No Gate 2 work, original audio production or mass roster generation was started.',
@@ -120,7 +151,7 @@ limitations=[
 'No public deployment, HTTPS host or offline readiness has been verified.'
 ]
 metadata={'status':'Awaiting User Review','capture':meta,'sheets':sheets,'checklist':checklist,'limitations':limitations,
-'atlasSHA256':manifest['sha256'],'runtimeAtlasUnchanged':True,'processing':'No screenshot resampling; native atlas crops integer nearest-neighbor 2x; lossless PNG composition.'}
+'atlasSHA256':manifest['sha256'],'lighting':manifest.get('lighting',{}),'outlineEvidence':outline_evidence,'outlineEvidenceLimits':'Observed valid/invalid stroke/backing samples only, not whole-scene WCAG conformance.','baselineDirectory':str(baseline) if baseline else None,'runtimeAtlasUnchangedByPackaging':True,'processing':'No screenshot resampling; native atlas crops integer nearest-neighbor 2x; lossless PNG composition.'}
 (out/'review-manifest.json').write_text(json.dumps(metadata,indent=2))
 md=['# Resonance Bastion — Gate 1 visual review','', '**Awaiting User Review**','',*limitations,'','## Review checklist','']
 md += [f'- [ ] {q}' for q in checklist]
@@ -142,8 +173,8 @@ body+='</details><p><a href="review-manifest.json">Complete metadata, checklist 
 shutil.copyfile(root/'public/assets/icon.png',out/'icon.png')
 (out/'index.html').write_text(f'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/png" href="icon.png"><title>Resonance Bastion Gate 1 Review</title><style>{css}</style><main>{body}</main></html>')
 # Preserve native raw PNG files as captured. Only contact sheets are composited.
-archive=out.parent/'Resonance_Bastion_Gate1_Review.zip'
+archive=out.parent/f'{out.name}.zip'
 with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
     for p in sorted(out.rglob('*')):
-        if p.is_file() and p.name!='before-overview.png': z.write(p,str(p.relative_to(out.parent)))
+        if p.is_file() and p.name not in ('before-overview.png','gallery-browser-check.png'): z.write(p,str(p.relative_to(out.parent)))
 print(json.dumps({'sheets':len(sheets),'captures':len(meta['images']),'zip':str(archive),'bytes':archive.stat().st_size,'status':'Awaiting User Review'},indent=2))

@@ -75,7 +75,7 @@ output {
   position: relative;
   overflow: hidden;
   border: 1px solid #78848b;
-  background: #111923;
+  background: #26333c;
 }
 canvas {
   display: block;

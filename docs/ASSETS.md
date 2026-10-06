@@ -37,3 +37,25 @@ Title composition: original 640×360 raster layered ruins/terrain/fortress/walls
 rebuilt from the same source definitions; candidate status. Frame manifest and
 source image hashes identify exact candidates. Optimized runtime assets are ordinary
 Git tracked PNG/JSON. No LFS, caches or browser recordings are required.
+
+## Gate 1 lighting candidate r1
+
+User feedback requested less darkness, better lighting and visible material detail.
+`assets/source/lighting-r1.json` is the single presentation-ramp definition:
+sprite RGB gamma0.70, darkest pixels (maximum channel <=32) preserved, a separate
+cool basalt ramp, lighter background and unowned-ground tint. The native pixel
+grid, alpha silhouettes, pivots, sizes, frame packing and content IDs are retained.
+The manifest's `palette` retains the original authored color definitions; its
+`lighting` block defines the applied ramps, and the actual 128-color atlas is the
+authority for final encoded pixels. The image-generation edit
+`lighting-reference-r1.png` is original lighting guidance,
+not runtime sprite geometry: its edge/layout differences were inspected and
+rejected for direct adoption. The original source images remain available.
+
+`python assets/source/validate_lighting.py` compares the runtime atlas against
+the immutable prior-review commit and checks all 30 frame identities/geometry,
+exact atlas alpha and increased representative mean RGB. These are objective
+pipeline checks, not user style approval or accessibility contrast certification.
+Actual runtime four-view/zoom/tablet captures accompany the revised review.
+Lighting ID: `rb-lighting-r1`. Status: **Awaiting User Review**. No new roster,
+animation, audio, save rule or combat mechanic was introduced.

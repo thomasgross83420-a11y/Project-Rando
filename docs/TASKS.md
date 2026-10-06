@@ -16,7 +16,7 @@ Never advance a failed gate as complete. Independent fixes/prototypes may procee
 
 ## Current Gate1 remainder, before certifying the gate
 
-- Await user feedback on the labeled nine-sheet runtime/atlas tablet review (Awaiting User Review) under §16/T17; inspect small
+- Await user feedback on the updated brighter-lighting runtime/atlas tablet review and same-scale before/after (Awaiting User Review) under §16/T17; inspect small
   silhouette readability and contrast before mass art/animation production.
 - Complete the required representative terrain transitions, approved role icons,
   camera/facing/animation-state manifests and foundation visual acceptance. Static

@@ -58,7 +58,7 @@ export class WorldView {
       parent,
       width: parent.clientWidth,
       height: parent.clientHeight,
-      backgroundColor: '#111923',
+      backgroundColor: atlas.lighting.runtimeBackground,
       pixelArt: true,
       antialias: false,
       banner: false,
@@ -277,7 +277,9 @@ export class WorldView {
         image(
           (x + y * 3) % 6 === 0 ? 'terrain.basalt' : `terrain.basalt.variant${(x + y * 3) % 6}`,
           { x: x + 0.5, y: y + 0.5 },
-          x >= 12 && x < 48 && y >= 12 && y < 48 ? 0xffffff : 0x66717c,
+          x >= 12 && x < 48 && y >= 12 && y < 48
+            ? 0xffffff
+            : Number.parseInt(atlas.lighting.unownedTerrainTint.slice(1), 16),
         );
       }
     const objects: [string, Point, string, number][] = [
@@ -385,11 +387,18 @@ export class WorldView {
         { x, y: y + h },
         { x, y },
       ].map((p) => project(p, this.camera));
-      g.lineStyle(2, color);
-      for (let i = 1; i < points.length; i++) {
-        const a = points[i - 1],
-          b = points[i];
-        if (a && b) g.lineBetween(a.x, a.y, b.x, b.y);
+      // A dark backing preserves boundary contrast on brighter terrain and art.
+      // Draw the complete backing first so adjacent colored segments stay clear.
+      for (const [width, stroke] of [
+        [4, 0x111923],
+        [2, color],
+      ] as const) {
+        g.lineStyle(width, stroke);
+        for (let i = 1; i < points.length; i++) {
+          const a = points[i - 1],
+            b = points[i];
+          if (a && b) g.lineBetween(a.x, a.y, b.x, b.y);
+        }
       }
     };
     outline(12, 12, 36, 36, 0x9bb9ae);

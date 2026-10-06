@@ -1,5 +1,9 @@
 # Gate 1 visual-review checkpoint
 
+This records the original review baseline. The subsequent user-requested
+[brighter-lighting revision r1](GATE1_LIGHTING_R1.md) has its own runtime proof
+and evidence; historical unchanged-atlas statements below describe this baseline.
+
 **Awaiting User Review.** Gate 1 remains in progress. Gate 2 and mass roster
 production are paused. Authority: unchanged blueprint §§5, 15, 16, 18, 26; T06,
 T14, T16 and T17. Candidate assets are not approved by structural tests or by

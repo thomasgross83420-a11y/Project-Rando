@@ -1,0 +1,19 @@
+{
+  "id": "rb-lighting-r1",
+  "status": "Awaiting User Review",
+  "authority": "User requested less-dark, better-lit, detailed and clearly defined Gate 1 candidates; blueprint section 16",
+  "reference": "assets/source/lighting-reference-r1.png",
+  "referenceUse": "Lighting guidance only. Generated edge/layout differences are not adopted as runtime geometry.",
+  "spriteChannelGamma": 0.70,
+  "preserveDarkPixelMaximum": 32,
+  "terrain": {
+    "ink": "#2b3c49",
+    "shadow": "#354957",
+    "dark": "#394c5b",
+    "stone": "#4c606d",
+    "face": "#617888"
+  },
+  "runtimeBackground": "#26333c",
+  "unownedTerrainTint": "#9aabb7",
+  "notes": "Original silhouettes, alpha masks, pixel grid, native bounds, pivots, packing and gameplay data retained; RGB lighting edited. No blur, bloom, dithering or enlargement. Terrain uses a separate subdued cool ramp. Original source references retained. No new roster or animation states."
+}

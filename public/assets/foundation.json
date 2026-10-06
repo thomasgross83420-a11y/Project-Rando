@@ -1,5 +1,24 @@
 {
   "schema": 1,
+  "lighting": {
+    "id": "rb-lighting-r1",
+    "status": "Awaiting User Review",
+    "authority": "User requested less-dark, better-lit, detailed and clearly defined Gate 1 candidates; blueprint section 16",
+    "reference": "assets/source/lighting-reference-r1.png",
+    "referenceUse": "Lighting guidance only. Generated edge/layout differences are not adopted as runtime geometry.",
+    "spriteChannelGamma": 0.7,
+    "preserveDarkPixelMaximum": 32,
+    "terrain": {
+      "ink": "#2b3c49",
+      "shadow": "#354957",
+      "dark": "#394c5b",
+      "stone": "#4c606d",
+      "face": "#617888"
+    },
+    "runtimeBackground": "#26333c",
+    "unownedTerrainTint": "#9aabb7",
+    "notes": "Original silhouettes, alpha masks, pixel grid, native bounds, pivots, packing and gameplay data retained; RGB lighting edited. No blur, bloom, dithering or enlargement. Terrain uses a separate subdued cool ramp. Original source references retained. No new roster or animation states."
+  },
   "atlas": "foundation.png",
   "atlasSize": [
     1024,
@@ -162,6 +181,7 @@
       "state": "idle",
       "source": "assets/source/camera-reference.png + generate_foundation.py",
       "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         436,
         4,
@@ -183,6 +203,7 @@
       "state": "idle",
       "source": "assets/source/camera-reference.png + generate_foundation.py",
       "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         636,
         4,
@@ -204,6 +225,7 @@
       "state": "idle",
       "source": "assets/source/camera-reference.png + generate_foundation.py",
       "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         4,
         204,
@@ -225,6 +247,7 @@
       "state": "idle",
       "source": "assets/source/camera-reference.png + generate_foundation.py",
       "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         204,
         204,
@@ -246,6 +269,7 @@
       "state": "idle",
       "source": "assets/source/camera-reference.png + generate_foundation.py",
       "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         404,
         204,
@@ -267,6 +291,7 @@
       "state": "idle",
       "source": "assets/source/camera-reference.png + generate_foundation.py",
       "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         540,
         204,
@@ -288,6 +313,7 @@
       "state": "idle",
       "source": "assets/source/camera-reference.png + generate_foundation.py",
       "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         676,
         204,
@@ -309,6 +335,7 @@
       "state": "idle",
       "source": "assets/source/camera-reference.png + generate_foundation.py",
       "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         812,
         204,
@@ -330,6 +357,7 @@
       "state": "idle",
       "source": "assets/source/camera-reference.png + generate_foundation.py",
       "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         948,
         204,
@@ -351,6 +379,7 @@
       "state": "idle",
       "source": "assets/source/camera-reference.png + generate_foundation.py",
       "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         4,
         404,
@@ -372,6 +401,7 @@
       "state": "idle",
       "source": "assets/source/camera-reference.png + generate_foundation.py",
       "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         76,
         404,
@@ -393,6 +423,7 @@
       "state": "idle",
       "source": "assets/source/camera-reference.png + generate_foundation.py",
       "review": "Native-size cleaned candidate; camera/anatomy approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         148,
         404,
@@ -414,6 +445,7 @@
       "state": "idle",
       "source": "foundation-reference.png; three individual 48x64 bodies",
       "review": "Native proof only; per-body facing/animation production Designed",
+      "lighting": "rb-lighting-r1",
       "rect": [
         220,
         404,
@@ -435,6 +467,7 @@
       "state": "idle",
       "source": "foundation-reference.png + generate_foundation.py",
       "review": "Native proof only; remaining facing/animation production Designed",
+      "lighting": "rb-lighting-r1",
       "rect": [
         324,
         404,
@@ -456,6 +489,7 @@
       "state": "idle",
       "source": "foundation-reference.png + generate_foundation.py",
       "review": "Native proof only; remaining facing/animation production Designed",
+      "lighting": "rb-lighting-r1",
       "rect": [
         380,
         404,
@@ -477,6 +511,7 @@
       "state": "idle",
       "source": "assets/source/generate_foundation.py",
       "review": "Candidate \u2014 visual approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         452,
         404,
@@ -498,6 +533,7 @@
       "state": "idle",
       "source": "assets/source/generate_foundation.py",
       "review": "Candidate \u2014 visual approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         556,
         404,
@@ -519,6 +555,7 @@
       "state": "idle",
       "source": "assets/source/generate_foundation.py",
       "review": "Candidate \u2014 visual approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         612,
         404,
@@ -540,6 +577,7 @@
       "state": "idle",
       "source": "assets/source/generate_foundation.py",
       "review": "Candidate \u2014 visual approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         684,
         404,
@@ -561,6 +599,7 @@
       "state": "idle",
       "source": "assets/source/generate_foundation.py",
       "review": "Candidate \u2014 visual approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         788,
         404,
@@ -582,6 +621,7 @@
       "state": "idle",
       "source": "assets/source/generate_foundation.py",
       "review": "Candidate \u2014 visual approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         844,
         404,
@@ -603,6 +643,7 @@
       "state": "idle",
       "source": "assets/source/generate_foundation.py",
       "review": "Candidate \u2014 visual approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         916,
         404,
@@ -624,6 +665,7 @@
       "state": "idle",
       "source": "assets/source/generate_foundation.py",
       "review": "Candidate \u2014 visual approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         4,
         492,
@@ -645,6 +687,7 @@
       "state": "idle",
       "source": "assets/source/generate_foundation.py",
       "review": "Candidate \u2014 visual approval pending",
+      "lighting": "rb-lighting-r1",
       "rect": [
         60,
         492,
@@ -654,5 +697,5 @@
     }
   ],
   "provenance": "Original image generation plus controlled native-size cleanup; deterministic authored terrain. All candidates pending user approval.",
-  "sha256": "97f540bb3102c0a0e31a8d4c5c37f574c64496761c64bd922de8399a91059de3"
+  "sha256": "d397c7f6333f7e60caf6420c50f99f5ee51e6baed5d23169feb9847f1584bd57"
 }

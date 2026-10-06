@@ -144,3 +144,39 @@ render-pass flushing. Capture tooling classifies only these two observed driver
 messages, fails other warnings, and never treats them as proof of device
 performance. No application error or failed HTTP request remains after the
 hidden-canvas correction. Android GPU/performance acceptance remains open.
+
+Gate 1 brighter-lighting r1 (2026-10-06, requested by user): controlled RGB
+midtones, separate cool basalt ramp, field background/tint and actual title raster
+were revised; original geometry and pixels-per-frame remain fixed. The generated
+lighting guide was inspected and retained as guidance only. A subsequent live
+review identified thin footprint/boundary lines against brighter terrain; added
+dark backing behind existing colored strokes and reran affected integration checks.
+Initial strict typecheck caught inferred possibly-undefined tuple entries in this
+loop; readonly tuple typing corrected them before the verified final build.
+
+Passed: reproducible 30-frame generation, atlas/anchor/palette/hash validation,
+exact prior-review alpha and frame-geometry comparison, increased masked mean RGB
+for all six representatives, eight unit tests, unchanged 3600-tick headless
+mechanism hash, final strict build, eleven browser tests rerun after the outline
+correction, lint and formatting. No new dependency or license was introduced.
+The existing upstream Zod/Rollup annotation and two lint information notices
+remain; five known ANGLE capture performance warnings were recorded, with no
+application/HTTP errors. These do not certify physical GPU performance.
+
+Final production capture: 23 real images at primary800×1280, landscape1280×800,
+four camera views, Fit/tactical/close, normal/actual200%, reduced-effects and
+keyboard focus; four-view caption/body nonoverlap; valid/invalid Place behavior;
+reload retained Sentry/Barricade,600Credits,capacity2/20; previews never committed.
+200% DOM reflow passed both tablets plus320px. Ten contact sheets preserve pixels
+and compare prior/revised runtime at identical settings; enlarged inspection uses
+actual atlas crops, never the lighting guide. Composited valid/invalid strokes
+were observed immediately adjacent to their dark backing: contrast7.419:1 and
+6.374:1 respectively,935/456 matching neighboring pixels. This certifies those
+observed samples only, not whole-scene WCAG conformance.
+
+Review gallery: ten sheets/thirteen checklist controls, all images loaded,
+nearest-neighbor CSS, no horizontal overflow at800×1280, keyboard checkbox works,
+no console/HTTP errors. Local loopback inspection is not public/offline proof.
+Exact evidence: review/GATE1_LIGHTING_R1_EVIDENCE.json. Blueprint SHA256 unchanged.
+Status remains Awaiting User Review; Gate1 incomplete, Gate2/mass roster paused.
+Physical tablet/Android/TalkBack and remaining foundation acceptance stay open.

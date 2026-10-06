@@ -1,0 +1,751 @@
+{
+  "status": "Awaiting User Review",
+  "date": "2026-10-06T14:51:58.870Z",
+  "workingTree": " M assets/source/generate_foundation.py\n M docs/ASSETS.md\n M docs/ASSET_PROMPTS.md\n M docs/DECISIONS.md\n M docs/DESIGN_DECISIONS.md\n M docs/IMPLEMENTATION_MAP.json\n M docs/STATUS.md\n M docs/TASKS.md\n M docs/review/GATE1_VISUAL_REVIEW.md\n M docs/versions.json\n M public/assets/foundation.json\n M public/assets/foundation.png\n M public/assets/icon.png\n M public/assets/style-proof-close.png\n M public/assets/style-proof-default.png\n M public/assets/title-foundation.png\n M scripts/package-visual-review.py\n M src/render/world.ts\n M src/style.css\n?? assets/source/lighting-r1.json\n?? assets/source/lighting-reference-r1.png\n?? assets/source/validate_lighting.py\n?? docs/review/GATE1_LIGHTING_R1.md\n",
+  "buildAssets": [
+    "app-CmcyuuH5.js",
+    "diagnostic-DPZ-Jlk7.js",
+    "foundation.json",
+    "foundation.png",
+    "icon.png",
+    "index-VKqhHP-G.js",
+    "style-proof-close.png",
+    "style-proof-default.png",
+    "title-foundation.png",
+    "world-CCCYswsU.css",
+    "world-DqBTZwCa.js"
+  ],
+  "atlasSHA256": "d397c7f6333f7e60caf6420c50f99f5ee51e6baed5d23169feb9847f1584bd57",
+  "browser": "151.0.7922.173",
+  "deviceScaleFactor": 1,
+  "images": [
+    {
+      "id": "01-title-portrait",
+      "title": "Title / primary tablet",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": null,
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Full viewport; additional controls may require scrolling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/01-title-portrait.png"
+    },
+    {
+      "id": "02-preparation-portrait",
+      "title": "Preparation / current default orientation and Fit field",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.390625,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Full viewport; additional controls may require scrolling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/02-preparation-portrait.png"
+    },
+    {
+      "id": "03-fit-field",
+      "title": "Current Fit field overview (Fit Base not yet separate)",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.390625,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Canvas crop, no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/03-fit-field.png"
+    },
+    {
+      "id": "04-orientation-0",
+      "title": "Camera 0 degrees / tactical",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.95367431640625,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Central 520x360 CSS-pixel crop; no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/04-orientation-0.png"
+    },
+    {
+      "id": "04-orientation-90",
+      "title": "Camera 90 degrees / tactical",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.95367431640625,
+        "view": 1,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Central 520x360 CSS-pixel crop; no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/04-orientation-90.png"
+    },
+    {
+      "id": "04-orientation-180",
+      "title": "Camera 180 degrees / tactical",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.95367431640625,
+        "view": 2,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Central 520x360 CSS-pixel crop; no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/04-orientation-180.png"
+    },
+    {
+      "id": "04-orientation-270",
+      "title": "Camera 270 degrees / tactical",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.95367431640625,
+        "view": 3,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Central 520x360 CSS-pixel crop; no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/04-orientation-270.png"
+    },
+    {
+      "id": "05-tactical",
+      "title": "Tactical zoom / real construction",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.95367431640625,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Central 520x360 CSS-pixel crop; no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/05-tactical.png"
+    },
+    {
+      "id": "06-together",
+      "title": "Core, terrain, Sentry, Rifle, Runner and Barricade / actual runtime scale",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.95367431640625,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production renderer + explicitly staged, static atlas samples",
+      "crop": "Central 520x360 CSS-pixel crop; no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only. Rifle/Runner are staged idle art, NOT deployed or combat-active; their additional views remain diagnostic.",
+      "path": "raw/06-together.png"
+    },
+    {
+      "id": "07-close",
+      "title": "Close zoom / real construction",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 1.862645149230957,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Canvas crop, no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/07-close.png"
+    },
+    {
+      "id": "08-selected",
+      "title": "Selected owned Sentry / free move preview",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 1.862645149230957,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Canvas crop, no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/08-selected.png"
+    },
+    {
+      "id": "09-valid",
+      "title": "Valid placement / tinted ghost and footprint",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 1.862645149230957,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Canvas crop, no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/09-valid.png"
+    },
+    {
+      "id": "09-valid-controls",
+      "title": "Valid placement / text, controls and route feedback",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 1.862645149230957,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Placement panel crop; no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/09-valid-controls.png"
+    },
+    {
+      "id": "10-invalid",
+      "title": "Invalid placement / reserved Core precinct",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 1.862645149230957,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Canvas crop, no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/10-invalid.png"
+    },
+    {
+      "id": "10-invalid-controls",
+      "title": "Invalid placement / disabled Place and exact reason",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 1.862645149230957,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Placement panel crop; no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/10-invalid-controls.png"
+    },
+    {
+      "id": "11-disabled-inventory",
+      "title": "Disabled inventory actions / deployment Designed",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 1.862645149230957,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Owned inventory crop; no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only. Disabled actions are unfinished deployments, NOT damaged or disabled battle assets.",
+      "path": "raw/11-disabled-inventory.png"
+    },
+    {
+      "id": "12-preparation-landscape",
+      "title": "Landscape preparation / current stacked layout",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.3267857142857143,
+        "view": 0,
+        "width": 1174,
+        "height": 438
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Full viewport; additional controls may require scrolling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/12-preparation-landscape.png"
+    },
+    {
+      "id": "13-landscape-tactical",
+      "title": "Landscape tactical / canvas",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "interfaceScale": "100%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.7978166852678572,
+        "view": 0,
+        "width": 1174,
+        "height": 438
+      },
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Canvas crop, no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/13-landscape-tactical.png"
+    },
+    {
+      "id": "14-title-landscape",
+      "title": "Landscape title",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "interfaceScale": "100%",
+      "camera": null,
+      "mode": "Default; silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Full viewport; additional controls may require scrolling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/14-title-landscape.png"
+    },
+    {
+      "id": "15-accessibility",
+      "title": "Actual accessibility controls / 200%",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "200%",
+      "camera": null,
+      "mode": "Reduced effects (no animated effects implemented); silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Full viewport; additional controls may require scrolling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/15-accessibility.png"
+    },
+    {
+      "id": "16-preparation-200",
+      "title": "200% UI + reduced effects / primary tablet",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "200%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.390625,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Reduced effects (no animated effects implemented); silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Full viewport; additional controls may require scrolling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/16-preparation-200.png"
+    },
+    {
+      "id": "17-camera-controls-200",
+      "title": "200% camera controls / non-drag alternatives",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "interfaceScale": "200%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.390625,
+        "view": 0,
+        "width": 774,
+        "height": 702
+      },
+      "mode": "Reduced effects (no animated effects implemented); silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Camera control panel crop; no resampling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/17-camera-controls-200.png"
+    },
+    {
+      "id": "18-landscape-200",
+      "title": "200% landscape / current stacked layout",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "interfaceScale": "200%",
+      "camera": {
+        "x": 30,
+        "y": 30,
+        "zoom": 0.3267857142857143,
+        "view": 3,
+        "width": 1174,
+        "height": 438
+      },
+      "mode": "Reduced effects (no animated effects implemented); silent foundation (no music/SFX)",
+      "quality": "Only current baseline renderer; no quality selector or high-contrast mode implemented",
+      "source": "Live production runtime",
+      "crop": "Full viewport; additional controls may require scrolling",
+      "temporary": "Candidate art; development header; unfinished terrain/role icons; static idle only.",
+      "path": "raw/18-landscape-200.png"
+    }
+  ],
+  "checks": [
+    "No representative nameplate/nameplate or nameplate/body overlaps in all four overview views",
+    "Valid preview enables Place; Core-reserved preview disables Place with reason; previews do not spend credits",
+    "Reload and Continue restore both placements, 600 Credits, capacity 2/20; previews do not persist",
+    "200% reflow without horizontal overflow at portrait/landscape tablets and 320px; focus and four-view labels remain usable"
+  ],
+  "errors": [],
+  "warnings": [
+    "[.WebGL-0x9fc0015f600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[.WebGL-0x9fc0015f600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[.WebGL-0x9fc0015f600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[.WebGL-0x9fc0015f600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+    "[.WebGL-0x9fc00163800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): Running out of reserved outsideRenderPass queueSerial. ending renderPass now."
+  ],
+  "captureBaseCommit": "c2e4b17f2b3af71489598a04d2b707ba29b796fd",
+  "lightingValidation": {
+    "baseline": "c2e4b17f2b3af71489598a04d2b707ba29b796fd",
+    "lighting": "rb-lighting-r1",
+    "frames": 30,
+    "geometryAndAlphaUnchanged": true,
+    "atlasSHA256": "d397c7f6333f7e60caf6420c50f99f5ee51e6baed5d23169feb9847f1584bd57",
+    "referenceSHA256": "b967003a0bc6eb1c3f0d96efeebf032042170c1b65ff420bfd093a527678d4db",
+    "measurements": [
+      {
+        "key": "objective.harmonic_core.view0",
+        "beforeMeanRGB": [
+          77.75,
+          76.47,
+          65.83
+        ],
+        "afterMeanRGB": [
+          98.66,
+          98.16,
+          88.67
+        ]
+      },
+      {
+        "key": "friendly.sentry.view0",
+        "beforeMeanRGB": [
+          75.55,
+          67.55,
+          56.93
+        ],
+        "afterMeanRGB": [
+          98.48,
+          91.06,
+          80.52
+        ]
+      },
+      {
+        "key": "friendly.rifle_squad.view0",
+        "beforeMeanRGB": [
+          56.09,
+          52.51,
+          47.26
+        ],
+        "afterMeanRGB": [
+          75.13,
+          72.28,
+          67.65
+        ]
+      },
+      {
+        "key": "enemy.runner.view0",
+        "beforeMeanRGB": [
+          73.84,
+          103.49,
+          97.24
+        ],
+        "afterMeanRGB": [
+          92.3,
+          118.37,
+          114.23
+        ]
+      },
+      {
+        "key": "friendly.standard_barricade.view0",
+        "beforeMeanRGB": [
+          76.47,
+          69.93,
+          60.11
+        ],
+        "afterMeanRGB": [
+          99.12,
+          94.03,
+          85.56
+        ]
+      },
+      {
+        "key": "terrain.basalt",
+        "beforeMeanRGB": [
+          52.84,
+          69.21,
+          79.75
+        ],
+        "afterMeanRGB": [
+          72.48,
+          93.37,
+          105.87
+        ]
+      }
+    ],
+    "limits": "Pixel preservation and brightness measurements are not user approval, contrast certification or Android performance evidence."
+  },
+  "outlineEvidence": [
+    {
+      "capture": "09-valid",
+      "foregroundRGB": [
+        64,
+        186,
+        168
+      ],
+      "adjacentBackingRGB": [
+        17,
+        25,
+        35
+      ],
+      "contrastRatio": 7.419,
+      "observedAdjacentPixels": 935
+    },
+    {
+      "capture": "10-invalid",
+      "foregroundRGB": [
+        255,
+        107,
+        107
+      ],
+      "adjacentBackingRGB": [
+        17,
+        25,
+        35
+      ],
+      "contrastRatio": 6.374,
+      "observedAdjacentPixels": 456
+    }
+  ],
+  "outlineEvidenceLimits": "Observed valid/invalid stroke/backing samples only, not whole-scene WCAG conformance.",
+  "commands": [
+    {
+      "command": "python assets/source/generate_foundation.py",
+      "result": "Passed; 30 frames, atlas 349002 bytes"
+    },
+    {
+      "command": "python assets/source/validate_foundation.py",
+      "result": "Passed; anchors, dimensions, transparent gutters, palette, hash"
+    },
+    {
+      "command": "python assets/source/validate_lighting.py",
+      "result": "Passed; prior-review geometry/alpha identical, six representatives brighter"
+    },
+    {
+      "command": "npm run build",
+      "result": "Passed; strict TypeScript and production subpath build; upstream Zod/Rollup comment warnings"
+    },
+    {
+      "command": "npm run test",
+      "result": "8 passed"
+    },
+    {
+      "command": "npm run test:scenario",
+      "result": "Passed; same 3600-tick mechanism hash 90a7d118d4df7eb3e8808e78d7ffa875ddd970ab4961287daf1a719426936169; not a combat test"
+    },
+    {
+      "command": "npm run test:browser",
+      "result": "11 passed; rerun after dark-outline backing correction"
+    },
+    {
+      "command": "npm run lint",
+      "result": "Passed; two existing information-level style notices"
+    },
+    {
+      "command": "npm run format:check",
+      "result": "Passed"
+    },
+    {
+      "command": "node scripts/capture-visual-review.mjs /workspace/shared/Resonance_Bastion_Gate1_Brighter_Review",
+      "result": "Passed;23 captures / no application or HTTP errors; all four view labels, placement, reload, 200% reflow"
+    },
+    {
+      "command": "python scripts/package-visual-review.py /workspace/shared/Resonance_Bastion_Gate1_Brighter_Review /workspace/shared/Resonance_Bastion_Gate1_Review",
+      "result": "Passed;10 sheets, same-scale comparisons, actual valid/invalid outline contrast samples"
+    }
+  ],
+  "resolvedDuringWork": [
+    "Initial outline-backing loop failed strict typecheck due to inferred possibly-undefined tuple entries. Fixed with a readonly tuple; final typecheck/build and affected browser/capture checks passed."
+  ],
+  "manualInspection": [
+    "Actual portrait title",
+    "Actual tactical view0 Core/Sentry/Barricade/Rifle/Runner scene",
+    "Close placement footprint on revised terrain",
+    "Same-scale prior/revised runtime contact sheet",
+    "Nearest-neighbor native atlas-derived close proof"
+  ],
+  "unchangedBlueprintSHA256": "9808229593b79b856f8f522dcffba591debe6334a3f60a61d1915cdd5e2900a6",
+  "versions": {
+    "presentation": "rb-lighting-r1",
+    "simulation": "rb-sim-v1",
+    "content": "rb-content-v1",
+    "generator": "rb-generator-v1",
+    "economy": "economy.duration_wave_v1",
+    "saveSchema": 1
+  },
+  "limitations": [
+    "Awaiting User Review; no aesthetic approval inferred",
+    "Gate1 incomplete; Gate2 and mass roster paused",
+    "No physical Android/GPU/TalkBack acceptance or public/offline deployment proof",
+    "Original animation/facing/role-icon/high-contrast and other Gate1 limitations remain",
+    "Observed ANGLE ReadPixels/render-pass warning classification unchanged; no performance certification"
+  ],
+  "galleryCheck": {
+    "viewport": "800x1280",
+    "sheets": 10,
+    "checkboxes": 13,
+    "allImagesLoaded": true,
+    "horizontalOverflow": false,
+    "nearestNeighbor": true,
+    "errors": [],
+    "keyboardCheckbox": true,
+    "route": "Local loopback review server, not a public deployment"
+  }
+}

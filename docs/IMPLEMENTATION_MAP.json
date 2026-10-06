@@ -147,12 +147,15 @@
     "scope": "Native cleaned static candidates, proof, terrain and title; final approval, complete directions/animations/role icons Designed",
     "code": [
       "assets/source/generate_foundation.py",
+      "assets/source/lighting-r1.json",
+      "assets/source/validate_lighting.py",
       "public/assets/foundation.json",
       "scripts/capture-visual-review.mjs",
       "scripts/package-visual-review.py"
     ],
     "tests": [
       "processor anchor/atlas checks",
+      "lighting revision: prior-review alpha/frame identity preservation, representative RGB increase; GATE1_LIGHTING_R1_EVIDENCE.json",
       "human screenshot inspection recorded in TEST_EVIDENCE.md",
       "review capture: four-view body/nameplate nonoverlap; 200% tablet reflow; actual accessibility setting; saved construction reload"
     ],
@@ -161,6 +164,6 @@
       "Pillow12.3.0"
     ],
     "save": "Visual asset identifiers never change body geometry or durable game stats",
-    "presentation": "128-color atlas, original generated candidates, source/prompt/provenance retained; user tablet review pending; labeled runtime/atlas package Awaiting User Review, no animation approval"
+    "presentation": "128-color atlas, original generated candidates, source/prompt/provenance retained; user-requested rb-lighting-r1 and outlined feedback; user tablet review pending; labeled runtime/atlas package Awaiting User Review, no animation approval"
   }
 ]

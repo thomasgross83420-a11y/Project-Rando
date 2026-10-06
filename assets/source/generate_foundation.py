@@ -1,5 +1,6 @@
-"""Original pixel-authored Gate 1 candidates. Rebuild: python assets/source/generate_foundation.py.
-Pillow 12.3.0 MIT-CMU; no sampled external artwork. Generated reference is mood only.
+"""Original Gate 1 native raster cleanup and composition. Rebuild: python assets/source/generate_foundation.py.
+Pillow 12.3.0 MIT-CMU; no external artwork. Original generated references supply
+static candidate crops; lighting-r1 reference guides RGB changes only.
 Nearest-neighbor only. Anchors and atlas margins are machine-validated.
 """
 from PIL import Image, ImageDraw
@@ -8,6 +9,7 @@ import json, hashlib
 ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/'public/assets'; OUT.mkdir(parents=True,exist_ok=True)
 P={'ink':'#0d1721','shadow':'#17232e','dark':'#25343e','stone':'#384954','face':'#53636a','light':'#89968f','edge':'#d4d5bd','gold':'#b18a52','goldlight':'#e1bf7b','teal':'#40baa8','cyan':'#b8eee0','rust':'#765548'}
+LIGHTING=json.loads((ROOT/'assets/source/lighting-r1.json').read_text())
 frames=[]; images=[]
 def polygon(d,points,color):d.polygon(points,fill=P.get(color,color))
 def box(d,cx,cy,w,h,z):
@@ -42,7 +44,10 @@ def soldier(d,x,y,view,bulwark=False,runner=False):
         polygon(d,[(x+7,y-30),(x+18,y-25),(x+18,y-8),(x+12,y-3),(x+7,y-9)],'ink')
         polygon(d,[(x+8,y-28),(x+16,y-24),(x+16,y-9),(x+12,y-5),(x+8,y-10)],'stone');d.line([(x+12,y-26),(x+12,y-9)],fill=P['goldlight'],width=2)
 def frame(key,w,h,anchor,draw,view=0,state='idle'):
-    im=Image.new('RGBA',(w,h));d=ImageDraw.Draw(im);draw(d,view);images.append(im)
+    im=Image.new('RGBA',(w,h));d=ImageDraw.Draw(im)
+    original_palette=P.copy()
+    if key.startswith('terrain.'):P.update(LIGHTING['terrain'])
+    draw(d,view);P.update(original_palette);images.append(im)
     frames.append({'key':key,'native':[w,h],'anchor':list(anchor),'cameraView':view,'state':state,'source':'assets/source/generate_foundation.py','review':'Candidate — visual approval pending'})
 def tile(d,v):
     polygon(d,[(32,0),(63,16),(32,31),(0,16)],'dark');polygon(d,[(32,2),(60,16),(32,29),(3,16)],'stone')
@@ -102,6 +107,18 @@ for key,bounds,size in [('enemy.runner.view0',(786,571,1093,967),(48,64)),('ward
 rifle=Image.new('RGBA',(96,80))
 for bounds,(x,y) in zip([(36,585,285,938),(282,613,512,951),(515,648,767,961)],[(0,0),(48,0),(24,16)]):rifle.alpha_composite(native_candidate(reference.crop(bounds),(48,64)),(x,y))
 index=next(i for i,f in enumerate(frames) if f['key']=='friendly.rifle_squad.view0');images[index]=rifle;frames[index]['source']='foundation-reference.png; three individual 48x64 bodies';frames[index]['review']='Native proof only; per-body facing/animation production Designed'
+# Apply the approved *request*, not inferred visual approval: a pixel-preserving
+# ambient-light ramp informed by lighting-reference-r1.png. Keep geometry and alpha
+# exactly; darkest outlines/contact shadows retain their original separation.
+channel_ramp=[round(255*((c/255)**LIGHTING['spriteChannelGamma'])) for c in range(256)]
+for i,f in enumerate(frames):
+    if f['key'].startswith('terrain.'):continue
+    original=images[i];lit=original.copy()
+    lit.putdata([(*([channel_ramp[c] for c in rgb] if a and max(rgb)>LIGHTING['preserveDarkPixelMaximum'] else rgb),a)
+                 for *rgb,a in original.get_flattened_data()])
+    assert lit.getchannel('A').tobytes()==original.getchannel('A').tobytes()
+    images[i]=lit
+    f['lighting']=LIGHTING['id']
 # Shelf atlas: four pixels transparent separation, no alpha at outer border.
 atlas=Image.new('RGBA',(1024,1024));x=y=4;row=0
 for im,f in zip(images,frames):
@@ -110,9 +127,9 @@ for im,f in zip(images,frames):
     atlas.alpha_composite(im,(x,y));f['rect']=[x,y,im.width,im.height];x+=im.width+8;row=max(row,im.height)
 alpha=atlas.getchannel('A');atlas=atlas.convert('RGB').quantize(colors=128,dither=Image.Dither.NONE).convert('RGBA');atlas.putalpha(alpha)
 atlas.save(OUT/'foundation.png',optimize=True)
-manifest={'schema':1,'atlas':'foundation.png','atlasSize':[1024,1024],'padding':4,'sourcePixelsPerScreenPixel':2,'palette':P,'frames':frames,'provenance':'Original image generation plus controlled native-size cleanup; deterministic authored terrain. All candidates pending user approval.','sha256':hashlib.sha256((OUT/'foundation.png').read_bytes()).hexdigest()}
+manifest={'schema':1,'lighting':LIGHTING,'atlas':'foundation.png','atlasSize':[1024,1024],'padding':4,'sourcePixelsPerScreenPixel':2,'palette':P,'frames':frames,'provenance':'Original image generation plus controlled native-size cleanup; deterministic authored terrain. All candidates pending user approval.','sha256':hashlib.sha256((OUT/'foundation.png').read_bytes()).hexdigest()}
 (OUT/'foundation.json').write_text(json.dumps(manifest,indent=2)+'\n')
-proof=Image.new('RGBA',(512,320),'#17232e')
+proof=Image.new('RGBA',(512,320),LIGHTING['runtimeBackground'])
 for key,(x,y) in zip(['terrain.basalt','objective.harmonic_core.view0','friendly.sentry.view0','friendly.standard_barricade.view0','friendly.rifle_squad.view0','enemy.runner.view0','warden.bulwark.view0'],[(16,260),(5,2),(190,15),(350,85),(190,185),(315,195),(390,190)]):
     index=next(i for i,f in enumerate(frames) if f['key']==key);proof.alpha_composite(images[index],(x,y))
 proof.resize((1024,640),Image.Resampling.NEAREST).save(OUT/'style-proof-close.png',optimize=True)
@@ -123,7 +140,7 @@ assert all(0<=f['anchor'][0]<f['native'][0] and 0<=f['anchor'][1]<f['native'][1]
 print(f'{len(frames)} original candidate frames; atlas {(OUT/"foundation.png").stat().st_size} bytes; anchors/padding validated')
 
 # Original editable title composition: far ruins, basalt midground, fortress and foreground wall.
-title=Image.new('RGBA',(640,360),'#111923');td=ImageDraw.Draw(title)
+title=Image.new('RGBA',(640,360),LIGHTING['runtimeBackground']);td=ImageDraw.Draw(title)
 for x,y in [(65,60),(555,75),(470,25),(158,28)]:
     td.rectangle((x,y,x+15,y+30),fill=P['shadow']);td.rectangle((x-4,y+29,x+22,y+34),fill=P['dark'])
 for gy in range(-6,12):

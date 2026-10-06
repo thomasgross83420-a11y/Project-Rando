@@ -62,3 +62,12 @@ No content/simulation/generator/economy/save-schema version or design baseline
 changes. Art remains Candidate / Awaiting User Review. Camera/label instrumentation
 and clearly named static Rifle/Runner comparison objects exist only in the
 external browser capture tool, not a shipped game control or saved entity.
+
+## ADR007 — independently versioned presentation lighting
+
+User feedback requests brighter, clearer Gate 1 art. A presentation-only
+`rb-lighting-r1` manifest/config defines reproducible RGB ramp changes and renderer
+background/tint; simulation/save/version identities are unchanged. Geometry and
+alpha are compared to the immutable prior review commit. Generated lighting
+guidance is retained but not substituted for runtime sprites. See VIS001 in
+DESIGN_DECISIONS.md and review/GATE1_LIGHTING_R1.md. User approval remains pending.

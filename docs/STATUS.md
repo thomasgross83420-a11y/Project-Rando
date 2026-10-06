@@ -34,5 +34,8 @@ is fulfilled. No roster category, mode, boss, progression or post-mastery scope 
 
 Gate 1 visual review: [review package/reproduction and checklist](review/GATE1_VISUAL_REVIEW.md).
 Objective overview label/selection and zero-size hidden-canvas defects corrected;
-no representative sprite or blueprint art direction changed. Gate 2 and mass roster
+the original correction checkpoint preserved representative sprites. The subsequent
+user-requested [brighter lighting candidate](review/GATE1_LIGHTING_R1.md) revises
+RGB ramps/background while preserving native geometry and the blueprint art direction.
+Its updated runtime proof is **Awaiting User Review**. Gate 2 and mass roster
 production are paused at this user-review checkpoint.
