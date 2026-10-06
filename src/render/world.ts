@@ -46,6 +46,9 @@ export class WorldView {
   }[] = [];
   labels: Phaser.GameObjects.Text[] = [];
   selected: Point = { x: 30, y: 30 };
+  get strategicRoles(): boolean {
+    return this.camera.zoom < 0.65 || (this.fitActive && this.fitMode === 'base');
+  }
   constructor(
     readonly parent: HTMLElement,
     readonly status: (message: string) => void,
@@ -362,7 +365,7 @@ export class WorldView {
     }
     // Strategic icons keep their UI pixel size; ordinary sprites keep native density.
     // Overlapping icon bounds share one badge and the named multi-object picker.
-    if (this.camera.zoom < 0.65 && this.scene) {
+    if (this.strategicRoles && this.scene) {
       const groups: { point: Point; ids: string[]; key: string }[] = [];
       for (const [key, point, id] of objects) {
         const screen = project(point, this.camera);
@@ -554,10 +557,10 @@ export class WorldView {
     g.lineBetween(p.x, p.y - 10, p.x, p.y + 10);
     this.parent.dataset.zoom = String(this.camera.zoom);
     this.parent.dataset.orientation = String(this.camera.view * 90);
-    this.parent.dataset.presentation = this.camera.zoom < 0.65 ? 'strategic' : 'detailed';
+    this.parent.dataset.presentation = this.strategicRoles ? 'strategic' : 'detailed';
     this.parent.dataset.fit = this.fitActive ? this.fitMode : 'manual';
     this.parent.dataset.roleGroups = String(
-      this.camera.zoom < 0.65 ? new Set(this.hitRecords.map((r) => `${r.x},${r.y}`)).size : 0,
+      this.strategicRoles ? new Set(this.hitRecords.map((r) => `${r.x},${r.y}`)).size : 0,
     );
   }
 }

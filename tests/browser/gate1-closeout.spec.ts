@@ -40,6 +40,8 @@ test('Fit Base, role badges, four views, route feedback and named jump operate w
   await page.setViewportSize({ width: 800, height: 1280 });
   await create(page);
   await expect(page.locator('#world')).toHaveAttribute('data-fit', 'base');
+  await expect(page.locator('#world')).toHaveAttribute('data-presentation', 'strategic');
+  await expect(page.locator('#world')).toHaveAttribute('data-role-groups', '1');
   const base = Number(await page.locator('#world').getAttribute('data-zoom'));
   await page.getByRole('button', { name: 'Fit field', exact: true }).click();
   expect(Number(await page.locator('#world').getAttribute('data-zoom'))).toBeLessThan(base);
