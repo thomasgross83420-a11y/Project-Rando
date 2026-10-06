@@ -13,3 +13,7 @@ scratch/
 
 # Rejected disposable early proof; editable pipeline retained
 assets/source/foundation-proof.png
+
+# Python review tooling caches
+__pycache__/
+*.py[cod]

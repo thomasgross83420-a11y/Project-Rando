@@ -147,17 +147,20 @@
     "scope": "Native cleaned static candidates, proof, terrain and title; final approval, complete directions/animations/role icons Designed",
     "code": [
       "assets/source/generate_foundation.py",
-      "public/assets/foundation.json"
+      "public/assets/foundation.json",
+      "scripts/capture-visual-review.mjs",
+      "scripts/package-visual-review.py"
     ],
     "tests": [
       "processor anchor/atlas checks",
-      "human screenshot inspection recorded in TEST_EVIDENCE.md"
+      "human screenshot inspection recorded in TEST_EVIDENCE.md",
+      "review capture: four-view body/nameplate nonoverlap; 200% tablet reflow; actual accessibility setting; saved construction reload"
     ],
     "dependencies": [
       "original reference PNGs",
       "Pillow12.3.0"
     ],
     "save": "Visual asset identifiers never change body geometry or durable game stats",
-    "presentation": "128-color atlas, original generated candidates, source/prompt/provenance retained; user tablet review pending"
+    "presentation": "128-color atlas, original generated candidates, source/prompt/provenance retained; user tablet review pending; labeled runtime/atlas package Awaiting User Review, no animation approval"
   }
 ]

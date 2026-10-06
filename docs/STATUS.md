@@ -6,7 +6,7 @@ The complete game remains required; this is a development checkpoint, not a rele
 | Gate | State | Evidence / remaining acceptance |
 | --- | --- | --- |
 | 0 | Verified environment smoke | TEST_EVIDENCE.md; real production-subpath Chromium checks |
-| 1 | Implemented, in progress | Construction/persistence/camera subset verified; user tablet style review, final foundation presentation and remaining input/accessibility acceptance still open |
+| 1 | Implemented, in progress | Construction/persistence/camera subset verified; visual proof Awaiting User Review; final foundation presentation and remaining input/accessibility acceptance still open |
 | 2–8 | Designed | Full autonomous combat, original audio, progression, roster, campaign, modes, all presentation and release checks remain queued |
 
 Implemented foundation: three campaign slots with named replacement review; exact
@@ -31,3 +31,8 @@ are still Designed. Development controls explain unavailable systems explicitly.
 and CONTENT_COVERAGE.json. IMPLEMENTATION_MAP.json links concrete partial foundations
 to source blocks/code/tests; a source block stays Designed until its entire contract
 is fulfilled. No roster category, mode, boss, progression or post-mastery scope was removed.
+
+Gate 1 visual review: [review package/reproduction and checklist](review/GATE1_VISUAL_REVIEW.md).
+Objective overview label/selection and zero-size hidden-canvas defects corrected;
+no representative sprite or blueprint art direction changed. Gate 2 and mass roster
+production are paused at this user-review checkpoint.

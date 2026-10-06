@@ -16,7 +16,7 @@ Never advance a failed gate as complete. Independent fixes/prototypes may procee
 
 ## Current Gate1 remainder, before certifying the gate
 
-- Resolve the pending native-size tablet style review under §16/T17; inspect small
+- Await user feedback on the labeled nine-sheet runtime/atlas tablet review (Awaiting User Review) under §16/T17; inspect small
   silhouette readability and contrast before mass art/animation production.
 - Complete the required representative terrain transitions, approved role icons,
   camera/facing/animation-state manifests and foundation visual acceptance. Static
@@ -25,6 +25,6 @@ Never advance a failed gate as complete. Independent fixes/prototypes may procee
   persistence, and remaining touch, keyboard, scale, focus and route fixtures under
   §§5/19/26 and T06/T08/T14/T16. Record each as Verified only after its evidence.
 - Physical tablet proof inspection remains separate from desktop emulation.
-- Then Gate2: authoritative bounded Bulwark/Bastion tutorial (exact authored plan),
+- Gate2 remains paused until Gate1 acceptance and the user review checkpoint are resolved. Then Gate2: authoritative bounded Bulwark/Bastion tutorial (exact authored plan),
   autonomous Sentry/Rifle/Runner/Raider/support/trap contracts; initial real original
   music/SFX, captions, pause and muted equivalence. No decorative Siege button now.
