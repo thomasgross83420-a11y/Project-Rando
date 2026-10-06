@@ -223,3 +223,43 @@ test('native ghost drag and two-touch pinch/cancel never purchase', async ({ pag
   await expect(page.getByRole('button', { name: 'Place', exact: true })).toBeDisabled();
   await cdp.detach();
 });
+
+test('hidden preparation retains a valid renderer through Title, scale and Continue', async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  page.on('console', (message) => {
+    if (message.type() === 'error') errors.push(message.text());
+  });
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await create(page);
+  await page.getByRole('button', { name: /Sentry 2 · Stored/ }).click();
+  await place(page, 24, 28);
+  await expect(page.locator('#status')).toContainText('Saved:');
+  for (const size of [
+    { width: 800, height: 1280 },
+    { width: 1280, height: 800 },
+  ]) {
+    await page.getByRole('button', { name: 'Return to title', exact: true }).click();
+    await expect(page.locator('#preparation')).toBeHidden();
+    await page.setViewportSize(size);
+    await page.getByRole('button', { name: 'Accessibility', exact: true }).click();
+    await page.locator('#ui-scale').selectOption('36');
+    await page.getByRole('button', { name: 'Cancel / close', exact: true }).click();
+    expect(
+      await page
+        .locator('canvas')
+        .evaluate((canvas: HTMLCanvasElement) => canvas.width > 0 && canvas.height > 0),
+    ).toBe(true);
+    await page.getByRole('button', { name: 'Continue', exact: true }).click();
+    await expect(page.locator('canvas')).toBeVisible();
+    await page.getByRole('button', { name: 'Rotate view', exact: true }).click();
+    await expect(page.getByRole('button', { name: /Sentry 2 · at 24,28/ })).toBeVisible();
+    await expect(page.locator('#account')).toContainText('600 Credits');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+  }
+  expect(errors).toEqual([]);
+});

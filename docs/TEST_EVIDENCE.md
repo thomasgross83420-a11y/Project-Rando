@@ -118,3 +118,29 @@ work branch with exact local object identities. Main remained f4cb0e8. A final
 review caught an accidental documentation-only overwrite of this evidence file;
 restored its prior recorded content from Git and retained the new results here.
 The corrective documentation checkpoint changes no gameplay or blueprint.
+
+Gate 1 visual-review correction checks (2026-10-06): overview nameplate/body
+and nameplate/nameplate overlap was demonstrated in the actual 800×1280 runtime
+at zoom0.390625 with a Sentry at24,28 and Barricade at26,32. Read-only camera/label
+observation in scripts/capture-visual-review.mjs tests all four orientations,
+visible caption bounds and no overlap. Selected-ground marker is now hollow,
+retaining the palette and readable contrasting border.
+A separate 1280×800 browser reproduction of Title transition changed canvas
+1174×438→0×0 and threw Phaser's `Framebuffer status: Incomplete Attachment`.
+Hidden-parent resize now preserves valid render dimensions. A dedicated browser
+regression covers Title, physical viewport changes, actual 200% setting, Continue,
+retained Sentry and wallet, reflow and absence of browser errors. No save or
+simulation rules changed; runtime atlas pixels and source remain unchanged.
+On the corrected production build: typecheck, format:check, lint (two existing
+style information notices), eight unit tests, unchanged 3600-tick mechanism hash,
+30-frame atlas validation and all eleven browser tests passed. Production build
+passed with the existing upstream Zod/Rollup comment-annotation warnings.
+The long screenshot run additionally observed ANGLE performance diagnostics:
+ReadPixels stalls and reserved outsideRenderPass queueSerial exhaustion. Exact
+warnings are retained in the review capture evidence. Inspection of
+[ANGLE's source](https://chromium.googlesource.com/angle/angle/+/1202055c973b20e5367ab9fc27898d7d5a1a79d5/src/libANGLE/renderer/vulkan/ContextVk.cpp#7151)
+(accessed 2026-10-06) confirms the latter is a performance warning followed by
+render-pass flushing. Capture tooling classifies only these two observed driver
+messages, fails other warnings, and never treats them as proof of device
+performance. No application error or failed HTTP request remains after the
+hidden-canvas correction. Android GPU/performance acceptance remains open.

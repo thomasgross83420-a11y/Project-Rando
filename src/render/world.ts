@@ -82,8 +82,13 @@ export class WorldView {
     this.bindInput();
   }
   resize(): void {
-    this.camera.width = this.parent.clientWidth;
-    this.camera.height = this.parent.clientHeight;
+    const width = this.parent.clientWidth,
+      height = this.parent.clientHeight;
+    // Title hides the preparation container. Zero-sized WebGL attachments are
+    // invalid; retain the last usable size until its layout becomes visible.
+    if (width <= 0 || height <= 0) return;
+    this.camera.width = width;
+    this.camera.height = height;
     if (this.fitActive) fitWorld(this.camera);
     if (!this.ready) return;
     this.game.scale.resize(this.camera.width, this.camera.height);
@@ -313,24 +318,62 @@ export class WorldView {
         foot: p,
       });
       image(`${key}.view${artView}`, p);
-      if (this.camera.zoom < 0.65 && this.scene) {
+    }
+    // Overview names must not obscure the sprites they identify or one another.
+    // Wait until all body bounds exist before positioning any nameplate.
+    if (this.camera.zoom < 0.65 && this.scene) {
+      const occupied = this.hitRecords.map((r) => ({
+        x: r.x - 4,
+        y: r.y - 4,
+        width: r.width + 8,
+        height: r.height + 8,
+      }));
+      for (const [key, point, id] of objects) {
+        const screen = project(point, this.camera);
+        const body = this.hitRecords.find((r) => r.id === id);
+        if (!body) throw new Error('Missing nameplate body bounds');
         const text = this.scene.add
-          .text(
-            screen.x,
-            screen.y,
-            id === 'core'
-              ? 'Core'
-              : requireDefinition(this.campaign?.assets.find((a) => a.id === id)?.type ?? 'MISSING')
-                  .name,
-            {
-              fontFamily: 'system-ui',
-              fontSize: '16px',
-              color: '#ffffff',
-              backgroundColor: '#17232e',
-            },
-          )
+          .text(screen.x, screen.y, id === 'core' ? 'Core' : requireDefinition(key).name, {
+            fontFamily: 'system-ui',
+            fontSize: '16px',
+            color: '#ffffff',
+            backgroundColor: '#17232e',
+          })
           .setOrigin(0.5)
           .setDepth(99998);
+        let placed = false;
+        for (let row = 0; row < Math.ceil(this.camera.height / (text.height + 8)); row++) {
+          for (const direction of [-1, 1]) {
+            const x = Math.max(
+              text.width / 2 + 4,
+              Math.min(this.camera.width - text.width / 2 - 4, screen.x),
+            );
+            const y =
+              direction < 0
+                ? body.y - 8 - text.height / 2 - row * (text.height + 8)
+                : body.y + body.height + 8 + text.height / 2 + row * (text.height + 8);
+            text.setPosition(x, y);
+            const r = text.getBounds();
+            if (r.top < 4 || r.bottom > this.camera.height - 4) continue;
+            if (
+              occupied.some(
+                (b) =>
+                  r.left < b.x + b.width &&
+                  r.right > b.x &&
+                  r.top < b.y + b.height &&
+                  r.bottom > b.y,
+              )
+            )
+              continue;
+            occupied.push({ x: r.x - 4, y: r.y - 4, width: r.width + 8, height: r.height + 8 });
+            placed = true;
+            break;
+          }
+          if (placed) break;
+        }
+        // A crowded overview retains the accessible named DOM inventory/picker;
+        // suppress an unplaceable caption rather than painting over an object.
+        text.setVisible(placed);
         this.labels.push(text);
       }
     }
@@ -404,7 +447,9 @@ export class WorldView {
     }
     g.setDepth(99999);
     const p = project(this.selected, this.camera);
-    g.fillStyle(0x58d7c3);
-    g.fillCircle(p.x, p.y, 6);
+    g.lineStyle(4, 0x111923);
+    g.strokeCircle(p.x, p.y, 7);
+    g.lineStyle(2, 0x58d7c3);
+    g.strokeCircle(p.x, p.y, 7);
   }
 }

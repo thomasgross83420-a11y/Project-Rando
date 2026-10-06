@@ -53,3 +53,12 @@ API could publish the exact local blob/tree/commit identities to the work branch
 The publisher verifies every object hash, parent and expected remote branch before
 a non-force reference update; it never modifies main. Recheck remote after each
 checkpoint. No token or local credential configuration is tracked.
+
+Gate 1 review: only demonstrated presentation defects are corrected (overview
+caption/body overlap, opaque point marker, hidden-container zero-size WebGL
+attachments). The production renderer retains its last valid dimensions while
+hidden. Captions are presentation-only and never affect spatial validation.
+No content/simulation/generator/economy/save-schema version or design baseline
+changes. Art remains Candidate / Awaiting User Review. Camera/label instrumentation
+and clearly named static Rifle/Runner comparison objects exist only in the
+external browser capture tool, not a shipped game control or saved entity.
