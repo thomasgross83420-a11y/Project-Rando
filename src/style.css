@@ -1,0 +1,95 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  color: #f2f4f7;
+  background: #111923;
+  font-size: 18px;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 24px
+    max(12px, env(safe-area-inset-left));
+}
+h1 {
+  font-size: 1.7rem;
+  margin: 0.25em 0;
+  overflow-wrap: anywhere;
+}
+p {
+  line-height: 1.5;
+}
+.eyebrow {
+  color: #58d7c3;
+  letter-spacing: 0.12em;
+  font-size: 16px;
+}
+button,
+input,
+select {
+  font: inherit;
+  min-height: 48px;
+  border: 1px solid #78848b;
+  border-radius: 6px;
+  padding: 10px 14px;
+  color: #f2f4f7;
+  background: #26333c;
+}
+button {
+  cursor: pointer;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+button:hover {
+  background: #36454f;
+}
+:focus-visible {
+  outline: 3px solid #ffc266;
+  outline-offset: 3px;
+}
+button:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+nav,
+section:not(#world) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+  align-items: center;
+}
+output {
+  display: block;
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+#world {
+  height: clamp(260px, 48dvh, 640px);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #78848b;
+  background: #111923;
+}
+canvas {
+  display: block;
+  touch-action: none;
+  image-rendering: pixelated;
+}
+#status {
+  padding: 10px;
+  background: #26333c;
+  border-left: 4px solid #58d7c3;
+  overflow-wrap: anywhere;
+}
+@media (min-width: 800px) {
+  #world {
+    height: 55dvh;
+  }
+}

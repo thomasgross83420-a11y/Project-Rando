@@ -1,0 +1,404 @@
+[
+  {
+    "id": "friendly.sentry",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.rotary",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.breaker_cannon",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.skyguard",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.arc_spire",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.mortar_nest",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.lance_array",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.nullifier",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.rifle_squad",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.heavy_squad",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.combat_engineers",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.field_medics",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.interceptor_drones",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.aegis_walkers",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.repair_node",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.medical_station",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.detection_relay",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.shield_projector",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.ammunition_fabricator",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.tactical_uplink",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.proximity_mine",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.slow_field",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.arc_plate",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.incendiary_vent",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.armor_shredding_charge",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.gravity_snare",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.decoy_beacon",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.collapse_charge",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.standard_barricade",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.reinforced_wall",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.controlled_gate",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.low_cover",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.razor_field",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.anti_vehicle_obstacle",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.elevated_firing_platform",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.resonance_channel",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.power_relay",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.barracks",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.drone_bay",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "friendly.command_node",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "warden.bulwark",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "warden.ranger",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "warden.conductor",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.runner",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.raider",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.bulwark",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.lancer",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.bombard",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.skimmer",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.veil",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.mole",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.sapper",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.jammer",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.mender",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.herald",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.drainer",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.carrier",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.breaker",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "enemy.harvester",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "boss.prism_sovereign",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "boss.choir_dreadnought",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "boss.silent_crown",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "boss.gorger_titan",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "boss.shatterstorm",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "boss.marshal",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "boss.black_conductor",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  },
+  {
+    "id": "boss.root_below",
+    "source": "§30",
+    "state": "Designed",
+    "runtimeImplemented": false
+  }
+]
