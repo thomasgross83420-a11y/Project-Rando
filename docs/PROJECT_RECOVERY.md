@@ -14,7 +14,8 @@ from mobile and should not need a PC, editor, or pasted development commands.
   “Build verified autonomous tutorial with durable practice checkpoints and original combat presentation,”
   dated 2026-10-07 00:29:21 UTC.
 - Recovery work branch: `codex/project-recovery`, based on that checkpoint.
-  The recovery change adds documentation; gameplay and the blueprint remain unchanged.
+  The recovery change adds documentation and a user-uploaded historical review
+  archive; gameplay and the blueprint remain unchanged.
 - The connected GitHub searches returned no pull requests or issues for this
   repository during inspection. All fetched branches and their commit history
   were inspected; there is no later fetched game checkpoint.
@@ -40,13 +41,51 @@ subject to any correction from the user.
 Blueprint SHA-256 was checked again and matches the saved Gate 2 evidence:
 `9808229593b79b856f8f522dcffba591debe6334a3f60a61d1915cdd5e2900a6`.
 
-No separate uploaded files were present in this session's `library-files`,
-`shared/downloads`, or initial scratch directories. The recovered tracked tree
-contains no ZIP, PDF or DOCX uploads. The blueprint and reference images above
-are available because they were committed; this is not evidence that every
-attachment from the archived conversation has been recovered. New attachments
-can supplement the record without replacing the authoritative blueprint or
-retroactively asserting approval.
+At the initial recovery, no separate uploaded files were present in this session's
+`library-files`, `shared/downloads`, or initial scratch directories, and the
+recovered tracked tree contained no ZIP, PDF or DOCX uploads. The user subsequently
+supplied the blueprint and brighter Gate 1 review ZIP described below. These two
+uploads supplement the repository evidence; this does not establish recovery of
+every attachment or message from the archived conversation.
+
+## Uploaded references reconciled — 2026-10-07
+
+The user supplied `Resonance_Bastion_Browser_Blueprint_Final.md` and
+`Resonance_Bastion_Gate1_Brighter_Review.zip` after the initial recovery.
+
+- The uploaded blueprint is byte-for-byte identical to the tracked authoritative
+  blueprint: same SHA-256 above. There is no competing specification or design
+  revision to reconcile, and no duplicate blueprint was added.
+- The original [brighter review ZIP](reference/Resonance_Bastion_Gate1_Brighter_Review.zip)
+  is preserved byte-for-byte as a historical user-supplied reference. SHA-256:
+  `74113c11e64f50df480275937002319198a632d708275bedf781712906171e1a`.
+  It contains 41 files (5,450,897 uncompressed bytes): ten contact sheets,
+  23 raw runtime captures, the review/checklist/gallery, and capture/lighting
+  metadata. ZIP integrity checks passed.
+- Its capture time is **2026-10-06 14:51:58.870 UTC**. Its recorded base commit is
+  `c2e4b17f2b3af71489598a04d2b707ba29b796fd` with lighting changes still in the
+  working tree at capture time. The subsequent `5c267af` checkpoint committed
+  that brighter-lighting work. The ZIP is not a snapshot of the later tutorial.
+- The archive's capture date/base, all 23 image metadata entries, checks,
+  errors/warnings, browser/device-scale, atlas identity, lighting validation and
+  gallery results match [the repository's lighting evidence](review/GATE1_LIGHTING_R1_EVIDENCE.json).
+  Its atlas SHA-256 `d397c7f6333f7e60caf6420c50f99f5ee51e6baed5d23169feb9847f1584bd57`
+  matches the current `public/assets/foundation.png`; its icon also matches the
+  current icon byte-for-byte. The before/after lighting and static-facing sheets
+  were inspected directly.
+- The ZIP correctly describes its own stage as static candidates, Awaiting User
+  Review, before Gate 1 closeout and Gate 2. Its missing Fit Base, role icons,
+  landscape reflow, durable/high-contrast preferences and combat/audio describe
+  that earlier build. Later construction commits `f3ee415`/`f2000cc` and tutorial
+  checkpoint `6d6c8e2` supply the subsequent implementation and test evidence.
+  These historical notes do not roll back the verified current state.
+- This upload is not new art approval. Preserve the conditional foundation
+  approval in [USER_VISUAL_APPROVAL.md](review/USER_VISUAL_APPROVAL.md); current
+  combat animation/effect/audio candidates still require their own review.
+
+This original uploaded ZIP is retained intentionally to avoid losing the
+historical visual comparison when a conversation is unavailable. Newly generated
+review captures and build outputs continue to stay outside Git.
 
 ## Recovered state
 

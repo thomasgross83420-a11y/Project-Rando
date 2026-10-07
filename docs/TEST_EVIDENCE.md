@@ -250,3 +250,18 @@ were checked: imports return200 JavaScript and the actual app/capture/audio work
 these are server warnings, not a load failure, so no setup patch was necessary.
 No new creative approval, public deployment, offline readiness, physical Android
 or TalkBack verification is implied.
+
+### Subsequent uploaded-reference reconciliation — 2026-10-07
+
+The user uploaded the final blueprint and original Gate1 brighter-review ZIP.
+SHA-256 comparison confirms the blueprint is byte-for-byte identical to the
+tracked authority. ZIP integrity passed:41files/5,450,897 uncompressed bytes.
+Capture date/base,23image metadata entries, checks/errors/warnings, atlas/browser/
+device-scale, lighting validation and gallery results match the existing
+GATE1_LIGHTING_R1_EVIDENCE.json. The foundation atlas checksum and exact icon
+bytes match the current runtime assets. Before/after lighting and static-facing
+contact sheets were inspected directly. This is the2026-10-06 14:51:58.870UTC
+pre-closeout review, not the latest tutorial; no new approval or gameplay change
+is inferred. The original ZIP is preserved unchanged in docs/reference; its
+checksum and chronology are recorded in PROJECT_RECOVERY.md. No gameplay tests
+were repeated for this reference/documentation addition.
