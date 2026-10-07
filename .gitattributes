@@ -1,0 +1,9 @@
+# Generated review media and raster/audio assets are binary, including PDFs
+# whose ASCII85 streams can otherwise be mistaken for source-text diffs.
+*.pdf binary
+*.zip binary
+*.png binary
+*.gif binary
+*.mp4 binary
+*.webm binary
+*.wav binary
