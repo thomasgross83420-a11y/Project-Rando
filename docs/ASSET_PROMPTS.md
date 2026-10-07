@@ -46,5 +46,14 @@ The inspected original edit is retained as `lighting-reference-r1.png`, SHA256
 It is guidance, not a finished atlas: small generated edge/layout differences
 were not imported into runtime geometry. `lighting-r1.json` plus the reproducible
 processor instead applies controlled RGB lighting to the existing native sprites.
-This preserves exact alpha/anchors and exposes existing detail. Candidate status
-remains Awaiting User Review; this prompt is not approval to propagate the style.
+This preserves exact alpha/anchors and exposes existing detail. Foundation is conditionally approved as recorded in review/USER_VISUAL_APPROVAL.md; this prompt never approves all new animation/roster candidates.
+
+## Gate2 eight-facing production-candidate reference recipe
+
+Retain rb-lighting-r1 bright science-fantasy raster language, steel/bronze/slate and cyan accents, upper-left light, crisp clusters, selective dark outline and transparent surroundings. Four rows/eight columns, whole aligned figures with generous margins; screen N/NE/E/SE/S/SW/W/NW. Row1 one light armored Rifle trooper with one rifle (three members compose one runtime squad); row2 jointed hostile crystalline Runner insect, preserve cyan crystalline body and angular legs; row3 Fracture Raider with heavy melee arm/equipment; row4 Bulwark with broad shield and arm carbine. Same equipment/proportions/foot placement in every direction. No typography, smooth concept painting, baked ground or missing limbs. Retained source facing-reference.png is inspected original output; native cleanup/rig, not the prompt alone, is the reproducible asset.
+
+Sentry facing recipe: single-barrel bronze/steel Sentry, square symmetric ground plinth, all eight screen gun bearings, transparent isolated cells, unchanged bright upper-left light/detail. Inspect the generated grid; select only correct whole poses. Curated sentry-facing.png retains eight accepted processing inputs; failed raw rows are not runtime assets or a claimed32-view final set.
+
+RepairNode/Mine recipe: transparent two-row/four-camera sheet, bright bronze/steel stationary wrench/repair machine and small low disc ProximityMine. Four quarter-turn 2:1 camera views, whole bodies/feet, no text/glow/background. Uneven generated rows are explicitly bounded by inspected crop boxes in generate_combat.py, never blindly sliced as a uniform runtime atlas.
+
+These are reusable production recipes. Exact generated source bytes/hashes and controlled scripts identify the actual reproducible input; further art acceptance must use native atlas and real combat. Model/version is unavailable, and no deterministic regeneration of imagegen output is promised.

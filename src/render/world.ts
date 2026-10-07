@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import atlas from '../../public/assets/foundation.json';
 import roles from '../../public/assets/roles.json';
+import combatArt from '../../public/assets/combat/manifest.json';
 import { type RouteAnalysis, PAD } from '../construction/geometry';
 import { footprint, type Campaign } from '../persistence/campaign';
 import { foundation, type ContentID } from '../data/foundation';
@@ -45,6 +46,11 @@ export class WorldView {
     scale?: number;
   }[] = [];
   labels: Phaser.GameObjects.Text[] = [];
+  onViewChange: (() => void) | undefined;
+  onRendererPause: (() => void) | undefined;
+  rendererAvailable = true;
+  readonly observer: ResizeObserver;
+  backgroundOnly = false;
   selected: Point = { x: 30, y: 30 };
   get strategicRoles(): boolean {
     return this.camera.zoom < 0.65 || (this.fitActive && this.fitMode === 'base');
@@ -52,12 +58,16 @@ export class WorldView {
   constructor(
     readonly parent: HTMLElement,
     readonly status: (message: string) => void,
+    readonly combatAssets = false,
   ) {
     const owner = this;
     class Scene extends Phaser.Scene {
       preload(): void {
         this.load.image('foundation', `${import.meta.env.BASE_URL}assets/foundation.png`);
         this.load.image('roles', `${import.meta.env.BASE_URL}assets/roles.png`);
+        if (owner.combatAssets)
+          for (const [i, a] of combatArt.atlases.entries())
+            this.load.image('combat.' + i, import.meta.env.BASE_URL + 'assets/combat/' + a.file);
       }
       create(): void {
         owner.scene = this;
@@ -75,6 +85,21 @@ export class WorldView {
             throw new Error('Malformed role icon');
           icons.add(f.key, 0, x, y, w, h);
         }
+        if (owner.combatAssets) {
+          for (const [i] of combatArt.atlases.entries())
+            if (!this.textures.exists('combat.' + i)) {
+              owner.status(
+                'Combat artwork unavailable; checkpoint retained. Return Title and retry when assets load.',
+              );
+              return;
+            }
+          for (const f of combatArt.frames) {
+            const [x, y, w, h] = f.rect;
+            if (x === undefined || y === undefined || w === undefined || h === undefined)
+              throw new Error('Invalid combat frame');
+            this.textures.get('combat.' + f.atlas).add(f.key, 0, x, y, w, h);
+          }
+        }
         owner.graphics = this.add.graphics();
         owner.ready = true;
         owner.resize();
@@ -91,23 +116,32 @@ export class WorldView {
       antialias: false,
       banner: false,
       audio: { noAudio: true },
-      fps: { target: 60 },
+      fps: { target: 30 },
       scene: Scene,
     });
-    new ResizeObserver(() => this.resize()).observe(parent);
+    this.observer = new ResizeObserver(() => this.resize());
+    this.observer.observe(parent);
     this.game.canvas.setAttribute(
       'aria-label',
       'Fortress world. Use coordinate fields and camera controls below.',
     );
     this.game.canvas.addEventListener('webglcontextlost', (event) => {
       event.preventDefault();
+      this.rendererAvailable = false;
+      this.onRendererPause?.();
       this.status('Renderer paused. Restoring world…');
     });
     this.game.canvas.addEventListener('webglcontextrestored', () => {
+      this.rendererAvailable = true;
       this.draw();
       this.status('Renderer restored. Camera and saved state preserved.');
     });
     this.bindInput();
+  }
+  dispose(): void {
+    this.observer.disconnect();
+    this.onViewChange = undefined;
+    this.game.destroy(true);
   }
   resize(): void {
     const width = this.parent.clientWidth,
@@ -305,6 +339,7 @@ export class WorldView {
         .image(p.x, p.y, 'foundation', key)
         .setOrigin(ax / w, ay / h)
         .setScale(this.camera.zoom / 2)
+        .setDepth(key.startsWith('terrain.') ? 0 : 1000 + p.y)
         .setTint(tint)
         .setAlpha(alpha);
       this.sprites.push(s);
@@ -322,13 +357,16 @@ export class WorldView {
             : Number.parseInt(atlas.lighting.unownedTerrainTint.slice(1), 16),
         );
       }
-    const objects: [string, Point, string, number][] = [
-      ['objective.harmonic_core', { x: 30, y: 30 }, 'core', 0],
-    ];
-    for (const a of this.campaign?.assets ?? []) {
+    const objects: [string, Point, string, number][] = this.backgroundOnly
+      ? []
+      : [['objective.harmonic_core', { x: 30, y: 30 }, 'core', 0]];
+    for (const a of this.backgroundOnly ? [] : (this.campaign?.assets ?? [])) {
       const r = footprint(a);
       if (!r) continue;
-      if (atlas.frames.some((f) => f.key === `${a.type}.view${this.camera.view}`))
+      if (
+        atlas.frames.some((f) => f.key === `${a.type}.view${this.camera.view}`) ||
+        (this.combatAssets && combatArt.frames.some((f) => f.content === a.type))
+      )
         objects.push([
           a.type,
           { x: r.x + r.width / 2, y: r.y + r.height / 2 },
@@ -342,6 +380,58 @@ export class WorldView {
       return pa.y - pb.y || pa.x - pb.x || (a[2] < b[2] ? -1 : a[2] > b[2] ? 1 : 0);
     });
     for (const [key, p, id, rotation] of objects) {
+      if (
+        this.combatAssets &&
+        !['objective.harmonic_core', 'friendly.sentry', 'friendly.standard_barricade'].includes(key)
+      ) {
+        const facing = (1 + this.camera.view * 2 + rotation * 2) % 8;
+        const artKey =
+          key +
+          '.' +
+          (['friendly.rifle_squad', 'warden.bulwark'].includes(key)
+            ? 'face' + facing
+            : 'view' + this.camera.view) +
+          '.idle.0';
+        const f = combatArt.frames.find((f) => f.key === artKey);
+        if (!f || !this.scene) throw new Error('Missing production preparation art ' + artKey);
+        const [tx, ty] = f.trim,
+          [w, h] = f.rect.slice(2),
+          [ax, ay] = f.anchor;
+        if (
+          tx === undefined ||
+          ty === undefined ||
+          w === undefined ||
+          h === undefined ||
+          ax === undefined ||
+          ay === undefined
+        )
+          throw new Error('Invalid trimmed preparation frame');
+        for (const o of key === 'friendly.rifle_squad'
+          ? [
+              { x: -0.25, y: -0.1 },
+              { x: 0.25, y: -0.1 },
+              { x: 0, y: 0.2 },
+            ]
+          : [{ x: 0, y: 0 }]) {
+          const pos = project({ x: p.x + o.x, y: p.y + o.y }, this.camera),
+            s = this.scene.add
+              .image(Math.round(pos.x), Math.round(pos.y), 'combat.' + f.atlas, f.key)
+              .setOrigin((ax - tx) / w, (ay - ty) / h)
+              .setScale(this.camera.zoom / 2)
+              .setDepth(1000 + pos.y);
+          this.sprites.push(s);
+        }
+        const pos = project(p, this.camera);
+        this.hitRecords.push({
+          id,
+          x: pos.x - ((ax - tx) * this.camera.zoom) / 2,
+          y: pos.y - ((ay - ty) * this.camera.zoom) / 2,
+          width: (w * this.camera.zoom) / 2,
+          height: (h * this.camera.zoom) / 2,
+          foot: p,
+        });
+        continue;
+      }
       const artView = (this.camera.view + rotation) % 4;
       const frame = atlas.frames.find((f) => f.key === `${key}.view${artView}`);
       if (!frame) throw new Error('Missing object art');
@@ -559,6 +649,7 @@ export class WorldView {
     this.parent.dataset.orientation = String(this.camera.view * 90);
     this.parent.dataset.presentation = this.strategicRoles ? 'strategic' : 'detailed';
     this.parent.dataset.fit = this.fitActive ? this.fitMode : 'manual';
+    this.onViewChange?.();
     this.parent.dataset.roleGroups = String(
       this.strategicRoles ? new Set(this.hitRecords.map((r) => `${r.x},${r.y}`)).size : 0,
     );

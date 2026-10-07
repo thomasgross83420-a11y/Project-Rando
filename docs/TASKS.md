@@ -18,9 +18,9 @@ Never advance a failed gate as complete. Independent fixes/prototypes may procee
 
 Gate 1 closeout passed: see review/GATE1_CLOSEOUT.md. Conditional foundation approval permits the next coherent combat slice, not mass roster production.
 
-1. Gate 2: compile the exact bounded tutorial and implement fixed-point headless combat, perception, navigation, actions, damage/death/outcomes and deterministic fixtures.
-2. Integrate battle locking, pause/speeds, durable checkpoint/restart, semantic HUD/inspectors and the Gate 2 results stub.
-3. Replace diagnostic mobile alternate views with coherent production candidates; demonstrate complete motion/attack/hit/incapacitation, original effects and real original audio with muted equivalence.
-4. Verify real production-browser tutorial, hidden-tab pause, reload/restart, animation/scale/readability and audio. Checkpoint only after applicable checks pass.
+1. Gate2 evidence passes:29 unit/19 production browser tests, exact browser/headless/muted hash, native art/audio validation. Checkpoint this verified slice; never propagate failed or unapproved candidates.
+2. Review the new mobile/Sentry/support animation and audio candidates in actual tutorial combat. Gate1 approval does not approve them. Apply requested candidate corrections before any roster propagation.
+3. Measure physical tablet motion, all speeds, readability, input, audio and interruption behavior. Keep Android/TalkBack checks separate from desktop emulation.
+4. Gate3 dependency: implement ordinary campaign receipts/results, persistent injury/repair/restoration, rewards/XP/progression and complete backup/recovery. Keep Tutorial Practice separate and preserve all later content.
 
 Full wizard/menus, advanced roster directions, all animation families and final full role-icon/accessibility audit remain required at their dependent gates, not certified by the Gate 1 foundation. Physical-device release remains Gate 8.

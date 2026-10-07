@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-07",
+  "scope": "Gate2 Bulwark/Bastion tutorial-practice subset; new art/audio Awaiting User Review",
+  "gate1Completion": "f2000ccd14eb342af30bf23ea62e985485003b68",
+  "blueprintSHA256": "9808229593b79b856f8f522dcffba591debe6334a3f60a61d1915cdd5e2900a6",
+  "units": {
+    "files": 8,
+    "passed": 29
+  },
+  "browser": {
+    "version": "151.0.7922.173",
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "durationMs": 288534.19800000003,
+    "basePath": "/Project-Rando/",
+    "visibility": "Injected integration condition; native headless tabs remained visible, not Android proof"
+  },
+  "canonicalHeadless": {
+    "groups": [
+      1,
+      2,
+      4,
+      8,
+      12
+    ],
+    "tick": 6150,
+    "kills": 24,
+    "tp": 30,
+    "hash": "8961c7817d3d73989a00c3e377387e6dde1ebeee16d219d5c397afc2be7839c7"
+  },
+  "browserMutedAndEnabled": {
+    "state": "Victory",
+    "tick": 6010,
+    "reason": "All deployments and hostile damage potential cleared for one combat second",
+    "hash": "0906b60beab68a8a8791bc285f4335c9a120c8ea8a38a7c4b43dbece859da320",
+    "kills": 24,
+    "tp": 30,
+    "coreHP": 10240000
+  },
+  "browserHeadlessReplay": {
+    "batch": 12,
+    "state": "Victory",
+    "tick": 6010,
+    "kills": 24,
+    "tp": 30,
+    "core": 10240000,
+    "hash": "0906b60beab68a8a8791bc285f4335c9a120c8ea8a38a7c4b43dbece859da320"
+  },
+  "audio": {
+    "result": {
+      "unlocked": true,
+      "decoded": 18,
+      "declared": 18,
+      "frozen": true,
+      "pauseState": "running",
+      "gain": 0.4000000059604645,
+      "muteGain": 0,
+      "voices": 24,
+      "shots": 8,
+      "loop": true,
+      "playbackRate": 1,
+      "loopEnd": 96
+    },
+    "errors": [],
+    "browser": "151.0.7922.173"
+  },
+  "assets": {
+    "keys": 1246,
+    "uniqueRects": 800,
+    "loadedPixels": 4987904,
+    "atlasSize": [
+      2048,
+      1919
+    ],
+    "atlasSHA256": "f010a3d68c6ea2b244e7b9f6d5346b6506ba90c6660b7a5ff8103fa5f64e44fb",
+    "gutterPx": 4,
+    "mobileFacings": 8,
+    "roleIcons": 9
+  },
+  "capture": {
+    "count": 10,
+    "errors": [],
+    "horizontalOverflow": false,
+    "driverPerformanceWarnings": 4,
+    "source": "Live production runtime and separately labeled actual atlas inspection"
+  },
+  "limits": [
+    "New candidates require user review",
+    "No mass roster production",
+    "Physical Android/TalkBack/audio output/performance not verified",
+    "Public deployment/offline not verified",
+    "Ordinary campaign rewards/injuries/claims/backups remain Gate3"
+  ],
+  "details": "../TEST_EVIDENCE.md"
+}

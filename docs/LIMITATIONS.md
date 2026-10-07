@@ -1,21 +1,15 @@
 # Known limitations and device checks
 
-Game development in progress; no complete game, public deployment, offline readiness
-or certified Android compatibility is claimed. Physical Android Chrome GPU/input,
-TalkBack, downloads, autoplay, background, thermal/memory stress and orientation
-checks await a device. User aesthetic review awaits an actual Gate 1 proof.
+The complete game remains in development. Gate1 construction is verified. Gate2's coherent Bulwark/Bastion tutorial-practice slice is implemented with real combat, candidate animation/effects/audio and durable practice checkpoints; final evidence is TEST_EVIDENCE.md. Ordinary campaign rewards, persistent injury/repair/restoration, XP/Promotion Cores, full backup/import/migrations and claim receipts remain Gate3. Other Warden/doctrine combinations and advanced policies are Gate4. Full content/modes/art/audio/accessibility/release remain their later gates. No empty controls represent those systems as implemented.
 
-Pages is not enabled. Connected GitHub integration cannot read Actions administration
-settings. All runtime gameplay will remain static and bundled; no paid host fallback.
+Physical Android Chrome: Needs Device Check for GPU/frame rate, all speeds, touch/pinch, orientation/background/discard, thermal/memory stress, text200%, audio unlock/decoding/output, download/export/import, IndexedDB quota/eviction and multiple tabs. TalkBack and secondary browsers need actual-device checks. Desktop mobile emulation is not Android proof.
 
-Gate1 is in progress. Only Sentry/Barricade construction is playable; combat and all
-remaining final-scope systems are Designed. The complete starter roster is owned
-according to the blueprint, but undeveloped deployment actions are disabled and
-explained. Exact baseline catalogs are not claims of implemented combat abilities.
-User tablet art proof is pending under §16. Remaining animation/facing/role-icon,
-wizard/menu/settings, accessibility and persistence acceptance is tracked in TASKS.
-Foundation exports offer complete current logical bytes, but import/backup recovery
-validation, receipts/claim fences and migration UI are not complete. Preferences
-currently operate in-session, not durably. No final backup guarantee is claimed.
-The capability diagnostic query is a development aid and must be removed/gated
-from the final release. No APK, extra account, paid service or LFS was introduced.
+Software-rendered Chromium151 can trigger the explicit performance pause at accelerated simulation. Tests reduce speed and explicitly Resume; no ticks are dropped and no mechanic or enemy is removed. Default1× is the baseline. The pinned half-cell reverse fields are synchronous; dynamic-target pathfinding optimization and full2/4× performance measurement remain future performance work, not a hidden change to mechanics. The initial texture budget is validated, not a proof of device memory safety.
+
+Original reference sources/rigs and audio synthesis are retained. New mobile/Sentry/support/animation/effect candidates require user and later full-roster silhouette review; conditional Gate1 foundation approval never approves them wholesale. Sentry uses eight screen-aim poses on a symmetric plinth; Core/Barricade/RepairNode/Mine have four camera sheets. A final view/anatomy/action audit remains Gate7. Contact-sheet/animation checks and live combat inspection do not substitute for that approval. Fractional fitting zoom uses nearest sampling and may produce uneven pixel widths; preferred integer sampling stops remain later camera polish.
+
+Global UI scale, contrast, reduced effects and audio sliders/mute save transactionally. The additive audio preference field accepts legacy global preferences without changing existing campaign schema. Temporary Sessions are explicit, in memory, and vanish on closure. Practice exports include starting army, complete authored plan/versions, identity/sequence and terminal summary; ordinary full backup/import compatibility is not claimed yet.
+
+Public repository visibility is free-Pages compatible, but Pages is not enabled. Connected integration GET /repos/thomasgross83420-a11y/Project-Rando/actions/permissions returned403 Resource not accessible by integration: administration(read) is the likely missing prerequisite; repository user-admin metadata and workflows-read200 do not grant integration administration. It is not a Gate1/2 blocker. No forbidden-endpoint retry, settings change, paid service, extra account, LFS, public URL or offline claim.
+
+The review gallery is tested on local HTTP, not as an Android file URL. Workspace Chromium blocks file:// navigation by administration policy. Downloadable native images/audio and ZIP are evaluation artifacts, not a substitute verified playable URL.

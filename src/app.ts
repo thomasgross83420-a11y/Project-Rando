@@ -14,6 +14,7 @@ import { AudioMixer } from './audio/mixer';
 import { PreferencesStore } from './persistence/preferences';
 import { analyzeRoutes } from './construction/geometry';
 import { solidFootprints, footprint } from './persistence/campaign';
+import { TutorialSession, practiceStore } from './ui/tutorial';
 const root = document.querySelector<HTMLElement>('#app');
 if (!root) throw new Error('Missing application root');
 root.innerHTML = `<header><p class="eyebrow">RESONANCE BASTION · CONSTRUCTION DEVELOPMENT</p><h1>Resonance Bastion</h1><p>Build a permanent fortress. Its defenders will fight autonomously.</p></header><p id="status" role="status">Checking retained storage…</p><div id="title"></div><div id="preparation" hidden><h2 id="campaign-heading"></h2><p id="account"></p><div id="prep-layout"><aside id="prep-sidebar" aria-label="Preparation tools"><h3>Camera and build</h3><nav aria-label="Camera controls">${[
@@ -31,7 +32,7 @@ root.innerHTML = `<header><p class="eyebrow">RESONANCE BASTION · CONSTRUCTION D
   .map(([id, label]) => `<button data-camera="${id}">${label}</button>`)
   .join(
     '',
-  )}</nav><nav aria-label="Spatial tools"><button id="routes-toggle" aria-pressed="false">Show Routes</button><label>Route clearance <select id="route-radius"><option value="768">Heavy · 0.75 GU</option><option value="461">Ordinary · 0.45 GU</option></select></label><button id="prep-accessibility">Accessibility</button></nav><div id="inventory-host"></div><div id="catalog-host"></div><nav aria-label="Entrance navigation">${[1, 2, 3, 4, 5, 6].map((n) => `<button data-front="${n}">Front ${n}</button>`).join('')}</nav></aside><div id="prep-field"><section id="world" aria-label="Fortress field"></section><p id="camera-summary" aria-live="off"></p><details class="spatial-legend"><summary>Map and marker legend</summary><p>Strategic badges: crystal = Core; barrel = tower; wall = barrier; chevron = friendly; number = grouped assets. Solid line: purchased land. Hatched square: Core reservation. Narrow double hatch: Warden pad. Numbered entrance: Front 1–6. Dashed line: validated route; ×: blocked entrance. Named inventory provides selection and camera jump.</p></details></div><aside id="prep-details" aria-label="Placement and details"><h3>Placement and inspection</h3><div id="construction"></div><p id="route-summary" aria-live="off"></p><button id="return-title">Return to title</button></aside></div></div><dialog id="dialog" aria-labelledby="dialog-heading"><h2 id="dialog-heading"></h2><div id="dialog-body"></div><button id="close-dialog">Cancel / close</button></dialog>`;
+  )}</nav><nav aria-label="Spatial tools"><button id="routes-toggle" aria-pressed="false">Show Routes</button><label>Route clearance <select id="route-radius"><option value="768">Heavy · 0.75 GU</option><option value="461">Ordinary · 0.45 GU</option></select></label><button id="prep-accessibility">Accessibility</button></nav><div id="inventory-host"></div><div id="catalog-host"></div><nav aria-label="Entrance navigation">${[1, 2, 3, 4, 5, 6].map((n) => `<button data-front="${n}">Front ${n}</button>`).join('')}</nav></aside><div id="prep-field"><section id="world" aria-label="Fortress field"></section><p id="camera-summary" aria-live="off"></p><details class="spatial-legend"><summary>Map and marker legend</summary><p>Strategic badges: crystal = Core; barrel = tower; wall = barrier; chevron = friendly; number = grouped assets. Solid line: purchased land. Hatched square: Core reservation. Narrow double hatch: Warden pad. Numbered entrance: Front 1–6. Dashed line: validated route; ×: blocked entrance. Named inventory provides selection and camera jump.</p></details></div><aside id="prep-details" aria-label="Placement and details"><h3>Placement and inspection</h3><div id="construction"></div><p id="route-summary" aria-live="off"></p><button id="tutorial-practice">Tutorial Practice</button><button id="return-title">Return to title</button></aside></div></div><dialog id="dialog" aria-labelledby="dialog-heading"><h2 id="dialog-heading"></h2><div id="dialog-body"></div><button id="close-dialog">Cancel / close</button></dialog>`;
 const byId = (id: string): HTMLElement => {
   const e = document.getElementById(id);
   if (!e) throw new Error(`Missing ${id}`);
@@ -90,6 +91,7 @@ try {
   );
 }
 let preparation: Preparation | undefined, view: WorldView | undefined;
+let tutorial: TutorialSession | undefined;
 function openAccessibility(): void {
   const v = preferences.value;
   modal(
@@ -121,6 +123,11 @@ let x = 18,
   y = 18,
   rotation: 0 | 1 | 2 | 3 = 0;
 const audio = new AudioMixer();
+audio.configure(preferences.value.audio);
+document.addEventListener('click', (e) => {
+  const b = (e.target as HTMLElement).closest('button');
+  if (b && !b.disabled) void audio.play('ui.confirm', 0, false, 'ui');
+});
 setInterval(() => {
   void repository
     ?.heartbeat()
@@ -150,13 +157,19 @@ async function renderTitle(): Promise<void> {
   const resumable =
     typeof last === 'number' && slots[last] !== undefined && !(slots[last] instanceof Error);
   byId('title').innerHTML =
-    `<img class="title-art" src="${import.meta.env.BASE_URL}assets/title-foundation.png" alt="Candidate raster fortress scene: a crystal Core, two Sentries and armored walls on basalt ground"><p class="notice">Gate 1 work in progress. Construction is functional; siege combat and progression are still Designed.</p><nav aria-label="Title"><button id="continue" ${resumable ? '' : 'disabled'}>Continue</button><button id="new-game" ${repository?.writer ? '' : 'disabled'}>New Game</button><button id="load" ${repository ? '' : 'disabled'}>Load Campaign</button><button id="help">How to Play</button><button id="accessibility">Accessibility</button><button id="settings">Settings</button><button id="credits">Credits</button><button id="data">Data Management</button>${!repository ? '<button id="temporary">Start Temporary Session</button>' : ''}${repository && !repository.writer ? '<button id="take-over">Take Over Editing</button>' : ''}</nav><p>Continue opens the last opened campaign. Three slots are available. ${repository?.temporary ? 'Temporary Session: closing loses unexported progress.' : repository?.writer ? 'Retained storage ready.' : 'Editing unavailable until storage or writer ownership is resolved.'}</p>`;
+    `<img class="title-art" src="${import.meta.env.BASE_URL}assets/title-foundation.png" alt="Candidate raster fortress scene: a crystal Core, two Sentries and armored walls on basalt ground"><p class="notice">Gate 2 in development. Construction and the Bulwark/Bastion autonomous tutorial practice are playable. Campaign progression remains Designed.</p><nav aria-label="Title"><button id="continue" ${resumable ? '' : 'disabled'}>Continue</button><button id="new-game" ${repository?.writer ? '' : 'disabled'}>New Game</button><button id="load" ${repository ? '' : 'disabled'}>Load Campaign</button><button id="help">How to Play</button><button id="accessibility">Accessibility</button><button id="settings">Settings</button><button id="credits">Credits</button><button id="data">Data Management</button>${!repository ? '<button id="temporary">Start Temporary Session</button>' : ''}${repository && !repository.writer ? '<button id="take-over">Take Over Editing</button>' : ''}</nav><p>Continue opens the last opened campaign. Three slots are available. ${repository?.temporary ? 'Temporary Session: closing loses unexported progress.' : repository?.writer ? 'Retained storage ready.' : 'Editing unavailable until storage or writer ownership is resolved.'}</p>`;
   if (resumable)
     button('continue', () => {
+      void audio.unlock();
       const c = slots[last];
       if (c && !(c instanceof Error)) return openCampaign(c);
     });
-  button('new-game', () => slotDialog(true));
+  button('new-game', () => {
+    void audio.unlock().then((enabled) => {
+      if (enabled) void audio.music('music.title');
+    });
+    return slotDialog(true);
+  });
   button('load', () => slotDialog(false));
   if (!repository)
     button('temporary', async () => {
@@ -181,22 +194,24 @@ async function renderTitle(): Promise<void> {
   button('help', () =>
     modal(
       'How to Play',
-      '<p>Choose New Game, select one of three slots, a doctrine and a Warden. All assets start in storage.</p><p>Choose an owned Sentry or Barricade, set integer X and Y coordinates, then Place. A world tap sets the coordinates; it never purchases. Move and Store are free. Undo restores the exact previous wallet and layout.</p><p>The amber Core precinct and Warden pad are reserved. Keep routes open for ordinary and heavy bodies. Camera controls work by touch or keyboard arrows and +/−. Combat is not implemented in this milestone.</p>',
+      '<p>Choose New Game, select one of three slots, a doctrine and a Warden. All assets start in storage.</p><p>Choose an owned Sentry or Barricade, set integer X and Y coordinates, then Place. A world tap sets the coordinates; it never purchases. Move and Store are free. Undo restores the exact previous wallet and layout.</p><p>The amber Core precinct and Warden pad are reserved. Keep routes open for ordinary and heavy bodies. Camera controls work by touch or keyboard arrows and +/−. Tutorial Practice runs a disposable Bulwark/Bastion clone with autonomous combat, pause, speeds and durable checkpoint restart; no campaign rewards or damage.</p>',
     ),
   );
   button('accessibility', openAccessibility);
   button('settings', () => {
     modal(
       'Settings',
-      '<button id="unlock-audio">Enable Sound</button><button id="mute-audio">Mute</button><p id="audio-status">Audio architecture is ready; original music and effects arrive in Gate 2.</p>',
+      '<button id="unlock-audio">Enable Sound</button><button id="mute-audio">Mute</button><p id="audio-status">Audio architecture is ready; three original 96-second cues and tutorial effects are available; full eight-cue soundtrack remains Gate7.</p>',
     );
     button('unlock-audio', async () => {
       byId('audio-status').textContent = (await audio.unlock())
-        ? 'Audio unlocked. No Gate 1 track is present.'
+        ? 'Audio unlocked. Original Title theme available; full soundtrack remains in development.'
         : 'Audio unavailable; gameplay is unaffected.';
+      if (audio.context?.state === 'running') void audio.music('music.title');
     });
     button('mute-audio', () => {
-      audio.setMuted(!audio.muted);
+      preferences.change({ audio: { ...preferences.value.audio, muted: !audio.muted } });
+      audio.configure(preferences.value.audio);
       byId('mute-audio').setAttribute('aria-pressed', String(audio.muted));
     });
   });
@@ -205,7 +220,7 @@ async function renderTitle(): Promise<void> {
       'Credits',
       '<p>Original Resonance Bastion design and raster candidates. Dependency notices are bundled.</p><a href="' +
         import.meta.env.BASE_URL +
-        'THIRD_PARTY_NOTICES.txt">Third-party licenses</a><p>Raster style approval and complete roster production remain pending.</p>',
+        'THIRD_PARTY_NOTICES.txt">Third-party licenses</a><p>Visual foundation conditionally approved. Combat candidates and complete roster review remain separate.</p>',
     ),
   );
   button('data', () => {
@@ -239,7 +254,7 @@ async function slotDialog(isNew: boolean): Promise<void> {
       }
       byId('dialog-heading').textContent = 'Create Campaign';
       byId('dialog-body').innerHTML =
-        `<form id="new-form"><label>Campaign name <input id="name" required maxlength="64" autocomplete="off"></label><label>Doctrine <select id="doctrine"><option>Bastion</option><option>Mobile</option><option>Chokepoint</option></select></label><label>Warden <select id="warden"><option value="warden.bulwark">Bulwark</option><option value="warden.ranger">Ranger</option><option value="warden.conductor">Conductor</option></select></label><p>600 Credits; granted assets start in storage. Warden combat and non-Sentry/non-Barricade deployment are still under development.</p>${existing ? `<p>Replacing ${escapeHTML(existing.name)} requires its exact name.</p><label>Existing campaign name <input id="overwrite" required autocomplete="off"></label>` : ''}<button type="submit">Review Campaign</button></form>`;
+        `<form id="new-form"><label>Campaign name <input id="name" required maxlength="64" autocomplete="off"></label><label>Doctrine <select id="doctrine"><option>Bastion</option><option>Mobile</option><option>Chokepoint</option></select></label><label>Warden <select id="warden"><option value="warden.bulwark">Bulwark</option><option value="warden.ranger">Ranger</option><option value="warden.conductor">Conductor</option></select></label><p>600 Credits; granted assets start in storage. Bulwark/Bastion tutorial combat is implemented; Ranger, Conductor and other doctrine combat remain Gate4. Owned Rifle, Mine and Repair Node deployment is available.</p>${existing ? `<p>Replacing ${escapeHTML(existing.name)} requires its exact name.</p><label>Existing campaign name <input id="overwrite" required autocomplete="off"></label>` : ''}<button type="submit">Review Campaign</button></form>`;
       (byId('name') as HTMLInputElement).focus();
       byId('new-form').onsubmit = (e) => {
         e.preventDefault();
@@ -286,7 +301,7 @@ async function openCampaign(c: Campaign): Promise<void> {
   byId('preparation').hidden = false;
   document.body.classList.add('in-preparation');
   if (!view) {
-    view = new WorldView(byId('world'), status);
+    view = new WorldView(byId('world'), status, true);
     view.onSelect = (p) => {
       x = Math.floor(p.x);
       y = Math.floor(p.y);
@@ -333,6 +348,12 @@ async function openCampaign(c: Campaign): Promise<void> {
       ? 'Temporary Session campaign opened; export before closing.'
       : 'Campaign opened from retained storage.',
   );
+  try {
+    if (await practiceStore(repository).read(c)) byId('tutorial-practice').click();
+  } catch {
+    byId('tutorial-practice').click();
+  }
+  if (audio.context?.state === 'running') void audio.music('music.preparation');
 }
 function renderPreparation(): void {
   const sentryBaseline = foundation['friendly.sentry'],
@@ -356,15 +377,25 @@ function renderPreparation(): void {
         const implemented = constructionTypes.includes(a.type);
         return `<button data-owned="${a.id}" ${implemented && canEdit ? '' : 'disabled'}>${foundation[a.type].name} ${i + 1} · ${a.placement ? `at ${a.placement.x},${a.placement.y}` : 'Stored'}${implemented ? '' : ' · deployment Designed'}</button>`;
       })
+      .join('')}</section><nav aria-label="Construction catalog">${constructionTypes
+      .filter((t) => foundation[t].category !== 'warden')
+      .map(
+        (t) =>
+          `<button data-buy="${t}" ${canEdit && foundation[t].rank <= c.rank ? '' : 'disabled'}>Buy & Place ${foundation[t].name} · ${foundation[t].cost} Credits${foundation[t].rank > c.rank ? ' · unlock Rank ' + foundation[t].rank : ''}</button>`,
+      )
       .join(
         '',
-      )}</section><nav aria-label="Construction catalog">${constructionTypes.map((t) => `<button data-buy="${t}" ${canEdit ? '' : 'disabled'}>Buy & Place ${foundation[t].name} · ${foundation[t].cost} Credits</button>`).join('')}</nav><section aria-label="Placement"><p>${type ? `${foundation[type].name} · ${foundation[type].width}×${foundation[type].height} GU · ${foundation[type].capacity} capacity · ${selected ? 'Owned: free placement' : `${foundation[type].cost} Credits only when Place succeeds`}` : 'Select an owned asset or Buy & Place.'}</p><label>X <input id="place-x" type="number" min="0" max="59" step="1" value="${x}"></label><label>Y <input id="place-y" type="number" min="0" max="59" step="1" value="${y}"></label><button id="nudge-x-minus">X −1</button><button id="nudge-x-plus">X +1</button><button id="nudge-y-minus">Y −1</button><button id="nudge-y-plus">Y +1</button><button id="rotate-placement">Rotate footprint · ${rotation * 90}°</button><button id="place" aria-describedby="placement-reason" ${type && canEdit ? '' : 'disabled'}>Place</button><button id="cancel-placement" ${choice ? '' : 'disabled'}>Cancel Placement</button><button id="store" ${selected?.placement && canEdit ? '' : 'disabled'}>Store Selected</button><output id="placement-reason" aria-live="off">${type ? 'Awaiting explicit Place. Every entrance is checked for ordinary and heavy body clearance.' : 'No placement selected.'}</output></section><nav aria-label="Preparation history"><button id="undo" ${p.undoStack.length && canEdit ? '' : 'disabled'}>Undo</button><button id="redo" ${p.redoStack.length && canEdit ? '' : 'disabled'}>Redo</button><button id="export-campaign">Export Campaign</button></nav><p>Core Integrity ${coreBaseline.hp} / ${coreBaseline.hp} · Armor ${coreBaseline.armor}. Sentry: Integrity ${sentryBaseline.hp}, Armor ${sentryBaseline.armor}, ${weapon.damage} damage / ${weapon.intervalTicks / 60} s, range ${weapon.rangeGU} GU, ${weapon.targets} layers. Barricade: Integrity ${barrierBaseline.hp}, Armor ${barrierBaseline.armor}. Autonomous combat, forecasts and siege start remain Designed.</p>`;
+      )}</nav><section aria-label="Placement"><p>${type ? `${foundation[type].name} · ${foundation[type].width}×${foundation[type].height} GU · ${foundation[type].capacity} capacity · ${selected ? 'Owned: free placement' : `${foundation[type].cost} Credits only when Place succeeds`}` : 'Select an owned asset or Buy & Place.'}</p><label>X <input id="place-x" type="number" min="0" max="59" step="1" value="${x}"></label><label>Y <input id="place-y" type="number" min="0" max="59" step="1" value="${y}"></label><button id="nudge-x-minus">X −1</button><button id="nudge-x-plus">X +1</button><button id="nudge-y-minus">Y −1</button><button id="nudge-y-plus">Y +1</button><button id="rotate-placement">Rotate footprint · ${rotation * 90}°</button><button id="place" aria-describedby="placement-reason" ${type && canEdit ? '' : 'disabled'}>Place</button><button id="cancel-placement" ${choice ? '' : 'disabled'}>Cancel Placement</button><button id="store" ${selected?.placement && canEdit ? '' : 'disabled'}>Store Selected</button><output id="placement-reason" aria-live="off">${type ? 'Awaiting explicit Place. Every entrance is checked for ordinary and heavy body clearance.' : 'No placement selected.'}</output></section><nav aria-label="Preparation history"><button id="undo" ${p.undoStack.length && canEdit ? '' : 'disabled'}>Undo</button><button id="redo" ${p.redoStack.length && canEdit ? '' : 'disabled'}>Redo</button><button id="export-campaign">Export Campaign</button></nav><p>Core Integrity ${coreBaseline.hp} / ${coreBaseline.hp} · Armor ${coreBaseline.armor}. Sentry: Integrity ${sentryBaseline.hp}, Armor ${sentryBaseline.armor}, ${weapon.damage} damage / ${weapon.intervalTicks / 60} s, range ${weapon.rangeGU} GU, ${weapon.targets} layers. Barricade: Integrity ${barrierBaseline.hp}, Armor ${barrierBaseline.armor}. Tutorial Practice uses a disposable clone and durable start. Normal campaign results, rewards and repairs remain Gate3.</p>`;
   for (const b of document.querySelectorAll<HTMLButtonElement>('[data-owned]'))
     b.onclick = () => {
       const id = b.dataset.owned;
       if (id) {
         choice = { id };
         const a = c.assets.find((a) => a.id === id);
+        if (a && foundation[a.type].category === 'warden' && !a.placement) {
+          x = 29;
+          y = 33;
+        }
         if (a?.placement) {
           x = a.placement.x;
           y = a.placement.y;
@@ -580,6 +611,7 @@ for (const b of document.querySelectorAll<HTMLButtonElement>('[data-front]'))
 dialog.addEventListener('close', () => void preferences.save());
 window.addEventListener('keydown', (e) => {
   if (dialog.open || (e.target as HTMLElement).matches('input,select,textarea')) return;
+  if (tutorial) return;
   if (e.key === 'Escape') {
     choice = undefined;
     renderPreparation();
@@ -604,6 +636,38 @@ document.addEventListener('visibilitychange', () => {
     void audio.suspend();
     void preferences.save();
   } else void repository?.heartbeat().catch((e) => status(`Writer check failed: ${String(e)}`));
+});
+button('tutorial-practice', async () => {
+  if (tutorial || !preparation || !repository) return;
+  preparation.undoStack = [];
+  preparation.redoStack = [];
+  choice = undefined;
+  byId('preparation').hidden = true;
+  view?.dispose();
+  view = undefined;
+  const host = document.createElement('div');
+  host.id = 'battle-root';
+  root.append(host);
+  tutorial = new TutorialSession(
+    host,
+    preparation.campaign,
+    repository,
+    preferences,
+    audio,
+    (title) => {
+      tutorial = undefined;
+
+      if (title) {
+        byId('preparation').hidden = true;
+        document.body.classList.remove('in-preparation');
+        void renderTitle();
+      } else {
+        if (preparation)
+          void openCampaign(preparation.campaign).then(() => byId('tutorial-practice').focus());
+      }
+    },
+  );
+  await tutorial.initialize();
 });
 await renderTitle();
 if (database)

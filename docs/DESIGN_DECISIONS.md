@@ -31,3 +31,7 @@ The complete affected browser suite and same-scale actual production captures
 verify integration. Pixel brightness is not proof of comfortable tablet contrast,
 Android compatibility, performance or artistic approval. Status remains
 **Awaiting User Review**. Gate 2 and mass roster production remain paused.
+
+## VIS002 — conditional foundation approval and Gate2 candidate boundary
+
+User approved rb-lighting-r1 foundation and Core/Sentry/Barricade language, four-view basis, pixel detail, dimensionality, foundational palette and placement-feedback direction. Exact scope: review/USER_VISUAL_APPROVAL.md. This supersedes VIS001's pending status for the foundation only. New Rifle/Runner alternate views use coherent original references instead of the procedural diagnostics. Runner cyan remains unchanged; hostile diamond/cross, outline, silhouette/motion and named inspection combine identity cues. Combat candidates and animation sets remain Awaiting User Review; no mass propagation. No gameplay tuning, rewards or economy formula was changed.

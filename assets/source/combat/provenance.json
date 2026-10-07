@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "scope": "Gate2 candidates only; no mass roster or final-art approval",
+  "method": "Original imagegen references plus inspected native raster cleanup/rig",
+  "modelVersion": "Not exposed by generation tool",
+  "lighting": "rb-lighting-r1",
+  "prompts": "docs/ASSET_PROMPTS.md",
+  "sources": [
+    {
+      "file": "facing-reference.png",
+      "sha256": "5af9f863d57e8632548c682d679c8c87f01ecd49fbdb113d62f77fa73e98e758",
+      "review": "Inspected processing input; production-candidate approval pending",
+      "source": "Original session image-generation output"
+    },
+    {
+      "file": "sentry-facing.png",
+      "sha256": "a978d94db9e3cf8da0eb2399f9a489b7db0fed9e457899254c1516c8eea55728",
+      "review": "Inspected processing input; production-candidate approval pending",
+      "source": "Original session image-generation output; Sentry cells curated before source retention"
+    },
+    {
+      "file": "support-reference.png",
+      "sha256": "2e36e53fcee7b7bb1a298ae39026a712626d488e98f116ea3e3126393af2d2c0",
+      "review": "Inspected processing input; production-candidate approval pending",
+      "source": "Original session image-generation output"
+    }
+  ]
+}

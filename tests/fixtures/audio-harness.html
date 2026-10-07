@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><title>Development-only native audio acceptance fixture</title><button id="unlock" type="button">Run native audio checks</button><pre id="result">Awaiting gesture</pre><script type="module">
+import { AudioMixer } from '../../src/audio/mixer.ts';
+import manifest from '../../public/assets/audio/manifest.json';
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+document.querySelector('#unlock').onclick=async()=>{
+ try{
+ const audio=new AudioMixer(), unlocked=await audio.unlock();if(!unlocked)throw new Error(audio.state);
+ for(const t of manifest.tracks)await audio.decode(t.key);
+ await audio.music('music.fracture');await wait(100);
+ const music=audio.musicSources[0],time=audio.context.currentTime;await audio.suspend();await wait(250);const frozen=Math.abs(audio.context.currentTime-time)<.02;
+ await audio.resume();audio.configure({...audio.settings,master:40});const gain=audio.master.gain.value;audio.setMuted(true);const muteGain=audio.master.gain.value;audio.setMuted(false);
+ const sounds=manifest.tracks.filter(t=>!t.key.startsWith('music.'));
+ await Promise.all(Array.from({length:6},()=>sounds.map(t=>audio.play(t.key,1))).flat());const voices=audio.voices.length;
+ await wait(2500);await Promise.all(sounds.map(t=>audio.play(t.key,1,true)));const shots=audio.voices.filter(v=>v.shot).length;
+ const result={unlocked,decoded:audio.decoded,declared:manifest.tracks.length,frozen,pauseState:audio.context.state,gain,muteGain,voices,shots,loop:music.source.loop,playbackRate:music.source.playbackRate.value,loopEnd:music.source.loopEnd};
+ if(!frozen||voices>24||shots>8||gain<.39||gain>.41||muteGain!==0||!result.loop||result.playbackRate!==1||result.loopEnd!==96)throw new Error(JSON.stringify(result));
+ document.querySelector('#result').textContent=JSON.stringify(result);await audio.suspend();
+ }catch(e){document.querySelector('#result').textContent=JSON.stringify({error:String(e)});}
+};
+</script></html>

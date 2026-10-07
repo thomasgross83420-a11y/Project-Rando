@@ -245,3 +245,64 @@ summary {
     grid-column: 3;
   }
 }
+#battle-root {
+  width: 100%;
+}
+#battle-hud {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(6rem, max-content);
+  gap: 8px;
+  align-items: center;
+  border: 1px solid #78848b;
+  padding: 8px;
+}
+#battle-hud p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+#battle-world {
+  height: clamp(240px, 55dvh, 680px);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #78848b;
+}
+#checkpoint-label {
+  font-size: 0.8rem;
+  margin: 4px 0;
+}
+#battle-inspector {
+  border: 1px solid #78848b;
+  padding: 8px;
+}
+#battle-inspector summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+#battle-captions {
+  min-height: 1.6rem;
+  line-height: 1.5;
+  border-left: 3px solid #ffc266;
+  padding-left: 8px;
+}
+#battle-dialog {
+  max-height: 90dvh;
+  overflow: auto;
+}
+#battle-history {
+  max-height: 18rem;
+  overflow: auto;
+}
+#battle-minimap {
+  width: 224px;
+  height: 224px;
+  max-width: 100%;
+  border: 2px solid #ffffff;
+}
+
+#battle-dialog button {
+  margin: 4px;
+}

@@ -18,7 +18,7 @@
         24
       ],
       "source": "objective.harmonic_core.view0",
-      "status": "Gate1 strategic candidate; conditional foundation approval, full roster audit pending"
+      "status": "Conditional foundation / Gate2 production candidate; full roster audit pending"
     },
     {
       "key": "friendly.sentry",
@@ -34,7 +34,7 @@
         24
       ],
       "source": "friendly.sentry.view0",
-      "status": "Gate1 strategic candidate; conditional foundation approval, full roster audit pending"
+      "status": "Conditional foundation / Gate2 production candidate; full roster audit pending"
     },
     {
       "key": "friendly.standard_barricade",
@@ -50,8 +50,104 @@
         24
       ],
       "source": "friendly.standard_barricade.view0",
-      "status": "Gate1 strategic candidate; conditional foundation approval, full roster audit pending"
+      "status": "Conditional foundation / Gate2 production candidate; full roster audit pending"
+    },
+    {
+      "key": "friendly.rifle_squad",
+      "role": "Mobile",
+      "rect": [
+        100,
+        4,
+        24,
+        24
+      ],
+      "native": [
+        24,
+        24
+      ],
+      "source": "friendly.rifle_squad.face2.idle.0",
+      "status": "Conditional foundation / Gate2 production candidate; full roster audit pending"
+    },
+    {
+      "key": "warden.bulwark",
+      "role": "Warden",
+      "rect": [
+        132,
+        4,
+        24,
+        24
+      ],
+      "native": [
+        24,
+        24
+      ],
+      "source": "warden.bulwark.face2.idle.0",
+      "status": "Conditional foundation / Gate2 production candidate; full roster audit pending"
+    },
+    {
+      "key": "friendly.repair_node",
+      "role": "Support",
+      "rect": [
+        164,
+        4,
+        24,
+        24
+      ],
+      "native": [
+        24,
+        24
+      ],
+      "source": "friendly.repair_node.view0.idle.0",
+      "status": "Conditional foundation / Gate2 production candidate; full roster audit pending"
+    },
+    {
+      "key": "friendly.proximity_mine",
+      "role": "Trap",
+      "rect": [
+        196,
+        4,
+        24,
+        24
+      ],
+      "native": [
+        24,
+        24
+      ],
+      "source": "friendly.proximity_mine.view3.idle.0",
+      "status": "Conditional foundation / Gate2 production candidate; full roster audit pending"
+    },
+    {
+      "key": "enemy.runner",
+      "role": "Hostile Runner",
+      "rect": [
+        228,
+        4,
+        24,
+        24
+      ],
+      "native": [
+        24,
+        24
+      ],
+      "source": "enemy.runner.face0.idle.0",
+      "status": "Conditional foundation / Gate2 production candidate; full roster audit pending"
+    },
+    {
+      "key": "enemy.raider",
+      "role": "Hostile Raider",
+      "rect": [
+        260,
+        4,
+        24,
+        24
+      ],
+      "native": [
+        24,
+        24
+      ],
+      "source": "enemy.raider.face4.idle.0",
+      "status": "Conditional foundation / Gate2 production candidate; full roster audit pending"
     }
   ],
-  "sha256": "85ce1cd3b742fb83be43074795a0322fc069c83f3a3a4ce7d31598815ead9d69"
+  "sha256": "7a8a9aec353aaa2bc3265d49c68eb3f78fad87781a237a11998bb8b8bdfdcbf1"
 }

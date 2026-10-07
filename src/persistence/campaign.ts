@@ -153,11 +153,12 @@ export function validateCampaign(input: unknown): Campaign {
     if (!r) continue;
     if (!constructionTypes.includes(a.type))
       throw new Error('Deployment is not implemented for this type in this foundation build');
-    if (a.hp === 0) throw new Error('Gate 1 has no wreck restoration yet');
+    if (a.hp === 0)
+      throw new Error('Campaign wreck restoration remains Gate3; no zero-health deployment');
     if (d.category === 'warden') {
-      if (a.type !== c.warden || r.x !== PAD.x || r.y !== PAD.y)
-        throw new Error('Selected Warden must use its pad');
-    } else {
+      if (a.type !== c.warden) throw new Error('Only the selected Warden may deploy');
+    }
+    if (!(d.category === 'warden' && r.x === PAD.x && r.y === PAD.y)) {
       if (r.x < 12 || r.y < 12 || r.x + r.width > 48 || r.y + r.height > 48)
         throw new Error('Footprint must fit purchased land [12,48)');
       if (overlaps(r, PRECINCT) || overlaps(r, PAD))

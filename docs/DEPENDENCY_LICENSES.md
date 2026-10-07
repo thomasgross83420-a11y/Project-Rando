@@ -42,3 +42,7 @@ parameter contract inspected in the [official protocol source](https://github.co
 on the same access date. This development interface is not a gameplay dependency
 or Android evidence. Image-generation model/version is not exposed by the tool;
 exact source PNGs, prompts and source hashes identify the reproducible cleanup input.
+
+Gate2 adds no npm/Python dependency, external asset pack, sample or runtime service. Pinned stack/licenses remain unchanged. Actual PCM16/WAV synthesis uses the installed Python standard library; original score/rig definitions remain source, not a proprietary audio-generation service. Native audio experiment and official WebAudio/wave references are in AUDIO_DEFINITIONS.md. Browser verification remains Chromium151 and Playwright1.63.0, not physical-device certification.
+
+Review-label tooling uses existing DejaVu Sans2.37 (Debian fonts-dejavu-core2.37-8), Bitstream Vera font license with DejaVu changes in public domain. Official https://dejavu-fonts.github.io/License.html inspected HTTP200 on2026-10-07 and installed copyright/version checked. Font software is not bundled into the game; labels are rendered by the pinned Pillow tool. No package installation or account is required.

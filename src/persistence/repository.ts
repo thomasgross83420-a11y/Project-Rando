@@ -9,6 +9,7 @@ export class CampaignRepository {
   readonly tabID = crypto.randomUUID();
   writer: Writer | undefined;
   readonly memory = new Map<number, Campaign>();
+  readonly practiceSlots = new Set<number>();
   private memoryLastOpened: number | undefined;
   readonly temporary: boolean;
   constructor(readonly database: Database | undefined) {
@@ -86,13 +87,15 @@ export class CampaignRepository {
       writer = this.writer;
     if (!writer) throw new Error('Another tab owns editing. This tab is read-only.');
     if (!this.database) {
+      if (this.practiceSlots.has(valid.slot))
+        throw new Error('Resolve retained practice before editing this campaign');
       const current = this.memory.get(valid.slot);
       this.compare(current, expected);
       this.memory.set(valid.slot, structuredClone(valid));
       return;
     }
     await this.database.transaction(
-      ['campaigns', 'previous', 'writer'],
+      ['campaigns', 'previous', 'writer', 'meta'],
       'readwrite',
       (tx, done) => {
         const campaigns = tx.objectStore('campaigns'),
@@ -104,17 +107,24 @@ export class CampaignRepository {
             this.writer = undefined;
             return;
           }
-          const request = campaigns.get(valid.slot);
-          request.onsuccess = () => {
-            try {
-              const before = request.result as Campaign | undefined;
-              this.compare(before, expected);
-              if (before) tx.objectStore('previous').put(before, valid.slot);
-              campaigns.put(valid, valid.slot);
-              done(undefined);
-            } catch {
+          const journal = tx.objectStore('meta').get(`practice.slot.${valid.slot}`);
+          journal.onsuccess = () => {
+            if (journal.result !== undefined) {
               tx.abort();
+              return;
             }
+            const request = campaigns.get(valid.slot);
+            request.onsuccess = () => {
+              try {
+                const before = request.result as Campaign | undefined;
+                this.compare(before, expected);
+                if (before) tx.objectStore('previous').put(before, valid.slot);
+                campaigns.put(valid, valid.slot);
+                done(undefined);
+              } catch {
+                tx.abort();
+              }
+            };
           };
         };
       },

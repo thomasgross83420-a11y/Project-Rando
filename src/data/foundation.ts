@@ -195,6 +195,10 @@ export const doctrines = {
 export const constructionTypes: readonly ContentID[] = [
   'friendly.sentry',
   'friendly.standard_barricade',
+  'friendly.rifle_squad',
+  'friendly.repair_node',
+  'friendly.proximity_mine',
+  'warden.bulwark',
 ];
 
 const definitionSchema = z

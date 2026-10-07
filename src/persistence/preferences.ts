@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import type { Database } from './database';
+import { audioSettings, audioDefaults } from '../audio/mixer';
 
 // Blueprint §§18,26C: global presentation only, outside campaign Undo/Redo.
 export const preferencesSchema = z
@@ -8,6 +9,7 @@ export const preferencesSchema = z
     uiScale: z.union([z.literal(18), z.literal(27), z.literal(36)]),
     reducedEffects: z.boolean(),
     highContrast: z.boolean(),
+    audio: audioSettings.default(audioDefaults),
   })
   .strict();
 export type Preferences = z.infer<typeof preferencesSchema>;
@@ -17,6 +19,7 @@ export class PreferencesStore {
     uiScale: 18,
     reducedEffects: matchMedia('(prefers-reduced-motion: reduce)').matches,
     highContrast: false,
+    audio: { ...audioDefaults },
   };
   private revision = 0;
   private savedRevision = -1;
