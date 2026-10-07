@@ -34,7 +34,7 @@ export const campaignSchema = z
     schema: z.literal(1),
     build: z.literal('0.1.0-foundation'),
     contentVersion: z.literal('rb-content-v1'),
-    simulationVersion: z.literal('rb-sim-v1'),
+    simulationVersion: z.enum(['rb-sim-v1', 'rb-sim-v2']),
     generatorVersion: z.literal('rb-generator-v1'),
     economyPolicyVersion: z.literal('economy.duration_wave_v1'),
     lineage: z.uuid(),

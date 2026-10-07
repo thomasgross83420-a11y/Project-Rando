@@ -285,7 +285,7 @@ export class Battle {
         return e.rect;
       });
   }
-  private los(a: Vec, t: Entity, owner = 0): boolean {
+  private los(a: Vec, t: Entity, owner = 0, clearance = 0): boolean {
     return this.entities.every(
       (e) =>
         e.hp <= 0 ||
@@ -293,8 +293,13 @@ export class Battle {
         !e.rect ||
         e.id === owner ||
         e.id === t.id ||
-        sweep(a, nearest(a, t), e, 0) === null,
+        sweep(a, nearest(a, t), e, clearance) === null,
     );
+  }
+  private weaponSight(e: Entity, t: Entity): boolean {
+    const clearance =
+      this.plan.simulation !== 'rb-sim-v1' && (combat[e.type].weapon?.speed ?? 0) > 0 ? 51 : 0;
+    return this.los(e, t, e.id, clearance);
   }
   private canSee(a: Entity, t: Entity): boolean {
     return t.hp > 0 && boundary(a, t) <= combat[a.type].vision && this.los(a, t, a.id);
@@ -342,13 +347,14 @@ export class Battle {
     if (this.events.length > 200) this.events.shift();
     this.eventSequence++;
   }
-  private flow(e: Entity, target = this.core, range = 819): Flow {
+  private flow(e: Entity, target = this.core, range = 819, lineOfFire = false): Flow {
     const key = [
       this.topology,
       e.radius,
       target.id,
       target.rect ? 'rect' : `${Math.floor(target.x / 512)},${Math.floor(target.y / 512)}`,
       range,
+      lineOfFire ? 'firing' : 'route',
     ].join('|');
     let f = this.flows.get(key);
     if (!f) {
@@ -358,7 +364,12 @@ export class Battle {
           if (!a.rect) throw new Error('Missing debris');
           return a.rect;
         });
-      f = new Flow(e.radius, this.solids(), (p) => boundary(p, target) <= range, debris);
+      f = new Flow(
+        e.radius,
+        this.solids(),
+        (p) => boundary(p, target) <= range && (!lineOfFire || this.los(p, target, e.id, 51)),
+        debris,
+      );
       if (this.flows.size >= 24) this.flows.clear();
       this.flows.set(key, f);
     }
@@ -473,8 +484,11 @@ export class Battle {
       h = bearing(delta(t, e)),
       v = direction(h, preferred + (t.rect ? 0 : t.radius)),
       p = { x: (t.rect ? near.x : t.x) + v.x, y: (t.rect ? near.y : t.y) + v.y };
-    if (edgeClear(e, p, e.radius, this.solids())) return p;
-    return this.flow(e, t, preferred).waypoint(e);
+    const lineOfFire =
+      this.plan.simulation !== 'rb-sim-v1' && (combat[e.type].weapon?.speed ?? 0) > 0;
+    if (edgeClear(e, p, e.radius, this.solids()) && (!lineOfFire || this.los(p, t, e.id, 51)))
+      return p;
+    return this.flow(e, t, preferred, lineOfFire).waypoint(e, lineOfFire);
   }
   private anchorPoint(e: Entity): Vec | null {
     if (edgeClear(e, e.anchor, e.radius, this.solids())) return { ...e.anchor };
@@ -642,7 +656,7 @@ export class Battle {
       e.reason = 'Target outside Balanced engagement radius';
       return;
     }
-    if (boundary(e, target) <= d.weapon.range && this.los(e, target, e.id)) {
+    if (boundary(e, target) <= d.weapon.range && this.weaponSight(e, target)) {
       e.goal = null;
       return;
     }
@@ -807,6 +821,12 @@ export class Battle {
       e.reason = 'Stuck: local avoidance then legal repath';
       e.target = 0;
       e.commitUntil = 0;
+      // Re-arm this local retry window. Otherwise an expired watchdog cancels
+      // each newly acquired target before its six-tick weapon warmup can finish.
+      if (this.plan.simulation !== 'rb-sim-v1') {
+        e.lastProgress = this.tick;
+        e.progressPoint = { x: e.x, y: e.y };
+      }
     }
   }
 
@@ -820,7 +840,7 @@ export class Battle {
       this.perceived(e, t) &&
       d.weapon &&
       boundary(e, t) <= d.weapon.range &&
-      this.los(e, t, e.id)
+      this.weaponSight(e, t)
         ? bearing(delta(e, nearest(e, t)))
         : goal
           ? bearing(delta(e, goal))
@@ -912,7 +932,7 @@ export class Battle {
       t.hp <= 0 ||
       !this.perceived(e, t) ||
       boundary(e, t) > w.range ||
-      !this.los(e, t, e.id)
+      !this.weaponSight(e, t)
     ) {
       e.warmup = null;
       if (w && !e.cast && !e.dash && e.state !== 'Moving') {

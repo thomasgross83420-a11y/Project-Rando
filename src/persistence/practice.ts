@@ -46,7 +46,7 @@ export const guidedPositions: [ContentID, number, number][] = [
   ['warden.bulwark', 29, 33],
   ['friendly.repair_node', 25, 34],
   ['friendly.standard_barricade', 22, 26],
-  ['friendly.proximity_mine', 22, 30],
+  ['friendly.proximity_mine', 18, 24],
 ];
 export function practiceArmy(campaign: Campaign, guided = true): StartAsset[] {
   if (campaign.warden !== 'warden.bulwark' || campaign.doctrine !== 'Bastion')

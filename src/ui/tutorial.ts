@@ -1,16 +1,17 @@
+import type { AudioMixer, AudioSettings } from '../audio/mixer';
+import { combat } from '../data/combat';
+import type { Campaign } from '../persistence/campaign';
+import { type PracticeCheckpoint, PracticeStore, practiceArmy } from '../persistence/practice';
+import type { PreferencesStore } from '../persistence/preferences';
+import type { CampaignRepository } from '../persistence/repository';
+import { CombatRenderer } from '../render/combat';
+import { WorldView } from '../render/world';
 import { Battle, type BattleEvent } from '../sim/battle';
 import { BattleClock } from '../sim/clock';
 import { hash } from '../sim/determinism';
 import { U } from '../sim/fixed';
 import { InterfaceTime } from './interface-time';
-import { combat } from '../data/combat';
-import { WorldView } from '../render/world';
-import { CombatRenderer } from '../render/combat';
-import { PracticeStore, practiceArmy, type PracticeCheckpoint } from '../persistence/practice';
-import type { Campaign } from '../persistence/campaign';
-import type { CampaignRepository } from '../persistence/repository';
-import type { PreferencesStore } from '../persistence/preferences';
-import type { AudioMixer, AudioSettings } from '../audio/mixer';
+
 const stores = new WeakMap<CampaignRepository, PracticeStore>();
 export function practiceStore(repo: CampaignRepository): PracticeStore {
   let store = stores.get(repo);
@@ -297,6 +298,9 @@ export class TutorialSession {
     });
     if (!this.world) throw new Error('Missing renderer');
     this.renderer = new CombatRenderer(this.world);
+    const battle = this.battle;
+    if (!battle) throw new Error('Missing battle');
+    this.renderer.motion.observe(battle.entities, battle.tick);
     this.renderer.reduced = this.preferences.value.reducedEffects;
     this.world.command('fit-base');
     this.clock = new BattleClock(
@@ -305,6 +309,7 @@ export class TutorialSession {
         if (!b) return;
         this.previous = new Map(b.entities.map((e) => [e.id, { x: e.x, y: e.y }]));
         b.step();
+        this.renderer?.motion.observe(b.entities, b.tick);
       },
       (reason) => {
         void this.audio.suspend();

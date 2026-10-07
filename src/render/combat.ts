@@ -3,9 +3,12 @@ import art from '../../public/assets/combat/manifest.json';
 import { combat } from '../data/combat';
 import type { Battle, Entity } from '../sim/battle';
 import { direction, U } from '../sim/fixed';
+import { actorAnimationFrame, eventAnimationFrame } from './animation';
+import { PoseDamageBank, type VisualFrame } from './damage';
+import { MotionTracker } from './motion';
 import { project } from './projection';
 import type { WorldView } from './world';
-import { actorAnimationFrame, eventAnimationFrame } from './animation';
+
 type Frame = (typeof art.frames)[number];
 const frames = new Map(art.frames.map((f) => [f.key, f]));
 export class CombatRenderer {
@@ -20,17 +23,26 @@ export class CombatRenderer {
   private interfaceNow = 0;
   private lastBattle: Battle | undefined;
   private health = new Map<number, { hp: number; changed: number }>();
+  readonly motion = new MotionTracker();
+  private readonly damage: PoseDamageBank;
   constructor(readonly view: WorldView) {
-    if (!view.scene) throw new Error('Renderer not ready');
-    this.graphics = view.scene.add.graphics().setDepth(100000);
-    this.shadows = view.scene.add.graphics().setDepth(1);
+    const scene = view.scene;
+    if (!scene) throw new Error('Renderer not ready');
+    this.damage = new PoseDamageBank(
+      art.atlases.map(
+        (_, i) => scene.textures.get(`combat.${i}`).getSourceImage() as HTMLImageElement,
+      ),
+    );
+    this.damage.install(scene);
+    this.graphics = scene.add.graphics().setDepth(100000);
+    this.shadows = scene.add.graphics().setDepth(1);
     view.onViewChange = () => {
       if (this.lastBattle) this.draw(this.lastBattle);
     };
   }
   private image(
     key: string,
-    frame: Frame,
+    frame: VisualFrame,
     x: number,
     y: number,
     depth: number,
@@ -52,11 +64,11 @@ export class CombatRenderer {
       throw new Error('Malformed combat anchor');
     let sprite = this.images.get(key);
     if (!sprite) {
-      sprite = scene.add.image(0, 0, `combat.${frame.atlas}`, frame.key);
+      sprite = scene.add.image(0, 0, frame.texture ?? `combat.${frame.atlas}`, frame.key);
       this.images.set(key, sprite);
     }
     sprite
-      .setTexture(`combat.${frame.atlas}`, frame.key)
+      .setTexture(frame.texture ?? `combat.${frame.atlas}`, frame.key)
       .setPosition(Math.round(x), Math.round(y))
       .setOrigin((ax - tx) / w, (ay - ty) / h)
       .setScale(scale)
@@ -64,8 +76,14 @@ export class CombatRenderer {
       .setVisible(true);
     return sprite;
   }
-  private frame(e: Entity, b: Battle): Frame {
-    return actorAnimationFrame(e, b.tick, this.view.camera.view, this.reduced);
+  private frame(e: Entity, b: Battle, alpha: number): Frame {
+    return actorAnimationFrame(
+      e,
+      b.tick,
+      this.view.camera.view,
+      this.reduced,
+      this.motion.sample(e.id, alpha),
+    );
   }
   draw(
     b: Battle,
@@ -96,7 +114,7 @@ export class CombatRenderer {
           y: (old ? old.y + (e.y - old.y) * alpha : e.y) / U,
         },
         p = project(world, c),
-        frame = this.frame(e, b);
+        frame = this.frame(e, b, alpha);
       if (p.x < -100 || p.y < -100 || p.x > c.width + 100 || p.y > c.height + 150) continue;
       this.shadows.fillStyle(0x0d1721, 0.4);
       this.shadows.fillEllipse(
@@ -130,18 +148,16 @@ export class CombatRenderer {
               ? 'scuffed'
               : null;
         if (band) {
-          const overlay = frames.get(
-            frame.key.replace(/\.(idle|aim|move|attack|hit|ability|channel)\.\d+$/, `.${band}.0`),
-          );
-          if (!overlay) throw new Error('Missing damage overlay');
-          this.image(
-            `damage.${e.id}.${n}`,
-            overlay,
-            pos.x,
-            pos.y,
-            1000 + pos.y + 0.001 + n / 100000000,
-            c.zoom / 2,
-          );
+          const overlay = this.damage.get(frame, band);
+          if (overlay)
+            this.image(
+              `damage.${e.id}.${n}`,
+              overlay,
+              pos.x,
+              pos.y,
+              1000 + pos.y + 0.001 + n / 100000000,
+              c.zoom / 2,
+            );
         }
       }
       if (

@@ -40,13 +40,26 @@ describe('Gate2 deterministic combat', () => {
     for (const batch of [1, 2, 4, 8, 12]) {
       const b = await Battle.create(army());
       let safety = 0;
+      let mineWarning = false;
+      let mineImpact = false;
       while ((b.state === 'Siege' || b.state === 'Cleanup') && safety++ < 16000) {
-        for (let i = 0; i < batch; i++) b.step();
+        for (let i = 0; i < batch; i++) {
+          b.step();
+          mineWarning ||= b.events.some((event) => event.kind === 'mine-warning');
+          mineImpact ||= b.events.some(
+            (event) =>
+              event.kind === 'impact' &&
+              b.get(event.source)?.type === 'friendly.proximity_mine' &&
+              event.value > 0,
+          );
+        }
         for (const e of b.entities.filter((e) => e.hp > 0 && e.radius))
           for (const t of b.entities.filter((t) => t.hp > 0 && t.radius && t.id > e.id))
             expect(distance(e, t)).toBeGreaterThanOrEqual(e.radius + t.radius);
       }
       expect(b.state, b.reason).toBe('Victory');
+      expect(mineWarning).toBe(true);
+      expect(mineImpact).toBe(true);
       expect(b.kills).toBe(24);
       expect(b.destroyedTP).toBe(30);
       expect(b.tick).toBeGreaterThan(5100);

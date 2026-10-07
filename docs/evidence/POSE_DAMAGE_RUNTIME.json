@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-07",
+  "test": "Actual Canvas2D compositor in Chromium; separately verified production integration",
+  "checkedPoseBandPairs": 1792,
+  "outsideBodyPixels": 0,
+  "originalOutsideBodyPixels": 1347,
+  "gutterFailures": 0,
+  "packedPixelMismatches": 0,
+  "uniqueOverlayRectangles": 414,
+  "overlayAtlas": [
+    2048,
+    274
+  ],
+  "totalLoadedTexturePixels": 5549056,
+  "buildMS": 786.5999999996275,
+  "budget": 6000000,
+  "landmarkChecks": "passed",
+  "sourceImagesEdited": false,
+  "naturalMotionApproval": "not certified",
+  "physicalTabletPerformance": "not measured"
+}

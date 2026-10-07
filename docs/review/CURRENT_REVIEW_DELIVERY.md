@@ -55,3 +55,5 @@ Physical Android performance/touch/storage/OS interruptions/TalkBack, subjective
 audio/style approval, full-roster completeness, deployment and offline readiness
 remain separate acceptance work. No additional gameplay rule clarification is
 needed to begin the receipt/persistence slice already specified by the blueprint.
+
+Latest follow-up: [build0.2.2 refinement PDF/video/ZIP](REFINEMENT_DELIVERY.md). This earlier full package remains the0.2.0 snapshot.

@@ -5,6 +5,11 @@ animation mechanics, scrutinized across each asset's relevant behaviors;
 blueprint §§16,21,24,27. Device/scope constraints: [DEVICE_TARGET.md](../DEVICE_TARGET.md).
 Application build: 0.2.1-animation-audit. No final art approval is inferred.
 
+This is the historical audit. The [0.2.2 follow-up](ANIMATION_REFINEMENT.md)
+corrects runtime overlay attachment and action continuity; raw source mismatches
+remain documented. Current `npm run audit:art` reports those raw findings and
+strictly verifies the compositor actually used in the game.
+
 ## Findings and corrections
 
 | Finding | State and evidence |

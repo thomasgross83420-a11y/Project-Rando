@@ -1,0 +1,427 @@
+{
+  "date": "2026-10-07",
+  "scope": "Measured current fixed Bulwark/Bastion tutorial; not whole-game balance certification",
+  "method": "Authoritative simulation; fixed authored army UUIDs/schedule, controlled role/health changes. Capture new native events every tick with overflow rejection. Damage is actual capped body loss, not theoretical DPS.",
+  "tuningChanged": false,
+  "simulation": "rb-sim-v1",
+  "limitations": [
+    "No progression/economy/boss/full-roster balance claim",
+    "Tutorial intended to teach and be survivable; unused support is a coverage gap, not permission to weaken it",
+    "Single layout/fixed schedule; broader map/doctrine/rank scenarios follow their implementation"
+  ],
+  "results": [
+    {
+      "id": "authored-baseline",
+      "scope": "Current tutorial fixture",
+      "outcome": "Victory",
+      "reason": "All deployments and hostile damage potential cleared for one combat second",
+      "ticks": 6150,
+      "combatSeconds": 102.5,
+      "kills": 24,
+      "tp": 30,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "enemy.raider": 477.275390625,
+        "enemy.runner": 18.181640625,
+        "friendly.rifle_squad": 1920.90625,
+        "friendly.sentry": 1379.09375
+      },
+      "releasesByRole": {
+        "enemy.raider": 15,
+        "enemy.runner": 1,
+        "friendly.rifle_squad": 102,
+        "friendly.sentry": 63
+      },
+      "actualRepair": 0,
+      "travelGU": {
+        "friendly.rifle_squad": 35.2783203125,
+        "warden.bulwark": 0
+      },
+      "movingTicks": {
+        "friendly.rifle_squad": 960
+      },
+      "friendlyDown": [],
+      "maximumProjectiles": 2,
+      "collectedEvents": 396,
+      "impacts": 149,
+      "hash": "8961c7817d3d73989a00c3e377387e6dde1ebeee16d219d5c397afc2be7839c7",
+      "flags": [
+        "Repair not exercised by this scenario",
+        "Mine not exercised by this scenario"
+      ]
+    },
+    {
+      "id": "no-repair",
+      "scope": "Role contribution comparison",
+      "outcome": "Victory",
+      "reason": "All deployments and hostile damage potential cleared for one combat second",
+      "ticks": 6150,
+      "combatSeconds": 102.5,
+      "kills": 24,
+      "tp": 30,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "enemy.raider": 477.275390625,
+        "enemy.runner": 18.181640625,
+        "friendly.rifle_squad": 1920.90625,
+        "friendly.sentry": 1379.09375
+      },
+      "releasesByRole": {
+        "enemy.raider": 15,
+        "enemy.runner": 1,
+        "friendly.rifle_squad": 102,
+        "friendly.sentry": 63
+      },
+      "actualRepair": 0,
+      "travelGU": {
+        "friendly.rifle_squad": 35.2783203125,
+        "warden.bulwark": 0
+      },
+      "movingTicks": {
+        "friendly.rifle_squad": 960
+      },
+      "friendlyDown": [],
+      "maximumProjectiles": 2,
+      "collectedEvents": 396,
+      "impacts": 149,
+      "hash": "b9ac3224f9124a951bbaf43cf3be11355c903f94be2967395c7350cc1d62839a",
+      "flags": [
+        "Mine not exercised by this scenario"
+      ]
+    },
+    {
+      "id": "no-mine",
+      "scope": "Role contribution comparison",
+      "outcome": "Victory",
+      "reason": "All deployments and hostile damage potential cleared for one combat second",
+      "ticks": 6150,
+      "combatSeconds": 102.5,
+      "kills": 24,
+      "tp": 30,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "enemy.raider": 477.275390625,
+        "enemy.runner": 18.181640625,
+        "friendly.rifle_squad": 1920.90625,
+        "friendly.sentry": 1379.09375
+      },
+      "releasesByRole": {
+        "enemy.raider": 15,
+        "enemy.runner": 1,
+        "friendly.rifle_squad": 102,
+        "friendly.sentry": 63
+      },
+      "actualRepair": 0,
+      "travelGU": {
+        "friendly.rifle_squad": 35.2783203125,
+        "warden.bulwark": 0
+      },
+      "movingTicks": {
+        "friendly.rifle_squad": 960
+      },
+      "friendlyDown": [],
+      "maximumProjectiles": 2,
+      "collectedEvents": 396,
+      "impacts": 149,
+      "hash": "c5b4d40a0cbb367ccc79f60551ce31ef2fa9843ddf8bbc2e31d94c24c420ae8f",
+      "flags": [
+        "Repair not exercised by this scenario"
+      ]
+    },
+    {
+      "id": "no-barrier",
+      "scope": "Role contribution comparison",
+      "outcome": "Victory",
+      "reason": "All deployments and hostile damage potential cleared for one combat second",
+      "ticks": 5895,
+      "combatSeconds": 98.25,
+      "kills": 24,
+      "tp": 30,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "enemy.raider": 190.91015625,
+        "friendly.rifle_squad": 1190.9296875,
+        "friendly.sentry": 2109.0703125
+      },
+      "releasesByRole": {
+        "enemy.raider": 6,
+        "friendly.rifle_squad": 64,
+        "friendly.sentry": 68
+      },
+      "actualRepair": 0,
+      "travelGU": {
+        "friendly.rifle_squad": 55.0966796875,
+        "warden.bulwark": 0
+      },
+      "movingTicks": {
+        "friendly.rifle_squad": 1500
+      },
+      "friendlyDown": [],
+      "maximumProjectiles": 3,
+      "collectedEvents": 306,
+      "impacts": 118,
+      "hash": "ac5600a17cca9088c04abd25e02c694ff5f1cf7caa5239ca5010eb4dd3e6c468",
+      "flags": [
+        "Repair not exercised by this scenario",
+        "Mine not exercised by this scenario"
+      ]
+    },
+    {
+      "id": "one-sentry",
+      "scope": "Reduced deployment comparison",
+      "outcome": "Victory",
+      "reason": "All deployments and hostile damage potential cleared for one combat second",
+      "ticks": 8633,
+      "combatSeconds": 143.88333333333333,
+      "kills": 24,
+      "tp": 30,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "enemy.raider": 2390.9140625,
+        "friendly.rifle_squad": 2127.212890625,
+        "friendly.sentry": 1172.787109375
+      },
+      "releasesByRole": {
+        "enemy.raider": 80,
+        "friendly.rifle_squad": 127,
+        "friendly.sentry": 47
+      },
+      "actualRepair": 0,
+      "travelGU": {
+        "friendly.rifle_squad": 26.2890625,
+        "warden.bulwark": 6.501953125
+      },
+      "movingTicks": {
+        "friendly.rifle_squad": 715,
+        "warden.bulwark": 199
+      },
+      "friendlyDown": [
+        "friendly.standard_barricade"
+      ],
+      "maximumProjectiles": 2,
+      "collectedEvents": 544,
+      "impacts": 231,
+      "hash": "212e378de1eeef627ed21b8336e0184fdc04598f9ce9ebe13eb91ffdc2fd813e",
+      "flags": [
+        "Repair not exercised by this scenario",
+        "Mine not exercised by this scenario"
+      ]
+    },
+    {
+      "id": "no-sentries",
+      "scope": "Mobile-defense comparison",
+      "outcome": "Cleanup",
+      "reason": "",
+      "ticks": 21600,
+      "combatSeconds": 360,
+      "kills": 8,
+      "tp": 9,
+      "coreRemaining": 7481.1279296875,
+      "damageByRole": {
+        "enemy.raider": 2400,
+        "enemy.runner": 6583.4619140625,
+        "friendly.rifle_squad": 1258.5556640625
+      },
+      "releasesByRole": {
+        "enemy.raider": 81,
+        "enemy.runner": 395,
+        "friendly.rifle_squad": 76,
+        "warden.bulwark": 1
+      },
+      "actualRepair": 4064.58984375,
+      "travelGU": {
+        "friendly.rifle_squad": 9.7568359375,
+        "warden.bulwark": 13.1826171875
+      },
+      "movingTicks": {
+        "friendly.rifle_squad": 267,
+        "warden.bulwark": 401
+      },
+      "friendlyDown": [
+        "friendly.rifle_squad",
+        "friendly.standard_barricade"
+      ],
+      "maximumProjectiles": 2,
+      "collectedEvents": 2426,
+      "impacts": 533,
+      "hash": "7c525666b0eda5860cc9aa5fd716d1551f608c903d42825f2f95af9b05501a18",
+      "flags": [
+        "Did not reach bounded terminal outcome",
+        "Mine not exercised by this scenario"
+      ]
+    },
+    {
+      "id": "no-rifle",
+      "scope": "Role contribution comparison",
+      "outcome": "Victory",
+      "reason": "All deployments and hostile damage potential cleared for one combat second",
+      "ticks": 6901,
+      "combatSeconds": 115.01666666666667,
+      "kills": 24,
+      "tp": 30,
+      "coreRemaining": 9715.619140625,
+      "damageByRole": {
+        "enemy.raider": 1954.1884765625,
+        "enemy.runner": 45.8173828125,
+        "friendly.sentry": 3170.908203125,
+        "warden.bulwark": 129.091796875
+      },
+      "releasesByRole": {
+        "enemy.raider": 67,
+        "enemy.runner": 3,
+        "friendly.sentry": 106,
+        "warden.bulwark": 4
+      },
+      "actualRepair": 215.625,
+      "travelGU": {
+        "warden.bulwark": 7.1728515625
+      },
+      "movingTicks": {
+        "warden.bulwark": 218
+      },
+      "friendlyDown": [
+        "friendly.standard_barricade"
+      ],
+      "maximumProjectiles": 2,
+      "collectedEvents": 477,
+      "impacts": 165,
+      "hash": "729882e890516838fd0039e76d6b61479b00758c4520e7682ad5b0d9ec55cb3f",
+      "flags": [
+        "Mine not exercised by this scenario"
+      ]
+    },
+    {
+      "id": "rifle-half-health",
+      "scope": "Injury sensitivity",
+      "outcome": "Victory",
+      "reason": "All deployments and hostile damage potential cleared for one combat second",
+      "ticks": 8345,
+      "combatSeconds": 139.08333333333334,
+      "kills": 24,
+      "tp": 30,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "enemy.raider": 1786.365234375,
+        "friendly.rifle_squad": 1553.1455078125,
+        "friendly.sentry": 1746.8544921875
+      },
+      "releasesByRole": {
+        "enemy.raider": 61,
+        "friendly.rifle_squad": 107,
+        "friendly.sentry": 72
+      },
+      "actualRepair": 0,
+      "travelGU": {
+        "friendly.rifle_squad": 32.8916015625,
+        "warden.bulwark": 0
+      },
+      "movingTicks": {
+        "friendly.rifle_squad": 895
+      },
+      "friendlyDown": [
+        "friendly.standard_barricade"
+      ],
+      "maximumProjectiles": 3,
+      "collectedEvents": 513,
+      "impacts": 208,
+      "hash": "1a0e8a65dcbef744eeee2fbca4dace1aa5192b47a80a16c9de8fa01f3037594b",
+      "flags": [
+        "Repair not exercised by this scenario",
+        "Mine not exercised by this scenario"
+      ]
+    },
+    {
+      "id": "sentries-half-health",
+      "scope": "Repair sensitivity",
+      "outcome": "Victory",
+      "reason": "All deployments and hostile damage potential cleared for one combat second",
+      "ticks": 6150,
+      "combatSeconds": 102.5,
+      "kills": 24,
+      "tp": 30,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "enemy.raider": 477.275390625,
+        "enemy.runner": 18.181640625,
+        "friendly.rifle_squad": 1920.90625,
+        "friendly.sentry": 1379.09375
+      },
+      "releasesByRole": {
+        "enemy.raider": 15,
+        "enemy.runner": 1,
+        "friendly.rifle_squad": 102,
+        "friendly.sentry": 63
+      },
+      "actualRepair": 600,
+      "travelGU": {
+        "friendly.rifle_squad": 35.2783203125,
+        "warden.bulwark": 0
+      },
+      "movingTicks": {
+        "friendly.rifle_squad": 960
+      },
+      "friendlyDown": [],
+      "maximumProjectiles": 2,
+      "collectedEvents": 492,
+      "impacts": 149,
+      "hash": "e158a4d5557858ca5f5fd37a9269a0a9c12118dbc232da0bf2fcb0fbe04ea1ea",
+      "flags": [
+        "Mine not exercised by this scenario"
+      ]
+    },
+    {
+      "id": "warden-alone",
+      "scope": "Diagnostic isolation, not the guided tutorial",
+      "outcome": "Cleanup",
+      "reason": "",
+      "ticks": 21600,
+      "combatSeconds": 360,
+      "kills": 0,
+      "tp": 0,
+      "coreRemaining": 2956.5419921875,
+      "damageByRole": {
+        "enemy.runner": 7043.4580078125
+      },
+      "releasesByRole": {
+        "enemy.runner": 427
+      },
+      "actualRepair": 0,
+      "travelGU": {
+        "warden.bulwark": 2.74609375
+      },
+      "movingTicks": {
+        "warden.bulwark": 83
+      },
+      "friendlyDown": [],
+      "maximumProjectiles": 0,
+      "collectedEvents": 883,
+      "impacts": 427,
+      "hash": "15234fae8efdf9c15bb4bd096a05106515d5acecd4875c84423c145565c2c1ea",
+      "flags": [
+        "Did not reach bounded terminal outcome"
+      ]
+    },
+    {
+      "id": "unarmed-core",
+      "scope": "Diagnostic defeat mechanism; not a playable tutorial setup",
+      "outcome": "Defeat",
+      "reason": "Inevitable Defeat: no friendly damage capability for 3 combat seconds",
+      "ticks": 779,
+      "combatSeconds": 12.983333333333333,
+      "kills": 0,
+      "tp": 0,
+      "coreRemaining": 10000,
+      "damageByRole": {},
+      "releasesByRole": {},
+      "actualRepair": 0,
+      "travelGU": {},
+      "movingTicks": {},
+      "friendlyDown": [],
+      "maximumProjectiles": 0,
+      "collectedEvents": 2,
+      "impacts": 0,
+      "hash": "ca4e7a3911cf8aa30b25bb05d81ea75b238e3b36f8e2b0c95ccc24aec7f9368f",
+      "flags": []
+    }
+  ]
+}

@@ -18,9 +18,18 @@ Never advance a failed gate as complete. Independent fixes/prototypes may procee
 
 Gate 1 closeout passed: see review/GATE1_CLOSEOUT.md. Conditional foundation approval permits the next coherent combat slice, not mass roster production.
 
-1. Gate2 baseline evidence passes:29 unit/19 production browser tests, exact browser/headless/muted hash, native art/audio validation. The animation follow-up passes38 unit/four affected browser regressions but its strict pixel audit fails427 pose/band pairs; details in review/ANIMATION_AUDIT.md. Never propagate failed or unapproved candidates.
-2. Correct the pose-attached damage overlays and replace generic articulation/contact assumptions with authored per-asset landmarks; follow review/ANIMATION_AUDIT.md. Review the new mobile/Sentry/support animation and audio candidates in actual tutorial combat. Gate1 approval does not approve them. Apply requested candidate corrections before any roster propagation.
-3. Measure physical tablet motion, all speeds, readability, input, audio and interruption behavior. Keep Android/TalkBack checks separate from desktop emulation.
-4. Gate3 dependency: implement ordinary campaign receipts/results, persistent injury/repair/restoration, rewards/XP/progression and complete backup/recovery. Keep Tutorial Practice separate and preserve all later content.
+1. Gate2 refinement passes46 unit tests, the full19 production-browser suite,
+   and strict actual-runtime pixel checks across1,792 pose/band pairs. Raw idle
+   source overlays retain their historical427 mismatches and are not used
+   directly on moving poses. See review/ANIMATION_REFINEMENT.md.
+2. Replace remaining generic articulation with explicit per-asset joints,
+   foot/contact and weapon/tool sockets; review source design/keyposes before
+   propagating to the roster. The four-key Rifle guide is not a runtime sheet.
+   Validate moving-and-firing blending, eight directions and downed weight.
+3. Measure physical tablet motion, all speeds, readability, input, audio and
+   interruption behavior. Keep Android/TalkBack checks separate from desktop.
+4. Implement Gate3 campaign receipts/results, persistent injury/repair/restoration,
+   rewards/XP/progression and complete backup/recovery; retain practice isolation.
+   Tutorial role/injury comparisons are evidence, not full-roster/economy balance.
 
 Full wizard/menus, advanced roster directions, all animation families and final full role-icon/accessibility audit remain required at their dependent gates, not certified by the Gate 1 foundation. Physical-device release remains Gate 8.
