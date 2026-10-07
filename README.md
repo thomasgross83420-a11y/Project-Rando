@@ -9,6 +9,8 @@ currently contains only the original repository introduction. Start with the
 available reference files, verification, and the next development step.
 The [current review download guide](docs/review/CURRENT_REVIEW_DELIVERY.md)
 provides a mobile-readable PDF and the complete visual/audio review ZIP.
+The subsequent [animation audit](docs/review/ANIMATION_AUDIT.md) records timing
+fixes, unresolved art defects, and the per-asset quality checks.
 
 Development follows the [unchanged authoritative blueprint](docs/blueprint/Resonance_Bastion_Browser_Blueprint_Final.md).
 See [implementation status](docs/STATUS.md), [task queue](docs/TASKS.md),

@@ -35,3 +35,22 @@ Android compatibility, performance or artistic approval. Status remains
 ## VIS002 — conditional foundation approval and Gate2 candidate boundary
 
 User approved rb-lighting-r1 foundation and Core/Sentry/Barricade language, four-view basis, pixel detail, dimensionality, foundational palette and placement-feedback direction. Exact scope: review/USER_VISUAL_APPROVAL.md. This supersedes VIS001's pending status for the foundation only. New Rifle/Runner alternate views use coherent original references instead of the procedural diagnostics. Runner cyan remains unchanged; hostile diamond/cross, outline, silhouette/motion and named inspection combine identity cues. Combat candidates and animation sets remain Awaiting User Review; no mass propagation. No gameplay tuning, rewards or economy formula was changed.
+
+## ANIM003 — authored timeline consistency and explicit quality audit
+
+2026-10-07 user requires natural/detailed/accurate asset-specific animation and
+heavy scrutiny, with Lenovo Tab M10 FHD Plus optimization preserving game scope.
+Before: effect playback used 4 ticks/frame and a 20-tick lifetime despite authored
+5-tick frames; explosion frame 5 was unreachable. Hit playback cut a 16-tick authored
+sequence at 15 ticks. After: compile/sampling uses actual manifest timings; death
+holds its terminal pose, reduced effects preserve lifetime, and effect object IDs
+include kind. Existing actors retain their pose selection/state priority, except
+the corrected hit display duration. Action/contact anatomy is not certified.
+
+Compatibility: application 0.2.1-animation-audit / animation clock v2. No atlas/source
+art, simulation/content/generator/economy/save-schema or gameplay tuning change;
+no save migration. The prior 0.2.0 review files remain a labeled earlier snapshot.
+All 1,246 frame IDs / 401 timelines are covered by technical checks. Pixel audit exposes
+427 pose/band overlay mismatch cases; generic articulation and socket/phase authoring
+remain open before final acceptance/roster propagation. See review/ANIMATION_AUDIT.md
+and DEVICE_TARGET.md; no full-art approval or physical-device performance claim.

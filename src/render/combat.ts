@@ -5,6 +5,7 @@ import type { Battle, Entity } from '../sim/battle';
 import { direction, U } from '../sim/fixed';
 import { project } from './projection';
 import type { WorldView } from './world';
+import { actorAnimationFrame, eventAnimationFrame } from './animation';
 type Frame = (typeof art.frames)[number];
 const frames = new Map(art.frames.map((f) => [f.key, f]));
 export class CombatRenderer {
@@ -64,58 +65,7 @@ export class CombatRenderer {
     return sprite;
   }
   private frame(e: Entity, b: Battle): Frame {
-    const mobile = combat[e.type].radius > 0,
-      face = (Math.floor((e.heading + 4096) / 8192) + 1 + this.view.camera.view * 2) % 8,
-      pose =
-        mobile || e.type === 'friendly.sentry' ? `face${face}` : `view${this.view.camera.view}`;
-    let state = 'idle',
-      count = 4,
-      interval = 10,
-      start = 0;
-    if (e.hp === 0) {
-      state = mobile ? 'incapacitated' : 'wreck';
-      count = mobile ? 6 : 1;
-      interval = 6;
-      start = e.deadTick ?? b.tick;
-    } else if (e.cast || e.dash || e.lastAbility > b.tick - 20) {
-      state = 'ability';
-      count = 4;
-      interval = 5;
-      start = e.cast ? e.cast.release - 12 : e.lastAbility;
-    } else if (e.lastAction > b.tick - (mobile ? 30 : 20) && combat[e.type].weapon) {
-      state = 'attack';
-      count = mobile ? 6 : 4;
-      interval = 5;
-      start = e.lastAction;
-    } else if (e.lastHit > b.tick - 15) {
-      state = 'hit';
-      count = 2;
-      interval = 8;
-      start = e.lastHit;
-    } else if (e.state === 'Channeling') {
-      state = 'channel';
-      count = 4;
-      interval = 5;
-    } else if (mobile && e.lastMove >= b.tick - 2) {
-      state = 'move';
-      count = 8;
-      interval = 6;
-    } else if (mobile && e.state === 'Aiming') {
-      state = 'aim';
-      count = 1;
-    }
-    const i =
-        this.reduced && state !== 'move'
-          ? e.hp === 0
-            ? count - 1
-            : 0
-          : e.hp === 0
-            ? Math.min(count - 1, Math.floor(Math.max(0, b.tick - start) / interval))
-            : Math.floor(Math.max(0, b.tick - start) / interval) % count,
-      key = `${e.type}.${pose}.${state}.${i}`,
-      f = frames.get(key);
-    if (!f) throw new Error(`Missing actual animation ${key}`);
-    return f;
+    return actorAnimationFrame(e, b.tick, this.view.camera.view, this.reduced);
   }
   draw(
     b: Battle,
@@ -414,20 +364,14 @@ export class CombatRenderer {
           })(),
         );
     }
-    for (const event of b.events.filter(
-      (e) =>
-        e.visible && b.tick - e.tick < 20 && ['impact', 'explosion', 'ability'].includes(e.kind),
-    )) {
-      const kind =
-          event.kind === 'explosion' ? 'explosion' : event.kind === 'ability' ? 'shield' : 'impact',
-        frame = this.reduced
-          ? 0
-          : Math.min(kind === 'explosion' ? 5 : 3, Math.floor((b.tick - event.tick) / 4)),
-        f = frames.get(`fx.${kind}.${frame}`),
-        p = project({ x: event.x / U, y: event.y / U }, c);
+    for (const event of b.events) {
+      if (!event.visible) continue;
+      const f = eventAnimationFrame(event, b.tick, this.reduced);
+      if (!f) continue;
+      const p = project({ x: event.x / U, y: event.y / U }, c);
       if (f)
         this.image(
-          `effect.${event.tick}.${event.source}.${event.target}`,
+          `effect.${event.kind}.${event.tick}.${event.source}.${event.target}`,
           f,
           p.x,
           p.y,

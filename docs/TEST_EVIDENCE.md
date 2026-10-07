@@ -286,3 +286,53 @@ outputs use /workspace/shared/downloads and durable repository download links.
 No runtime dependency, lockfile, blueprint, game or save-schema change. Existing
 29unit/19production-browser verification is not a new run. No creative approval,
 physical-device certification or playable deployment is inferred.
+
+## Animation timing and quality audit — 2026-10-07
+
+User identified Lenovo Tab M10 FHD Plus and required optimization that preserves
+game scope, with detailed, natural and accurate animation scrutinized per asset.
+Recorded in DEVICE_TARGET.md and review/ANIMATION_AUDIT.md. Application build
+0.2.1-animation-audit; source art/atlas, blueprint, simulation/content/generator,
+economy, dependencies/lockfile and save schemas unchanged.
+
+Corrected renderer timing to sample authored durations. Six-frame explosion now
+reaches its last frame at ages25–29 and expires at30; impact/shield expire at20.
+Hit sequence remains visible at age15 of16. Reduced effects share the same
+duration; terminal actor poses clamp; event object keys include event kind.
+Compiled timelines reject missing/gapped/invalid durations. Rendering remains
+read-only with respect to authoritative combat.
+
+Fresh `npm run verify` passed types/lint,38 unit tests/nine files, Gate0 scenario
+and production build. Existing12 informational lint notices and upstream Zod/
+Phaser build warnings remain. Tests check all1246 authored IDs/401 timelines,
+unequal durations, exact frame boundaries/expiry, projected principal facings
+through four cameras, static views, death priority, support/Warden state cues,
+reduced effects and unchanged authoritative snapshot hash. These are technical
+checks; they do not certify natural anatomy or correct contact/release phases.
+
+Focused production browser command:
+`npm run test:browser -- tests/browser/gate2.spec.ts tests/browser/gate2-accessibility.spec.ts`.
+Final run4/4 passed in1.8min: actual enabled/muted autonomous victories have equal
+hashes; pause/restart, native saved terminal/discard/reload, result abort/retry,
+writer takeover, injected background handling and keyboard audio persistence pass.
+Initial run3/4 failed at final Continue because the test reloaded before discard
+acknowledgement: hidden account text still showed600. Application discard already
+awaits native transaction completion. Test now waits for visible preparation and
+independently verifies the IndexedDB practice journal is absent before reloading.
+No arbitrary delay or application storage change was introduced. That corrected
+test passed; the failed attempt is not certified. The prior full19-browser suite
+is baseline evidence, not a new19-test run after the timing change.
+
+`npm run format:check`, focused Biome check, Python syntax and `git diff --check`
+pass. Focused Biome checks exposed import ordering in the new unit fixture and
+modified browser test; corrected before final checks. `npm run audit:art` explicitly
+**fails with exit1**: atlas/hash/dimension/ID/anchor/frame-order/timing structures
+pass1246frames/401sequences, while427of1280pose/band overlay comparisons fail,
+worst11pixels outside the animated alpha silhouette. Pixel audit reads only;
+no images are edited. Reproducible report: evidence/ANIMATION_AUDIT.json.
+
+Overlay attachment, explicit joint/articulation/contact authoring, cast/release
+continuity and terminal-pose quality remain open before final animation acceptance
+or roster propagation. No subjective natural-motion certification, physical
+Lenovo/Android performance, TalkBack/listening review or public deployment is
+implied. Earlier0.2.0 review files retain their original snapshot/provenance.
