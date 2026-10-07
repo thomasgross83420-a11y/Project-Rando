@@ -1,5 +1,9 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from '@playwright/test';
-import { mkdir, writeFile } from 'node:fs/promises';
+
+const versions = JSON.parse(
+  await readFile(new URL('../docs/versions.json', import.meta.url), 'utf8'),
+);
 
 const out = process.env.RB_REVIEW_DIR ?? '/workspace/shared/Resonance_Bastion_Gate2';
 await mkdir(`${out}/motion-source`, { recursive: true });
@@ -64,6 +68,8 @@ try {
     JSON.stringify(
       {
         browser: version,
+        build: versions.applicationBuild,
+        simulation: versions.simulation,
         source: 'Actual production preview; UI automation only, no injected combat state',
         viewport: { width: 800, height: 1280 },
         speed: '1x',

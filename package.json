@@ -17,7 +17,8 @@
     "test": "vitest run",
     "test:browser": "playwright test",
     "test:scenario": "node --experimental-strip-types scripts/headless.ts",
-    "audit:art": "python3 scripts/audit-combat-art.py --strict",
+    "audit:art": "python3 scripts/audit-combat-art.py && node scripts/check-animation-rendering.mjs",
+    "audit:balance": "vite build --ssr scripts/tutorial-balance.ts --outDir .cache/balance && node scripts/tutorial-balance.mjs",
     "traceability": "node scripts/index-blueprint.mjs",
     "verify": "npm run typecheck && npm run lint && npm run test && npm run test:scenario && npm run build"
   },

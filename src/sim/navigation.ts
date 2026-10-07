@@ -138,10 +138,19 @@ export class Flow {
       dy = Math.floor(b / N) - Math.floor(a / N);
     return neighbors.findIndex((n) => n[0] === dx && n[1] === dy);
   }
-  waypoint(p: Vec): Vec | null {
+  waypoint(p: Vec, alignGoal = false): Vec | null {
     const i = cellIndex(p),
       next = this.parents[i];
     if (!Number.isFinite(this.costs[i])) return null;
+    // A valid cell center does not make every point inside that cell a firing
+    // position. Finish the short alignment when the caller needs an exact goal.
+    if (
+      alignGoal &&
+      this.costs[i] === 0 &&
+      distance(p, cellPoint(i)) > 12 &&
+      edgeClear(p, cellPoint(i), this.radius, this.solids)
+    )
+      return cellPoint(i);
     if (distance(p, cellPoint(i)) > 220 && edgeClear(p, cellPoint(i), this.radius, this.solids))
       return cellPoint(i);
     return next !== undefined && next >= 0 ? cellPoint(next) : p;

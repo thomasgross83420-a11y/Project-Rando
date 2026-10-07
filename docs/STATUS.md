@@ -21,3 +21,12 @@ checks are separate: 427 pose/overlay mismatch cases remain open, with generic
 articulation and contact/phase authoring still requiring refinement. See
 review/ANIMATION_AUDIT.md and evidence/ANIMATION_AUDIT.json. Lenovo Tab M10 FHD Plus
 is the optimization measurement target; full blueprint scope/detail remains the goal.
+
+2026-10-07 follow-up, build0.2.2: runtime pose-damage attachment resolves the raw
+idle-overlay mismatch (all1,792 actual pose/band pairs checked, zero outside-body
+pixels); original source audit remains historical evidence. Distance-driven gait
+and cast/channel continuity are corrected. Versioned v2 firing routes fix blocked
+cover/corner engagement; retained v1 checkpoints keep their original replay.
+The guided practice Mine is placed on a measured approach route. Full natural
+articulation and per-facing contacts/sockets remain open. See
+review/ANIMATION_REFINEMENT.md for current evidence and review files.

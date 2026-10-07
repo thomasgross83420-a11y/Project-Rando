@@ -336,3 +336,22 @@ continuity and terminal-pose quality remain open before final animation acceptan
 or roster propagation. No subjective natural-motion certification, physical
 Lenovo/Android performance, TalkBack/listening review or public deployment is
 implied. Earlier0.2.0 review files retain their original snapshot/provenance.
+
+## Animation/interaction refinement — 2026-10-07
+
+Build0.2.2, rb-sim-v2: `npm run verify` passes46 tests/11 files, strict types,
+lint, deterministic headless scenario and production build. Full production
+browser suite19/19 passed after renderer/AI fixes; affected guided-practice
+cases rerun after Mine placement. No skipped/retried tests in the full run.
+`npm run audit:art` reports the raw427 idle-source mismatches, then passes
+strict actual compositor checks across1,792 pose/band pairs: outside-body0,
+gutters0, packed pixel mismatch0 and translated material landmarks verified.
+
+`npm run audit:balance` records12 terminal comparisons (11 Victory, expected
+unarmed Inevitable Defeat). Guided fixture:6879 ticks, Core10000,24 kills30TP;
+all five tick groupings agree. Retained-v1 golden replay remains6150 ticks and
+its original hash. The isolated Mine fixture checks full18-tick telegraph,
+single charge, fixed blast position and damage; every canonical grouping checks
+that the newly placed Mine actually warns and hits. Detailed evidence and
+limitations: review/ANIMATION_REFINEMENT.md. The fresh actual-UI video and
+pixel/source sheets accompany the PDF/ZIP; no physical Android claim.

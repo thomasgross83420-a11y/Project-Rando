@@ -67,6 +67,7 @@ export function actorAnimationFrame(
   tick: number,
   view: Camera['view'],
   reduced = false,
+  movePhase?: number,
 ): CombatFrame {
   const mobile = combat[e.type].radius > 0;
   const face = (Math.floor((e.heading + 4096) / 8192) + 1 + view * 2) % 8;
@@ -81,10 +82,11 @@ export function actorAnimationFrame(
     e.cast ||
     e.dash ||
     (e.type === 'warden.bulwark' &&
-      e.lastAbility > tick - animationTimeline(`${prefix}.ability`).duration)
+      e.lastAbility >= 0 &&
+      tick - e.lastAbility < animationTimeline(`${prefix}.ability`).duration - 12)
   ) {
     state = 'ability';
-    start = e.cast ? e.cast.release - 12 : e.lastAbility;
+    start = e.cast ? e.cast.release - 12 : e.lastAbility - 12;
   } else if (
     combat[e.type].weapon &&
     e.lastAction > tick - animationTimeline(`${prefix}.attack`).duration
@@ -96,6 +98,7 @@ export function actorAnimationFrame(
     start = e.lastHit;
   } else if (e.state === 'Channeling') {
     state = 'channel';
+    start = e.channelCommit - 30;
   } else if (mobile && e.lastMove >= tick - 2) {
     state = 'move';
   } else if (mobile && e.state === 'Aiming') {
@@ -103,7 +106,8 @@ export function actorAnimationFrame(
   }
   const timeline = animationTimeline(`${prefix}.${state}`);
   if (reduced && state !== 'move') return e.hp === 0 ? timeline.last : timeline.first;
-  const frame = timeline.sample(tick - start, e.hp === 0 ? 'clamp' : 'loop');
+  const elapsed = state === 'move' && movePhase !== undefined ? movePhase : tick - start;
+  const frame = timeline.sample(elapsed, e.hp === 0 || state === 'ability' ? 'clamp' : 'loop');
   if (!frame) throw new Error('Missing actor frame');
   return frame;
 }

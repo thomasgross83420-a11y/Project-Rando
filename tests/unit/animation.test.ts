@@ -128,15 +128,19 @@ describe('animation behavior and authored contracts', () => {
   it('selects support channel and Warden cast/release/dash cues, with death taking priority', async () => {
     const node = await actor('friendly.repair_node');
     node.state = 'Channeling';
+    node.channelCommit = 30;
     expect(actorAnimationFrame(node, 12, 2).key).toBe('friendly.repair_node.view2.channel.2');
     const warden = await actor('warden.bulwark');
     warden.cast = { ability: 2, release: 112, recipient: 0, point: { x: 0, y: 0 }, heading: 0 };
     expect(actorAnimationFrame(warden, 110, 0).state).toBe('ability');
+    expect(actorAnimationFrame(warden, 111, 0).frame).toBe(2);
     warden.cast = null;
     warden.lastAbility = 112;
-    expect(actorAnimationFrame(warden, 117, 0).frame).toBe(1);
+    expect(actorAnimationFrame(warden, 112, 0).frame).toBe(2);
+    expect(actorAnimationFrame(warden, 117, 0).frame).toBe(3);
     warden.dash = { end: 130, recipient: 1, point: { x: 0, y: 0 }, heading: 0 };
     expect(actorAnimationFrame(warden, 128, 0).state).toBe('ability');
+    expect(actorAnimationFrame(warden, 128, 0).frame).toBe(3);
     warden.hp = 0;
     warden.deadTick = 128;
     expect(actorAnimationFrame(warden, 128, 0).state).toBe('incapacitated');

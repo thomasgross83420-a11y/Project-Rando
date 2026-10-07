@@ -57,3 +57,11 @@ Sentry facing recipe: single-barrel bronze/steel Sentry, square symmetric ground
 RepairNode/Mine recipe: transparent two-row/four-camera sheet, bright bronze/steel stationary wrench/repair machine and small low disc ProximityMine. Four quarter-turn 2:1 camera views, whole bodies/feet, no text/glow/background. Uneven generated rows are explicitly bounded by inspected crop boxes in generate_combat.py, never blindly sliced as a uniform runtime atlas.
 
 These are reusable production recipes. Exact generated source bytes/hashes and controlled scripts identify the actual reproducible input; further art acceptance must use native atlas and real combat. Model/version is unavailable, and no deterministic regeneration of imagegen output is promised.
+
+## 2026-10-07 Rifle keypose research
+
+A four-key contact/down/passing/up guide was generated from the existing Rifle
+reference, preserved unchanged, and remains outside runtime atlases. See
+[source provenance](../assets/source/combat/studies/provenance.md). It still needs
+aligned eight-frame/eight-direction authoring, equipment and contact scrutiny,
+and actual combat review. The earlier repeated-pose study was rejected.

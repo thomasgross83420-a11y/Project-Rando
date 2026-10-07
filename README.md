@@ -11,6 +11,9 @@ The [current review download guide](docs/review/CURRENT_REVIEW_DELIVERY.md)
 provides a mobile-readable PDF and the complete visual/audio review ZIP.
 The subsequent [animation audit](docs/review/ANIMATION_AUDIT.md) records timing
 fixes, unresolved art defects, and the per-asset quality checks.
+The [animation refinement review](docs/review/ANIMATION_REFINEMENT.md) is the latest
+checkpoint, with pose attachment, movement/action fixes and measured tutorial comparisons.
+Its [PDF, video and ZIP downloads](docs/review/REFINEMENT_DELIVERY.md) are suitable for mobile review.
 
 Development follows the [unchanged authoritative blueprint](docs/blueprint/Resonance_Bastion_Browser_Blueprint_Final.md).
 See [implementation status](docs/STATUS.md), [task queue](docs/TASKS.md),

@@ -152,6 +152,34 @@ describe('observable autonomous combat contracts', () => {
     steps(c, 12);
     expect(c.projectiles.some((p) => p.source === warm.id)).toBe(false);
   });
+  it('a detected mine trigger consumes one charge, preserves the full telegraph, and blasts at its fixed position', async () => {
+    const b = await Battle.create(
+      tutorialArmy().filter((a) => a.type === 'friendly.proximity_mine'),
+    );
+    steps(b, 601);
+    const mine = required(b.entities.find((e) => e.type === 'friendly.proximity_mine')),
+      runner = required(b.entities.find((e) => e.team === 'hostile' && e.hp > 0)),
+      charges = mine.charges;
+    let trigger = 0;
+    for (let i = 0; i < 30 && mine.mineDue === null; i++) {
+      runner.x = mine.x - U / 2;
+      runner.y = mine.y;
+      runner.goal = null;
+      b.step();
+      if (mine.mineDue !== null) trigger = b.tick;
+    }
+    expect(mine.mineDue).toBe(trigger + 18);
+    expect(mine.charges).toBe(charges - 1);
+    expect(b.events.some((e) => e.kind === 'mine-warning' && e.tick === trigger)).toBe(true);
+    steps(b, 17);
+    expect(b.events.some((e) => e.kind === 'explosion')).toBe(false);
+    b.step();
+    const blast = required(b.events.find((e) => e.kind === 'explosion'));
+    expect(blast.tick).toBe(trigger + 18);
+    expect([blast.x, blast.y]).toEqual([mine.x, mine.y]);
+    expect(runner.hp).toBe(0);
+    expect(mine.charges).toBe(charges - 1);
+  });
   it('victory waits for future packets and a hostile projectile; Core death takes precedence', async () => {
     const b = await Battle.create(tutorialArmy());
     steps(b, 600);

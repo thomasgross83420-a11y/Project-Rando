@@ -8,7 +8,7 @@ export function tutorialArmy(): StartAsset[] {
     ['warden.bulwark', 29, 33, 2],
     ['friendly.repair_node', 25, 34, 2],
     ['friendly.standard_barricade', 22, 26, 1],
-    ['friendly.proximity_mine', 22, 30, 1],
+    ['friendly.proximity_mine', 18, 24, 1],
   ].map((v, i) => {
     const [type, x, y, width] = v as [keyof typeof combat, number, number, number];
     return {
