@@ -85,7 +85,10 @@ The user supplied `Resonance_Bastion_Browser_Blueprint_Final.md` and
 
 This original uploaded ZIP is retained intentionally to avoid losing the
 historical visual comparison when a conversation is unavailable. Newly generated
-review captures and build outputs continue to stay outside Git.
+review intermediates and build outputs continue to stay outside Git. The user
+subsequently requested a current review file; the finished PDF and media ZIP
+are retained explicitly for that delivery, with checksums and reproduction in
+[CURRENT_REVIEW_DELIVERY.md](review/CURRENT_REVIEW_DELIVERY.md).
 
 ## Recovered state
 

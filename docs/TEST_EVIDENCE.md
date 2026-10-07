@@ -265,3 +265,24 @@ pre-closeout review, not the latest tutorial; no new approval or gameplay change
 is inferred. The original ZIP is preserved unchanged in docs/reference; its
 checksum and chronology are recorded in PROJECT_RECOVERY.md. No gameplay tests
 were repeated for this reference/documentation addition.
+
+### Current review file delivery — 2026-10-07
+
+User requested a current-state review file and the remaining feedback questions.
+See review/CURRENT_REVIEW_DELIVERY.md for output inventory/checksums/reproduction.
+The19-page PDF contains status/questions,10current runtime screenshots,6atlas
+sheets and18audio links. The complete ZIP adds4movement GIFs,18original WAVs,
+51.08-second actual production-preview H.264 video and metadata/inventory.
+Live capture reaches tick2697 with41samples/no application errors; video has
+no recorded system audio and makes no Android performance claim. New script
+format/lint/Python syntax, PDF parsing/image/link counts, ZIP integrity/every
+inventory checksum/original audio hashes and updated local-gallery checks pass.
+PDF first/final pages and an actual video frame were visually inspected.
+ReportLab4.4.9/BSD metadata renders documents; PyMuPDF1.26.6 inspected the PDF;
+system FFmpeg7.1.5 converted video, with pinned Playwright FFmpeg1011 for capture.
+Initial motion attempt needed the absent helper; after its supported installation
+the capture passed. Default /mnt/data delivery was not writable on this worker;
+outputs use /workspace/shared/downloads and durable repository download links.
+No runtime dependency, lockfile, blueprint, game or save-schema change. Existing
+29unit/19production-browser verification is not a new run. No creative approval,
+physical-device certification or playable deployment is inferred.
