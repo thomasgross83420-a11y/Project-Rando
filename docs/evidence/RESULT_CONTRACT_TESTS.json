@@ -1,0 +1,41 @@
+{
+  "build": "0.2.4-campaign-result-contracts",
+  "scope": "Staged transaction framework and pure kernels; no live normal campaign payout adapter",
+  "unit": {
+    "passed": 87,
+    "files": 18
+  },
+  "browser": {
+    "passed": 34,
+    "failed": 0,
+    "ordinaryRunFixtures": 8,
+    "skipped": 0,
+    "retries": 0,
+    "minutes": 3.8
+  },
+  "firstBrowserRun": {
+    "passed": 33,
+    "failed": 1,
+    "reason": "Navigation HTTP 404 caused by launch overlapping production rebuild; invalid launch, then complete stable rerun"
+  },
+  "syntheticRewardFixture": {
+    "adapter": "foundation-transaction-fixture-v1",
+    "credits": 37,
+    "gameplayReward": false
+  },
+  "sources": {
+    "src/data/progression.json": "0e6dde7ed7dc07d30ff0d069142ab0c06953de1ab3171b5fdeaaf08cae7b686f",
+    "src/progression/allocation.ts": "e8ea73294f03a312eccfab2a8faea519f2d66f7a2047883c2f0489dae5d7a12a",
+    "src/progression/growth.ts": "30e32adef9c69009a98edd25b1b0b4d39375ce35c308b2472ee5b561614a2695",
+    "src/economy/recovery.ts": "6235abdc2cac53b996602c1d855001c786d97146715ee7ee3f25599e6a348d54",
+    "src/persistence/run-journal.ts": "996692fa0a1fc77a68174dc0197f3f60dbb03d9aeef010d6718d7b65eb3f1eef",
+    "tests/fixtures/run-rules.ts": "f33fe1b291a6a59d6ebbd38b47bfa3987b89df8dea6f1e3d032349d7e650de2b",
+    "docs/blueprint/Resonance_Bastion_Browser_Blueprint_Final.md": "9808229593b79b856f8f522dcffba591debe6334a3f60a61d1915cdd5e2900a6"
+  },
+  "logSHA256": {
+    "verify": "9232fdc77b19d9bb30c25390ddd3718e20c8b54f997afcfdd7d72267028ae6f4",
+    "browserStable": "97a089fff4c8fa0ec999beab42b4609083f672495b53c357828e7d50d452212d"
+  },
+  "physicalAndroidVerified": false,
+  "accuracyEquationApproved": false
+}

@@ -38,3 +38,11 @@ movement is independent of eight sprite facings. Current-slice Data Management
 now supports complete checksummed backup/import and fenced rollback/deletion.
 Exact reward arithmetic remains disconnected from practice/campaign payouts.
 See review/OMNIDIRECTIONAL_RECOVERY.md, RECOVERY_CONTRACT.md and ECONOMY_POLICY.md.
+
+2026-10-07 build 0.2.4: ordinary-run transaction framework passes interrupted,
+failed and uncertain-acknowledgment fixtures. Pinned rank/asset thresholds, exact
+XP allocation, specified growth and body/stock price quotes are verified kernels.
+No production paid-run adapter, widened campaign save profile or new encounter
+launch is enabled. Accuracy-growth equation is absent from the blueprint and
+awaits the user's response; no inferred formula is applied. See
+review/CAMPAIGN_RESULT_CONTRACTS.md and RUN_RESULT_CONTRACT.md.

@@ -1,0 +1,932 @@
+{
+  "build": "0.2.4-campaign-result-contracts",
+  "scope": "Pure arithmetic and synthetic protocol fixtures; no live campaign rewards or stat changes",
+  "thresholdPolicy": "progression.thresholds-v1",
+  "rankCostCount": 99,
+  "assetThresholdCount": 100,
+  "assetXPCap": 78498,
+  "conservedPermutationCases": 512,
+  "accuracyGrowth": "Unspecified by blueprint; linear +5 percentage-point proposal awaits user input",
+  "growth": [
+    {
+      "level": 1,
+      "enhancement": 0,
+      "maximumIntegrity": 1200,
+      "woundedIntegrity": 1100,
+      "damage": 40,
+      "rangeGU": 8,
+      "intervalTicks": 48
+    },
+    {
+      "level": 2,
+      "enhancement": 0,
+      "maximumIntegrity": 1208.484375,
+      "woundedIntegrity": 1108.484375,
+      "damage": 40.2421875,
+      "rangeGU": 8.01171875,
+      "intervalTicks": 48
+    },
+    {
+      "level": 3,
+      "enhancement": 0,
+      "maximumIntegrity": 1216.9697265625,
+      "woundedIntegrity": 1116.9697265625,
+      "damage": 40.484375,
+      "rangeGU": 8.0244140625,
+      "intervalTicks": 48
+    },
+    {
+      "level": 4,
+      "enhancement": 0,
+      "maximumIntegrity": 1225.4541015625,
+      "woundedIntegrity": 1125.4541015625,
+      "damage": 40.7275390625,
+      "rangeGU": 8.0361328125,
+      "intervalTicks": 48
+    },
+    {
+      "level": 5,
+      "enhancement": 0,
+      "maximumIntegrity": 1233.939453125,
+      "woundedIntegrity": 1133.939453125,
+      "damage": 40.9697265625,
+      "rangeGU": 8.048828125,
+      "intervalTicks": 48
+    },
+    {
+      "level": 6,
+      "enhancement": 0,
+      "maximumIntegrity": 1242.423828125,
+      "woundedIntegrity": 1142.423828125,
+      "damage": 41.2119140625,
+      "rangeGU": 8.060546875,
+      "intervalTicks": 47
+    },
+    {
+      "level": 7,
+      "enhancement": 0,
+      "maximumIntegrity": 1250.9091796875,
+      "woundedIntegrity": 1150.9091796875,
+      "damage": 41.4541015625,
+      "rangeGU": 8.072265625,
+      "intervalTicks": 47
+    },
+    {
+      "level": 8,
+      "enhancement": 0,
+      "maximumIntegrity": 1259.3935546875,
+      "woundedIntegrity": 1159.3935546875,
+      "damage": 41.697265625,
+      "rangeGU": 8.0849609375,
+      "intervalTicks": 47
+    },
+    {
+      "level": 9,
+      "enhancement": 0,
+      "maximumIntegrity": 1267.87890625,
+      "woundedIntegrity": 1167.87890625,
+      "damage": 41.939453125,
+      "rangeGU": 8.0966796875,
+      "intervalTicks": 47
+    },
+    {
+      "level": 10,
+      "enhancement": 1,
+      "maximumIntegrity": 1314.654296875,
+      "woundedIntegrity": 1214.654296875,
+      "damage": 43.447265625,
+      "rangeGU": 8.109375,
+      "intervalTicks": 47
+    },
+    {
+      "level": 11,
+      "enhancement": 1,
+      "maximumIntegrity": 1323.3935546875,
+      "woundedIntegrity": 1223.3935546875,
+      "damage": 43.697265625,
+      "rangeGU": 8.12109375,
+      "intervalTicks": 47
+    },
+    {
+      "level": 12,
+      "enhancement": 1,
+      "maximumIntegrity": 1332.1337890625,
+      "woundedIntegrity": 1232.1337890625,
+      "damage": 43.9462890625,
+      "rangeGU": 8.1337890625,
+      "intervalTicks": 47
+    },
+    {
+      "level": 13,
+      "enhancement": 1,
+      "maximumIntegrity": 1340.873046875,
+      "woundedIntegrity": 1240.873046875,
+      "damage": 44.1962890625,
+      "rangeGU": 8.1455078125,
+      "intervalTicks": 47
+    },
+    {
+      "level": 14,
+      "enhancement": 1,
+      "maximumIntegrity": 1349.6123046875,
+      "woundedIntegrity": 1249.6123046875,
+      "damage": 44.4462890625,
+      "rangeGU": 8.1572265625,
+      "intervalTicks": 46
+    },
+    {
+      "level": 15,
+      "enhancement": 1,
+      "maximumIntegrity": 1358.3515625,
+      "woundedIntegrity": 1258.3515625,
+      "damage": 44.6953125,
+      "rangeGU": 8.169921875,
+      "intervalTicks": 46
+    },
+    {
+      "level": 16,
+      "enhancement": 1,
+      "maximumIntegrity": 1367.0908203125,
+      "woundedIntegrity": 1267.0908203125,
+      "damage": 44.9453125,
+      "rangeGU": 8.181640625,
+      "intervalTicks": 46
+    },
+    {
+      "level": 17,
+      "enhancement": 1,
+      "maximumIntegrity": 1375.830078125,
+      "woundedIntegrity": 1275.830078125,
+      "damage": 45.1953125,
+      "rangeGU": 8.1943359375,
+      "intervalTicks": 46
+    },
+    {
+      "level": 18,
+      "enhancement": 1,
+      "maximumIntegrity": 1384.5693359375,
+      "woundedIntegrity": 1284.5693359375,
+      "damage": 45.4453125,
+      "rangeGU": 8.2060546875,
+      "intervalTicks": 46
+    },
+    {
+      "level": 19,
+      "enhancement": 1,
+      "maximumIntegrity": 1393.3095703125,
+      "woundedIntegrity": 1293.3095703125,
+      "damage": 45.6943359375,
+      "rangeGU": 8.2177734375,
+      "intervalTicks": 46
+    },
+    {
+      "level": 20,
+      "enhancement": 2,
+      "maximumIntegrity": 1442.884765625,
+      "woundedIntegrity": 1342.884765625,
+      "damage": 47.2822265625,
+      "rangeGU": 8.23046875,
+      "intervalTicks": 46
+    },
+    {
+      "level": 21,
+      "enhancement": 2,
+      "maximumIntegrity": 1451.87890625,
+      "woundedIntegrity": 1351.87890625,
+      "damage": 47.5390625,
+      "rangeGU": 8.2421875,
+      "intervalTicks": 46
+    },
+    {
+      "level": 22,
+      "enhancement": 2,
+      "maximumIntegrity": 1460.873046875,
+      "woundedIntegrity": 1360.873046875,
+      "damage": 47.7958984375,
+      "rangeGU": 8.2548828125,
+      "intervalTicks": 46
+    },
+    {
+      "level": 23,
+      "enhancement": 2,
+      "maximumIntegrity": 1469.8662109375,
+      "woundedIntegrity": 1369.8662109375,
+      "damage": 48.0537109375,
+      "rangeGU": 8.2666015625,
+      "intervalTicks": 45
+    },
+    {
+      "level": 24,
+      "enhancement": 2,
+      "maximumIntegrity": 1478.8603515625,
+      "woundedIntegrity": 1378.8603515625,
+      "damage": 48.310546875,
+      "rangeGU": 8.2783203125,
+      "intervalTicks": 45
+    },
+    {
+      "level": 25,
+      "enhancement": 2,
+      "maximumIntegrity": 1487.8544921875,
+      "woundedIntegrity": 1387.8544921875,
+      "damage": 48.5673828125,
+      "rangeGU": 8.291015625,
+      "intervalTicks": 45
+    },
+    {
+      "level": 26,
+      "enhancement": 2,
+      "maximumIntegrity": 1496.8486328125,
+      "woundedIntegrity": 1396.8486328125,
+      "damage": 48.82421875,
+      "rangeGU": 8.302734375,
+      "intervalTicks": 45
+    },
+    {
+      "level": 27,
+      "enhancement": 2,
+      "maximumIntegrity": 1505.8427734375,
+      "woundedIntegrity": 1405.8427734375,
+      "damage": 49.0810546875,
+      "rangeGU": 8.3154296875,
+      "intervalTicks": 45
+    },
+    {
+      "level": 28,
+      "enhancement": 2,
+      "maximumIntegrity": 1514.8359375,
+      "woundedIntegrity": 1414.8359375,
+      "damage": 49.337890625,
+      "rangeGU": 8.3271484375,
+      "intervalTicks": 45
+    },
+    {
+      "level": 29,
+      "enhancement": 2,
+      "maximumIntegrity": 1523.830078125,
+      "woundedIntegrity": 1423.830078125,
+      "damage": 49.5947265625,
+      "rangeGU": 8.33984375,
+      "intervalTicks": 45
+    },
+    {
+      "level": 30,
+      "enhancement": 3,
+      "maximumIntegrity": 1576.2060546875,
+      "woundedIntegrity": 1476.2060546875,
+      "damage": 51.2626953125,
+      "rangeGU": 8.3515625,
+      "intervalTicks": 45
+    },
+    {
+      "level": 31,
+      "enhancement": 3,
+      "maximumIntegrity": 1585.4541015625,
+      "woundedIntegrity": 1485.4541015625,
+      "damage": 51.52734375,
+      "rangeGU": 8.36328125,
+      "intervalTicks": 45
+    },
+    {
+      "level": 32,
+      "enhancement": 3,
+      "maximumIntegrity": 1594.703125,
+      "woundedIntegrity": 1494.703125,
+      "damage": 51.7919921875,
+      "rangeGU": 8.3759765625,
+      "intervalTicks": 45
+    },
+    {
+      "level": 33,
+      "enhancement": 3,
+      "maximumIntegrity": 1603.951171875,
+      "woundedIntegrity": 1503.951171875,
+      "damage": 52.0556640625,
+      "rangeGU": 8.3876953125,
+      "intervalTicks": 44
+    },
+    {
+      "level": 34,
+      "enhancement": 3,
+      "maximumIntegrity": 1613.2001953125,
+      "woundedIntegrity": 1513.2001953125,
+      "damage": 52.3203125,
+      "rangeGU": 8.400390625,
+      "intervalTicks": 44
+    },
+    {
+      "level": 35,
+      "enhancement": 3,
+      "maximumIntegrity": 1622.4482421875,
+      "woundedIntegrity": 1522.4482421875,
+      "damage": 52.583984375,
+      "rangeGU": 8.412109375,
+      "intervalTicks": 44
+    },
+    {
+      "level": 36,
+      "enhancement": 3,
+      "maximumIntegrity": 1631.697265625,
+      "woundedIntegrity": 1531.697265625,
+      "damage": 52.8486328125,
+      "rangeGU": 8.423828125,
+      "intervalTicks": 44
+    },
+    {
+      "level": 37,
+      "enhancement": 3,
+      "maximumIntegrity": 1640.9453125,
+      "woundedIntegrity": 1540.9453125,
+      "damage": 53.1123046875,
+      "rangeGU": 8.4365234375,
+      "intervalTicks": 44
+    },
+    {
+      "level": 38,
+      "enhancement": 3,
+      "maximumIntegrity": 1650.1943359375,
+      "woundedIntegrity": 1550.1943359375,
+      "damage": 53.376953125,
+      "rangeGU": 8.4482421875,
+      "intervalTicks": 44
+    },
+    {
+      "level": 39,
+      "enhancement": 3,
+      "maximumIntegrity": 1659.4423828125,
+      "woundedIntegrity": 1559.4423828125,
+      "damage": 53.6416015625,
+      "rangeGU": 8.4609375,
+      "intervalTicks": 44
+    },
+    {
+      "level": 40,
+      "enhancement": 4,
+      "maximumIntegrity": 1714.6181640625,
+      "woundedIntegrity": 1614.6181640625,
+      "damage": 55.388671875,
+      "rangeGU": 8.47265625,
+      "intervalTicks": 44
+    },
+    {
+      "level": 41,
+      "enhancement": 4,
+      "maximumIntegrity": 1724.12109375,
+      "woundedIntegrity": 1624.12109375,
+      "damage": 55.66015625,
+      "rangeGU": 8.484375,
+      "intervalTicks": 44
+    },
+    {
+      "level": 42,
+      "enhancement": 4,
+      "maximumIntegrity": 1733.6240234375,
+      "woundedIntegrity": 1633.6240234375,
+      "damage": 55.931640625,
+      "rangeGU": 8.4970703125,
+      "intervalTicks": 43
+    },
+    {
+      "level": 43,
+      "enhancement": 4,
+      "maximumIntegrity": 1743.126953125,
+      "woundedIntegrity": 1643.126953125,
+      "damage": 56.2041015625,
+      "rangeGU": 8.5087890625,
+      "intervalTicks": 43
+    },
+    {
+      "level": 44,
+      "enhancement": 4,
+      "maximumIntegrity": 1752.6298828125,
+      "woundedIntegrity": 1652.6298828125,
+      "damage": 56.4755859375,
+      "rangeGU": 8.521484375,
+      "intervalTicks": 43
+    },
+    {
+      "level": 45,
+      "enhancement": 4,
+      "maximumIntegrity": 1762.1337890625,
+      "woundedIntegrity": 1662.1337890625,
+      "damage": 56.7470703125,
+      "rangeGU": 8.533203125,
+      "intervalTicks": 43
+    },
+    {
+      "level": 46,
+      "enhancement": 4,
+      "maximumIntegrity": 1771.63671875,
+      "woundedIntegrity": 1671.63671875,
+      "damage": 57.0185546875,
+      "rangeGU": 8.5458984375,
+      "intervalTicks": 43
+    },
+    {
+      "level": 47,
+      "enhancement": 4,
+      "maximumIntegrity": 1781.1396484375,
+      "woundedIntegrity": 1681.1396484375,
+      "damage": 57.2900390625,
+      "rangeGU": 8.5576171875,
+      "intervalTicks": 43
+    },
+    {
+      "level": 48,
+      "enhancement": 4,
+      "maximumIntegrity": 1790.642578125,
+      "woundedIntegrity": 1690.642578125,
+      "damage": 57.5615234375,
+      "rangeGU": 8.5693359375,
+      "intervalTicks": 43
+    },
+    {
+      "level": 49,
+      "enhancement": 4,
+      "maximumIntegrity": 1800.1455078125,
+      "woundedIntegrity": 1700.1455078125,
+      "damage": 57.8330078125,
+      "rangeGU": 8.58203125,
+      "intervalTicks": 43
+    },
+    {
+      "level": 50,
+      "enhancement": 5,
+      "maximumIntegrity": 1858.12109375,
+      "woundedIntegrity": 1758.12109375,
+      "damage": 59.66015625,
+      "rangeGU": 8.59375,
+      "intervalTicks": 43
+    },
+    {
+      "level": 51,
+      "enhancement": 5,
+      "maximumIntegrity": 1867.87890625,
+      "woundedIntegrity": 1767.87890625,
+      "damage": 59.939453125,
+      "rangeGU": 8.6064453125,
+      "intervalTicks": 43
+    },
+    {
+      "level": 52,
+      "enhancement": 5,
+      "maximumIntegrity": 1877.63671875,
+      "woundedIntegrity": 1777.63671875,
+      "damage": 60.2177734375,
+      "rangeGU": 8.6181640625,
+      "intervalTicks": 43
+    },
+    {
+      "level": 53,
+      "enhancement": 5,
+      "maximumIntegrity": 1887.3935546875,
+      "woundedIntegrity": 1787.3935546875,
+      "damage": 60.4970703125,
+      "rangeGU": 8.6298828125,
+      "intervalTicks": 42
+    },
+    {
+      "level": 54,
+      "enhancement": 5,
+      "maximumIntegrity": 1897.1513671875,
+      "woundedIntegrity": 1797.1513671875,
+      "damage": 60.775390625,
+      "rangeGU": 8.642578125,
+      "intervalTicks": 42
+    },
+    {
+      "level": 55,
+      "enhancement": 5,
+      "maximumIntegrity": 1906.9091796875,
+      "woundedIntegrity": 1806.9091796875,
+      "damage": 61.0546875,
+      "rangeGU": 8.654296875,
+      "intervalTicks": 42
+    },
+    {
+      "level": 56,
+      "enhancement": 5,
+      "maximumIntegrity": 1916.6669921875,
+      "woundedIntegrity": 1816.6669921875,
+      "damage": 61.3330078125,
+      "rangeGU": 8.6669921875,
+      "intervalTicks": 42
+    },
+    {
+      "level": 57,
+      "enhancement": 5,
+      "maximumIntegrity": 1926.423828125,
+      "woundedIntegrity": 1826.423828125,
+      "damage": 61.6123046875,
+      "rangeGU": 8.6787109375,
+      "intervalTicks": 42
+    },
+    {
+      "level": 58,
+      "enhancement": 5,
+      "maximumIntegrity": 1936.181640625,
+      "woundedIntegrity": 1836.181640625,
+      "damage": 61.890625,
+      "rangeGU": 8.6904296875,
+      "intervalTicks": 42
+    },
+    {
+      "level": 59,
+      "enhancement": 5,
+      "maximumIntegrity": 1945.939453125,
+      "woundedIntegrity": 1845.939453125,
+      "damage": 62.169921875,
+      "rangeGU": 8.703125,
+      "intervalTicks": 42
+    },
+    {
+      "level": 60,
+      "enhancement": 6,
+      "maximumIntegrity": 2006.71484375,
+      "woundedIntegrity": 1906.71484375,
+      "damage": 64.0771484375,
+      "rangeGU": 8.71484375,
+      "intervalTicks": 42
+    },
+    {
+      "level": 61,
+      "enhancement": 6,
+      "maximumIntegrity": 2016.7275390625,
+      "woundedIntegrity": 1916.7275390625,
+      "damage": 64.36328125,
+      "rangeGU": 8.7275390625,
+      "intervalTicks": 42
+    },
+    {
+      "level": 62,
+      "enhancement": 6,
+      "maximumIntegrity": 2026.7392578125,
+      "woundedIntegrity": 1926.7392578125,
+      "damage": 64.6494140625,
+      "rangeGU": 8.7392578125,
+      "intervalTicks": 42
+    },
+    {
+      "level": 63,
+      "enhancement": 6,
+      "maximumIntegrity": 2036.751953125,
+      "woundedIntegrity": 1936.751953125,
+      "damage": 64.935546875,
+      "rangeGU": 8.751953125,
+      "intervalTicks": 42
+    },
+    {
+      "level": 64,
+      "enhancement": 6,
+      "maximumIntegrity": 2046.763671875,
+      "woundedIntegrity": 1946.763671875,
+      "damage": 65.2216796875,
+      "rangeGU": 8.763671875,
+      "intervalTicks": 41
+    },
+    {
+      "level": 65,
+      "enhancement": 6,
+      "maximumIntegrity": 2056.775390625,
+      "woundedIntegrity": 1956.775390625,
+      "damage": 65.5078125,
+      "rangeGU": 8.775390625,
+      "intervalTicks": 41
+    },
+    {
+      "level": 66,
+      "enhancement": 6,
+      "maximumIntegrity": 2066.7880859375,
+      "woundedIntegrity": 1966.7880859375,
+      "damage": 65.7939453125,
+      "rangeGU": 8.7880859375,
+      "intervalTicks": 41
+    },
+    {
+      "level": 67,
+      "enhancement": 6,
+      "maximumIntegrity": 2076.7998046875,
+      "woundedIntegrity": 1976.7998046875,
+      "damage": 66.080078125,
+      "rangeGU": 8.7998046875,
+      "intervalTicks": 41
+    },
+    {
+      "level": 68,
+      "enhancement": 6,
+      "maximumIntegrity": 2086.8125,
+      "woundedIntegrity": 1986.8125,
+      "damage": 66.3662109375,
+      "rangeGU": 8.8125,
+      "intervalTicks": 41
+    },
+    {
+      "level": 69,
+      "enhancement": 6,
+      "maximumIntegrity": 2096.82421875,
+      "woundedIntegrity": 1996.82421875,
+      "damage": 66.65234375,
+      "rangeGU": 8.82421875,
+      "intervalTicks": 41
+    },
+    {
+      "level": 70,
+      "enhancement": 7,
+      "maximumIntegrity": 2160.400390625,
+      "woundedIntegrity": 2060.400390625,
+      "damage": 68.6396484375,
+      "rangeGU": 8.8359375,
+      "intervalTicks": 41
+    },
+    {
+      "level": 71,
+      "enhancement": 7,
+      "maximumIntegrity": 2170.6669921875,
+      "woundedIntegrity": 2070.6669921875,
+      "damage": 68.93359375,
+      "rangeGU": 8.8486328125,
+      "intervalTicks": 41
+    },
+    {
+      "level": 72,
+      "enhancement": 7,
+      "maximumIntegrity": 2180.93359375,
+      "woundedIntegrity": 2080.93359375,
+      "damage": 69.2265625,
+      "rangeGU": 8.8603515625,
+      "intervalTicks": 41
+    },
+    {
+      "level": 73,
+      "enhancement": 7,
+      "maximumIntegrity": 2191.2001953125,
+      "woundedIntegrity": 2091.2001953125,
+      "damage": 69.51953125,
+      "rangeGU": 8.873046875,
+      "intervalTicks": 41
+    },
+    {
+      "level": 74,
+      "enhancement": 7,
+      "maximumIntegrity": 2201.466796875,
+      "woundedIntegrity": 2101.466796875,
+      "damage": 69.8134765625,
+      "rangeGU": 8.884765625,
+      "intervalTicks": 41
+    },
+    {
+      "level": 75,
+      "enhancement": 7,
+      "maximumIntegrity": 2211.7333984375,
+      "woundedIntegrity": 2111.7333984375,
+      "damage": 70.1064453125,
+      "rangeGU": 8.896484375,
+      "intervalTicks": 40
+    },
+    {
+      "level": 76,
+      "enhancement": 7,
+      "maximumIntegrity": 2222,
+      "woundedIntegrity": 2122,
+      "damage": 70.400390625,
+      "rangeGU": 8.9091796875,
+      "intervalTicks": 40
+    },
+    {
+      "level": 77,
+      "enhancement": 7,
+      "maximumIntegrity": 2232.2666015625,
+      "woundedIntegrity": 2132.2666015625,
+      "damage": 70.693359375,
+      "rangeGU": 8.9208984375,
+      "intervalTicks": 40
+    },
+    {
+      "level": 78,
+      "enhancement": 7,
+      "maximumIntegrity": 2242.533203125,
+      "woundedIntegrity": 2142.533203125,
+      "damage": 70.986328125,
+      "rangeGU": 8.93359375,
+      "intervalTicks": 40
+    },
+    {
+      "level": 79,
+      "enhancement": 7,
+      "maximumIntegrity": 2252.7998046875,
+      "woundedIntegrity": 2152.7998046875,
+      "damage": 71.2802734375,
+      "rangeGU": 8.9453125,
+      "intervalTicks": 40
+    },
+    {
+      "level": 80,
+      "enhancement": 8,
+      "maximumIntegrity": 2319.17578125,
+      "woundedIntegrity": 2219.17578125,
+      "damage": 73.34765625,
+      "rangeGU": 8.9580078125,
+      "intervalTicks": 40
+    },
+    {
+      "level": 81,
+      "enhancement": 8,
+      "maximumIntegrity": 2329.697265625,
+      "woundedIntegrity": 2229.697265625,
+      "damage": 73.6484375,
+      "rangeGU": 8.9697265625,
+      "intervalTicks": 40
+    },
+    {
+      "level": 82,
+      "enhancement": 8,
+      "maximumIntegrity": 2340.2177734375,
+      "woundedIntegrity": 2240.2177734375,
+      "damage": 73.94921875,
+      "rangeGU": 8.9814453125,
+      "intervalTicks": 40
+    },
+    {
+      "level": 83,
+      "enhancement": 8,
+      "maximumIntegrity": 2350.7392578125,
+      "woundedIntegrity": 2250.7392578125,
+      "damage": 74.25,
+      "rangeGU": 8.994140625,
+      "intervalTicks": 40
+    },
+    {
+      "level": 84,
+      "enhancement": 8,
+      "maximumIntegrity": 2361.2607421875,
+      "woundedIntegrity": 2261.2607421875,
+      "damage": 74.55078125,
+      "rangeGU": 9.005859375,
+      "intervalTicks": 40
+    },
+    {
+      "level": 85,
+      "enhancement": 8,
+      "maximumIntegrity": 2371.7822265625,
+      "woundedIntegrity": 2271.7822265625,
+      "damage": 74.8505859375,
+      "rangeGU": 9.0185546875,
+      "intervalTicks": 40
+    },
+    {
+      "level": 86,
+      "enhancement": 8,
+      "maximumIntegrity": 2382.302734375,
+      "woundedIntegrity": 2282.302734375,
+      "damage": 75.1513671875,
+      "rangeGU": 9.0302734375,
+      "intervalTicks": 40
+    },
+    {
+      "level": 87,
+      "enhancement": 8,
+      "maximumIntegrity": 2392.82421875,
+      "woundedIntegrity": 2292.82421875,
+      "damage": 75.4521484375,
+      "rangeGU": 9.0419921875,
+      "intervalTicks": 39
+    },
+    {
+      "level": 88,
+      "enhancement": 8,
+      "maximumIntegrity": 2403.345703125,
+      "woundedIntegrity": 2303.345703125,
+      "damage": 75.7529296875,
+      "rangeGU": 9.0546875,
+      "intervalTicks": 39
+    },
+    {
+      "level": 89,
+      "enhancement": 8,
+      "maximumIntegrity": 2413.8662109375,
+      "woundedIntegrity": 2313.8662109375,
+      "damage": 76.0537109375,
+      "rangeGU": 9.06640625,
+      "intervalTicks": 39
+    },
+    {
+      "level": 90,
+      "enhancement": 9,
+      "maximumIntegrity": 2483.0419921875,
+      "woundedIntegrity": 2383.0419921875,
+      "damage": 78.201171875,
+      "rangeGU": 9.0791015625,
+      "intervalTicks": 39
+    },
+    {
+      "level": 91,
+      "enhancement": 9,
+      "maximumIntegrity": 2493.818359375,
+      "woundedIntegrity": 2393.818359375,
+      "damage": 78.5087890625,
+      "rangeGU": 9.0908203125,
+      "intervalTicks": 39
+    },
+    {
+      "level": 92,
+      "enhancement": 9,
+      "maximumIntegrity": 2504.59375,
+      "woundedIntegrity": 2404.59375,
+      "damage": 78.8173828125,
+      "rangeGU": 9.103515625,
+      "intervalTicks": 39
+    },
+    {
+      "level": 93,
+      "enhancement": 9,
+      "maximumIntegrity": 2515.3701171875,
+      "woundedIntegrity": 2415.3701171875,
+      "damage": 79.125,
+      "rangeGU": 9.115234375,
+      "intervalTicks": 39
+    },
+    {
+      "level": 94,
+      "enhancement": 9,
+      "maximumIntegrity": 2526.1455078125,
+      "woundedIntegrity": 2426.1455078125,
+      "damage": 79.4326171875,
+      "rangeGU": 9.126953125,
+      "intervalTicks": 39
+    },
+    {
+      "level": 95,
+      "enhancement": 9,
+      "maximumIntegrity": 2536.9208984375,
+      "woundedIntegrity": 2436.9208984375,
+      "damage": 79.740234375,
+      "rangeGU": 9.1396484375,
+      "intervalTicks": 39
+    },
+    {
+      "level": 96,
+      "enhancement": 9,
+      "maximumIntegrity": 2547.697265625,
+      "woundedIntegrity": 2447.697265625,
+      "damage": 80.048828125,
+      "rangeGU": 9.1513671875,
+      "intervalTicks": 39
+    },
+    {
+      "level": 97,
+      "enhancement": 9,
+      "maximumIntegrity": 2558.47265625,
+      "woundedIntegrity": 2458.47265625,
+      "damage": 80.3564453125,
+      "rangeGU": 9.1640625,
+      "intervalTicks": 39
+    },
+    {
+      "level": 98,
+      "enhancement": 9,
+      "maximumIntegrity": 2569.248046875,
+      "woundedIntegrity": 2469.248046875,
+      "damage": 80.6640625,
+      "rangeGU": 9.17578125,
+      "intervalTicks": 39
+    },
+    {
+      "level": 99,
+      "enhancement": 9,
+      "maximumIntegrity": 2580.0244140625,
+      "woundedIntegrity": 2480.0244140625,
+      "damage": 80.9716796875,
+      "rangeGU": 9.1875,
+      "intervalTicks": 38
+    },
+    {
+      "level": 100,
+      "enhancement": 10,
+      "maximumIntegrity": 2652,
+      "woundedIntegrity": 2552,
+      "damage": 83.2001953125,
+      "rangeGU": 9.2001953125,
+      "intervalTicks": 38
+    }
+  ],
+  "recoveryReferences": {
+    "sentryHalfBodyRepair": {
+      "restored": 614400,
+      "body": 1228800,
+      "credits": 32
+    },
+    "sentryMasteredRestore": {
+      "body": 614400,
+      "credits": 235
+    },
+    "sentryMasteredHalfBodySale": {
+      "credits": 766,
+      "promotionCores": 82
+    },
+    "mineRearm": {
+      "restored": 1,
+      "permanent": 1,
+      "credits": 19
+    }
+  }
+}

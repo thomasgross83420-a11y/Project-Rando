@@ -181,7 +181,12 @@ export class PracticeStore {
               const before = saved.result as Campaign | undefined;
               if (before?.lineage.toLowerCase() !== c.lineage || before.revision !== c.revision)
                 throw new Error('Campaign changed; reload before retry');
-              work(tx.objectStore('meta'), done, guard);
+              const run = tx.objectStore('meta').get(`run.slot.${c.slot}`);
+              run.onsuccess = guard(() => {
+                if (run.result !== undefined)
+                  throw new Error('Resolve retained campaign run before practice');
+                work(tx.objectStore('meta'), done, guard);
+              });
             });
           });
         },
@@ -207,6 +212,8 @@ export class PracticeStore {
       };
     if (!this.repository.database) {
       if (!this.repository.writer) throw new Error('Read Only');
+      if (this.repository.activeRunSlots.has(c.slot))
+        throw new Error('Resolve retained campaign run before practice');
       if (this.memory.has(c.slot))
         throw new Error('Existing practice must be restarted or discarded');
       const sequence = String(BigInt(this.memorySequence.get(c.slot) ?? '0') + 1n),
