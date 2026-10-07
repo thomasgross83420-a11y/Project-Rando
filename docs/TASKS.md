@@ -43,3 +43,15 @@ and exactly-once result receipt before enabling rewards. Then integrate persiste
 body/stock injury, contribution XP/rank/claims, repair/restoration/emergency viability
 and complete record handling. Per-asset anatomy/contact refinement continues;
 physical-device measurements remain distinct. See review/OMNIDIRECTIONAL_RECOVERY.md.
+
+## Dependency-ready after build 0.2.4
+
+The ordinary transaction protocol and pure progression/growth/recovery kernels
+are verified independently. Next connect a versioned campaign-profile migration,
+frozen combat stats, real contribution accounting, permanent versus temporary
+trap stock and ending body capture. Then implement the production normal-result
+adapter, complete run/receipt backup-import and player-facing recovery/Results.
+Only after those checks may C01S01 become a paid campaign launch. The missing
+accuracy-growth equation is recorded for user clarification; all other specified
+growth fields can proceed independently. Counter namespace rollover, Endurance
+block boundaries, emergency viability and bounded full records remain open.

@@ -20,3 +20,7 @@ Lenovo/Android performance and native sharing have not been certified.
 The [approved 0.2.2 motion video](REFINEMENT_DELIVERY.md) retains its original
 snapshot. No new animation footage or public playable deployment is claimed.
 Details: [OMNIDIRECTIONAL_RECOVERY.md](OMNIDIRECTIONAL_RECOVERY.md).
+
+The subsequent [result-contract checkpoint](RESULT_CONTRACTS_DELIVERY.md) adds
+verified transaction and progression prerequisites. These 0.2.3 artifacts retain
+their original snapshot and hashes.

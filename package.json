@@ -15,14 +15,15 @@
     "format": "biome format --write src tests scripts *.ts *.json index.html",
     "format:check": "biome format src tests scripts *.ts *.json index.html",
     "test": "vitest run",
-    "test:browser": "playwright test",
+    "test:browser": "node scripts/build-run-journal-fixture.mjs && playwright test",
     "test:scenario": "node --experimental-strip-types scripts/headless.ts",
     "audit:art": "python3 scripts/audit-combat-art.py && node scripts/check-animation-rendering.mjs",
     "audit:balance": "vite build --ssr scripts/tutorial-balance.ts --outDir .cache/balance && node scripts/tutorial-balance.mjs",
     "traceability": "node scripts/index-blueprint.mjs",
     "verify": "npm run typecheck && npm run lint && npm run test && npm run test:scenario && npm run build",
     "audit:economy": "vite build --ssr scripts/economy-analysis.ts --outDir .cache/economy && node scripts/economy-analysis.mjs",
-    "audit:movement": "vite build --ssr scripts/movement-audit.ts --outDir .cache/movement && node scripts/movement-audit.mjs"
+    "audit:movement": "vite build --ssr scripts/movement-audit.ts --outDir .cache/movement && node scripts/movement-audit.mjs",
+    "audit:progression": "vite build --ssr scripts/progression-analysis.ts --outDir .cache/progression && node scripts/progression-analysis.mjs"
   },
   "dependencies": {
     "phaser": "3.90.0",

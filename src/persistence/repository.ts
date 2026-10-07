@@ -13,6 +13,7 @@ export class CampaignRepository {
   readonly memoryPrevious = new Map<number, Campaign>();
   readonly memoryFences = new Map<string, ProgressFence>();
   readonly practiceSlots = new Set<number>();
+  readonly activeRunSlots = new Set<number>();
   private memoryLastOpened: number | undefined;
   readonly temporary: boolean;
   constructor(readonly database: Database | undefined) {
@@ -90,8 +91,8 @@ export class CampaignRepository {
       writer = this.writer;
     if (!writer) throw new Error('Another tab owns editing. This tab is read-only.');
     if (!this.database) {
-      if (this.practiceSlots.has(valid.slot))
-        throw new Error('Resolve retained practice before editing this campaign');
+      if (this.practiceSlots.has(valid.slot) || this.activeRunSlots.has(valid.slot))
+        throw new Error('Resolve retained run/practice before editing this campaign');
       const current = this.memory.get(valid.slot);
       this.compare(current, expected);
       if (current) this.memoryPrevious.set(valid.slot, structuredClone(current));
@@ -111,9 +112,15 @@ export class CampaignRepository {
             this.writer = undefined;
             return;
           }
-          const journal = tx.objectStore('meta').get(`practice.slot.${valid.slot}`);
-          journal.onsuccess = () => {
-            if (journal.result !== undefined) {
+          const journal = tx.objectStore('meta').get(`practice.slot.${valid.slot}`),
+            run = tx.objectStore('meta').get(`run.slot.${valid.slot}`);
+          let pending = 2;
+          const ready = () => {
+            if (--pending > 0) return;
+            commitCampaign();
+          };
+          const commitCampaign = () => {
+            if (journal.result !== undefined || run.result !== undefined) {
               tx.abort();
               return;
             }
@@ -130,6 +137,8 @@ export class CampaignRepository {
               }
             };
           };
+          journal.onsuccess = ready;
+          run.onsuccess = ready;
         };
       },
     );

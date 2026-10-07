@@ -391,3 +391,33 @@ barricade; import/rollback are previewed only. The plotted 1-second movement ray
 come from the production solver, not hand-illustrated approximations. Source
 art/active combat atlases are unchanged. Readable review and verified ZIP follow
 review/OMNIDIRECTIONAL_RECOVERY.md and MOVEMENT_RECOVERY_DELIVERY.md.
+
+## Ordinary-run contracts and exact progression — build 0.2.4, 2026-10-07
+
+`npm run verify` passed strict types/lint, 87 unit tests in 18 files, the
+deterministic headless mechanism scenario and production build. Final types,
+lint and formatting checks pass; 14 existing informational lint notices and
+upstream Zod/Phaser build warnings remain. New progression evidence records
+100 specified-growth samples and 512 exact wide-integer allocation permutations.
+Threshold derivation at 70 and 100 Decimal digits agrees; all published asset
+threshold references match. The blueprint source hash remains unchanged.
+
+Native ordinary-run fixtures are separate from actual practice gameplay. Their
+synthetic 37-Credit adapter checks monotonic allocation/restart/abandonment,
+Step 1 failure and memory export, Step 2 abort after queued wallet writes,
+successful commit with lost acknowledgment, reopened receipt reconciliation,
+writer takeover, competing starts/results, and ordinary/practice mutual exclusion.
+Only the test bundle in ignored .cache loads that adapter. No production paid
+result, live injury/XP command or broadened foundation save profile is enabled.
+
+The first extended browser run passed 33/34; one Gate 0 navigation received HTTP
+404 because the production build was replacing dist while tests had already
+started. No application bug was inferred from that invalid launch. Verification
+was then sequenced: complete verify/build, followed by the stable full browser run.
+The stable full browser run passed 34/34 in 3.8 minutes, with no skips or
+retries. All eight ordinary-run native fixtures passed in that run. No test assertion
+was relaxed to hide the 404 and no skipped/retried tests certify that failed run.
+
+The missing accuracy-growth equation is a blueprint clarification, not a tested
+formula. The proposed +5 percentage-point linear rule remains unapplied pending
+user input. Source artwork, actor movement and simulation versions are unchanged.
