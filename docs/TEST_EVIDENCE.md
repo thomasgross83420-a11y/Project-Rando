@@ -218,3 +218,71 @@ Ten final native production views: FitBase/tactical/close selected perceived hos
 Known limits: software GPU acceleration can trigger explicit performance pause; tests lower speed and Resume without dropping mechanics. No Android frame-rate/thermal/memory/TalkBack certification, native OS visibility proof, full soundtrack or final art acceptance. Pages remains disabled/unverified; prior Actions administration403 is an integration administration-read prerequisite, not evidence of a paid-plan restriction. No forbidden retry, deployment/settings change, public URL or offline claim. All later campaign/roster/boss/mode/progression/accessibility/presentation categories remain required.
 
 Review-package check: local HTTP preview loaded16 native/contact images and18 original audio controls, keyboard checkbox and portrait/landscape nonoverflow passed with no application errors. Workspace Chromium refused file:// navigation with ERR_BLOCKED_BY_ADMINISTRATOR; no claim is made that opening the HTML directly works on Android. GIFs are optional user-opened links, not compulsory auto-playing review motion.
+
+## Archived-thread recovery verification — 2026-10-07
+
+Recovered `codex/resonance-foundation` checkpoint `6d6c8e283fa809a4622b50c358235156ab820cb3`;
+`main` is still the initial README. See [PROJECT_RECOVERY.md](PROJECT_RECOVERY.md)
+for surviving references, approval boundaries, unavailable attachments and next work.
+No gameplay, blueprint, dependency or save-schema changes were made in this recovery.
+
+Fresh commands actually passed: `npm ci`; `npm run verify` (types, lint,
+29 unit tests/eight files, 3600-tick Gate0 deterministic scenario, build);
+`npm run format:check`; `npm run test:browser` (19/19, 4.1 minutes);
+`npx vite build --ssr scripts/tutorial-headless.ts --outDir .cache/headless`
+then `node scripts/tutorial-headless.mjs`; Python foundation/lighting/role/combat
+validators; live `capture-gate2.mjs`, `check-audio.mjs`, `package-gate2-review.py`
+and local-HTTP `check-gate2-review.mjs`. Node24.19.0/npm11.9.0/Chromium151.0.7922.173/
+Pillow12.3.0 match the prior recorded environment. Blueprint SHA256 unchanged.
+
+Actual tutorial headless groupings1/2/4/8/12 each won at6150ticks,24kills,30TP,
+hash8961c7817d3d73989a00c3e377387e6dde1ebeee16d219d5c397afc2be7839c7,
+matching the prior canonical fixture. Browser regression independently passes
+enabled/muted final-hash equality, checkpoint restart, failed-result retry and
+writer takeover. Live development capture generated10 views with no application
+errors/overflow and four known driver ReadPixels warnings. Native audio decoded
+18/18; local gallery checked16 images/18 audio controls, keyboard and two layouts.
+Review artifacts remain outside Git and are reproducible from preserved sources.
+
+Existing12 lint information notices, two upstream Zod annotation warnings and the
+Phaser chunk warning remain nonfatal. Vite development public-manifest messages
+were checked: imports return200 JavaScript and the actual app/capture/audio work;
+these are server warnings, not a load failure, so no setup patch was necessary.
+No new creative approval, public deployment, offline readiness, physical Android
+or TalkBack verification is implied.
+
+### Subsequent uploaded-reference reconciliation — 2026-10-07
+
+The user uploaded the final blueprint and original Gate1 brighter-review ZIP.
+SHA-256 comparison confirms the blueprint is byte-for-byte identical to the
+tracked authority. ZIP integrity passed:41files/5,450,897 uncompressed bytes.
+Capture date/base,23image metadata entries, checks/errors/warnings, atlas/browser/
+device-scale, lighting validation and gallery results match the existing
+GATE1_LIGHTING_R1_EVIDENCE.json. The foundation atlas checksum and exact icon
+bytes match the current runtime assets. Before/after lighting and static-facing
+contact sheets were inspected directly. This is the2026-10-06 14:51:58.870UTC
+pre-closeout review, not the latest tutorial; no new approval or gameplay change
+is inferred. The original ZIP is preserved unchanged in docs/reference; its
+checksum and chronology are recorded in PROJECT_RECOVERY.md. No gameplay tests
+were repeated for this reference/documentation addition.
+
+### Current review file delivery — 2026-10-07
+
+User requested a current-state review file and the remaining feedback questions.
+See review/CURRENT_REVIEW_DELIVERY.md for output inventory/checksums/reproduction.
+The19-page PDF contains status/questions,10current runtime screenshots,6atlas
+sheets and18audio links. The complete ZIP adds4movement GIFs,18original WAVs,
+51.08-second actual production-preview H.264 video and metadata/inventory.
+Live capture reaches tick2697 with41samples/no application errors; video has
+no recorded system audio and makes no Android performance claim. New script
+format/lint/Python syntax, PDF parsing/image/link counts, ZIP integrity/every
+inventory checksum/original audio hashes and updated local-gallery checks pass.
+PDF first/final pages and an actual video frame were visually inspected.
+ReportLab4.4.9/BSD metadata renders documents; PyMuPDF1.26.6 inspected the PDF;
+system FFmpeg7.1.5 converted video, with pinned Playwright FFmpeg1011 for capture.
+Initial motion attempt needed the absent helper; after its supported installation
+the capture passed. Default /mnt/data delivery was not writable on this worker;
+outputs use /workspace/shared/downloads and durable repository download links.
+No runtime dependency, lockfile, blueprint, game or save-schema change. Existing
+29unit/19production-browser verification is not a new run. No creative approval,
+physical-device certification or playable deployment is inferred.

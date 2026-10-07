@@ -3,6 +3,13 @@ What can I say, it's just a bunch of rando I'm trying out.
 
 ## Resonance Bastion
 
+The game is on the `codex/resonance-foundation` development branch; `main`
+currently contains only the original repository introduction. Start with the
+[thread recovery record](docs/PROJECT_RECOVERY.md) for the recovered checkpoint,
+available reference files, verification, and the next development step.
+The [current review download guide](docs/review/CURRENT_REVIEW_DELIVERY.md)
+provides a mobile-readable PDF and the complete visual/audio review ZIP.
+
 Development follows the [unchanged authoritative blueprint](docs/blueprint/Resonance_Bastion_Browser_Blueprint_Final.md).
 See [implementation status](docs/STATUS.md), [task queue](docs/TASKS.md),
 [test evidence](docs/TEST_EVIDENCE.md) and [hosting evidence](docs/HOSTING.md).
