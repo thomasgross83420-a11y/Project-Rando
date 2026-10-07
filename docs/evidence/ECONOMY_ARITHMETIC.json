@@ -1,0 +1,211 @@
+{
+  "date": "2026-10-07",
+  "policy": "economy.duration_wave_v1",
+  "arithmeticCases": 97200,
+  "monotonicChecks": 28800,
+  "golden": [
+    {
+      "rank": 1,
+      "band": 1,
+      "assumedBudgetTP": {
+        "n": "316",
+        "d": "1"
+      },
+      "credits": "1392",
+      "xp": "1013",
+      "assetPool": "1344",
+      "cores": "1"
+    },
+    {
+      "rank": 10,
+      "band": 2,
+      "assumedBudgetTP": {
+        "n": "379",
+        "d": "1"
+      },
+      "credits": "1689",
+      "xp": "1460",
+      "assetPool": "1995",
+      "cores": "1"
+    },
+    {
+      "rank": 25,
+      "band": 5,
+      "assumedBudgetTP": {
+        "n": "574",
+        "d": "1"
+      },
+      "credits": "2673",
+      "xp": "3325",
+      "assetPool": "4752",
+      "cores": "1"
+    },
+    {
+      "rank": 50,
+      "band": 10,
+      "assumedBudgetTP": {
+        "n": "895",
+        "d": "1"
+      },
+      "credits": "4534",
+      "xp": "8078",
+      "assetPool": "11895",
+      "cores": "2"
+    },
+    {
+      "rank": 75,
+      "band": 15,
+      "assumedBudgetTP": {
+        "n": "1218",
+        "d": "1"
+      },
+      "credits": "6700",
+      "xp": "14930",
+      "assetPool": "22284",
+      "cores": "3"
+    },
+    {
+      "rank": 100,
+      "band": 20,
+      "assumedBudgetTP": {
+        "n": "1540",
+        "d": "1"
+      },
+      "credits": "9158",
+      "xp": "23856",
+      "assetPool": "35880",
+      "cores": "4"
+    }
+  ],
+  "actualTutorial": {
+    "outcome": "Victory",
+    "ticks": 6879,
+    "hash": "1fc32c1de93483123a91b0b018aa0f90a36e508c406acc27b14f2990016ba8b6",
+    "kills": 24,
+    "buckets": [
+      {
+        "block": 1,
+        "segment": 1,
+        "duration": 90,
+        "pressure": {
+          "n": "7",
+          "d": "20"
+        },
+        "plannedQTP": 16,
+        "destroyedQTP": 16
+      },
+      {
+        "block": 1,
+        "segment": 2,
+        "duration": 90,
+        "pressure": {
+          "n": "19",
+          "d": "40"
+        },
+        "plannedQTP": 24,
+        "destroyedQTP": 24
+      },
+      {
+        "block": 1,
+        "segment": 3,
+        "duration": 90,
+        "pressure": {
+          "n": "4",
+          "d": "5"
+        },
+        "plannedQTP": 24,
+        "destroyedQTP": 24
+      },
+      {
+        "block": 1,
+        "segment": 4,
+        "duration": 90,
+        "pressure": {
+          "n": "9",
+          "d": "10"
+        },
+        "plannedQTP": 44,
+        "destroyedQTP": 44
+      },
+      {
+        "block": 1,
+        "segment": 5,
+        "duration": 90,
+        "pressure": {
+          "n": "11",
+          "d": "20"
+        },
+        "plannedQTP": 12,
+        "destroyedQTP": 12
+      }
+    ],
+    "hypotheticalOrdinaryReward": {
+      "policy": "economy.duration_wave_v1",
+      "unweightedTP": {
+        "n": "30",
+        "d": "1"
+      },
+      "weightedThreat": {
+        "n": "1321741",
+        "d": "50000"
+      },
+      "killCredits": {
+        "n": "1321741",
+        "d": "12500"
+      },
+      "completionCredits": {
+        "n": "230",
+        "d": "1"
+      },
+      "ordinaryCredits": {
+        "n": "4196741",
+        "d": "12500"
+      },
+      "credits": "335",
+      "bastionXP": "155",
+      "assetXPPool": "200",
+      "promotionCores": "1",
+      "factors": {
+        "difficulty": {
+          "n": "1",
+          "d": "1"
+        },
+        "modifier": {
+          "n": "1",
+          "d": "1"
+        },
+        "profile": {
+          "n": "1",
+          "d": "1"
+        },
+        "repeat": {
+          "n": "1",
+          "d": "1"
+        },
+        "band": {
+          "n": "1",
+          "d": "1"
+        },
+        "challenge": {
+          "n": "1",
+          "d": "1"
+        }
+      }
+    },
+    "paidPracticeReward": {
+      "credits": 0,
+      "xp": 0,
+      "cores": 0
+    }
+  },
+  "band20Block3PerTP": {
+    "n": "361021",
+    "d": "50000"
+  },
+  "limits": [
+    "Synthetic arithmetic cases are not generated-plan victories or payout receipts",
+    "Actual tutorial destruction origins are measured; comparison does not pay practice",
+    "Full roster, persistent contributions/injuries/repair, 100-seed balance and six-block state receipts remain open"
+  ],
+  "resampling": "Exact rational endpoint-preserving linear interpolation; pinned implementation choice, not measured balance"
+}

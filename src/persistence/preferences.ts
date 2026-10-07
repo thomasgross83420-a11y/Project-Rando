@@ -50,6 +50,13 @@ export class PreferencesStore {
     this.apply();
     if (stored === undefined) await this.save();
   }
+  imported(value: Preferences): void {
+    clearTimeout(this.timer);
+    this.value = preferencesSchema.parse(value);
+    this.revision++;
+    this.savedRevision = this.revision;
+    this.apply();
+  }
   apply(): void {
     document.documentElement.style.fontSize = `${this.value.uiScale}px`;
     document.documentElement.classList.toggle('reduced-effects', this.value.reducedEffects);
@@ -61,6 +68,11 @@ export class PreferencesStore {
     this.revision++;
     if (this.timer) clearTimeout(this.timer);
     this.timer = setTimeout(() => void this.save(), 250);
+  }
+  async flush(): Promise<void> {
+    await this.save();
+    if (this.database && this.revision !== this.savedRevision)
+      throw new Error('Preferences save failed or changed; retry before recovery');
   }
   async save(): Promise<void> {
     if (this.timer) clearTimeout(this.timer);

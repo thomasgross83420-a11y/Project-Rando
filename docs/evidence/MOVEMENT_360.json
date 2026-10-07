@@ -1,0 +1,1570 @@
+{
+  "date": "2026-10-07",
+  "headingsChecked": 65536,
+  "worstHeadingError": 0,
+  "anglesPerAsset": 48,
+  "assets": [
+    {
+      "type": "friendly.rifle_squad",
+      "nominalSpeedGU": 2.2001953125,
+      "samples": [
+        {
+          "heading": 505,
+          "degrees": 2.7740478515625,
+          "xGU": 0.1064453125,
+          "yGU": -2.197265625,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 1871,
+          "degrees": 10.2777099609375,
+          "xGU": 0.392578125,
+          "yGU": -2.1650390625,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 3236,
+          "degrees": 17.77587890625,
+          "xGU": 0.6708984375,
+          "yGU": -2.0947265625,
+          "travelGU": 2.19921875,
+          "angularError": 3
+        },
+        {
+          "heading": 4601,
+          "degrees": 25.2740478515625,
+          "xGU": 0.939453125,
+          "yGU": -1.9892578125,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 5967,
+          "degrees": 32.7777099609375,
+          "xGU": 1.1904296875,
+          "yGU": -1.849609375,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 7332,
+          "degrees": 40.27587890625,
+          "xGU": 1.421875,
+          "yGU": -1.677734375,
+          "travelGU": 2.19921875,
+          "angularError": 1
+        },
+        {
+          "heading": 8697,
+          "degrees": 47.7740478515625,
+          "xGU": 1.62890625,
+          "yGU": -1.478515625,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 10063,
+          "degrees": 55.2777099609375,
+          "xGU": 1.80859375,
+          "yGU": -1.2529296875,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 11428,
+          "degrees": 62.77587890625,
+          "xGU": 1.9560546875,
+          "yGU": -1.005859375,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 12793,
+          "degrees": 70.2740478515625,
+          "xGU": 2.0712890625,
+          "yGU": -0.7421875,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 14159,
+          "degrees": 77.7777099609375,
+          "xGU": 2.150390625,
+          "yGU": -0.4658203125,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 15524,
+          "degrees": 85.27587890625,
+          "xGU": 2.1923828125,
+          "yGU": -0.1806640625,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 16889,
+          "degrees": 92.7740478515625,
+          "xGU": 2.197265625,
+          "yGU": 0.1064453125,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 18255,
+          "degrees": 100.2777099609375,
+          "xGU": 2.1650390625,
+          "yGU": 0.392578125,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 19620,
+          "degrees": 107.77587890625,
+          "xGU": 2.0947265625,
+          "yGU": 0.6708984375,
+          "travelGU": 2.19921875,
+          "angularError": 3
+        },
+        {
+          "heading": 20985,
+          "degrees": 115.2740478515625,
+          "xGU": 1.9892578125,
+          "yGU": 0.939453125,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 22351,
+          "degrees": 122.7777099609375,
+          "xGU": 1.849609375,
+          "yGU": 1.1904296875,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 23716,
+          "degrees": 130.27587890625,
+          "xGU": 1.677734375,
+          "yGU": 1.421875,
+          "travelGU": 2.19921875,
+          "angularError": 1
+        },
+        {
+          "heading": 25081,
+          "degrees": 137.7740478515625,
+          "xGU": 1.478515625,
+          "yGU": 1.62890625,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 26447,
+          "degrees": 145.2777099609375,
+          "xGU": 1.2529296875,
+          "yGU": 1.80859375,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 27812,
+          "degrees": 152.77587890625,
+          "xGU": 1.005859375,
+          "yGU": 1.9560546875,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 29177,
+          "degrees": 160.2740478515625,
+          "xGU": 0.7421875,
+          "yGU": 2.0712890625,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 30543,
+          "degrees": 167.7777099609375,
+          "xGU": 0.4658203125,
+          "yGU": 2.150390625,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 31908,
+          "degrees": 175.27587890625,
+          "xGU": 0.1806640625,
+          "yGU": 2.1923828125,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 33273,
+          "degrees": 182.7740478515625,
+          "xGU": -0.1064453125,
+          "yGU": 2.197265625,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 34639,
+          "degrees": 190.2777099609375,
+          "xGU": -0.392578125,
+          "yGU": 2.1650390625,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 36004,
+          "degrees": 197.77587890625,
+          "xGU": -0.6708984375,
+          "yGU": 2.0947265625,
+          "travelGU": 2.19921875,
+          "angularError": 3
+        },
+        {
+          "heading": 37369,
+          "degrees": 205.2740478515625,
+          "xGU": -0.939453125,
+          "yGU": 1.9892578125,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 38735,
+          "degrees": 212.7777099609375,
+          "xGU": -1.1904296875,
+          "yGU": 1.849609375,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 40100,
+          "degrees": 220.27587890625,
+          "xGU": -1.421875,
+          "yGU": 1.677734375,
+          "travelGU": 2.19921875,
+          "angularError": 1
+        },
+        {
+          "heading": 41465,
+          "degrees": 227.7740478515625,
+          "xGU": -1.62890625,
+          "yGU": 1.478515625,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 42831,
+          "degrees": 235.2777099609375,
+          "xGU": -1.80859375,
+          "yGU": 1.2529296875,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 44196,
+          "degrees": 242.77587890625,
+          "xGU": -1.9560546875,
+          "yGU": 1.005859375,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 45561,
+          "degrees": 250.2740478515625,
+          "xGU": -2.0712890625,
+          "yGU": 0.7421875,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 46927,
+          "degrees": 257.7777099609375,
+          "xGU": -2.150390625,
+          "yGU": 0.4658203125,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 48292,
+          "degrees": 265.27587890625,
+          "xGU": -2.1923828125,
+          "yGU": 0.1806640625,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 49657,
+          "degrees": 272.7740478515625,
+          "xGU": -2.197265625,
+          "yGU": -0.1064453125,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 51023,
+          "degrees": 280.2777099609375,
+          "xGU": -2.1650390625,
+          "yGU": -0.392578125,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 52388,
+          "degrees": 287.77587890625,
+          "xGU": -2.0947265625,
+          "yGU": -0.6708984375,
+          "travelGU": 2.19921875,
+          "angularError": 3
+        },
+        {
+          "heading": 53753,
+          "degrees": 295.2740478515625,
+          "xGU": -1.9892578125,
+          "yGU": -0.939453125,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 55119,
+          "degrees": 302.7777099609375,
+          "xGU": -1.849609375,
+          "yGU": -1.1904296875,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 56484,
+          "degrees": 310.27587890625,
+          "xGU": -1.677734375,
+          "yGU": -1.421875,
+          "travelGU": 2.19921875,
+          "angularError": 1
+        },
+        {
+          "heading": 57849,
+          "degrees": 317.7740478515625,
+          "xGU": -1.478515625,
+          "yGU": -1.62890625,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 59215,
+          "degrees": 325.2777099609375,
+          "xGU": -1.2529296875,
+          "yGU": -1.80859375,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 60580,
+          "degrees": 332.77587890625,
+          "xGU": -1.005859375,
+          "yGU": -1.9560546875,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 61945,
+          "degrees": 340.2740478515625,
+          "xGU": -0.7421875,
+          "yGU": -2.0712890625,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 63311,
+          "degrees": 347.7777099609375,
+          "xGU": -0.4658203125,
+          "yGU": -2.150390625,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 64676,
+          "degrees": 355.27587890625,
+          "xGU": -0.1806640625,
+          "yGU": -2.1923828125,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        }
+      ]
+    },
+    {
+      "type": "warden.bulwark",
+      "nominalSpeedGU": 2,
+      "samples": [
+        {
+          "heading": 505,
+          "degrees": 2.7740478515625,
+          "xGU": 0.0966796875,
+          "yGU": -1.998046875,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 1871,
+          "degrees": 10.2777099609375,
+          "xGU": 0.3564453125,
+          "yGU": -1.9677734375,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 3236,
+          "degrees": 17.77587890625,
+          "xGU": 0.6103515625,
+          "yGU": -1.904296875,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 4601,
+          "degrees": 25.2740478515625,
+          "xGU": 0.853515625,
+          "yGU": -1.80859375,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 5967,
+          "degrees": 32.7777099609375,
+          "xGU": 1.08203125,
+          "yGU": -1.681640625,
+          "travelGU": 2,
+          "angularError": 3
+        },
+        {
+          "heading": 7332,
+          "degrees": 40.27587890625,
+          "xGU": 1.29296875,
+          "yGU": -1.525390625,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 8697,
+          "degrees": 47.7740478515625,
+          "xGU": 1.48046875,
+          "yGU": -1.34375,
+          "travelGU": 1.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 10063,
+          "degrees": 55.2777099609375,
+          "xGU": 1.6435546875,
+          "yGU": -1.138671875,
+          "travelGU": 1.9990234375,
+          "angularError": 1
+        },
+        {
+          "heading": 11428,
+          "degrees": 62.77587890625,
+          "xGU": 1.7783203125,
+          "yGU": -0.9150390625,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 12793,
+          "degrees": 70.2740478515625,
+          "xGU": 1.8828125,
+          "yGU": -0.6748046875,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 14159,
+          "degrees": 77.7777099609375,
+          "xGU": 1.9541015625,
+          "yGU": -0.4228515625,
+          "travelGU": 1.9990234375,
+          "angularError": 2
+        },
+        {
+          "heading": 15524,
+          "degrees": 85.27587890625,
+          "xGU": 1.9931640625,
+          "yGU": -0.1650390625,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 16889,
+          "degrees": 92.7740478515625,
+          "xGU": 1.998046875,
+          "yGU": 0.0966796875,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 18255,
+          "degrees": 100.2777099609375,
+          "xGU": 1.9677734375,
+          "yGU": 0.3564453125,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 19620,
+          "degrees": 107.77587890625,
+          "xGU": 1.904296875,
+          "yGU": 0.6103515625,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 20985,
+          "degrees": 115.2740478515625,
+          "xGU": 1.80859375,
+          "yGU": 0.853515625,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 22351,
+          "degrees": 122.7777099609375,
+          "xGU": 1.681640625,
+          "yGU": 1.08203125,
+          "travelGU": 2,
+          "angularError": 3
+        },
+        {
+          "heading": 23716,
+          "degrees": 130.27587890625,
+          "xGU": 1.525390625,
+          "yGU": 1.29296875,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 25081,
+          "degrees": 137.7740478515625,
+          "xGU": 1.34375,
+          "yGU": 1.48046875,
+          "travelGU": 1.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 26447,
+          "degrees": 145.2777099609375,
+          "xGU": 1.138671875,
+          "yGU": 1.6435546875,
+          "travelGU": 1.9990234375,
+          "angularError": 1
+        },
+        {
+          "heading": 27812,
+          "degrees": 152.77587890625,
+          "xGU": 0.9150390625,
+          "yGU": 1.7783203125,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 29177,
+          "degrees": 160.2740478515625,
+          "xGU": 0.6748046875,
+          "yGU": 1.8828125,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 30543,
+          "degrees": 167.7777099609375,
+          "xGU": 0.4228515625,
+          "yGU": 1.9541015625,
+          "travelGU": 1.9990234375,
+          "angularError": 2
+        },
+        {
+          "heading": 31908,
+          "degrees": 175.27587890625,
+          "xGU": 0.1650390625,
+          "yGU": 1.9931640625,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 33273,
+          "degrees": 182.7740478515625,
+          "xGU": -0.0966796875,
+          "yGU": 1.998046875,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 34639,
+          "degrees": 190.2777099609375,
+          "xGU": -0.3564453125,
+          "yGU": 1.9677734375,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 36004,
+          "degrees": 197.77587890625,
+          "xGU": -0.6103515625,
+          "yGU": 1.904296875,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 37369,
+          "degrees": 205.2740478515625,
+          "xGU": -0.853515625,
+          "yGU": 1.80859375,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 38735,
+          "degrees": 212.7777099609375,
+          "xGU": -1.08203125,
+          "yGU": 1.681640625,
+          "travelGU": 2,
+          "angularError": 3
+        },
+        {
+          "heading": 40100,
+          "degrees": 220.27587890625,
+          "xGU": -1.29296875,
+          "yGU": 1.525390625,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 41465,
+          "degrees": 227.7740478515625,
+          "xGU": -1.48046875,
+          "yGU": 1.34375,
+          "travelGU": 1.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 42831,
+          "degrees": 235.2777099609375,
+          "xGU": -1.6435546875,
+          "yGU": 1.138671875,
+          "travelGU": 1.9990234375,
+          "angularError": 1
+        },
+        {
+          "heading": 44196,
+          "degrees": 242.77587890625,
+          "xGU": -1.7783203125,
+          "yGU": 0.9150390625,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 45561,
+          "degrees": 250.2740478515625,
+          "xGU": -1.8828125,
+          "yGU": 0.6748046875,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 46927,
+          "degrees": 257.7777099609375,
+          "xGU": -1.9541015625,
+          "yGU": 0.4228515625,
+          "travelGU": 1.9990234375,
+          "angularError": 2
+        },
+        {
+          "heading": 48292,
+          "degrees": 265.27587890625,
+          "xGU": -1.9931640625,
+          "yGU": 0.1650390625,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 49657,
+          "degrees": 272.7740478515625,
+          "xGU": -1.998046875,
+          "yGU": -0.0966796875,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 51023,
+          "degrees": 280.2777099609375,
+          "xGU": -1.9677734375,
+          "yGU": -0.3564453125,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 52388,
+          "degrees": 287.77587890625,
+          "xGU": -1.904296875,
+          "yGU": -0.6103515625,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 53753,
+          "degrees": 295.2740478515625,
+          "xGU": -1.80859375,
+          "yGU": -0.853515625,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 55119,
+          "degrees": 302.7777099609375,
+          "xGU": -1.681640625,
+          "yGU": -1.08203125,
+          "travelGU": 2,
+          "angularError": 3
+        },
+        {
+          "heading": 56484,
+          "degrees": 310.27587890625,
+          "xGU": -1.525390625,
+          "yGU": -1.29296875,
+          "travelGU": 2,
+          "angularError": 2
+        },
+        {
+          "heading": 57849,
+          "degrees": 317.7740478515625,
+          "xGU": -1.34375,
+          "yGU": -1.48046875,
+          "travelGU": 1.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 59215,
+          "degrees": 325.2777099609375,
+          "xGU": -1.138671875,
+          "yGU": -1.6435546875,
+          "travelGU": 1.9990234375,
+          "angularError": 1
+        },
+        {
+          "heading": 60580,
+          "degrees": 332.77587890625,
+          "xGU": -0.9150390625,
+          "yGU": -1.7783203125,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 61945,
+          "degrees": 340.2740478515625,
+          "xGU": -0.6748046875,
+          "yGU": -1.8828125,
+          "travelGU": 2,
+          "angularError": 1
+        },
+        {
+          "heading": 63311,
+          "degrees": 347.7777099609375,
+          "xGU": -0.4228515625,
+          "yGU": -1.9541015625,
+          "travelGU": 1.9990234375,
+          "angularError": 2
+        },
+        {
+          "heading": 64676,
+          "degrees": 355.27587890625,
+          "xGU": -0.1650390625,
+          "yGU": -1.9931640625,
+          "travelGU": 2,
+          "angularError": 2
+        }
+      ]
+    },
+    {
+      "type": "enemy.runner",
+      "nominalSpeedGU": 3,
+      "samples": [
+        {
+          "heading": 505,
+          "degrees": 2.7740478515625,
+          "xGU": 0.1455078125,
+          "yGU": -2.99609375,
+          "travelGU": 3,
+          "angularError": 1
+        },
+        {
+          "heading": 1871,
+          "degrees": 10.2777099609375,
+          "xGU": 0.53515625,
+          "yGU": -2.951171875,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 3236,
+          "degrees": 17.77587890625,
+          "xGU": 0.9150390625,
+          "yGU": -2.8564453125,
+          "travelGU": 2.9990234375,
+          "angularError": 2
+        },
+        {
+          "heading": 4601,
+          "degrees": 25.2740478515625,
+          "xGU": 1.2802734375,
+          "yGU": -2.712890625,
+          "travelGU": 3,
+          "angularError": 2
+        },
+        {
+          "heading": 5967,
+          "degrees": 32.7777099609375,
+          "xGU": 1.6240234375,
+          "yGU": -2.521484375,
+          "travelGU": 2.9990234375,
+          "angularError": 1
+        },
+        {
+          "heading": 7332,
+          "degrees": 40.27587890625,
+          "xGU": 1.939453125,
+          "yGU": -2.2880859375,
+          "travelGU": 2.9990234375,
+          "angularError": 2
+        },
+        {
+          "heading": 8697,
+          "degrees": 47.7740478515625,
+          "xGU": 2.220703125,
+          "yGU": -2.015625,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 10063,
+          "degrees": 55.2777099609375,
+          "xGU": 2.4658203125,
+          "yGU": -1.7080078125,
+          "travelGU": 3,
+          "angularError": 2
+        },
+        {
+          "heading": 11428,
+          "degrees": 62.77587890625,
+          "xGU": 2.6669921875,
+          "yGU": -1.3720703125,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 12793,
+          "degrees": 70.2740478515625,
+          "xGU": 2.82421875,
+          "yGU": -1.01171875,
+          "travelGU": 3,
+          "angularError": 3
+        },
+        {
+          "heading": 14159,
+          "degrees": 77.7777099609375,
+          "xGU": 2.931640625,
+          "yGU": -0.634765625,
+          "travelGU": 3,
+          "angularError": 1
+        },
+        {
+          "heading": 15524,
+          "degrees": 85.27587890625,
+          "xGU": 2.9892578125,
+          "yGU": -0.2470703125,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 16889,
+          "degrees": 92.7740478515625,
+          "xGU": 2.99609375,
+          "yGU": 0.1455078125,
+          "travelGU": 3,
+          "angularError": 1
+        },
+        {
+          "heading": 18255,
+          "degrees": 100.2777099609375,
+          "xGU": 2.951171875,
+          "yGU": 0.53515625,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 19620,
+          "degrees": 107.77587890625,
+          "xGU": 2.8564453125,
+          "yGU": 0.9150390625,
+          "travelGU": 2.9990234375,
+          "angularError": 2
+        },
+        {
+          "heading": 20985,
+          "degrees": 115.2740478515625,
+          "xGU": 2.712890625,
+          "yGU": 1.2802734375,
+          "travelGU": 3,
+          "angularError": 2
+        },
+        {
+          "heading": 22351,
+          "degrees": 122.7777099609375,
+          "xGU": 2.521484375,
+          "yGU": 1.6240234375,
+          "travelGU": 2.9990234375,
+          "angularError": 1
+        },
+        {
+          "heading": 23716,
+          "degrees": 130.27587890625,
+          "xGU": 2.2880859375,
+          "yGU": 1.939453125,
+          "travelGU": 2.9990234375,
+          "angularError": 2
+        },
+        {
+          "heading": 25081,
+          "degrees": 137.7740478515625,
+          "xGU": 2.015625,
+          "yGU": 2.220703125,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 26447,
+          "degrees": 145.2777099609375,
+          "xGU": 1.7080078125,
+          "yGU": 2.4658203125,
+          "travelGU": 3,
+          "angularError": 2
+        },
+        {
+          "heading": 27812,
+          "degrees": 152.77587890625,
+          "xGU": 1.3720703125,
+          "yGU": 2.6669921875,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 29177,
+          "degrees": 160.2740478515625,
+          "xGU": 1.01171875,
+          "yGU": 2.82421875,
+          "travelGU": 3,
+          "angularError": 3
+        },
+        {
+          "heading": 30543,
+          "degrees": 167.7777099609375,
+          "xGU": 0.634765625,
+          "yGU": 2.931640625,
+          "travelGU": 3,
+          "angularError": 1
+        },
+        {
+          "heading": 31908,
+          "degrees": 175.27587890625,
+          "xGU": 0.2470703125,
+          "yGU": 2.9892578125,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 33273,
+          "degrees": 182.7740478515625,
+          "xGU": -0.1455078125,
+          "yGU": 2.99609375,
+          "travelGU": 3,
+          "angularError": 1
+        },
+        {
+          "heading": 34639,
+          "degrees": 190.2777099609375,
+          "xGU": -0.53515625,
+          "yGU": 2.951171875,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 36004,
+          "degrees": 197.77587890625,
+          "xGU": -0.9150390625,
+          "yGU": 2.8564453125,
+          "travelGU": 2.9990234375,
+          "angularError": 2
+        },
+        {
+          "heading": 37369,
+          "degrees": 205.2740478515625,
+          "xGU": -1.2802734375,
+          "yGU": 2.712890625,
+          "travelGU": 3,
+          "angularError": 2
+        },
+        {
+          "heading": 38735,
+          "degrees": 212.7777099609375,
+          "xGU": -1.6240234375,
+          "yGU": 2.521484375,
+          "travelGU": 2.9990234375,
+          "angularError": 1
+        },
+        {
+          "heading": 40100,
+          "degrees": 220.27587890625,
+          "xGU": -1.939453125,
+          "yGU": 2.2880859375,
+          "travelGU": 2.9990234375,
+          "angularError": 2
+        },
+        {
+          "heading": 41465,
+          "degrees": 227.7740478515625,
+          "xGU": -2.220703125,
+          "yGU": 2.015625,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 42831,
+          "degrees": 235.2777099609375,
+          "xGU": -2.4658203125,
+          "yGU": 1.7080078125,
+          "travelGU": 3,
+          "angularError": 2
+        },
+        {
+          "heading": 44196,
+          "degrees": 242.77587890625,
+          "xGU": -2.6669921875,
+          "yGU": 1.3720703125,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 45561,
+          "degrees": 250.2740478515625,
+          "xGU": -2.82421875,
+          "yGU": 1.01171875,
+          "travelGU": 3,
+          "angularError": 3
+        },
+        {
+          "heading": 46927,
+          "degrees": 257.7777099609375,
+          "xGU": -2.931640625,
+          "yGU": 0.634765625,
+          "travelGU": 3,
+          "angularError": 1
+        },
+        {
+          "heading": 48292,
+          "degrees": 265.27587890625,
+          "xGU": -2.9892578125,
+          "yGU": 0.2470703125,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 49657,
+          "degrees": 272.7740478515625,
+          "xGU": -2.99609375,
+          "yGU": -0.1455078125,
+          "travelGU": 3,
+          "angularError": 1
+        },
+        {
+          "heading": 51023,
+          "degrees": 280.2777099609375,
+          "xGU": -2.951171875,
+          "yGU": -0.53515625,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 52388,
+          "degrees": 287.77587890625,
+          "xGU": -2.8564453125,
+          "yGU": -0.9150390625,
+          "travelGU": 2.9990234375,
+          "angularError": 2
+        },
+        {
+          "heading": 53753,
+          "degrees": 295.2740478515625,
+          "xGU": -2.712890625,
+          "yGU": -1.2802734375,
+          "travelGU": 3,
+          "angularError": 2
+        },
+        {
+          "heading": 55119,
+          "degrees": 302.7777099609375,
+          "xGU": -2.521484375,
+          "yGU": -1.6240234375,
+          "travelGU": 2.9990234375,
+          "angularError": 1
+        },
+        {
+          "heading": 56484,
+          "degrees": 310.27587890625,
+          "xGU": -2.2880859375,
+          "yGU": -1.939453125,
+          "travelGU": 2.9990234375,
+          "angularError": 2
+        },
+        {
+          "heading": 57849,
+          "degrees": 317.7740478515625,
+          "xGU": -2.015625,
+          "yGU": -2.220703125,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 59215,
+          "degrees": 325.2777099609375,
+          "xGU": -1.7080078125,
+          "yGU": -2.4658203125,
+          "travelGU": 3,
+          "angularError": 2
+        },
+        {
+          "heading": 60580,
+          "degrees": 332.77587890625,
+          "xGU": -1.3720703125,
+          "yGU": -2.6669921875,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        },
+        {
+          "heading": 61945,
+          "degrees": 340.2740478515625,
+          "xGU": -1.01171875,
+          "yGU": -2.82421875,
+          "travelGU": 3,
+          "angularError": 3
+        },
+        {
+          "heading": 63311,
+          "degrees": 347.7777099609375,
+          "xGU": -0.634765625,
+          "yGU": -2.931640625,
+          "travelGU": 3,
+          "angularError": 1
+        },
+        {
+          "heading": 64676,
+          "degrees": 355.27587890625,
+          "xGU": -0.2470703125,
+          "yGU": -2.9892578125,
+          "travelGU": 2.9990234375,
+          "angularError": 0
+        }
+      ]
+    },
+    {
+      "type": "enemy.raider",
+      "nominalSpeedGU": 2.2001953125,
+      "samples": [
+        {
+          "heading": 505,
+          "degrees": 2.7740478515625,
+          "xGU": 0.1064453125,
+          "yGU": -2.197265625,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 1871,
+          "degrees": 10.2777099609375,
+          "xGU": 0.392578125,
+          "yGU": -2.1650390625,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 3236,
+          "degrees": 17.77587890625,
+          "xGU": 0.6708984375,
+          "yGU": -2.0947265625,
+          "travelGU": 2.19921875,
+          "angularError": 3
+        },
+        {
+          "heading": 4601,
+          "degrees": 25.2740478515625,
+          "xGU": 0.939453125,
+          "yGU": -1.9892578125,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 5967,
+          "degrees": 32.7777099609375,
+          "xGU": 1.1904296875,
+          "yGU": -1.849609375,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 7332,
+          "degrees": 40.27587890625,
+          "xGU": 1.421875,
+          "yGU": -1.677734375,
+          "travelGU": 2.19921875,
+          "angularError": 1
+        },
+        {
+          "heading": 8697,
+          "degrees": 47.7740478515625,
+          "xGU": 1.62890625,
+          "yGU": -1.478515625,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 10063,
+          "degrees": 55.2777099609375,
+          "xGU": 1.80859375,
+          "yGU": -1.2529296875,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 11428,
+          "degrees": 62.77587890625,
+          "xGU": 1.9560546875,
+          "yGU": -1.005859375,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 12793,
+          "degrees": 70.2740478515625,
+          "xGU": 2.0712890625,
+          "yGU": -0.7421875,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 14159,
+          "degrees": 77.7777099609375,
+          "xGU": 2.150390625,
+          "yGU": -0.4658203125,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 15524,
+          "degrees": 85.27587890625,
+          "xGU": 2.1923828125,
+          "yGU": -0.1806640625,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 16889,
+          "degrees": 92.7740478515625,
+          "xGU": 2.197265625,
+          "yGU": 0.1064453125,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 18255,
+          "degrees": 100.2777099609375,
+          "xGU": 2.1650390625,
+          "yGU": 0.392578125,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 19620,
+          "degrees": 107.77587890625,
+          "xGU": 2.0947265625,
+          "yGU": 0.6708984375,
+          "travelGU": 2.19921875,
+          "angularError": 3
+        },
+        {
+          "heading": 20985,
+          "degrees": 115.2740478515625,
+          "xGU": 1.9892578125,
+          "yGU": 0.939453125,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 22351,
+          "degrees": 122.7777099609375,
+          "xGU": 1.849609375,
+          "yGU": 1.1904296875,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 23716,
+          "degrees": 130.27587890625,
+          "xGU": 1.677734375,
+          "yGU": 1.421875,
+          "travelGU": 2.19921875,
+          "angularError": 1
+        },
+        {
+          "heading": 25081,
+          "degrees": 137.7740478515625,
+          "xGU": 1.478515625,
+          "yGU": 1.62890625,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 26447,
+          "degrees": 145.2777099609375,
+          "xGU": 1.2529296875,
+          "yGU": 1.80859375,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 27812,
+          "degrees": 152.77587890625,
+          "xGU": 1.005859375,
+          "yGU": 1.9560546875,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 29177,
+          "degrees": 160.2740478515625,
+          "xGU": 0.7421875,
+          "yGU": 2.0712890625,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 30543,
+          "degrees": 167.7777099609375,
+          "xGU": 0.4658203125,
+          "yGU": 2.150390625,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 31908,
+          "degrees": 175.27587890625,
+          "xGU": 0.1806640625,
+          "yGU": 2.1923828125,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 33273,
+          "degrees": 182.7740478515625,
+          "xGU": -0.1064453125,
+          "yGU": 2.197265625,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 34639,
+          "degrees": 190.2777099609375,
+          "xGU": -0.392578125,
+          "yGU": 2.1650390625,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 36004,
+          "degrees": 197.77587890625,
+          "xGU": -0.6708984375,
+          "yGU": 2.0947265625,
+          "travelGU": 2.19921875,
+          "angularError": 3
+        },
+        {
+          "heading": 37369,
+          "degrees": 205.2740478515625,
+          "xGU": -0.939453125,
+          "yGU": 1.9892578125,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 38735,
+          "degrees": 212.7777099609375,
+          "xGU": -1.1904296875,
+          "yGU": 1.849609375,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 40100,
+          "degrees": 220.27587890625,
+          "xGU": -1.421875,
+          "yGU": 1.677734375,
+          "travelGU": 2.19921875,
+          "angularError": 1
+        },
+        {
+          "heading": 41465,
+          "degrees": 227.7740478515625,
+          "xGU": -1.62890625,
+          "yGU": 1.478515625,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 42831,
+          "degrees": 235.2777099609375,
+          "xGU": -1.80859375,
+          "yGU": 1.2529296875,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 44196,
+          "degrees": 242.77587890625,
+          "xGU": -1.9560546875,
+          "yGU": 1.005859375,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 45561,
+          "degrees": 250.2740478515625,
+          "xGU": -2.0712890625,
+          "yGU": 0.7421875,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 46927,
+          "degrees": 257.7777099609375,
+          "xGU": -2.150390625,
+          "yGU": 0.4658203125,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 48292,
+          "degrees": 265.27587890625,
+          "xGU": -2.1923828125,
+          "yGU": 0.1806640625,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 49657,
+          "degrees": 272.7740478515625,
+          "xGU": -2.197265625,
+          "yGU": -0.1064453125,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 51023,
+          "degrees": 280.2777099609375,
+          "xGU": -2.1650390625,
+          "yGU": -0.392578125,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 52388,
+          "degrees": 287.77587890625,
+          "xGU": -2.0947265625,
+          "yGU": -0.6708984375,
+          "travelGU": 2.19921875,
+          "angularError": 3
+        },
+        {
+          "heading": 53753,
+          "degrees": 295.2740478515625,
+          "xGU": -1.9892578125,
+          "yGU": -0.939453125,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 55119,
+          "degrees": 302.7777099609375,
+          "xGU": -1.849609375,
+          "yGU": -1.1904296875,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 56484,
+          "degrees": 310.27587890625,
+          "xGU": -1.677734375,
+          "yGU": -1.421875,
+          "travelGU": 2.19921875,
+          "angularError": 1
+        },
+        {
+          "heading": 57849,
+          "degrees": 317.7740478515625,
+          "xGU": -1.478515625,
+          "yGU": -1.62890625,
+          "travelGU": 2.2001953125,
+          "angularError": 1
+        },
+        {
+          "heading": 59215,
+          "degrees": 325.2777099609375,
+          "xGU": -1.2529296875,
+          "yGU": -1.80859375,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 60580,
+          "degrees": 332.77587890625,
+          "xGU": -1.005859375,
+          "yGU": -1.9560546875,
+          "travelGU": 2.19921875,
+          "angularError": 2
+        },
+        {
+          "heading": 61945,
+          "degrees": 340.2740478515625,
+          "xGU": -0.7421875,
+          "yGU": -2.0712890625,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        },
+        {
+          "heading": 63311,
+          "degrees": 347.7777099609375,
+          "xGU": -0.4658203125,
+          "yGU": -2.150390625,
+          "travelGU": 2.2001953125,
+          "angularError": 0
+        },
+        {
+          "heading": 64676,
+          "degrees": 355.27587890625,
+          "xGU": -0.1806640625,
+          "yGU": -2.1923828125,
+          "travelGU": 2.2001953125,
+          "angularError": 2
+        }
+      ]
+    }
+  ],
+  "source": "Isolated actual production movement solver; target/ability decisions excluded. Autonomous anchor travel and camera mapping separately verified by unit tests.",
+  "limits": "No physical-device or natural-foot-contact certification; eight drawn facings do not restrict arbitrary world travel."
+}

@@ -3,7 +3,7 @@ What can I say, it's just a bunch of rando I'm trying out.
 
 ## Resonance Bastion
 
-The game is on the `codex/resonance-foundation` development branch; `main`
+The latest checkpoint is on `codex/omnidirectional-recovery`; `main`
 currently contains only the original repository introduction. Start with the
 [thread recovery record](docs/PROJECT_RECOVERY.md) for the recovered checkpoint,
 available reference files, verification, and the next development step.
@@ -11,8 +11,7 @@ The [current review download guide](docs/review/CURRENT_REVIEW_DELIVERY.md)
 provides a mobile-readable PDF and the complete visual/audio review ZIP.
 The subsequent [animation audit](docs/review/ANIMATION_AUDIT.md) records timing
 fixes, unresolved art defects, and the per-asset quality checks.
-The [animation refinement review](docs/review/ANIMATION_REFINEMENT.md) is the latest
-checkpoint, with pose attachment, movement/action fixes and measured tutorial comparisons.
+The preceding [animation refinement review](docs/review/ANIMATION_REFINEMENT.md) covers with pose attachment, movement/action fixes and measured tutorial comparisons.
 Its [PDF, video and ZIP downloads](docs/review/REFINEMENT_DELIVERY.md) are suitable for mobile review.
 
 Development follows the [unchanged authoritative blueprint](docs/blueprint/Resonance_Bastion_Browser_Blueprint_Final.md).
@@ -23,3 +22,9 @@ Use Node >=22.12, `npm ci`, `npm run verify`, `npm run test:browser`.
 `npm run dev` starts the developer shell; `npm run build` produces static `dist/`.
 Assets use `/Project-Rando/` as the production base path. Build output and dependencies
 are not committed. No public deployment or physical Android verification is claimed.
+
+Latest checkpoint: [360° movement and recovery review](docs/review/OMNIDIRECTIONAL_RECOVERY.md),
+with [mobile PDF and ZIP downloads](docs/review/MOVEMENT_RECOVERY_DELIVERY.md).
+Data Management now exports/imports the supported playable state with checksum
+and rollback previews. `npm run audit:movement` and `npm run audit:economy`
+retain machine-readable evidence; reward arithmetic does not pay practice.

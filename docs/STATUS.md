@@ -6,8 +6,9 @@ Authority: [unchanged blueprint](blueprint/Resonance_Bastion_Browser_Blueprint_F
 |---|---|---|
 |0|Verified|Environment and static-subpath experiments in TEST_EVIDENCE.md|
 |1|Verified construction foundation|f3ee415 plus final FitBase preset/readability correction f2000cc; ten user closeout requirements in review/GATE1_CLOSEOUT.md|
-|2|Verified tutorial mechanics and initial production pipeline; new candidates Awaiting User Review|Real Bulwark/Bastion tutorial practice, bounded deployment/combat, durable checkpoint/results stub, original candidate animation/effects/audio; COMBAT_PIPELINE.md and TEST_EVIDENCE.md|
-|3–8|Designed|Ordinary reward-bearing campaign loop, receipts/injuries/recovery/progression/backups; remaining tactics/roster/bosses/modes; final presentation/accessibility/release|
+|2|Verified tutorial mechanics and initial production pipeline; reviewed 0.2.2 design direction approved, full per-asset motion refinement open|Real Bulwark/Bastion tutorial practice, bounded deployment/combat, durable checkpoint/results stub, original candidate animation/effects/audio; COMBAT_PIPELINE.md and TEST_EVIDENCE.md|
+|3|In progress|Current-slice backup/import/rollback and exact reward arithmetic verified; ordinary paid receipts/injuries/progression/emergency recovery remain open|
+|4–8|Designed|Remaining tactics/roster/bosses/modes; final presentation/accessibility/release|
 
 Gate1: three retained slots, atomic construction/ownership/capacity/history, projection/camera/input, distinct FitBase/Field, named strategic selection, routes/reservations, actual landscape reflow and durable accessibility preferences. Conditional approval is recorded in review/USER_VISUAL_APPROVAL.md. It does not approve diagnostic Rifle/Runner views, every animation, staging or the full roster.
 
@@ -30,3 +31,10 @@ cover/corner engagement; retained v1 checkpoints keep their original replay.
 The guided practice Mine is placed on a measured approach route. Full natural
 articulation and per-facing contacts/sockets remain open. See
 review/ANIMATION_REFINEMENT.md for current evidence and review files.
+
+2026-10-07 build 0.2.3: user approved the reviewed look/keypose direction and
+specified full 360° traversal. Full heading/mobile/camera checks pass; shared
+movement is independent of eight sprite facings. Current-slice Data Management
+now supports complete checksummed backup/import and fenced rollback/deletion.
+Exact reward arithmetic remains disconnected from practice/campaign payouts.
+See review/OMNIDIRECTIONAL_RECOVERY.md, RECOVERY_CONTRACT.md and ECONOMY_POLICY.md.

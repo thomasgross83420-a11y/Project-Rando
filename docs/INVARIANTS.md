@@ -11,3 +11,5 @@ See blueprint §§1–6, 19–20, 24–29 and T01–T20.
 - No silent repair, resurrection, reward inflation, hidden scaling or inventory manufacture.
 - Touch, keyboard, semantic lists and non-drag alternatives preserve essential access.
 - Every source category remains in the implementation map; early milestones preserve full scope.
+
+- Moving assets traverse at arbitrary angles through the full 360°; sprite-facing sampling and camera projection cannot quantize travel into eight allowed directions.

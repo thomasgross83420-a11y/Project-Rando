@@ -20,3 +20,7 @@ feedback: [ANIMATION_REFINEMENT.md](ANIMATION_REFINEMENT.md).
 No playable origin is deployed. Desktop automation cannot certify Lenovo tablet
 performance, TalkBack or Android audio/storage behavior. The complete earlier
 WAV review is linked from [CURRENT_REVIEW_DELIVERY.md](CURRENT_REVIEW_DELIVERY.md).
+
+The later [movement and recovery checkpoint](MOVEMENT_RECOVERY_DELIVERY.md)
+adds full-angle evidence, recovery UI and exact reward groundwork. The files
+above retain their original 0.2.2 snapshot and hashes.
