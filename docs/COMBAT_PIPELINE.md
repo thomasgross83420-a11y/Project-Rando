@@ -13,3 +13,13 @@ Rendering/DOM/audio: read-only BattleClock/camera/map/inspection/settings, no ta
 Native production contract is ASSETS.md plus combat manifest/source scripts. Foot anchor, collision relationship, native dimensions, camera/facing/state/ticks, trim/gutters, palette/lighting, shadow/body/effect depth, team shapes, damage/disabled overlays, reduced/static/high-contrast variants are explicit. Edit sources/rigs, rebuild, validate, inspect native sheets, inspect live tactical/strategic combat, then record user acceptance. Candidate existence is not approval. Full-dataset menu/accessibility/facing audit remains later; physical Android is Needs Device Check.
 
 Original audio definitions/actual files are AUDIO_DEFINITIONS.md. No audio/render clock or external service imports the simulation. Native decode/mixing tests and enabled/muted real-run hashes are required evidence, separate from listening review.
+
+## Animation audit follow-up — 2026-10-07
+
+User requires natural, accurate, detailed and heavily scrutinized behavior per
+asset; tablet optimization preserves scope. See review/ANIMATION_AUDIT.md and
+DEVICE_TARGET.md. Authored timeline sampling fixes effect truncation and hit
+duration; technical tests cover every frame boundary. Pixel audit exposes 427
+pose/overlay mismatch cases. Generic cut-point articulation and missing
+contact/phase landmarks remain quality work, not verified natural animation.
+No final-art acceptance or roster propagation follows from the timeline fixes.

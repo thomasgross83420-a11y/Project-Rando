@@ -1,4 +1,5 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, type Page, test } from '@playwright/test';
+
 async function create(page: Page) {
   await page.goto('./');
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
@@ -100,6 +101,29 @@ test('real tutorial is autonomous, paused, restarted from durable checkpoint, an
   await page
     .getByRole('button', { name: 'Confirm Discard Practice and Return Base', exact: true })
     .click();
+  // The hidden account still has its old balance during the asynchronous discard.
+  // Wait for the acknowledged return to base before testing durable reload.
+  await expect(page.locator('#preparation')).toBeVisible();
+  const discarded = await page.evaluate(
+    () =>
+      new Promise((resolve, reject) => {
+        const r = indexedDB.open('resonance-bastion-v1');
+        r.onerror = () => reject(r.error);
+        r.onsuccess = () => {
+          const db = r.result,
+            q = db.transaction('meta').objectStore('meta').get('practice.slot.0');
+          q.onerror = () => {
+            db.close();
+            reject(q.error);
+          };
+          q.onsuccess = () => {
+            resolve(q.result);
+            db.close();
+          };
+        };
+      }),
+  );
+  expect(discarded).toBeUndefined();
   await expect(page.locator('#account')).toContainText('600');
   await page.reload();
   await page.getByRole('button', { name: 'Continue', exact: true }).click();

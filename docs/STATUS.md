@@ -14,3 +14,10 @@ Gate1: three retained slots, atomic construction/ownership/capacity/history, pro
 Gate2: Tutorial Practice uses owned Bulwark/Bastion assets in a disposable guided or current-fortress clone. Sentry/Rifle/RepairNode/Barricade/Mine and Runner/Raider are functional. Combat is autonomous; pause/speeds, camera/map/inspection, audio/settings and checkpoint restart are the only battle controls. The real campaign receives zero rewards/injury/claims. This is the blueprint's Gate2 results stub, not completion of Gate3 economy. Only this Warden/doctrine fixture is implemented; other selected combinations are preserved and explain their Gate4 dependency.
 
 The baseline source, integer combat and real browser acceptance are separately evidenced. No final candidate-art acceptance, physical Android performance, TalkBack certification, public deployment or offline readiness is claimed. No mass roster production has started.
+
+2026-10-07 animation audit: authored frame timing now governs actor/effect playback;
+explosion truncation and hit-duration mismatch corrected. Technical and pixel
+checks are separate: 427 pose/overlay mismatch cases remain open, with generic
+articulation and contact/phase authoring still requiring refinement. See
+review/ANIMATION_AUDIT.md and evidence/ANIMATION_AUDIT.json. Lenovo Tab M10 FHD Plus
+is the optimization measurement target; full blueprint scope/detail remains the goal.

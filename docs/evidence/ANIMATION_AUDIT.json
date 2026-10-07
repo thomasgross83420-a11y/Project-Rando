@@ -1,0 +1,373 @@
+{
+  "date": "2026-10-07",
+  "scope": "Gate2 native art structural and pose-overlay audit; no creative approval",
+  "atlasVersion": "rb-combat-art-v1",
+  "structuralChecks": {
+    "result": "passed",
+    "frames": 1246,
+    "sequences": 401,
+    "checks": [
+      "atlas hashes/dimensions",
+      "unique IDs",
+      "native bounds/anchors",
+      "dense frame order",
+      "positive integer timings"
+    ]
+  },
+  "coverage": {
+    "objective.harmonic_core": {
+      "poses": [
+        "objective.harmonic_core.view0",
+        "objective.harmonic_core.view1",
+        "objective.harmonic_core.view2",
+        "objective.harmonic_core.view3"
+      ],
+      "states": [
+        "damaged",
+        "hit",
+        "idle",
+        "scuffed",
+        "wreck"
+      ],
+      "frames": 36
+    },
+    "friendly.sentry": {
+      "poses": [
+        "friendly.sentry.face0",
+        "friendly.sentry.face1",
+        "friendly.sentry.face2",
+        "friendly.sentry.face3",
+        "friendly.sentry.face4",
+        "friendly.sentry.face5",
+        "friendly.sentry.face6",
+        "friendly.sentry.face7"
+      ],
+      "states": [
+        "attack",
+        "damaged",
+        "hit",
+        "idle",
+        "scuffed",
+        "wreck"
+      ],
+      "frames": 104
+    },
+    "friendly.repair_node": {
+      "poses": [
+        "friendly.repair_node.view0",
+        "friendly.repair_node.view1",
+        "friendly.repair_node.view2",
+        "friendly.repair_node.view3"
+      ],
+      "states": [
+        "channel",
+        "damaged",
+        "hit",
+        "idle",
+        "scuffed",
+        "wreck"
+      ],
+      "frames": 52
+    },
+    "warden.bulwark": {
+      "poses": [
+        "warden.bulwark.face0",
+        "warden.bulwark.face1",
+        "warden.bulwark.face2",
+        "warden.bulwark.face3",
+        "warden.bulwark.face4",
+        "warden.bulwark.face5",
+        "warden.bulwark.face6",
+        "warden.bulwark.face7"
+      ],
+      "states": [
+        "ability",
+        "aim",
+        "attack",
+        "damaged",
+        "hit",
+        "idle",
+        "incapacitated",
+        "move",
+        "scuffed"
+      ],
+      "frames": 264
+    },
+    "friendly.standard_barricade": {
+      "poses": [
+        "friendly.standard_barricade.view0",
+        "friendly.standard_barricade.view1",
+        "friendly.standard_barricade.view2",
+        "friendly.standard_barricade.view3"
+      ],
+      "states": [
+        "damaged",
+        "hit",
+        "idle",
+        "scuffed",
+        "wreck"
+      ],
+      "frames": 36
+    },
+    "enemy.raider": {
+      "poses": [
+        "enemy.raider.face0",
+        "enemy.raider.face1",
+        "enemy.raider.face2",
+        "enemy.raider.face3",
+        "enemy.raider.face4",
+        "enemy.raider.face5",
+        "enemy.raider.face6",
+        "enemy.raider.face7"
+      ],
+      "states": [
+        "aim",
+        "attack",
+        "damaged",
+        "hit",
+        "idle",
+        "incapacitated",
+        "move",
+        "scuffed"
+      ],
+      "frames": 232
+    },
+    "enemy.runner": {
+      "poses": [
+        "enemy.runner.face0",
+        "enemy.runner.face1",
+        "enemy.runner.face2",
+        "enemy.runner.face3",
+        "enemy.runner.face4",
+        "enemy.runner.face5",
+        "enemy.runner.face6",
+        "enemy.runner.face7"
+      ],
+      "states": [
+        "aim",
+        "attack",
+        "damaged",
+        "hit",
+        "idle",
+        "incapacitated",
+        "move",
+        "scuffed"
+      ],
+      "frames": 232
+    },
+    "friendly.rifle_squad": {
+      "poses": [
+        "friendly.rifle_squad.face0",
+        "friendly.rifle_squad.face1",
+        "friendly.rifle_squad.face2",
+        "friendly.rifle_squad.face3",
+        "friendly.rifle_squad.face4",
+        "friendly.rifle_squad.face5",
+        "friendly.rifle_squad.face6",
+        "friendly.rifle_squad.face7"
+      ],
+      "states": [
+        "aim",
+        "attack",
+        "damaged",
+        "hit",
+        "idle",
+        "incapacitated",
+        "move",
+        "scuffed"
+      ],
+      "frames": 232
+    },
+    "friendly.proximity_mine": {
+      "poses": [
+        "friendly.proximity_mine.view0",
+        "friendly.proximity_mine.view1",
+        "friendly.proximity_mine.view2",
+        "friendly.proximity_mine.view3"
+      ],
+      "states": [
+        "damaged",
+        "hit",
+        "idle",
+        "scuffed",
+        "wreck"
+      ],
+      "frames": 36
+    },
+    "fx.shield": {
+      "poses": [
+        "fx"
+      ],
+      "states": [
+        "shield"
+      ],
+      "frames": 4
+    },
+    "fx.explosion": {
+      "poses": [
+        "fx"
+      ],
+      "states": [
+        "explosion"
+      ],
+      "frames": 6
+    },
+    "fx.impact": {
+      "poses": [
+        "fx"
+      ],
+      "states": [
+        "impact"
+      ],
+      "frames": 4
+    },
+    "fx.emissive": {
+      "poses": [
+        "fx"
+      ],
+      "states": [
+        "idle"
+      ],
+      "frames": 4
+    },
+    "fx.kinetic": {
+      "poses": [
+        "fx"
+      ],
+      "states": [
+        "kinetic"
+      ],
+      "frames": 4
+    }
+  },
+  "effectDurations": {
+    "impact": 20,
+    "explosion": 30,
+    "shield": 20
+  },
+  "damageOverlayAlignment": {
+    "result": "failed",
+    "poseBandPairsChecked": 1280,
+    "mismatchedPairs": 427,
+    "worstOutsidePixels": 11,
+    "affectedContent": {
+      "enemy.raider": 108,
+      "enemy.runner": 113,
+      "friendly.repair_node": 8,
+      "friendly.rifle_squad": 101,
+      "friendly.sentry": 16,
+      "warden.bulwark": 81
+    },
+    "samples": [
+      {
+        "frame": "warden.bulwark.face0.move.6",
+        "band": "damaged",
+        "outsideBodyPixels": 11
+      },
+      {
+        "frame": "friendly.rifle_squad.face0.move.6",
+        "band": "damaged",
+        "outsideBodyPixels": 10
+      },
+      {
+        "frame": "enemy.raider.face0.move.6",
+        "band": "damaged",
+        "outsideBodyPixels": 9
+      },
+      {
+        "frame": "enemy.raider.face0.move.6",
+        "band": "scuffed",
+        "outsideBodyPixels": 9
+      },
+      {
+        "frame": "enemy.raider.face7.move.5",
+        "band": "damaged",
+        "outsideBodyPixels": 9
+      },
+      {
+        "frame": "enemy.raider.face7.move.6",
+        "band": "damaged",
+        "outsideBodyPixels": 9
+      },
+      {
+        "frame": "friendly.rifle_squad.face0.move.5",
+        "band": "damaged",
+        "outsideBodyPixels": 9
+      },
+      {
+        "frame": "friendly.rifle_squad.face0.move.6",
+        "band": "scuffed",
+        "outsideBodyPixels": 9
+      },
+      {
+        "frame": "warden.bulwark.face1.move.5",
+        "band": "damaged",
+        "outsideBodyPixels": 9
+      },
+      {
+        "frame": "warden.bulwark.face1.move.6",
+        "band": "damaged",
+        "outsideBodyPixels": 9
+      },
+      {
+        "frame": "enemy.raider.face0.move.5",
+        "band": "damaged",
+        "outsideBodyPixels": 8
+      },
+      {
+        "frame": "enemy.raider.face7.move.5",
+        "band": "scuffed",
+        "outsideBodyPixels": 8
+      },
+      {
+        "frame": "enemy.raider.face7.move.6",
+        "band": "scuffed",
+        "outsideBodyPixels": 8
+      },
+      {
+        "frame": "enemy.runner.face0.move.5",
+        "band": "damaged",
+        "outsideBodyPixels": 8
+      },
+      {
+        "frame": "enemy.runner.face0.move.6",
+        "band": "damaged",
+        "outsideBodyPixels": 8
+      },
+      {
+        "frame": "enemy.runner.face2.move.2",
+        "band": "damaged",
+        "outsideBodyPixels": 8
+      },
+      {
+        "frame": "enemy.runner.face2.move.5",
+        "band": "damaged",
+        "outsideBodyPixels": 8
+      },
+      {
+        "frame": "enemy.runner.face2.move.6",
+        "band": "damaged",
+        "outsideBodyPixels": 8
+      },
+      {
+        "frame": "warden.bulwark.face0.move.5",
+        "band": "damaged",
+        "outsideBodyPixels": 8
+      },
+      {
+        "frame": "warden.bulwark.face4.move.2",
+        "band": "damaged",
+        "outsideBodyPixels": 8
+      }
+    ],
+    "meaning": "Damage overlays authored on idle silhouettes extend beyond some animated poses; correct attachment/clipping before final acceptance."
+  },
+  "manualReviewRequired": [
+    "Anatomy, articulated joints, armor/equipment continuity and natural stride/contact",
+    "Per-facing muzzle/tool/contact sockets and authoritative action/anticipation/recovery alignment",
+    "Cast-to-release continuity, support channel phase and terminal pose quality",
+    "All supported zoom/rotations, team identity and reduced/high-contrast behavior in actual combat",
+    "Physical Lenovo Tab M10 FHD Plus motion/input/performance and listening"
+  ],
+  "acceptance": "Current candidates remain Awaiting User Review. Structural passes are not natural-motion certification."
+}
