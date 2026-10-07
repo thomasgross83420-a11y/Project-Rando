@@ -3,9 +3,9 @@
 Build 0.2.4-campaign-result-contracts; branch `codex/campaign-result-contracts`.
 
 - [3-page mobile review PDF](https://raw.githubusercontent.com/thomasgross83420-a11y/Project-Rando/codex/campaign-result-contracts/docs/review/Resonance_Bastion_Result_Contracts_Review.pdf) · 0.14 MB
-  SHA-256: 5412136993770633392bad8bfec7c7b97408c1ae088907c84f969faf5abe9e12
+  SHA-256: c1e372f7052784aadd23ce48c88644c70447860dd0e16b9a57a46eea6f8e41c7
 - [Complete review and evidence ZIP](https://raw.githubusercontent.com/thomasgross83420-a11y/Project-Rando/codex/campaign-result-contracts/docs/review/Resonance_Bastion_Result_Contracts_Review.zip) · 0.22 MB
-  SHA-256: 02c10b9da99125e26dbdffe1a9921754cab612b6b5597a5300e370d65112f829
+  SHA-256: 96ada33e9b6931b66d4537dae98690ddc6b377d4175ff137be4cf411b1626be7
 
 The PDF explains the staged result system, exact progression and recovery kernels,
 verified tests and the missing accuracy-growth rule. Its plot uses measured
