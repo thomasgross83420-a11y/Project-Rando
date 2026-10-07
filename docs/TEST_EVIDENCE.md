@@ -218,3 +218,35 @@ Ten final native production views: FitBase/tactical/close selected perceived hos
 Known limits: software GPU acceleration can trigger explicit performance pause; tests lower speed and Resume without dropping mechanics. No Android frame-rate/thermal/memory/TalkBack certification, native OS visibility proof, full soundtrack or final art acceptance. Pages remains disabled/unverified; prior Actions administration403 is an integration administration-read prerequisite, not evidence of a paid-plan restriction. No forbidden retry, deployment/settings change, public URL or offline claim. All later campaign/roster/boss/mode/progression/accessibility/presentation categories remain required.
 
 Review-package check: local HTTP preview loaded16 native/contact images and18 original audio controls, keyboard checkbox and portrait/landscape nonoverflow passed with no application errors. Workspace Chromium refused file:// navigation with ERR_BLOCKED_BY_ADMINISTRATOR; no claim is made that opening the HTML directly works on Android. GIFs are optional user-opened links, not compulsory auto-playing review motion.
+
+## Archived-thread recovery verification — 2026-10-07
+
+Recovered `codex/resonance-foundation` checkpoint `6d6c8e283fa809a4622b50c358235156ab820cb3`;
+`main` is still the initial README. See [PROJECT_RECOVERY.md](PROJECT_RECOVERY.md)
+for surviving references, approval boundaries, unavailable attachments and next work.
+No gameplay, blueprint, dependency or save-schema changes were made in this recovery.
+
+Fresh commands actually passed: `npm ci`; `npm run verify` (types, lint,
+29 unit tests/eight files, 3600-tick Gate0 deterministic scenario, build);
+`npm run format:check`; `npm run test:browser` (19/19, 4.1 minutes);
+`npx vite build --ssr scripts/tutorial-headless.ts --outDir .cache/headless`
+then `node scripts/tutorial-headless.mjs`; Python foundation/lighting/role/combat
+validators; live `capture-gate2.mjs`, `check-audio.mjs`, `package-gate2-review.py`
+and local-HTTP `check-gate2-review.mjs`. Node24.19.0/npm11.9.0/Chromium151.0.7922.173/
+Pillow12.3.0 match the prior recorded environment. Blueprint SHA256 unchanged.
+
+Actual tutorial headless groupings1/2/4/8/12 each won at6150ticks,24kills,30TP,
+hash8961c7817d3d73989a00c3e377387e6dde1ebeee16d219d5c397afc2be7839c7,
+matching the prior canonical fixture. Browser regression independently passes
+enabled/muted final-hash equality, checkpoint restart, failed-result retry and
+writer takeover. Live development capture generated10 views with no application
+errors/overflow and four known driver ReadPixels warnings. Native audio decoded
+18/18; local gallery checked16 images/18 audio controls, keyboard and two layouts.
+Review artifacts remain outside Git and are reproducible from preserved sources.
+
+Existing12 lint information notices, two upstream Zod annotation warnings and the
+Phaser chunk warning remain nonfatal. Vite development public-manifest messages
+were checked: imports return200 JavaScript and the actual app/capture/audio work;
+these are server warnings, not a load failure, so no setup patch was necessary.
+No new creative approval, public deployment, offline readiness, physical Android
+or TalkBack verification is implied.
