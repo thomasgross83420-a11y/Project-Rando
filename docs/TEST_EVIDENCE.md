@@ -175,7 +175,7 @@ were observed immediately adjacent to their dark backing: contrast7.419:1 and
 observed samples only, not whole-scene WCAG conformance.
 
 Review gallery: ten sheets/thirteen checklist controls, all images loaded,
-nearest-neighbor CSS, no horizontal overflow at800×1280, keyboard checkbox works,
+nearest-neighbor CSS, no horizontal overflow at 800×1280, keyboard checkbox works,
 no console/HTTP errors. Local loopback inspection is not public/offline proof.
 Exact evidence: review/GATE1_LIGHTING_R1_EVIDENCE.json. Blueprint SHA256 unchanged.
 Status remains Awaiting User Review; Gate1 incomplete, Gate2/mass roster paused.
@@ -201,7 +201,7 @@ Implemented modules and baseline contract: COMBAT_PIPELINE.md. Real18Runner/sixR
 
 Commands actually run: npm run format/format:check/typecheck/lint/test/test:scenario/build/test:browser/traceability; npx vite build --ssr scripts/tutorial-headless.ts --outDir .cache/headless; node scripts/tutorial-headless.mjs (canonical and saved browser checkpoint); Python combat/role/foundation validators and repeat combat generation; node scripts/check-audio.mjs; production scripts/capture-gate2.mjs and package-gate2-review.py; git diff --check. Strict checks pass;29 unit tests/eight files pass. Lint has12 informational template-style notices, no errors/warnings. Production has two upstream Zod comment-annotation warnings and the existing large Phaser chunk warning; none is represented as a measured performance result.
 
-The final extended production-subpath suite passed19/19 with no retries/skips/flaky results. A separately added background/audio-keyboard fixture passed. Final inspector-only display corrections are followed by a focused production rerun of background/preferences, context-loss/result-abort and competing tabs, plus new screenshots. Browser acceptance is actual Chromium151.0.7922.173 at800×1280,1280×800,412×915 and320-wide reflow, not physical Android. The one earlier17/18 run failed because its test clicked Resume before context restoration; the game correctly guarded unresolved renderer state. The test now awaits the actual restoration status, verifies no simulation ticks while paused, and explicitly resumes. The corrected full run passed. An added native audio regression then demonstrated that Camera-overlay dismissal resumed combat but left audio suspended. Dismissal now respects any remaining pauses/new modal/changed session, refreshes its status, and resumes audio only when gameplay is eligible. The final extended suite verifies this correction. Foreground presentation clocks preserve caption/health deadlines through hidden/frozen absence;29 unit tests include that independent behavior fixture. Earlier unit/schema/pivot/pixel-packing failures were corrected before completion, never counted as passes.
+The final extended production-subpath suite passed19/19 with no retries/skips/flaky results. A separately added background/audio-keyboard fixture passed. Final inspector-only display corrections are followed by a focused production rerun of background/preferences, context-loss/result-abort and competing tabs, plus new screenshots. Browser acceptance is actual Chromium151.0.7922.173 at 800×1280,1280×800,412×915 and320-wide reflow, not physical Android. The one earlier17/18 run failed because its test clicked Resume before context restoration; the game correctly guarded unresolved renderer state. The test now awaits the actual restoration status, verifies no simulation ticks while paused, and explicitly resumes. The corrected full run passed. An added native audio regression then demonstrated that Camera-overlay dismissal resumed combat but left audio suspended. Dismissal now respects any remaining pauses/new modal/changed session, refreshes its status, and resumes audio only when gameplay is eligible. The final extended suite verifies this correction. Foreground presentation clocks preserve caption/health deadlines through hidden/frozen absence;29 unit tests include that independent behavior fixture. Earlier unit/schema/pivot/pixel-packing failures were corrected before completion, never counted as passes.
 
 Canonical authored-army fixture: groupings1/2/4/8/12 all Victory at6150ticks,24kills,30TP,Core10240000fixed units (10000 Integrity), hash8961c7817d3d73989a00c3e377387e6dde1ebeee16d219d5c397afc2be7839c7. Clock fixtures verify.5/1/2/4 at equal authoritative ticks and composable manual/modal/background pauses. Actual production tutorial with audio enabled then muted clears24/24 with identical hash0906b60beab68a8a8791bc285f4335c9a120c8ea8a38a7c4b43dbece859da320 at6010ticks. The saved browser starting plan/UUID army independently replays headlessly to that exact terminal hash. These two hashes describe different starting UUID armies; identical inputs, not arbitrary new campaign identities, must match.
 
@@ -355,3 +355,39 @@ single charge, fixed blast position and damage; every canonical grouping checks
 that the newly placed Mine actually warns and hits. Detailed evidence and
 limitations: review/ANIMATION_REFINEMENT.md. The fresh actual-UI video and
 pixel/source sheets accompany the PDF/ZIP; no physical Android claim.
+
+## Full-angle movement and supported recovery — build 0.2.3,2026-10-07
+
+`npm run verify` passed strict types/lint/scenario/build and 67 unit tests across
+14 files. Final affected backup/movement/economy cases were rerun on the current
+source. The existing v1 exact replay and v2 canonical hash remain unchanged.
+New movement evidence: 65,536 heading roundtrips (zero index error), 48 intermediate
+production-solver angles for each of four mobile body types, actual 48-direction
+Rifle/Bulwark anchor-return paths, and all four camera projections/eight facings.
+No renderer-facing limit or diagonal speed bonus is introduced.
+
+Browser integration: initial 24/24 passed; extended run 25/26 passed with one
+harness locator timeout (`getByLabel` with exact text included nested option
+text). Accessible combobox-name selection corrected the test; all seven recovery
+cases reran and passed in 27.5 s. All 26 distinct scenarios are verified across those
+runs; do not report a single 26/26 full run. No retry or skipped test was used.
+Native cases: File-object/pasted imports, selected-slot wallet replacement,
+previous rollback/reload, preview-before-delete, injected quota throw after other
+slot writes queued (whole transaction abort then exact retry), stale writer
+rejection, retained practice export/conflict protection, unknown future journal
+preservation and optional accessibility import/reload. Physical Android sharing,
+file picking and persistence remain unmeasured.
+
+`npm run audit:movement` records docs/evidence/MOVEMENT_360.json.
+`npm run audit:economy` records 97,200 synthetic arithmetic cases and 28,800 tier
+rate checks, matches all six blueprint reference rows, and captures actual
+24 tutorial destruction allocations by frozen packet origins. This is exact
+policy groundwork, not paid receipts, generated-plan victories, full contribution
+allocation or 100-seed economy balance. Actual practice still pays 0.
+
+The new capture script records four actual production-dialog screenshots with
+no page errors at 800×1280. A UI-created disposable campaign buys one 60 Credit
+barricade; import/rollback are previewed only. The plotted 1-second movement rays
+come from the production solver, not hand-illustrated approximations. Source
+art/active combat atlases are unchanged. Readable review and verified ZIP follow
+review/OMNIDIRECTIONAL_RECOVERY.md and MOVEMENT_RECOVERY_DELIVERY.md.

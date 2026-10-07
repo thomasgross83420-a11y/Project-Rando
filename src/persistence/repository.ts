@@ -1,4 +1,5 @@
 import type { Database } from './database';
+import type { ProgressFence } from './fence';
 import { validateCampaign, type Campaign } from './campaign';
 interface Writer {
   tabID: string;
@@ -9,6 +10,8 @@ export class CampaignRepository {
   readonly tabID = crypto.randomUUID();
   writer: Writer | undefined;
   readonly memory = new Map<number, Campaign>();
+  readonly memoryPrevious = new Map<number, Campaign>();
+  readonly memoryFences = new Map<string, ProgressFence>();
   readonly practiceSlots = new Set<number>();
   private memoryLastOpened: number | undefined;
   readonly temporary: boolean;
@@ -91,6 +94,7 @@ export class CampaignRepository {
         throw new Error('Resolve retained practice before editing this campaign');
       const current = this.memory.get(valid.slot);
       this.compare(current, expected);
+      if (current) this.memoryPrevious.set(valid.slot, structuredClone(current));
       this.memory.set(valid.slot, structuredClone(valid));
       return;
     }
@@ -131,7 +135,10 @@ export class CampaignRepository {
     );
   }
   private compare(current: Campaign | undefined, expected: Campaign | undefined): void {
-    if (current?.lineage !== expected?.lineage || current?.revision !== expected?.revision)
+    if (
+      current?.lineage.toLowerCase() !== expected?.lineage.toLowerCase() ||
+      current?.revision !== expected?.revision
+    )
       throw new Error('Campaign changed. Reload before retry.');
   }
   async opened(slot: number): Promise<void> {

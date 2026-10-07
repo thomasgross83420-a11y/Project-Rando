@@ -22,3 +22,19 @@ coherent autonomous tutorial and its complete animation/effects/audio production
 contract. No mass roster production until that pipeline has demonstrated consistent
 results. No Astra review is requested. Approval of this foundation does not
 certify physical Android, TalkBack, audio listening or production deployment.
+
+## Refinement checkpoint approval — 2026-10-07
+
+User reviewed build0.2.2 PDF/live motion and the Rifle keypose source study:
+“Everything looks great to me”. They authorized continued development and
+emphasized full 360° traversal for every moving asset, independent of 2.5D
+presentation. Record the reviewed look/design direction as approved for continued
+refinement. This does not replace technical checks of every joint/contact/socket
+or certify physical-device performance; the four-key guide is not a finished
+runtime sheet. No additional approval is needed for the authorized next steps.
+
+Movement requirement: authoritative positions and headings support arbitrary
+angles, not only the eight sprite directions. Eight-direction pixel-art facing
+selection must never quantize simulation travel or restrict available routes.
+Static structures retain preparation placement rotations and do not acquire
+invented locomotion. Obstacles and body-clearance rules still apply.

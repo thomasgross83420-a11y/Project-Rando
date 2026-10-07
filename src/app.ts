@@ -15,6 +15,8 @@ import { PreferencesStore } from './persistence/preferences';
 import { analyzeRoutes } from './construction/geometry';
 import { solidFootprints, footprint } from './persistence/campaign';
 import { TutorialSession, practiceStore } from './ui/tutorial';
+import { BackupStore } from './persistence/backup';
+import { DataManagement } from './ui/data-management';
 const root = document.querySelector<HTMLElement>('#app');
 if (!root) throw new Error('Missing application root');
 root.innerHTML = `<header><p class="eyebrow">RESONANCE BASTION · CONSTRUCTION DEVELOPMENT</p><h1>Resonance Bastion</h1><p>Build a permanent fortress. Its defenders will fight autonomously.</p></header><p id="status" role="status">Checking retained storage…</p><div id="title"></div><div id="preparation" hidden><h2 id="campaign-heading"></h2><p id="account"></p><div id="prep-layout"><aside id="prep-sidebar" aria-label="Preparation tools"><h3>Camera and build</h3><nav aria-label="Camera controls">${[
@@ -32,7 +34,7 @@ root.innerHTML = `<header><p class="eyebrow">RESONANCE BASTION · CONSTRUCTION D
   .map(([id, label]) => `<button data-camera="${id}">${label}</button>`)
   .join(
     '',
-  )}</nav><nav aria-label="Spatial tools"><button id="routes-toggle" aria-pressed="false">Show Routes</button><label>Route clearance <select id="route-radius"><option value="768">Heavy · 0.75 GU</option><option value="461">Ordinary · 0.45 GU</option></select></label><button id="prep-accessibility">Accessibility</button></nav><div id="inventory-host"></div><div id="catalog-host"></div><nav aria-label="Entrance navigation">${[1, 2, 3, 4, 5, 6].map((n) => `<button data-front="${n}">Front ${n}</button>`).join('')}</nav></aside><div id="prep-field"><section id="world" aria-label="Fortress field"></section><p id="camera-summary" aria-live="off"></p><details class="spatial-legend"><summary>Map and marker legend</summary><p>Strategic badges: crystal = Core; barrel = tower; wall = barrier; chevron = friendly; number = grouped assets. Solid line: purchased land. Hatched square: Core reservation. Narrow double hatch: Warden pad. Numbered entrance: Front 1–6. Dashed line: validated route; ×: blocked entrance. Named inventory provides selection and camera jump.</p></details></div><aside id="prep-details" aria-label="Placement and details"><h3>Placement and inspection</h3><div id="construction"></div><p id="route-summary" aria-live="off"></p><button id="tutorial-practice">Tutorial Practice</button><button id="return-title">Return to title</button></aside></div></div><dialog id="dialog" aria-labelledby="dialog-heading"><h2 id="dialog-heading"></h2><div id="dialog-body"></div><button id="close-dialog">Cancel / close</button></dialog>`;
+  )}</nav><nav aria-label="Spatial tools"><button id="routes-toggle" aria-pressed="false">Show Routes</button><label>Route clearance <select id="route-radius"><option value="768">Heavy · 0.75 GU</option><option value="461">Ordinary · 0.45 GU</option></select></label><button id="prep-accessibility">Accessibility</button></nav><div id="inventory-host"></div><div id="catalog-host"></div><nav aria-label="Entrance navigation">${[1, 2, 3, 4, 5, 6].map((n) => `<button data-front="${n}">Front ${n}</button>`).join('')}</nav></aside><div id="prep-field"><section id="world" aria-label="Fortress field"></section><p id="camera-summary" aria-live="off"></p><details class="spatial-legend"><summary>Map and marker legend</summary><p>Strategic badges: crystal = Core; barrel = tower; wall = barrier; chevron = friendly; number = grouped assets. Solid line: purchased land. Hatched square: Core reservation. Narrow double hatch: Warden pad. Numbered entrance: Front 1–6. Dashed line: validated route; ×: blocked entrance. Named inventory provides selection and camera jump.</p></details></div><aside id="prep-details" aria-label="Placement and details"><h3>Placement and inspection</h3><div id="construction"></div><p id="route-summary" aria-live="off"></p><button id="tutorial-practice">Tutorial Practice</button><button id="prep-data">Data Management</button><button id="return-title">Return to title</button></aside></div></div><dialog id="dialog" aria-labelledby="dialog-heading"><h2 id="dialog-heading"></h2><div id="dialog-body"></div><button id="close-dialog">Cancel / close</button></dialog>`;
 const byId = (id: string): HTMLElement => {
   const e = document.getElementById(id);
   if (!e) throw new Error(`Missing ${id}`);
@@ -62,11 +64,12 @@ function modal(title: string, html: string): void {
   byId('close-dialog').focus();
 }
 let creationBusy = false;
+let dataManagement: DataManagement | undefined;
 button('close-dialog', () => {
-  if (!creationBusy) dialog.close();
+  if (!creationBusy && !dataManagement?.busy) dialog.close();
 });
 dialog.addEventListener('cancel', (e) => {
-  if (creationBusy) e.preventDefault();
+  if (creationBusy || dataManagement?.busy) e.preventDefault();
 });
 let database: Database | undefined;
 try {
@@ -223,13 +226,35 @@ async function renderTitle(): Promise<void> {
         'THIRD_PARTY_NOTICES.txt">Third-party licenses</a><p>Visual foundation conditionally approved. Combat candidates and complete roster review remain separate.</p>',
     ),
   );
-  button('data', () => {
-    modal(
-      'Data Management',
-      '<p>Export a currently opened campaign from Preparation. Import, Restore Previous and deletion require the complete validated recovery interface in Gate 3 and remain Designed.</p>',
-    );
-  });
+  button('data', () => openData());
 }
+async function openData(exportSlots?: number[]): Promise<void> {
+  const repo = repository;
+  if (!repo) throw new Error('Start a retained or explicit temporary session first');
+  modal('Data Management', '<div id="data-host"></div>');
+  dataManagement = new DataManagement(
+    byId('data-host'),
+    repo,
+    new BackupStore(repo, practiceStore(repo)),
+    preferences,
+    status,
+    async () => {
+      preparation = undefined;
+      choice = undefined;
+      if (view) {
+        view.campaign = undefined;
+        view.ghost = undefined;
+      }
+      byId('preparation').hidden = true;
+      byId('title').hidden = false;
+      audio.configure(preferences.value.audio);
+      await renderTitle();
+    },
+  );
+  await dataManagement.open();
+  if (exportSlots) await dataManagement.prepare(exportSlots);
+}
+button('prep-data', () => openData());
 async function slotDialog(isNew: boolean): Promise<void> {
   const slots = (await repository?.slots()) ?? [];
   modal(
@@ -453,28 +478,7 @@ function renderPreparation(): void {
   });
   button('undo', () => transact(() => p.history('undo')));
   button('redo', () => transact(() => p.history('redo')));
-  button('export-campaign', () => {
-    const url = URL.createObjectURL(
-      new Blob(
-        [
-          JSON.stringify(
-            { format: 'resonance-foundation-backup-v1', campaign: p.campaign },
-            null,
-            2,
-          ),
-        ],
-        { type: 'application/json' },
-      ),
-    );
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `resonance-slot-${c.slot + 1}.json`;
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-    status(
-      'Campaign bytes offered for download. Confirm the file was stored externally. Import interface is still Designed.',
-    );
-  });
+  button('export-campaign', () => openData([c.slot]));
   // Real landscape tools/details regions; preserve one set of semantic controls.
   const inventory = byId('construction').querySelector('[aria-label="Owned inventory"]');
   const catalog = byId('construction').querySelector('[aria-label="Construction catalog"]');

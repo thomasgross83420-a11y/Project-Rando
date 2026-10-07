@@ -26,7 +26,7 @@ export const practiceSchema = z
     schema: z.literal(1),
     kind: z.literal('tutorial-practice'),
     slot: z.number().int().min(0).max(2),
-    lineage: z.uuid(),
+    lineage: z.uuid().transform((id) => id.toLowerCase()),
     revision: z.number().int().nonnegative(),
     sequence: z
       .string()
@@ -126,7 +126,7 @@ export function validatePracticeArmy(c: Campaign, army: StartAsset[]): void {
 }
 export class PracticeStore {
   readonly memory = new Map<number, PracticeCheckpoint>();
-  private memorySequence = new Map<number, string>();
+  readonly memorySequence = new Map<number, string>();
   constructor(readonly repository: CampaignRepository) {}
   async read(c: Campaign): Promise<PracticeCheckpoint | undefined> {
     const raw = this.repository.database
@@ -179,7 +179,7 @@ export class PracticeStore {
             const saved = tx.objectStore('campaigns').get(c.slot);
             saved.onsuccess = guard(() => {
               const before = saved.result as Campaign | undefined;
-              if (before?.lineage !== c.lineage || before.revision !== c.revision)
+              if (before?.lineage.toLowerCase() !== c.lineage || before.revision !== c.revision)
                 throw new Error('Campaign changed; reload before retry');
               work(tx.objectStore('meta'), done, guard);
             });

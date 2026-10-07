@@ -18,7 +18,7 @@ const placement = z
   .strict();
 export const ownedSchema = z
   .object({
-    id: z.uuid(),
+    id: z.uuid().transform((id) => id.toLowerCase()),
     type: contentID,
     hp: z.number().int().min(0),
     xp: z.literal(0),
@@ -37,7 +37,7 @@ export const campaignSchema = z
     simulationVersion: z.enum(['rb-sim-v1', 'rb-sim-v2']),
     generatorVersion: z.literal('rb-generator-v1'),
     economyPolicyVersion: z.literal('economy.duration_wave_v1'),
-    lineage: z.uuid(),
+    lineage: z.uuid().transform((id) => id.toLowerCase()),
     revision: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
     name: z
       .string()
@@ -145,6 +145,8 @@ export function validateCampaign(input: unknown): Campaign {
     ids.add(a.id);
     const d = foundation[a.type];
     if (a.hp > d.hp * 1024) throw new Error('Durability exceeds baseline');
+    if (a.paidCredits !== 0 && a.paidCredits !== d.cost)
+      throw new Error('Unsupported foundation investment ledger');
     if (d.category === 'warden') {
       if (wardens.has(a.type)) throw new Error('Duplicate Warden');
       wardens.add(a.type);

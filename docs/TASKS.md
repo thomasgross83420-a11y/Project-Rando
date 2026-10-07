@@ -23,8 +23,8 @@ Gate 1 closeout passed: see review/GATE1_CLOSEOUT.md. Conditional foundation app
    source overlays retain their historical427 mismatches and are not used
    directly on moving poses. See review/ANIMATION_REFINEMENT.md.
 2. Replace remaining generic articulation with explicit per-asset joints,
-   foot/contact and weapon/tool sockets; review source design/keyposes before
-   propagating to the roster. The four-key Rifle guide is not a runtime sheet.
+   foot/contact and weapon/tool sockets; continue under the user-approved design/keypose direction
+   and verify actual contacts before roster propagation. The four-key Rifle guide is not a runtime sheet.
    Validate moving-and-firing blending, eight directions and downed weight.
 3. Measure physical tablet motion, all speeds, readability, input, audio and
    interruption behavior. Keep Android/TalkBack checks separate from desktop.
@@ -33,3 +33,13 @@ Gate 1 closeout passed: see review/GATE1_CLOSEOUT.md. Conditional foundation app
    Tutorial role/injury comparisons are evidence, not full-roster/economy balance.
 
 Full wizard/menus, advanced roster directions, all animation families and final full role-icon/accessibility audit remain required at their dependent gates, not certified by the Gate 1 foundation. Physical-device release remains Gate 8.
+
+## Dependency-ready after build 0.2.3
+
+Full-angle motion and current-slice backup/recovery are verified; exact policy
+arithmetic and rollback fences are ready prerequisites, not paid receipts.
+Next implement normal-run allocation/checkpoint, immutable PendingResult journal
+and exactly-once result receipt before enabling rewards. Then integrate persistent
+body/stock injury, contribution XP/rank/claims, repair/restoration/emergency viability
+and complete record handling. Per-asset anatomy/contact refinement continues;
+physical-device measurements remain distinct. See review/OMNIDIRECTIONAL_RECOVERY.md.
