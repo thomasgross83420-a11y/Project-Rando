@@ -455,3 +455,33 @@ is implied by this increment.
 A current-source grown-stat spot replay of the mobile L100/E10 band-20 case
 also exactly matches its retained hash
 `694e131ec19d00245e6464b02d074f99063ad549162e311811b5cbfc81684dd6`.
+
+## 2026-10-08 — paid combat progression, build 0.2.6
+
+- All126 unit tests in28 files passed; all43 production-browser checks passed
+  without retries/skips. Typecheck, lint, format check, deterministic scenario and
+  production build passed. Existing14 lint informational diagnostics and bundle
+  annotation/size warnings remain. Initial browser failure exposed an unhandled
+  audio suspension rejection; the mixer was corrected, then the full suite passed.
+- Native IndexedDB: pending real results survive reload and cross-slot backup;
+  checkpoint-import and receipt-write aborts roll back every store; exact retry
+  pays once. Recent committed/unpresented receipts are included in export.
+- Actual UI: explicit migration and deployment, real Standard victory286 Bastion
+  XP/rank2, stock-only19-Credit rearm, double-tap exact costs, preserved zero-body
+  enhancement, paid Restore, interruption/abandonment, emergency cancellation and
+  commitment outside Undo. Failed-result UI retry also tolerates audio-device error.
+- Normal/200% scale in412×915,800×1280,1280×800: progression controls have no
+  horizontal overflow. Original layout, audio, takeover and recovery regressions pass.
+- Eight exact terminal receipts measure guided/repaired repeat, injured Rifle,
+  half-body Sentries with/without Repair Node, zero-cash emergency Cadet victory
+  and immediate surrender. Standard gross335 Credits; full recovery budgets72/48
+  for first/repaired repeat,104/136 for injured Sentries with/without Node.
+  Immediate surrender pays0 Credits/XP/assetXP/Cores. No coefficients are retuned
+  using these teaching-only cases. See evidence/COMBAT_PROGRESSION.json.
+- Untracked legacy v1/v2 hashes remain exact and are checked by unit regressions.
+  Neither frozen study profiles nor paid captures silently replace their rules.
+- A follow-up four-Node fixture identifies self-repair consuming an external slot
+  in current v3. The next versioned support increment addresses that discrepancy.
+  Counts/source/log hashes: evidence/COMBAT_PROGRESSION_TESTS.json.
+  Mobile PDF/ZIP: review/COMBAT_PROGRESSION_DELIVERY.md. No public deployment,
+  whole-game balance, Lenovo hardware, Android sharing or TalkBack certification.

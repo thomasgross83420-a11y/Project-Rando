@@ -142,8 +142,15 @@ and auto-commit with no outstanding requests. Hashing, schema validation and reb
 finish before final writes; writer/base/state comparisons remain inside transaction
 callbacks. Completion is not proof against sudden OS/device power loss.
 
-Full verification counts and artifact hashes are recorded in TEST_EVIDENCE.md and
-COMBAT_PROGRESSION_TESTS.json once the final checks finish. Desktop checks do not
+Full verification passed all 126 unit tests (28 files), all 43 browser checks,
+type checking, lint, formatting, deterministic scenario and production build.
+Eight actual terminal receipts compare guided/repeat, injured biological and
+mechanical assets, Repair Node present/stored, emergency and zero-kill surrender.
+Counts and hashes are recorded in TEST_EVIDENCE.md and COMBAT_PROGRESSION_TESTS.json.
+A follow-up four-Node audit found self-repair incorrectly consuming one of the
+two external slots in v3; its versioned correction is the next mechanics increment. Desktop checks do not
 certify Lenovo hardware performance, Android sharing or TalkBack behavior. Full
 roster, animation contact authoring, earned promotions, later encounters, bosses,
 all doctrines, modes and release acceptance remain development work.
+
+Audio failure cross-reference: [MDN suspend](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/suspend) and [MDN resume](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/resume), checked 2026-10-08. Their Promises can reject for a closed context; gameplay must handle audio-device errors separately from persistence.
