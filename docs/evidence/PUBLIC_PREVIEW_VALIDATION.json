@@ -1,0 +1,489 @@
+{
+  "checked_utc": "2026-10-08",
+  "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+  "pinned_source": "bc7d60c4cc3eb229f6fdb3be9dce8eee0c2bebe1",
+  "workflow_merge": "cf738b2e381d68a652d8aa7ae681e0e48f1324c9",
+  "readme_merge": "4c3e4b530c8778cc6632435db0913c080062924e",
+  "deployment": {
+    "run_id": 37742865384,
+    "url": "https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37742865384",
+    "conclusion": "success",
+    "completed_utc": "2026-10-08T07:23:12Z",
+    "ci_checks": {
+      "typecheck": "passed",
+      "lint": "passed",
+      "unit_files": 30,
+      "unit_tests": 134,
+      "scenario": "Gate0 mechanism, not gameplay; all five tick groupings match",
+      "scenario_hash": "90a7d118d4df7eb3e8808e78d7ffa875ddd970ab4961287daf1a719426936169",
+      "production_build": "passed"
+    }
+  },
+  "production_assets": {
+    "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+    "source": "bc7d60c4cc3eb229f6fdb3be9dce8eee0c2bebe1",
+    "https_certificate_validation": true,
+    "verified_files": 38,
+    "files": [
+      {
+        "path": "THIRD_PARTY_NOTICES.txt",
+        "status": 200,
+        "mime": "text/plain",
+        "bytes": 284630,
+        "sha256": "0c1677ecd236df2d3657cbbcc75abc08315327d88acb5c339008d218da8dd48e",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/app-Cuxy5u2g.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1336827,
+        "sha256": "28f2bcd97a31335408b248d900df7d1a7676ee51b78090a4e36bc6972118aa55",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/alert.core.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 27244,
+        "sha256": "3b102957104f73fccd2ac6aca0a2e6e08eab400d8b4b590192f170a763cac448",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/alert.wave.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 20844,
+        "sha256": "7daa96d6c9b192bd862cb1a83f97c0650fe97c01ae5607a89357a81dbb2e30eb",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/manifest.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 8925,
+        "sha256": "03cf25256b4e669a262c9fb5ffeb7f043223dd728675acac436a633e454fba8d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/music.fracture.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3072044,
+        "sha256": "8c9a7cc92de47f02432fe14b2deadc78c638a438e46167177786f3848dd211a0",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/music.preparation.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3072044,
+        "sha256": "7ff2ab848fea55b8ec56ddb20b486b30c0df818a416cbd4295d4478c055145af",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/music.title.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3072044,
+        "sha256": "f9d89a42dc85e7756e7a4b988551ba5205aaaa5ecbd6b7de7c1739c3da7c7642",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.bulwark.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 5804,
+        "sha256": "bb24a903b5eac49b04798238738db8f321b394b4ef0587a754cc56fa59264680",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.challenge.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 17644,
+        "sha256": "7063882770bf5bbcd4b5ecc3b43a52fd3a2531fc80aee4d479f5dc64e3555332",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.holdfast.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 22444,
+        "sha256": "92c6d991e9820b59399fd69074299576ca97a69afa6cee74932fcbdd66f43553",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.impact.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 4204,
+        "sha256": "89483ec8e8a1bf99511e22c4f1cdee232bb319c5972e7f0bfcb3c01552320f33",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.interpose.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 14444,
+        "sha256": "7d44cfd5125f04169aee307f8b4b15bf0d21cbe25cfb6f0970dadd75f0e47ea6",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.melee.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 5164,
+        "sha256": "73edc6f7cc218caf9577e4156f57199fb1793b99725462e819c7e93afc5b0c01",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.mine.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 20844,
+        "sha256": "44dd680024f1857d68b3cbaac0bcd4bd5e674c92720e516351aa78c7b1713cf5",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.repair.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 12844,
+        "sha256": "ffec83d3805a309a12f0a1deede7028c2498ccd9cc6ed1b07d3c6e9c072702dc",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.rifle.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3244,
+        "sha256": "5a0f402ed431262f53f54a6b6cc86ea75e79898aecefb804ca44cfff3c959cde",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.sentry.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3884,
+        "sha256": "2ea71d3fbdb4df7535809be96ff52d7c611f8332d10444db7657b6a146c842d2",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/stinger.defeat.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 76844,
+        "sha256": "70039d02db80cca01131f03827612a352281690939f6a5936397bda823a0a883",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/stinger.victory.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 76844,
+        "sha256": "26bf18aeb3ec29401e0fe5bd19f12d54515e17917859cffcaa50dc8de3bfb30d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/ui.confirm.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3244,
+        "sha256": "8c4183b4e3f2906d8c5e04a4286adf0c072fff1ada8dc8df9a77dd02f99058b6",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/balance-study-DRp6tFs0.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1468,
+        "sha256": "540f44c7510fde4df978fc09c14b4699231325424e126367362474deb99d6f83",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/combat/atlas0.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 1038294,
+        "sha256": "f010a3d68c6ea2b244e7b9f6d5346b6506ba90c6660b7a5ff8103fa5f64e44fb",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/combat/manifest.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 731449,
+        "sha256": "5d6ca3e80b3b6e78967b9a1d6cbee167f4dba07931bbce1cebd836b08e623070",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/diagnostic-CkOAn4Ad.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 3043,
+        "sha256": "8d963bd29d3a5c2511dd8813b112c65339c46ee91fc46b94decbbae63bf7f310",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/foundation.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 14896,
+        "sha256": "02f0da9d5ec4f0bc7d4a24d1c2bd2a1ee56382af1cab303b5a6b9252a54f20ce",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/foundation.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 349002,
+        "sha256": "d397c7f6333f7e60caf6420c50f99f5ee51e6baed5d23169feb9847f1584bd57",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/icon.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 2141,
+        "sha256": "bcdfbcc4c5789752013f3d8eb3881914fb84a788915f111087833d296abd4f2d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/index-BsGoYJG3.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1206,
+        "sha256": "5c4e3935742e3345da923ca149483f1f8c96df0b2f86a95b9e344c662e40d489",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/preload-helper-Cl7pOkUX.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1124,
+        "sha256": "989e1a374921cdeb43a03349e760593a196a91e7e6e055f9061657b8b57d96fc",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/roles.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 3285,
+        "sha256": "9693882fe946249b5cdacb4e7a4399aa884f2a3dc0d04478636a90a70c2715d8",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/roles.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 8321,
+        "sha256": "7a8a9aec353aaa2bc3265d49c68eb3f78fad87781a237a11998bb8b8bdfdcbf1",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/style-proof-close.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 128163,
+        "sha256": "0a19c329843159f762f96801e1873212969088e75848bf2174e6e8f68006b075",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/style-proof-default.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 32282,
+        "sha256": "0f378033a758ee393a7e1be3a7719fcc0bc96619f96116a29a896dbb4891ddc3",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/title-foundation.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 129260,
+        "sha256": "7c5ba99eabc67764b163517198ee7c21e3981372761c540430fa33768a07c553",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/world-B1qVrqeY.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1780200,
+        "sha256": "e75dc25f9f247b9eff31a15eb9e21fbe3914e13bfc94ac32a7d891bbb461c97d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/world-BIblJv6X.css",
+        "status": 200,
+        "mime": "text/css",
+        "bytes": 4124,
+        "sha256": "0bc3db90569d679101a129d28ddab124155d655c36af98968ae7ff8f1420d448",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "index.html",
+        "status": 200,
+        "mime": "text/html",
+        "bytes": 596,
+        "sha256": "bf1f544649545417bfe39dc343ea553d3042638e86eee044d3059f3fab0a573a",
+        "matches_local_tested_build": true
+      }
+    ]
+  },
+  "public_origin_browser": {
+    "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+    "browser": "151.0.7922.173",
+    "source": "Desktop Chromium on the actual public HTTPS origin; not physical Android acceptance",
+    "features": {
+      "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+      "origin": "https://thomasgross83420-a11y.github.io",
+      "secureContext": true,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "randomUUID": "function",
+      "BigInt": "function",
+      "structuredClone": "function",
+      "hasOwn": "function",
+      "IndexedDB": "function",
+      "WebAudio": "function"
+    },
+    "viewports": [
+      {
+        "width": 800,
+        "height": 1280
+      },
+      {
+        "width": 1280,
+        "height": 800
+      }
+    ],
+    "errors": []
+  },
+  "browser_checks": {
+    "final_passed_unique_checks": 6,
+    "automatic_retries": 0,
+    "final_checks": [
+      {
+        "name": "the player can migrate, deploy existing assets, win, review committed XP and rearm the persisted mine once",
+        "file": "campaign-ui.spec.ts",
+        "line": 47,
+        "status": "passed",
+        "duration_ms": 38582,
+        "retry": 0
+      },
+      {
+        "name": "Gate 0 production subpath, renderer, storage, gesture, audio and export",
+        "file": "gate0.spec.ts",
+        "line": 2,
+        "status": "passed",
+        "duration_ms": 2960,
+        "retry": 0
+      },
+      {
+        "name": "viewport reflow, touch cancellation, semantic focus and production MIME",
+        "file": "gate0.spec.ts",
+        "line": 77,
+        "status": "passed",
+        "duration_ms": 8574,
+        "retry": 0
+      },
+      {
+        "name": "campaign creation, free deployment, atomic purchase, Undo/Redo and reload",
+        "file": "gate1.spec.ts",
+        "line": 18,
+        "status": "passed",
+        "duration_ms": 8391,
+        "retry": 0
+      },
+      {
+        "name": "real tutorial is autonomous, paused, restarted from durable checkpoint, and saved as practice victory",
+        "file": "gate2.spec.ts",
+        "line": 16,
+        "status": "passed",
+        "duration_ms": 171412,
+        "retry": 0
+      },
+      {
+        "name": "mobile backup replaces selected wallets, preserves other slots/settings, reloads and rolls back without merging",
+        "file": "recovery.spec.ts",
+        "line": 59,
+        "status": "passed",
+        "duration_ms": 7755,
+        "retry": 0
+      }
+    ],
+    "initial_attempt": [
+      {
+        "name": "the player can migrate, deploy existing assets, win, review committed XP and rearm the persisted mine once",
+        "file": "campaign-ui.spec.ts",
+        "line": 47,
+        "status": "passed",
+        "duration_ms": 38582,
+        "retry": 0
+      },
+      {
+        "name": "Gate 0 production subpath, renderer, storage, gesture, audio and export",
+        "file": "gate0.spec.ts",
+        "line": 2,
+        "status": "passed",
+        "duration_ms": 2960,
+        "retry": 0
+      },
+      {
+        "name": "viewport reflow, touch cancellation, semantic focus and production MIME",
+        "file": "gate0.spec.ts",
+        "line": 77,
+        "status": "failed",
+        "duration_ms": 4184,
+        "retry": 0
+      },
+      {
+        "name": "campaign creation, free deployment, atomic purchase, Undo/Redo and reload",
+        "file": "gate1.spec.ts",
+        "line": 18,
+        "status": "passed",
+        "duration_ms": 8391,
+        "retry": 0
+      },
+      {
+        "name": "real tutorial is autonomous, paused, restarted from durable checkpoint, and saved as practice victory",
+        "file": "gate2.spec.ts",
+        "line": 16,
+        "status": "passed",
+        "duration_ms": 171412,
+        "retry": 0
+      },
+      {
+        "name": "mobile backup replaces selected wallets, preserves other slots/settings, reloads and rolls back without merging",
+        "file": "recovery.spec.ts",
+        "line": 59,
+        "status": "passed",
+        "duration_ms": 7755,
+        "retry": 0
+      }
+    ],
+    "routing_correction": {
+      "cause": "Playwright API request fixture did not inherit launchOptions.proxy. Direct connections returned ENETUNREACH/ECONNREFUSED at the MIME request; the browser itself used the proxy successfully.",
+      "change": "Move proxy to the shared use.proxy setting in the temporary live-check configuration so both browser context and request fixture use the required session proxy.",
+      "game_changes": false,
+      "rerun": [
+        {
+          "name": "viewport reflow, touch cancellation, semantic focus and production MIME",
+          "file": "gate0.spec.ts",
+          "line": 77,
+          "status": "passed",
+          "duration_ms": 8574,
+          "retry": 0
+        }
+      ]
+    },
+    "physical_android_acceptance": false
+  },
+  "remaining_device_checks": [
+    "actual GPU/frame timing",
+    "real touch and pinch",
+    "Android audio/background lifecycle",
+    "backup file durability on Android",
+    "TalkBack"
+  ]
+}

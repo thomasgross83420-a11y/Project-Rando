@@ -1,11 +1,11 @@
-# Prepared playable tablet preview
+# Published playable tablet preview
 
 The target device is now identified. Real touch/GPU/audio/background and backup
 measurements require opening the game on that tablet, on a stable secure origin.
 Review PDF/ZIP downloads are not executable public game hosting.
 
-Candidate delivery remains the user's public, Free-compatible Project-Rando
-GitHub Pages site. The prepared manual-only workflow in
+Delivery uses the user's public, Free-compatible Project-Rando
+GitHub Pages site. The reviewed manual-only workflow in
 [pages-preview.yml.example](pages-preview.yml.example) checks out the locally
 tested0.2.9 source commit rather than main's original README. Its exact source
 SHA is present in that file. It runs `npm ci` and `npm run verify`, then uploads
@@ -23,11 +23,9 @@ GitHub reports the workflow active (ID `378139552`).
 
 The authorized `POST /repos/thomasgross83420-a11y/Project-Rando/pages` with
 `build_type=workflow` returned HTTP 403, `Resource not accessible by integration`.
-The integration can install the workflow but cannot enable Pages. The remaining
-owner action is [repository Pages settings](https://github.com/thomasgross83420-a11y/Project-Rando/settings/pages)
-→ Build and deployment → Source → GitHub Actions. This is a configuration
-prerequisite, not a new publication-approval request. Workflow dispatch and live
-verification follow once that setting is confirmed.
+The integration could install the workflow but could not enable Pages. The owner
+completed the source setting, confirmed by Pages GET as `build_type=workflow`
+with HTTPS enforced. The manual workflow was then dispatched successfully.
 
 The pinned `actions/configure-pages` action documents that automatic enablement
 requires a token other than `GITHUB_TOKEN`, with the relevant administrative and
@@ -40,9 +38,14 @@ enabled. Actual workflow dispatch/settings may need their own permissions;
 do not claim successful publication until the deployment completes and its
 real HTTPS URL, MIME, subpath refresh and save-origin behavior are checked.
 
-Expected path after successful publication: `/Project-Rando/`. No playable URL
-is currently certified. Origin changes cannot silently move existing saves;
-use complete checksummed backup/import when moving between origins.
+Verified URL: [Open Resonance Bastion](https://thomasgross83420-a11y.github.io/Project-Rando/).
+[Run 37742865384](https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37742865384)
+passed deployment after all 134 unit tests, type/lint/scenario/build checks.
+The 38 public files match the tested build exactly. Six selected browser checks
+passed on the live HTTPS origin; see [verification](PUBLIC_PREVIEW.md) for the
+initial checker routing correction and remaining physical-device work.
+Origin changes cannot silently move existing saves; use complete checksummed
+backup/import when moving between origins.
 
 ## First tablet pass after publication
 

@@ -60,6 +60,7 @@ Actual automated runs remain Chromium151, not154 or Android.
    fixed-step combat, replay hashes and natural motion. Presentation work may be
    scheduled/batched without changing progression, actor behavior or content scope.
 
-Public hosting is not yet configured; see [hosting evidence](HOSTING.md).
-Review PDF/ZIP downloads are available now, but are not a hosted playable game.
+The [public playable preview](https://thomasgross83420-a11y.github.io/Project-Rando/)
+is configured and deployed; see [live-origin verification](PUBLIC_PREVIEW.md).
+Review PDF/ZIP downloads remain separate review artifacts.
 Local mechanics and individual asset development can continue independently.

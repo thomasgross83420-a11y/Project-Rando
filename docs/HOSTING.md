@@ -16,9 +16,25 @@ The connection's repository-file access does not establish Pages administration
 access. This is a service permission error; it is not an approval-review rejection
 or evidence of an account-plan restriction.
 
-Publication and live HTTPS/game/save checks remain pending that configuration.
-No candidate URL is certified as playable yet. The earlier observations below
-are retained as dated history.
+The owner completed the setting. A subsequent Pages GET confirmed
+`build_type=workflow`, `https_enforced=true` and the site URL. Manual
+[run 37742865384](https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37742865384)
+passed build and deployment, completing at 2026-10-08T07:23:12Z.
+
+**Verified playable URL:** [Resonance Bastion](https://thomasgross83420-a11y.github.io/Project-Rando/).
+All 38 production files match the tested local build byte-for-byte, with HTTPS
+certificate validation and appropriate MIME types. Six selected production
+browser checks passed on the live origin, including actual campaign victory,
+practice replay, retained saves, backups and refresh. One initial MIME checker
+network-routing error was resolved by applying the session proxy to both the
+browser and API request fixture; no game change was needed. See
+[verification and device limits](PUBLIC_PREVIEW.md) and
+[machine-readable evidence](evidence/PUBLIC_PREVIEW_VALIDATION.json).
+
+[PR 13](https://github.com/thomasgross83420-a11y/Project-Rando/pull/13), merge
+`4c3e4b530c8778cc6632435db0913c080062924e`, adds the direct play link and
+start/backup instructions to main's README. Its workflow and source pin are
+unchanged. The earlier observations below are retained as dated history.
 
 2026-10-06: connected repository thomasgross83420-a11y/Project-Rando is public,
 not archived and has_pages=false. GET Pages: 404. GET Actions permissions: 403

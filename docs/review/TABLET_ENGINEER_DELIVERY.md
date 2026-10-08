@@ -14,8 +14,11 @@ The rendering checkpoint passed134 unit/49 browser checks. The subsequent
 kernel adds9 cases, with143 full-unit tests and static/scenario/build checks
 passing. All38 production files match the prior49-browser-checked build exactly.
 The stock kernel is not yet an enabled Engineer; mobile behavior and artwork
-still require integration. Device identification is resolved; public preview
-publication approval is pending and real Android performance remains unmeasured.
+still require integration. Device identification is resolved. The later approved
+[public playable preview](https://thomasgross83420-a11y.github.io/Project-Rando/)
+is now deployed and [checked on its HTTPS origin](../PUBLIC_PREVIEW.md).
+Real Android performance remains unmeasured. The PDF/ZIP retain their original
+pre-publication review contents and hashes.
 
 ZIP includes the prior four-page paid/progression review, all current evidence,
 before/after screenshots, target/API references, Engineer contract, manifests
