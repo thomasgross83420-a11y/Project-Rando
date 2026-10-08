@@ -1,5 +1,6 @@
 import type Phaser from 'phaser';
 import art from '../../public/assets/combat/manifest.json';
+import rifleRig from '../../public/assets/combat/rifle-rig.json';
 import type { CombatFrame } from './animation';
 
 export type DamageBand = 'scuffed' | 'damaged';
@@ -10,8 +11,14 @@ export type VisualFrame = Pick<
   texture?: string;
 };
 const frames = new Map(art.frames.map((f) => [f.key, f]));
+const rifleDamage: Readonly<Record<string, CombatFrame>> = rifleRig.damageFrames;
 
 export function damageSource(frame: CombatFrame, band: DamageBand): CombatFrame {
+  if (frame.content === 'friendly.rifle_squad') {
+    const authored = rifleDamage[`${frame.key}.${band}`];
+    if (!authored) throw new Error(`Missing authored Rifle damage ${frame.key}.${band}`);
+    return authored;
+  }
   const key = frame.key.slice(0, frame.key.lastIndexOf('.', frame.key.lastIndexOf('.') - 1));
   const overlay = frames.get(`${key}.${band}.0`);
   if (!overlay) throw new Error(`Missing damage source ${key}.${band}`);
@@ -57,7 +64,9 @@ export function composePoseDamage(
   const crop = (x: number, y: number, width: number, height: number, dx: number, dy: number) => {
     if (width && height) ctx.drawImage(base, x, y, width, height, x + dx, y + dy, width, height);
   };
-  if (frame.state === 'move') {
+  if (frame.content === 'friendly.rifle_squad') {
+    ctx.drawImage(base, 0, 0);
+  } else if (frame.state === 'move') {
     const cut = Math.round(h * 0.7),
       mid = Math.floor(w / 2),
       stride = [0, 1, 2, 1, 0, -1, -2, -1][frame.frame] ?? 0,
@@ -213,7 +222,7 @@ export class PoseDamageBank {
       (n, a) => n + (a.size[0] ?? 0) * (a.size[1] ?? 0),
       1048576 + 288 * 32,
     );
-    if (height > 2048 || existing + this.pixels > 6000000)
+    if (height > 2048 || existing + this.pixels > 8000000)
       throw new Error('Pose damage atlas exceeds texture budget');
     const ctx = this.canvas.getContext('2d');
     if (!ctx) throw new Error('Damage compositor unavailable');

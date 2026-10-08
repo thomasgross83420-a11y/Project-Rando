@@ -70,7 +70,7 @@ for role in coverage.values():
     role['poses'] = sorted(role['poses'])
     role['states'] = sorted(role['states'])
 report = {
-    'date': '2026-10-07',
+    'date': '2026-10-08',
     'scope': 'Gate2 native art structural and pose-overlay audit; no creative approval',
     'atlasVersion': m['version'],
     'structuralChecks': {'result': 'passed', 'frames': len(m['frames']), 'sequences': len(groups),

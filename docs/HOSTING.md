@@ -1,6 +1,18 @@
 # Free GitHub delivery evidence
 
-## Current touch interface update — 2026-10-08
+
+## Current Rifle articulation update — 2026-10-08
+
+The manual preview builds `151c105195069ae419c36fd8f284fe40abd43275`,
+version `0.2.12-rifle-joints`. PR19 updates only main's source pin and README,
+merged as `681f2c134c43070fdf6ee79c122c39e6ace39a5e`. Successful manual
+run37793975792 completed deployment at14:40:21 UTC and passed all150 unit checks
+plus type/lint/scenario/build. All40 public files match, all12 selected live
+checks pass, and an actual pre-update0.2.11 campaign survives unchanged through
+active-page takeover, normal reload and practice. No automatic publishing,
+paid runners or extra services are added. See [current verification](PUBLIC_PREVIEW.md).
+
+## Previous touch interface update — 2026-10-08
 
 The live preview builds `23754abc513320b4d25b5bcaae23ca4a8b6315de`,
 version `0.2.11-touch-field`. [PR 17](https://github.com/thomasgross83420-a11y/Project-Rando/pull/17)

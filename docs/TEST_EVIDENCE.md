@@ -561,3 +561,32 @@ prior verified0.2.9 bytes exactly, so its49 passing browser checks remain
 applicable to the playable runtime without a broad repeat. This is not an
 enabled/animated Engineer or certified Mobile doctrine. Actual spatial/perception
 observations and fixed-phase stock completion must be integrated and tested.
+
+## 2026-10-08 — Rifle authored articulation, build0.2.12
+
+All150 unit tests in32 files, type/lint/format, deterministic scenario and
+production build pass. Seven new unit cases cover independent directions/crops,
+grounded keys and cycle wrap, real releases, frozen projectiles, blocked gait,
+reduced effects, terminal state, immutability and initial framing. Source validation
+passes1,310 frames; raster audit passes512 upper/lower connectivity cases; actual
+runtime compositor passes1,920 pose/band pairs with zero outside pixels, packing
+mismatches or gutter failures. Raw idle-source overlay discrepancies remain389,
+and other units' generic articulation is still open.
+
+All70 browser scenarios are verified with zero automatic retries. Initial69 pass;
+the result-error case waits at an intentional4x performance pause. A follow-up
+uses only visible policy-aware Resume controls, retains the same persistence/
+audio/receipt assertions, and passes. The paid flow and both new actual-renderer
+cases also pass in that follow-up. Visual inspection moved the review fixture
+outside Core occlusion; final captured art is visible. No runtime changes followed
+the frozen40-file build. Local source/log/artifact evidence and initial/follow-up
+results are in evidence/RIFLE_PRESENTATION_TESTS.json. Public source/CI/live-save
+verification is recorded separately in PUBLIC_PREVIEW.md.
+
+0.2.12 pinned-source CI repeats all150 unit checks successfully. All40 actual
+public files match;12 selected live cases pass with zero retries/skips/failures,
+including both result/audio failure recovery and actual public-art Phaser rigs.
+A real-public0.2.11 campaign passes the upgrade path unchanged. Current build
+label, required browser APIs, assets, portrait/landscape and startup/practice
+screens were inspected with no page/resource errors. Physical Android remains
+separate; see evidence/RIFLE_PRESENTATION_LIVE.json and PUBLIC_PREVIEW.md.

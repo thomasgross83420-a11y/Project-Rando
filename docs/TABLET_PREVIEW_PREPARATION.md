@@ -7,7 +7,7 @@ Review PDF/ZIP downloads are not executable public game hosting.
 Delivery uses the user's public, Free-compatible Project-Rando
 GitHub Pages site. The reviewed manual-only workflow in
 [pages-preview.yml.example](pages-preview.yml.example) checks out the locally
-tested0.2.11 source commit rather than main's README-only application contents. Its exact source
+tested0.2.12 source commit rather than main's README-only application contents. Its exact source
 SHA is present in that file. It runs `npm ci` and `npm run verify`, then uploads
 only static dist and deploys with pinned official actions, a standard Ubuntu
 runner, 15-minute job limits, one-day artifact retention and no automatic
@@ -39,14 +39,12 @@ do not claim successful publication until the deployment completes and its
 real HTTPS URL, MIME, subpath refresh and save-origin behavior are checked.
 
 Verified URL: [Open Resonance Bastion](https://thomasgross83420-a11y.github.io/Project-Rando/).
-Current [run 37777948348](https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37777948348)
-published `23754abc513320b4d25b5bcaae23ca4a8b6315de` after all 143 unit tests
-and type/lint/scenario/build checks. Its 68 local production-browser and 24
-selected live scenarios were verified. The initial paid battle check hit the
-intentional 4× performance pause; a separate follow-up accommodates Resume and
-lower speed when needed, and completed at 4× without another pause. The landscape matrix gets a larger timing budget
-with unchanged assertions. Both attempts are retained. All 38 public files
-match the tested build exactly. A real 0.2.10 public save passed the update path.
+Current [run 37793975792](https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37793975792)
+published `151c105195069ae419c36fd8f284fe40abd43275` after all150 unit tests
+and type/lint/scenario/build checks. All70 local browser scenarios are verified,
+with initial69 passes and four recorded follow-ups. All12 selected live checks
+pass without retries/skips/failures; all40 public files match. A real0.2.11 public
+save survived unchanged through takeover, reload and practice start.
 See [verification](PUBLIC_PREVIEW.md) for current results, the initial publication
 history and remaining physical-device work.
 Origin changes cannot silently move existing saves; use complete checksummed

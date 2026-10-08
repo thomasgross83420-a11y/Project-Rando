@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-08",
+  "rigPoses": 280,
+  "compositeAimTravelPhaseCases": 512,
+  "maximumSignificantComponents": 1,
+  "disconnectedCases": [],
+  "otherFrameRecordsUnchanged": true,
+  "originalAtlasUnchanged": true,
+  "originalAtlasSHA256": "f010a3d68c6ea2b244e7b9f6d5346b6506ba90c6660b7a5ff8103fa5f64e44fb",
+  "newAtlas": {
+    "file": "rifle-joints-r1.png",
+    "size": [
+      1024,
+      1044
+    ],
+    "sha256": "6f515788d495baf3bcfbfd4016ba08705e5e71336239961a86c7302e76837d18",
+    "bytes": 103431
+  },
+  "review": "Raster connectivity and per-pose weathering validation, not final creative or tablet acceptance"
+}

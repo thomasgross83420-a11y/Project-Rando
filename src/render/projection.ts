@@ -87,3 +87,21 @@ export function fitBase(camera: Camera): void {
     Math.min(2.5, (camera.width - 24) / (maxX - minX), (camera.height - 24) / (maxY - minY)),
   );
 }
+
+/** Frame the deployed defenders at combat start. Camera presentation only. */
+export function fitCombatStart(camera: Camera, defenders: readonly Point[]): void {
+  if (!defenders.length) return;
+  const measuring = { ...camera, x: 0, y: 0, width: 0, height: 0, zoom: 1 };
+  const points = defenders.map((p) => project(p, measuring));
+  const left = Math.min(...points.map((p) => p.x)) - 28;
+  const right = Math.max(...points.map((p) => p.x)) + 28;
+  const top = Math.min(...points.map((p) => p.y)) - 64;
+  const bottom = Math.max(...points.map((p) => p.y)) + 28;
+  const center = unproject({ x: (left + right) / 2, y: (top + bottom) / 2 }, measuring);
+  camera.x = center.x;
+  camera.y = center.y;
+  camera.zoom = Math.max(
+    0.35,
+    Math.min(1.35, (camera.width - 24) / (right - left), (camera.height - 24) / (bottom - top)),
+  );
+}

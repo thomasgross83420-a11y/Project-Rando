@@ -1,1 +1,1 @@
-export const applicationBuild = '0.2.11-touch-field';
+export const applicationBuild = '0.2.12-rifle-joints';

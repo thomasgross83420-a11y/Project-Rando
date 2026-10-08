@@ -1,22 +1,22 @@
 import Phaser from 'phaser';
+import combatArt from '../../public/assets/combat/manifest.json';
 import atlas from '../../public/assets/foundation.json';
 import roles from '../../public/assets/roles.json';
-import combatArt from '../../public/assets/combat/manifest.json';
-import { type RouteAnalysis, PAD } from '../construction/geometry';
-import { footprint, type Campaign } from '../persistence/campaign';
-import { foundation, type ContentID } from '../data/foundation';
-import { ENTRANCES } from '../construction/geometry';
+import { ENTRANCES, PAD, type RouteAnalysis } from '../construction/geometry';
+import { type ContentID, foundation } from '../data/foundation';
+import { type Campaign, footprint } from '../persistence/campaign';
 import {
+  type Camera,
   clientPoint,
-  fit as fitWorld,
   fitBase,
+  fit as fitWorld,
+  type Point,
   pan,
   project,
   unproject,
   zoomAt,
-  type Camera,
-  type Point,
 } from './projection';
+import { rifleFormation } from './rifle';
 export class WorldView {
   readonly camera: Camera = { x: 30, y: 30, zoom: 1, view: 0, width: 412, height: 400 };
   game: Phaser.Game;
@@ -68,8 +68,8 @@ export class WorldView {
       preload(): void {
         this.load.image('foundation', `${import.meta.env.BASE_URL}assets/foundation.png`);
         this.load.image('roles', `${import.meta.env.BASE_URL}assets/roles.png`);
-        if (owner.combatAssets)
-          for (const [i, a] of combatArt.atlases.entries())
+        for (const [i, a] of combatArt.atlases.entries())
+          if (owner.combatAssets || a.file === 'rifle-joints-r1.png')
             this.load.image('combat.' + i, import.meta.env.BASE_URL + 'assets/combat/' + a.file);
       }
       create(): void {
@@ -88,20 +88,22 @@ export class WorldView {
             throw new Error('Malformed role icon');
           icons.add(f.key, 0, x, y, w, h);
         }
-        if (owner.combatAssets) {
-          for (const [i] of combatArt.atlases.entries())
-            if (!this.textures.exists('combat.' + i)) {
-              owner.status(
-                'Combat artwork unavailable; checkpoint retained. Return Title and retry when assets load.',
-              );
-              return;
-            }
-          for (const f of combatArt.frames) {
-            const [x, y, w, h] = f.rect;
-            if (x === undefined || y === undefined || w === undefined || h === undefined)
-              throw new Error('Invalid combat frame');
-            this.textures.get('combat.' + f.atlas).add(f.key, 0, x, y, w, h);
+        for (const [i, a] of combatArt.atlases.entries())
+          if (
+            (owner.combatAssets || a.file === 'rifle-joints-r1.png') &&
+            !this.textures.exists('combat.' + i)
+          ) {
+            owner.status(
+              'Combat artwork unavailable; checkpoint retained. Return Title and retry when assets load.',
+            );
+            return;
           }
+        for (const f of combatArt.frames) {
+          if (!owner.combatAssets && f.content !== 'friendly.rifle_squad') continue;
+          const [x, y, w, h] = f.rect;
+          if (x === undefined || y === undefined || w === undefined || h === undefined)
+            throw new Error('Invalid combat frame');
+          this.textures.get('combat.' + f.atlas).add(f.key, 0, x, y, w, h);
         }
         owner.graphics = this.add.graphics();
         owner.ready = true;
@@ -389,6 +391,27 @@ export class WorldView {
         .setTint(tint)
         .setAlpha(alpha);
     };
+    const rifleImage = (point: Point, rotation: number, tint = 0xffffff, alpha = 1) => {
+      const facing = (1 + this.camera.view * 2 + rotation * 2) % 8;
+      const key = `friendly.rifle_squad.face${facing}.idle.0`;
+      const frame = combatArt.frames.find((f) => f.key === key);
+      if (!frame) throw new Error('Missing authored Rifle preparation frame');
+      const [tx = 0, ty = 0] = frame.trim,
+        [x = 0, y = 0] = frame.anchor;
+      const width = frame.rect[2] ?? 0,
+        height = frame.rect[3] ?? 0;
+      for (const o of rifleFormation) {
+        const pos = project({ x: point.x + o.x, y: point.y + o.y }, this.camera);
+        this.pooledImage('combat.' + frame.atlas, key)
+          .setPosition(pos.x, pos.y)
+          .setOrigin((x - tx) / width, (y - ty) / height)
+          .setScale(this.camera.zoom / 2)
+          .setDepth(1000 + pos.y)
+          .setTint(tint)
+          .setAlpha(alpha);
+      }
+      return frame;
+    };
     for (let y = 0; y < 60; y++)
       for (let x = 0; x < 60; x++) {
         const p = project({ x: x + 0.5, y: y + 0.5 }, this.camera);
@@ -425,6 +448,23 @@ export class WorldView {
       return pa.y - pb.y || pa.x - pb.x || (a[2] < b[2] ? -1 : a[2] > b[2] ? 1 : 0);
     });
     for (const [key, p, id, rotation] of objects) {
+      if (key === 'friendly.rifle_squad') {
+        rifleImage(p, rotation);
+        const positions = rifleFormation.map((o) =>
+          project({ x: p.x + o.x, y: p.y + o.y }, this.camera),
+        );
+        const minX = Math.min(...positions.map((p) => p.x)) - 12 * this.camera.zoom;
+        const minY = Math.min(...positions.map((p) => p.y)) - (51 * this.camera.zoom) / 2;
+        this.hitRecords.push({
+          id,
+          x: minX,
+          y: minY,
+          width: Math.max(...positions.map((p) => p.x)) + 12 * this.camera.zoom - minX,
+          height: Math.max(...positions.map((p) => p.y)) + (13 * this.camera.zoom) / 2 - minY,
+          foot: p,
+        });
+        continue;
+      }
       if (
         this.combatAssets &&
         !['objective.harmonic_core', 'friendly.sentry', 'friendly.standard_barricade'].includes(key)
@@ -661,7 +701,14 @@ export class WorldView {
         color: '#ffffff',
         backgroundColor: '#111923',
       }).setDepth(100001);
-      if (atlas.frames.some((f) => f.key === `${this.ghost?.type}.view${this.camera.view}`))
+      if (this.ghost.type === 'friendly.rifle_squad')
+        rifleImage(
+          { x: this.ghost.x + w / 2, y: this.ghost.y + h / 2 },
+          this.ghost.rotation,
+          this.ghost.valid ? 0xb9e5d9 : 0xf8ac9e,
+          0.6,
+        );
+      else if (atlas.frames.some((f) => f.key === `${this.ghost?.type}.view${this.camera.view}`))
         image(
           `${this.ghost.type}.view${(this.camera.view + this.ghost.rotation) % 4}`,
           { x: this.ghost.x + w / 2, y: this.ghost.y + h / 2 },

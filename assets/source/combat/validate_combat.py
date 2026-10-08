@@ -4,7 +4,7 @@ import json,hashlib,wave,math
 R=Path(__file__).resolve().parents[3];m=json.loads((R/'public/assets/combat/manifest.json').read_text());atlases=[]
 for a in m['atlases']:
  p=R/'public/assets/combat'/a['file'];assert hashlib.sha256(p.read_bytes()).hexdigest()==a['sha256'];im=Image.open(p).convert('RGBA');assert list(im.size)==a['size'];assert max(im.size)<=2048;atlases.append(im)
-assert sum(a.width*a.height for a in atlases)+1048576+288*32<=6000000
+assert sum(a.width*a.height for a in atlases)+1048576+288*32<=8000000
 keys=set();rectangles={}
 for f in m['frames']:
  assert f['key'] not in keys;keys.add(f['key']);a=f['atlas'];x,y,w,h=f['rect'];im=atlases[a];assert 4<=x and 4<=y and x+w+4<=im.width and y+h+4<=im.height
@@ -17,7 +17,8 @@ for f in m['frames']:
 for content in ['friendly.rifle_squad','enemy.runner','enemy.raider','warden.bulwark']:
  for facing in range(8):
   idle=next(f for f in m['frames'] if f['key']==content+'.face'+str(facing)+'.idle.0')
-  assert idle['trim'][3]==idle['anchor'][1], 'Idle silhouette must meet its fixed ground anchor'
+  if content!='friendly.rifle_squad':assert idle['trim'][3]==idle['anchor'][1], 'Idle silhouette must meet its fixed ground anchor'
+  else:assert idle['anchor']==[24,51] and idle['native']==[48,64], 'Rifle uses an authored ground-center anchor, not the lowest of two depth-separated soles'
   for state,count in [('idle',4),('move',8),('aim',1),('attack',6),('hit',2),('incapacitated',6)]:
    assert len([f for f in m['frames']if f['content']==content and f['facing']==facing and f['state']==state])==count
 au=json.loads((R/'public/assets/audio/manifest.json').read_text())

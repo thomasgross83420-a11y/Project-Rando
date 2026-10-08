@@ -14,7 +14,53 @@ site/browser preserves the save origin; changing device or origin requires
 explicit backup/import. Actual Android download durability remains a device
 check, even though browser download and import flows pass remotely.
 
-## Current 0.2.11 touch interface update
+## Current 0.2.12 Rifle articulation update
+
+[Play build 0.2.12](https://thomasgross83420-a11y.github.io/Project-Rando/?build=0.2.12-rifle-joints).
+Published source: `151c105195069ae419c36fd8f284fe40abd43275`.
+[PR 19](https://github.com/thomasgross83420-a11y/Project-Rando/pull/19) changes
+main's workflow source pin and README only, merged as
+`681f2c134c43070fdf6ee79c122c39e6ace39a5e`.
+[Run 37793975792](https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37793975792)
+passed build and deployment, completing 14:40:21 UTC. CI repeated all 150 unit
+tests in 32 files, type/lint/scenario/build checks on that exact source.
+
+The Rifle Squad now uses authored joints, grounded native gait keys, separate
+travel/aim directions, individual actual-release cues, frozen weapon-socket trace
+origins, per-pose damage and consistent preparation/ghost/combat artwork. Combat
+starts framed around deployed defenders. Simulation, balance and save formats
+are unchanged. The full game and remaining per-asset articulation are still open.
+
+All 70 local browser scenarios are verified: initial 69 passes and four explicit
+follow-ups, with zero automatic retries. The initial result-error wait stopped
+at an intentional 4× performance pause. Its helper now accommodates the visible
+Resume policy; both follow-up fights finished at 4× without another pause. The
+review fixture was moved outside Core occlusion for a visible animation capture.
+Runtime and the frozen 40-file build were unchanged in those follow-ups.
+
+All 40 public files match the tested build over certificate-verified HTTPS, with
+appropriate MIME types. All 12 selected live checks passed without retries,
+skips or failures: paid victory/XP/rearm, injected result/audio failure and exact
+receipt retry, construction/Undo/Redo/reload, backup/import, startup/editing,
+native touch and bounded battle tools. Two of these use isolated actual Phaser
+fixtures and public artwork; the other ten use the deployed application.
+
+An isolated campaign created on the actual 0.2.11 origin before deployment
+survived unchanged. Its old page stayed open; 0.2.12 required confirmed takeover,
+then recovered editing automatically on reload and started practice using the
+retained campaign. No campaign bytes changed. Public portrait and landscape
+battle captures were inspected after assets loaded, with no page/resource errors
+or horizontal overflow. Orientation changes retain the existing explicit pause.
+
+See [Rifle development review](RIFLE_ARTICULATION.md),
+[local evidence](evidence/RIFLE_PRESENTATION_TESTS.json),
+[live/source/save evidence](evidence/RIFLE_PRESENTATION_LIVE.json),
+[public portrait](evidence/rifle-public-battle-portrait.png) and
+[public landscape](evidence/rifle-public-battle-landscape.png).
+The title displays `0.2.12-rifle-joints`. Desktop Chromium native emulated touch
+does not measure physical Lenovo performance or certify final natural motion.
+
+## Previous 0.2.11 touch interface update
 
 Published source: `23754abc513320b4d25b5bcaae23ca4a8b6315de`.
 [PR 17](https://github.com/thomasgross83420-a11y/Project-Rando/pull/17) updates

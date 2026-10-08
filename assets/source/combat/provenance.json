@@ -24,5 +24,27 @@
       "review": "Inspected processing input; production-candidate approval pending",
       "source": "Original session image-generation output"
     }
+  ],
+  "authoredRigs": [
+    {
+      "id": "rifle-joints-r1",
+      "authoring": "Original native raster drawing from explicit joints, contacts and equipment sockets; no reference PNG pixels transformed",
+      "source": "rifle_joints.py",
+      "designReference": "studies/rifle-keyposes-r2.png",
+      "designReferenceSHA256": "922318c051f43b4f23c2eb8470c43ad04807faa9f3298dc8fffe938b0e6cba58",
+      "palette": "Steel/ochre/cyan identity retained; upper-left lighting",
+      "bounds": [
+        48,
+        64
+      ],
+      "groundCenterAnchor": [
+        24,
+        51
+      ],
+      "review": "Candidate continuation of the approved design direction; physical tablet/final creative acceptance open",
+      "generatorSHA256": "1e2aa32886e3ce008b9342311dad3da2e80d192382e9f10fdcb9d67f802ef1a4",
+      "landmarksSHA256": "e28b4188906ad66b90dc8245367bfe80459c60de6fa68912d9634f6364d6a765",
+      "atlasSHA256": "6f515788d495baf3bcfbfd4016ba08705e5e71336239961a86c7302e76837d18"
+    }
   ]
 }

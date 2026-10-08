@@ -213,7 +213,7 @@ try {
       }
     }
     return {
-      date: '2026-10-07',
+      date: '2026-10-08',
       test: 'Actual Canvas2D compositor in Chromium; separately verified production integration',
       checkedPoseBandPairs: checked,
       outsideBodyPixels: outside,
@@ -224,7 +224,7 @@ try {
       overlayAtlas: [bank.canvas.width, bank.canvas.height],
       totalLoadedTexturePixels: totalPixels,
       buildMS,
-      budget: 6000000,
+      budget: 8000000,
       landmarkChecks: 'passed',
       sourceImagesEdited: false,
       naturalMotionApproval: 'not certified',

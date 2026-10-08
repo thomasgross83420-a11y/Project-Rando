@@ -1,19 +1,19 @@
 {
-  "date": "2026-10-07",
+  "date": "2026-10-08",
   "test": "Actual Canvas2D compositor in Chromium; separately verified production integration",
-  "checkedPoseBandPairs": 1792,
+  "checkedPoseBandPairs": 1920,
   "outsideBodyPixels": 0,
-  "originalOutsideBodyPixels": 1347,
+  "originalOutsideBodyPixels": 998,
   "gutterFailures": 0,
   "packedPixelMismatches": 0,
-  "uniqueOverlayRectangles": 414,
+  "uniqueOverlayRectangles": 614,
   "overlayAtlas": [
     2048,
-    274
+    377
   ],
-  "totalLoadedTexturePixels": 5549056,
-  "buildMS": 786.5999999996275,
-  "budget": 6000000,
+  "totalLoadedTexturePixels": 6829056,
+  "buildMS": 1051.3000000044703,
+  "budget": 8000000,
   "landmarkChecks": "passed",
   "sourceImagesEdited": false,
   "naturalMotionApproval": "not certified",

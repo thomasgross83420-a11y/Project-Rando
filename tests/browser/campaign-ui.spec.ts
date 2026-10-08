@@ -1,5 +1,6 @@
+import { expect, type Page, test } from '@playwright/test';
 import { battleTools, prepMenu } from './menu-helpers';
-import { expect, test, type Page } from '@playwright/test';
+
 async function takeOver(page: Page) {
   await expect(page.getByRole('button', { name: 'Load Campaign', exact: true })).toBeVisible();
   const take = page.getByRole('button', { name: 'Take Over Editing', exact: true });
@@ -46,10 +47,42 @@ async function saved(page: Page) {
     return c;
   });
 }
+async function waitForCampaignResult(page: Page, pending = false) {
+  let performanceResumes = 0;
+  await expect
+    .poll(
+      async () => {
+        if (
+          pending
+            ? await page.locator('#campaign-finalize').isVisible()
+            : (await page.locator('#battle-content').textContent())?.includes(
+                'Campaign Results Saved',
+              )
+        )
+          return true;
+        if ((await page.locator('#battle-pause').textContent()) === 'Resume…') {
+          await expect(page.locator('#battle-status')).toContainText('Paused: performance');
+          await battleTools(page);
+          await page.locator('#battle-speed').selectOption('2');
+          await page.locator('#battle-pause').click();
+          await page.locator('#battle-resume').click();
+          performanceResumes++;
+        }
+        return false;
+      },
+      { timeout: 120000, intervals: [250] },
+    )
+    .toBe(true);
+  await test.info().attach('performance-policy', {
+    body: JSON.stringify({ performanceResumes }),
+    contentType: 'application/json',
+  });
+}
+
 test('the player can migrate, deploy existing assets, win, review committed XP and rearm the persisted mine once', async ({
   page,
 }) => {
-  test.setTimeout(90000);
+  test.setTimeout(180000);
   await newCampaign(page);
   await enable(page);
   await page.locator('#campaign-begin').click();
@@ -58,9 +91,7 @@ test('the player can migrate, deploy existing assets, win, review committed XP a
   await battleTools(page);
   await page.locator('#battle-speed').selectOption('4');
   await expect(page.locator('#battle-time')).toContainText('4×');
-  await expect(page.locator('#battle-content')).toContainText('Campaign Results Saved', {
-    timeout: 60000,
-  });
+  await waitForCampaignResult(page);
   await expect(page.locator('#battle-content')).toContainText('Bastion XP +286');
   await expect(page.locator('#battle-content')).toContainText('Rank 1 → 2');
   await expect(page.locator('#battle-content')).toContainText('Warden survives; Core at least 75%');
@@ -93,7 +124,7 @@ test('the player can migrate, deploy existing assets, win, review committed XP a
 test('a visible commit failure preserves the exact result and retry succeeds even if the audio device rejects suspension', async ({
   page,
 }) => {
-  test.setTimeout(90000);
+  test.setTimeout(180000);
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   await newCampaign(page);
@@ -114,7 +145,7 @@ test('a visible commit failure preserves the exact result and retry succeeds eve
     AudioContext.prototype.suspend = () =>
       Promise.reject(new Error('Injected audio device failure'));
   });
-  await expect(page.locator('#campaign-finalize')).toBeVisible({ timeout: 60000 });
+  await waitForCampaignResult(page, true);
   await expect(page.locator('#battle-content')).toContainText('Pending Campaign Results');
   expect((await saved(page)).credits).toBe(600);
   await page.locator('#campaign-finalize').click();
