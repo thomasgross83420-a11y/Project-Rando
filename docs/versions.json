@@ -7,7 +7,7 @@
   "economyPolicy": "economy.duration_wave_v1",
   "saveSchema": 1,
   "blueprintSHA256": "9808229593b79b856f8f522dcffba591debe6334a3f60a61d1915cdd5e2900a6",
-  "applicationBuild": "0.2.9-render-reuse",
+  "applicationBuild": "0.2.10-startup-recovery",
   "animationClock": "rb-animation-clock-v3",
   "practiceSchema": 1,
   "preferencesSchema": 1,

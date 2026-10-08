@@ -56,8 +56,7 @@ test('injected background pauses without catch-up; keyboard audio settings persi
     page.getByText('Presentation preferences saved. Campaign data unchanged.', { exact: true }),
   ).toBeVisible();
   await page.reload();
-  await page.getByRole('button', { name: 'Take Over Editing', exact: true }).click();
-  await page.getByRole('button', { name: 'Confirm Take Over', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Take Over Editing', exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: 'Continue', exact: true }).click();
   await page.getByRole('button', { name: 'Restart From Checkpoint', exact: true }).click();
   await expect(page.locator('#battle-root')).toHaveAttribute('data-state', 'Siege', {

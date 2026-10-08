@@ -3,14 +3,37 @@ export class Database {
   constructor(readonly db: IDBDatabase) {}
   static open(): Promise<Database> {
     return new Promise((resolve, reject) => {
-      const request = indexedDB.open(DATABASE_NAME, 1);
+      let abandoned = false;
+      const fail = (error: Error | DOMException) => {
+        abandoned = true;
+        clearTimeout(timer);
+        reject(error);
+      };
+      const timer = setTimeout(
+        () =>
+          fail(new Error('Storage open timed out; retry saved storage or choose temporary play')),
+        10000,
+      );
+      let request: IDBOpenDBRequest;
+      try {
+        request = indexedDB.open(DATABASE_NAME, 1);
+      } catch (error) {
+        fail(error instanceof Error ? error : new Error(String(error)));
+        return;
+      }
       request.onupgradeneeded = () => {
         for (const name of ['campaigns', 'previous', 'meta', 'writer'])
           request.result.createObjectStore(name);
       };
-      request.onerror = () => reject(request.error ?? new Error('Storage unavailable'));
-      request.onblocked = () => reject(new Error('Close other tabs to finish database upgrade'));
+      request.onerror = () => fail(request.error ?? new Error('Storage unavailable'));
+      request.onblocked = () =>
+        fail(new Error('Close other tabs to finish database upgrade, then retry'));
       request.onsuccess = () => {
+        clearTimeout(timer);
+        if (abandoned) {
+          request.result.close();
+          return;
+        }
         request.result.onversionchange = () => request.result.close();
         resolve(new Database(request.result));
       };

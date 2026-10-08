@@ -37,8 +37,7 @@ test('real tutorial is autonomous, paused, restarted from durable checkpoint, an
   await page.getByRole('button', { name: 'Resume', exact: true }).click();
   await page.waitForTimeout(400);
   await page.reload();
-  await page.getByRole('button', { name: 'Take Over Editing', exact: true }).click();
-  await page.getByRole('button', { name: 'Confirm Take Over', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Take Over Editing', exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: 'Continue', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Interrupted Tutorial Practice' })).toBeVisible();
   await page.getByRole('button', { name: 'Restart From Checkpoint', exact: true }).click();

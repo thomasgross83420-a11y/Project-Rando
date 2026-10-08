@@ -1,6 +1,8 @@
 import './style.css';
+import { applicationBuild } from './build';
 import { Database } from './persistence/database';
 import { CampaignRepository, Preparation } from './persistence/repository';
+import { WriterSession } from './persistence/writer-session';
 import {
   createCampaign,
   applyCommand,
@@ -56,6 +58,16 @@ const byId = (id: string): HTMLElement => {
 };
 const status = (message: string): void => {
   byId('status').textContent = message;
+  if ((document.getElementById('dialog') as HTMLDialogElement | null)?.open) {
+    let messageNode = document.getElementById('dialog-message');
+    if (!messageNode) {
+      messageNode = document.createElement('p');
+      messageNode.id = 'dialog-message';
+      messageNode.setAttribute('role', 'status');
+      byId('dialog-body').append(messageNode);
+    }
+    messageNode.textContent = message;
+  }
 };
 const escapeHTML = (s: string): string =>
   s
@@ -90,14 +102,22 @@ try {
   database = await Database.open();
   await database.probe();
 } catch (e) {
+  database?.db.close();
+  database = undefined;
   status(
     `Retained storage unavailable: ${String(e)}. You may explicitly start a Temporary Session.`,
   );
 }
 let repository: CampaignRepository | undefined;
+let writerSession: WriterSession | undefined;
 if (database) {
   repository = new CampaignRepository(database);
-  await repository.acquire();
+  writerSession = new WriterSession(repository);
+  try {
+    await writerSession.acquire();
+  } catch (e) {
+    status(`Editing check failed: ${String(e)}. Choose New Game to retry. Saves are preserved.`);
+  }
 }
 const preferences = new PreferencesStore(database, status);
 try {
@@ -145,13 +165,128 @@ document.addEventListener('click', (e) => {
   const b = (e.target as HTMLElement).closest('button');
   if (b && !b.disabled) void audio.play('ui.confirm', 0, false, 'ui');
 });
-setInterval(() => {
-  void repository
-    ?.heartbeat()
-    .catch((e) =>
-      status(`Writer check failed: ${String(e)}. Editing requires a fresh storage check.`),
+const editingState = document.createElement('section');
+editingState.id = 'editing-state';
+editingState.setAttribute('aria-label', 'Editing access');
+byId('status').after(editingState);
+let checkingEditing = false;
+let lastEditing = Boolean(repository?.writer);
+let editingReadOnly: boolean | undefined;
+function renderEditingState(): void {
+  lastEditing = Boolean(repository?.writer);
+  const readOnly = Boolean(repository && !repository.writer);
+  if (readOnly === editingReadOnly) return;
+  editingReadOnly = readOnly;
+  editingState.hidden = !readOnly;
+  editingState.innerHTML = editingState.hidden
+    ? ''
+    : '<p>This tab is viewing saved progress. Choose Take Over Editing to make changes or start a battle here.</p><button id="take-over">Take Over Editing</button>';
+  if (!editingState.hidden)
+    button('take-over', () =>
+      ensureEditing(async () => {
+        dialog.close();
+        // Reopen committed state rather than resuming a possibly stale live world.
+        if (tutorial) tutorial.leave(true);
+        if (preparation) {
+          const current = (await repository?.slots())?.[preparation.campaign.slot];
+          if (current && !(current instanceof Error)) await openCampaign(current);
+        } else await renderTitle();
+      }),
     );
-}, 5000);
+}
+async function checkEditing(): Promise<void> {
+  if (checkingEditing || document.hidden || !repository || !writerSession) return;
+  checkingEditing = true;
+  const before = lastEditing;
+  try {
+    if (repository.writer) await repository.heartbeat();
+    else {
+      writerSession.release();
+      await writerSession.acquire();
+    }
+  } catch (error) {
+    writerSession.release();
+    status(
+      `Editing check failed: ${String(error)}. Choose New Game or Take Over Editing to retry.`,
+    );
+  } finally {
+    checkingEditing = false;
+  }
+  if (before && !repository.writer) writerSession.release();
+  renderEditingState();
+  if (before !== Boolean(repository.writer)) {
+    if (tutorial && !repository.writer) {
+      tutorial.clock?.pause('recovery');
+      tutorial.status(
+        'Editing moved to another tab. Take Over Editing opens saved recovery; this attempt is paused.',
+      );
+    }
+    if (preparation && !byId('preparation').hidden) {
+      if (repository.writer) {
+        const current = (await repository.slots())[preparation.campaign.slot];
+        if (current && !(current instanceof Error)) await openCampaign(current);
+      } else renderPreparation();
+    }
+    if (!byId('title').hidden && !dialog.open) await renderTitle();
+  }
+}
+function recheckEditing(): void {
+  void checkEditing().catch((error) =>
+    status(`Editing controls could not refresh: ${String(error)}. Saved progress is preserved.`),
+  );
+}
+if (writerSession) writerSession.onLost = recheckEditing;
+setInterval(recheckEditing, 5000);
+window.addEventListener('pagehide', () => writerSession?.release());
+window.addEventListener('pageshow', recheckEditing);
+async function startTemporary(): Promise<void> {
+  repository = new CampaignRepository(undefined);
+  writerSession = new WriterSession(repository);
+  await writerSession.acquire();
+  status('Temporary Session enabled. Export progress before closing.');
+  renderEditingState();
+  await renderTitle();
+}
+async function ensureEditing(action: () => void | Promise<void>): Promise<void> {
+  if (!repository) {
+    modal(
+      'Storage unavailable',
+      '<p>Saved storage is unavailable. Retry without changing saved data, or start a temporary game and export it before closing.</p><button id="retry-storage">Retry Saved Storage</button><button id="temporary-modal">Start Temporary Session</button>',
+    );
+    button('retry-storage', () => location.reload());
+    button('temporary-modal', async () => {
+      dialog.close();
+      await startTemporary();
+      await action();
+    });
+    return;
+  }
+  if (!repository.writer) {
+    writerSession?.release();
+    await writerSession?.acquire();
+  }
+  renderEditingState();
+  if (repository.writer) {
+    await action();
+    return;
+  }
+  modal(
+    'Take Over Editing',
+    '<p>This game may be open in another tab, or an earlier visit still holds editing access. Use this tab to continue. Any other editing tab will become read-only; saved progress stays intact.</p><button id="confirm-take-over">Confirm Take Over</button>',
+  );
+  button('confirm-take-over', async () => {
+    const confirm = byId('confirm-take-over') as HTMLButtonElement;
+    confirm.disabled = true;
+    try {
+      await writerSession?.acquire(true);
+      dialog.close();
+      renderEditingState();
+      await action();
+    } finally {
+      confirm.disabled = false;
+    }
+  });
+}
 function hidePreparation(): void {
   if (preparation?.busy) {
     status('Wait for the preparation save to finish before leaving.');
@@ -169,44 +304,40 @@ function hidePreparation(): void {
   void renderTitle();
 }
 async function renderTitle(): Promise<void> {
-  const slots = (await repository?.slots()) ?? [],
+  const slots = (await repository?.slots()) ?? [];
+  let last: number | undefined;
+  try {
     last = await repository?.lastOpened();
-  const resumable =
-    typeof last === 'number' && slots[last] !== undefined && !(slots[last] instanceof Error);
+  } catch (error) {
+    status(
+      `Continue unavailable: ${String(error)}. Load Campaign can inspect saved slots; no saved data was changed.`,
+    );
+  }
+  const lastCampaign = typeof last === 'number' ? slots[last] : undefined;
+  const resumable = lastCampaign !== undefined && !(lastCampaign instanceof Error);
   byId('title').innerHTML =
-    `<img class="title-art" src="${import.meta.env.BASE_URL}assets/title-foundation.png" alt="Candidate raster fortress scene: a crystal Core, two Sentries and armored walls on basalt ground"><p class="notice">Construction, free practice and the first Bulwark/Bastion campaign siege with earned progression and recovery are playable. The full campaign and remaining roster are in development.</p><nav aria-label="Title"><button id="continue" ${resumable ? '' : 'disabled'}>Continue</button><button id="new-game" ${repository?.writer ? '' : 'disabled'}>New Game</button><button id="load" ${repository ? '' : 'disabled'}>Load Campaign</button><button id="help">How to Play</button><button id="accessibility">Accessibility</button><button id="settings">Settings</button><button id="credits">Credits</button><button id="data">Data Management</button>${!repository ? '<button id="temporary">Start Temporary Session</button>' : ''}${repository && !repository.writer ? '<button id="take-over">Take Over Editing</button>' : ''}</nav><p>Continue opens the last opened campaign. Three slots are available. ${repository?.temporary ? 'Temporary Session: closing loses unexported progress.' : repository?.writer ? 'Retained storage ready.' : 'Editing unavailable until storage or writer ownership is resolved.'}</p>`;
+    `<img class="title-art" src="${import.meta.env.BASE_URL}assets/title-foundation.png" alt="Candidate raster fortress scene: a crystal Core, two Sentries and armored walls on basalt ground"><p class="notice">Construction, free practice and the first Bulwark/Bastion campaign siege with earned progression and recovery are playable. The full campaign and remaining roster are in development.</p><nav aria-label="Title"><button id="continue" ${resumable ? '' : 'disabled'}>Continue</button><button id="new-game">New Game</button><button id="load" ${repository ? '' : 'disabled'}>Load Campaign</button><button id="help">How to Play</button><button id="accessibility">Accessibility</button><button id="settings">Settings</button><button id="credits">Credits</button><button id="data">Data Management</button>${!repository ? '<button id="temporary">Start Temporary Session</button>' : ''}</nav><p>Continue opens the last opened campaign. Three slots are available. ${repository?.temporary ? 'Temporary Session: closing loses unexported progress.' : repository?.writer ? 'Retained storage ready.' : 'Choose New Game or Take Over Editing to enable editing.'}</p>`;
+  renderEditingState();
+  const buildLabel = document.createElement('p');
+  buildLabel.id = 'build-label';
+  buildLabel.textContent = `Development preview ${applicationBuild}`;
+  byId('title').append(buildLabel);
   if (resumable)
     button('continue', () => {
       void audio.unlock();
-      const c = slots[last];
+      const c = lastCampaign;
       if (c && !(c instanceof Error)) return openCampaign(c);
     });
   button('new-game', () => {
     void audio.unlock().then((enabled) => {
       if (enabled) void audio.music('music.title');
     });
-    return slotDialog(true);
+    return ensureEditing(() => slotDialog(true));
   });
   button('load', () => slotDialog(false));
   if (!repository)
     button('temporary', async () => {
-      repository = new CampaignRepository(undefined);
-      await repository.acquire();
-      status('Temporary Session enabled. No retained Saved claim; export before closing.');
-      await renderTitle();
-    });
-  if (repository && !repository.writer)
-    button('take-over', () => {
-      modal(
-        'Take Over Editing',
-        '<p>This increments the writer generation. Other tabs become read-only.</p><button id="confirm-take-over">Confirm Take Over</button>',
-      );
-      button('confirm-take-over', async () => {
-        await repository?.acquire(true);
-        dialog.close();
-        await renderTitle();
-        status('This tab now owns editing.');
-      });
+      await startTemporary();
     });
   button('help', () =>
     modal(
@@ -220,6 +351,7 @@ async function renderTitle(): Promise<void> {
       'Settings',
       '<button id="unlock-audio">Enable Sound</button><button id="mute-audio">Mute</button><p id="audio-status">Audio architecture is ready; three original 96-second cues and tutorial effects are available; full eight-cue soundtrack remains Gate7.</p>',
     );
+    byId('mute-audio').setAttribute('aria-pressed', String(audio.muted));
     button('unlock-audio', async () => {
       byId('audio-status').textContent = (await audio.unlock())
         ? 'Audio unlocked. Original Title theme available; full soundtrack remains in development.'
@@ -293,7 +425,7 @@ async function slotDialog(isNew: boolean): Promise<void> {
       }
       byId('dialog-heading').textContent = 'Create Campaign';
       byId('dialog-body').innerHTML =
-        `<form id="new-form"><label>Campaign name <input id="name" required maxlength="64" autocomplete="off"></label><label>Doctrine <select id="doctrine"><option>Bastion</option><option>Mobile</option><option>Chokepoint</option></select></label><label>Warden <select id="warden"><option value="warden.bulwark">Bulwark</option><option value="warden.ranger">Ranger</option><option value="warden.conductor">Conductor</option></select></label><p>600 Credits; granted assets start in storage. Bulwark/Bastion tutorial combat is implemented; Ranger, Conductor and other doctrine combat remain Gate4. Owned Rifle, Mine and Repair Node deployment is available.</p>${existing ? `<p>Replacing ${escapeHTML(existing.name)} requires its exact name.</p><label>Existing campaign name <input id="overwrite" required autocomplete="off"></label>` : ''}<button type="submit">Review Campaign</button></form>`;
+        `<form id="new-form"><label>Campaign name <input id="name" required maxlength="64" autocomplete="off"></label><label for="doctrine">Doctrine</label><select id="doctrine"><option>Bastion</option><option value="Mobile" disabled>Mobile · combat in development</option><option value="Chokepoint" disabled>Chokepoint · combat in development</option></select><label for="warden">Warden</label><select id="warden"><option value="warden.bulwark">Bulwark</option><option value="warden.ranger" disabled>Ranger · combat in development</option><option value="warden.conductor" disabled>Conductor · combat in development</option></select><p>600 Credits; granted assets start in storage. Bulwark/Bastion tutorial combat is implemented; Ranger, Conductor and other doctrine combat remain Gate4. Owned Rifle, Mine and Repair Node deployment is available.</p>${existing ? `<p>Replacing ${escapeHTML(existing.name)} requires its exact name.</p><label>Existing campaign name <input id="overwrite" required autocomplete="off"></label>` : ''}<button type="submit">Review Campaign</button></form>`;
       (byId('name') as HTMLInputElement).focus();
       byId('new-form').onsubmit = (e) => {
         e.preventDefault();
@@ -311,19 +443,31 @@ async function slotDialog(isNew: boolean): Promise<void> {
             `<p>${escapeHTML(c.name)} · ${c.doctrine} · ${foundation[c.warden].name}</p><p>600 Credits. Storage: ${summary}.</p><p>Nothing is committed until Create.</p><button id="commit-new">${existing ? 'Replace and Create' : 'Create'}</button>`;
           button('commit-new', async () => {
             if (!repository) throw new Error('No session');
+            if (creationBusy) return;
             creationBusy = true;
-            (byId('close-dialog') as HTMLButtonElement).disabled = true;
-            (byId('commit-new') as HTMLButtonElement).disabled = true;
+            const close = byId('close-dialog') as HTMLButtonElement,
+              create = byId('commit-new') as HTMLButtonElement;
+            close.disabled = true;
+            create.disabled = true;
+            let saved = false;
             try {
               await repository.commit(c, existing);
+              saved = true;
               dialog.close();
               await openCampaign(c);
             } catch (e) {
-              (byId('commit-new') as HTMLButtonElement).disabled = false;
+              if (saved) {
+                await renderTitle();
+                status(
+                  `Campaign saved, but could not be opened: ${String(e)}. Choose Load Campaign to retry opening it.`,
+                );
+                return;
+              }
+              create.disabled = false;
               throw e;
             } finally {
               creationBusy = false;
-              (byId('close-dialog') as HTMLButtonElement).disabled = false;
+              close.disabled = false;
             }
           });
         })().catch((e) => status(`Campaign not created: ${String(e)}`));
@@ -708,7 +852,7 @@ document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
     void audio.suspend();
     void preferences.save();
-  } else void repository?.heartbeat().catch((e) => status(`Writer check failed: ${String(e)}`));
+  } else recheckEditing();
 });
 async function startBattleSession(paid = false): Promise<void> {
   if (tutorial || !preparation || !repository) return;

@@ -805,6 +805,9 @@ export class TutorialSession {
     this.bindPauseActions();
   }
   async resume(): Promise<void> {
+    // A sleeping tab may still have an in-memory writer after another tab's
+    // confirmed takeover. Validate the durable generation before Resume.
+    await this.repo.heartbeat();
     if (document.hidden || !this.world?.rendererAvailable || !this.repo.writer) {
       this.status(
         'Resume unavailable: background, renderer or writer recovery remains unresolved.',

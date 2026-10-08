@@ -94,8 +94,7 @@ test('mobile backup replaces selected wallets, preserves other slots/settings, r
   await expect(page.locator('#data-message')).toContainText('restored and Saved');
   expect(((await saved(page)) as { credits: number }[])[0]?.credits).toBe(540);
   await page.reload();
-  await page.getByRole('button', { name: 'Take Over Editing', exact: true }).click();
-  await page.getByRole('button', { name: 'Confirm Take Over', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Take Over Editing', exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: 'Load Campaign', exact: true }).click();
   await page.getByRole('button', { name: 'Open campaign', exact: true }).first().click();
   await expect(page.locator('#account')).toContainText('540 Credits');
@@ -188,8 +187,7 @@ test('export includes native interrupted practice and import refuses to replace 
   await page.getByRole('button', { name: 'Begin Tutorial Practice', exact: true }).click();
   await expect(page.locator('#checkpoint-label')).toContainText('Checkpoint Saved');
   await page.reload();
-  await page.getByRole('button', { name: 'Take Over Editing', exact: true }).click();
-  await page.getByRole('button', { name: 'Confirm Take Over', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Take Over Editing', exact: true })).toHaveCount(0);
   await data(page);
   const complete = JSON.parse(await exported(page));
   expect(complete.slots[0].practice.plan.simulation).toBe('rb-sim-v2');
