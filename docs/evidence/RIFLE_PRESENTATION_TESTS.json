@@ -1,0 +1,1618 @@
+{
+  "build": "0.2.12-rifle-joints",
+  "date": "2026-10-08",
+  "local_browser_initial": {
+    "stats": {
+      "startTime": "2026-10-08T14:21:04.556Z",
+      "duration": 681053.8069999999,
+      "expected": 69,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "affordable-repair.spec.ts",
+        "title": "unaffordable full repair is preserved; affordable Core preview can cancel, then explicitly spend once",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "affordable-repair.spec.ts",
+        "title": "quarter, half and exact asset choices use max body, cap at missing body and preserve earned XP",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "affordable-repair.spec.ts",
+        "title": "a small asset wallet keeps the exact affordable fraction through persistence instead of charging a rounded display",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "campaign-ui.spec.ts",
+        "title": "the player can migrate, deploy existing assets, win, review committed XP and rearm the persisted mine once",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "campaign-ui.spec.ts",
+        "title": "a visible commit failure preserves the exact result and retry succeeds even if the audio device rejects suspension",
+        "ok": false,
+        "results": [
+          {
+            "status": "unexpected",
+            "attempts": [
+              {
+                "status": "failed",
+                "retry": 0,
+                "errors": [
+                  "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#campaign-finalize')\nExpected: visible\nTimeout: 60000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#campaign-finalize') with timeout 60000ms\u001b[22m\n\u001b[2m  - waiting for locator('#campaign-finalize')\u001b[22m\n\n\n  115 |       Promise.reject(new Error('Injected audio device failure'));\n  116 |   });\n> 117 |   await expect(page.locator('#campaign-finalize')).toBeVisible({ timeout: 60000 });\n      |                                                    ^\n  118 |   await expect(page.locator('#battle-content')).toContainText('Pending Campaign Results');\n  119 |   expect((await saved(page)).credits).toBe(600);\n  120 |   await page.locator('#campaign-finalize').click();\n    at /workspace/Project-Rando/tests/browser/campaign-ui.spec.ts:117:52"
+                ],
+                "attachments": [
+                  {
+                    "name": "error-context",
+                    "contentType": "text/markdown",
+                    "path": "/workspace/Project-Rando/test-results/campaign-ui-a-visible-comm-2597e-o-device-rejects-suspension/error-context.md"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "campaign-ui.spec.ts",
+        "title": "earned enhancement preview quotes actual weapon changes and preserves a wreck until explicitly restored",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "campaign-ui.spec.ts",
+        "title": "reload restarts the captured beginning and abandoning an unfinished siege pays nothing",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "campaign-ui.spec.ts",
+        "title": "the recovery controls preserve a cash-poor wrecked campaign and explicitly commit its emergency repair outside Undo",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "campaign-ui.spec.ts",
+        "title": "progression controls and quoted purchases reflow in portrait and landscape at normal and 200% interface scale",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate0.spec.ts",
+        "title": "Gate 0 production subpath, renderer, storage, gesture, audio and export",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate0.spec.ts",
+        "title": "IndexedDB abort is reported; failed open offers a temporary session",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate0.spec.ts",
+        "title": "actual WebGL context loss restores presentation",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate0.spec.ts",
+        "title": "viewport reflow, touch cancellation, semantic focus and production MIME",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate1-closeout.spec.ts",
+        "title": "global scale, reduced effects and high contrast persist across reload and campaigns",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate1-closeout.spec.ts",
+        "title": "Fit Base, role badges, four views, route feedback and named jump operate without mutating the wallet",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate1-closeout.spec.ts",
+        "title": "landscape and portrait keep the world visible while tools collapse at normal and 200%",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate1-closeout.spec.ts",
+        "title": "preference transaction failure retains session presentation and offers retry without touching campaign",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate1.spec.ts",
+        "title": "campaign creation, free deployment, atomic purchase, Undo/Redo and reload",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": [
+                  {
+                    "name": "observed-browser-warnings",
+                    "contentType": "application/json",
+                    "body": "W10="
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate1.spec.ts",
+        "title": "invalid placement and failed persistence preserve money and history",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate1.spec.ts",
+        "title": "second tab cannot edit until confirmed writer takeover; stale tab cannot commit",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate1.spec.ts",
+        "title": "explicit temporary session, native controls, viewport and 200% reflow",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate1.spec.ts",
+        "title": "high artwork selects the Core inspector in four views without purchasing; wizard cancel preserves slot",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate1.spec.ts",
+        "title": "native ghost drag and two-touch pinch/cancel never purchase",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate1.spec.ts",
+        "title": "hidden preparation retains a valid renderer through Title, scale and Continue",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate2-accessibility.spec.ts",
+        "title": "injected background pauses without catch-up; keyboard audio settings persist through checkpoint reload",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate2.spec.ts",
+        "title": "real tutorial is autonomous, paused, restarted from durable checkpoint, and saved as practice victory",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": [
+                  {
+                    "name": "native-browser-checkpoint.json",
+                    "contentType": "application/json",
+                    "body": "eyJzY2hlbWEiOjEsImtpbmQiOiJ0dXRvcmlhbC1wcmFjdGljZSIsInNsb3QiOjAsImxpbmVhZ2UiOiIwODExYWQ0NS00OGVmLTRkMGYtYWE5NC1kNGNjN2IzNDMxNjEiLCJyZXZpc2lvbiI6MCwic2VxdWVuY2UiOiIxIiwicGxhbiI6eyJzY2hlbWEiOjEsIm1vZGUiOiJ0dXRvcmlhbC1wcmFjdGljZSIsInNlZWQiOiJyYi10dXRvcmlhbC12MSIsInNpbXVsYXRpb24iOiJyYi1zaW0tdjIiLCJjb250ZW50IjoicmItY29udGVudC12MSIsImVjb25vbXlQb2xpY3kiOiJlY29ub215LmR1cmF0aW9uX3dhdmVfdjEiLCJkaWZmaWN1bHR5IjoiU3RhbmRhcmQiLCJkdXJhdGlvbiI6NTQwMCwid2FybmluZ1RpY2siOjM5MDAsInRwIjozMCwicGFja2V0cyI6W3siaWQiOjEsInRpY2siOjYwMCwiZW50cmFuY2UiOjEsInR5cGUiOiJlbmVteS5ydW5uZXIiLCJ0cCI6MX0seyJpZCI6MiwidGljayI6NzgwLCJlbnRyYW5jZSI6MSwidHlwZSI6ImVuZW15LnJ1bm5lciIsInRwIjoxfSx7ImlkIjozLCJ0aWNrIjo5NjAsImVudHJhbmNlIjoxLCJ0eXBlIjoiZW5lbXkucnVubmVyIiwidHAiOjF9LHsiaWQiOjQsInRpY2siOjExNDAsImVudHJhbmNlIjoxLCJ0eXBlIjoiZW5lbXkucnVubmVyIiwidHAiOjF9LHsiaWQiOjUsInRpY2siOjEzMjAsImVudHJhbmNlIjoxLCJ0eXBlIjoiZW5lbXkucnVubmVyIiwidHAiOjF9LHsiaWQiOjYsInRpY2siOjE1MDAsImVudHJhbmNlIjoxLCJ0eXBlIjoiZW5lbXkucnVubmVyIiwidHAiOjF9LHsiaWQiOjcsInRpY2siOjE4MDAsImVudHJhbmNlIjoxLCJ0eXBlIjoiZW5lbXkucmFpZGVyIiwidHAiOjJ9LHsiaWQiOjgsInRpY2siOjIxMDAsImVudHJhbmNlIjoxLCJ0eXBlIjoiZW5lbXkucmFpZGVyIiwidHAiOjJ9LHsiaWQiOjksInRpY2siOjI0MDAsImVudHJhbmNlIjoxLCJ0eXBlIjoiZW5lbXkucmFpZGVyIiwidHAiOjJ9LHsiaWQiOjEwLCJ0aWNrIjozMDAwLCJlbnRyYW5jZSI6MSwidHlwZSI6ImVuZW15LnJ1bm5lciIsInRwIjoxfSx7ImlkIjoxMSwidGljayI6MzE4MCwiZW50cmFuY2UiOjEsInR5cGUiOiJlbmVteS5ydW5uZXIiLCJ0cCI6MX0seyJpZCI6MTIsInRpY2siOjMzNjAsImVudHJhbmNlIjoxLCJ0eXBlIjoiZW5lbXkucnVubmVyIiwidHAiOjF9LHsiaWQiOjEzLCJ0aWNrIjozNTQwLCJlbnRyYW5jZSI6MSwidHlwZSI6ImVuZW15LnJ1bm5lciIsInRwIjoxfSx7ImlkIjoxNCwidGljayI6MzcyMCwiZW50cmFuY2UiOjEsInR5cGUiOiJlbmVteS5ydW5uZXIiLCJ0cCI6MX0seyJpZCI6MTUsInRpY2siOjM5MDAsImVudHJhbmNlIjoxLCJ0eXBlIjoiZW5lbXkucnVubmVyIiwidHAiOjF9LHsiaWQiOjE2LCJ0aWNrIjo0MjAwLCJlbnRyYW5jZSI6MSwidHlwZSI6ImVuZW15LnJhaWRlciIsInRwIjoyfSx7ImlkIjoxNywidGljayI6NDQ0MCwiZW50cmFuY2UiOjEsInR5cGUiOiJlbmVteS5yYWlkZXIiLCJ0cCI6Mn0seyJpZCI6MTgsInRpY2siOjQ1MDAsImVudHJhbmNlIjoxLCJ0eXBlIjoiZW5lbXkucnVubmVyIiwidHAiOjF9LHsiaWQiOjE5LCJ0aWNrIjo0NjIwLCJlbnRyYW5jZSI6MSwidHlwZSI6ImVuZW15LnJ1bm5lciIsInRwIjoxfSx7ImlkIjoyMCwidGljayI6NDY4MCwiZW50cmFuY2UiOjEsInR5cGUiOiJlbmVteS5yYWlkZXIiLCJ0cCI6Mn0seyJpZCI6MjEsInRpY2siOjQ3NDAsImVudHJhbmNlIjoxLCJ0eXBlIjoiZW5lbXkucnVubmVyIiwidHAiOjF9LHsiaWQiOjIyLCJ0aWNrIjo0ODYwLCJlbnRyYW5jZSI6MSwidHlwZSI6ImVuZW15LnJ1bm5lciIsInRwIjoxfSx7ImlkIjoyMywidGljayI6NDk4MCwiZW50cmFuY2UiOjEsInR5cGUiOiJlbmVteS5ydW5uZXIiLCJ0cCI6MX0seyJpZCI6MjQsInRpY2siOjUxMDAsImVudHJhbmNlIjoxLCJ0eXBlIjoiZW5lbXkucnVubmVyIiwidHAiOjF9XX0sImFybXkiOlt7InV1aWQiOiI0Yzg1MWZhOS1kNDEwLTQ4MGQtYTgwOC01ZDg2M2Q5NDQwM2IiLCJoZWFkaW5nIjowLCJ0eXBlIjoid2FyZGVuLmJ1bHdhcmsiLCJ4IjoyOSwieSI6MzMsIndpZHRoIjoyLCJoZWlnaHQiOjIsImhwIjoyNTYwMDAwfSx7InV1aWQiOiJkYjRjYjY3YS1iM2MxLTQ4NTktOGU1Zi1hZjVmYjE1NWQzNGUiLCJoZWFkaW5nIjowLCJ0eXBlIjoiZnJpZW5kbHkuc2VudHJ5IiwieCI6MjQsInkiOjMyLCJ3aWR0aCI6MiwiaGVpZ2h0IjoyLCJocCI6MTIyODgwMH0seyJ1dWlkIjoiMmNlY2NmNWMtZmMzMS00MjIyLWJiM2UtMmQ4YWU5ZmFjMjdjIiwiaGVhZGluZyI6MCwidHlwZSI6ImZyaWVuZGx5LnNlbnRyeSIsIngiOjI0LCJ5IjoyNiwid2lkdGgiOjIsImhlaWdodCI6MiwiaHAiOjEyMjg4MDB9LHsidXVpZCI6ImJhYjQ3NDEyLTBiY2EtNGQwYS04NjJkLWE5OGU3ZGQ4YzJjMyIsImhlYWRpbmciOjAsInR5cGUiOiJmcmllbmRseS5yaWZsZV9zcXVhZCIsIngiOjIyLCJ5IjoyOCwid2lkdGgiOjIsImhlaWdodCI6MiwiaHAiOjkyMTYwMH0seyJ1dWlkIjoiMDUyZDZlM2ItYTVhMi00ZGYyLTk1ODYtODk2NzQyYTEwZmFkIiwiaGVhZGluZyI6MCwidHlwZSI6ImZyaWVuZGx5LnN0YW5kYXJkX2JhcnJpY2FkZSIsIngiOjIyLCJ5IjoyNiwid2lkdGgiOjEsImhlaWdodCI6MSwiaHAiOjE1MzYwMDB9LHsidXVpZCI6IjgxZjMxOTBmLTg0M2MtNDZjOS05MWUxLTM5MWUxNWVmNzQyNSIsImhlYWRpbmciOjAsInR5cGUiOiJmcmllbmRseS5wcm94aW1pdHlfbWluZSIsIngiOjE4LCJ5IjoyNCwid2lkdGgiOjEsImhlaWdodCI6MSwiaHAiOjIwNDgwMH0seyJ1dWlkIjoiZjc3YzY3YTAtYjUyMi00YTY2LTliZDQtZDkzZGU0NjlkNzU0IiwiaGVhZGluZyI6MCwidHlwZSI6ImZyaWVuZGx5LnJlcGFpcl9ub2RlIiwieCI6MjUsInkiOjM0LCJ3aWR0aCI6MiwiaGVpZ2h0IjoyLCJocCI6ODE5MjAwfV0sImlkZW50aXR5IjoiMGRiNzEzNjViZWY4M2E2ZDFjMjAwNjlkMWIwODkwZDdlNmU2OWNhZGZjNmI5MTc2YjFlMTU0MTUzOTc1YmVkMSIsInRlcm1pbmFsIjp7InN0YXRlIjoiVmljdG9yeSIsInRpY2siOjY0ODEsInJlYXNvbiI6IkFsbCBkZXBsb3ltZW50cyBhbmQgaG9zdGlsZSBkYW1hZ2UgcG90ZW50aWFsIGNsZWFyZWQgZm9yIG9uZSBjb21iYXQgc2Vjb25kIiwiaGFzaCI6ImJhOWMxOWE0ZGNiN2E1ODY4MTU2YmZlZjJhNWUyY2NlM2Y5NGNjMjVkODc0ZTYxZDkxNzI3OTkzMDMxYzM0YzIiLCJraWxscyI6MjQsInRwIjozMCwiY29yZUhQIjoxMDI0MDAwMH19"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate2.spec.ts",
+        "title": "surrender result abort offers idempotent retry and leaves the real campaign intact",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate2.spec.ts",
+        "title": "competing tab takeover freezes the old battle and offers the retained checkpoint to the new writer",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "recovery.spec.ts",
+        "title": "mobile backup replaces selected wallets, preserves other slots/settings, reloads and rolls back without merging",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "recovery.spec.ts",
+        "title": "corrupt checksums and duplicate JSON are rejected before native storage changes; delete has an explicit preview",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "recovery.spec.ts",
+        "title": "a quota failure after writes were queued aborts all imported slots and leaves an exact retry",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "recovery.spec.ts",
+        "title": "writer takeover rejects a stale recovery preview and preserves the other writer campaign",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "recovery.spec.ts",
+        "title": "export includes native interrupted practice and import refuses to replace it with a conflicting older backup",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "recovery.spec.ts",
+        "title": "unknown future logical journals block backup/recovery rather than silently omitting pending state",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "recovery.spec.ts",
+        "title": "global accessibility is preserved unless the player explicitly applies included settings",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "render-reuse.spec.ts",
+        "title": "repeated pan/zoom/facing/ghost cycles keep a bounded pool and hide surplus without changing picking",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "render-reuse.spec.ts",
+        "title": "ghost/role/label state clears back to identical pixels and scene disposal releases retained objects",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "result-backup.spec.ts",
+        "title": "rb-sim-v3 native IndexedDB preserves a real pending result across reload and a backup imported into a different slot",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "result-backup.spec.ts",
+        "title": "rb-sim-v4 native IndexedDB preserves a real pending result across reload and a backup imported into a different slot",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "result-backup.spec.ts",
+        "title": "an abort while importing the paid checkpoint rolls back every store and the exact same preview can retry",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "result-backup.spec.ts",
+        "title": "a real result commit abort leaves its exact pending journal and wallet intact, then retry pays once",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "rifle-render.spec.ts",
+        "title": "preparation and legal/illegal Rifle ghosts share the authored three-member art without loading the legacy combat atlas",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "rifle-render.spec.ts",
+        "title": "Rifle moving fire uses three grounded members, independent gait/aim, one cropped rig per member and repeatable pixels through pause and camera rotation",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "run-journal.spec.ts",
+        "title": "native preflight failure rolls back checkpoint and allocation; exact retry starts sequence one",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "run-journal.spec.ts",
+        "title": "Step 1 failure keeps only durable checkpoint, offers exact in-memory recovery and retry survives reopen",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "run-journal.spec.ts",
+        "title": "Step 2 abort after queued body/wallet writes leaves every store unchanged, then exact retry commits once",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "run-journal.spec.ts",
+        "title": "lost commit acknowledgment reconciles a durable receipt after reopen without applying rewards again",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "run-journal.spec.ts",
+        "title": "writer takeover rejects stale result application while the new owner can retry the pinned pending result",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "run-journal.spec.ts",
+        "title": "active runs block preparation edits and current unsupported journals block backup rather than omit state",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "run-journal.spec.ts",
+        "title": "competing preflights and result writers cannot allocate or finalize a duplicate attempt",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "run-journal.spec.ts",
+        "title": "ordinary preflight and tutorial practice mutually exclude each other inside the native write boundary",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "reload and reopening a closed page restore editing without changing campaigns",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "another active tab can start New Game through confirmed takeover and the old controls refresh",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "legacy ownership offers a working recovery from New Game instead of a gray dead end",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "a failed writer transaction keeps title controls and a retry path available",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "failed storage probe offers explicit temporary play without breaking the title",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "without Web Locks, closed legacy ownership still requires confirmation and saves remain unchanged",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "title buttons and cancelled creation stay usable, and unfinished combat choices are clearly unavailable",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "a campaign saved before an open failure remains loadable without retrying creation",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "a rejected Web Lock request does not strand startup and can be retried",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "writer quota errors stay recoverable without uncaught request-handler errors",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "a displaced battle never automatically resumes after the other writer closes; takeover opens durable recovery",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "touch-layout.spec.ts",
+        "title": "field and collapsible menus fit 360\u00d7640 at 100% and 200%",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "touch-layout.spec.ts",
+        "title": "field and collapsible menus fit 412\u00d7915 at 100% and 200%",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "touch-layout.spec.ts",
+        "title": "field and collapsible menus fit 800\u00d71280 at 100% and 200%",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "touch-layout.spec.ts",
+        "title": "field and collapsible menus fit 1280\u00d7800 at 100% and 200%",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "touch-layout.spec.ts",
+        "title": "field and collapsible menus fit 320\u00d7640 at 100% and 200%",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "touch-layout.spec.ts",
+        "title": "native touch pans in every direction, pinches about the midpoint, and continues with the remaining finger",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "touch-layout.spec.ts",
+        "title": "choosing a build closes the menu; pinch continuation never moves or buys the ghost",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "touch-layout.spec.ts",
+        "title": "battle keeps the field visible and observation tools collapsed; opening and closing works by touch",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "local_browser_followup": {
+    "stats": {
+      "startTime": "2026-10-08T14:33:07.395Z",
+      "duration": 78192.25700000001,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "campaign-ui.spec.ts",
+        "title": "the player can migrate, deploy existing assets, win, review committed XP and rearm the persisted mine once",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": [
+                  {
+                    "name": "performance-policy",
+                    "contentType": "application/json",
+                    "body": "eyJwZXJmb3JtYW5jZVJlc3VtZXMiOjB9"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "campaign-ui.spec.ts",
+        "title": "a visible commit failure preserves the exact result and retry succeeds even if the audio device rejects suspension",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": [
+                  {
+                    "name": "performance-policy",
+                    "contentType": "application/json",
+                    "body": "eyJwZXJmb3JtYW5jZVJlc3VtZXMiOjB9"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "rifle-render.spec.ts",
+        "title": "preparation and legal/illegal Rifle ghosts share the authored three-member art without loading the legacy combat atlas",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "rifle-render.spec.ts",
+        "title": "Rifle moving fire uses three grounded members, independent gait/aim, one cropped rig per member and repeatable pixels through pause and camera rotation",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "errors": [],
+                "attachments": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "verified_unique_scenarios": 70,
+  "automatic_retries": 0,
+  "unit": {
+    "passed": 150,
+    "files": 32,
+    "source_note": "Full verify before the final preparation-only WorldView change; current WorldView covered by fresh build/typecheck and all browser scenarios. Pinned-source CI repeats all unit tests."
+  },
+  "scenario_hash": "90a7d118d4df7eb3e8808e78d7ffa875ddd970ab4961287daf1a719426936169",
+  "failure_resolution": "Initial result-error case stopped at intentional 4x performance pause before terminal results; explicit test helper verifies performance status and resumes at 2x through visible controls when needed. Follow-up retains all persistence/audio/retry assertions. Animation screenshot fixture moved outside Core occlusion; no runtime change after full browser build.",
+  "production_manifest": {
+    "applicationBuild": "0.2.12-rifle-joints",
+    "files": [
+      {
+        "path": "THIRD_PARTY_NOTICES.txt",
+        "bytes": 284630,
+        "sha256": "0c1677ecd236df2d3657cbbcc75abc08315327d88acb5c339008d218da8dd48e"
+      },
+      {
+        "path": "assets/app-CN7KbM0W.js",
+        "bytes": 1348185,
+        "sha256": "6efd26964c0a2a3fb0b60278fb524f814b13defde4ca53502c5fb13b1d8f7d44"
+      },
+      {
+        "path": "assets/audio/alert.core.wav",
+        "bytes": 27244,
+        "sha256": "3b102957104f73fccd2ac6aca0a2e6e08eab400d8b4b590192f170a763cac448"
+      },
+      {
+        "path": "assets/audio/alert.wave.wav",
+        "bytes": 20844,
+        "sha256": "7daa96d6c9b192bd862cb1a83f97c0650fe97c01ae5607a89357a81dbb2e30eb"
+      },
+      {
+        "path": "assets/audio/manifest.json",
+        "bytes": 8925,
+        "sha256": "03cf25256b4e669a262c9fb5ffeb7f043223dd728675acac436a633e454fba8d"
+      },
+      {
+        "path": "assets/audio/music.fracture.wav",
+        "bytes": 3072044,
+        "sha256": "8c9a7cc92de47f02432fe14b2deadc78c638a438e46167177786f3848dd211a0"
+      },
+      {
+        "path": "assets/audio/music.preparation.wav",
+        "bytes": 3072044,
+        "sha256": "7ff2ab848fea55b8ec56ddb20b486b30c0df818a416cbd4295d4478c055145af"
+      },
+      {
+        "path": "assets/audio/music.title.wav",
+        "bytes": 3072044,
+        "sha256": "f9d89a42dc85e7756e7a4b988551ba5205aaaa5ecbd6b7de7c1739c3da7c7642"
+      },
+      {
+        "path": "assets/audio/sfx.bulwark.wav",
+        "bytes": 5804,
+        "sha256": "bb24a903b5eac49b04798238738db8f321b394b4ef0587a754cc56fa59264680"
+      },
+      {
+        "path": "assets/audio/sfx.challenge.wav",
+        "bytes": 17644,
+        "sha256": "7063882770bf5bbcd4b5ecc3b43a52fd3a2531fc80aee4d479f5dc64e3555332"
+      },
+      {
+        "path": "assets/audio/sfx.holdfast.wav",
+        "bytes": 22444,
+        "sha256": "92c6d991e9820b59399fd69074299576ca97a69afa6cee74932fcbdd66f43553"
+      },
+      {
+        "path": "assets/audio/sfx.impact.wav",
+        "bytes": 4204,
+        "sha256": "89483ec8e8a1bf99511e22c4f1cdee232bb319c5972e7f0bfcb3c01552320f33"
+      },
+      {
+        "path": "assets/audio/sfx.interpose.wav",
+        "bytes": 14444,
+        "sha256": "7d44cfd5125f04169aee307f8b4b15bf0d21cbe25cfb6f0970dadd75f0e47ea6"
+      },
+      {
+        "path": "assets/audio/sfx.melee.wav",
+        "bytes": 5164,
+        "sha256": "73edc6f7cc218caf9577e4156f57199fb1793b99725462e819c7e93afc5b0c01"
+      },
+      {
+        "path": "assets/audio/sfx.mine.wav",
+        "bytes": 20844,
+        "sha256": "44dd680024f1857d68b3cbaac0bcd4bd5e674c92720e516351aa78c7b1713cf5"
+      },
+      {
+        "path": "assets/audio/sfx.repair.wav",
+        "bytes": 12844,
+        "sha256": "ffec83d3805a309a12f0a1deede7028c2498ccd9cc6ed1b07d3c6e9c072702dc"
+      },
+      {
+        "path": "assets/audio/sfx.rifle.wav",
+        "bytes": 3244,
+        "sha256": "5a0f402ed431262f53f54a6b6cc86ea75e79898aecefb804ca44cfff3c959cde"
+      },
+      {
+        "path": "assets/audio/sfx.sentry.wav",
+        "bytes": 3884,
+        "sha256": "2ea71d3fbdb4df7535809be96ff52d7c611f8332d10444db7657b6a146c842d2"
+      },
+      {
+        "path": "assets/audio/stinger.defeat.wav",
+        "bytes": 76844,
+        "sha256": "70039d02db80cca01131f03827612a352281690939f6a5936397bda823a0a883"
+      },
+      {
+        "path": "assets/audio/stinger.victory.wav",
+        "bytes": 76844,
+        "sha256": "26bf18aeb3ec29401e0fe5bd19f12d54515e17917859cffcaa50dc8de3bfb30d"
+      },
+      {
+        "path": "assets/audio/ui.confirm.wav",
+        "bytes": 3244,
+        "sha256": "8c4183b4e3f2906d8c5e04a4286adf0c072fff1ada8dc8df9a77dd02f99058b6"
+      },
+      {
+        "path": "assets/balance-study-CfZYC0QI.js",
+        "bytes": 1468,
+        "sha256": "4306f5d4ffc1ceb362870fa6763aba19cbf91ee56870a440b11750c7d7cce279"
+      },
+      {
+        "path": "assets/combat/atlas0.png",
+        "bytes": 1038294,
+        "sha256": "f010a3d68c6ea2b244e7b9f6d5346b6506ba90c6660b7a5ff8103fa5f64e44fb"
+      },
+      {
+        "path": "assets/combat/manifest.json",
+        "bytes": 771152,
+        "sha256": "cc3f5cdf575d016082a1538bc85ec012e0a5e3c15cf1b1baf0ca77b3e5100544"
+      },
+      {
+        "path": "assets/combat/rifle-joints-r1.png",
+        "bytes": 103431,
+        "sha256": "6f515788d495baf3bcfbfd4016ba08705e5e71336239961a86c7302e76837d18"
+      },
+      {
+        "path": "assets/combat/rifle-rig.json",
+        "bytes": 231101,
+        "sha256": "524257287c625d8de7407dd9e06a892cb4973d645f6b4e18a2501a7443ea9dee"
+      },
+      {
+        "path": "assets/diagnostic-B9GG4N3e.js",
+        "bytes": 3043,
+        "sha256": "b8cf5bbf690250c44045336a99bed94cfe9a6b208092d23e280b4852d0c88491"
+      },
+      {
+        "path": "assets/foundation.json",
+        "bytes": 14896,
+        "sha256": "02f0da9d5ec4f0bc7d4a24d1c2bd2a1ee56382af1cab303b5a6b9252a54f20ce"
+      },
+      {
+        "path": "assets/foundation.png",
+        "bytes": 349002,
+        "sha256": "d397c7f6333f7e60caf6420c50f99f5ee51e6baed5d23169feb9847f1584bd57"
+      },
+      {
+        "path": "assets/icon.png",
+        "bytes": 2141,
+        "sha256": "bcdfbcc4c5789752013f3d8eb3881914fb84a788915f111087833d296abd4f2d"
+      },
+      {
+        "path": "assets/index-DHSPJ1MO.js",
+        "bytes": 1206,
+        "sha256": "3e6578270f836aee4c31dfbf1ec41da83f0799224e6af12381a1ac1dcb93453e"
+      },
+      {
+        "path": "assets/preload-helper-Cl7pOkUX.js",
+        "bytes": 1124,
+        "sha256": "989e1a374921cdeb43a03349e760593a196a91e7e6e055f9061657b8b57d96fc"
+      },
+      {
+        "path": "assets/roles.json",
+        "bytes": 3285,
+        "sha256": "9693882fe946249b5cdacb4e7a4399aa884f2a3dc0d04478636a90a70c2715d8"
+      },
+      {
+        "path": "assets/roles.png",
+        "bytes": 8321,
+        "sha256": "7a8a9aec353aaa2bc3265d49c68eb3f78fad87781a237a11998bb8b8bdfdcbf1"
+      },
+      {
+        "path": "assets/style-proof-close.png",
+        "bytes": 128163,
+        "sha256": "0a19c329843159f762f96801e1873212969088e75848bf2174e6e8f68006b075"
+      },
+      {
+        "path": "assets/style-proof-default.png",
+        "bytes": 32282,
+        "sha256": "0f378033a758ee393a7e1be3a7719fcc0bc96619f96116a29a896dbb4891ddc3"
+      },
+      {
+        "path": "assets/title-foundation.png",
+        "bytes": 129260,
+        "sha256": "7c5ba99eabc67764b163517198ee7c21e3981372761c540430fa33768a07c553"
+      },
+      {
+        "path": "assets/world-DFVhNYXI.css",
+        "bytes": 8156,
+        "sha256": "b2d539f32486a3443c722da5a6473966d2418bc087b558d93675591853966105"
+      },
+      {
+        "path": "assets/world-eJSXKqmu.js",
+        "bytes": 2038843,
+        "sha256": "06b6ad10b8c4bbc1aeeb91ca784def63bbb9fa6495475a1a64a3010f7813d8aa"
+      },
+      {
+        "path": "index.html",
+        "bytes": 632,
+        "sha256": "a383310acedac26fb542d1cd1251db50031e248713ca479c7e9ca7589aec21a0"
+      }
+    ]
+  },
+  "log_sha256": {
+    "rifle-final-verify.log": "e19aa4e55abb20310c3de2dbe3b0b3ef26ef90f2c5891301f5a2f8037f5979f6",
+    "rifle-build-final.log": "beb35f43e8f62a0eae4f3fc996ac590d91cc213f3b30c22c39a5e265a79ac62d",
+    "rifle-lint-final.log": "fce6dd233ac08bdd64f73ff8e2e802268c1f68b5dd4810e6c22f5b0419caa2c8",
+    "rifle-types-final.log": "de5747b66e88dc09998c6c5d86b149e421e779339107fc311cf1f50cc86c6140",
+    "rifle-format-final.log": "76ae7812a0e876179d336d4ec0dc54f93665022eb7e16d46008434cb537c7c33",
+    "rifle-source-validation.log": "032e430a5c04c9044364fc45185ca500d2c489d6751e5588e3bd443189114dd5",
+    "rifle-raster-final.log": "a06723107a4524a96709972f4aa9889025d556fbbb12282922a99f338484fef3",
+    "rifle-browser-final.log": "283134f550656819d100aa703167fb1167e5eca1a1684aff00559698978c3795",
+    "rifle-browser-followup.log": "e056953913965f7c8f5d54cb4b477209301e7c97aedd139b864d99dbfb55d54a"
+  },
+  "limits": "Desktop Chromium native emulated touch and actual Phaser/Canvas2D; physical Android performance and final creative acceptance remain open."
+}

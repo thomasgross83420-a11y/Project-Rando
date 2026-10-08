@@ -7,6 +7,7 @@ import { actorAnimationFrame, eventAnimationFrame } from './animation';
 import { PoseDamageBank, type VisualFrame } from './damage';
 import { MotionTracker } from './motion';
 import { project } from './projection';
+import { rifleCrop, rifleFormation, rifleLayers, riflePose, rifleProjectileOffset } from './rifle';
 import type { WorldView } from './world';
 
 type Frame = (typeof art.frames)[number];
@@ -73,6 +74,7 @@ export class CombatRenderer {
       .setOrigin((ax - tx) / w, (ay - ty) / h)
       .setScale(scale)
       .setDepth(depth)
+      .setCrop()
       .setVisible(true);
     return sprite;
   }
@@ -117,47 +119,100 @@ export class CombatRenderer {
         frame = this.frame(e, b, alpha);
       if (p.x < -100 || p.y < -100 || p.x > c.width + 100 || p.y > c.height + 150) continue;
       this.shadows.fillStyle(0x0d1721, 0.4);
-      this.shadows.fillEllipse(
-        p.x,
-        p.y,
-        (e.rect ? (Math.max(e.rect.width, e.rect.height) / U) * 24 : 16) * c.zoom,
-        8 * c.zoom,
-      );
-      const offsets =
-        e.type === 'friendly.rifle_squad'
-          ? [
-              { x: -0.25, y: -0.1 },
-              { x: 0.25, y: -0.1 },
-              { x: 0, y: 0.2 },
-            ]
-          : [{ x: 0, y: 0 }];
+      if (e.type !== 'friendly.rifle_squad' || e.hp === 0)
+        this.shadows.fillEllipse(
+          p.x,
+          p.y,
+          (e.rect ? (Math.max(e.rect.width, e.rect.height) / U) * 24 : 16) * c.zoom,
+          8 * c.zoom,
+        );
+      const offsets = e.type === 'friendly.rifle_squad' ? rifleFormation : [{ x: 0, y: 0 }];
       for (const [o, n] of offsets.map((o, i) => [o, i] as const)) {
         const pos = project({ x: world.x + o.x, y: world.y + o.y }, c);
-        this.image(
-          `actor.${e.id}.${n}`,
-          frame,
-          pos.x,
-          pos.y,
-          1000 + pos.y + e.id / 1000000 + n / 100000000,
-          c.zoom / 2,
-        );
+        const layers =
+          e.type === 'friendly.rifle_squad'
+            ? rifleLayers(
+                e,
+                b.tick,
+                c.view,
+                this.motion.sample(e.id, alpha),
+                this.motion.heading(e.id) ?? e.heading,
+                n,
+                this.motion.firingMember(e.id),
+                this.reduced,
+              )
+            : { upper: frame, lower: null, muzzle: null };
+        if (e.type === 'friendly.rifle_squad' && e.hp > 0) {
+          for (const sole of riflePose(layers.lower ?? layers.upper).soles) {
+            this.shadows.fillEllipse(
+              pos.x + ((sole.x - 24) * c.zoom) / 2,
+              pos.y + ((sole.y - 51) * c.zoom) / 2,
+              Math.max(2, 3 * c.zoom),
+              Math.max(1, c.zoom),
+            );
+          }
+        }
+        const drawPart = (
+          partFrame: Frame,
+          key: string,
+          part: 'upper' | 'lower' | null,
+          damage = false,
+        ) => {
+          const visual =
+            damage && band ? this.damage.get(partFrame, band) : damage ? null : partFrame;
+          if (!visual) return;
+          const image = this.image(
+            key,
+            visual,
+            pos.x,
+            pos.y,
+            1000 +
+              pos.y +
+              e.id / 1000000 +
+              n / 100000000 +
+              (damage ? 0.002 : part === 'upper' ? 0.001 : 0),
+            c.zoom / 2,
+          );
+          if (part) {
+            const split = riflePose(partFrame).splitY;
+            const crop = damage
+              ? {
+                  x: 0,
+                  y: Math.max(0, Math.min(visual.rect[3] ?? 0, split - (visual.trim[1] ?? 0))),
+                  width: visual.rect[2] ?? 0,
+                  height: visual.rect[3] ?? 0,
+                }
+              : rifleCrop(partFrame, part);
+            if (damage) {
+              if (part === 'upper') {
+                crop.height = crop.y;
+                crop.y = 0;
+              } else crop.height -= crop.y;
+            }
+            image.setCrop(crop.x, crop.y, crop.width, crop.height);
+          }
+        };
         const band =
           e.hp > 0 && e.hp * 100 < e.maxHP * 40
             ? 'damaged'
             : e.hp > 0 && e.hp * 100 <= e.maxHP * 75
               ? 'scuffed'
               : null;
+        if (layers.lower) drawPart(layers.lower, `actor.${e.id}.${n}.lower`, 'lower');
+        drawPart(layers.upper, `actor.${e.id}.${n}`, layers.lower ? 'upper' : null);
         if (band) {
-          const overlay = this.damage.get(frame, band);
-          if (overlay)
-            this.image(
-              `damage.${e.id}.${n}`,
-              overlay,
-              pos.x,
-              pos.y,
-              1000 + pos.y + 0.001 + n / 100000000,
-              c.zoom / 2,
-            );
+          if (layers.lower) drawPart(layers.lower, `damage.${e.id}.${n}.lower`, 'lower', true);
+          drawPart(layers.upper, `damage.${e.id}.${n}`, layers.lower ? 'upper' : null, true);
+        }
+        if (layers.muzzle) {
+          const x =
+            pos.x + (((layers.muzzle[0] ?? 24) - (layers.upper.anchor[0] ?? 24)) * c.zoom) / 2;
+          const y =
+            pos.y + (((layers.muzzle[1] ?? 51) - (layers.upper.anchor[1] ?? 51)) * c.zoom) / 2;
+          g.fillStyle(0xffedb5, 1);
+          g.fillRect(Math.round(x) - 1, Math.round(y) - 1, 3, 3);
+          g.fillStyle(0xffffff, 1);
+          g.fillRect(Math.round(x), Math.round(y), 1, 1);
         }
       }
       if (
@@ -258,12 +313,24 @@ export class CombatRenderer {
       const width = frame.native[0] ?? 48,
         height = frame.native[1] ?? 64,
         anchorY = frame.anchor[1] ?? 60;
+      const memberPositions =
+        e.type === 'friendly.rifle_squad'
+          ? rifleFormation.map((o) => project({ x: world.x + o.x, y: world.y + o.y }, c))
+          : [p];
+      const left = Math.min(...memberPositions.map((p) => p.x)) - (width * c.zoom) / 4;
+      const top = Math.min(...memberPositions.map((p) => p.y)) - (anchorY * c.zoom) / 2;
       this.view.hitRecords.push({
         id: String(e.id),
-        x: p.x - (width * c.zoom) / 4,
-        y: p.y - (anchorY * c.zoom) / 2,
-        width: Math.max(24, (width * c.zoom) / 2),
-        height: Math.max(24, (height * c.zoom) / 2),
+        x: left,
+        y: top,
+        width: Math.max(
+          24,
+          Math.max(...memberPositions.map((p) => p.x)) + (width * c.zoom) / 4 - left,
+        ),
+        height: Math.max(
+          24,
+          Math.max(...memberPositions.map((p) => p.y)) + ((height - anchorY) * c.zoom) / 2 - top,
+        ),
         foot: world,
       });
       if (e.mineDue !== null) {
@@ -364,6 +431,18 @@ export class CombatRenderer {
       if (p.team === 'hostile' && !b.get(p.source)) continue;
       const pos = project({ x: p.x / U, y: p.y / U }, c),
         f = frames.get('fx.kinetic.0');
+      const cue = this.motion.projectile(p.id),
+        target = b.get(p.target);
+      if (cue) {
+        const offset = rifleProjectileOffset(
+          cue,
+          p.traveled,
+          c,
+          target ? (this.frame(target, b, alpha).anchor[1] ?? 60) : 60,
+        );
+        pos.x += offset.x;
+        pos.y += offset.y;
+      }
       if (f)
         this.image(
           `projectile.${p.id}`,
@@ -376,6 +455,16 @@ export class CombatRenderer {
           (() => {
             const v = direction(p.heading, U),
               end = project({ x: (p.x + v.x) / U, y: (p.y + v.y) / U }, c);
+            if (cue) {
+              const offset = rifleProjectileOffset(
+                cue,
+                p.traveled + U,
+                c,
+                target ? (this.frame(target, b, alpha).anchor[1] ?? 60) : 60,
+              );
+              end.x += offset.x;
+              end.y += offset.y;
+            }
             return Math.atan2(end.y - pos.y, end.x - pos.x) + Math.atan2(4, 9);
           })(),
         );
@@ -385,6 +474,10 @@ export class CombatRenderer {
       const f = eventAnimationFrame(event, b.tick, this.reduced);
       if (!f) continue;
       const p = project({ x: event.x / U, y: event.y / U }, c);
+      if (event.kind === 'impact' && b.get(event.source)?.type === 'friendly.rifle_squad') {
+        const target = b.get(event.target);
+        p.y -= ((target ? (this.frame(target, b, alpha).anchor[1] ?? 60) : 60) * 0.45 * c.zoom) / 2;
+      }
       if (f)
         this.image(
           `effect.${event.kind}.${event.tick}.${event.source}.${event.target}`,

@@ -1,11 +1,11 @@
 {
-  "date": "2026-10-07",
+  "date": "2026-10-08",
   "scope": "Gate2 native art structural and pose-overlay audit; no creative approval",
-  "atlasVersion": "rb-combat-art-v1",
+  "atlasVersion": "rb-combat-art-v2-rifle",
   "structuralChecks": {
     "result": "passed",
-    "frames": 1246,
-    "sequences": 401,
+    "frames": 1310,
+    "sequences": 409,
     "checks": [
       "atlas hashes/dimensions",
       "unique IDs",
@@ -155,29 +155,6 @@
       ],
       "frames": 232
     },
-    "friendly.rifle_squad": {
-      "poses": [
-        "friendly.rifle_squad.face0",
-        "friendly.rifle_squad.face1",
-        "friendly.rifle_squad.face2",
-        "friendly.rifle_squad.face3",
-        "friendly.rifle_squad.face4",
-        "friendly.rifle_squad.face5",
-        "friendly.rifle_squad.face6",
-        "friendly.rifle_squad.face7"
-      ],
-      "states": [
-        "aim",
-        "attack",
-        "damaged",
-        "hit",
-        "idle",
-        "incapacitated",
-        "move",
-        "scuffed"
-      ],
-      "frames": 232
-    },
     "friendly.proximity_mine": {
       "poses": [
         "friendly.proximity_mine.view0",
@@ -238,6 +215,30 @@
         "kinetic"
       ],
       "frames": 4
+    },
+    "friendly.rifle_squad": {
+      "poses": [
+        "friendly.rifle_squad.face0",
+        "friendly.rifle_squad.face1",
+        "friendly.rifle_squad.face2",
+        "friendly.rifle_squad.face3",
+        "friendly.rifle_squad.face4",
+        "friendly.rifle_squad.face5",
+        "friendly.rifle_squad.face6",
+        "friendly.rifle_squad.face7"
+      ],
+      "states": [
+        "aim",
+        "attack",
+        "brace",
+        "damaged",
+        "hit",
+        "idle",
+        "incapacitated",
+        "move",
+        "scuffed"
+      ],
+      "frames": 296
     }
   },
   "effectDurations": {
@@ -248,13 +249,13 @@
   "damageOverlayAlignment": {
     "result": "failed",
     "poseBandPairsChecked": 1280,
-    "mismatchedPairs": 427,
+    "mismatchedPairs": 389,
     "worstOutsidePixels": 11,
     "affectedContent": {
       "enemy.raider": 108,
       "enemy.runner": 113,
       "friendly.repair_node": 8,
-      "friendly.rifle_squad": 101,
+      "friendly.rifle_squad": 63,
       "friendly.sentry": 16,
       "warden.bulwark": 81
     },
@@ -263,11 +264,6 @@
         "frame": "warden.bulwark.face0.move.6",
         "band": "damaged",
         "outsideBodyPixels": 11
-      },
-      {
-        "frame": "friendly.rifle_squad.face0.move.6",
-        "band": "damaged",
-        "outsideBodyPixels": 10
       },
       {
         "frame": "enemy.raider.face0.move.6",
@@ -287,16 +283,6 @@
       {
         "frame": "enemy.raider.face7.move.6",
         "band": "damaged",
-        "outsideBodyPixels": 9
-      },
-      {
-        "frame": "friendly.rifle_squad.face0.move.5",
-        "band": "damaged",
-        "outsideBodyPixels": 9
-      },
-      {
-        "frame": "friendly.rifle_squad.face0.move.6",
-        "band": "scuffed",
         "outsideBodyPixels": 9
       },
       {
@@ -358,6 +344,21 @@
         "frame": "warden.bulwark.face4.move.2",
         "band": "damaged",
         "outsideBodyPixels": 8
+      },
+      {
+        "frame": "warden.bulwark.face7.move.5",
+        "band": "damaged",
+        "outsideBodyPixels": 8
+      },
+      {
+        "frame": "warden.bulwark.face7.move.6",
+        "band": "damaged",
+        "outsideBodyPixels": 8
+      },
+      {
+        "frame": "enemy.raider.face0.move.5",
+        "band": "scuffed",
+        "outsideBodyPixels": 7
       }
     ],
     "meaning": "Damage overlays authored on idle silhouettes extend beyond some animated poses; correct attachment/clipping before final acceptance."

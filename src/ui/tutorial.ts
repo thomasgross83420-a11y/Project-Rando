@@ -5,12 +5,13 @@ import { type PracticeCheckpoint, PracticeStore, practiceArmy } from '../persist
 import type { PreferencesStore } from '../persistence/preferences';
 import type { CampaignRepository } from '../persistence/repository';
 import { CombatRenderer } from '../render/combat';
+import { fitCombatStart } from '../render/projection';
 import { WorldView } from '../render/world';
 import type { Battle, BattleEvent } from '../sim/battle';
-import { createPracticeBattle } from '../sim/practice-battle';
 import { BattleClock } from '../sim/clock';
 import { hash } from '../sim/determinism';
 import { U } from '../sim/fixed';
+import { createPracticeBattle } from '../sim/practice-battle';
 import { InterfaceTime } from './interface-time';
 
 const stores = new WeakMap<CampaignRepository, PracticeStore>();
@@ -319,16 +320,23 @@ export class TutorialSession {
     this.renderer = new CombatRenderer(this.world);
     const battle = this.battle;
     if (!battle) throw new Error('Missing battle');
-    this.renderer.motion.observe(battle.entities, battle.tick);
+    this.renderer.motion.observe(battle.entities, battle.tick, battle.projectiles);
     this.renderer.reduced = this.preferences.value.reducedEffects;
-    this.world.command('fit-base');
+    this.world.fitActive = false;
+    fitCombatStart(
+      this.world.camera,
+      battle.entities
+        .filter((e) => e.team === 'friendly' && e.hp > 0)
+        .map((e) => ({ x: e.x / U, y: e.y / U })),
+    );
+    this.world.draw();
     this.clock = new BattleClock(
       () => {
         const b = this.battle;
         if (!b) return;
         this.previous = new Map(b.entities.map((e) => [e.id, { x: e.x, y: e.y }]));
         b.step();
-        this.renderer?.motion.observe(b.entities, b.tick);
+        this.renderer?.motion.observe(b.entities, b.tick, b.projectiles);
       },
       (reason) => {
         void this.audio.suspend();
