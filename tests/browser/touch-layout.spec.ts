@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { battleTools, closePrepMenu, precisePlacement, prepMenu } from './menu-helpers';
 
 async function create(page: Page) {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
   await page.getByRole('button', { name: 'Create campaign', exact: true }).first().click();
   await page.getByLabel('Campaign name', { exact: true }).fill('Field First');

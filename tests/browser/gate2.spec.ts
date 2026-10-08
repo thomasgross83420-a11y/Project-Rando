@@ -2,7 +2,7 @@ import { battleTools, prepMenu } from './menu-helpers';
 import { expect, type Page, test } from '@playwright/test';
 
 async function create(page: Page) {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
   await page.getByRole('button', { name: 'Create campaign', exact: true }).first().click();
   await page.getByLabel('Campaign name', { exact: true }).fill('Combat Proof');
@@ -207,7 +207,7 @@ test('competing tab takeover freezes the old battle and offers the retained chec
   test.setTimeout(60000);
   await create(page);
   const other = await context.newPage();
-  await other.goto('./');
+  await other.goto('./?legacy=1');
   await other.getByRole('button', { name: 'Take Over Editing', exact: true }).click();
   await other.getByRole('button', { name: 'Confirm Take Over', exact: true }).click();
   await expect(page.locator('#battle-root')).toHaveAttribute('data-state', 'Paused', {

@@ -1,0 +1,24 @@
+{
+  "semanticFrames": 30848,
+  "nativeImages": 1461,
+  "atlases": 14,
+  "decodedBytesByGroup": {
+    "friendly": 2097152,
+    "enemy-Fracture": 524288,
+    "enemy-Iron": 524288,
+    "enemy-Hollow": 1048576,
+    "enemy-Maw": 524288,
+    "boss.prism_sovereign": 262144,
+    "boss.choir_dreadnought": 262144,
+    "boss.silent_crown": 262144,
+    "boss.gorger_titan": 262144,
+    "boss.shatterstorm": 262144,
+    "boss.marshal": 262144,
+    "boss.black_conductor": 262144,
+    "boss.root_below": 262144,
+    "weapons": 262144
+  },
+  "musicTracks": 10,
+  "audioBytes": 7289247,
+  "authoredPlans": 260
+}

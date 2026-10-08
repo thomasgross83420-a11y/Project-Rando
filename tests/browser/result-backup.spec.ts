@@ -15,7 +15,7 @@ async function initialize(
   pending = true,
   simulation: 'rb-sim-v3' | 'rb-sim-v4' = 'rb-sim-v4',
 ) {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.addScriptTag({ path: '.cache/run-journal-browser/fixture.js' });
   await page.evaluate(
     async ({ create, pending, simulation }) => {

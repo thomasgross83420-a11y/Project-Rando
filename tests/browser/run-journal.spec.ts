@@ -14,7 +14,7 @@ declare global {
   }
 }
 async function init(page: Page, create = true) {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.addScriptTag({ path: '.cache/run-journal-browser/fixture.js' });
   await page.evaluate(async (create) => {
     const api = window.RBRunFixture,

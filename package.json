@@ -1,6 +1,6 @@
 {
   "name": "resonance-bastion",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -15,7 +15,7 @@
     "format": "biome format --write src tests scripts *.ts *.json index.html",
     "format:check": "biome format src tests scripts *.ts *.json index.html",
     "test": "vitest run",
-    "test:browser": "node scripts/build-run-journal-fixture.mjs && playwright test",
+    "test:browser": "node scripts/build-run-journal-fixture.mjs && node scripts/build-full-first-pass-fixture.mjs && playwright test",
     "test:scenario": "node --experimental-strip-types scripts/headless.ts",
     "audit:art": "python3 scripts/audit-combat-art.py && node scripts/check-animation-rendering.mjs",
     "audit:balance": "vite build --ssr scripts/tutorial-balance.ts --outDir .cache/balance && node scripts/tutorial-balance.mjs",
@@ -26,7 +26,8 @@
     "audit:progression": "vite build --ssr scripts/progression-analysis.ts --outDir .cache/progression && node scripts/progression-analysis.mjs",
     "audit:progression-balance": "vite build --ssr scripts/progression-balance.ts --outDir .cache/progression-balance && node scripts/progression-balance.mjs",
     "audit:combat-progression": "vite build --ssr scripts/combat-progression-analysis.ts --outDir .cache/combat-progression && node scripts/combat-progression-analysis.mjs",
-    "audit:support-channels": "vite build --ssr scripts/support-channel-analysis.ts --outDir .cache/support-channels && node scripts/support-channel-analysis.mjs"
+    "audit:support-channels": "vite build --ssr scripts/support-channel-analysis.ts --outDir .cache/support-channels && node scripts/support-channel-analysis.mjs",
+    "audit:full-content": "python3 scripts/audit-full-content.py"
   },
   "dependencies": {
     "phaser": "3.90.0",

@@ -5,7 +5,7 @@ test('injected background pauses without catch-up; keyboard audio settings persi
 }) => {
   test.setTimeout(60000);
   await page.setViewportSize({ width: 800, height: 1280 });
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
   await page.getByRole('button', { name: 'Create campaign', exact: true }).first().click();
   await page.getByLabel('Campaign name', { exact: true }).fill('Accessibility fixture');

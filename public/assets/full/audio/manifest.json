@@ -1,0 +1,68 @@
+{
+  "original": true,
+  "source": "assets/source/full/generate_music.py",
+  "sampleRate": 16000,
+  "tracks": [
+    {
+      "key": "title",
+      "file": "music.title.ogg",
+      "duration": 120.0,
+      "sha256": "0cacd341afe4c5e41e6c7b39039ee3b5adb362630242d7686f52af3f827e3f67"
+    },
+    {
+      "key": "preparation",
+      "file": "music.preparation.ogg",
+      "duration": 120.0,
+      "sha256": "2a47e9cd8866ae25affe1177d287c6f18b965b189970b57c36cc5592f437a52d"
+    },
+    {
+      "key": "fracture",
+      "file": "music.fracture.ogg",
+      "duration": 100.0,
+      "sha256": "f7e817f5f2f9415a934edc87157ed1dc4b3da90ddc842da607131fbe1cbfdc1a"
+    },
+    {
+      "key": "iron",
+      "file": "music.iron.ogg",
+      "duration": 109.09090909090908,
+      "sha256": "fb6306d49af7a78984bb3c3bb94bd7c20218d126139bd11421a11e69fed4477f"
+    },
+    {
+      "key": "hollow",
+      "file": "music.hollow.ogg",
+      "duration": 133.33333333333334,
+      "sha256": "1166e1fb0fb4be7fb909a22aae429777df593499921b9ff9313f7142baa88e61"
+    },
+    {
+      "key": "maw",
+      "file": "music.maw.ogg",
+      "duration": 114.28571428571429,
+      "sha256": "f0c077ab534668304bfef22e2988ddfd856723f63ba7c56f11abdda92c1ba2ed"
+    },
+    {
+      "key": "boss",
+      "file": "music.boss.ogg",
+      "duration": 184.61538461538458,
+      "sha256": "9e8c5063cfe317894ab3d4dbc086bf51fc6667a2801dc71ee75dc20d47903416"
+    },
+    {
+      "key": "endurance",
+      "file": "music.endurance.ogg",
+      "duration": 208.69565217391306,
+      "sha256": "d65e446c97cc65df4d3f62a5796db75fa15eac4cbdfcc08d79d55583ac43aa73"
+    },
+    {
+      "key": "victory",
+      "file": "stinger.victory.ogg",
+      "duration": 3.4,
+      "sha256": "39c8a97316d8ebd8ac6e502fc226ca4cc0b56c981b910d4ef1cb645ec9c66e96"
+    },
+    {
+      "key": "defeat",
+      "file": "stinger.defeat.ogg",
+      "duration": 3.4,
+      "sha256": "e8c83356ebbcc818f458a48f1b513bd9efa3b766085b3756826e26f0c06976b5"
+    }
+  ],
+  "encoding": "Opus mono 40 kbps"
+}
