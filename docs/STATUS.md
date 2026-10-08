@@ -92,3 +92,10 @@ unit tests and49 browser checks pass, with retained replay hashes unchanged.
 Tablet GPU/audio/storage performance remains unmeasured. A manual-only pinned
 Pages preview workflow is prepared for publication approval, not installed.
 See review/TABLET_RENDER_REUSE.md and TABLET_PREVIEW_PREPARATION.md.
+
+2026-10-08 subsequent individual work: isolated one-star Engineer finite-stock/
+rearm contracts pass9 new cases; full143 unit tests in31 files and all static/
+scenario/build checks pass. Entire38-file production output is byte-identical
+to the0.2.9 build that passed49 browser checks. No Engineer is enabled yet:
+live mobility/repair/fire priorities, captured profiles, stock-result accounting,
+versioned snapshots and natural artwork remain required. See ENGINEER_STOCK_CONTRACT.md.

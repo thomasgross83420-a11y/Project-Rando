@@ -1,7 +1,7 @@
 """Mobile tablet-target/performance report; earlier artifacts stay unchanged."""
 from pathlib import Path
 from html import escape
-import hashlib,json,zipfile,shutil
+import hashlib,json,zipfile,shutil,sys
 from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Table,TableStyle,PageBreak
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.pagesizes import A4
@@ -10,6 +10,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 ROOT=Path(__file__).resolve().parents[1];review=ROOT/'docs/review';delivery=Path('/workspace/shared/downloads')
 checks=json.loads((ROOT/'docs/evidence/TABLET_RENDER_TESTS.json').read_text())
+engineer='--engineer' in sys.argv
 rows=json.loads((ROOT/'docs/evidence/RENDER_REUSE_COMPARISON.json').read_text())['cases']
 for name,file in [('Review','DejaVuSans.ttf'),('Bold','DejaVuSans-Bold.ttf')]:pdfmetrics.registerFont(TTFont(name,'/usr/share/fonts/truetype/dejavu/'+file))
 body=ParagraphStyle('Body',fontName='Review',fontSize=10,leading=14,spaceAfter=10,textColor=colors.HexColor('#243946'))
@@ -47,16 +48,35 @@ para('The manual-only workflow pins the tested 0.2.9 source, uses official actio
 para('Publishing this development checkpoint as a public playable preview requires your approval. After publication and real HTTPS/MIME/refresh checks, the tablet pass can test 1×/2×/4×, orientation and all travel directions, pause/audio, background-return without catch-up, checkpoint restart and Android backup/reimport. Any missing Pages settings permission will be identified precisely; no paid service is needed.')
 para('Independent development continues',head)
 para('The next individual Engineer contract separates purchased and siege-temporary trap charges, enforces six uninterrupted seconds and eight completed additions per agent, and cancels interrupted work without free permanent stock. Full mobile repair/action priorities, state-machine integration and natural per-asset animation still require their own evidence. The wider roster/campaign and full balance remain open.')
+if engineer:
+ proof=json.loads((ROOT/'docs/evidence/ENGINEER_STOCK_TESTS.json').read_text())
+ story.append(PageBreak());para('Engineer rearm: the next individual contract',title)
+ para('Development continued beyond the rendering checkpoint. An isolated Engineer finite-stock and uninterrupted-rearm kernel is implemented and tested. The Engineer is not yet enabled in the game; mobile priorities, repair/fire exclusion, captured profiles and original animation still require their separate increments.')
+ para('Exact stock and timing rules',head)
+ para('Two visual engineers belong to one owned agent: one rearm action and eight completed additions per siege, not sixteen. One trap can reserve one Engineer. A channel begun at tick T completes at T+360 (six full seconds); there is no immediate charge or level-based time/count improvement. Every authoritative tick is observed, irrespective of game speed.')
+ para('Temporary combat charges are spent before purchased charges. Total stock never exceeds its initial cap. Results can retain only the actual remaining purchased stock; unused temporary charges cannot become permanent stock or a refund. This kernel makes no campaign, currency, body or XP writes.')
+ para('Interruptions are scrutinized at the completion boundary',head)
+ para('Movement, invalid range/LOS, source or trap death, incoming damage, unsafe nearby threats, being under attack or a higher-priority action cancels the unfinished rearm. Missing observations and filled traps release their reservation. Cancellation spends no completed addition; restarting needs a new full six seconds. Completed rearms survive later interruptions.')
+ para('The entire completion batch is validated before any channel/count update. Invalid observations cannot complete one Engineer while failing another. Retrying the corrected tick completes once; repeated or skipped committed ticks are rejected. The live integration must supply real spatial/perception/death observations and apply returned temporary stock in the correct fixed-step phase.')
+ para('Evidence',head)
+ para(f"Nine new unit cases cover all initial caps 1–8 and starting purchased-stock counts, temporary-first consumption, tick 359/360, all interruption flags at completion, restart, reservation conflicts, exhausted allowance and invalid-batch retry. The complete suite passes {proof['unitTests']} unit tests in {proof['unitFiles']} files, plus typecheck, lint, formatting, scenario and build.")
+ para(f"All {proof['productionFilesCompared']} production files are byte-for-byte identical to the preceding playable build, which passed 49 browser checks. No broad browser rerun was needed for an unimported kernel. Retained v1/v2/v3 replay regressions still pass. The source and output hashes are included in this ZIP.")
+ para('Remaining work and publication input',head)
+ para('Next integrate the actual mobile repair/action planner under a new simulation version, then prove its movement, injury-scaled output, shared channels, stock/result accounting and natural pose/contact transitions. Full blueprint scope remains intact. Separately, approval to enable the prepared public GitHub Pages tablet preview is pending; physical tablet performance remains unmeasured.')
 def footer(c,d):c.setFont('Review',8);c.drawString(38,24,'Resonance Bastion • 0.2.9 • measured desktop improvement; Android checks open');c.drawRightString(A4[0]-38,24,str(d.page))
-pdf=review/'Resonance_Bastion_Tablet_Optimization_Review.pdf'
+stem='Resonance_Bastion_Tablet_and_Engineer_Review' if engineer else 'Resonance_Bastion_Tablet_Optimization_Review'
+pdf=review/(stem+'.pdf')
 SimpleDocTemplate(str(pdf),pagesize=A4,leftMargin=38,rightMargin=38,topMargin=38,bottomMargin=40).build(story,onFirstPage=footer,onLaterPages=footer)
 files={pdf.name:pdf,'Resonance_Bastion_Current_Development_Review.pdf':review/'Resonance_Bastion_Current_Development_Review.pdf','TABLET_RENDER_REUSE.md':review/'TABLET_RENDER_REUSE.md'}
 for n in ['TABLET_VALIDATION.md','TABLET_PREVIEW_PREPARATION.md','pages-preview.yml.example']:files['docs/'+n]=ROOT/'docs'/n
 for n in ['TABLET_TARGET.json','TABLET_RENDER_TESTS.json','RENDER_REUSE_BEFORE.json','RENDER_REUSE_AFTER.json','RENDER_REUSE_COMPARISON.json']:files['evidence/'+n]=ROOT/'docs/evidence'/n
+if engineer:
+ files['docs/ENGINEER_STOCK_CONTRACT.md']=ROOT/'docs/ENGINEER_STOCK_CONTRACT.md'
+ files['evidence/ENGINEER_STOCK_TESTS.json']=ROOT/'docs/evidence/ENGINEER_STOCK_TESTS.json'
 for phase in ['before','after']:
  for p in (Path('/workspace/scratch')/('render-reuse-'+phase)).glob('*.png'):files['screenshots/'+phase+'/'+p.name]=p
 manifest={n:{'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}for n,p in files.items()}
-archive=review/'Resonance_Bastion_Tablet_Optimization_Review.zip'
+archive=review/(stem+'.zip')
 with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED)as z:
  for n,p in files.items():z.write(p,n)
  z.writestr('MANIFEST.json',json.dumps(manifest,indent=2)+'\n')

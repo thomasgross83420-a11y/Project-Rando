@@ -3,8 +3,10 @@ What can I say, it's just a bunch of rando I'm trying out.
 
 ## Resonance Bastion
 
-The latest checkpoint is on `codex/tablet-render-reuse`; `main`
-currently contains only the original repository introduction. Start with the
+The latest development checkpoint is on `codex/engineer-stock-contracts`;
+`main` contains the public preview link and its manual deployment workflow.
+[Open the tested playable preview](https://thomasgross83420-a11y.github.io/Project-Rando/).
+Start with the
 [thread recovery record](docs/PROJECT_RECOVERY.md) for the recovered checkpoint,
 available reference files, verification, and the next development step.
 The [current review download guide](docs/review/CURRENT_REVIEW_DELIVERY.md)
@@ -21,7 +23,9 @@ See [implementation status](docs/STATUS.md), [task queue](docs/TASKS.md),
 Use Node >=22.12, `npm ci`, `npm run verify`, `npm run test:browser`.
 `npm run dev` starts the developer shell; `npm run build` produces static `dist/`.
 Assets use `/Project-Rando/` as the production base path. Build output and dependencies
-are not committed. No public deployment or physical Android verification is claimed.
+are not committed. The pinned preview is published and checked on its public
+HTTPS origin; physical Android verification remains open. See
+[public preview verification](docs/PUBLIC_PREVIEW.md).
 
 Previous checkpoint: [360° movement and recovery review](docs/review/OMNIDIRECTIONAL_RECOVERY.md),
 with [mobile PDF and ZIP downloads](docs/review/MOVEMENT_RECOVERY_DELIVERY.md).
@@ -64,10 +68,16 @@ confirmation-heading polish. [Current development review](docs/review/DEVELOPMEN
 provides the latest mobile PDF/ZIP. [Tablet validation](docs/TABLET_VALIDATION.md)
 records the hardware/runtime information needed next, without reducing game scope.
 
-Latest checkpoint: [tablet target and rendering reuse](docs/review/TABLET_RENDER_REUSE.md).
+Previous playable checkpoint: [tablet target and rendering reuse](docs/review/TABLET_RENDER_REUSE.md).
 The user's TB-X606F/Android10/4 GB/Chrome154 target is identified. Shared camera
 redraws reuse scene objects with six exact before/after pixel comparisons, bounded
 cycle/disposal tests and all134 unit/49 browser checks passing. No physical-device
 performance is inferred. [Mobile review](docs/review/TABLET_RENDER_DELIVERY.md)
 records the measured improvement; a pinned manual Pages preview is prepared for
 publication approval, not installed or deployed.
+
+Latest individual work: [Engineer finite-stock/rearm contract](docs/ENGINEER_STOCK_CONTRACT.md).
+The isolated kernel adds9 meaningful cases; all143 unit tests pass. All38
+production files match the prior49-browser-checked runtime exactly; the Engineer
+is not enabled yet. [Current tablet/Engineer PDF and ZIP](docs/review/TABLET_ENGINEER_DELIVERY.md)
+record both increments and the pending public-preview publication step.
