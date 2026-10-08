@@ -3,7 +3,7 @@ What can I say, it's just a bunch of rando I'm trying out.
 
 ## Resonance Bastion
 
-The latest checkpoint is on `codex/tablet-render-reuse`; `main`
+The latest checkpoint is on `codex/engineer-stock-contracts`; `main`
 currently contains only the original repository introduction. Start with the
 [thread recovery record](docs/PROJECT_RECOVERY.md) for the recovered checkpoint,
 available reference files, verification, and the next development step.
@@ -64,10 +64,16 @@ confirmation-heading polish. [Current development review](docs/review/DEVELOPMEN
 provides the latest mobile PDF/ZIP. [Tablet validation](docs/TABLET_VALIDATION.md)
 records the hardware/runtime information needed next, without reducing game scope.
 
-Latest checkpoint: [tablet target and rendering reuse](docs/review/TABLET_RENDER_REUSE.md).
+Previous playable checkpoint: [tablet target and rendering reuse](docs/review/TABLET_RENDER_REUSE.md).
 The user's TB-X606F/Android10/4 GB/Chrome154 target is identified. Shared camera
 redraws reuse scene objects with six exact before/after pixel comparisons, bounded
 cycle/disposal tests and all134 unit/49 browser checks passing. No physical-device
 performance is inferred. [Mobile review](docs/review/TABLET_RENDER_DELIVERY.md)
 records the measured improvement; a pinned manual Pages preview is prepared for
 publication approval, not installed or deployed.
+
+Latest individual work: [Engineer finite-stock/rearm contract](docs/ENGINEER_STOCK_CONTRACT.md).
+The isolated kernel adds9 meaningful cases; all143 unit tests pass. All38
+production files match the prior49-browser-checked runtime exactly; the Engineer
+is not enabled yet. [Current tablet/Engineer PDF and ZIP](docs/review/TABLET_ENGINEER_DELIVERY.md)
+record both increments and the pending public-preview publication step.

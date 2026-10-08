@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-08",
+  "sourceCheckpoint": "645ae1c572b711973f2fd303b07071de2bd8988e",
+  "applicationBuild": "0.2.9-render-reuse",
+  "kernelEnabledInGame": false,
+  "unitTests": 143,
+  "unitFiles": 31,
+  "newKernelCases": 9,
+  "browserTestsOnIdenticalProductionOutput": 49,
+  "browserSourceCheckpoint": "bc7d60c4cc3eb229f6fdb3be9dce8eee0c2bebe1",
+  "productionOutputByteIdenticalToPriorVerifiedBuild": true,
+  "productionFilesCompared": 38,
+  "productionInventorySHA256": "672af02d41707fced7f5dd61b58f64b4d705d51e79ce666028dc8b02823b36d2",
+  "sourceSHA256": {
+    "src/sim/finite-stock.ts": "f8a468ca092c0dc22bed2324fe86e76eb95cd6a0d9abc32091455d0e89d2b5a4",
+    "tests/unit/finite-stock.test.ts": "46b28984a14b9be25fbdc5b87b9dc1667e90f6e171a60767f3f2d283f49a0b69"
+  },
+  "logSHA256": {
+    "engineer-final-verify.log": "047c9731ccda33ed1b9c3d6321a3275ad3dcc1faa726200e8df8a9044685cc94",
+    "engineer-final-format-check.log": "de917fd450a969de7939e37dbe7172db265afdfc2214e99c325472aa6e485e55"
+  },
+  "checks": [
+    "typecheck",
+    "lint",
+    "format check",
+    "full unit suite",
+    "deterministic scenario",
+    "production build",
+    "entire production output byte comparison"
+  ],
+  "limits": [
+    "Isolated base Engineer stock/rearm contract; movement/repair/weapon/state machine/art not enabled.",
+    "Observations must come from the authoritative world each consecutive tick.",
+    "Physical Android performance remains unmeasured."
+  ]
+}

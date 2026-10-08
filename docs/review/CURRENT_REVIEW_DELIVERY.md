@@ -1,6 +1,9 @@
 # Review delivery
 
-Latest supplement: [tablet target and rendering PDF/ZIP, build0.2.9](TABLET_RENDER_DELIVERY.md).
+Latest: [tablet and Engineer PDF/ZIP](TABLET_ENGINEER_DELIVERY.md), three pages,
+with the tested Engineer stock/rearm increment following build0.2.9 rendering.
+
+Preceding supplement: [tablet target and rendering PDF/ZIP, build0.2.9](TABLET_RENDER_DELIVERY.md).
 The device/runtime question is resolved by supplied screenshots; a measured
 pixel-preserving scene reuse improvement passes134 unit/49 browser checks.
 

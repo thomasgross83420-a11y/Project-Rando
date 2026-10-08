@@ -545,3 +545,19 @@ during the refactor, corrected before final verification. Desktop draw-submissio
 timings do not measure GPU/frame time or certify physical Android.
 The pinned manual Pages preview YAML parses and satisfies reviewed trigger/ref/
 runner/permissions checks, but is neither installed nor dispatched.
+
+## 2026-10-08 — isolated Engineer finite-stock/rearm contract
+
+Nine new unit cases verify caps1–8 and every starting permanent-stock count,
+temporary-first spending/no permanent bank, tick359/360, eight additions per
+agent, one trap/source reservation, all interruption/preemption flags, missing/
+full recipients, restart timing, safe integer bounds and rejected whole-batch
+retry. Full143 unit tests in31 files pass; typecheck, lint, format check,
+deterministic scenario and build pass. Source/log hashes and production comparison:
+evidence/ENGINEER_STOCK_TESTS.json.
+
+The kernel is unimported by the app. All38 production output files match the
+prior verified0.2.9 bytes exactly, so its49 passing browser checks remain
+applicable to the playable runtime without a broad repeat. This is not an
+enabled/animated Engineer or certified Mobile doctrine. Actual spatial/perception
+observations and fixed-phase stock completion must be integrated and tested.

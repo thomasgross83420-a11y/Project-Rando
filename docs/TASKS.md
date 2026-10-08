@@ -105,3 +105,10 @@ six uninterrupted seconds, one source per trap, eight completed additions per
 agent (not per visual member), temporary-first use and no permanent stock bank.
 Keep the future kernel distinct from an enabled/animated Engineer until its
 movement, priority, repair, weapon, capture and artwork contracts all pass.
+
+Subsequent Engineer finite-stock/rearm kernel is now verified independently.
+Next integrate actual mobile observation/action planning under a new captured
+simulation version, preserving old replay paths. Then complete profiles,
+temporary/permanent stock terminal validation and actual visual/contact proof.
+The one-star stock primitive is not a completed mobile unit. Prepared public
+preview approval is pending; tablet target-identification questions are answered.
