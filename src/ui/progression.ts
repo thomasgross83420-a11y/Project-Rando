@@ -1,8 +1,14 @@
 import type { Campaign, Owned } from '../persistence/campaign';
 import { maximumBody } from '../persistence/campaign';
-import { foundation } from '../data/foundation';
+import { foundation, coreBaseline } from '../data/foundation';
 import thresholds from '../data/progression.json';
-import { previewProgression, type ProgressionCommand } from '../progression/preparation';
+import {
+  bodyInvestment,
+  previewProgression,
+  type ProgressionCommand,
+} from '../progression/preparation';
+import { quoteAffordableRepair, type BodyInvestment } from '../economy/recovery';
+import { divRound } from '../sim/fixed';
 import { previewEmergency, recoveryViable } from '../progression/emergency';
 import { captureProfile, developingSlice } from '../progression/profile';
 import type { CombatID } from '../data/combat';
@@ -23,7 +29,7 @@ export function progressionControls(
   if (c.schema !== 2) return;
   const panel = document.createElement('section');
   panel.setAttribute('aria-label', 'Progression and recovery');
-  panel.innerHTML = `<h3>Progression and Recovery</h3><p>Core ${points(c.coreHP)} / 10,000 Integrity. Repairs are purchased explicitly.</p><label>Core repair points <input id="core-repair-points" type="number" min="0" step="1" value="${Math.ceil((10000 * 1024 - c.coreHP) / 1024)}"></label>`;
+  panel.innerHTML = `<h3>Progression and Recovery</h3><p>Core ${points(c.coreHP)} / 10,000 Integrity. Repairs are purchased explicitly.</p>`;
   host.append(panel);
   const add = (label: string, fn: () => void, disabled = false) => {
     const b = document.createElement('button');
@@ -52,20 +58,54 @@ export function progressionControls(
               : '';
           })();
     actions.confirm(
-      `Purchase ${command.kind}`,
+      {
+        'repair-core': 'Repair Core',
+        repair: 'Repair Asset',
+        restore: 'Restore Asset',
+        rearm: 'Rearm Mine',
+        enhance: 'Purchase Enhancement',
+        sell: 'Sell Asset',
+      }[command.kind],
       `${q.creditsSpent.toLocaleString()} Credits. Wallet ${c.credits.toLocaleString()} → ${q.after.credits.toLocaleString()}. ${resulting} This preserves earned XP and paid investment.`,
       () => actions.commit(q.after, c),
     );
   };
-  add(
-    'Review Core Repair',
-    () =>
-      preview({
-        kind: 'repair-core',
-        requested:
-          Number((panel.querySelector('#core-repair-points') as HTMLInputElement).value) * 1024,
-      }),
-    c.coreHP === 10000 * 1024,
+  const repairs = (
+    prefix: 'core' | 'asset',
+    label: string,
+    investment: BodyInvestment,
+    buy: (requested: number) => void,
+  ) => {
+    const request = repairAmountControls(
+      panel,
+      prefix,
+      label,
+      investment.maximum,
+      investment.body,
+      actions.enabled,
+    );
+    add(`Review ${label} Repair`, () => buy(request()), investment.body === investment.maximum);
+    const q = quoteAffordableRepair(investment, c.credits),
+      description = document.createElement('p');
+    description.textContent = `${label} maximum affordable now: ${points(q.restored)} points for ${q.credits.toLocaleString()} Credits. Review is a choice, not an automatic purchase.`;
+    panel.append(description);
+    add(`Review Affordable ${label} Repair`, () => buy(q.restored), q.restored === 0);
+  };
+  repairs(
+    'core',
+    'Core',
+    {
+      body: c.coreHP,
+      maximum: coreBaseline.hp * 1024,
+      baseCost: 0,
+      enhancementPaid: 0,
+      promotionCoresPaid: 0,
+      warden: false,
+      core: true,
+      refundLocked: false,
+      emergencyCreated: false,
+    },
+    (requested) => preview({ kind: 'repair-core', requested }),
   );
   if (selected) {
     const a = c.assets.find((a) => a.id === selected.id);
@@ -77,23 +117,10 @@ export function progressionControls(
     detail.textContent = `${d.name} · ${points(a.hp)} / ${points(max)} body${a.hp === 0 ? ' · Wrecked' : ''} · ${d.developing ? `L${a.level} · ${a.level === 100 ? 'MAX' : `${a.xp.toLocaleString()} cumulative XP / ${next?.toLocaleString()} next threshold`} · E${a.enhancement} / ${Math.floor(a.level / 10)} eligible` : 'Fixed level · no XP'}${a.refundLocked ? ' · Emergency refund lock' : ''}${a.permanentCharges !== null ? ` · ${a.permanentCharges} / 1 permanent charge` : ''}`;
     panel.append(detail);
     if (a.hp === 0) add('Review Restore', () => preview({ kind: 'restore', id: a.id }));
-    else {
-      const label = document.createElement('label');
-      label.textContent = 'Asset repair points ';
-      const input = document.createElement('input');
-      input.id = 'asset-repair-points';
-      input.type = 'number';
-      input.min = '0';
-      input.step = '1';
-      input.value = String(Math.ceil((max - a.hp) / 1024));
-      label.append(input);
-      panel.append(label);
-      add(
-        'Review Asset Repair',
-        () => preview({ kind: 'repair', id: a.id, requested: Number(input.value) * 1024 }),
-        a.hp === max,
+    else
+      repairs('asset', 'Asset', bodyInvestment(a), (requested) =>
+        preview({ kind: 'repair', id: a.id, requested }),
       );
-    }
     if (a.type === 'friendly.proximity_mine')
       add(
         'Review Rearm',
@@ -140,6 +167,49 @@ export function progressionControls(
       );
     });
   }
+}
+
+function repairAmountControls(
+  panel: HTMLElement,
+  prefix: string,
+  name: string,
+  maximum: number,
+  body: number,
+  enabled: boolean,
+): () => number {
+  const modeLabel = document.createElement('label'),
+    mode = document.createElement('select'),
+    inputLabel = document.createElement('label'),
+    input = document.createElement('input');
+  modeLabel.textContent = `${name} repair amount `;
+  mode.id = `${prefix}-repair-mode`;
+  mode.innerHTML =
+    '<option value="full">Full missing body</option><option value="quarter">+25% maximum</option><option value="half">+50% maximum</option><option value="exact">Exact whole points</option>';
+  mode.disabled = !enabled;
+  modeLabel.append(mode);
+  inputLabel.textContent = `${name} repair points `;
+  input.id = `${prefix}-repair-points`;
+  input.type = 'number';
+  input.min = '0';
+  input.step = '1';
+  inputLabel.append(input);
+  panel.append(modeLabel, inputLabel);
+  const request = () =>
+    mode.value === 'full'
+      ? maximum - body
+      : mode.value === 'quarter'
+        ? divRound(BigInt(maximum), 4n)
+        : mode.value === 'half'
+          ? divRound(BigInt(maximum), 2n)
+          : Number(input.value) * 1024;
+  const show = () => {
+    if (mode.value === 'exact') input.value = String(Math.ceil(Number(input.value)));
+    else input.value = String(Math.min(request(), maximum - body) / 1024);
+    input.disabled = !enabled || mode.value !== 'exact';
+  };
+  mode.onchange = show;
+  show();
+  return request;
 }
 
 function profileComparison(type: CombatID, level: number, from: number, to: number): string {

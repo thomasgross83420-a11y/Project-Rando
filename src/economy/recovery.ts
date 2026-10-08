@@ -79,3 +79,20 @@ export function quoteRearm(
     credits: safe(ceil(BigInt(baseCost) * BigInt(restored), 4n * BigInt(initial))),
   };
 }
+
+/** Greatest affordable fixed-point restoration; pure quote, never a purchase.
+ * Monotonic exact prices permit bounded binary search without floating point. */
+export function quoteAffordableRepair(a: BodyInvestment, wallet: number) {
+  validate(a);
+  integer(wallet);
+  // Also enforces the wreck/Core distinction at the ordinary quote boundary.
+  quoteRepair(a, 0);
+  let lo = 0n,
+    hi = BigInt(a.maximum - a.body);
+  while (lo < hi) {
+    const mid = (lo + hi + 1n) / 2n;
+    if (quoteRepair(a, safe(mid)).credits <= wallet) lo = mid;
+    else hi = mid - 1n;
+  }
+  return quoteRepair(a, safe(lo));
+}
