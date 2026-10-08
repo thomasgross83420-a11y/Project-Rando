@@ -16,6 +16,9 @@ The full campaign, roster, and final animation work remain in development.
 Physical Lenovo tablet performance is still awaiting device observations.
 
 The manual deployment workflow builds pinned source
-[`bc7d60c`](https://github.com/thomasgross83420-a11y/Project-Rando/tree/bc7d60c4cc3eb229f6fdb3be9dce8eee0c2bebe1).
+[`29837e8`](https://github.com/thomasgross83420-a11y/Project-Rando/tree/29837e8718f301c07eed9324b78acc323a29e8f0).
 Application work continues on development branches; publishing this preview
 does not merge that stack into `main`.
+
+Current preview: **0.2.10-startup-recovery**, including restored New Game after
+reload, recoverable storage/editing controls, and explicit active-tab takeover.
