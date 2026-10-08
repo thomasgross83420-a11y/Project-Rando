@@ -1,4 +1,10 @@
-# Current review delivery — 2026-10-07
+# Review delivery
+
+Latest: [current development PDF/ZIP, build0.2.8](DEVELOPMENT_DELIVERY.md),
+2026-10-08. Four-page status/recovery/progression report and checksummed evidence
+bundle. The earlier large visual/audio review below remains available.
+
+## Retained visual/audio review — 2026-10-07
 
 User-requested review files are preserved on `codex/project-recovery` so they
 remain available from mobile even if this conversation is archived.

@@ -80,3 +80,16 @@ roster element. Preserve existing checkpoints/replays. Remaining Gate3 work incl
 full records/results analysis, reserve-funds advice, sale/promotion lifecycle and
 emergency identity reuse/tombstones. Full pacing/net targets require the compiler
 and missing rosters, not an artificial rebalance of this teaching schedule.
+
+## Dependency-ready after build0.2.8
+
+Self/external support channels and explicit affordable recovery are implemented
+and scrutinized as separate increments. Next target the identified tablet runtime
+and capture performance/lifecycle evidence, preserving complete game scope.
+Actual model/Android/browser information is requested, not yet known; independent
+roster development remains possible. The next small asset contract is Engineer:
+shared two-external repair channels, injury-scaled output, move/fire/repair action
+exclusion and interrupted rearm, before adding its production artwork/state
+machine. Do not substitute a stationary Node's post-combat loop for those mobile
+contracts. Promotion/sale/emergency tombstones and full results analysis remain
+separate Gate3 work; the current teaching fight cannot set full campaign pacing.

@@ -498,3 +498,21 @@ Full v3 battle/checkpoint/pending hashes are compared with published0.2.6 values
 v1/v2 hashes remain pinned. Native backup reload/cross-slot import pays v3/v4
 results once. Source/log hashes: evidence/SUPPORT_CHANNEL_TESTS.json.
 No Android performance or full support-roster acceptance is inferred.
+
+## 2026-10-08 — explicit affordable repair, build0.2.8
+
+Full134 unit tests in30 files and47 production-browser checks passed without
+retries/skips, plus typecheck, lint, format check, deterministic scenario and
+production build. UI/IndexedDB fixtures confirm affordable Core cancellation and
+single commit, 25%/50%/exact capped asset choices and the 58,982-unit/3-Credit
+Sentry affordability edge. Unit fixtures compare the exact next-quantum price,
+input preservation, wreck rejection and safe-integer extremes.
+
+Captured confirmation screens exposed internal command words in their headings.
+Replaced them with human-readable action names; rebuilt and reran all9 affected
+affordable-repair/campaign-UI browser cases. No simulation/price changes followed
+the full suite. New actual dialog captures were inspected and included in the
+current review ZIP. Source and each run's log hashes are retained separately in
+evidence/AFFORDABLE_REPAIR_TESTS.json. Physical tablet model/runtime information
+is pending; TABLET_VALIDATION.md distinguishes known family specs from actual
+device evidence and specifies the next measurement pass.
