@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5 MIT
         with:
-          ref: fcd236b64032f3439c886a7b5002ca3142fb0356
+          ref: df878865ddb0e6e6cb43f175b5646fd840b507db
           persist-credentials: false
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6 MIT
         with:
