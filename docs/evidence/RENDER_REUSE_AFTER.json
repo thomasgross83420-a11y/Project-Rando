@@ -1,0 +1,828 @@
+{
+  "phase": "after",
+  "date": "2026-10-08",
+  "engine": "desktop Chromium; actual shared WorldView class",
+  "limitations": [
+    "Not Lenovo/Android performance",
+    "JavaScript draw submission time, not GPU frame time",
+    "Loopback context, not deployed HTTPS acceptance",
+    "Teaching-slice preparation/background, not maximum-roster combat"
+  ],
+  "errors": [],
+  "cases": [
+    {
+      "name": "portrait-base",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "draws": 81,
+      "imagesCreated": 1,
+      "textsCreated": 1,
+      "destroyed": 0,
+      "meanMs": 2.2737499993294477,
+      "medianMs": 2.0999999940395355,
+      "p95Ms": 4.299999997019768,
+      "maximumMs": 5,
+      "features": {
+        "secureContext": true,
+        "bigint": true,
+        "structuredClone": true,
+        "objectHasOwn": true,
+        "randomUUID": true,
+        "indexedDB": true,
+        "pointerEvents": true,
+        "webAudio": true,
+        "webGL": true,
+        "gpuRenderer": "WebKit WebGL",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36"
+      },
+      "final": {
+        "activeImages": 3235,
+        "activeTexts": 6,
+        "sceneChildren": 3244,
+        "visibleChildren": 3242,
+        "hits": [
+          {
+            "id": "00000000-0000-4000-8000-000000000011",
+            "x": 317.3333333333333,
+            "y": 367.3333333333333,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 18.5,
+              "y": 24.5
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000005",
+            "x": 338.8888888888889,
+            "y": 399.6666666666667,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 22.5,
+              "y": 26.5
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000004",
+            "x": 338.8888888888889,
+            "y": 399.6666666666667,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 23,
+              "y": 29
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000002",
+            "x": 338.8888888888889,
+            "y": 399.6666666666667,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 25,
+              "y": 27
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000003",
+            "x": 295.77777777777777,
+            "y": 448.1666666666667,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 25,
+              "y": 33
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000013",
+            "x": 295.77777777777777,
+            "y": 448.1666666666667,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 26,
+              "y": 35
+            }
+          },
+          {
+            "id": "core",
+            "x": 382,
+            "y": 458.94444444444446,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 30,
+              "y": 30
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000001",
+            "x": 338.8888888888889,
+            "y": 480.5,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 30,
+              "y": 34
+            }
+          }
+        ],
+        "camera": {
+          "x": 27.5,
+          "y": 27.5,
+          "zoom": 0.6736111111111112,
+          "view": 0,
+          "width": 800,
+          "height": 900
+        }
+      },
+      "screenshotSHA256": "18c5e87b1b28ee6706ec288bc7824c691d2349d43aaa5f99954876019ba1c7b9"
+    },
+    {
+      "name": "portrait-field",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "draws": 81,
+      "imagesCreated": 0,
+      "textsCreated": 0,
+      "destroyed": 0,
+      "meanMs": 2.1962499994784594,
+      "medianMs": 2,
+      "p95Ms": 4,
+      "maximumMs": 6.300000004470348,
+      "features": {
+        "secureContext": true,
+        "bigint": true,
+        "structuredClone": true,
+        "objectHasOwn": true,
+        "randomUUID": true,
+        "indexedDB": true,
+        "pointerEvents": true,
+        "webAudio": true,
+        "webGL": true,
+        "gpuRenderer": "WebKit WebGL",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36"
+      },
+      "final": {
+        "activeImages": 3614,
+        "activeTexts": 9,
+        "sceneChildren": 3624,
+        "visibleChildren": 3624,
+        "hits": [
+          {
+            "id": "00000000-0000-4000-8000-000000000011",
+            "x": 343.2,
+            "y": 377.0333333333333,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 18.5,
+              "y": 24.5
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000005",
+            "x": 343.2,
+            "y": 377.0333333333333,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 22.5,
+              "y": 26.5
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000004",
+            "x": 343.2,
+            "y": 406.1333333333333,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 23,
+              "y": 29
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000002",
+            "x": 343.2,
+            "y": 406.1333333333333,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 25,
+              "y": 27
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000003",
+            "x": 343.2,
+            "y": 406.1333333333333,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 25,
+              "y": 33
+            }
+          },
+          {
+            "id": "core",
+            "x": 382,
+            "y": 432,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 30,
+              "y": 30
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000001",
+            "x": 382,
+            "y": 432,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 30,
+              "y": 34
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000013",
+            "x": 323.8,
+            "y": 435.23333333333335,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 26,
+              "y": 35
+            }
+          }
+        ],
+        "camera": {
+          "x": 30,
+          "y": 30,
+          "zoom": 0.4041666666666667,
+          "view": 0,
+          "width": 800,
+          "height": 900
+        }
+      },
+      "screenshotSHA256": "93abda9ceb51749c577773212d0b27331e9d9ae30551c695888396143bace904"
+    },
+    {
+      "name": "portrait-close",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "draws": 81,
+      "imagesCreated": 0,
+      "textsCreated": 0,
+      "destroyed": 0,
+      "meanMs": 0.7800000000745058,
+      "medianMs": 0.6999999955296516,
+      "p95Ms": 1.5,
+      "maximumMs": 2.8000000044703484,
+      "features": {
+        "secureContext": true,
+        "bigint": true,
+        "structuredClone": true,
+        "objectHasOwn": true,
+        "randomUUID": true,
+        "indexedDB": true,
+        "pointerEvents": true,
+        "webAudio": true,
+        "webGL": true,
+        "gpuRenderer": "WebKit WebGL",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36"
+      },
+      "final": {
+        "activeImages": 806,
+        "activeTexts": 0,
+        "sceneChildren": 2548,
+        "visibleChildren": 807,
+        "hits": [
+          {
+            "id": "00000000-0000-4000-8000-000000000011",
+            "x": 183,
+            "y": 144,
+            "width": 50,
+            "height": 34,
+            "foot": {
+              "x": 18.5,
+              "y": 24.5
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000005",
+            "x": 240,
+            "y": 228,
+            "width": 64,
+            "height": 64,
+            "foot": {
+              "x": 22.5,
+              "y": 26.5
+            },
+            "frame": "friendly.standard_barricade.view0",
+            "scale": 1
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000004",
+            "x": 191,
+            "y": 277,
+            "width": 33,
+            "height": 45,
+            "foot": {
+              "x": 23,
+              "y": 29
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000002",
+            "x": 272,
+            "y": 209,
+            "width": 128,
+            "height": 144,
+            "foot": {
+              "x": 25,
+              "y": 27
+            },
+            "frame": "friendly.sentry.view0",
+            "scale": 1
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000003",
+            "x": 80,
+            "y": 305,
+            "width": 128,
+            "height": 144,
+            "foot": {
+              "x": 25,
+              "y": 33
+            },
+            "frame": "friendly.sentry.view0",
+            "scale": 1
+          },
+          {
+            "id": "core",
+            "x": 304,
+            "y": 298,
+            "width": 192,
+            "height": 192,
+            "foot": {
+              "x": 30,
+              "y": 30
+            },
+            "frame": "objective.harmonic_core.view0",
+            "scale": 1
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000013",
+            "x": 52,
+            "y": 344,
+            "width": 120,
+            "height": 122,
+            "foot": {
+              "x": 26,
+              "y": 35
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000001",
+            "x": 250,
+            "y": 450,
+            "width": 51,
+            "height": 64,
+            "foot": {
+              "x": 30,
+              "y": 34
+            }
+          }
+        ],
+        "camera": {
+          "x": 30,
+          "y": 30,
+          "zoom": 2,
+          "view": 0,
+          "width": 800,
+          "height": 900
+        }
+      },
+      "screenshotSHA256": "fee202d7c5f038752b9240582d00811e0000d7a805c895f101d1cf9bac119f77"
+    },
+    {
+      "name": "portrait-ghost",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "draws": 81,
+      "imagesCreated": 1,
+      "textsCreated": 1,
+      "destroyed": 0,
+      "meanMs": 2.327499999757856,
+      "medianMs": 1.4000000059604645,
+      "p95Ms": 3.899999998509884,
+      "maximumMs": 32.20000000298023,
+      "features": {
+        "secureContext": true,
+        "bigint": true,
+        "structuredClone": true,
+        "objectHasOwn": true,
+        "randomUUID": true,
+        "indexedDB": true,
+        "pointerEvents": true,
+        "webAudio": true,
+        "webGL": true,
+        "gpuRenderer": "WebKit WebGL",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36"
+      },
+      "final": {
+        "activeImages": 3236,
+        "activeTexts": 7,
+        "sceneChildren": 3246,
+        "visibleChildren": 3244,
+        "hits": [
+          {
+            "id": "00000000-0000-4000-8000-000000000011",
+            "x": 317.3333333333333,
+            "y": 367.3333333333333,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 18.5,
+              "y": 24.5
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000005",
+            "x": 338.8888888888889,
+            "y": 399.6666666666667,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 22.5,
+              "y": 26.5
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000004",
+            "x": 338.8888888888889,
+            "y": 399.6666666666667,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 23,
+              "y": 29
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000002",
+            "x": 338.8888888888889,
+            "y": 399.6666666666667,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 25,
+              "y": 27
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000003",
+            "x": 295.77777777777777,
+            "y": 448.1666666666667,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 25,
+              "y": 33
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000013",
+            "x": 295.77777777777777,
+            "y": 448.1666666666667,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 26,
+              "y": 35
+            }
+          },
+          {
+            "id": "core",
+            "x": 382,
+            "y": 458.94444444444446,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 30,
+              "y": 30
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000001",
+            "x": 338.8888888888889,
+            "y": 480.5,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 30,
+              "y": 34
+            }
+          }
+        ],
+        "camera": {
+          "x": 27.5,
+          "y": 27.5,
+          "zoom": 0.6736111111111112,
+          "view": 0,
+          "width": 800,
+          "height": 900
+        }
+      },
+      "screenshotSHA256": "9f0a956c3ce59afb50eeeec12969aa4a9e1b7b1224f5181b1ad5a9e2c13dfafd"
+    },
+    {
+      "name": "landscape-field",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "draws": 81,
+      "imagesCreated": 0,
+      "textsCreated": 1,
+      "destroyed": 0,
+      "meanMs": 2.2600000000558795,
+      "medianMs": 1.6000000014901161,
+      "p95Ms": 4.399999998509884,
+      "maximumMs": 21.299999997019768,
+      "features": {
+        "secureContext": true,
+        "bigint": true,
+        "structuredClone": true,
+        "objectHasOwn": true,
+        "randomUUID": true,
+        "indexedDB": true,
+        "pointerEvents": true,
+        "webAudio": true,
+        "webGL": true,
+        "gpuRenderer": "WebKit WebGL",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36"
+      },
+      "final": {
+        "activeImages": 3613,
+        "activeTexts": 8,
+        "sceneChildren": 3623,
+        "visibleChildren": 3622,
+        "hits": [
+          {
+            "id": "00000000-0000-4000-8000-000000000011",
+            "x": 545.3142857142857,
+            "y": 180.02857142857144,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 18.5,
+              "y": 24.5
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000005",
+            "x": 545.3142857142857,
+            "y": 180.02857142857144,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 22.5,
+              "y": 26.5
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000004",
+            "x": 545.3142857142857,
+            "y": 180.02857142857144,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 23,
+              "y": 29
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000002",
+            "x": 545.3142857142857,
+            "y": 180.02857142857144,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 25,
+              "y": 27
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000003",
+            "x": 533.0857142857143,
+            "y": 225.8857142857143,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 25,
+              "y": 33
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000013",
+            "x": 533.0857142857143,
+            "y": 225.8857142857143,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 26,
+              "y": 35
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000001",
+            "x": 533.0857142857143,
+            "y": 225.8857142857143,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 30,
+              "y": 34
+            }
+          },
+          {
+            "id": "core",
+            "x": 582,
+            "y": 232,
+            "width": 36,
+            "height": 36,
+            "foot": {
+              "x": 30,
+              "y": 30
+            }
+          }
+        ],
+        "camera": {
+          "x": 30,
+          "y": 30,
+          "zoom": 0.3821428571428571,
+          "view": 0,
+          "width": 1200,
+          "height": 500
+        }
+      },
+      "screenshotSHA256": "c6434ba3ad3fd2673adc1d7199a2923a24485b5619cb00715b98cd8fb3e2eb76"
+    },
+    {
+      "name": "landscape-close",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "draws": 81,
+      "imagesCreated": 0,
+      "textsCreated": 0,
+      "destroyed": 0,
+      "meanMs": 0.7650000001303852,
+      "medianMs": 0.6999999955296516,
+      "p95Ms": 1.5,
+      "maximumMs": 3.5,
+      "features": {
+        "secureContext": true,
+        "bigint": true,
+        "structuredClone": true,
+        "objectHasOwn": true,
+        "randomUUID": true,
+        "indexedDB": true,
+        "pointerEvents": true,
+        "webAudio": true,
+        "webGL": true,
+        "gpuRenderer": "WebKit WebGL",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36"
+      },
+      "final": {
+        "activeImages": 729,
+        "activeTexts": 1,
+        "sceneChildren": 2574,
+        "visibleChildren": 731,
+        "hits": [
+          {
+            "id": "00000000-0000-4000-8000-000000000011",
+            "x": 383,
+            "y": -56,
+            "width": 50,
+            "height": 34,
+            "foot": {
+              "x": 18.5,
+              "y": 24.5
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000005",
+            "x": 440,
+            "y": 28,
+            "width": 64,
+            "height": 64,
+            "foot": {
+              "x": 22.5,
+              "y": 26.5
+            },
+            "frame": "friendly.standard_barricade.view0",
+            "scale": 1
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000004",
+            "x": 391,
+            "y": 77,
+            "width": 33,
+            "height": 45,
+            "foot": {
+              "x": 23,
+              "y": 29
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000002",
+            "x": 472,
+            "y": 9,
+            "width": 128,
+            "height": 144,
+            "foot": {
+              "x": 25,
+              "y": 27
+            },
+            "frame": "friendly.sentry.view0",
+            "scale": 1
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000003",
+            "x": 280,
+            "y": 105,
+            "width": 128,
+            "height": 144,
+            "foot": {
+              "x": 25,
+              "y": 33
+            },
+            "frame": "friendly.sentry.view0",
+            "scale": 1
+          },
+          {
+            "id": "core",
+            "x": 504,
+            "y": 98,
+            "width": 192,
+            "height": 192,
+            "foot": {
+              "x": 30,
+              "y": 30
+            },
+            "frame": "objective.harmonic_core.view0",
+            "scale": 1
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000013",
+            "x": 252,
+            "y": 144,
+            "width": 120,
+            "height": 122,
+            "foot": {
+              "x": 26,
+              "y": 35
+            }
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000001",
+            "x": 450,
+            "y": 250,
+            "width": 51,
+            "height": 64,
+            "foot": {
+              "x": 30,
+              "y": 34
+            }
+          }
+        ],
+        "camera": {
+          "x": 30,
+          "y": 30,
+          "zoom": 2,
+          "view": 0,
+          "width": 1200,
+          "height": 500
+        }
+      },
+      "screenshotSHA256": "5e7e89083d33cb985d3b81697966f6f108497a8b25e07744cb6c28e276d65f2d"
+    }
+  ]
+}

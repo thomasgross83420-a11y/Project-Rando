@@ -1,6 +1,10 @@
 # Review delivery
 
-Latest: [current development PDF/ZIP, build0.2.8](DEVELOPMENT_DELIVERY.md),
+Latest supplement: [tablet target and rendering PDF/ZIP, build0.2.9](TABLET_RENDER_DELIVERY.md).
+The device/runtime question is resolved by supplied screenshots; a measured
+pixel-preserving scene reuse improvement passes134 unit/49 browser checks.
+
+Previous: [current development PDF/ZIP, build0.2.8](DEVELOPMENT_DELIVERY.md),
 2026-10-08. Four-page status/recovery/progression report and checksummed evidence
 bundle. The earlier large visual/audio review below remains available.
 

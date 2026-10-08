@@ -3,7 +3,7 @@ What can I say, it's just a bunch of rando I'm trying out.
 
 ## Resonance Bastion
 
-The latest checkpoint is on `codex/affordable-repair-previews`; `main`
+The latest checkpoint is on `codex/tablet-render-reuse`; `main`
 currently contains only the original repository introduction. Start with the
 [thread recovery record](docs/PROJECT_RECOVERY.md) for the recovered checkpoint,
 available reference files, verification, and the next development step.
@@ -57,9 +57,17 @@ battle, checkpoint and pending-result hashes remain exact. All131 unit tests and
 [Mobile support review](docs/review/SUPPORT_CHANNEL_DELIVERY.md) supplements the
 paid-combat review. `npm run audit:support-channels` reproduces the four comparisons.
 
-Latest checkpoint: [repair choices](docs/AFFORDABLE_REPAIR.md). Full/25%/50%/exact
+Previous checkpoint: [repair choices](docs/AFFORDABLE_REPAIR.md). Full/25%/50%/exact
 and maximum-affordable previews use unchanged prices and require confirmation.
 All134 unit/47 browser checks pass; all9 affected UI cases also pass following
 confirmation-heading polish. [Current development review](docs/review/DEVELOPMENT_DELIVERY.md)
 provides the latest mobile PDF/ZIP. [Tablet validation](docs/TABLET_VALIDATION.md)
 records the hardware/runtime information needed next, without reducing game scope.
+
+Latest checkpoint: [tablet target and rendering reuse](docs/review/TABLET_RENDER_REUSE.md).
+The user's TB-X606F/Android10/4 GB/Chrome154 target is identified. Shared camera
+redraws reuse scene objects with six exact before/after pixel comparisons, bounded
+cycle/disposal tests and all134 unit/49 browser checks passing. No physical-device
+performance is inferred. [Mobile review](docs/review/TABLET_RENDER_DELIVERY.md)
+records the measured improvement; a pinned manual Pages preview is prepared for
+publication approval, not installed or deployed.

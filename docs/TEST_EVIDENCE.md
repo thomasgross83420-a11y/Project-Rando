@@ -516,3 +516,32 @@ current review ZIP. Source and each run's log hashes are retained separately in
 evidence/AFFORDABLE_REPAIR_TESTS.json. Physical tablet model/runtime information
 is pending; TABLET_VALIDATION.md distinguishes known family specs from actual
 device evidence and specifies the next measurement pass.
+
+## 2026-10-08 — tablet identification and shared renderer reuse, build0.2.9
+
+User screenshots identify TB-X606F, Android10, 4 GB RAM, Helio P22T,
+1920×1200 panel and Chrome154.0.8037.126. Relevant fields only are retained in
+evidence/TABLET_TARGET.json. MDN compatibility data establishes version minima
+for four required APIs, not actual hardware/storage acceptance.
+
+Full134 unit tests in30 files and49 production-browser checks pass without
+retries/skips. Typecheck, lint (existing informational notices), format check,
+deterministic scenario and production build pass. Retained v1/v2/v3 replay
+regressions remain exact. Source/log hashes: evidence/TABLET_RENDER_TESTS.json.
+
+Six actual shared-WorldView measurement cases each make81 redraws, covering
+portrait/landscape, all four orientations, Fit Base/Field/close and ghosts.
+After reuse:0–1 new images,0–1 new texts and0 destructions per case, compared
+with59,049–292,734 recreated images per case before. Six final PNGs match
+byte-for-byte and independently by RGB pixels; hit bounds/camera also match.
+Native browser regressions check second-cycle zero growth, visibility/picking,
+ghost/style reset to exact pixels and scene disposal. Full input/camera/reflow,
+renderer recovery, practice and paid-result suites pass against the actual app.
+
+The separate measurement harness initially removed the app's async bootstrap
+DOM, producing Missing status; an isolated audit document fixed that setup before
+recorded passing measurements. Typecheck caught an unused temporary variable
+during the refactor, corrected before final verification. Desktop draw-submission
+timings do not measure GPU/frame time or certify physical Android.
+The pinned manual Pages preview YAML parses and satisfies reviewed trigger/ref/
+runner/permissions checks, but is neither installed nor dispatched.
