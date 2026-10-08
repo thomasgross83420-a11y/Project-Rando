@@ -16,12 +16,14 @@ The full campaign, roster, and final animation work remain in development.
 Physical Lenovo tablet performance is still awaiting device observations.
 
 The manual deployment workflow builds pinned source
-[`23754ab`](https://github.com/thomasgross83420-a11y/Project-Rando/tree/23754abc513320b4d25b5bcaae23ca4a8b6315de).
+[`151c105`](https://github.com/thomasgross83420-a11y/Project-Rando/tree/151c105195069ae419c36fd8f284fe40abd43275).
 Application work continues on development branches; publishing this preview
 does not merge that stack into `main`.
 
-Current preview: **0.2.11-touch-field**. The playing field fills the screen;
-Build, Forces, Upgrade, Tactics, Siege and Records open collapsible menus. Drag
-the field to pan, pinch to zoom. In placement mode, two fingers move the camera;
-Place/Cancel stay visible. Battle keeps health and Pause visible with secondary
-controls inside Tools. Existing campaigns and recovery remain supported.
+Current preview: **0.2.12-rifle-joints**. The Rifle Squad now has authored joints,
+grounded gait, independent aiming, member-specific firing and consistent
+placement/combat art. Battles start framed around deployed defenders. The
+field-first touch interface and collapsible menus remain available. Existing
+campaigns and recovery stay supported. This remains an early development slice.
+
+[Read the current Rifle development review](https://github.com/thomasgross83420-a11y/Project-Rando/blob/codex/rifle-articulation/docs/RIFLE_ARTICULATION.md).
