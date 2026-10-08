@@ -1,6 +1,18 @@
 # Free GitHub delivery evidence
 
-## Current publication status — 2026-10-08
+## Current startup/control update — 2026-10-08
+
+The live preview now builds `29837e8718f301c07eed9324b78acc323a29e8f0`,
+version `0.2.10-startup-recovery`. [PR 15](https://github.com/thomasgross83420-a11y/Project-Rando/pull/15)
+changes only main's source pin and README; no application stack is merged.
+[Run 37755028365](https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37755028365)
+passed CI and deployment. The same URL/origin remains in use. All 38 assets
+match the tested build; 143 unit, 60 local production browser and 15 selected
+live checks pass. An actual pre-update public save remained unchanged through
+confirmed legacy takeover, normal subsequent reload and practice start. See
+[current verification](PUBLIC_PREVIEW.md).
+
+## Initial publication status — 2026-10-08
 
 The user authorized a public playable preview. [PR 12](https://github.com/thomasgross83420-a11y/Project-Rando/pull/12)
 installed the manual-only workflow on `main`, merge

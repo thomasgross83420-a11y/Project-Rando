@@ -60,3 +60,17 @@ No combat coefficients, progression prices, authoritative replay version,
 campaign schema or artwork is changed by these fixes. All other blueprint
 development remains open; this increment fixes startup and nearby interactions.
 Physical Android observations remain distinct from browser automation.
+
+## Completed validation and delivery
+
+Source `29837e8718f301c07eed9324b78acc323a29e8f0` passed 143 unit tests,
+type/lint/scenario/build checks, changed-file formatting and all 60 production
+browser checks with zero retries/skips/failures. [Local evidence](evidence/STARTUP_CONTROL_TESTS.json)
+records each check. The [same public game](https://thomasgross83420-a11y.github.io/Project-Rando/)
+was updated by [PR 15](https://github.com/thomasgross83420-a11y/Project-Rando/pull/15)
+and successful [run 37755028365](https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37755028365).
+
+All 38 public files match the tested build. Fifteen selected live checks passed;
+an isolated actual 0.2.9 public save survived legacy takeover, ordinary 0.2.10
+reload and practice start without campaign changes. [Live evidence](evidence/STARTUP_CONTROL_LIVE.json)
+binds this upgrade and the current title/layout checks to the deployment.

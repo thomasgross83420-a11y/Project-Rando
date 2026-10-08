@@ -1,0 +1,486 @@
+{
+  "build": "0.2.10-startup-recovery",
+  "source": "29837e8718f301c07eed9324b78acc323a29e8f0",
+  "deployment": {
+    "run_id": 37755028365,
+    "url": "https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37755028365",
+    "conclusion": "success",
+    "main_merge": "f619a2706fd07aedcc3addced5015e1cd364f358",
+    "completed_utc": "2026-10-08T09:14:00Z",
+    "ci_unit_tests": 143,
+    "ci_unit_files": 31
+  },
+  "assets": {
+    "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+    "source": "29837e8718f301c07eed9324b78acc323a29e8f0",
+    "https_certificate_validation": true,
+    "verified_files": 38,
+    "files": [
+      {
+        "path": "THIRD_PARTY_NOTICES.txt",
+        "status": 200,
+        "mime": "text/plain",
+        "bytes": 284630,
+        "sha256": "0c1677ecd236df2d3657cbbcc75abc08315327d88acb5c339008d218da8dd48e",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/app-XmnDkdpD.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1341017,
+        "sha256": "cef666e2931820ca9b7359e3d9190c1474ab862bdacf07d47fcd3a4f1017d9f5",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/alert.core.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 27244,
+        "sha256": "3b102957104f73fccd2ac6aca0a2e6e08eab400d8b4b590192f170a763cac448",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/alert.wave.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 20844,
+        "sha256": "7daa96d6c9b192bd862cb1a83f97c0650fe97c01ae5607a89357a81dbb2e30eb",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/manifest.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 8925,
+        "sha256": "03cf25256b4e669a262c9fb5ffeb7f043223dd728675acac436a633e454fba8d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/music.fracture.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3072044,
+        "sha256": "8c9a7cc92de47f02432fe14b2deadc78c638a438e46167177786f3848dd211a0",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/music.preparation.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3072044,
+        "sha256": "7ff2ab848fea55b8ec56ddb20b486b30c0df818a416cbd4295d4478c055145af",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/music.title.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3072044,
+        "sha256": "f9d89a42dc85e7756e7a4b988551ba5205aaaa5ecbd6b7de7c1739c3da7c7642",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.bulwark.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 5804,
+        "sha256": "bb24a903b5eac49b04798238738db8f321b394b4ef0587a754cc56fa59264680",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.challenge.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 17644,
+        "sha256": "7063882770bf5bbcd4b5ecc3b43a52fd3a2531fc80aee4d479f5dc64e3555332",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.holdfast.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 22444,
+        "sha256": "92c6d991e9820b59399fd69074299576ca97a69afa6cee74932fcbdd66f43553",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.impact.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 4204,
+        "sha256": "89483ec8e8a1bf99511e22c4f1cdee232bb319c5972e7f0bfcb3c01552320f33",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.interpose.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 14444,
+        "sha256": "7d44cfd5125f04169aee307f8b4b15bf0d21cbe25cfb6f0970dadd75f0e47ea6",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.melee.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 5164,
+        "sha256": "73edc6f7cc218caf9577e4156f57199fb1793b99725462e819c7e93afc5b0c01",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.mine.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 20844,
+        "sha256": "44dd680024f1857d68b3cbaac0bcd4bd5e674c92720e516351aa78c7b1713cf5",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.repair.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 12844,
+        "sha256": "ffec83d3805a309a12f0a1deede7028c2498ccd9cc6ed1b07d3c6e9c072702dc",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.rifle.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3244,
+        "sha256": "5a0f402ed431262f53f54a6b6cc86ea75e79898aecefb804ca44cfff3c959cde",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.sentry.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3884,
+        "sha256": "2ea71d3fbdb4df7535809be96ff52d7c611f8332d10444db7657b6a146c842d2",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/stinger.defeat.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 76844,
+        "sha256": "70039d02db80cca01131f03827612a352281690939f6a5936397bda823a0a883",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/stinger.victory.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 76844,
+        "sha256": "26bf18aeb3ec29401e0fe5bd19f12d54515e17917859cffcaa50dc8de3bfb30d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/ui.confirm.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3244,
+        "sha256": "8c4183b4e3f2906d8c5e04a4286adf0c072fff1ada8dc8df9a77dd02f99058b6",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/balance-study-CKjdAZXy.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1468,
+        "sha256": "45e3831ffdaab10093298084aa2380df08e9b23bbae1352ddd7d9837f0e7e65a",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/combat/atlas0.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 1038294,
+        "sha256": "f010a3d68c6ea2b244e7b9f6d5346b6506ba90c6660b7a5ff8103fa5f64e44fb",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/combat/manifest.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 731449,
+        "sha256": "5d6ca3e80b3b6e78967b9a1d6cbee167f4dba07931bbce1cebd836b08e623070",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/diagnostic-Bv32JOlT.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 3043,
+        "sha256": "64710a6a12efa2697fd6250ca40556b53b50035ce9b8350bb9b6bad9b9af1de5",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/foundation.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 14896,
+        "sha256": "02f0da9d5ec4f0bc7d4a24d1c2bd2a1ee56382af1cab303b5a6b9252a54f20ce",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/foundation.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 349002,
+        "sha256": "d397c7f6333f7e60caf6420c50f99f5ee51e6baed5d23169feb9847f1584bd57",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/icon.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 2141,
+        "sha256": "bcdfbcc4c5789752013f3d8eb3881914fb84a788915f111087833d296abd4f2d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/index-D2cdxgdU.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1206,
+        "sha256": "f1cd15a61bf88dbd4d0436d7e478310f97d55f82c23be547aee0dd987a7b516e",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/preload-helper-Cl7pOkUX.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1124,
+        "sha256": "989e1a374921cdeb43a03349e760593a196a91e7e6e055f9061657b8b57d96fc",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/roles.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 3285,
+        "sha256": "9693882fe946249b5cdacb4e7a4399aa884f2a3dc0d04478636a90a70c2715d8",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/roles.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 8321,
+        "sha256": "7a8a9aec353aaa2bc3265d49c68eb3f78fad87781a237a11998bb8b8bdfdcbf1",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/style-proof-close.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 128163,
+        "sha256": "0a19c329843159f762f96801e1873212969088e75848bf2174e6e8f68006b075",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/style-proof-default.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 32282,
+        "sha256": "0f378033a758ee393a7e1be3a7719fcc0bc96619f96116a29a896dbb4891ddc3",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/title-foundation.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 129260,
+        "sha256": "7c5ba99eabc67764b163517198ee7c21e3981372761c540430fa33768a07c553",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/world-BIblJv6X.css",
+        "status": 200,
+        "mime": "text/css",
+        "bytes": 4124,
+        "sha256": "0bc3db90569d679101a129d28ddab124155d655c36af98968ae7ff8f1420d448",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/world-BLTkFWTW.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1780478,
+        "sha256": "2c39c0b62a528263ed3816f188f249de4508c537fb263cd75e880f015775f115",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "index.html",
+        "status": 200,
+        "mime": "text/html",
+        "bytes": 596,
+        "sha256": "71b75342ab24c78cc1a3b1310a171ee405049db71548c3c77aa22a0ebfa0a57c",
+        "matches_local_tested_build": true
+      }
+    ]
+  },
+  "live_browser": {
+    "stats": {
+      "startTime": "2026-10-08T09:14:51.286Z",
+      "duration": 95347.12,
+      "expected": 15,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "checks": [
+      {
+        "name": "the player can migrate, deploy existing assets, win, review committed XP and rearm the persisted mine once",
+        "file": "campaign-ui.spec.ts",
+        "status": "passed",
+        "duration_ms": 36340,
+        "retry": 0
+      },
+      {
+        "name": "Gate 0 production subpath, renderer, storage, gesture, audio and export",
+        "file": "gate0.spec.ts",
+        "status": "passed",
+        "duration_ms": 3594,
+        "retry": 0
+      },
+      {
+        "name": "viewport reflow, touch cancellation, semantic focus and production MIME",
+        "file": "gate0.spec.ts",
+        "status": "passed",
+        "duration_ms": 4094,
+        "retry": 0
+      },
+      {
+        "name": "mobile backup replaces selected wallets, preserves other slots/settings, reloads and rolls back without merging",
+        "file": "recovery.spec.ts",
+        "status": "passed",
+        "duration_ms": 9340,
+        "retry": 0
+      },
+      {
+        "name": "reload and reopening a closed page restore editing without changing campaigns",
+        "file": "startup-controls.spec.ts",
+        "status": "passed",
+        "duration_ms": 4347,
+        "retry": 0
+      },
+      {
+        "name": "another active tab can start New Game through confirmed takeover and the old controls refresh",
+        "file": "startup-controls.spec.ts",
+        "status": "passed",
+        "duration_ms": 3482,
+        "retry": 0
+      },
+      {
+        "name": "legacy ownership offers a working recovery from New Game instead of a gray dead end",
+        "file": "startup-controls.spec.ts",
+        "status": "passed",
+        "duration_ms": 3027,
+        "retry": 0
+      },
+      {
+        "name": "a failed writer transaction keeps title controls and a retry path available",
+        "file": "startup-controls.spec.ts",
+        "status": "passed",
+        "duration_ms": 1838,
+        "retry": 0
+      },
+      {
+        "name": "failed storage probe offers explicit temporary play without breaking the title",
+        "file": "startup-controls.spec.ts",
+        "status": "passed",
+        "duration_ms": 1099,
+        "retry": 0
+      },
+      {
+        "name": "without Web Locks, closed legacy ownership still requires confirmation and saves remain unchanged",
+        "file": "startup-controls.spec.ts",
+        "status": "passed",
+        "duration_ms": 2444,
+        "retry": 0
+      },
+      {
+        "name": "title buttons and cancelled creation stay usable, and unfinished combat choices are clearly unavailable",
+        "file": "startup-controls.spec.ts",
+        "status": "passed",
+        "duration_ms": 5255,
+        "retry": 0
+      },
+      {
+        "name": "a campaign saved before an open failure remains loadable without retrying creation",
+        "file": "startup-controls.spec.ts",
+        "status": "passed",
+        "duration_ms": 3345,
+        "retry": 0
+      },
+      {
+        "name": "a rejected Web Lock request does not strand startup and can be retried",
+        "file": "startup-controls.spec.ts",
+        "status": "passed",
+        "duration_ms": 1740,
+        "retry": 0
+      },
+      {
+        "name": "writer quota errors stay recoverable without uncaught request-handler errors",
+        "file": "startup-controls.spec.ts",
+        "status": "passed",
+        "duration_ms": 1056,
+        "retry": 0
+      },
+      {
+        "name": "a displaced battle never automatically resumes after the other writer closes; takeover opens durable recovery",
+        "file": "startup-controls.spec.ts",
+        "status": "passed",
+        "duration_ms": 13219,
+        "retry": 0
+      }
+    ],
+    "automatic_retries": 0,
+    "browser": "desktop Chromium 151.0.7922.173"
+  },
+  "existing_save_upgrade": {
+    "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+    "browser": "151.0.7922.173",
+    "old_source": "bc7d60c4cc3eb229f6fdb3be9dce8eee0c2bebe1",
+    "new_source": "29837e8718f301c07eed9324b78acc323a29e8f0",
+    "actual_public_origin": true,
+    "existing_campaigns_unchanged": true,
+    "active_legacy_takeover_confirmed": true,
+    "next_reload_automatic": true,
+    "existing_campaign_practice_started": true,
+    "errors": []
+  },
+  "features_and_layouts": {
+    "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+    "browser": "151.0.7922.173",
+    "source": "Desktop Chromium on the actual public HTTPS origin; not physical Android acceptance",
+    "features": {
+      "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+      "origin": "https://thomasgross83420-a11y.github.io",
+      "secureContext": true,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "randomUUID": "function",
+      "BigInt": "function",
+      "structuredClone": "function",
+      "hasOwn": "function",
+      "IndexedDB": "function",
+      "WebAudio": "function",
+      "build": "Development preview 0.2.10-startup-recovery"
+    },
+    "viewports": [
+      {
+        "width": 800,
+        "height": 1280
+      },
+      {
+        "width": 1280,
+        "height": 800
+      }
+    ],
+    "errors": []
+  },
+  "physical_android_acceptance": false
+}
