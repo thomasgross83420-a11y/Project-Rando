@@ -1,3 +1,4 @@
+import { battleTools, prepMenu } from './menu-helpers';
 import { expect, test } from '@playwright/test';
 test('injected background pauses without catch-up; keyboard audio settings persist through checkpoint reload', async ({
   page,
@@ -10,11 +11,13 @@ test('injected background pauses without catch-up; keyboard audio settings persi
   await page.getByLabel('Campaign name', { exact: true }).fill('Accessibility fixture');
   await page.getByRole('button', { name: 'Review Campaign', exact: true }).click();
   await page.getByRole('button', { name: 'Create', exact: true }).click();
+  await prepMenu(page, 'siege');
   await page.getByRole('button', { name: 'Tutorial Practice', exact: true }).click();
   await page.getByRole('button', { name: 'Begin Tutorial Practice', exact: true }).click();
   await expect(page.locator('#battle-root')).toHaveAttribute('data-state', 'Siege', {
     timeout: 20000,
   });
+  await battleTools(page);
   await page.locator('#battle-camera').click();
   await expect(page.locator('#battle-root')).toHaveAttribute('data-state', 'Paused');
   await expect(page.locator('#battle-root')).toHaveAttribute('data-audio-state', 'suspended');
@@ -52,9 +55,10 @@ test('injected background pauses without catch-up; keyboard audio settings persi
   await page.getByLabel('Mute all', { exact: true }).check();
   await page.getByRole('button', { name: 'Back to Pause', exact: true }).click();
   await page.getByRole('button', { name: 'Cancel / close', exact: true }).click();
-  await expect(
-    page.getByText('Presentation preferences saved. Campaign data unchanged.', { exact: true }),
-  ).toBeVisible();
+  await expect(page.locator('#status')).toHaveText(
+    'Presentation preferences saved. Campaign data unchanged.',
+  );
+  await expect(page.locator('#status')).toBeVisible();
   await page.reload();
   await expect(page.getByRole('button', { name: 'Take Over Editing', exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: 'Continue', exact: true }).click();
@@ -62,6 +66,7 @@ test('injected background pauses without catch-up; keyboard audio settings persi
   await expect(page.locator('#battle-root')).toHaveAttribute('data-state', 'Siege', {
     timeout: 20000,
   });
+  await battleTools(page);
   await expect(page.locator('#battle-mute')).toHaveAttribute('aria-pressed', 'true');
   await page.locator('#battle-pause').click();
   await page.getByRole('button', { name: 'Audio Settings', exact: true }).click();

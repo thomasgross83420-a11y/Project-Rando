@@ -1,3 +1,4 @@
+import { prepMenu } from './menu-helpers';
 import { expect, test, type Page } from '@playwright/test';
 
 async function create(page: Page) {
@@ -35,6 +36,7 @@ test('reload and reopening a closed page restore editing without changing campai
   await expect(page.getByRole('button', { name: 'New Game', exact: true })).toBeEnabled();
   await expect(page.getByRole('button', { name: 'Take Over Editing', exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: 'Continue', exact: true }).click();
+  await prepMenu(page, 'build');
   await expect(page.getByRole('button', { name: /Sentry 2 · Stored/ })).toBeEnabled();
   expect(await retained(page)).toEqual(before);
   await page.close();
@@ -66,6 +68,7 @@ test('another active tab can start New Game through confirmed takeover and the o
   await expect(
     other.getByRole('heading', { name: 'New Campaign — Select Slot', exact: true }),
   ).toBeVisible();
+  await prepMenu(page, 'build');
   await expect(page.getByRole('button', { name: /Sentry 2 · Stored/ })).toBeDisabled({
     timeout: 10000,
   });
@@ -200,8 +203,10 @@ test('title buttons and cancelled creation stay usable, and unfinished combat ch
   }
   expect(await retained(page)).toEqual([]);
   await create(page);
+  await prepMenu(page, 'siege');
   await page.getByRole('button', { name: 'Tutorial Practice', exact: true }).click();
   await page.getByRole('button', { name: 'Return Base', exact: true }).click();
+  await prepMenu(page, 'build');
   await expect(page.getByRole('button', { name: /Sentry 2 · Stored/ })).toBeEnabled();
 });
 test('a campaign saved before an open failure remains loadable without retrying creation', async ({
@@ -288,6 +293,7 @@ test('a displaced battle never automatically resumes after the other writer clos
   await page.goto('./');
   await create(page);
   const before = await retained(page);
+  await prepMenu(page, 'siege');
   await page.getByRole('button', { name: 'Tutorial Practice', exact: true }).click();
   await page.getByRole('button', { name: 'Begin Tutorial Practice', exact: true }).click();
   await expect(page.locator('#battle-root')).toHaveAttribute('data-state', 'Siege', {

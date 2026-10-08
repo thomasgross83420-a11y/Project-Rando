@@ -1,3 +1,4 @@
+import { battleTools, prepMenu } from './menu-helpers';
 import { expect, test, type Page } from '@playwright/test';
 async function takeOver(page: Page) {
   await expect(page.getByRole('button', { name: 'Load Campaign', exact: true })).toBeVisible();
@@ -17,6 +18,7 @@ async function newCampaign(page: Page) {
   await expect(page.locator('#campaign-heading')).toHaveText('Paid progression');
 }
 async function enable(page: Page) {
+  await prepMenu(page, 'siege');
   await page.locator('#campaign-siege').click();
   await page.locator('#enable-progression').click();
   await expect(page.locator('#campaign-begin')).toBeVisible();
@@ -51,7 +53,9 @@ test('the player can migrate, deploy existing assets, win, review committed XP a
   await newCampaign(page);
   await enable(page);
   await page.locator('#campaign-begin').click();
+  await battleTools(page);
   await expect(page.locator('#battle-speed')).toBeVisible();
+  await battleTools(page);
   await page.locator('#battle-speed').selectOption('4');
   await expect(page.locator('#battle-time')).toContainText('4×');
   await expect(page.locator('#battle-content')).toContainText('Campaign Results Saved', {
@@ -66,6 +70,7 @@ test('the player can migrate, deploy existing assets, win, review committed XP a
     .screenshot({ path: 'test-results/campaign-victory-summary.png' });
   await page.locator('#campaign-finish').click();
   await expect(page.locator('#account')).toContainText('Rank 2');
+  await prepMenu(page, 'build');
   await page
     .locator('[data-owned]')
     .filter({ hasText: 'Proximity Mine' })
@@ -73,6 +78,7 @@ test('the player can migrate, deploy existing assets, win, review committed XP a
     .click();
   await expect(page.locator('#progression-controls')).toContainText('0 / 1 permanent charge');
   const before = await saved(page);
+  await prepMenu(page, 'upgrade');
   await page.getByRole('button', { name: 'Review Rearm', exact: true }).click();
   await expect(page.locator('#dialog-body')).toContainText('19 Credits');
   await page.locator('#progression-confirm').dblclick();
@@ -93,6 +99,7 @@ test('a visible commit failure preserves the exact result and retry succeeds eve
   await newCampaign(page);
   await enable(page);
   await page.locator('#campaign-begin').click();
+  await battleTools(page);
   await page.locator('#battle-speed').selectOption('4');
   await page.evaluate(() => {
     const put = IDBObjectStore.prototype.put;
@@ -144,13 +151,16 @@ test('earned enhancement preview quotes actual weapon changes and preserves a wr
   await takeOver(page);
   await page.getByRole('button', { name: 'Load Campaign', exact: true }).click();
   await page.getByRole('button', { name: 'Open campaign', exact: true }).first().click();
+  await prepMenu(page, 'build');
   await page.locator('[data-owned]').filter({ hasText: 'Sentry' }).first().click();
+  await prepMenu(page, 'upgrade');
   await page.getByRole('button', { name: 'Review Enhancement 1', exact: true }).click();
   await expect(page.locator('#dialog-body')).toContainText('100 Credits');
   await expect(page.locator('#dialog-body')).toContainText('damage per release');
   await expect(page.locator('#dialog-body')).toContainText('weapon range');
   await page.locator('#close-dialog').click();
   expect((await saved(page)).credits).toBe(600);
+  await prepMenu(page, 'upgrade');
   await page.getByRole('button', { name: 'Review Enhancement 1', exact: true }).click();
   await page.locator('#progression-confirm').dblclick();
   await expect(page.locator('#progression-controls')).toContainText('E1 / 1 eligible');
@@ -207,6 +217,7 @@ test('the recovery controls preserve a cash-poor wrecked campaign and explicitly
   await takeOver(page);
   await page.getByRole('button', { name: 'Load Campaign', exact: true }).click();
   await page.getByRole('button', { name: 'Open campaign', exact: true }).first().click();
+  await prepMenu(page, 'upgrade');
   await expect(page.getByRole('button', { name: 'Review Recovery', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Review Recovery', exact: true }).click();
   await expect(page.locator('#dialog-body')).toContainText('2,500 Integrity');
@@ -228,6 +239,7 @@ test('progression controls and quoted purchases reflow in portrait and landscape
   await takeOver(page);
   await page.getByRole('button', { name: 'Load Campaign', exact: true }).click();
   await page.getByRole('button', { name: 'Open campaign', exact: true }).first().click();
+  await prepMenu(page, 'build');
   await page.locator('[data-owned]').filter({ hasText: 'Sentry' }).first().click();
   for (const viewport of [
     { width: 412, height: 915 },
@@ -236,9 +248,11 @@ test('progression controls and quoted purchases reflow in portrait and landscape
   ]) {
     await page.setViewportSize(viewport);
     for (const scale of ['18', '36']) {
+      await prepMenu(page, 'tools');
       await page.getByRole('button', { name: 'Accessibility', exact: true }).click();
       await page.getByLabel('Interface scale').selectOption(scale);
       await page.getByRole('button', { name: 'Cancel / close', exact: true }).click();
+      await prepMenu(page, 'upgrade');
       await page.locator('#progression-controls').scrollIntoViewIfNeeded();
       expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(
         false,

@@ -1,3 +1,4 @@
+import { battleTools, prepMenu } from './menu-helpers';
 import { expect, type Page, test } from '@playwright/test';
 
 async function create(page: Page) {
@@ -7,6 +8,7 @@ async function create(page: Page) {
   await page.getByLabel('Campaign name', { exact: true }).fill('Combat Proof');
   await page.getByRole('button', { name: 'Review Campaign', exact: true }).click();
   await page.getByRole('button', { name: 'Create', exact: true }).click();
+  await prepMenu(page, 'siege');
   await page.getByRole('button', { name: 'Tutorial Practice', exact: true }).click();
   await page.getByRole('button', { name: 'Begin Tutorial Practice', exact: true }).click();
   await expect(page.locator('#battle-root')).toHaveAttribute('data-state', 'Siege', {
@@ -27,6 +29,7 @@ test('real tutorial is autonomous, paused, restarted from durable checkpoint, an
   await expect
     .poll(async () => Number(await page.locator('#battle-root').getAttribute('data-audio-decoded')))
     .toBeGreaterThan(0);
+  await battleTools(page);
   await page.locator('#battle-speed').selectOption('1');
   await page.waitForTimeout(1000);
   await page.locator('#battle-pause').click();
@@ -44,11 +47,13 @@ test('real tutorial is autonomous, paused, restarted from durable checkpoint, an
   await expect(page.locator('#battle-root')).toHaveAttribute('data-state', 'Siege', {
     timeout: 20000,
   });
+  await battleTools(page);
   await page.locator('#battle-speed').selectOption('4');
   for (let attempt = 0; attempt < 180; attempt++) {
     const state = await page.locator('#battle-root').getAttribute('data-state');
     if (state === 'Victory') break;
     if (state === 'Paused') {
+      await battleTools(page);
       await page.locator('#battle-speed').selectOption('1');
       await page.locator('#battle-pause').click();
       await page.getByRole('button', { name: 'Resume', exact: true }).click();
@@ -81,13 +86,17 @@ test('real tutorial is autonomous, paused, restarted from durable checkpoint, an
   });
   await page.getByRole('button', { name: 'Practice Again', exact: true }).click();
   await page.getByRole('button', { name: 'Begin Tutorial Practice', exact: true }).click();
+  await battleTools(page);
   await page.locator('#battle-mute').click();
+  await battleTools(page);
   await expect(page.locator('#battle-mute')).toHaveAttribute('aria-pressed', 'true');
+  await battleTools(page);
   await page.locator('#battle-speed').selectOption('2');
   for (let attempt = 0; attempt < 220; attempt++) {
     const state = await page.locator('#battle-root').getAttribute('data-state');
     if (state === 'Victory') break;
     if (state === 'Paused') {
+      await battleTools(page);
       await page.locator('#battle-speed').selectOption('1');
       await page.locator('#battle-pause').click();
       await page.getByRole('button', { name: 'Resume', exact: true }).click();

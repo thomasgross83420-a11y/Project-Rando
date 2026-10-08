@@ -1,3 +1,4 @@
+import { precisePlacement, closePrepMenu, prepMenu } from './menu-helpers';
 import { expect, test, type Page } from '@playwright/test';
 async function create(page: Page): Promise<void> {
   await page.goto('./');
@@ -10,8 +11,11 @@ async function create(page: Page): Promise<void> {
   await expect(page.locator('canvas')).toBeVisible();
 }
 async function place(page: Page, x: number, y: number): Promise<void> {
+  await precisePlacement(page);
   await page.getByLabel('X', { exact: true }).fill(String(x));
+  await precisePlacement(page);
   await page.getByLabel('Y', { exact: true }).fill(String(y));
+  await precisePlacement(page);
   await page.getByLabel('Y', { exact: true }).press('Tab');
   await page.getByRole('button', { name: 'Place', exact: true }).click();
 }
@@ -30,30 +34,38 @@ test('campaign creation, free deployment, atomic purchase, Undo/Redo and reload'
   });
   await create(page);
   await expect(page.locator('#account')).toContainText('600 Credits');
+  await prepMenu(page, 'build');
   await page.getByRole('button', { name: /Sentry 2 · Stored/ }).click();
   await place(page, 18, 18);
   await expect(page.locator('#status')).toContainText('Saved:');
   await expect(page.locator('#account')).toContainText('Capacity 2/20');
+  await prepMenu(page, 'build');
   await page
     .getByRole('button', { name: 'Buy & Place Standard Barricade · 60 Credits', exact: true })
     .click();
   await place(page, 22, 18);
   await expect(page.locator('#account')).toContainText('540 Credits');
+  await prepMenu(page, 'tools');
   await page.getByRole('button', { name: 'Undo', exact: true }).click();
   await expect(page.locator('#account')).toContainText('600 Credits');
+  await prepMenu(page, 'tools');
   await page.getByRole('button', { name: 'Redo', exact: true }).click();
   await expect(page.locator('#account')).toContainText('540 Credits');
+  await prepMenu(page, 'build');
   await page.getByRole('button', { name: 'Buy & Place Sentry · 250 Credits', exact: true }).click();
   await page.getByRole('button', { name: 'Cancel Placement', exact: true }).click();
   await expect(page.locator('#account')).toContainText('540 Credits');
   const download = page.waitForEvent('download');
+  await prepMenu(page, 'tools');
   await page.getByRole('button', { name: 'Export Campaign', exact: true }).click();
   expect((await download).suggestedFilename()).toBe('resonance-slot-1.json');
   await page.screenshot({ path: 'test-results/gate1-construction.png', fullPage: true });
   await page.reload();
   await page.getByRole('button', { name: 'Continue', exact: true }).click();
   await expect(page.locator('#account')).toContainText('540 Credits');
+  await prepMenu(page, 'build');
   await expect(page.getByRole('button', { name: /Sentry 2 · at 18,18/ })).toBeVisible();
+  await prepMenu(page, 'tools');
   await expect(page.getByRole('button', { name: 'Undo', exact: true })).toBeDisabled();
   expect(errors).toEqual([]);
   expect(warnings.every((w) => /GL Driver Message.*GPU stall due to ReadPixels/.test(w))).toBe(
@@ -66,9 +78,13 @@ test('campaign creation, free deployment, atomic purchase, Undo/Redo and reload'
 });
 test('invalid placement and failed persistence preserve money and history', async ({ page }) => {
   await create(page);
+  await prepMenu(page, 'build');
   await page.getByRole('button', { name: 'Buy & Place Sentry · 250 Credits', exact: true }).click();
+  await precisePlacement(page);
   await page.getByLabel('X', { exact: true }).fill('28');
+  await precisePlacement(page);
   await page.getByLabel('Y', { exact: true }).fill('28');
+  await precisePlacement(page);
   await page.getByLabel('Y', { exact: true }).press('Tab');
   await expect(page.getByRole('button', { name: 'Place', exact: true })).toBeDisabled();
   await expect(page.locator('#placement-reason')).toContainText('reserved');
@@ -84,6 +100,7 @@ test('invalid placement and failed persistence preserve money and history', asyn
   await place(page, 18, 18);
   await expect(page.locator('#status')).toContainText('failed');
   await expect(page.locator('#account')).toContainText('600 Credits');
+  await prepMenu(page, 'tools');
   await expect(page.getByRole('button', { name: 'Undo', exact: true })).toBeDisabled();
 });
 test('second tab cannot edit until confirmed writer takeover; stale tab cannot commit', async ({
@@ -102,9 +119,11 @@ test('second tab cannot edit until confirmed writer takeover; stale tab cannot c
   await other.getByRole('button', { name: 'Take Over Editing', exact: true }).click();
   await other.getByRole('button', { name: 'Confirm Take Over', exact: true }).click();
   await other.getByRole('button', { name: 'Continue', exact: true }).click();
+  await prepMenu(other, 'build');
   await other.getByRole('button', { name: /Sentry 2 · Stored/ }).click();
   await place(other, 18, 18);
   await expect(other.locator('#status')).toContainText('Saved:');
+  await prepMenu(page, 'build');
   await expect(page.getByRole('button', { name: /Sentry 2 · Stored/ })).toBeDisabled();
   await expect(page.getByRole('button', { name: 'Take Over Editing', exact: true })).toBeVisible();
   await expect(page.locator('#account')).toContainText('Capacity 0/20');
@@ -143,8 +162,10 @@ test('explicit temporary session, native controls, viewport and 200% reflow', as
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
     );
+    await prepMenu(page, 'tools', true);
     await page.getByRole('button', { name: 'Rotate view', exact: true }).focus();
     await page.keyboard.press('Enter');
+    await prepMenu(page, 'tools', true);
     await expect(page.getByRole('button', { name: 'Rotate view', exact: true })).toBeFocused();
   }
   await page.screenshot({ path: 'test-results/gate1-200-percent.png', fullPage: true });
@@ -157,19 +178,25 @@ test('high artwork selects the Core inspector in four views without purchasing; 
   for (let orientation = 0; orientation < 4; orientation++) {
     // Fit Base includes tall-sprite padding; Core recenter is the explicit route
     // to a centered ground anchor, independent of Base/Field fit or viewport.
+    await prepMenu(page, 'tools', true);
     await page.getByRole('button', { name: 'Core', exact: true }).click();
-    for (let zoom = 0; zoom < 4; zoom++)
+    for (let zoom = 0; zoom < 4; zoom++) {
+      await prepMenu(page, 'tools', true);
       await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
+    }
     await page.locator('canvas').scrollIntoViewIfNeeded();
     const box = await page.locator('canvas').boundingBox();
     if (!box) throw new Error('Canvas missing');
+    await closePrepMenu(page);
     await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2 - 40);
     await expect(page.getByRole('dialog')).toBeVisible();
     await expect(page.getByRole('dialog')).toContainText('Harmonic Core');
     await page.getByRole('button', { name: 'Cancel / close', exact: true }).click();
+    await prepMenu(page, 'tools', true);
     await page.getByRole('button', { name: 'Rotate view', exact: true }).click();
   }
   await expect(page.locator('#account')).toContainText('600 Credits');
+  await prepMenu(page, 'records');
   await page.getByRole('button', { name: 'Return to title', exact: true }).click();
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
   await expect(page.locator('.slot')).toHaveCount(3);
@@ -183,7 +210,9 @@ test('high artwork selects the Core inspector in four views without purchasing; 
 
 test('native ghost drag and two-touch pinch/cancel never purchase', async ({ page, context }) => {
   await create(page);
+  await prepMenu(page, 'build');
   await page.getByRole('button', { name: 'Buy & Place Sentry · 250 Credits', exact: true }).click();
+  await closePrepMenu(page);
   const canvas = page.locator('canvas');
   await canvas.scrollIntoViewIfNeeded();
   let box = await canvas.boundingBox();
@@ -192,6 +221,7 @@ test('native ghost drag and two-touch pinch/cancel never purchase', async ({ pag
   await page.mouse.down();
   await page.mouse.move(box.x + box.width / 2 + 24, box.y + box.height / 2 - 16, { steps: 3 });
   await page.mouse.up();
+  await precisePlacement(page);
   await expect(page.getByLabel('X', { exact: true })).not.toHaveValue('18');
   await expect(page.locator('#account')).toContainText('600 Credits');
   await expect(page.locator('#account')).toContainText('Capacity 0/20');
@@ -224,7 +254,7 @@ test('native ghost drag and two-touch pinch/cancel never purchase', async ({ pag
   await expect(page.locator('#account')).toContainText('Capacity 0/20');
   await expect(page.getByRole('button', { name: 'Cancel Placement', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: 'Cancel Placement', exact: true }).click();
-  await expect(page.getByRole('button', { name: 'Place', exact: true })).toBeDisabled();
+  await expect(page.locator('#prep-details')).toBeHidden();
   await cdp.detach();
 });
 
@@ -238,6 +268,7 @@ test('hidden preparation retains a valid renderer through Title, scale and Conti
   });
   await page.setViewportSize({ width: 1280, height: 800 });
   await create(page);
+  await prepMenu(page, 'build');
   await page.getByRole('button', { name: /Sentry 2 · Stored/ }).click();
   await place(page, 24, 28);
   await expect(page.locator('#status')).toContainText('Saved:');
@@ -245,9 +276,11 @@ test('hidden preparation retains a valid renderer through Title, scale and Conti
     { width: 800, height: 1280 },
     { width: 1280, height: 800 },
   ]) {
+    await prepMenu(page, 'records');
     await page.getByRole('button', { name: 'Return to title', exact: true }).click();
     await expect(page.locator('#preparation')).toBeHidden();
     await page.setViewportSize(size);
+    await prepMenu(page, 'tools');
     await page.getByRole('button', { name: 'Accessibility', exact: true }).click();
     await page.locator('#ui-scale').selectOption('36');
     await page.getByRole('button', { name: 'Cancel / close', exact: true }).click();
@@ -258,7 +291,9 @@ test('hidden preparation retains a valid renderer through Title, scale and Conti
     ).toBe(true);
     await page.getByRole('button', { name: 'Continue', exact: true }).click();
     await expect(page.locator('canvas')).toBeVisible();
+    await prepMenu(page, 'tools', true);
     await page.getByRole('button', { name: 'Rotate view', exact: true }).click();
+    await prepMenu(page, 'build');
     await expect(page.getByRole('button', { name: /Sentry 2 · at 24,28/ })).toBeVisible();
     await expect(page.locator('#account')).toContainText('600 Credits');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(

@@ -3,18 +3,61 @@
 [Open Resonance Bastion](https://thomasgross83420-a11y.github.io/Project-Rando/)
 
 Open in Chrome. Choose **New Game**, **Create campaign**, review and create it,
-then **Tutorial Practice → Begin Tutorial Practice** for a battle. The
+then **Siege → Tutorial Practice → Begin Tutorial Practice** for a battle. The
 construction and paid C01S01 campaign loop are also available. This is the
 tested development slice; the remaining roster, campaign and final animation
 work are still open. The staged Engineer kernel is not enabled in this build.
 
-Progress stays in browser storage on this origin. **Data Management → Prepare
+Progress stays in browser storage on this origin. **Records → Data Management → Prepare
 Backup → Download Backup** exports complete supported state. Keeping the same
 site/browser preserves the save origin; changing device or origin requires
 explicit backup/import. Actual Android download durability remains a device
 check, even though browser download and import flows pass remotely.
 
-## Current 0.2.10 startup/control update
+## Current 0.2.11 touch interface update
+
+Published source: `23754abc513320b4d25b5bcaae23ca4a8b6315de`.
+[PR 17](https://github.com/thomasgross83420-a11y/Project-Rando/pull/17) updates
+main's manual workflow source pin and README only, merge
+`d9b616256a836c8a3d8675c4122286b249649fab`.
+[Run 37777948348](https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37777948348)
+passed build and deployment at 12:37:33 UTC. CI passed all 143 unit tests
+in 31 files, type/lint/scenario/build checks. All 68 local production-browser
+checks passed without retries, skips or failures.
+
+Preparation fills the viewport with all menus collapsed initially. Build,
+Forces, Upgrade, Tactics, Siege and Records open bounded, internally scrolling
+drawers. Direct drag/pinch controls the camera; after a pinch the remaining
+finger pans safely, including during placement. Place/Cancel stay visible.
+Battle keeps health, time and Pause visible, with secondary options in Tools.
+Title and result screens retain normal scrolling.
+
+All 38 deployed files match the locally tested build exactly over verified
+HTTPS with appropriate MIME types. The 24 selected live scenarios are verified with zero automatic retries.
+The first invocation passed 22; its paid battle wait timed out after the
+intentional performance pause at 4×. A separate follow-up accounts for that
+policy using visible Resume and 2× if needed; it completed at 4× without another
+pause, verifying the same paid victory, XP/rank, single rearm and retained reload. The landscape matrix exceeded its one-minute
+budget during its final field measurement; it passes unchanged assertions in a
+separate two-minute-budget check. Both attempts are recorded; published code
+is unchanged. These scenarios cover all seven preparation panels,
+320–1280 widths, 100%/200% scale, native touch, startup/editing recovery,
+purchases, Undo/Redo, paid victory, backup/import and retained reload.
+
+A separate real-public-origin test created a campaign on the actual 0.2.10
+site before publication and kept that old page open. On 0.2.11, active-tab
+takeover required confirmation, campaign bytes remained unchanged, the next
+reload automatically recovered editing, and practice started from the retained
+campaign. Live portrait/landscape field and open Build drawers were inspected.
+No balance, save format, journal identity or simulation version changed.
+
+See [interface review](TOUCH_FIELD_REVIEW.md),
+[local evidence](evidence/TOUCH_FIELD_TESTS.json) and
+[live/save evidence](evidence/TOUCH_FIELD_LIVE.json).
+The title displays `0.2.11-touch-field`. Desktop native emulated touch does not
+certify the Lenovo GPU, Android virtual keyboard, background audio or TalkBack.
+
+## Previous 0.2.10 startup/control update
 
 Published source: `29837e8718f301c07eed9324b78acc323a29e8f0`.
 [PR 15](https://github.com/thomasgross83420-a11y/Project-Rando/pull/15) updates

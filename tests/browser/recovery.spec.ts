@@ -1,3 +1,4 @@
+import { precisePlacement, prepMenu } from './menu-helpers';
 import { expect, test, type Page } from '@playwright/test';
 async function create(page: Page, name = 'Recovery First') {
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
@@ -8,6 +9,7 @@ async function create(page: Page, name = 'Recovery First') {
   await expect(page.locator('#preparation')).toBeVisible();
 }
 async function data(page: Page) {
+  await prepMenu(page, 'records');
   await page
     .getByRole('button', { name: 'Data Management', exact: true })
     .filter({ visible: true })
@@ -61,8 +63,10 @@ test('mobile backup replaces selected wallets, preserves other slots/settings, r
 }) => {
   await page.goto('./');
   await create(page);
+  await prepMenu(page, 'records');
   await page.getByRole('button', { name: 'Return to title', exact: true }).click();
   await create(page, 'Recovery Second');
+  await prepMenu(page, 'records');
   await page.getByRole('button', { name: 'Return to title', exact: true }).click();
   await data(page);
   const backup = await exported(page);
@@ -73,11 +77,15 @@ test('mobile backup replaces selected wallets, preserves other slots/settings, r
   await page.getByRole('button', { name: 'Cancel / close', exact: true }).click();
   await page.getByRole('button', { name: 'Load Campaign', exact: true }).click();
   await page.getByRole('button', { name: 'Open campaign', exact: true }).first().click();
+  await prepMenu(page, 'build');
   await page
     .getByRole('button', { name: 'Buy & Place Standard Barricade · 60 Credits', exact: true })
     .click();
+  await precisePlacement(page);
   await page.getByLabel('X', { exact: true }).fill('18');
+  await precisePlacement(page);
   await page.getByLabel('Y', { exact: true }).fill('18');
+  await precisePlacement(page);
   await page.getByLabel('Y', { exact: true }).press('Tab');
   await page.getByRole('button', { name: 'Place', exact: true }).click();
   await expect(page.locator('#account')).toContainText('540 Credits');
@@ -86,6 +94,7 @@ test('mobile backup replaces selected wallets, preserves other slots/settings, r
   await page.locator('[data-import-source="1"]').selectOption('skip');
   await page.getByRole('button', { name: 'Confirm Replace Selected Slots', exact: true }).click();
   await expect(page.locator('#data-message')).toContainText('replaced and Saved');
+  await expect(page.locator('body')).not.toHaveClass(/in-preparation/);
   const campaigns = (await saved(page)) as { name: string; credits: number }[];
   expect(campaigns.map((c) => c.credits)).toEqual([600, 600]);
   expect(campaigns[1]?.name).toBe('Recovery Second');
@@ -131,6 +140,7 @@ test('a quota failure after writes were queued aborts all imported slots and lea
 }) => {
   await page.goto('./');
   await create(page);
+  await prepMenu(page, 'records');
   await page.getByRole('button', { name: 'Return to title', exact: true }).click();
   await create(page, 'Second');
   await data(page);
@@ -183,6 +193,7 @@ test('export includes native interrupted practice and import refuses to replace 
   await data(page);
   const older = await exported(page);
   await page.getByRole('button', { name: 'Cancel / close', exact: true }).click();
+  await prepMenu(page, 'siege');
   await page.getByRole('button', { name: 'Tutorial Practice', exact: true }).click();
   await page.getByRole('button', { name: 'Begin Tutorial Practice', exact: true }).click();
   await expect(page.locator('#checkpoint-label')).toContainText('Checkpoint Saved');
@@ -246,6 +257,7 @@ test('global accessibility is preserved unless the player explicitly applies inc
   await page.locator('#export-preferences').check();
   const backup = await exported(page);
   await page.getByRole('button', { name: 'Cancel / close', exact: true }).click();
+  await prepMenu(page, 'tools');
   await page
     .getByRole('button', { name: 'Accessibility', exact: true })
     .filter({ visible: true })

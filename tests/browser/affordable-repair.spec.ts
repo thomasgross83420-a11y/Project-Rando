@@ -1,3 +1,4 @@
+import { prepMenu } from './menu-helpers';
 import { expect, test, type Page } from '@playwright/test';
 async function fixture(page: Page, credits: number, coreHP: number, sentryHP: number) {
   await page.goto('./');
@@ -55,9 +56,11 @@ test('unaffordable full repair is preserved; affordable Core preview can cancel,
   await fixture(page, 7, 9000 * 1024, 1200 * 1024);
   const before = await saved(page);
   await expect(page.locator('#progression-controls')).toContainText('70 points for 7 Credits');
+  await prepMenu(page, 'upgrade');
   await page.getByRole('button', { name: 'Review Core Repair', exact: true }).click();
   await expect(page.locator('#status')).toContainText('Insufficient Credits');
   expect(await saved(page)).toEqual(before);
+  await prepMenu(page, 'upgrade');
   await page.getByRole('button', { name: 'Review Affordable Core Repair', exact: true }).click();
   await expect(page.locator('#dialog-body')).toContainText('9,000 → 9,070');
   await page
@@ -65,10 +68,12 @@ test('unaffordable full repair is preserved; affordable Core preview can cancel,
     .screenshot({ path: 'test-results/affordable-core-repair-quote.png' });
   await page.locator('#close-dialog').click();
   expect(await saved(page)).toEqual(before);
+  await prepMenu(page, 'upgrade');
   await page.getByRole('button', { name: 'Review Affordable Core Repair', exact: true }).click();
   await page.locator('#progression-confirm').dblclick();
   await expect(page.locator('#progression-controls')).toContainText('Core 9,070');
   expect(await saved(page)).toMatchObject({ credits: 0, coreHP: 9070 * 1024 });
+  await prepMenu(page, 'upgrade');
   await expect(
     page.getByRole('button', { name: 'Review Affordable Core Repair', exact: true }),
   ).toBeDisabled();
@@ -77,19 +82,27 @@ test('quarter, half and exact asset choices use max body, cap at missing body an
   page,
 }) => {
   await fixture(page, 600, 10000 * 1024, 600 * 1024);
+  await prepMenu(page, 'build');
   await page.locator('[data-owned]').filter({ hasText: 'Sentry' }).first().click();
+  await prepMenu(page, 'upgrade');
   await page.locator('#asset-repair-mode').selectOption('quarter');
+  await prepMenu(page, 'upgrade');
   await page.getByRole('button', { name: 'Review Asset Repair', exact: true }).click();
   await expect(page.locator('#dialog-body')).toContainText('16 Credits');
   await expect(page.locator('#dialog-body')).toContainText('600 → 900');
   await page.locator('#progression-confirm').click();
   await expect(page.locator('#progression-controls')).toContainText('900 / 1,200');
+  await prepMenu(page, 'upgrade');
   await page.locator('#asset-repair-mode').selectOption('exact');
+  await prepMenu(page, 'upgrade');
   await page.locator('#asset-repair-points').fill('10');
+  await prepMenu(page, 'upgrade');
   await page.getByRole('button', { name: 'Review Asset Repair', exact: true }).click();
   await page.locator('#progression-confirm').click();
   await expect(page.locator('#progression-controls')).toContainText('910 / 1,200');
+  await prepMenu(page, 'upgrade');
   await page.locator('#asset-repair-mode').selectOption('half');
+  await prepMenu(page, 'upgrade');
   await page.getByRole('button', { name: 'Review Asset Repair', exact: true }).click();
   await expect(page.locator('#dialog-body')).toContainText('910 → 1,200');
   await page.locator('#progression-confirm').click();
@@ -105,8 +118,10 @@ test('a small asset wallet keeps the exact affordable fraction through persisten
   page,
 }) => {
   await fixture(page, 3, 10000 * 1024, 1000 * 1024);
+  await prepMenu(page, 'build');
   await page.locator('[data-owned]').filter({ hasText: 'Sentry' }).first().click();
   await expect(page.locator('#progression-controls')).toContainText('57.6 points for 3 Credits');
+  await prepMenu(page, 'upgrade');
   await page.getByRole('button', { name: 'Review Affordable Asset Repair', exact: true }).click();
   await page
     .getByRole('dialog')

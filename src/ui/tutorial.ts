@@ -115,6 +115,9 @@ export class TutorialSession {
   }
   status(s: string): void {
     this.el('battle-status').textContent = s;
+    this.el('battle-status').title = s;
+    const detail = this.parent.querySelector('#battle-status-details');
+    if (detail) detail.textContent = `Status: ${s}`;
   }
   modal(title: string, html: string): void {
     if (this.dialog.open) this.dialog.close();
@@ -148,7 +151,7 @@ export class TutorialSession {
   }
   forecast(): void {
     this.el('battle-content').innerHTML =
-      '<h3>Forecast · Standard · Front 1</h3><p>Bounded 90-second tutorial: 18 Fracture Runners and six Raiders, 30 Threat Points. Last deployment by 85 director seconds; warning at 65 seconds. Cleanup has no time limit or artificial damage. Runners approach the Core; Raiders prefer detected nearby mobile defenders. Armor reduces kinetic damage.</p><p>Defend automatically with Bulwark, Sentry, Rifle Squad, Repair Node, Standard Barricade and Proximity Mine. Construction and all tactical commands lock after preflight. Camera, inspection, pause, speed and presentation remain available.</p><label>Starting army <select id="practice-army"><option value="guided">Guided owned-asset clone · no reserve spending</option><option value="current">Current fortress clone</option></select></label><div id="practice-preview"></div><button id="practice-begin">Begin Tutorial Practice</button><button id="practice-cancel">Return Base</button>';
+      '<h3>Forecast · Standard · Front 1</h3><p>Bounded 90-second tutorial: 18 Fracture Runners and six Raiders, 30 Threat Points. Last deployment by 85 director seconds; warning at 65 seconds. Cleanup has no time limit or artificial damage. Runners approach the Core; Raiders prefer detected nearby mobile defenders. Armor reduces kinetic damage.</p><p>Defend automatically with Bulwark, Sentry, Rifle Squad, Repair Node, Standard Barricade and Proximity Mine. Construction and all tactical commands lock after preflight. Camera, inspection, pause, speed and presentation remain available.</p><label>Starting army <select id="practice-army"><option value="guided">Guided owned-asset clone · no reserve spending</option><option value="current">Current fortress clone</option></select></label><details><summary>Starting army details</summary><div id="practice-preview"></div></details><button id="practice-begin">Begin Tutorial Practice</button><button id="practice-cancel">Return Base</button>';
     const update = () => {
       try {
         const army = practiceArmy(
@@ -240,17 +243,22 @@ export class TutorialSession {
   }
   protected async launchRuntime(battleInput: Battle, sequence: string): Promise<void> {
     this.stopRuntime();
+    this.parent.classList.add('battle-playing');
     this.battle = battleInput;
     this.lastEventSequence = 0;
     this.lastHUD = -1;
     this.terminalSaving = false;
     this.terminalError = false;
     this.el('battle-content').innerHTML =
-      '<div id="battle-hud" aria-label="Battle survival and state"><div><p id="core-health"></p><p id="warden-health"></p><p id="battle-time" aria-live="off"></p></div><button id="battle-pause">Pause</button></div><p id="checkpoint-label">' +
+      '<div id="battle-hud" aria-label="Battle survival and state"><div><p id="core-health"></p><p id="warden-health"></p><p id="battle-time" aria-live="off"></p></div></div>' +
+      '<div id="battle-field"><section id="battle-world" aria-label="Autonomous battlefield"></section><p class="gesture-hint">Drag to pan · Pinch to zoom · Tap to inspect</p><div id="battle-critical" role="alert" hidden><p id="battle-critical-text"></p><button id="battle-critical-ack">Acknowledge critical warning</button></div><div id="battle-captions" role="status"></div>' +
+      '<details id="battle-tools-sheet" class="field-drawer" hidden><summary>Close battle tools</summary><div class="drawer-body"><nav aria-label="Battle observation tools"><label>Speed <select id="battle-speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select></label><button id="battle-map">Map</button><button id="battle-inspect" aria-controls="battle-inspector" aria-expanded="false">Inspection</button><button id="battle-camera">Camera</button><button id="battle-mute" aria-pressed="false">Mute</button><button id="battle-enable-sound" hidden>Enable Sound</button></nav><p id="battle-timing-details"></p><p id="checkpoint-label">' +
       (this.repo.temporary ? 'Temporary checkpoint · closing loses it' : 'Checkpoint Saved') +
       ' · starting sequence ' +
       safe(sequence) +
-      ' · no exact mid-battle resume</p><div id="battle-critical" role="alert" hidden><p id="battle-critical-text"></p><button id="battle-critical-ack">Acknowledge critical warning</button></div><section id="battle-world" aria-label="Autonomous battlefield"></section><nav aria-label="Battle observation tools"><label>Speed <select id="battle-speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select></label><button id="battle-camera">Camera</button><button id="battle-map">Map</button><button id="battle-inspect">Inspection</button><button id="battle-mute" aria-pressed="false">Mute</button><button id="battle-enable-sound" hidden>Enable Sound</button></nav><div id="battle-captions" role="status"></div><details id="battle-inspector"><summary>Known friendly assets and detected contacts</summary><label>Inspect entity <select id="battle-entity"></select></label><div id="battle-details" aria-live="off"></div><button id="battle-jump">Jump to selected</button><button id="battle-range" aria-pressed="false">Selected Range</button></details><details><summary>Observed event history</summary><ol id="battle-history"></ol></details>';
+      ' · no exact mid-battle resume</p><details><summary>Observed event history</summary><ol id="battle-history"></ol></details><p id="battle-status-details"></p></div></details>' +
+      '<details id="battle-inspector" class="field-drawer" hidden><summary>Close inspection</summary><div class="drawer-body"><label>Inspect entity <select id="battle-entity"></select></label><div id="battle-details" aria-live="off"></div><button id="battle-jump">Jump to selected</button><button id="battle-range" aria-pressed="false">Selected Range</button></div></details></div>' +
+      '<div id="battle-footer"><button id="battle-pause" aria-haspopup="dialog">Pause</button><nav id="battle-toolbar" aria-label="Battle menus"><button id="battle-tools" aria-controls="battle-tools-sheet" aria-expanded="false">Tools</button></nav></div>';
     this.world = new WorldView(this.el('battle-world'), (s) => this.status(s), true);
     for (const control of this.parent.querySelectorAll<HTMLButtonElement | HTMLSelectElement>(
       '#battle-content button, #battle-content select',
@@ -354,13 +362,36 @@ export class TutorialSession {
     };
     this.button('battle-camera', () => this.cameraMenu());
     this.button('battle-map', () => this.mapMenu());
-    this.button('battle-inspect', () => {
-      (this.el('battle-inspector') as HTMLDetailsElement).open = !(
-        this.el('battle-inspector') as HTMLDetailsElement
-      ).open;
-      if (this.preferences.value.uiScale === 36) this.clock?.pause('manual');
-      this.el('battle-entity').focus();
-    });
+    const toggleSheet = (id: string, controlId: string) => {
+      const sheet = this.el(id) as HTMLDetailsElement;
+      const opening = !sheet.open;
+      for (const otherId of ['battle-inspector', 'battle-tools-sheet']) {
+        const other = this.el(otherId) as HTMLDetailsElement;
+        other.open = false;
+        other.hidden = true;
+      }
+      sheet.hidden = !opening;
+      sheet.open = opening;
+      this.el(controlId).setAttribute('aria-expanded', String(opening));
+      if (opening && this.preferences.value.uiScale === 36) this.clock?.pause('manual');
+      if (opening) sheet.querySelector('summary')?.focus();
+    };
+    this.button('battle-tools', () => toggleSheet('battle-tools-sheet', 'battle-tools'));
+    this.button('battle-inspect', () => toggleSheet('battle-inspector', 'battle-inspect'));
+    for (const [id, controlId] of [
+      ['battle-tools-sheet', 'battle-tools'],
+      ['battle-inspector', 'battle-inspect'],
+    ] as const) {
+      const sheet = this.el(id) as HTMLDetailsElement;
+      const sync = () => {
+        const restoreFocus = !sheet.open && sheet.contains(document.activeElement);
+        sheet.hidden = !sheet.open;
+        if (restoreFocus) this.el('battle-tools').focus();
+        this.el(controlId).setAttribute('aria-expanded', String(sheet.open));
+      };
+      sheet.addEventListener('toggle', sync);
+      this.callbacks.push(() => sheet.removeEventListener('toggle', sync));
+    }
     this.el('battle-entity').onchange = () =>
       this.select(Number((this.el('battle-entity') as HTMLSelectElement).value));
     this.button('battle-jump', () => this.jump(this.renderer?.selected ?? 1));
@@ -392,6 +423,15 @@ export class TutorialSession {
     this.callbacks.push(() => document.removeEventListener('visibilitychange', visible));
     const keyboard = (e: KeyboardEvent) => {
       if ((e.target as HTMLElement).matches('input,select,textarea') || this.dialog.open) return;
+      if (e.key === 'Escape') {
+        const sheet = this.parent.querySelector<HTMLDetailsElement>('.field-drawer[open]');
+        if (sheet) {
+          e.preventDefault();
+          sheet.open = false;
+          this.el('battle-tools').focus();
+          return;
+        }
+      }
       if (e.key === ' ' || e.key === 'Escape') {
         e.preventDefault();
         if (e.key === ' ' && this.clock?.pauses.size) void this.resume();
@@ -459,7 +499,7 @@ export class TutorialSession {
     if (!b) return;
     this.parent.dataset.tick = String(b.tick);
     this.parent.dataset.state = this.clock?.pauses.size ? 'Paused' : b.state;
-    this.el('battle-pause').textContent = this.clock?.pauses.size ? 'Paused / Resume' : 'Pause';
+    this.el('battle-pause').textContent = this.clock?.pauses.size ? 'Resume…' : 'Pause';
     this.el('battle-mute').setAttribute('aria-pressed', String(this.audio.muted));
     this.parent.dataset.audioState = this.audio.context?.state ?? 'unavailable';
     this.parent.dataset.audioDecoded = String(this.audio.decoded);
@@ -471,13 +511,16 @@ export class TutorialSession {
       .map((c) => c.message)
       .join(' · ');
     const second = Math.floor(b.tick / 60);
+    const timing = `${this.clock?.pauses.size ? 'Paused' : b.state} · ${Math.floor(second / 60)}:${String(second % 60).padStart(2, '0')} · ${this.clock?.speed ?? 1}×`;
+    const time = this.el('battle-time');
+    if (time.textContent !== timing) time.textContent = timing;
     if (second === this.lastHUD) return;
     this.lastHUD = second;
     this.el('core-health').textContent =
-      `${b.core.hp * 4 < b.core.maxHP ? '⚠ Core critical · ' : ''}Core ${Math.ceil(b.core.hp / U)} / ${Math.ceil(b.core.maxHP / U)} Integrity`;
+      `${b.core.hp * 4 < b.core.maxHP ? '⚠ Core critical · ' : ''}Core ${Math.ceil(b.core.hp / U)}/${Math.ceil(b.core.maxHP / U)}`;
     const w = b.entities.find((e) => e.type === 'warden.bulwark');
     this.el('warden-health').textContent =
-      `${w?.hp === 0 ? '× Incapacitated · ' : w && w.hp * 100 < w.maxHP * 30 ? '⚠ Low Health · ' : ''}Bulwark ${Math.ceil((w?.hp ?? 0) / U)} / ${Math.ceil((w?.maxHP ?? 0) / U)} Health`;
+      `${w?.hp === 0 ? '× Incapacitated · ' : w && w.hp * 100 < w.maxHP * 30 ? '⚠ Low Health · ' : ''}Bulwark ${Math.ceil((w?.hp ?? 0) / U)}/${Math.ceil((w?.maxHP ?? 0) / U)}`;
     const critical = b.core.hp * 4 < b.core.maxHP || w?.hp === 0;
     if (!critical) this.acknowledgedCritical = false;
     this.el('battle-critical').hidden = !critical || this.acknowledgedCritical;
@@ -486,19 +529,8 @@ export class TutorialSession {
         ? 'Core critical: below 25% Integrity. Automatic defenders continue.'
         : 'Bulwark incapacitated: no further weapon or active-ability output; other defenders continue.'
       : '';
-    this.el('battle-time').textContent =
-      b.state +
-      ` · Deployments ${b.packet}/24 · ` +
-      Math.floor(second / 60) +
-      ':' +
-      String(second % 60).padStart(2, '0') +
-      ' combat · ' +
-      (b.state === 'Cleanup'
-        ? `Cleanup elapsed ${Math.floor((b.tick - (b.cleanupTick ?? b.tick)) / 60)}s`
-        : `${Math.max(0, 90 - Math.floor(b.director / 60))}s nominal director remaining`) +
-      ' · ' +
-      (this.clock?.speed ?? 1) +
-      '×';
+    time.title = `${timing} · Deployments ${b.packet}/24 · ${b.state === 'Cleanup' ? `Cleanup elapsed ${Math.floor((b.tick - (b.cleanupTick ?? b.tick)) / 60)}s` : `${Math.max(0, 90 - Math.floor(b.director / 60))}s nominal director remaining`}`;
+    this.el('battle-timing-details').textContent = time.title;
     this.refreshInspector();
   }
   events(now: number): void {
@@ -567,6 +599,16 @@ export class TutorialSession {
   select(id: number): void {
     if (this.renderer) this.renderer.selected = id;
     this.refreshInspector();
+    if (id) {
+      const tools = this.el('battle-tools-sheet') as HTMLDetailsElement;
+      tools.open = false;
+      tools.hidden = true;
+      const inspector = this.el('battle-inspector') as HTMLDetailsElement;
+      inspector.hidden = false;
+      inspector.open = true;
+      this.el('battle-inspect').setAttribute('aria-expanded', 'true');
+      if (this.preferences.value.uiScale === 36) this.clock?.pause('manual');
+    }
   }
   refreshInspector(): void {
     const b = this.battle,
@@ -968,6 +1010,7 @@ export class TutorialSession {
       this.results();
     } catch (e) {
       this.terminalError = true;
+      this.parent.classList.remove('battle-playing');
       this.parent.querySelector('#practice-result-recovery')?.remove();
       this.el('battle-content').insertAdjacentHTML(
         'beforeend',
@@ -1045,6 +1088,7 @@ export class TutorialSession {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
   stopRuntime(): void {
+    this.parent.classList.remove('battle-playing');
     cancelAnimationFrame(this.raf);
     for (const fn of this.callbacks) fn();
     this.callbacks = [];

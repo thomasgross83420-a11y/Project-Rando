@@ -14,7 +14,7 @@ Gate1: three retained slots, atomic construction/ownership/capacity/history, pro
 
 Gate2: Tutorial Practice uses owned Bulwark/Bastion assets in a disposable guided or current-fortress clone. Sentry/Rifle/RepairNode/Barricade/Mine and Runner/Raider are functional. Combat is autonomous; pause/speeds, camera/map/inspection, audio/settings and checkpoint restart are the only battle controls. The real campaign receives zero rewards/injury/claims. This is the blueprint's Gate2 results stub, not completion of Gate3 economy. Only this Warden/doctrine fixture is implemented; other selected combinations are preserved and explain their Gate4 dependency.
 
-The baseline source, integer combat and real browser acceptance are separately evidenced. No final candidate-art acceptance, physical Android performance, TalkBack certification, public deployment or offline readiness is claimed. No mass roster production has started.
+The baseline source, integer combat and real browser acceptance are separately evidenced. The [public preview](PUBLIC_PREVIEW.md) is published and verified. Final candidate-art acceptance, physical Android performance, TalkBack certification and offline readiness remain open. No mass roster production has started.
 
 2026-10-07 animation audit: authored frame timing now governs actor/effect playback;
 explosion truncation and hit-duration mismatch corrected. Technical and pixel
@@ -99,3 +99,26 @@ scenario/build checks pass. Entire38-file production output is byte-identical
 to the0.2.9 build that passed49 browser checks. No Engineer is enabled yet:
 live mobility/repair/fire priorities, captured profiles, stock-result accounting,
 versioned snapshots and natural artwork remain required. See ENGINEER_STOCK_CONTRACT.md.
+
+2026-10-08 build0.2.10: published startup/control recovery preserves campaigns,
+keeps New Game available, fences active competing tabs, and recovers editing
+from a proven closed page. All143 unit/60 local browser/15 selected live checks
+passed. A real public-origin0.2.9 save survived the update byte-for-byte.
+See STARTUP_CONTROL_RECOVERY.md and PUBLIC_PREVIEW.md for the actual pinned
+release and hosting evidence.
+
+2026-10-08 build0.2.11: preparation and battle keep the field in the viewport.
+Build/Forces/Upgrade/Tactics/Siege/Records and battle observation tools collapse;
+menus scroll internally. Native pinch-to-one-finger handoff continues camera pan
+without moving a placement ghost. Rebuilt history buttons bind to their new nodes.
+All143 unit and68 production browser checks pass, including 100%/200% layout,
+touch gestures, purchases, complete battles, saves and backups. Balance, save
+formats and simulation versions are unchanged. See TOUCH_FIELD_REVIEW.md and
+evidence/TOUCH_FIELD_TESTS.json; public release is recorded in PUBLIC_PREVIEW.md.
+
+0.2.11 publication: pinned source23754abc513320b4d25b5bcaae23ca4a8b6315de
+is deployed by successful manual run37777948348. CI passes all143 unit checks.
+All38 public files match;24 live scenarios are verified, with initial22 passes
+and two explicit follow-ups retained. An actual public0.2.10 save remains
+unchanged through takeover, reload and practice start. See PUBLIC_PREVIEW.md and
+evidence/TOUCH_FIELD_LIVE.json.

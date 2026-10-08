@@ -126,7 +126,7 @@ export class WorldView {
     this.observer.observe(parent);
     this.game.canvas.setAttribute(
       'aria-label',
-      'Fortress world. Use coordinate fields and camera controls below.',
+      'Fortress world. Drag to pan, pinch to zoom, tap to inspect. Menus contain alternative controls.',
     );
     this.game.canvas.addEventListener('webglcontextlost', (event) => {
       event.preventDefault();
@@ -231,7 +231,7 @@ export class WorldView {
       } else if (list.length === 1 && start) {
         if (startClient && Math.hypot(e.clientX - startClient.x, e.clientY - startClient.y) > 8)
           moved = true;
-        if (moved && this.ghost) {
+        if (moved && this.ghost && !multiPointer) {
           this.selected = unproject(current, this.camera);
           this.onSelect?.(this.selected);
         } else if (moved) {
@@ -272,8 +272,10 @@ export class WorldView {
         }
       }
       pointers.delete(e.pointerId);
-      start = undefined;
+      start = pointers.values().next().value;
+      startClient = undefined;
       oldPinch = 0;
+      oldMidpoint = undefined;
       this.draw();
     });
     canvas.addEventListener('pointercancel', (e) => {
@@ -679,6 +681,8 @@ export class WorldView {
       this.imagePool[i]?.setVisible(false);
     for (let i = this.labels.length; i < this.labelPool.length; i++)
       this.labelPool[i]?.setVisible(false);
+    this.parent.dataset.centerX = String(this.camera.x);
+    this.parent.dataset.centerY = String(this.camera.y);
     this.parent.dataset.zoom = String(this.camera.zoom);
     this.parent.dataset.orientation = String(this.camera.view * 90);
     this.parent.dataset.presentation = this.strategicRoles ? 'strategic' : 'detailed';
