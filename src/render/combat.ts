@@ -209,9 +209,9 @@ export class CombatRenderer {
         g.lineBetween(p.x + 10, p.y, p.x + 16, p.y);
         if (this.range) {
           const r =
-            combat[e.type].weapon?.range ??
+            b.definition(e).weapon?.range ??
             (e.type === 'friendly.repair_node'
-              ? 5 * U
+              ? (b.profile(e.id)?.repair?.range ?? 5 * U)
               : e.type === 'friendly.proximity_mine'
                 ? U
                 : 0);

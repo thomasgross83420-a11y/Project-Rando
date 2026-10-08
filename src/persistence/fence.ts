@@ -1,5 +1,5 @@
 import { z } from 'zod';
-const sequence = z.string().regex(/^(0|[1-9][0-9]{0,19})$/);
+import { sequenceSchema as sequence } from './sequence';
 const unique = <T extends z.ZodType>(type: T, max: number) =>
   z
     .array(type)

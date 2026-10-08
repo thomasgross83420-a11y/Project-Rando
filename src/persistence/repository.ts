@@ -1,6 +1,8 @@
 import type { Database } from './database';
 import type { ProgressFence } from './fence';
 import { validateCampaign, type Campaign } from './campaign';
+import { receiptsSchema } from './run-journal';
+import { runStateKey, runReceiptsKey } from './run-keys';
 interface Writer {
   tabID: string;
   generation: number;
@@ -14,6 +16,7 @@ export class CampaignRepository {
   readonly memoryFences = new Map<string, ProgressFence>();
   readonly practiceSlots = new Set<number>();
   readonly activeRunSlots = new Set<number>();
+  readonly unpresentedResultSlots = new Set<number>();
   private memoryLastOpened: number | undefined;
   readonly temporary: boolean;
   constructor(readonly database: Database | undefined) {
@@ -93,6 +96,8 @@ export class CampaignRepository {
     if (!this.database) {
       if (this.practiceSlots.has(valid.slot) || this.activeRunSlots.has(valid.slot))
         throw new Error('Resolve retained run/practice before editing this campaign');
+      if (this.unpresentedResultSlots.has(valid.slot))
+        throw new Error('Acknowledge committed Results before editing this campaign');
       const current = this.memory.get(valid.slot);
       this.compare(current, expected);
       if (current) this.memoryPrevious.set(valid.slot, structuredClone(current));
@@ -113,8 +118,9 @@ export class CampaignRepository {
             return;
           }
           const journal = tx.objectStore('meta').get(`practice.slot.${valid.slot}`),
-            run = tx.objectStore('meta').get(`run.slot.${valid.slot}`);
-          let pending = 2;
+            run = tx.objectStore('meta').get(runStateKey(valid.slot)),
+            receipts = tx.objectStore('meta').get(runReceiptsKey(valid.slot));
+          let pending = 3;
           const ready = () => {
             if (--pending > 0) return;
             commitCampaign();
@@ -123,6 +129,13 @@ export class CampaignRepository {
             if (journal.result !== undefined || run.result !== undefined) {
               tx.abort();
               return;
+            }
+            if (receipts.result !== undefined) {
+              const parsed = receiptsSchema.safeParse(receipts.result);
+              if (!parsed.success || parsed.data.unpresented) {
+                tx.abort();
+                return;
+              }
             }
             const request = campaigns.get(valid.slot);
             request.onsuccess = () => {
@@ -139,6 +152,7 @@ export class CampaignRepository {
           };
           journal.onsuccess = ready;
           run.onsuccess = ready;
+          receipts.onsuccess = ready;
         };
       },
     );

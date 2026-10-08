@@ -3,7 +3,7 @@ What can I say, it's just a bunch of rando I'm trying out.
 
 ## Resonance Bastion
 
-The latest checkpoint is on `codex/progression-balance-audit`; `main`
+The latest checkpoint is on `codex/combat-result-integration`; `main`
 currently contains only the original repository introduction. Start with the
 [thread recovery record](docs/PROJECT_RECOVERY.md) for the recovered checkpoint,
 available reference files, verification, and the next development step.
@@ -34,8 +34,17 @@ and [mobile review downloads](docs/review/RESULT_CONTRACTS_DELIVERY.md). The exa
 transaction and progression kernels are staged; ordinary paid campaigns remain
 dependent work. `npm run audit:progression` records specified growth evidence.
 
-Latest checkpoint: [progression balance audit](docs/PROGRESSION_BALANCE.md) and
+Previous checkpoint: [progression balance audit](docs/PROGRESSION_BALANCE.md) and
 [mobile review downloads](docs/review/PROGRESSION_BALANCE_DELIVERY.md). Versioned
 accuracy growth, frozen per-asset stat profiles and exact purchase quotes now
 have deterministic comparisons. The existing playable practice keeps its pinned
 replay rules. `npm run audit:progression-balance` reproduces the measured studies.
+
+Latest checkpoint: [combat and paid progression](docs/COMBAT_RESULT_INTEGRATION.md)
+and [mobile review downloads](docs/review/COMBAT_PROGRESSION_DELIVERY.md). Bulwark/Bastion
+C01S01 now commits actual rewards, wounds, contribution XP and permanent stock.
+Preparation offers explicit repair/restore/rearm/enhancement; backup includes
+paid checkpoints, pending results and receipts. Old practice replays remain pinned;
+new-schema free practice retains owned grown profiles in a full-body/full-stock clone.
+`npm run audit:combat-progression` produces eight real current-slice receipts.
+The full campaign/roster and physical tablet acceptance remain development work.

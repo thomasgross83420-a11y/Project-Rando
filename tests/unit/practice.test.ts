@@ -60,6 +60,7 @@ it('retained v1 campaign/practice identities survive the v2 update; only a new p
   await repo.commit(c, undefined);
   const store = new PracticeStore(repo),
     cp = await store.start(c, practiceArmy(c));
+  if (cp.schema !== 1) throw new Error('Expected legacy checkpoint');
   cp.plan.simulation = 'rb-sim-v1';
   cp.identity = await planIdentity(cp.plan, cp.army);
   store.memory.set(c.slot, structuredClone(cp));

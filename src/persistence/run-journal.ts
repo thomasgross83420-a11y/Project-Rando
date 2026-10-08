@@ -8,12 +8,11 @@ import { validateCampaign, campaignSchema, type Campaign } from './campaign';
 import { emptyFence, fenceSchema, type ProgressFence } from './fence';
 import { parseBackupJSON } from './json';
 import type { CampaignRepository } from './repository';
+import { sequenceSchema } from './sequence';
+import { runStateKey as key, runReceiptsKey as receiptsKey } from './run-keys';
+export { sequenceSchema } from './sequence';
 const logicalJSON = z.json().transform((value): unknown => value);
 const digest = z.string().regex(/^[a-f0-9]{64}$/);
-export const sequenceSchema = z
-  .string()
-  .regex(/^(0|[1-9][0-9]{0,19})$/)
-  .refine((s) => BigInt(s) <= 18446744073709551615n, 'Unsigned 64-bit sequence overflow');
 const runIDSchema = z
   .object({ lineage: z.uuid().transform((s) => s.toLowerCase()), sequence: sequenceSchema })
   .strict();
@@ -70,14 +69,14 @@ const receiptSchema = z
     checksum: digest,
   })
   .strict();
-const stateSchema = z
+export const stateSchema = z
   .object({ checkpoint: checkpointSchema, pending: pendingSchema.nullable() })
   .strict();
 const memoryJournals = new WeakMap<
   CampaignRepository,
   { states: Map<number, RunState>; receipts: Map<number, ReceiptState> }
 >();
-const receiptsSchema = z
+export const receiptsSchema = z
   .object({ receipts: z.array(receiptSchema).max(16), unpresented: runIDSchema.nullable() })
   .strict();
 export type RunCheckpoint = z.infer<typeof checkpointSchema>;
@@ -85,7 +84,7 @@ export type PendingResult = z.infer<typeof pendingSchema>;
 export type RunReceipt = z.infer<typeof receiptSchema>;
 export type TerminalInput = z.infer<typeof terminalSchema>;
 export type RunState = z.infer<typeof stateSchema>;
-type ReceiptState = z.infer<typeof receiptsSchema>;
+export type ReceiptState = z.infer<typeof receiptsSchema>;
 /** Pure deterministic adapter. Must validate compiled allocations, frozen stats,
  * terminal body/stock, contribution and policy, and derive every resulting field.
  * It cannot await or write storage. Test fixtures are not gameplay adapters.
@@ -115,8 +114,6 @@ const terminalOf = (v: TerminalInput): TerminalInput => ({
   rewardOriginBuckets: v.rewardOriginBuckets,
 });
 const sameID = (a: RunCheckpoint['runID'], b: RunCheckpoint['runID']) => same(a, b);
-const key = (slot: number) => `run.slot.${slot}`;
-const receiptsKey = (slot: number) => `receipts.slot.${slot}`;
 const boundedClone = <T>(input: T, max: number): T => {
   const text = canonical(input);
   if (new TextEncoder().encode(text).byteLength > max)
@@ -221,6 +218,35 @@ export class RunJournalStore {
     state.checkpoint = await this.validateCheckpoint(state.checkpoint);
     if (state.pending) await this.validatePending(state.checkpoint, state.pending);
     return state;
+  }
+  /** Backup import changes slot/revision without changing the attempt or frozen
+   * gameplay. Re-derive pending results instead of editing sealed rewards. All
+   * hashing completes before BackupStore opens its write transaction. */
+  async rebaseState(raw: unknown, campaign: Campaign): Promise<RunState> {
+    const state = await this.validateState(raw);
+    const base = validateCampaign(campaign);
+    const old = state.checkpoint.base;
+    if (
+      base.lineage !== old.lineage ||
+      !same({ ...base, slot: old.slot, revision: old.revision }, old)
+    )
+      throw new Error("Import cannot change a retained run's base gameplay");
+    const { checksum: _checksum, ...previous } = state.checkpoint;
+    const checkpoint = await this.validateCheckpoint(
+      await seal({
+        ...previous,
+        slot: base.slot,
+        baseRevision: base.revision,
+        base,
+        baseHash: await hash(base),
+      }),
+    );
+    return {
+      checkpoint,
+      pending: state.pending
+        ? await this.buildPending(checkpoint, terminalOf(state.pending))
+        : null,
+    };
   }
   private async validatePending(cp: RunCheckpoint, raw: unknown): Promise<PendingResult> {
     const pending = pendingSchema.parse(boundedClone(raw, 8 * 1048576));
@@ -356,7 +382,7 @@ export class RunJournalStore {
     const nextState = await this.validateState({ checkpoint: cp, pending });
     await this.write(cp.slot, v, { state: nextState });
   }
-  private async validatedReceipts(raw: unknown): Promise<ReceiptState> {
+  async validatedReceipts(raw: unknown): Promise<ReceiptState> {
     const value = receiptsSchema.parse(
       boundedClone(raw ?? { receipts: [], unpresented: null }, 8 * 1048576),
     );
@@ -538,7 +564,11 @@ export class RunJournalStore {
           this.memory.set(slot, structuredClone(next.state));
           this.repo.activeRunSlots.add(slot);
         }
-        if (next.receipts) this.memoryReceipts.set(slot, structuredClone(next.receipts));
+        if (next.receipts) {
+          this.memoryReceipts.set(slot, structuredClone(next.receipts));
+          if (next.receipts.unpresented) this.repo.unpresentedResultSlots.add(slot);
+          else this.repo.unpresentedResultSlots.delete(slot);
+        }
         if (next.fence) this.repo.memoryFences.set(next.fence.lineage, structuredClone(next.fence));
         return;
       }

@@ -1,4 +1,13 @@
 import type { CapturedStudy, StudyInput, ShotObservation } from './balance-study';
+import type { ContributionLedger } from '../progression/contribution';
+import {
+  campaignTutorialSchema,
+  campaignStartAssetSchema,
+  type CampaignTutorialPlan,
+  type CapturedCampaign,
+  profiledPracticePlanSchema,
+  type ProfiledPracticePlan,
+} from './campaign-start';
 import { accuracyPass } from '../progression/accuracy';
 import { rational } from '../economy/policy';
 import { foundation } from '../data/foundation';
@@ -164,37 +173,67 @@ export class Battle {
   private detected = new Set<number>();
   private impacts: Impact[] = [];
   private shotObservations = new Map<number, ShotObservation>();
+  private accounting: ContributionLedger | null = null;
+  private reductionOwners = new Map<number, number>();
+  private perceivedHistory = new Set<number>();
+  get perceivedHostiles(): readonly number[] {
+    return [...this.perceivedHistory].sort((a, b) => a - b);
+  }
+  get contributionSnapshot() {
+    if (!this.accounting) throw new Error('Combat accounting was not captured at run start');
+    return this.accounting.snapshot();
+  }
   get observedShots(): readonly Readonly<ShotObservation>[] {
     return [...this.shotObservations.values()].map((s) => Object.freeze({ ...s }));
   }
-  private definition(e: Pick<Entity, 'id' | 'type'>) {
+  definition(e: Pick<Entity, 'id' | 'type'>) {
     return (
-      this.study?.profiles[e.id]?.definition ??
+      this.profiles?.[e.id]?.definition ??
       (e.type === 'enemy.runner' || e.type === 'enemy.raider'
-        ? this.study?.enemies[e.type]
+        ? this.enemies?.[e.type]
         : undefined) ??
       combat[e.type]
     );
   }
+  private get profiles() {
+    return this.campaign?.profiles ?? this.study?.profiles;
+  }
+  profile(id: number) {
+    return this.profiles?.[id];
+  }
+  private get enemies() {
+    return this.campaign?.enemies ?? this.study?.enemies;
+  }
   constructor(
-    readonly plan: TutorialPlan,
+    readonly plan: TutorialPlan | CampaignTutorialPlan | ProfiledPracticePlan,
     readonly accuracy: RandomStream,
     army: readonly StartAsset[],
     private readonly study?: CapturedStudy,
+    private readonly campaign?: CapturedCampaign,
+    private readonly profiledPractice = false,
   ) {
-    tutorialSchema.parse(plan);
+    if (plan.mode === 'campaign') {
+      campaignTutorialSchema.parse(plan);
+      if (!campaign || study || profiledPractice) throw new Error('Campaign capture required');
+    } else if (profiledPractice) {
+      profiledPracticePlanSchema.parse(plan);
+      if (!campaign || study) throw new Error('Profiled practice capture required');
+    } else {
+      tutorialSchema.parse(plan);
+      if (campaign) throw new Error('Campaign capture cannot run as legacy practice');
+    }
     this.add(
       1,
       'objective.harmonic_core',
       'friendly',
       { x: 30 * U, y: 30 * U },
       fixedRect(CORE),
-      combat['objective.harmonic_core'].hp,
+      campaign?.frozen.coreHP ?? combat['objective.harmonic_core'].hp,
     );
     if (new Set(army.map((a) => a.uuid.toLowerCase())).size !== army.length)
       throw new Error('Duplicate army UUID');
     const sorted = army
-      .map((a) => startSchema.parse(a))
+      .map((a) => (campaign ? campaignStartAssetSchema : startSchema).parse(a))
       .sort((a, b) => (a.uuid < b.uuid ? -1 : a.uuid > b.uuid ? 1 : 0));
     if (sorted.length > tuning.allyCap) throw new Error('Friendly cap');
     for (const [a, index] of sorted.map((a, i) => [a, i] as const)) {
@@ -219,6 +258,7 @@ export class Battle {
         a.hp,
       );
       actor.heading = a.heading;
+      if (campaign) actor.charges = campaign.frozen.army[index]?.permanentStock ?? 0;
     }
   }
   static async create(army: StartAsset[], plan = tutorialPlan()): Promise<Battle> {
@@ -240,6 +280,75 @@ export class Battle {
       study.army,
       study,
     );
+  }
+  /** Real applied combat facts, independent of rendering and event retention. */
+  static async createTracked(army: StartAsset[], plan = tutorialPlan()): Promise<Battle> {
+    const b = await Battle.create(army, plan);
+    await b.startAccounting(army);
+    return b;
+  }
+  static async createTrackedStudy(army: StartAsset[], input: StudyInput): Promise<Battle> {
+    const b = await Battle.createStudy(army, input);
+    await b.startAccounting(army);
+    return b;
+  }
+  static async createCampaign(planInput: unknown, frozenInput: unknown): Promise<Battle> {
+    const { captureCampaign } = await import('./campaign-start');
+    const plan = campaignTutorialSchema.parse(planInput),
+      campaign = captureCampaign(frozenInput);
+    const army = campaign.frozen.army.map(
+      ({ level: _l, enhancement: _e, permanentStock: _s, ...a }) => a,
+    );
+    const b = new Battle(
+      plan,
+      await RandomStream.seeded(plan.seed, 'accuracy', plan.simulation),
+      army,
+      undefined,
+      campaign,
+    );
+    await b.startAccounting(army);
+    return b;
+  }
+  static async createProfiledPractice(planInput: unknown, frozenInput: unknown): Promise<Battle> {
+    const { captureCampaign } = await import('./campaign-start');
+    const plan = profiledPracticePlanSchema.parse(planInput),
+      campaign = captureCampaign(frozenInput);
+    const army = campaign.frozen.army.map(
+      ({ level: _l, enhancement: _e, permanentStock: _s, ...a }) => a,
+    );
+    const b = new Battle(
+      plan,
+      await RandomStream.seeded(plan.seed, 'accuracy', plan.simulation),
+      army,
+      undefined,
+      campaign,
+      true,
+    );
+    await b.startAccounting(army);
+    return b;
+  }
+  private async startAccounting(army: StartAsset[]): Promise<void> {
+    const { ContributionLedger } = await import('../progression/contribution');
+    this.accounting = new ContributionLedger(1 + army.length + this.plan.packets.length);
+    const sorted = army
+      .map((a) => (this.campaign ? campaignStartAssetSchema : startSchema).parse(a))
+      .sort((a, b) => (a.uuid < b.uuid ? -1 : a.uuid > b.uuid ? 1 : 0));
+    for (const e of this.entities) this.registerAccounting(e, sorted[e.id - 2]?.uuid ?? null);
+  }
+  private registerAccounting(e: Entity, uuid: string | null = null): void {
+    const d = foundation[e.type as keyof typeof foundation];
+    this.accounting?.register({
+      id: e.id,
+      uuid,
+      type: e.type,
+      team: e.team,
+      developing: Boolean(d?.developing),
+      rewardable: e.team === 'hostile',
+      body: e.hp,
+      maximum: e.maxHP,
+      initialStock: e.type === 'friendly.proximity_mine' ? 1 : 0,
+      permanentStock: e.charges,
+    });
   }
   private add(
     id: number,
@@ -296,6 +405,7 @@ export class Battle {
       rampartArmor: 0,
     };
     this.entities.push(e);
+    if (this.accounting) this.registerAccounting(e);
     this.entities.sort((a, b) => a.id - b.id);
     return e;
   }
@@ -424,7 +534,7 @@ export class Battle {
         a.y - b.y ||
         a.x - b.x,
     );
-    const radius = (this.study?.enemies[packet.type] ?? combat[packet.type]).radius,
+    const radius = (this.enemies?.[packet.type] ?? combat[packet.type]).radius,
       spot = spots.find(
         (p) =>
           edgeClear(p, p, radius, this.solids()) &&
@@ -440,7 +550,7 @@ export class Battle {
       'hostile',
       spot,
       null,
-      (this.study?.enemies[packet.type] ?? combat[packet.type]).hp,
+      (this.enemies?.[packet.type] ?? combat[packet.type]).hp,
     );
     const deployed = this.get(1000 + packet.id);
     if (deployed) this.spatial.update(deployed);
@@ -451,7 +561,7 @@ export class Battle {
       1000 + packet.id,
       { x: marker.x * U, y: marker.y * U },
       1,
-      `Front 1: ${(this.study?.enemies[packet.type] ?? combat[packet.type]).name} deployed`,
+      `Front 1: ${(this.enemies?.[packet.type] ?? combat[packet.type]).name} deployed`,
     );
     if (this.packet === this.plan.packets.length) {
       this.state = 'Cleanup';
@@ -491,6 +601,7 @@ export class Battle {
         .filter((e) => e.team === 'friendly' && e.hp > 0)
         .flatMap((e) => e.contacts.map((c) => c.id)),
     );
+    if (this.accounting) for (const id of this.detected) this.perceivedHistory.add(id);
   }
   private perceived(e: Entity, t: Entity): boolean {
     return e.team === 'friendly'
@@ -922,8 +1033,10 @@ export class Battle {
       if (c.ability === 2) {
         e.fieldEnd = this.tick + 360;
         for (const ally of this.entities)
-          if (ally.hp > 0 && ally.team === e.team && boundary(e, ally) <= 4 * U)
+          if (ally.hp > 0 && ally.team === e.team && boundary(e, ally) <= 4 * U) {
             ally.reduction = 20;
+            if (this.accounting) this.reductionOwners.set(ally.id, e.id);
+          }
       }
       e.lastAbility = this.tick;
       this.event(
@@ -1029,7 +1142,8 @@ export class Battle {
       missAngle = this.accuracy.next(),
       missRadius = this.accuracy.next();
     let p = nearest(e, t);
-    const captured = this.study?.input.accuracyGrowth ? this.study.profiles[e.id]?.accuracy : null,
+    const captured =
+        this.campaign || this.study?.input.accuracyGrowth ? this.profiles?.[e.id]?.accuracy : null,
       passed = accuracyPass(
         hit,
         captured
@@ -1157,10 +1271,26 @@ export class Battle {
       if (!t || t.hp <= 0) continue;
       let raw = hit.raw,
         absorbed = 0;
+      const before = t.hp,
+        armor = this.armor(t),
+        bodyLoss = (value: number, reduction: number) =>
+          Math.min(
+            before,
+            divRound(
+              BigInt(value) * BigInt(100 * U) * BigInt(100 - reduction),
+              BigInt(100 * U + armor) * 100n,
+            ),
+          ),
+        prevented: { source: number; bodyAverted: number }[] = [];
       for (const s of t.shield.sort((a, b) => a.expires - b.expires || a.source - b.source)) {
         if (s.expires <= this.tick || angleError(s.heading, bearing(delta(t, hit.origin))) > 10923)
           continue;
         const amount = Math.min(s.pool, raw);
+        if (this.accounting)
+          prevented.push({
+            source: s.source,
+            bodyAverted: bodyLoss(raw, 0) - bodyLoss(raw - amount, 0),
+          });
         s.pool -= amount;
         raw -= amount;
         absorbed += amount;
@@ -1173,6 +1303,13 @@ export class Battle {
           BigInt(100 * U + this.armor(t)) * 100n,
         ),
       );
+      if (this.accounting) {
+        const owner = this.reductionOwners.get(t.id);
+        if (owner && t.reduction)
+          prevented.push({ source: owner, bodyAverted: bodyLoss(raw, 0) - loss });
+        this.accounting.prevention(hit.source, t.id, prevented, bodyLoss(hit.raw, 0) - loss);
+        this.accounting.damage(hit.source, t.id, loss, absorbed);
+      }
       t.hp -= loss;
       t.lastHit = this.tick;
       if (loss || absorbed) {
@@ -1229,7 +1366,7 @@ export class Battle {
         t.team === 'friendly' &&
         t.hp > 0 &&
         this.definition(t).mechanical &&
-        boundary(e, t) <= (this.study?.profiles[e.id]?.repair?.range ?? 5 * U) &&
+        boundary(e, t) <= (this.profiles?.[e.id]?.repair?.range ?? 5 * U) &&
         this.los(e, t, e.id) &&
         (slots.get(t.id) ?? 0) < 2;
       const score = (t: Entity): number =>
@@ -1271,13 +1408,14 @@ export class Battle {
         e.channelCommit = this.tick + 30;
       }
       slots.set(t.id, (slots.get(t.id) ?? 0) + 1);
-      const repair = this.study?.profiles[e.id]?.repair,
+      const repair = this.profiles?.[e.id]?.repair,
         output = t.id === 1 ? (repair?.corePerPulse ?? 3200) : (repair?.perPulse ?? 6400);
       reserved.set(t.id, (reserved.get(t.id) ?? 0) + Math.min(output, t.maxHP - t.hp));
       e.state = 'Channeling';
       e.reason = 'Stationary repair channel; living mechanical ally; LOS; Core half rate';
       if (this.tick >= e.channelPulse) {
         const gain = Math.min(output, t.maxHP - t.hp);
+        if (gain) this.accounting?.restore(e.id, t.id, gain);
         t.hp += gain;
         e.channelPulse += 15;
         if (gain)
@@ -1295,6 +1433,7 @@ export class Battle {
   step(): void {
     if (this.state !== 'Siege' && this.state !== 'Cleanup') return;
     this.tick++;
+    this.accounting?.beginTick(this.tick);
     this.spatial.rebuild(this.entities);
     // 1. Expirations and synchronous topology. No worker/render completion can govern this boundary.
     if (this.dirty) {
@@ -1314,16 +1453,19 @@ export class Battle {
         (a) => a.hp > 0 && a.fieldEnd > this.tick && a.team === e.team,
       );
       if (this.tick % 15 === 0 || !activeField) {
-        e.reduction = this.entities.some(
+        const owner = this.entities.find(
           (a) =>
             a.hp > 0 &&
             a.type === 'warden.bulwark' &&
             a.fieldEnd > this.tick &&
             a.team === e.team &&
             boundary(a, e) <= 4 * U,
-        )
-          ? 20
-          : 0;
+        );
+        e.reduction = owner ? 20 : 0;
+        if (this.accounting) {
+          if (owner) this.reductionOwners.set(e.id, owner.id);
+          else this.reductionOwners.delete(e.id);
+        }
       }
     }
     // 2. Director/ordinary deployment. The bounded tutorial never needs a population hold beyond staging.
@@ -1347,10 +1489,12 @@ export class Battle {
       );
     // 3. Perception and stable due decisions.
     this.perceive();
+    const hostileDecision = this.plan.difficulty === 'Cadet' ? 30 : 21;
     for (const e of this.entities)
       if (
         e.hp > 0 &&
-        this.tick % (e.team === 'friendly' ? 15 : 21) === e.id % (e.team === 'friendly' ? 15 : 21)
+        this.tick % (e.team === 'friendly' ? 15 : hostileDecision) ===
+          e.id % (e.team === 'friendly' ? 15 : hostileDecision)
       ) {
         this.chooseAbility(e);
         this.decide(e);
@@ -1369,7 +1513,7 @@ export class Battle {
           this.los(e, t, e.id)
         )
           t.shield.push({
-            pool: this.study?.profiles[e.id]?.interposePool ?? 600 * U,
+            pool: this.profiles?.[e.id]?.interposePool ?? 600 * U,
             expires: this.tick + 360,
             heading: d.heading,
             source: e.id,
@@ -1417,6 +1561,7 @@ export class Battle {
         this.known(e).some((t) => boundary(e, t) <= U)
       ) {
         e.charges--;
+        this.accounting?.spendCharge(e.id);
         e.mineDue = this.tick + 18;
         e.reason = 'Triggered: fixed-location blast in 0.3 combat seconds';
         this.event(
@@ -1428,6 +1573,7 @@ export class Battle {
           'Proximity Mine ground blast warning: 0.3 seconds',
         );
       }
+    if (this.accounting) for (const e of this.entities) this.accounting.assertBody(e.id, e.hp);
     if (!this.core.hp) {
       this.finish('Defeat', 'Core Integrity reached zero');
       return;
@@ -1488,11 +1634,23 @@ export class Battle {
   }
   surrender(): void {
     if (this.state === 'Victory' || this.state === 'Defeat') return;
-    this.finish('Defeat', 'Confirmed practice surrender; no campaign rewards or damage');
+    this.finish(
+      'Defeat',
+      this.plan.mode === 'campaign'
+        ? 'Confirmed campaign surrender; finalized partial result'
+        : 'Confirmed practice surrender; no campaign rewards or damage',
+    );
   }
   snapshot(): object {
     return {
       ...(this.study ? { study: this.study } : {}),
+      ...(this.campaign
+        ? {
+            [this.profiledPractice ? 'practice' : 'campaign']: this.campaign,
+            perceivedHostiles: this.perceivedHostiles,
+          }
+        : {}),
+      ...(this.accounting ? { contributions: this.accounting.snapshot() } : {}),
       tick: this.tick,
       director: this.director,
       cleanupTick: this.cleanupTick,

@@ -1,7 +1,15 @@
 import './style.css';
 import { Database } from './persistence/database';
 import { CampaignRepository, Preparation } from './persistence/repository';
-import { createCampaign, applyCommand, accounting, type Campaign } from './persistence/campaign';
+import {
+  createCampaign,
+  applyCommand,
+  accounting,
+  rankAllowances,
+  migrateProgression,
+  maximumBody,
+  type Campaign,
+} from './persistence/campaign';
 import {
   constructionTypes,
   coreBaseline,
@@ -17,6 +25,12 @@ import { solidFootprints, footprint } from './persistence/campaign';
 import { TutorialSession, practiceStore } from './ui/tutorial';
 import { BackupStore } from './persistence/backup';
 import { DataManagement } from './ui/data-management';
+import { CampaignSession } from './ui/campaign';
+import { progressionControls } from './ui/progression';
+import { RunJournalStore, receiptsSchema } from './persistence/run-journal';
+import { runStateKey, runReceiptsKey } from './persistence/run-keys';
+import { campaignTutorialRules } from './progression/campaign-result';
+import { canonical } from './sim/determinism';
 const root = document.querySelector<HTMLElement>('#app');
 if (!root) throw new Error('Missing application root');
 root.innerHTML = `<header><p class="eyebrow">RESONANCE BASTION · CONSTRUCTION DEVELOPMENT</p><h1>Resonance Bastion</h1><p>Build a permanent fortress. Its defenders will fight autonomously.</p></header><p id="status" role="status">Checking retained storage…</p><div id="title"></div><div id="preparation" hidden><h2 id="campaign-heading"></h2><p id="account"></p><div id="prep-layout"><aside id="prep-sidebar" aria-label="Preparation tools"><h3>Camera and build</h3><nav aria-label="Camera controls">${[
@@ -34,7 +48,7 @@ root.innerHTML = `<header><p class="eyebrow">RESONANCE BASTION · CONSTRUCTION D
   .map(([id, label]) => `<button data-camera="${id}">${label}</button>`)
   .join(
     '',
-  )}</nav><nav aria-label="Spatial tools"><button id="routes-toggle" aria-pressed="false">Show Routes</button><label>Route clearance <select id="route-radius"><option value="768">Heavy · 0.75 GU</option><option value="461">Ordinary · 0.45 GU</option></select></label><button id="prep-accessibility">Accessibility</button></nav><div id="inventory-host"></div><div id="catalog-host"></div><nav aria-label="Entrance navigation">${[1, 2, 3, 4, 5, 6].map((n) => `<button data-front="${n}">Front ${n}</button>`).join('')}</nav></aside><div id="prep-field"><section id="world" aria-label="Fortress field"></section><p id="camera-summary" aria-live="off"></p><details class="spatial-legend"><summary>Map and marker legend</summary><p>Strategic badges: crystal = Core; barrel = tower; wall = barrier; chevron = friendly; number = grouped assets. Solid line: purchased land. Hatched square: Core reservation. Narrow double hatch: Warden pad. Numbered entrance: Front 1–6. Dashed line: validated route; ×: blocked entrance. Named inventory provides selection and camera jump.</p></details></div><aside id="prep-details" aria-label="Placement and details"><h3>Placement and inspection</h3><div id="construction"></div><p id="route-summary" aria-live="off"></p><button id="tutorial-practice">Tutorial Practice</button><button id="prep-data">Data Management</button><button id="return-title">Return to title</button></aside></div></div><dialog id="dialog" aria-labelledby="dialog-heading"><h2 id="dialog-heading"></h2><div id="dialog-body"></div><button id="close-dialog">Cancel / close</button></dialog>`;
+  )}</nav><nav aria-label="Spatial tools"><button id="routes-toggle" aria-pressed="false">Show Routes</button><label>Route clearance <select id="route-radius"><option value="768">Heavy · 0.75 GU</option><option value="461">Ordinary · 0.45 GU</option></select></label><button id="prep-accessibility">Accessibility</button></nav><div id="inventory-host"></div><div id="catalog-host"></div><nav aria-label="Entrance navigation">${[1, 2, 3, 4, 5, 6].map((n) => `<button data-front="${n}">Front ${n}</button>`).join('')}</nav></aside><div id="prep-field"><section id="world" aria-label="Fortress field"></section><p id="camera-summary" aria-live="off"></p><details class="spatial-legend"><summary>Map and marker legend</summary><p>Strategic badges: crystal = Core; barrel = tower; wall = barrier; chevron = friendly; number = grouped assets. Solid line: purchased land. Hatched square: Core reservation. Narrow double hatch: Warden pad. Numbered entrance: Front 1–6. Dashed line: validated route; ×: blocked entrance. Named inventory provides selection and camera jump.</p></details></div><aside id="prep-details" aria-label="Placement and details"><h3>Placement and inspection</h3><div id="construction"></div><p id="route-summary" aria-live="off"></p><button id="campaign-siege">Campaign Siege · C01S01</button><button id="tutorial-practice">Tutorial Practice</button><div id="progression-controls"></div><button id="prep-data">Data Management</button><button id="return-title">Return to title</button></aside></div></div><dialog id="dialog" aria-labelledby="dialog-heading"><h2 id="dialog-heading"></h2><div id="dialog-body"></div><button id="close-dialog">Cancel / close</button></dialog>`;
 const byId = (id: string): HTMLElement => {
   const e = document.getElementById(id);
   if (!e) throw new Error(`Missing ${id}`);
@@ -160,7 +174,7 @@ async function renderTitle(): Promise<void> {
   const resumable =
     typeof last === 'number' && slots[last] !== undefined && !(slots[last] instanceof Error);
   byId('title').innerHTML =
-    `<img class="title-art" src="${import.meta.env.BASE_URL}assets/title-foundation.png" alt="Candidate raster fortress scene: a crystal Core, two Sentries and armored walls on basalt ground"><p class="notice">Gate 2 in development. Construction and the Bulwark/Bastion autonomous tutorial practice are playable. Campaign progression remains Designed.</p><nav aria-label="Title"><button id="continue" ${resumable ? '' : 'disabled'}>Continue</button><button id="new-game" ${repository?.writer ? '' : 'disabled'}>New Game</button><button id="load" ${repository ? '' : 'disabled'}>Load Campaign</button><button id="help">How to Play</button><button id="accessibility">Accessibility</button><button id="settings">Settings</button><button id="credits">Credits</button><button id="data">Data Management</button>${!repository ? '<button id="temporary">Start Temporary Session</button>' : ''}${repository && !repository.writer ? '<button id="take-over">Take Over Editing</button>' : ''}</nav><p>Continue opens the last opened campaign. Three slots are available. ${repository?.temporary ? 'Temporary Session: closing loses unexported progress.' : repository?.writer ? 'Retained storage ready.' : 'Editing unavailable until storage or writer ownership is resolved.'}</p>`;
+    `<img class="title-art" src="${import.meta.env.BASE_URL}assets/title-foundation.png" alt="Candidate raster fortress scene: a crystal Core, two Sentries and armored walls on basalt ground"><p class="notice">Construction, free practice and the first Bulwark/Bastion campaign siege with earned progression and recovery are playable. The full campaign and remaining roster are in development.</p><nav aria-label="Title"><button id="continue" ${resumable ? '' : 'disabled'}>Continue</button><button id="new-game" ${repository?.writer ? '' : 'disabled'}>New Game</button><button id="load" ${repository ? '' : 'disabled'}>Load Campaign</button><button id="help">How to Play</button><button id="accessibility">Accessibility</button><button id="settings">Settings</button><button id="credits">Credits</button><button id="data">Data Management</button>${!repository ? '<button id="temporary">Start Temporary Session</button>' : ''}${repository && !repository.writer ? '<button id="take-over">Take Over Editing</button>' : ''}</nav><p>Continue opens the last opened campaign. Three slots are available. ${repository?.temporary ? 'Temporary Session: closing loses unexported progress.' : repository?.writer ? 'Retained storage ready.' : 'Editing unavailable until storage or writer ownership is resolved.'}</p>`;
   if (resumable)
     button('continue', () => {
       void audio.unlock();
@@ -340,7 +354,7 @@ async function openCampaign(c: Campaign): Promise<void> {
         ids
           .map((id) =>
             id === 'core'
-              ? `<p>Harmonic Core · Integrity ${coreBaseline.hp} / ${coreBaseline.hp} · Armor ${coreBaseline.armor} · immovable [28,32)². No manual combat control.</p>`
+              ? `<p>Harmonic Core · Integrity ${(campaign.coreHP / 1024).toLocaleString(undefined, { maximumFractionDigits: 3 })} / ${coreBaseline.hp} · Armor ${coreBaseline.armor} · immovable [28,32)². No manual combat control.</p>`
               : `<button data-inspect="${id}">${requireDefinition(campaign.assets.find((a) => a.id === id)?.type ?? 'MISSING').name} · Select owned placement</button>`,
           )
           .join(''),
@@ -374,6 +388,22 @@ async function openCampaign(c: Campaign): Promise<void> {
       : 'Campaign opened from retained storage.',
   );
   try {
+    const journal = new RunJournalStore(repository, campaignTutorialRules);
+    const retainedRun = repository.database
+      ? await repository.database.read('meta', runStateKey(c.slot))
+      : journal.memory.get(c.slot);
+    const retainedReceipts = repository.database
+      ? await repository.database.read('meta', runReceiptsKey(c.slot))
+      : journal.memoryReceipts.get(c.slot);
+    const parsedReceipts = receiptsSchema.safeParse(retainedReceipts);
+    if (
+      retainedRun ||
+      (retainedReceipts !== undefined &&
+        (!parsedReceipts.success || parsedReceipts.data.unpresented))
+    ) {
+      await startBattleSession(true);
+      return;
+    }
     if (await practiceStore(repository).read(c)) byId('tutorial-practice').click();
   } catch {
     byId('tutorial-practice').click();
@@ -388,29 +418,32 @@ function renderPreparation(): void {
   const p = preparation;
   if (!p) return;
   const c = p.campaign,
-    totals = accounting(c);
+    totals = accounting(c),
+    allowed = rankAllowances(c.rank);
   byId('campaign-heading').textContent = c.name;
   byId('account').textContent =
-    `Rank 1 · ${c.credits} Credits · Capacity ${totals.capacity}/20 · Barriers ${totals.barriers}/40 · Traps ${totals.traps}/8 · ${repository?.temporary ? 'Temporary Session' : 'Retained storage'}`;
+    `Rank ${c.rank} · ${c.accountXP} rank XP · ${c.credits} Credits · ${c.promotionCores} Cores · Capacity ${totals.capacity}/${allowed.capacity} · Barriers ${totals.barriers}/${allowed.barriers} · Traps ${totals.traps}/${allowed.traps} · ${repository?.temporary ? 'Temporary Session' : 'Retained storage'}`;
   const chosen = choice;
   const selected = chosen && 'id' in chosen ? c.assets.find((a) => a.id === chosen.id) : undefined,
     type = choice && 'type' in choice ? choice.type : selected?.type;
   const canEdit = Boolean(repository?.writer) && !p.busy;
+  (byId('campaign-siege') as HTMLButtonElement).disabled =
+    !canEdit || c.warden !== 'warden.bulwark' || c.doctrine !== 'Bastion';
   byId('construction').innerHTML =
     `<p>Purchased land: [12,48) × [12,48). Core precinct: [27,33)². Selected Warden pad: [29,31) × [33,35). Expansions unlock at Rank 15/40/60/80; corners at 85/88/92/95. Purchase interface arrives with progression.</p><section aria-label="Owned inventory">${c.assets
       .map((a, i) => {
         const implemented = constructionTypes.includes(a.type);
-        return `<button data-owned="${a.id}" ${implemented && canEdit ? '' : 'disabled'}>${foundation[a.type].name} ${i + 1} · ${a.placement ? `at ${a.placement.x},${a.placement.y}` : 'Stored'}${implemented ? '' : ' · deployment Designed'}</button>`;
+        return `<button data-owned="${a.id}" ${implemented && canEdit ? '' : 'disabled'}>${foundation[a.type].name} ${i + 1} · ${a.placement ? `at ${a.placement.x},${a.placement.y}` : 'Stored'}${c.schema === 2 ? ` · L${a.level} E${a.enhancement} · ${Math.ceil(a.hp / 1024)}/${Math.ceil(maximumBody(a) / 1024)} body` : ''}${implemented ? '' : ' · deployment Designed'}</button>`;
       })
       .join('')}</section><nav aria-label="Construction catalog">${constructionTypes
       .filter((t) => foundation[t].category !== 'warden')
       .map(
         (t) =>
-          `<button data-buy="${t}" ${canEdit && foundation[t].rank <= c.rank ? '' : 'disabled'}>Buy & Place ${foundation[t].name} · ${foundation[t].cost} Credits${foundation[t].rank > c.rank ? ' · unlock Rank ' + foundation[t].rank : ''}</button>`,
+          `<button data-buy="${t}" ${canEdit && foundation[t].rank <= c.rank ? '' : 'disabled'}>Buy & Place ${foundation[t].name} · ${foundation[t].cost} Credits${foundation[t].rank > c.rank ? ` · unlock Rank ${foundation[t].rank}` : ''}</button>`,
       )
       .join(
         '',
-      )}</nav><section aria-label="Placement"><p>${type ? `${foundation[type].name} · ${foundation[type].width}×${foundation[type].height} GU · ${foundation[type].capacity} capacity · ${selected ? 'Owned: free placement' : `${foundation[type].cost} Credits only when Place succeeds`}` : 'Select an owned asset or Buy & Place.'}</p><label>X <input id="place-x" type="number" min="0" max="59" step="1" value="${x}"></label><label>Y <input id="place-y" type="number" min="0" max="59" step="1" value="${y}"></label><button id="nudge-x-minus">X −1</button><button id="nudge-x-plus">X +1</button><button id="nudge-y-minus">Y −1</button><button id="nudge-y-plus">Y +1</button><button id="rotate-placement">Rotate footprint · ${rotation * 90}°</button><button id="place" aria-describedby="placement-reason" ${type && canEdit ? '' : 'disabled'}>Place</button><button id="cancel-placement" ${choice ? '' : 'disabled'}>Cancel Placement</button><button id="store" ${selected?.placement && canEdit ? '' : 'disabled'}>Store Selected</button><output id="placement-reason" aria-live="off">${type ? 'Awaiting explicit Place. Every entrance is checked for ordinary and heavy body clearance.' : 'No placement selected.'}</output></section><nav aria-label="Preparation history"><button id="undo" ${p.undoStack.length && canEdit ? '' : 'disabled'}>Undo</button><button id="redo" ${p.redoStack.length && canEdit ? '' : 'disabled'}>Redo</button><button id="export-campaign">Export Campaign</button></nav><p>Core Integrity ${coreBaseline.hp} / ${coreBaseline.hp} · Armor ${coreBaseline.armor}. Sentry: Integrity ${sentryBaseline.hp}, Armor ${sentryBaseline.armor}, ${weapon.damage} damage / ${weapon.intervalTicks / 60} s, range ${weapon.rangeGU} GU, ${weapon.targets} layers. Barricade: Integrity ${barrierBaseline.hp}, Armor ${barrierBaseline.armor}. Tutorial Practice uses a disposable clone and durable start. Normal campaign results, rewards and repairs remain Gate3.</p>`;
+      )}</nav><section aria-label="Placement"><p>${type ? `${foundation[type].name} · ${foundation[type].width}×${foundation[type].height} GU · ${foundation[type].capacity} capacity · ${selected ? 'Owned: free placement' : `${foundation[type].cost} Credits only when Place succeeds`}` : 'Select an owned asset or Buy & Place.'}</p><label>X <input id="place-x" type="number" min="0" max="59" step="1" value="${x}"></label><label>Y <input id="place-y" type="number" min="0" max="59" step="1" value="${y}"></label><button id="nudge-x-minus">X −1</button><button id="nudge-x-plus">X +1</button><button id="nudge-y-minus">Y −1</button><button id="nudge-y-plus">Y +1</button><button id="rotate-placement">Rotate footprint · ${rotation * 90}°</button><button id="place" aria-describedby="placement-reason" ${type && canEdit ? '' : 'disabled'}>Place</button><button id="cancel-placement" ${choice ? '' : 'disabled'}>Cancel Placement</button><button id="store" ${selected?.placement && canEdit ? '' : 'disabled'}>Store Selected</button><output id="placement-reason" aria-live="off">${type ? 'Awaiting explicit Place. Every entrance is checked for ordinary and heavy body clearance.' : 'No placement selected.'}</output></section><nav aria-label="Preparation history"><button id="undo" ${p.undoStack.length && canEdit ? '' : 'disabled'}>Undo</button><button id="redo" ${p.redoStack.length && canEdit ? '' : 'disabled'}>Redo</button><button id="export-campaign">Export Campaign</button></nav><p>Core Integrity ${(c.coreHP / 1024).toLocaleString(undefined, { maximumFractionDigits: 3 })} / ${coreBaseline.hp} · Armor ${coreBaseline.armor}. Base values · Sentry: Integrity ${sentryBaseline.hp}, Armor ${sentryBaseline.armor}, ${weapon.damage} damage / ${weapon.intervalTicks / 60} s, range ${weapon.rangeGU} GU, ${weapon.targets} layers. Barricade: Integrity ${barrierBaseline.hp}, Armor ${barrierBaseline.armor}. Tutorial Practice uses a disposable clone and durable start. C01S01 campaign progression and recovery are available for Bulwark/Bastion. The remaining campaign and roster are still in development.</p>`;
   for (const b of document.querySelectorAll<HTMLButtonElement>('[data-owned]'))
     b.onclick = () => {
       const id = b.dataset.owned;
@@ -479,6 +512,42 @@ function renderPreparation(): void {
   button('undo', () => transact(() => p.history('undo')));
   button('redo', () => transact(() => p.history('redo')));
   button('export-campaign', () => openData([c.slot]));
+  progressionControls(byId('progression-controls'), c, selected, {
+    enabled: canEdit,
+    error: status,
+    confirm: (title, text, accept) => {
+      modal(
+        title,
+        `<p>${escapeHTML(text)}</p><button id="progression-confirm">Confirm Purchase</button>`,
+      );
+      button('progression-confirm', async () => {
+        (byId('progression-confirm') as HTMLButtonElement).disabled = true;
+        try {
+          await accept();
+          dialog.close();
+          renderPreparation();
+        } catch (e) {
+          (byId('progression-confirm') as HTMLButtonElement).disabled = false;
+          throw e;
+        }
+      });
+    },
+    commit: async (after, before, outsideHistory) => {
+      if (canonical(p.campaign) !== canonical(before))
+        throw new Error('Campaign changed; review the purchase again');
+      if (outsideHistory) {
+        await p.repository.commit(after, before);
+        p.campaign = after;
+        p.undoStack = [];
+        p.redoStack = [];
+      } else await p.commit(after);
+      status(
+        repository?.temporary
+          ? 'Committed in Temporary Session; export before closing'
+          : 'Saved: purchase committed',
+      );
+    },
+  });
   // Real landscape tools/details regions; preserve one set of semantic controls.
   const inventory = byId('construction').querySelector('[aria-label="Owned inventory"]');
   const catalog = byId('construction').querySelector('[aria-label="Construction catalog"]');
@@ -530,7 +599,7 @@ function updateGhost(): void {
       valid = true;
       (byId('place') as HTMLButtonElement).disabled = !repository?.writer || preparation.busy;
       byId('placement-reason').textContent =
-        `Legal placement. After Place: ${preview.credits} Credits; capacity ${totals.capacity}/20; barriers ${totals.barriers}/40; traps ${totals.traps}/8. Commit only with Place.`;
+        `Legal placement. After Place: ${preview.credits} Credits; capacity ${totals.capacity}/${rankAllowances(preparation.campaign.rank).capacity}; barriers ${totals.barriers}/${rankAllowances(preparation.campaign.rank).barriers}; traps ${totals.traps}/${rankAllowances(preparation.campaign.rank).traps}. Commit only with Place.`;
     } catch (error) {
       reason = String(error);
       (byId('place') as HTMLButtonElement).disabled = true;
@@ -641,8 +710,10 @@ document.addEventListener('visibilitychange', () => {
     void preferences.save();
   } else void repository?.heartbeat().catch((e) => status(`Writer check failed: ${String(e)}`));
 });
-button('tutorial-practice', async () => {
+async function startBattleSession(paid = false): Promise<void> {
   if (tutorial || !preparation || !repository) return;
+  const repo = repository,
+    slot = preparation.campaign.slot;
   preparation.undoStack = [];
   preparation.redoStack = [];
   choice = undefined;
@@ -651,8 +722,8 @@ button('tutorial-practice', async () => {
   view = undefined;
   const host = document.createElement('div');
   host.id = 'battle-root';
-  root.append(host);
-  tutorial = new TutorialSession(
+  byId('app').append(host);
+  tutorial = new (paid ? CampaignSession : TutorialSession)(
     host,
     preparation.campaign,
     repository,
@@ -662,16 +733,42 @@ button('tutorial-practice', async () => {
       tutorial = undefined;
 
       if (title) {
-        byId('preparation').hidden = true;
-        document.body.classList.remove('in-preparation');
-        void renderTitle();
+        hidePreparation();
       } else {
         if (preparation)
-          void openCampaign(preparation.campaign).then(() => byId('tutorial-practice').focus());
+          void repo
+            .slots()
+            .then((slots) => {
+              const current = slots[slot];
+              if (current && !(current instanceof Error)) return openCampaign(current);
+            })
+            .then(() => byId(paid ? 'campaign-siege' : 'tutorial-practice').focus());
       }
     },
   );
   await tutorial.initialize();
+}
+button('tutorial-practice', () => startBattleSession());
+button('campaign-siege', () => {
+  if (!preparation || !repository || tutorial) return;
+  if (preparation.campaign.schema === 1) {
+    const before = preparation.campaign,
+      after = migrateProgression(before);
+    modal(
+      'Enable Campaign Progression',
+      '<p>Keep your owned identities, placements, wallet and current health. Your previous save is retained. Enables earned progression and explicit recovery purchases; practice stays free.</p><button id="enable-progression">Enable Campaign Progression</button>',
+    );
+    button('enable-progression', async () => {
+      if (!preparation || canonical(preparation.campaign) !== canonical(before))
+        throw new Error('Campaign changed; review again');
+      await preparation.commit(after);
+      preparation.undoStack = [];
+      preparation.redoStack = [];
+      dialog.close();
+      await openCampaign(after);
+      await startBattleSession(true);
+    });
+  } else return startBattleSession(true);
 });
 await renderTitle();
 if (database)

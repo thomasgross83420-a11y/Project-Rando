@@ -69,3 +69,14 @@ Full rank-to-level pacing, acquisition/promotion timing, net-income targets and
 all-role balance require generated budgets, missing roster actions and real
 contribution weights. Continue staged combat and anatomy/contact work; do not
 scale opponents to player stats or increase prices to cancel progression.
+
+## Dependency-ready after build 0.2.6
+
+The first Bulwark/Bastion paid C01S01 path, contribution/progression/body/stock
+commit, full run/receipt backup and quoted recovery UI pass current-slice tests.
+Continue with versioned support-channel coordination (self-repair must not consume
+an external channel), meaningful injury/action boundary cases and the next small
+roster element. Preserve existing checkpoints/replays. Remaining Gate3 work includes
+full records/results analysis, reserve-funds advice, sale/promotion lifecycle and
+emergency identity reuse/tombstones. Full pacing/net targets require the compiler
+and missing rosters, not an artificial rebalance of this teaching schedule.
