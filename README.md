@@ -13,5 +13,5 @@ Build **0.3.0-first-pass** contains the full friendly/enemy roster, phased bosse
 Progress is local to this browser. **Manage → Data / backups → Export** offers backup sharing or download. First load and uncached resources require internet. Earlier preview saves remain separate and can be explicitly migrated through Data management.
 
 The manual deployment workflow builds pinned source
-[`fcd236b`](https://github.com/thomasgross83420-a11y/Project-Rando/tree/fcd236b64032f3439c886a7b5002ca3142fb0356).
+[`df87886`](https://github.com/thomasgross83420-a11y/Project-Rando/tree/df878865ddb0e6e6cb43f175b5646fd840b507db).
 Application development remains on its development branches; publishing does not merge that stack into `main`.
