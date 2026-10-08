@@ -35,22 +35,50 @@ import { campaignTutorialRules } from './progression/campaign-result';
 import { canonical } from './sim/determinism';
 const root = document.querySelector<HTMLElement>('#app');
 if (!root) throw new Error('Missing application root');
-root.innerHTML = `<header><p class="eyebrow">RESONANCE BASTION · CONSTRUCTION DEVELOPMENT</p><h1>Resonance Bastion</h1><p>Build a permanent fortress. Its defenders will fight autonomously.</p></header><p id="status" role="status">Checking retained storage…</p><div id="title"></div><div id="preparation" hidden><h2 id="campaign-heading"></h2><p id="account"></p><div id="prep-layout"><aside id="prep-sidebar" aria-label="Preparation tools"><h3>Camera and build</h3><nav aria-label="Camera controls">${[
-  ['fit-base', 'Fit Base'],
-  ['fit', 'Fit field'],
-  ['recenter', 'Core'],
-  ['rotate', 'Rotate view'],
-  ['in', 'Zoom in'],
-  ['out', 'Zoom out'],
-  ['left', 'Pan left'],
-  ['right', 'Pan right'],
-  ['up', 'Pan up'],
-  ['down', 'Pan down'],
-]
-  .map(([id, label]) => `<button data-camera="${id}">${label}</button>`)
-  .join(
-    '',
-  )}</nav><nav aria-label="Spatial tools"><button id="routes-toggle" aria-pressed="false">Show Routes</button><label>Route clearance <select id="route-radius"><option value="768">Heavy · 0.75 GU</option><option value="461">Ordinary · 0.45 GU</option></select></label><button id="prep-accessibility">Accessibility</button></nav><div id="inventory-host"></div><div id="catalog-host"></div><nav aria-label="Entrance navigation">${[1, 2, 3, 4, 5, 6].map((n) => `<button data-front="${n}">Front ${n}</button>`).join('')}</nav></aside><div id="prep-field"><section id="world" aria-label="Fortress field"></section><p id="camera-summary" aria-live="off"></p><details class="spatial-legend"><summary>Map and marker legend</summary><p>Strategic badges: crystal = Core; barrel = tower; wall = barrier; chevron = friendly; number = grouped assets. Solid line: purchased land. Hatched square: Core reservation. Narrow double hatch: Warden pad. Numbered entrance: Front 1–6. Dashed line: validated route; ×: blocked entrance. Named inventory provides selection and camera jump.</p></details></div><aside id="prep-details" aria-label="Placement and details"><h3>Placement and inspection</h3><div id="construction"></div><p id="route-summary" aria-live="off"></p><button id="campaign-siege">Campaign Siege · C01S01</button><button id="tutorial-practice">Tutorial Practice</button><div id="progression-controls"></div><button id="prep-data">Data Management</button><button id="return-title">Return to title</button></aside></div></div><dialog id="dialog" aria-labelledby="dialog-heading"><h2 id="dialog-heading"></h2><div id="dialog-body"></div><button id="close-dialog">Cancel / close</button></dialog>`;
+root.innerHTML = `<header><p class="eyebrow">RESONANCE BASTION · CONSTRUCTION DEVELOPMENT</p><h1>Resonance Bastion</h1><p>Build a permanent fortress. Its defenders will fight autonomously.</p></header>
+<p id="status" role="status">Checking retained storage…</p><div id="title"></div>
+<div id="preparation" hidden>
+  <div id="prep-hud"><h2 id="campaign-heading"></h2><button data-prep-panel="tools" aria-controls="prep-sidebar" aria-expanded="false">Tools</button><p id="account"></p></div>
+  <div id="prep-layout">
+    <div id="prep-field"><section id="world" aria-label="Fortress field"></section><p class="gesture-hint">Drag to pan · Pinch to zoom · Tap to inspect</p></div>
+    <aside id="prep-sidebar" class="field-drawer" aria-label="Preparation tools" hidden>
+      <div class="drawer-heading"><h3 id="prep-panel-heading"></h3><button id="prep-panel-close">Close menu</button></div>
+      <div class="drawer-body">
+        <div data-panel="build" hidden><p>Select an asset, then drag its ghost on the field. Only Place spends Credits.</p><div id="catalog-host"></div><div id="inventory-host"></div></div>
+        <div data-panel="forces" hidden><h3>Owned defenders</h3><div id="forces-host"></div><p>Defenders move and fight autonomously in all directions during a siege.</p></div>
+        <div data-panel="upgrade" hidden><div id="progression-controls"></div></div>
+        <div data-panel="tactics" hidden><p>The current roster fights autonomously. Select a deployed asset on the field to inspect it; use Routes under Tools to check clearance. Configurable tactics are still in development.</p></div>
+        <div data-panel="siege" hidden><button id="campaign-siege">Campaign Siege · C01S01</button><button id="tutorial-practice">Tutorial Practice</button><p>Practice uses a disposable clone. Campaign sieges retain wounds, spending and earned progression.</p></div>
+        <div data-panel="records" hidden><button id="prep-data">Data Management</button><div id="prep-records"></div><button id="return-title">Return to title</button></div>
+        <div data-panel="tools" hidden>
+          <details><summary>Camera alternatives</summary><p>Drag the field with one finger to pan. Pinch with two fingers to zoom. While placing, one finger moves the ghost; two fingers still move the camera.</p><nav aria-label="Camera controls">${[
+            ['fit-base', 'Fit Base'],
+            ['fit', 'Fit field'],
+            ['recenter', 'Core'],
+            ['rotate', 'Rotate view'],
+            ['in', 'Zoom in'],
+            ['out', 'Zoom out'],
+            ['left', 'Pan left'],
+            ['right', 'Pan right'],
+            ['up', 'Pan up'],
+            ['down', 'Pan down'],
+          ]
+            .map(([id, label]) => `<button data-camera="${id}">${label}</button>`)
+            .join(
+              '',
+            )}</nav><p id="camera-summary" aria-live="off"></p><nav aria-label="Entrance navigation">${[1, 2, 3, 4, 5, 6].map((n) => `<button data-front="${n}">Front ${n}</button>`).join('')}</nav></details>
+          <nav aria-label="Spatial tools"><button id="routes-toggle" aria-pressed="false">Show Routes</button><label>Route clearance <select id="route-radius"><option value="768">Heavy · 0.75 GU</option><option value="461">Ordinary · 0.45 GU</option></select></label></nav>
+          <p id="route-summary" aria-live="off"></p><div id="history-host"></div><button id="prep-accessibility">Accessibility</button>
+          <details><summary>Campaign resources and save status</summary><p id="account-details"></p><p id="status-details"></p></details>
+          <details class="spatial-legend"><summary>Map and marker legend</summary><p>Crystal = Core; barrel = tower; wall = barrier; chevron = friendly; number = grouped assets. Solid line: purchased land. Hatched square: Core reservation. Double hatch: Warden pad. Numbered entrance: Front 1–6. Dashed line: validated route; ×: blocked entrance.</p></details>
+        </div>
+      </div>
+    </aside>
+    <aside id="prep-details" aria-label="Placement and details"><div id="construction"></div></aside>
+  </div>
+  <nav id="prep-tabs" aria-label="Preparation menus">${['Build', 'Forces', 'Upgrade', 'Tactics', 'Siege', 'Records'].map((name) => `<button data-prep-panel="${name.toLowerCase()}" aria-controls="prep-sidebar" aria-expanded="false">${name}</button>`).join('')}</nav>
+</div>
+<dialog id="dialog" aria-labelledby="dialog-heading"><h2 id="dialog-heading"></h2><div id="dialog-body"></div><button id="close-dialog">Cancel / close</button></dialog>`;
 const byId = (id: string): HTMLElement => {
   const e = document.getElementById(id);
   if (!e) throw new Error(`Missing ${id}`);
@@ -58,6 +86,15 @@ const byId = (id: string): HTMLElement => {
 };
 const status = (message: string): void => {
   byId('status').textContent = message;
+  byId('status').title = message;
+  byId('status-details').textContent = `Status: ${message}`;
+  const battleStatus = document.getElementById('battle-status');
+  if (battleStatus) {
+    battleStatus.textContent = message;
+    battleStatus.title = message;
+    const detail = document.getElementById('battle-status-details');
+    if (detail) detail.textContent = `Status: ${message}`;
+  }
   if ((document.getElementById('dialog') as HTMLDialogElement | null)?.open) {
     let messageNode = document.getElementById('dialog-message');
     if (!messageNode) {
@@ -89,6 +126,41 @@ function modal(title: string, html: string): void {
   dialog.showModal();
   byId('close-dialog').focus();
 }
+let activePrepPanel: string | undefined;
+let prepPanelOpener: HTMLButtonElement | undefined;
+function closePrepPanel(restoreFocus = false): void {
+  byId('prep-sidebar').hidden = true;
+  activePrepPanel = undefined;
+  for (const control of document.querySelectorAll('[data-prep-panel]'))
+    control.setAttribute('aria-expanded', 'false');
+  if (restoreFocus) prepPanelOpener?.focus();
+}
+for (const control of document.querySelectorAll<HTMLButtonElement>('[data-prep-panel]')) {
+  control.onclick = () => {
+    const panel = control.dataset.prepPanel;
+    if (activePrepPanel === panel) {
+      closePrepPanel(true);
+      return;
+    }
+    activePrepPanel = panel;
+    prepPanelOpener = control;
+    for (const content of document.querySelectorAll<HTMLElement>('[data-panel]'))
+      content.hidden = content.dataset.panel !== panel;
+    for (const button of document.querySelectorAll<HTMLButtonElement>('[data-prep-panel]'))
+      button.setAttribute('aria-expanded', String(button === control));
+    byId('prep-panel-heading').textContent = control.textContent;
+    byId('prep-sidebar').hidden = false;
+    byId('prep-sidebar').querySelector('.drawer-body')?.scrollTo(0, 0);
+    byId('prep-panel-close').focus();
+  };
+}
+button('prep-panel-close', () => closePrepPanel(true));
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && activePrepPanel && !dialog.open) {
+    event.preventDefault();
+    closePrepPanel(true);
+  }
+});
 let creationBusy = false;
 let dataManagement: DataManagement | undefined;
 button('close-dialog', () => {
@@ -294,6 +366,7 @@ function hidePreparation(): void {
   }
   byId('preparation').hidden = true;
   document.body.classList.remove('in-preparation');
+  closePrepPanel();
   byId('title').hidden = false;
   preparation = undefined;
   choice = undefined;
@@ -392,6 +465,8 @@ async function openData(exportSlots?: number[]): Promise<void> {
         view.ghost = undefined;
       }
       byId('preparation').hidden = true;
+      document.body.classList.remove('in-preparation');
+      closePrepPanel();
       byId('title').hidden = false;
       audio.configure(preferences.value.audio);
       await renderTitle();
@@ -483,6 +558,7 @@ async function openCampaign(c: Campaign): Promise<void> {
   byId('title').hidden = true;
   byId('preparation').hidden = false;
   document.body.classList.add('in-preparation');
+  closePrepPanel();
   if (!view) {
     view = new WorldView(byId('world'), status, true);
     view.onSelect = (p) => {
@@ -512,6 +588,7 @@ async function openCampaign(c: Campaign): Promise<void> {
           y = asset.placement.y;
           rotation = asset.placement.rotation;
           dialog.close();
+          closePrepPanel();
           renderPreparation();
           byId('place').focus();
         };
@@ -524,6 +601,7 @@ async function openCampaign(c: Campaign): Promise<void> {
   }
   view.campaign = c;
   view.highContrast = preferences.value.highContrast;
+  view.onViewChange = updateCameraSummary;
   view.command('fit-base');
   renderPreparation();
   status(
@@ -567,12 +645,18 @@ function renderPreparation(): void {
   byId('campaign-heading').textContent = c.name;
   byId('account').textContent =
     `Rank ${c.rank} · ${c.accountXP} rank XP · ${c.credits} Credits · ${c.promotionCores} Cores · Capacity ${totals.capacity}/${allowed.capacity} · Barriers ${totals.barriers}/${allowed.barriers} · Traps ${totals.traps}/${allowed.traps} · ${repository?.temporary ? 'Temporary Session' : 'Retained storage'}`;
+  byId('account-details').textContent = byId('account').textContent;
   const chosen = choice;
   const selected = chosen && 'id' in chosen ? c.assets.find((a) => a.id === chosen.id) : undefined,
     type = choice && 'type' in choice ? choice.type : selected?.type;
   const canEdit = Boolean(repository?.writer) && !p.busy;
   (byId('campaign-siege') as HTMLButtonElement).disabled =
     !canEdit || c.warden !== 'warden.bulwark' || c.doctrine !== 'Bastion';
+  const preciseOpen = Boolean(
+    (document.getElementById('placement-precise') as HTMLDetailsElement | null)?.open,
+  );
+  // Remove reparented IDs before resolving and binding the new history controls.
+  byId('history-host').replaceChildren();
   byId('construction').innerHTML =
     `<p>Purchased land: [12,48) × [12,48). Core precinct: [27,33)². Selected Warden pad: [29,31) × [33,35). Expansions unlock at Rank 15/40/60/80; corners at 85/88/92/95. Purchase interface arrives with progression.</p><section aria-label="Owned inventory">${c.assets
       .map((a, i) => {
@@ -587,7 +671,7 @@ function renderPreparation(): void {
       )
       .join(
         '',
-      )}</nav><section aria-label="Placement"><p>${type ? `${foundation[type].name} · ${foundation[type].width}×${foundation[type].height} GU · ${foundation[type].capacity} capacity · ${selected ? 'Owned: free placement' : `${foundation[type].cost} Credits only when Place succeeds`}` : 'Select an owned asset or Buy & Place.'}</p><label>X <input id="place-x" type="number" min="0" max="59" step="1" value="${x}"></label><label>Y <input id="place-y" type="number" min="0" max="59" step="1" value="${y}"></label><button id="nudge-x-minus">X −1</button><button id="nudge-x-plus">X +1</button><button id="nudge-y-minus">Y −1</button><button id="nudge-y-plus">Y +1</button><button id="rotate-placement">Rotate footprint · ${rotation * 90}°</button><button id="place" aria-describedby="placement-reason" ${type && canEdit ? '' : 'disabled'}>Place</button><button id="cancel-placement" ${choice ? '' : 'disabled'}>Cancel Placement</button><button id="store" ${selected?.placement && canEdit ? '' : 'disabled'}>Store Selected</button><output id="placement-reason" aria-live="off">${type ? 'Awaiting explicit Place. Every entrance is checked for ordinary and heavy body clearance.' : 'No placement selected.'}</output></section><nav aria-label="Preparation history"><button id="undo" ${p.undoStack.length && canEdit ? '' : 'disabled'}>Undo</button><button id="redo" ${p.redoStack.length && canEdit ? '' : 'disabled'}>Redo</button><button id="export-campaign">Export Campaign</button></nav><p>Core Integrity ${(c.coreHP / 1024).toLocaleString(undefined, { maximumFractionDigits: 3 })} / ${coreBaseline.hp} · Armor ${coreBaseline.armor}. Base values · Sentry: Integrity ${sentryBaseline.hp}, Armor ${sentryBaseline.armor}, ${weapon.damage} damage / ${weapon.intervalTicks / 60} s, range ${weapon.rangeGU} GU, ${weapon.targets} layers. Barricade: Integrity ${barrierBaseline.hp}, Armor ${barrierBaseline.armor}. Tutorial Practice uses a disposable clone and durable start. C01S01 campaign progression and recovery are available for Bulwark/Bastion. The remaining campaign and roster are still in development.</p>`;
+      )}</nav><section aria-label="Placement" ${type ? '' : 'hidden'}><p class="placement-name">${type ? `${foundation[type].name} · ${foundation[type].width}×${foundation[type].height} GU · ${foundation[type].capacity} capacity · ${selected ? 'Owned: free placement' : `${foundation[type].cost} Credits only when Place succeeds`}` : 'Select an owned asset or Buy & Place.'}</p><details id="placement-precise"><summary>Precise placement and options</summary><label>X <input id="place-x" type="number" min="0" max="59" step="1" value="${x}"></label><label>Y <input id="place-y" type="number" min="0" max="59" step="1" value="${y}"></label><button id="nudge-x-minus">X −1</button><button id="nudge-x-plus">X +1</button><button id="nudge-y-minus">Y −1</button><button id="nudge-y-plus">Y +1</button><button id="rotate-placement">Rotate footprint · ${rotation * 90}°</button></details><div class="placement-actions"><button id="place" aria-describedby="placement-reason" ${type && canEdit ? '' : 'disabled'}>Place</button><button id="cancel-placement" ${choice ? '' : 'disabled'}>Cancel Placement</button></div><div id="placement-owned-actions"><button id="store" ${selected?.placement && canEdit ? '' : 'disabled'}>Store Selected</button></div><output id="placement-reason" aria-live="off">${type ? 'Awaiting explicit Place. Every entrance is checked for ordinary and heavy body clearance.' : 'No placement selected.'}</output></section><nav aria-label="Preparation history"><button id="undo" ${p.undoStack.length && canEdit ? '' : 'disabled'}>Undo</button><button id="redo" ${p.redoStack.length && canEdit ? '' : 'disabled'}>Redo</button><button id="export-campaign">Export Campaign</button></nav><p>Core Integrity ${(c.coreHP / 1024).toLocaleString(undefined, { maximumFractionDigits: 3 })} / ${coreBaseline.hp} · Armor ${coreBaseline.armor}. Base values · Sentry: Integrity ${sentryBaseline.hp}, Armor ${sentryBaseline.armor}, ${weapon.damage} damage / ${weapon.intervalTicks / 60} s, range ${weapon.rangeGU} GU, ${weapon.targets} layers. Barricade: Integrity ${barrierBaseline.hp}, Armor ${barrierBaseline.armor}. Tutorial Practice uses a disposable clone and durable start. C01S01 campaign progression and recovery are available for Bulwark/Bastion. The remaining campaign and roster are still in development.</p>`;
   for (const b of document.querySelectorAll<HTMLButtonElement>('[data-owned]'))
     b.onclick = () => {
       const id = b.dataset.owned;
@@ -603,6 +687,7 @@ function renderPreparation(): void {
           y = a.placement.y;
           rotation = a.placement.rotation;
         }
+        closePrepPanel();
         renderPreparation();
         byId('place').focus();
       }
@@ -610,6 +695,7 @@ function renderPreparation(): void {
   for (const b of document.querySelectorAll<HTMLButtonElement>('[data-buy]'))
     b.onclick = () => {
       choice = { type: b.dataset.buy as ContentID };
+      closePrepPanel();
       renderPreparation();
       byId('place').focus();
     };
@@ -692,11 +778,23 @@ function renderPreparation(): void {
       );
     },
   });
-  // Real landscape tools/details regions; preserve one set of semantic controls.
-  const inventory = byId('construction').querySelector('[aria-label="Owned inventory"]');
-  const catalog = byId('construction').querySelector('[aria-label="Construction catalog"]');
+  const construction = byId('construction');
+  const inventory = construction.querySelector('[aria-label="Owned inventory"]');
+  const catalog = construction.querySelector('[aria-label="Construction catalog"]');
+  const forces = document.createElement('section');
+  forces.setAttribute('aria-label', 'Owned forces');
+  for (const entry of inventory?.querySelectorAll<HTMLButtonElement>('[data-owned]') ?? []) {
+    const asset = c.assets.find((a) => a.id === entry.dataset.owned);
+    if (asset && ['warden', 'mobile'].includes(foundation[asset.type].category))
+      forces.append(entry);
+  }
+  byId('forces-host').replaceChildren(forces);
   byId('inventory-host').replaceChildren(...(inventory ? [inventory] : []));
   byId('catalog-host').replaceChildren(...(catalog ? [catalog] : []));
+  const history = construction.querySelector('[aria-label="Preparation history"]');
+  byId('history-host').replaceChildren(...(history ? [history] : []));
+  byId('prep-records').replaceChildren(...construction.querySelectorAll(':scope > p'));
+  byId('prep-details').hidden = !type;
   const jump = document.createElement('button');
   jump.textContent = 'Jump to selected';
   jump.disabled = !selected?.placement;
@@ -712,13 +810,18 @@ function renderPreparation(): void {
       }
     }
   };
-  byId('construction').append(jump);
+  byId('placement-owned-actions').append(jump);
+  byId('placement-precise').append(byId('placement-owned-actions'));
+  const placement = construction.querySelector('[aria-label="Placement"]');
+  const placementActions = placement?.querySelector('.placement-actions');
+  if (placementActions) placement?.querySelector('.placement-name')?.after(placementActions);
+  (byId('placement-precise') as HTMLDetailsElement).open = preciseOpen;
   updateGhost();
 }
 function updateCameraSummary(): void {
   if (!view) return;
   byId('camera-summary').textContent =
-    `Camera ${view.camera.view * 90}° · ${view.camera.zoom < 0.65 ? 'Strategic role icons' : view.camera.zoom > 1.35 ? 'Close detailed sprites' : 'Tactical detailed sprites'} · zoom ${view.camera.zoom.toFixed(3)} · ${view.fitActive ? (view.fitMode === 'base' ? 'Fit Base: purchased terrain plus sprite-height margin (pan if viewport is too narrow at minimum zoom)' : 'Fit Field: full world and staging perimeter') : 'Manual camera'}`;
+    `Camera ${view.camera.view * 90}° · ${view.strategicRoles ? 'Strategic role icons' : view.camera.zoom > 1.35 ? 'Close detailed sprites' : 'Tactical detailed sprites'} · zoom ${view.camera.zoom.toFixed(3)} · ${view.fitActive ? (view.fitMode === 'base' ? 'Fit Base: purchased terrain plus sprite-height margin (pan if viewport is too narrow at minimum zoom)' : 'Fit Field: full world and staging perimeter') : 'Manual camera'}`;
 }
 function updateGhost(): void {
   if (!view || !preparation) return;
@@ -752,6 +855,11 @@ function updateGhost(): void {
   }
   view.ghost = type ? { type, x, y, rotation, valid } : undefined;
   view.invalidReason = reason;
+  const hint = byId('prep-field').querySelector('.gesture-hint');
+  if (hint)
+    hint.textContent = type
+      ? 'Drag the ghost · Two fingers move / zoom the camera'
+      : 'Drag to pan · Pinch to zoom · Tap to inspect';
   const solids = solidFootprints(preparation.campaign).filter(
     (r) => !a?.placement || r.x !== a.placement.x || r.y !== a.placement.y,
   );
@@ -827,7 +935,12 @@ for (const b of document.querySelectorAll<HTMLButtonElement>('[data-front]'))
   };
 dialog.addEventListener('close', () => void preferences.save());
 window.addEventListener('keydown', (e) => {
-  if (dialog.open || (e.target as HTMLElement).matches('input,select,textarea')) return;
+  if (
+    e.defaultPrevented ||
+    dialog.open ||
+    (e.target as HTMLElement).matches('input,select,textarea')
+  )
+    return;
   if (tutorial) return;
   if (e.key === 'Escape') {
     choice = undefined;
@@ -858,6 +971,7 @@ async function startBattleSession(paid = false): Promise<void> {
   if (tutorial || !preparation || !repository) return;
   const repo = repository,
     slot = preparation.campaign.slot;
+  status('');
   preparation.undoStack = [];
   preparation.redoStack = [];
   choice = undefined;

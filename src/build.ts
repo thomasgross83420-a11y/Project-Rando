@@ -1,1 +1,1 @@
-export const applicationBuild = '0.2.10-startup-recovery';
+export const applicationBuild = '0.2.11-touch-field';

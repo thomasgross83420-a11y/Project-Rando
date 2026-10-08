@@ -3,7 +3,7 @@ What can I say, it's just a bunch of rando I'm trying out.
 
 ## Resonance Bastion
 
-The latest development checkpoint is on `codex/startup-control-recovery`;
+The latest development checkpoint is on `codex/touch-field-layout`;
 `main` contains the public preview link and its manual deployment workflow.
 [Open the tested playable preview](https://thomasgross83420-a11y.github.io/Project-Rando/).
 Start with the
@@ -27,8 +27,13 @@ are not committed. The pinned preview is published and checked on its public
 HTTPS origin; physical Android verification remains open. See
 [public preview verification](docs/PUBLIC_PREVIEW.md).
 
-Current public build: **0.2.10-startup-recovery**. See
-[startup/control fixes](docs/STARTUP_CONTROL_RECOVERY.md),
+Current interface build: **0.2.11-touch-field**. See the
+[field-first touch interface review](docs/TOUCH_FIELD_REVIEW.md) for the new
+collapsible menus, direct camera gestures, placement actions and bounded battle
+panels. Publication and exact build checks are recorded in
+[public preview verification](docs/PUBLIC_PREVIEW.md).
+
+Previous startup/control checkpoint: [startup recovery](docs/STARTUP_CONTROL_RECOVERY.md),
 [60-check production browser evidence](docs/evidence/STARTUP_CONTROL_TESTS.json)
 and [live update/save verification](docs/evidence/STARTUP_CONTROL_LIVE.json).
 
