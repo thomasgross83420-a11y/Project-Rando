@@ -100,7 +100,9 @@ it('prunes only recent receipt details; older finalized sequences never pay afte
   const before = canonical(repo.memory.get(0));
   expect(await store.finalize(...oldest)).toEqual({ status: 'already-finalized', receipt: null });
   expect(canonical(repo.memory.get(0))).toBe(before);
-});
+  // Twenty complete checksummed journal transactions can exceed the default
+  // five seconds while other integration suites share a hosted runner.
+}, 30000);
 it('rejects sequence overflow and clears a retained stale attempt without applying its payable payload', async () => {
   const { repo, c, store } = await setup(),
     cp = await store.start(c, fixturePlan, fixtureFrozen),
