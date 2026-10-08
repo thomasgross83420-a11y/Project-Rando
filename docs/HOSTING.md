@@ -1,5 +1,25 @@
 # Free GitHub delivery evidence
 
+## Current publication status — 2026-10-08
+
+The user authorized a public playable preview. [PR 12](https://github.com/thomasgross83420-a11y/Project-Rando/pull/12)
+installed the manual-only workflow on `main`, merge
+`cf738b2e381d68a652d8aa7ae681e0e48f1324c9`, without merging application
+development branches. The workflow is active, ID `378139552`, and builds tested
+source `bc7d60c4cc3eb229f6fdb3be9dce8eee0c2bebe1`.
+
+The authorized Pages creation request (`POST /repos/thomasgross83420-a11y/Project-Rando/pages`,
+`build_type=workflow`) returned HTTP 403, `Resource not accessible by integration`.
+The owner was asked to select **GitHub Actions** under **Build and deployment →
+Source** at [Pages settings](https://github.com/thomasgross83420-a11y/Project-Rando/settings/pages).
+The connection's repository-file access does not establish Pages administration
+access. This is a service permission error; it is not an approval-review rejection
+or evidence of an account-plan restriction.
+
+Publication and live HTTPS/game/save checks remain pending that configuration.
+No candidate URL is certified as playable yet. The earlier observations below
+are retained as dated history.
+
 2026-10-06: connected repository thomasgross83420-a11y/Project-Rando is public,
 not archived and has_pages=false. GET Pages: 404. GET Actions permissions: 403
 Resource not accessible by integration. The account-plan field was unavailable;

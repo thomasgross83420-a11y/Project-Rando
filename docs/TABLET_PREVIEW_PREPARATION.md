@@ -13,13 +13,26 @@ only static dist and deploys with pinned official actions, a standard Ubuntu
 runner, 15-minute job limits, one-day artifact retention and no automatic
 push/PR trigger. No custom domain, paid runner, cache, LFS or new service is used.
 
-## Publication requiring user authorization
+## Authorized publication — 2026-10-08
 
-Approve publishing this development checkpoint as the public playable preview.
-After approval, install the reviewed workflow on the default branch without
-merging the development stack, set Pages Source to GitHub Actions and dispatch
-the pinned workflow. If the integration cannot set Pages, the specific remaining
-mobile action is repository Settings → Pages → Source → GitHub Actions.
+The user approved publishing this development checkpoint. The reviewed workflow
+is now installed on `main` by [PR 12](https://github.com/thomasgross83420-a11y/Project-Rando/pull/12),
+merged as `cf738b2e381d68a652d8aa7ae681e0e48f1324c9`. That merge adds only
+`.github/workflows/tablet-preview.yml`; it does not merge the development stack.
+GitHub reports the workflow active (ID `378139552`).
+
+The authorized `POST /repos/thomasgross83420-a11y/Project-Rando/pages` with
+`build_type=workflow` returned HTTP 403, `Resource not accessible by integration`.
+The integration can install the workflow but cannot enable Pages. The remaining
+owner action is [repository Pages settings](https://github.com/thomasgross83420-a11y/Project-Rando/settings/pages)
+→ Build and deployment → Source → GitHub Actions. This is a configuration
+prerequisite, not a new publication-approval request. Workflow dispatch and live
+verification follow once that setting is confirmed.
+
+The pinned `actions/configure-pages` action documents that automatic enablement
+requires a token other than `GITHUB_TOKEN`, with the relevant administrative and
+Pages permissions. Its default `enablement: false` is retained; no credential is
+requested and the forbidden Pages creation operation is not retried.
 
 The previously forbidden Actions-administration endpoint is not retried.
 Its403 does not establish an account-plan limitation or whether Actions is
