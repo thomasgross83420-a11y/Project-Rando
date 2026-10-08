@@ -412,6 +412,10 @@ export const campaignTutorialRules: RunRules = {
     c.lifetimeXP = String(rank.lifetime);
     c.lifetimeXPSaturated = rank.saturated;
     c.emergencyActive = false;
+    if (plan.simulation === 'rb-sim-v4') {
+      c.build = '0.2.7-support';
+      c.simulationVersion = 'rb-sim-v4';
+    }
     c.revision++;
     const recovery = fullRecoveryBudget(c, recoveryIDs);
     return {

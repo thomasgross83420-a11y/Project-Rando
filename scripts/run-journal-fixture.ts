@@ -62,10 +62,17 @@ export async function productionSetup(create = true) {
     backup: new BackupStore(repo, new PracticeStore(repo)),
   };
 }
-export async function productionPending(session: Awaited<ReturnType<typeof productionSetup>>) {
+export async function productionPending(
+  session: Awaited<ReturnType<typeof productionSetup>>,
+  simulation: 'rb-sim-v3' | 'rb-sim-v4' = 'rb-sim-v4',
+) {
   const c = session.campaign;
   if (c?.schema !== 2) throw new Error('Production campaign missing');
-  const cp = await session.journal.start(c, campaignTutorialPlan(), freezeCampaign(c));
+  const cp = await session.journal.start(
+    c,
+    campaignTutorialPlan('Standard', simulation),
+    freezeCampaign(c),
+  );
   const b = await Battle.createCampaign(cp.plan, cp.frozen);
   for (let i = 0; i < 1800; i++) b.step();
   b.surrender();

@@ -73,8 +73,8 @@ export const progressedOwnedSchema = legacyOwnedSchema.extend({
 });
 export const progressionCampaignSchema = legacyCampaignSchema.extend({
   schema: z.literal(2),
-  build: z.literal('0.2.6-progression'),
-  simulationVersion: z.literal('rb-sim-v3'),
+  build: z.enum(['0.2.6-progression', '0.2.7-support']),
+  simulationVersion: z.enum(['rb-sim-v3', 'rb-sim-v4']),
   progressionPolicy: z.literal(CAMPAIGN_PROGRESSION_POLICY),
   rank: z.number().int().min(1).max(100),
   accountXP: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),

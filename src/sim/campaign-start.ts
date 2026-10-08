@@ -19,7 +19,7 @@ export const campaignTutorialSchema = tutorialSchema.extend({
   schema: z.literal(2),
   mode: z.literal('campaign'),
   stage: z.literal('C01S01'),
-  simulation: z.literal('rb-sim-v3'),
+  simulation: z.enum(['rb-sim-v3', 'rb-sim-v4']),
   difficulty: z.enum(['Cadet', 'Standard']),
   objectives: z.tuple([z.literal('objective.warden_survives'), z.literal('objective.core_75')]),
 });
@@ -62,13 +62,14 @@ export interface CapturedCampaign {
 }
 export function campaignTutorialPlan(
   difficulty: 'Cadet' | 'Standard' = 'Standard',
+  simulation: 'rb-sim-v3' | 'rb-sim-v4' = 'rb-sim-v4',
 ): CampaignTutorialPlan {
   return campaignTutorialSchema.parse({
     ...tutorialPlan(),
     schema: 2,
     mode: 'campaign',
     stage: 'C01S01',
-    simulation: 'rb-sim-v3',
+    simulation,
     difficulty,
     objectives: ['objective.warden_survives', 'objective.core_75'],
   });

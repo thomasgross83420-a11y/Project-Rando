@@ -55,7 +55,11 @@ export async function measureCombatProgression() {
     await repo.commit(c, undefined);
     const journal = new RunJournalStore(repo, campaignTutorialRules);
     for (let iteration = 1; iteration <= spec.repeats; iteration++) {
-      const cp = await journal.start(c, campaignTutorialPlan(spec.difficulty), freezeCampaign(c)),
+      const cp = await journal.start(
+          c,
+          campaignTutorialPlan(spec.difficulty, 'rb-sim-v3'),
+          freezeCampaign(c),
+        ),
         b = await Battle.createCampaign(cp.plan, cp.frozen);
       if (spec.id === 'immediate-surrender-standard') b.surrender();
       let budget = 36000;
