@@ -1,5 +1,15 @@
 # Implementation status
 
+
+Current published increment: **0.2.12-rifle-joints**. The Rifle Squad's authored
+joints/contacts, independent aim/gait and real-release presentation are verified
+for this slice. All150 unit checks,70 browser scenarios and12 selected live
+checks are verified; all40 public files match. An actual0.2.11 save remains
+unchanged. See [current review](RIFLE_ARTICULATION.md) and
+[public source/deployment evidence](PUBLIC_PREVIEW.md). Full game completion,
+other assets' articulation and physical-device/final creative acceptance remain
+open. Earlier dated entries below retain the development history.
+
 Authority: [unchanged blueprint](blueprint/Resonance_Bastion_Browser_Blueprint_Final.md). No major scope category is removed. Source ingestion retains905 source blocks and67 base roster identities. Registry presence does not mean implementation.
 
 | Gate | State | Evidence / remaining |
@@ -131,3 +141,9 @@ balance and save formats are unchanged. All150 unit and70 browser scenarios are
 verified; initial69 browser passes plus four explicit follow-ups are retained.
 Other assets, full content, final creative and Android acceptance remain open.
 See RIFLE_ARTICULATION.md and evidence/RIFLE_PRESENTATION_TESTS.json.
+
+0.2.12 publication: pinned source151c105195069ae419c36fd8f284fe40abd43275
+passed CI150 checks and manual deployment37793975792. All40 public files match;
+all12 selected live checks pass without retries/skips/failures. A public0.2.11
+save survives unchanged and starts practice. Public battle portrait/landscape
+were visually inspected. See evidence/RIFLE_PRESENTATION_LIVE.json.

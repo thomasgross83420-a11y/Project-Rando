@@ -582,3 +582,11 @@ outside Core occlusion; final captured art is visible. No runtime changes follow
 the frozen40-file build. Local source/log/artifact evidence and initial/follow-up
 results are in evidence/RIFLE_PRESENTATION_TESTS.json. Public source/CI/live-save
 verification is recorded separately in PUBLIC_PREVIEW.md.
+
+0.2.12 pinned-source CI repeats all150 unit checks successfully. All40 actual
+public files match;12 selected live cases pass with zero retries/skips/failures,
+including both result/audio failure recovery and actual public-art Phaser rigs.
+A real-public0.2.11 campaign passes the upgrade path unchanged. Current build
+label, required browser APIs, assets, portrait/landscape and startup/practice
+screens were inspected with no page/resource errors. Physical Android remains
+separate; see evidence/RIFLE_PRESENTATION_LIVE.json and PUBLIC_PREVIEW.md.

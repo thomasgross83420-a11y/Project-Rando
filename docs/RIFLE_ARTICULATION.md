@@ -64,7 +64,8 @@ All 150 unit tests in 32 files, deterministic scenario, type/lint/format and
 production build checks pass. All 70 browser scenarios are verified with zero
 automatic retries: the initial run passed 69, and four explicit follow-ups pass,
 including the result-error case after making its waiting logic honor the visible
-performance-pause policy. The animation review fixture was also moved outside
+performance-pause policy. Both follow-up paid fights completed at 4× without
+another performance pause; the helper did not need to resume them. The animation review fixture was also moved outside
 Core occlusion so its captured pose is directly visible. Runtime code and the
 40-file production build were unchanged during those follow-ups.
 See [local evidence](evidence/RIFLE_PRESENTATION_TESTS.json) and
@@ -92,3 +93,19 @@ parameter is introduced. Future work includes other assets' own joints, contacts
 actions and visual states; the Engineer's mobile action integration; remaining
 progression/results lifecycle; the full roster and campaign; final environment,
 UI and audio production; and physical-device acceptance.
+
+
+## Published review
+
+[Open the updated game](https://thomasgross83420-a11y.github.io/Project-Rando/?build=0.2.12-rifle-joints).
+The title build is `0.2.12-rifle-joints`; Siege → Tutorial Practice opens the
+free battle. Published source is `151c105195069ae419c36fd8f284fe40abd43275`.
+All40 files match; all12 selected live checks pass, and an actual0.2.11 save
+survives unchanged. CI repeats all150 unit checks on the pinned source.
+See [live evidence](evidence/RIFLE_PRESENTATION_LIVE.json),
+[portrait](evidence/rifle-public-battle-portrait.png) and
+[landscape](evidence/rifle-public-battle-landscape.png).
+
+Idle keys currently retain a neutral hold; breathing and secondary cloth/backpack
+motion remain individual refinement work. Eight-direction pixel poses and the
+held native gait keys are technical candidates, not final creative acceptance.

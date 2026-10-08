@@ -14,7 +14,26 @@
 
 Never advance a failed gate as complete. Independent fixes/prototypes may proceed with explicit status.
 
-## Current dependency-ready work
+## Dependency-ready after build0.2.12
+
+Rifle Squad authored joints/contacts replace the generic runtime articulation for
+that unit only. Independent aim/gait, real-release member cues, weapon sockets,
+per-pose damage and shared placement/combat identity pass current-slice regression checks;
+see RIFLE_ARTICULATION.md for explicit scope and evidence. Remaining assets still
+need their own contact, equipment, injury, death and action-state work before
+roster propagation. Physical tablet motion/performance remains a separate check.
+
+Continue the Engineer mobile planning/integration contract next: movement versus
+repair/fire/rearm exclusion, two external channels shared with Nodes, interruption,
+finite temporary stock, capture/versioned snapshots and final-result accounting.
+The existing isolated rearm kernel is a prerequisite, not a live Engineer. Then
+its own visual/contact proof is required. Results/promotion/sale/emergency identity
+lifecycle, full roster, campaigns/modes, environment and final art/audio remain
+open at their dependent gates. Public preview publication is now established;
+older pending-publication entries above are retained history.
+
+
+## Recovery-era dependency-ready work
 
 Gate 1 closeout passed: see review/GATE1_CLOSEOUT.md. Conditional foundation approval permits the next coherent combat slice, not mass roster production.
 
@@ -112,22 +131,3 @@ simulation version, preserving old replay paths. Then complete profiles,
 temporary/permanent stock terminal validation and actual visual/contact proof.
 The one-star stock primitive is not a completed mobile unit. Prepared public
 preview approval is pending; tablet target-identification questions are answered.
-
-
-## Dependency-ready after build0.2.12
-
-Rifle Squad authored joints/contacts replace the generic runtime articulation for
-that unit only. Independent aim/gait, real-release member cues, weapon sockets,
-per-pose damage and shared placement/combat identity pass current-slice regression checks;
-see RIFLE_ARTICULATION.md for explicit scope and evidence. Remaining assets still
-need their own contact, equipment, injury, death and action-state work before
-roster propagation. Physical tablet motion/performance remains a separate check.
-
-Continue the Engineer mobile planning/integration contract next: movement versus
-repair/fire/rearm exclusion, two external channels shared with Nodes, interruption,
-finite temporary stock, capture/versioned snapshots and final-result accounting.
-The existing isolated rearm kernel is a prerequisite, not a live Engineer. Then
-its own visual/contact proof is required. Results/promotion/sale/emergency identity
-lifecycle, full roster, campaigns/modes, environment and final art/audio remain
-open at their dependent gates. Public preview publication is now established;
-older pending-publication entries above are retained history.

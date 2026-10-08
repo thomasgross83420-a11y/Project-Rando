@@ -1394,10 +1394,16 @@
   "unit": {
     "passed": 150,
     "files": 32,
-    "source_note": "Full verify before the final preparation-only WorldView change; current WorldView covered by fresh build/typecheck and all browser scenarios. Pinned-source CI repeats all unit tests."
+    "source_note": "Full verify before the final preparation-only WorldView change; current WorldView covered by fresh build/typecheck and all browser scenarios. Pinned-source CI repeats all unit tests.",
+    "pinned_source_ci": {
+      "run": 37793975792,
+      "passed": 150,
+      "files": 32,
+      "type_lint_scenario_build": "pass"
+    }
   },
   "scenario_hash": "90a7d118d4df7eb3e8808e78d7ffa875ddd970ab4961287daf1a719426936169",
-  "failure_resolution": "Initial result-error case stopped at intentional 4x performance pause before terminal results; explicit test helper verifies performance status and resumes at 2x through visible controls when needed. Follow-up retains all persistence/audio/retry assertions. Animation screenshot fixture moved outside Core occlusion; no runtime change after full browser build.",
+  "failure_resolution": "Initial result-error case stopped at intentional 4x performance pause before terminal results; explicit test helper verifies performance status and resumes at 2x through visible controls when needed. Follow-up retains all persistence/audio/retry assertions. Animation screenshot fixture moved outside Core occlusion; no runtime change after full browser build. Both follow-up paid battles completed at 4x without another performance pause (zero resumes). The helper remains prepared for an explicit 2x Resume if needed.",
   "production_manifest": {
     "applicationBuild": "0.2.12-rifle-joints",
     "files": [
@@ -1608,11 +1614,16 @@
     "rifle-build-final.log": "beb35f43e8f62a0eae4f3fc996ac590d91cc213f3b30c22c39a5e265a79ac62d",
     "rifle-lint-final.log": "fce6dd233ac08bdd64f73ff8e2e802268c1f68b5dd4810e6c22f5b0419caa2c8",
     "rifle-types-final.log": "de5747b66e88dc09998c6c5d86b149e421e779339107fc311cf1f50cc86c6140",
-    "rifle-format-final.log": "76ae7812a0e876179d336d4ec0dc54f93665022eb7e16d46008434cb537c7c33",
+    "rifle-format-final.log": "6a68868caa4d03e27aeed1722ca05f0a1981490d45a2e6898ad6e5e965cb1a16",
     "rifle-source-validation.log": "032e430a5c04c9044364fc45185ca500d2c489d6751e5588e3bd443189114dd5",
     "rifle-raster-final.log": "a06723107a4524a96709972f4aa9889025d556fbbb12282922a99f338484fef3",
     "rifle-browser-final.log": "283134f550656819d100aa703167fb1167e5eca1a1684aff00559698978c3795",
     "rifle-browser-followup.log": "e056953913965f7c8f5d54cb4b477209301e7c97aedd139b864d99dbfb55d54a"
   },
-  "limits": "Desktop Chromium native emulated touch and actual Phaser/Canvas2D; physical Android performance and final creative acceptance remain open."
+  "limits": "Desktop Chromium native emulated touch and actual Phaser/Canvas2D; physical Android performance and final creative acceptance remain open.",
+  "followup_performance_resumes": {
+    "the player can migrate, deploy existing assets, win, review committed XP and rearm the persisted mine once": 0,
+    "a visible commit failure preserves the exact result and retry succeeds even if the audio device rejects suspension": 0
+  },
+  "source_commit": "151c105195069ae419c36fd8f284fe40abd43275"
 }

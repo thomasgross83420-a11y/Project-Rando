@@ -1,0 +1,719 @@
+{
+  "date": "2026-10-08",
+  "build": "0.2.12-rifle-joints",
+  "source": "151c105195069ae419c36fd8f284fe40abd43275",
+  "deployment": {
+    "conclusion": "success",
+    "headSha": "681f2c134c43070fdf6ee79c122c39e6ace39a5e",
+    "jobs": [
+      {
+        "completedAt": "2026-10-08T14:39:25Z",
+        "conclusion": "success",
+        "databaseId": 113368474952,
+        "name": "build",
+        "startedAt": "2026-10-08T14:37:27Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run npm ci --ignore-scripts --no-fund",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run npm run verify",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 11,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "number": 12,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 13,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37793975792/job/113368474952"
+      },
+      {
+        "completedAt": "2026-10-08T14:40:21Z",
+        "conclusion": "success",
+        "databaseId": 113369416880,
+        "name": "deploy",
+        "startedAt": "2026-10-08T14:39:30Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 4,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37793975792/job/113369416880"
+      }
+    ],
+    "status": "completed",
+    "updatedAt": "2026-10-08T14:40:22Z",
+    "url": "https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37793975792"
+  },
+  "main_merge": "681f2c134c43070fdf6ee79c122c39e6ace39a5e",
+  "publication_pr": 19,
+  "development_pr": 18,
+  "ci": {
+    "unit_passed": 150,
+    "unit_files": 32,
+    "type_lint_scenario_build": "pass",
+    "ci_log_sha256": "abe712a466df3900fc7d2e39fcb1b0ed60b8f53b682a21807cb1a00efafd29ab"
+  },
+  "public_browser": {
+    "stats": {
+      "startTime": "2026-10-08T14:41:54.427Z",
+      "duration": 159657.54299999998,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "campaign-ui.spec.ts",
+        "title": "the player can migrate, deploy existing assets, win, review committed XP and rearm the persisted mine once",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "performance_policy": [
+                  {
+                    "performanceResumes": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "campaign-ui.spec.ts",
+        "title": "a visible commit failure preserves the exact result and retry succeeds even if the audio device rejects suspension",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "performance_policy": [
+                  {
+                    "performanceResumes": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "gate1.spec.ts",
+        "title": "campaign creation, free deployment, atomic purchase, Undo/Redo and reload",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "performance_policy": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "recovery.spec.ts",
+        "title": "mobile backup replaces selected wallets, preserves other slots/settings, reloads and rolls back without merging",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "performance_policy": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "rifle-render.spec.ts",
+        "title": "preparation and legal/illegal Rifle ghosts share the authored three-member art without loading the legacy combat atlas",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "performance_policy": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "rifle-render.spec.ts",
+        "title": "Rifle moving fire uses three grounded members, independent gait/aim, one cropped rig per member and repeatable pixels through pause and camera rotation",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "performance_policy": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "reload and reopening a closed page restore editing without changing campaigns",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "performance_policy": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "another active tab can start New Game through confirmed takeover and the old controls refresh",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "performance_policy": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "startup-controls.spec.ts",
+        "title": "title buttons and cancelled creation stay usable, and unfinished combat choices are clearly unavailable",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "performance_policy": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "touch-layout.spec.ts",
+        "title": "native touch pans in every direction, pinches about the midpoint, and continues with the remaining finger",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "performance_policy": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "touch-layout.spec.ts",
+        "title": "choosing a build closes the menu; pinch continuation never moves or buys the ghost",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "performance_policy": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "touch-layout.spec.ts",
+        "title": "battle keeps the field visible and observation tools collapsed; opening and closing works by touch",
+        "ok": true,
+        "results": [
+          {
+            "status": "expected",
+            "attempts": [
+              {
+                "status": "passed",
+                "retry": 0,
+                "performance_policy": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "automatic_retries": 0,
+    "scope": "Ten application UI scenarios and two isolated Phaser fixture cases loading actual public assets; deployed application bytes independently match the tested build."
+  },
+  "assets": {
+    "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+    "source": "151c105195069ae419c36fd8f284fe40abd43275",
+    "https_certificate_validation": true,
+    "verified_files": 40,
+    "files": [
+      {
+        "path": "THIRD_PARTY_NOTICES.txt",
+        "status": 200,
+        "mime": "text/plain",
+        "bytes": 284630,
+        "sha256": "0c1677ecd236df2d3657cbbcc75abc08315327d88acb5c339008d218da8dd48e",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/app-CN7KbM0W.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1348185,
+        "sha256": "6efd26964c0a2a3fb0b60278fb524f814b13defde4ca53502c5fb13b1d8f7d44",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/alert.core.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 27244,
+        "sha256": "3b102957104f73fccd2ac6aca0a2e6e08eab400d8b4b590192f170a763cac448",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/alert.wave.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 20844,
+        "sha256": "7daa96d6c9b192bd862cb1a83f97c0650fe97c01ae5607a89357a81dbb2e30eb",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/manifest.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 8925,
+        "sha256": "03cf25256b4e669a262c9fb5ffeb7f043223dd728675acac436a633e454fba8d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/music.fracture.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3072044,
+        "sha256": "8c9a7cc92de47f02432fe14b2deadc78c638a438e46167177786f3848dd211a0",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/music.preparation.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3072044,
+        "sha256": "7ff2ab848fea55b8ec56ddb20b486b30c0df818a416cbd4295d4478c055145af",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/music.title.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3072044,
+        "sha256": "f9d89a42dc85e7756e7a4b988551ba5205aaaa5ecbd6b7de7c1739c3da7c7642",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.bulwark.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 5804,
+        "sha256": "bb24a903b5eac49b04798238738db8f321b394b4ef0587a754cc56fa59264680",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.challenge.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 17644,
+        "sha256": "7063882770bf5bbcd4b5ecc3b43a52fd3a2531fc80aee4d479f5dc64e3555332",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.holdfast.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 22444,
+        "sha256": "92c6d991e9820b59399fd69074299576ca97a69afa6cee74932fcbdd66f43553",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.impact.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 4204,
+        "sha256": "89483ec8e8a1bf99511e22c4f1cdee232bb319c5972e7f0bfcb3c01552320f33",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.interpose.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 14444,
+        "sha256": "7d44cfd5125f04169aee307f8b4b15bf0d21cbe25cfb6f0970dadd75f0e47ea6",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.melee.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 5164,
+        "sha256": "73edc6f7cc218caf9577e4156f57199fb1793b99725462e819c7e93afc5b0c01",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.mine.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 20844,
+        "sha256": "44dd680024f1857d68b3cbaac0bcd4bd5e674c92720e516351aa78c7b1713cf5",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.repair.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 12844,
+        "sha256": "ffec83d3805a309a12f0a1deede7028c2498ccd9cc6ed1b07d3c6e9c072702dc",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.rifle.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3244,
+        "sha256": "5a0f402ed431262f53f54a6b6cc86ea75e79898aecefb804ca44cfff3c959cde",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.sentry.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3884,
+        "sha256": "2ea71d3fbdb4df7535809be96ff52d7c611f8332d10444db7657b6a146c842d2",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/stinger.defeat.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 76844,
+        "sha256": "70039d02db80cca01131f03827612a352281690939f6a5936397bda823a0a883",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/stinger.victory.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 76844,
+        "sha256": "26bf18aeb3ec29401e0fe5bd19f12d54515e17917859cffcaa50dc8de3bfb30d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/ui.confirm.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3244,
+        "sha256": "8c4183b4e3f2906d8c5e04a4286adf0c072fff1ada8dc8df9a77dd02f99058b6",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/balance-study-CfZYC0QI.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1468,
+        "sha256": "4306f5d4ffc1ceb362870fa6763aba19cbf91ee56870a440b11750c7d7cce279",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/combat/atlas0.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 1038294,
+        "sha256": "f010a3d68c6ea2b244e7b9f6d5346b6506ba90c6660b7a5ff8103fa5f64e44fb",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/combat/manifest.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 771152,
+        "sha256": "cc3f5cdf575d016082a1538bc85ec012e0a5e3c15cf1b1baf0ca77b3e5100544",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/combat/rifle-joints-r1.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 103431,
+        "sha256": "6f515788d495baf3bcfbfd4016ba08705e5e71336239961a86c7302e76837d18",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/combat/rifle-rig.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 231101,
+        "sha256": "524257287c625d8de7407dd9e06a892cb4973d645f6b4e18a2501a7443ea9dee",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/diagnostic-B9GG4N3e.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 3043,
+        "sha256": "b8cf5bbf690250c44045336a99bed94cfe9a6b208092d23e280b4852d0c88491",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/foundation.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 14896,
+        "sha256": "02f0da9d5ec4f0bc7d4a24d1c2bd2a1ee56382af1cab303b5a6b9252a54f20ce",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/foundation.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 349002,
+        "sha256": "d397c7f6333f7e60caf6420c50f99f5ee51e6baed5d23169feb9847f1584bd57",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/icon.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 2141,
+        "sha256": "bcdfbcc4c5789752013f3d8eb3881914fb84a788915f111087833d296abd4f2d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/index-DHSPJ1MO.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1206,
+        "sha256": "3e6578270f836aee4c31dfbf1ec41da83f0799224e6af12381a1ac1dcb93453e",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/preload-helper-Cl7pOkUX.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1124,
+        "sha256": "989e1a374921cdeb43a03349e760593a196a91e7e6e055f9061657b8b57d96fc",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/roles.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 3285,
+        "sha256": "9693882fe946249b5cdacb4e7a4399aa884f2a3dc0d04478636a90a70c2715d8",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/roles.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 8321,
+        "sha256": "7a8a9aec353aaa2bc3265d49c68eb3f78fad87781a237a11998bb8b8bdfdcbf1",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/style-proof-close.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 128163,
+        "sha256": "0a19c329843159f762f96801e1873212969088e75848bf2174e6e8f68006b075",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/style-proof-default.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 32282,
+        "sha256": "0f378033a758ee393a7e1be3a7719fcc0bc96619f96116a29a896dbb4891ddc3",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/title-foundation.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 129260,
+        "sha256": "7c5ba99eabc67764b163517198ee7c21e3981372761c540430fa33768a07c553",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/world-DFVhNYXI.css",
+        "status": 200,
+        "mime": "text/css",
+        "bytes": 8156,
+        "sha256": "b2d539f32486a3443c722da5a6473966d2418bc087b558d93675591853966105",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/world-eJSXKqmu.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 2038843,
+        "sha256": "06b6ad10b8c4bbc1aeeb91ca784def63bbb9fa6495475a1a64a3010f7813d8aa",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "index.html",
+        "status": 200,
+        "mime": "text/html",
+        "bytes": 632,
+        "sha256": "a383310acedac26fb542d1cd1251db50031e248713ca479c7e9ca7589aec21a0",
+        "matches_local_tested_build": true
+      }
+    ]
+  },
+  "upgrade": {
+    "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+    "browser": "151.0.7922.173",
+    "old_source": "23754abc513320b4d25b5bcaae23ca4a8b6315de",
+    "new_source": "151c105195069ae419c36fd8f284fe40abd43275",
+    "actual_public_origin": true,
+    "existing_campaigns_unchanged": true,
+    "active_old_page_takeover_confirmed": true,
+    "next_reload_automatic": true,
+    "existing_campaign_practice_started": true,
+    "errors": []
+  },
+  "features": {
+    "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+    "browser": "151.0.7922.173",
+    "source": "Desktop Chromium on the actual public HTTPS origin; not physical Android acceptance",
+    "features": {
+      "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+      "origin": "https://thomasgross83420-a11y.github.io",
+      "secureContext": true,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "randomUUID": "function",
+      "BigInt": "function",
+      "structuredClone": "function",
+      "hasOwn": "function",
+      "IndexedDB": "function",
+      "WebAudio": "function",
+      "build": "Development preview 0.2.12-rifle-joints"
+    },
+    "viewports": [
+      {
+        "width": 800,
+        "height": 1280
+      },
+      {
+        "width": 1280,
+        "height": 800
+      }
+    ],
+    "errors": []
+  },
+  "limits": "Desktop Chromium 151 with native emulated touch; Lenovo GPU, Android IME/audio/background, TalkBack and final creative acceptance remain open."
+}
