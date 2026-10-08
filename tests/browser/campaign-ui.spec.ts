@@ -10,7 +10,7 @@ async function takeOver(page: Page) {
   }
 }
 async function newCampaign(page: Page) {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
   await page.getByRole('button', { name: 'Create campaign', exact: true }).first().click();
   await page.locator('#name').fill('Paid progression');
@@ -163,7 +163,7 @@ test('a visible commit failure preserves the exact result and retry succeeds eve
 test('earned enhancement preview quotes actual weapon changes and preserves a wreck until explicitly restored', async ({
   page,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.addScriptTag({ path: '.cache/run-journal-browser/fixture.js' });
   await page.evaluate(async () => {
     const s = await window.RBRunFixture.productionSetup(),
@@ -231,7 +231,7 @@ test('reload restarts the captured beginning and abandoning an unfinished siege 
 test('the recovery controls preserve a cash-poor wrecked campaign and explicitly commit its emergency repair outside Undo', async ({
   page,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.addScriptTag({ path: '.cache/run-journal-browser/fixture.js' });
   await page.evaluate(async () => {
     const s = await window.RBRunFixture.productionSetup(),
@@ -263,7 +263,7 @@ test('the recovery controls preserve a cash-poor wrecked campaign and explicitly
 test('progression controls and quoted purchases reflow in portrait and landscape at normal and 200% interface scale', async ({
   page,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.addScriptTag({ path: '.cache/run-journal-browser/fixture.js' });
   await page.evaluate(() => window.RBRunFixture.productionSetup());
   await page.reload();

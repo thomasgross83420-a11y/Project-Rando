@@ -1,0 +1,138 @@
+[
+  {
+    "cue": "title",
+    "bpm": 80,
+    "bars": 40,
+    "transpose": 0,
+    "timbre": "bell",
+    "melody": [
+      74,
+      69,
+      72,
+      77,
+      76,
+      72,
+      69,
+      67
+    ]
+  },
+  {
+    "cue": "preparation",
+    "bpm": 80,
+    "bars": 40,
+    "transpose": 0,
+    "timbre": "pad",
+    "melody": [
+      74,
+      69,
+      72,
+      77,
+      76,
+      72,
+      69,
+      67
+    ]
+  },
+  {
+    "cue": "fracture",
+    "bpm": 96,
+    "bars": 40,
+    "transpose": 2,
+    "timbre": "bell",
+    "melody": [
+      69,
+      72,
+      74,
+      77,
+      81,
+      79,
+      76,
+      72
+    ]
+  },
+  {
+    "cue": "iron",
+    "bpm": 88,
+    "bars": 40,
+    "transpose": -2,
+    "timbre": "brass",
+    "melody": [
+      62,
+      65,
+      69,
+      70,
+      69,
+      65,
+      62,
+      57
+    ]
+  },
+  {
+    "cue": "hollow",
+    "bpm": 72,
+    "bars": 40,
+    "transpose": 1,
+    "timbre": "glass",
+    "melody": [
+      74,
+      77,
+      76,
+      72,
+      69,
+      67,
+      65,
+      69
+    ]
+  },
+  {
+    "cue": "maw",
+    "bpm": 84,
+    "bars": 40,
+    "transpose": -5,
+    "timbre": "wood",
+    "melody": [
+      74,
+      77,
+      76,
+      72,
+      69,
+      67,
+      65,
+      69
+    ]
+  },
+  {
+    "cue": "boss",
+    "bpm": 104,
+    "bars": 80,
+    "transpose": -2,
+    "timbre": "brass",
+    "melody": [
+      62,
+      65,
+      69,
+      70,
+      69,
+      65,
+      62,
+      57
+    ]
+  },
+  {
+    "cue": "endurance",
+    "bpm": 92,
+    "bars": 80,
+    "transpose": 0,
+    "timbre": "wood",
+    "melody": [
+      69,
+      72,
+      74,
+      77,
+      81,
+      79,
+      76,
+      72
+    ]
+  }
+]

@@ -1,7 +1,7 @@
 import { prepMenu } from './menu-helpers';
 import { expect, test, type Page } from '@playwright/test';
 async function fixture(page: Page, credits: number, coreHP: number, sentryHP: number) {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.addScriptTag({ path: '.cache/run-journal-browser/fixture.js' });
   await page.evaluate(
     async ({ credits, coreHP, sentryHP }) => {

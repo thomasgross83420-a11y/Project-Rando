@@ -1,7 +1,7 @@
 import { closePrepMenu, precisePlacement, prepMenu } from './menu-helpers';
 import { expect, test, type Page } from '@playwright/test';
 async function create(page: Page) {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await expect(page.getByRole('button', { name: 'New Game', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
   await page.getByRole('button', { name: 'Create campaign', exact: true }).first().click();
@@ -22,7 +22,7 @@ async function place(page: Page, x: number, y: number) {
 test('global scale, reduced effects and high contrast persist across reload and campaigns', async ({
   page,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await prepMenu(page, 'tools');
   await expect(page.getByRole('button', { name: 'Accessibility', exact: true })).toBeEnabled();
   await prepMenu(page, 'tools');

@@ -29,7 +29,7 @@ test('reload and reopening a closed page restore editing without changing campai
   page,
   context,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await create(page);
   const before = await retained(page);
   await page.reload();
@@ -41,7 +41,7 @@ test('reload and reopening a closed page restore editing without changing campai
   expect(await retained(page)).toEqual(before);
   await page.close();
   const reopened = await context.newPage();
-  await reopened.goto('./');
+  await reopened.goto('./?legacy=1');
   await expect(reopened.getByRole('button', { name: 'New Game', exact: true })).toBeEnabled();
   await expect(
     reopened.getByRole('button', { name: 'Take Over Editing', exact: true }),
@@ -52,11 +52,11 @@ test('another active tab can start New Game through confirmed takeover and the o
   page,
   context,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await create(page);
   const before = await retained(page);
   const other = await context.newPage();
-  await other.goto('./');
+  await other.goto('./?legacy=1');
   await other.getByRole('button', { name: 'New Game', exact: true }).click();
   await expect(
     other.getByRole('heading', { name: 'Take Over Editing', exact: true }),
@@ -78,7 +78,7 @@ test('another active tab can start New Game through confirmed takeover and the o
 test('legacy ownership offers a working recovery from New Game instead of a gray dead end', async ({
   page,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await create(page);
   const before = await retained(page);
   await page.evaluate(async () => {
@@ -126,7 +126,7 @@ test('a failed writer transaction keeps title controls and a retry path availabl
       return tx;
     };
   });
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await expect(page.getByRole('button', { name: 'New Game', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
   await expect(
@@ -146,7 +146,7 @@ test('failed storage probe offers explicit temporary play without breaking the t
       return original.call(this, value, key);
     };
   });
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
   await expect(
     page.getByRole('heading', { name: 'Storage unavailable', exact: true }),
@@ -165,7 +165,7 @@ test('without Web Locks, closed legacy ownership still requires confirmation and
   page,
 }) => {
   await page.addInitScript(() => Object.defineProperty(navigator, 'locks', { value: undefined }));
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await create(page);
   const before = await retained(page);
   await page.reload();
@@ -179,7 +179,7 @@ test('without Web Locks, closed legacy ownership still requires confirmation and
 test('title buttons and cancelled creation stay usable, and unfinished combat choices are clearly unavailable', async ({
   page,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await expect(page.getByRole('button', { name: 'Continue', exact: true })).toBeDisabled();
   for (const name of ['How to Play', 'Accessibility', 'Settings', 'Credits']) {
     await page.getByRole('button', { name, exact: true }).click();
@@ -214,7 +214,7 @@ test('a campaign saved before an open failure remains loadable without retrying 
 }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.evaluate(() => {
     const original = IDBObjectStore.prototype.put;
     let failed = false;
@@ -253,7 +253,7 @@ test('a rejected Web Lock request does not strand startup and can be retried', a
       return original(...args);
     }) as LockManager['request'];
   });
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
   await expect(
     page.getByRole('heading', { name: 'New Campaign — Select Slot', exact: true }),
@@ -277,7 +277,7 @@ test('writer quota errors stay recoverable without uncaught request-handler erro
       return original.call(this, value, key);
     };
   });
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
   await expect(
     page.getByRole('heading', { name: 'New Campaign — Select Slot', exact: true }),
@@ -290,7 +290,7 @@ test('a displaced battle never automatically resumes after the other writer clos
   context,
 }) => {
   test.setTimeout(45000);
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await create(page);
   const before = await retained(page);
   await prepMenu(page, 'siege');
@@ -300,7 +300,7 @@ test('a displaced battle never automatically resumes after the other writer clos
     timeout: 20000,
   });
   const other = await context.newPage();
-  await other.goto('./');
+  await other.goto('./?legacy=1');
   await other.getByRole('button', { name: 'Take Over Editing', exact: true }).click();
   await other.getByRole('button', { name: 'Confirm Take Over', exact: true }).click();
   await expect(page.locator('#battle-root')).toHaveAttribute('data-state', 'Paused');

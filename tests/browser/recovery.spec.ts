@@ -61,7 +61,7 @@ async function saved(page: Page) {
 test('mobile backup replaces selected wallets, preserves other slots/settings, reloads and rolls back without merging', async ({
   page,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await create(page);
   await prepMenu(page, 'records');
   await page.getByRole('button', { name: 'Return to title', exact: true }).click();
@@ -112,7 +112,7 @@ test('mobile backup replaces selected wallets, preserves other slots/settings, r
 test('corrupt checksums and duplicate JSON are rejected before native storage changes; delete has an explicit preview', async ({
   page,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await create(page);
   await data(page);
   const backup = await exported(page),
@@ -138,7 +138,7 @@ test('corrupt checksums and duplicate JSON are rejected before native storage ch
 test('a quota failure after writes were queued aborts all imported slots and leaves an exact retry', async ({
   page,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await create(page);
   await prepMenu(page, 'records');
   await page.getByRole('button', { name: 'Return to title', exact: true }).click();
@@ -169,14 +169,14 @@ test('writer takeover rejects a stale recovery preview and preserves the other w
   page,
   context,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await create(page);
   await data(page);
   const backup = await exported(page);
   await review(page, backup);
   const before = await saved(page);
   const other = await context.newPage();
-  await other.goto('./');
+  await other.goto('./?legacy=1');
   await other.getByRole('button', { name: 'Take Over Editing', exact: true }).click();
   await other.getByRole('button', { name: 'Confirm Take Over', exact: true }).click();
   await page.getByRole('button', { name: 'Confirm Replace Selected Slots', exact: true }).click();
@@ -188,7 +188,7 @@ test('writer takeover rejects a stale recovery preview and preserves the other w
 test('export includes native interrupted practice and import refuses to replace it with a conflicting older backup', async ({
   page,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await create(page);
   await data(page);
   const older = await exported(page);
@@ -219,7 +219,7 @@ test('export includes native interrupted practice and import refuses to replace 
 test('unknown future logical journals block backup/recovery rather than silently omitting pending state', async ({
   page,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await create(page);
   await data(page);
   const backup = await exported(page);
@@ -251,7 +251,7 @@ test('unknown future logical journals block backup/recovery rather than silently
 test('global accessibility is preserved unless the player explicitly applies included settings', async ({
   page,
 }) => {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await create(page);
   await data(page);
   await page.locator('#export-preferences').check();

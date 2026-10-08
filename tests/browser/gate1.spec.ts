@@ -1,7 +1,7 @@
 import { precisePlacement, closePrepMenu, prepMenu } from './menu-helpers';
 import { expect, test, type Page } from '@playwright/test';
 async function create(page: Page): Promise<void> {
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await expect(page.getByRole('button', { name: 'New Game', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
   await page.getByRole('button', { name: 'Create campaign', exact: true }).first().click();
@@ -114,7 +114,7 @@ test('second tab cannot edit until confirmed writer takeover; stale tab cannot c
   });
   await create(page);
   const other = await context.newPage();
-  await other.goto('./');
+  await other.goto('./?legacy=1');
   await expect(other.locator('#status')).toContainText('read-only');
   await other.getByRole('button', { name: 'Take Over Editing', exact: true }).click();
   await other.getByRole('button', { name: 'Confirm Take Over', exact: true }).click();
@@ -139,7 +139,7 @@ test('explicit temporary session, native controls, viewport and 200% reflow', as
       },
     });
   });
-  await page.goto('./');
+  await page.goto('./?legacy=1');
   await expect(page.getByRole('button', { name: 'New Game', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: 'Start Temporary Session', exact: true }).click();
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
