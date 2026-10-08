@@ -29,7 +29,7 @@ function validate(a: BodyInvestment): void {
 /** Requested restoration uses fixed-point body units, not rounded display HP. */
 export function quoteRepair(a: BodyInvestment, requested: number) {
   validate(a);
-  integer(requested, 1);
+  integer(requested);
   if (!a.core && a.body === 0) throw new Error('Restore the wreck before repairing');
   const restored = Math.min(requested, a.maximum - a.body);
   const points = BigInt(restored),

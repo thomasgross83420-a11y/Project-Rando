@@ -421,3 +421,37 @@ was relaxed to hide the 404 and no skipped/retried tests certify that failed run
 The missing accuracy-growth equation is a blueprint clarification, not a tested
 formula. The proposed +5 percentage-point linear rule remains unapplied pending
 user input. Source artwork, actor movement and simulation versions are unchanged.
+
+## 2026-10-07–08 — progression balance, build 0.2.5
+
+`npm run verify` passed 96 unit tests in 20 files, typecheck/lint, the pinned
+Gate0 tick-grouping fixture and production build. The full production browser
+suite passed 34/34 in 4.9 minutes, without skips/retries. Separate growing-profile
+and purchase fixtures passed 9/9 after final type/guard cleanup. Existing lint
+style information and Phaser chunk-size warnings remain; no new lint diagnostics
+were introduced by the added modules.
+
+`npm run audit:progression-balance` collected 68 runs / 17 configurations / four
+paired seeds. All reached Victory in the authored teaching fixture. Across
+9538 observed releases, 978 passed rolls resolved without intended contact and
+140 failed rolls contacted the intended target. Actual capped damage, body,
+repair and body-recovery quotes are separate. Corrected arithmetic medians were
+recomputed from retained per-run rows; every result hash is retained.
+
+Exact uint32 thresholds, sub-percent growth, role ordering, frozen per-instance
+profiles, enhancement/promotion gates and price boundaries, zero-request repair,
+legacy v1/v2 hashes and grown-profile tick-grouping determinism are verified.
+An additional production-browser startup trace confirms the study module is not
+requested in normal practice and reports zero page errors. This is a desktop
+network/compatibility check, not a physical tablet performance certificate.
+
+See evidence/PROGRESSION_BALANCE.json and PROGRESSION_BALANCE_TESTS.json for the
+captured inputs, outputs, source/log fingerprints and limits, and
+PROGRESSION_BALANCE.md for the decision and primary research links. No normal
+paid campaign launch, full XP pacing, full roster/boss balance, ordinary-run
+backup/import, physical Lenovo, native Android sharing or TalkBack certification
+is implied by this increment.
+
+A current-source grown-stat spot replay of the mobile L100/E10 band-20 case
+also exactly matches its retained hash
+`694e131ec19d00245e6464b02d074f99063ad549162e311811b5cbfc81684dd6`.

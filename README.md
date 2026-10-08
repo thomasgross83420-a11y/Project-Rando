@@ -3,7 +3,7 @@ What can I say, it's just a bunch of rando I'm trying out.
 
 ## Resonance Bastion
 
-The latest checkpoint is on `codex/campaign-result-contracts`; `main`
+The latest checkpoint is on `codex/progression-balance-audit`; `main`
 currently contains only the original repository introduction. Start with the
 [thread recovery record](docs/PROJECT_RECOVERY.md) for the recovered checkpoint,
 available reference files, verification, and the next development step.
@@ -29,7 +29,13 @@ Data Management now exports/imports the supported playable state with checksum
 and rollback previews. `npm run audit:movement` and `npm run audit:economy`
 retain machine-readable evidence; reward arithmetic does not pay practice.
 
-Latest checkpoint: [campaign result contracts](docs/review/CAMPAIGN_RESULT_CONTRACTS.md)
+Previous checkpoint: [campaign result contracts](docs/review/CAMPAIGN_RESULT_CONTRACTS.md)
 and [mobile review downloads](docs/review/RESULT_CONTRACTS_DELIVERY.md). The exact
 transaction and progression kernels are staged; ordinary paid campaigns remain
 dependent work. `npm run audit:progression` records specified growth evidence.
+
+Latest checkpoint: [progression balance audit](docs/PROGRESSION_BALANCE.md) and
+[mobile review downloads](docs/review/PROGRESSION_BALANCE_DELIVERY.md). Versioned
+accuracy growth, frozen per-asset stat profiles and exact purchase quotes now
+have deterministic comparisons. The existing playable practice keeps its pinned
+replay rules. `npm run audit:progression-balance` reproduces the measured studies.

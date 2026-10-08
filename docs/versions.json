@@ -7,7 +7,7 @@
   "economyPolicy": "economy.duration_wave_v1",
   "saveSchema": 1,
   "blueprintSHA256": "9808229593b79b856f8f522dcffba591debe6334a3f60a61d1915cdd5e2900a6",
-  "applicationBuild": "0.2.4-campaign-result-contracts",
+  "applicationBuild": "0.2.5-progression-balance",
   "animationClock": "rb-animation-clock-v3",
   "practiceSchema": 1,
   "preferencesSchema": 1,
@@ -15,5 +15,7 @@
   "headingTableSHA256": "c3083702923fcf0253e21a360447f54602b9131c369656c0317a9b444337e938",
   "backupSchema": 1,
   "runJournalSchema": 1,
-  "progressionThresholds": "progression.thresholds-v1"
+  "progressionThresholds": "progression.thresholds-v1",
+  "accuracyPolicy": "accuracy.half-miss-v1",
+  "combatProfilePolicy": "progression.current-slice-v1"
 }

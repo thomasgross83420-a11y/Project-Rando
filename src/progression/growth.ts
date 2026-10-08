@@ -1,4 +1,4 @@
-/** Blueprint §27A shared growth only. No invented armor/accuracy curve,
+/** Blueprint §27A shared growth. No automatic armor curve,
  * automatic purchases, perk applicability or runtime stat mutation.
  */
 import { add, halfUp, multiply, rational, type Rational } from '../economy/policy';
@@ -32,6 +32,7 @@ export function ordinaryIntervalTicks(
   level: number,
   kind: 'attack' | 'beam' | 'support' = 'attack',
 ): number {
+  if (!['attack', 'beam', 'support'].includes(kind)) throw new Error('Unknown interval kind');
   const factors = growthFactors(level, 0);
   if (nominalSeconds.n <= 0n || nominalSeconds.d <= 0n)
     throw new Error('Positive interval required');

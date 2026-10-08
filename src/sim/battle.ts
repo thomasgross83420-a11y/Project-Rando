@@ -1,3 +1,6 @@
+import type { CapturedStudy, StudyInput, ShotObservation } from './balance-study';
+import { accuracyPass } from '../progression/accuracy';
+import { rational } from '../economy/policy';
 import { foundation } from '../data/foundation';
 import { combat, tuning, type CombatID } from '../data/combat';
 import { CORE, ENTRANCES, edgeClear, type Rect } from '../construction/geometry';
@@ -160,10 +163,24 @@ export class Battle {
   private flows = new Map<string, Flow>();
   private detected = new Set<number>();
   private impacts: Impact[] = [];
+  private shotObservations = new Map<number, ShotObservation>();
+  get observedShots(): readonly Readonly<ShotObservation>[] {
+    return [...this.shotObservations.values()].map((s) => Object.freeze({ ...s }));
+  }
+  private definition(e: Pick<Entity, 'id' | 'type'>) {
+    return (
+      this.study?.profiles[e.id]?.definition ??
+      (e.type === 'enemy.runner' || e.type === 'enemy.raider'
+        ? this.study?.enemies[e.type]
+        : undefined) ??
+      combat[e.type]
+    );
+  }
   constructor(
     readonly plan: TutorialPlan,
     readonly accuracy: RandomStream,
-    army: StartAsset[],
+    army: readonly StartAsset[],
+    private readonly study?: CapturedStudy,
   ) {
     tutorialSchema.parse(plan);
     this.add(
@@ -198,7 +215,7 @@ export class Battle {
         a.type,
         'friendly',
         { x: r.x + r.width / 2, y: r.y + r.height / 2 },
-        combat[a.type].radius ? null : r,
+        this.definition({ id: index + 2, type: a.type }).radius ? null : r,
         a.hp,
       );
       actor.heading = a.heading;
@@ -211,6 +228,19 @@ export class Battle {
       army,
     );
   }
+  /** Analysis-only: keeps the authored schedule but captures profiles and seed.
+   * Never accepted by tutorial checkpoint/result persistence. */
+  static async createStudy(army: StartAsset[], input: StudyInput): Promise<Battle> {
+    const { captureStudy } = await import('./balance-study');
+    const study = captureStudy(army, input),
+      plan = tutorialPlan();
+    return new Battle(
+      plan,
+      await RandomStream.seeded(study.input.seed, 'accuracy', plan.simulation),
+      study.army,
+      study,
+    );
+  }
   private add(
     id: number,
     type: CombatID,
@@ -219,7 +249,7 @@ export class Battle {
     rect: Rect | null,
     hp: number,
   ): Entity {
-    const d = combat[type];
+    const d = this.definition({ id, type });
     if (hp > d.hp) throw new Error('Durability exceeds baseline');
     const e: Entity = {
       ...point,
@@ -279,7 +309,7 @@ export class Battle {
   }
   private solids(exclude: number[] = []): Rect[] {
     return this.entities
-      .filter((e) => e.hp > 0 && combat[e.type].solid && e.rect && !exclude.includes(e.id))
+      .filter((e) => e.hp > 0 && this.definition(e).solid && e.rect && !exclude.includes(e.id))
       .map((e) => {
         if (!e.rect) throw new Error('Missing solid rectangle');
         return e.rect;
@@ -289,7 +319,7 @@ export class Battle {
     return this.entities.every(
       (e) =>
         e.hp <= 0 ||
-        !combat[e.type].solid ||
+        !this.definition(e).solid ||
         !e.rect ||
         e.id === owner ||
         e.id === t.id ||
@@ -298,11 +328,11 @@ export class Battle {
   }
   private weaponSight(e: Entity, t: Entity): boolean {
     const clearance =
-      this.plan.simulation !== 'rb-sim-v1' && (combat[e.type].weapon?.speed ?? 0) > 0 ? 51 : 0;
+      this.plan.simulation !== 'rb-sim-v1' && (this.definition(e).weapon?.speed ?? 0) > 0 ? 51 : 0;
     return this.los(e, t, e.id, clearance);
   }
   private canSee(a: Entity, t: Entity): boolean {
-    return t.hp > 0 && boundary(a, t) <= combat[a.type].vision && this.los(a, t, a.id);
+    return t.hp > 0 && boundary(a, t) <= this.definition(a).vision && this.los(a, t, a.id);
   }
   visible(e: Entity): boolean {
     return (
@@ -312,7 +342,7 @@ export class Battle {
           (sensor) =>
             sensor.team === 'friendly' &&
             sensor.hp > 0 &&
-            boundary(sensor, e) <= combat[sensor.type].vision &&
+            boundary(sensor, e) <= this.definition(sensor).vision &&
             this.los(sensor, e, sensor.id),
         ))
     );
@@ -394,7 +424,7 @@ export class Battle {
         a.y - b.y ||
         a.x - b.x,
     );
-    const radius = combat[packet.type].radius,
+    const radius = (this.study?.enemies[packet.type] ?? combat[packet.type]).radius,
       spot = spots.find(
         (p) =>
           edgeClear(p, p, radius, this.solids()) &&
@@ -404,7 +434,14 @@ export class Battle {
       this.reason = 'Deployment held: staging space occupied';
       return true;
     }
-    this.add(1000 + packet.id, packet.type, 'hostile', spot, null, combat[packet.type].hp);
+    this.add(
+      1000 + packet.id,
+      packet.type,
+      'hostile',
+      spot,
+      null,
+      (this.study?.enemies[packet.type] ?? combat[packet.type]).hp,
+    );
     const deployed = this.get(1000 + packet.id);
     if (deployed) this.spatial.update(deployed);
     this.packet++;
@@ -414,7 +451,7 @@ export class Battle {
       1000 + packet.id,
       { x: marker.x * U, y: marker.y * U },
       1,
-      `Front 1: ${combat[packet.type].name} deployed`,
+      `Front 1: ${(this.study?.enemies[packet.type] ?? combat[packet.type]).name} deployed`,
     );
     if (this.packet === this.plan.packets.length) {
       this.state = 'Cleanup';
@@ -426,7 +463,7 @@ export class Battle {
     for (const e of this.entities) {
       if (
         e.hp <= 0 ||
-        !combat[e.type].vision ||
+        !this.definition(e).vision ||
         this.tick % tuning.perception !== e.id % tuning.perception
       )
         continue;
@@ -477,7 +514,7 @@ export class Battle {
     );
   }
   armor(e: Entity): number {
-    return combat[e.type].armor * U + e.rampartArmor;
+    return this.definition(e).armor * U + e.rampartArmor;
   }
   private movePoint(e: Entity, t: Entity, preferred: number): Vec | null {
     const near = nearest(e, t),
@@ -485,7 +522,7 @@ export class Battle {
       v = direction(h, preferred + (t.rect ? 0 : t.radius)),
       p = { x: (t.rect ? near.x : t.x) + v.x, y: (t.rect ? near.y : t.y) + v.y };
     const lineOfFire =
-      this.plan.simulation !== 'rb-sim-v1' && (combat[e.type].weapon?.speed ?? 0) > 0;
+      this.plan.simulation !== 'rb-sim-v1' && (this.definition(e).weapon?.speed ?? 0) > 0;
     if (edgeClear(e, p, e.radius, this.solids()) && (!lineOfFire || this.los(p, t, e.id, 51)))
       return p;
     return this.flow(e, t, preferred, lineOfFire).waypoint(e, lineOfFire);
@@ -499,7 +536,7 @@ export class Battle {
     ).waypoint(e);
   }
   private score(e: Entity, t: Entity): number {
-    const d = combat[e.type],
+    const d = this.definition(e),
       w = d.weapon;
     if (!w) return -Infinity;
     const dist = boundary(e, t),
@@ -511,7 +548,7 @@ export class Battle {
       self = t.target === e.id ? 1000 : 0;
     let exposure = 0;
     for (const k of this.known(e)) {
-      const kw = combat[k.type].weapon;
+      const kw = this.definition(k).weapon;
       if (kw && boundary(e, k) <= kw.range)
         exposure += divRound(
           BigInt(kw.damage) * 60n * 5000n,
@@ -523,7 +560,7 @@ export class Battle {
       const pref =
         t.id === 1
           ? 0
-          : e.type === 'enemy.raider' && combat[t.type].radius && dist <= 4 * U
+          : e.type === 'enemy.raider' && this.definition(t).radius && dist <= 4 * U
             ? 60000
             : t.type === 'friendly.standard_barricade'
               ? 45000
@@ -575,7 +612,7 @@ export class Battle {
   }
   private decide(e: Entity): void {
     if (e.cast || e.dash) return;
-    const d = combat[e.type];
+    const d = this.definition(e);
     if (!d.weapon) return;
     const weapon = d.weapon;
     const candidates = this.known(e);
@@ -588,7 +625,7 @@ export class Battle {
       const blockers = candidates.filter(
         (t) =>
           t.id !== 1 &&
-          ((t.rect && combat[t.type].solid) ||
+          ((t.rect && this.definition(t).solid) ||
             (!t.rect &&
               boundary(e, t) <= weapon.range + 64 &&
               e.goal &&
@@ -759,7 +796,7 @@ export class Battle {
     );
   }
   private move(e: Entity): void {
-    const d = combat[e.type];
+    const d = this.definition(e);
     if (!d.speed || e.hp <= 0 || e.cast) return;
     const goal = e.dash?.point ?? e.goal;
     if (!goal) return;
@@ -831,7 +868,7 @@ export class Battle {
   }
 
   private face(e: Entity): void {
-    const d = combat[e.type],
+    const d = this.definition(e),
       t = this.get(e.target),
       goal = e.dash?.point ?? e.goal;
     const aim =
@@ -922,7 +959,7 @@ export class Battle {
       }
       this.event('explosion', e.id, 0, e, 300 * U, 'Proximity Mine detonated: fixed ground area');
     }
-    const w = combat[e.type].weapon,
+    const w = this.definition(e).weapon,
       t = this.get(e.target);
     if (
       !w ||
@@ -970,7 +1007,14 @@ export class Battle {
     e.lastAction = this.tick;
     e.state = 'Firing';
     if (!w.speed) {
-      this.event('melee', e.id, t.id, e, raw, `${combat[e.type].name} automatic contact attack`);
+      this.event(
+        'melee',
+        e.id,
+        t.id,
+        e,
+        raw,
+        `${this.definition(e).name} automatic contact attack`,
+      );
       this.impacts.push({
         fraction: 0,
         source: e.id,
@@ -985,7 +1029,25 @@ export class Battle {
       missAngle = this.accuracy.next(),
       missRadius = this.accuracy.next();
     let p = nearest(e, t);
-    if (BigInt(hit) * 100n >= BigInt(w.accuracy) * 4294967296n) {
+    const captured = this.study?.input.accuracyGrowth ? this.study.profiles[e.id]?.accuracy : null,
+      passed = accuracyPass(
+        hit,
+        captured
+          ? rational(BigInt(captured.numerator), BigInt(captured.denominator))
+          : rational(BigInt(w.accuracy), 100n),
+      );
+    if (this.study) {
+      if (this.shotObservations.size >= 20000)
+        throw new Error('Study shot collector exceeded budget');
+      this.shotObservations.set(sequence, {
+        sequence,
+        source: e.id,
+        target: t.id,
+        accuracyPassed: passed,
+        resolution: 'in-flight',
+      });
+    }
+    if (!passed) {
       const offset = direction(
         Math.floor((missAngle * 65536) / 4294967296),
         1024 + Math.floor((missRadius * 1025) / 4294967296),
@@ -1009,7 +1071,7 @@ export class Battle {
       sequence,
       release: { x: e.x, y: e.y },
     });
-    this.event('shot', e.id, t.id, e, raw, `${combat[e.type].name} automatic shot`);
+    this.event('shot', e.id, t.id, e, raw, `${this.definition(e).name} automatic shot`);
   }
   private advanceProjectiles(): void {
     const keep: Projectile[] = [];
@@ -1035,13 +1097,21 @@ export class Battle {
             (t) =>
               t.hp > 0 &&
               t.id !== p.source &&
-              (t.team !== p.team || (combat[t.type].solid && t.rect)),
+              (t.team !== p.team || (this.definition(t).solid && t.rect)),
           )
           .map((t) => ({ t, f: sweep(a, b, t) }))
           .filter((c): c is { t: Entity; f: number } => c.f !== null)
           .sort((a, b) => a.f - b.f || a.t.id - b.t.id),
         first = contacts[0];
       if (first) {
+        const observation = this.shotObservations.get(p.sequence);
+        if (observation)
+          observation.resolution =
+            first.t.team === p.team
+              ? 'friendly-solid'
+              : first.t.id === p.target
+                ? 'intended'
+                : 'other-hostile';
         if (first.t.team !== p.team)
           this.impacts.push({
             fraction: first.f,
@@ -1067,6 +1137,10 @@ export class Battle {
       p.traveled += distance(a, b);
       if (p.traveled < p.maxTravel && p.x >= 0 && p.y >= 0 && p.x < 60 * U && p.y < 60 * U)
         keep.push(p);
+      else {
+        const observation = this.shotObservations.get(p.sequence);
+        if (observation) observation.resolution = 'expired';
+      }
     }
     this.projectiles = keep;
   }
@@ -1122,7 +1196,7 @@ export class Battle {
         e.state =
           e.team === 'hostile'
             ? 'Destroyed'
-            : combat[e.type].mechanical || e.rect
+            : this.definition(e).mechanical || e.rect
               ? 'Wrecked'
               : 'Incapacitated';
         e.reason =
@@ -1143,7 +1217,7 @@ export class Battle {
           this.kills++;
           this.destroyedTP += e.type === 'enemy.raider' ? 2 : 1;
         }
-        this.event('death', e.id, e.id, e, 0, `${combat[e.type].name} ${e.reason}`);
+        this.event('death', e.id, e.id, e, 0, `${this.definition(e).name} ${e.reason}`);
       }
   }
   private support(): void {
@@ -1154,8 +1228,8 @@ export class Battle {
       const valid = (t: Entity): boolean =>
         t.team === 'friendly' &&
         t.hp > 0 &&
-        combat[t.type].mechanical &&
-        boundary(e, t) <= 5 * U &&
+        this.definition(t).mechanical &&
+        boundary(e, t) <= (this.study?.profiles[e.id]?.repair?.range ?? 5 * U) &&
         this.los(e, t, e.id) &&
         (slots.get(t.id) ?? 0) < 2;
       const score = (t: Entity): number =>
@@ -1197,7 +1271,8 @@ export class Battle {
         e.channelCommit = this.tick + 30;
       }
       slots.set(t.id, (slots.get(t.id) ?? 0) + 1);
-      const output = t.id === 1 ? 3200 : 6400;
+      const repair = this.study?.profiles[e.id]?.repair,
+        output = t.id === 1 ? (repair?.corePerPulse ?? 3200) : (repair?.perPulse ?? 6400);
       reserved.set(t.id, (reserved.get(t.id) ?? 0) + Math.min(output, t.maxHP - t.hp));
       e.state = 'Channeling';
       e.reason = 'Stationary repair channel; living mechanical ally; LOS; Core half rate';
@@ -1294,7 +1369,7 @@ export class Battle {
           this.los(e, t, e.id)
         )
           t.shield.push({
-            pool: 600 * U,
+            pool: this.study?.profiles[e.id]?.interposePool ?? 600 * U,
             expires: this.tick + 360,
             heading: d.heading,
             source: e.id,
@@ -1363,7 +1438,7 @@ export class Battle {
           (e) =>
             e.team === 'friendly' &&
             e.hp > 0 &&
-            (combat[e.type].weapon || e.charges > 0 || e.mineDue !== null),
+            (this.definition(e).weapon || e.charges > 0 || e.mineDue !== null),
         ) || this.projectiles.some((p) => p.team === 'friendly');
     if (!capable && hostiles.some((e) => Number.isFinite(this.flow(e).costs[cellIndex(e)])))
       this.inevitableTicks++;
@@ -1417,6 +1492,7 @@ export class Battle {
   }
   snapshot(): object {
     return {
+      ...(this.study ? { study: this.study } : {}),
       tick: this.tick,
       director: this.director,
       cleanupTick: this.cleanupTick,
