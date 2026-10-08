@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-08",
+  "applicationBuild": "0.2.9-render-reuse",
+  "sourceCheckpoint": "bc7d60c4cc3eb229f6fdb3be9dce8eee0c2bebe1",
+  "unitTests": 134,
+  "unitFiles": 30,
+  "browserTests": 49,
+  "browserRetries": 0,
+  "browserSkipped": 0,
+  "checks": [
+    "typecheck",
+    "lint",
+    "format check",
+    "full unit suite",
+    "deterministic scenario",
+    "production build",
+    "full production browser suite",
+    "six exact before/after PNG and hit/camera comparisons",
+    "bounded camera cycles and disposal",
+    "manual-only pinned workflow YAML checks"
+  ],
+  "sourceSHA256": {
+    "src/render/world.ts": "c56614ba25c5beb1e86df080b0c29138a627dd12f0639113de8d3c67fceab1e2",
+    "tests/browser/render-reuse.spec.ts": "576000365b6426caaea35d015ad980296034cf0ba1aa18ab297e4bfd44a78601",
+    "scripts/render-performance-fixture.ts": "3b7258a124928901f96beb1a3e71f28f0f6e9da97c6b7d850a2aef0d125a2452",
+    "scripts/build-render-fixture.mjs": "c1ce605b10a598e528872d400ea21f9b2919c206d6f8ec613a1789b1db0f981b",
+    "scripts/measure-render-reuse.mjs": "b6a4174c976f0ddadb81ab44e51a02bf7fbabfdce4b66094fe688368b07d09fe",
+    "docs/evidence/RENDER_REUSE_BEFORE.json": "ac32eb6dac0828b901043e500463008c6496c7a10fb98f30be046c5abcca888f",
+    "docs/evidence/RENDER_REUSE_AFTER.json": "eb9431e749cdba50dd58d4dcfc87c05d4c87a38127c4810d26df34c1e8a8bdc5",
+    "docs/evidence/RENDER_REUSE_COMPARISON.json": "884e944e22353ccd9e58af2ea578fc72c441f01349f504670e610880e67c2989",
+    "docs/evidence/TABLET_TARGET.json": "a276460a63e6d270fe529cd3f142a1cfebed38f42125fee5efc0e03b637e68df",
+    "docs/pages-preview.yml.example": "d8a11c0eae3687711977de6ec0b1ab4b73184182f6ae0290b5b1c956f9b30002"
+  },
+  "logSHA256": {
+    "tablet-render-verify.log": "23b8fdce485ea9ebe461343a36a9932738c49db31010fb8411ea6dfbcaec7a4c",
+    "tablet-render-browser.log": "d63b413d2963b09e2e9732ccee91c78b7eb9a6f477b9f8cdb4535501e77f1b0b",
+    "tablet-render-format-check.log": "58cb84edbe847de721aa3ccfe7f5f2f398b7c9e12e54f463a76607f1ded3eb4b",
+    "render-before.log": "0ee682f080b552f3c82503513be0bd8cd04f162c4bfe7a206d6b220e1efb12c4",
+    "render-after.log": "62a0b0c286ee68eb6b0b945e54d926eb5416a0fa4840b4748813279fa56166d2"
+  },
+  "physicalAndroidCertified": false,
+  "reportedChrome154Executed": false,
+  "notes": [
+    "The actual Android/browser/model inputs are resolved from supplied screenshots.",
+    "Allocation counts and draw submission timing are desktop measurements, not device frame timing.",
+    "Workflow template is prepared only, not installed or dispatched."
+  ]
+}

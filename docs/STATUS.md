@@ -83,3 +83,12 @@ confirmation spends once. Full134 unit/47 browser checks pass, then affected9
 browser checks pass after human-readable confirmation titles. See AFFORDABLE_REPAIR.md.
 Exact tablet model/Android/browser information has been requested to target the
 next physical/runtime checks; desktop emulation does not certify that device.
+
+2026-10-08 build0.2.9: supplied screenshots resolve TB-X606F/Android10/4 GB/
+Chrome154.0.8037.126. A measured redraw-allocation bottleneck is corrected with
+scene-owned image/text reuse. All six before/after PNGs and picking/camera bounds
+match exactly; bounded repeated camera/ghost cycles and disposal pass. Full134
+unit tests and49 browser checks pass, with retained replay hashes unchanged.
+Tablet GPU/audio/storage performance remains unmeasured. A manual-only pinned
+Pages preview workflow is prepared for publication approval, not installed.
+See review/TABLET_RENDER_REUSE.md and TABLET_PREVIEW_PREPARATION.md.

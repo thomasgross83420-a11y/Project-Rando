@@ -31,6 +31,9 @@ export class WorldView {
   invalidReason = '';
   scene: Phaser.Scene | undefined;
   sprites: Phaser.GameObjects.Image[] = [];
+  private imagePool: Phaser.GameObjects.Image[] = [];
+  private labelPool: Phaser.GameObjects.Text[] = [];
+  private labelKinds: string[] = [];
   campaign: Campaign | undefined;
   ghost: { type: ContentID; x: number; y: number; rotation: number; valid: boolean } | undefined;
   onSelect: ((point: Point) => void) | undefined;
@@ -142,6 +145,11 @@ export class WorldView {
     this.observer.disconnect();
     this.onViewChange = undefined;
     this.game.destroy(true);
+    this.imagePool = [];
+    this.labelPool = [];
+    this.labelKinds = [];
+    this.sprites = [];
+    this.labels = [];
   }
   resize(): void {
     const width = this.parent.clientWidth,
@@ -316,11 +324,47 @@ export class WorldView {
     if (command === 'down') pan(this.camera, 0, -48);
     this.draw();
   }
+  /** Reuse presentation objects by draw slot; active arrays retain their meaning.
+   * Every acquisition resets properties that differ between terrain, actors,
+   * strategic icons and translucent ghosts. Hidden surplus stays scene-owned. */
+  private pooledImage(texture: string, frame: string): Phaser.GameObjects.Image {
+    if (!this.scene) throw new Error('World scene unavailable');
+    const index = this.sprites.length;
+    let sprite = this.imagePool[index];
+    if (!sprite) {
+      sprite = this.scene.add.image(0, 0, texture, frame);
+      this.imagePool.push(sprite);
+    } else if (sprite.texture.key !== texture || sprite.frame.name !== frame)
+      sprite.setTexture(texture, frame);
+    sprite.setOrigin(0.5).setScale(1).setTint(0xffffff).setAlpha(1).setVisible(true);
+    this.sprites.push(sprite);
+    return sprite;
+  }
+  private pooledLabel(
+    kind: string,
+    text: string,
+    x: number,
+    y: number,
+    style: Phaser.Types.GameObjects.Text.TextStyle,
+  ): Phaser.GameObjects.Text {
+    if (!this.scene) throw new Error('World scene unavailable');
+    const index = this.labels.length;
+    let label = this.labelPool[index];
+    if (!label) {
+      label = this.scene.add.text(x, y, text, style);
+      this.labelPool.push(label);
+    } else {
+      if (this.labelKinds[index] !== kind) label.setStyle(style);
+      if (label.text !== text) label.setText(text);
+    }
+    this.labelKinds[index] = kind;
+    label.setPosition(x, y).setOrigin(0).setVisible(true);
+    this.labels.push(label);
+    return label;
+  }
   draw(): void {
     const g = this.graphics;
     if (!g) return;
-    for (const sprite of this.sprites) sprite.destroy();
-    for (const label of this.labels) label.destroy();
     this.labels = [];
     this.hitRecords = [];
     this.sprites = [];
@@ -335,14 +379,13 @@ export class WorldView {
         ay = f.anchor[1];
       if (w === undefined || h === undefined || ax === undefined || ay === undefined)
         throw new Error('Missing anchor');
-      const s = this.scene.add
-        .image(p.x, p.y, 'foundation', key)
+      this.pooledImage('foundation', key)
+        .setPosition(p.x, p.y)
         .setOrigin(ax / w, ay / h)
         .setScale(this.camera.zoom / 2)
         .setDepth(key.startsWith('terrain.') ? 0 : 1000 + p.y)
         .setTint(tint)
         .setAlpha(alpha);
-      this.sprites.push(s);
     };
     for (let y = 0; y < 60; y++)
       for (let x = 0; x < 60; x++) {
@@ -413,13 +456,12 @@ export class WorldView {
               { x: 0, y: 0.2 },
             ]
           : [{ x: 0, y: 0 }]) {
-          const pos = project({ x: p.x + o.x, y: p.y + o.y }, this.camera),
-            s = this.scene.add
-              .image(Math.round(pos.x), Math.round(pos.y), 'combat.' + f.atlas, f.key)
-              .setOrigin((ax - tx) / w, (ay - ty) / h)
-              .setScale(this.camera.zoom / 2)
-              .setDepth(1000 + pos.y);
-          this.sprites.push(s);
+          const pos = project({ x: p.x + o.x, y: p.y + o.y }, this.camera);
+          this.pooledImage('combat.' + f.atlas, f.key)
+            .setPosition(Math.round(pos.x), Math.round(pos.y))
+            .setOrigin((ax - tx) / w, (ay - ty) / h)
+            .setScale(this.camera.zoom / 2)
+            .setDepth(1000 + pos.y);
         }
         const pos = project(p, this.camera);
         this.hitRecords.push({
@@ -479,21 +521,16 @@ export class WorldView {
         g.fillRoundedRect(p.x - 16, p.y - 16, 32, 32, 4);
         g.lineStyle(this.highContrast ? 3 : 2, 0xb8eee0);
         g.strokeRoundedRect(p.x - 16, p.y - 16, 32, 32, 4);
-        const icon = this.scene.add
-          .image(Math.round(p.x), Math.round(p.y), 'roles', b.key)
+        this.pooledImage('roles', b.key)
+          .setPosition(Math.round(p.x), Math.round(p.y))
           .setDepth(100000);
-        this.sprites.push(icon);
         if (b.ids.length > 1)
-          this.labels.push(
-            this.scene.add
-              .text(p.x + 13, p.y - 17, String(b.ids.length), {
-                fontFamily: 'system-ui',
-                fontSize: '16px',
-                color: '#ffffff',
-                backgroundColor: '#111923',
-              })
-              .setDepth(100001),
-          );
+          this.pooledLabel('group', String(b.ids.length), p.x + 13, p.y - 17, {
+            fontFamily: 'system-ui',
+            fontSize: '16px',
+            color: '#ffffff',
+            backgroundColor: '#111923',
+          }).setDepth(100001);
         for (const id of b.ids) {
           const object = objects.find((o) => o[2] === id);
           if (object)
@@ -586,17 +623,14 @@ export class WorldView {
         p.y >= 0 &&
         p.y <= this.camera.height
       )
-        this.labels.push(
-          this.scene.add
-            .text(p.x, p.y, `${i + 1}`, {
-              fontFamily: 'system-ui',
-              fontSize: '18px',
-              color: '#e1bf7b',
-              backgroundColor: '#17232e',
-            })
-            .setOrigin(0.5)
-            .setDepth(99998),
-        );
+        this.pooledLabel('entrance', `${i + 1}`, p.x, p.y, {
+          fontFamily: 'system-ui',
+          fontSize: '18px',
+          color: '#e1bf7b',
+          backgroundColor: '#17232e',
+        })
+          .setOrigin(0.5)
+          .setDepth(99998);
     }
     // Locked purchase regions remain navigable terrain, never collision walls.
     for (const r of [
@@ -619,16 +653,12 @@ export class WorldView {
         h = this.ghost.rotation % 2 ? d.width : d.height;
       outline(this.ghost.x, this.ghost.y, w, h, this.ghost.valid ? 0x40baa8 : 0xff6b6b);
       const p = project({ x: this.ghost.x + w / 2, y: this.ghost.y + h / 2 }, this.camera);
-      this.labels.push(
-        this.scene.add
-          .text(p.x + 12, p.y + 8, this.ghost.valid ? '✓' : '×', {
-            fontFamily: 'system-ui',
-            fontSize: '24px',
-            color: '#ffffff',
-            backgroundColor: '#111923',
-          })
-          .setDepth(100001),
-      );
+      this.pooledLabel('ghost', this.ghost.valid ? '✓' : '×', p.x + 12, p.y + 8, {
+        fontFamily: 'system-ui',
+        fontSize: '24px',
+        color: '#ffffff',
+        backgroundColor: '#111923',
+      }).setDepth(100001);
       if (atlas.frames.some((f) => f.key === `${this.ghost?.type}.view${this.camera.view}`))
         image(
           `${this.ghost.type}.view${(this.camera.view + this.ghost.rotation) % 4}`,
@@ -645,6 +675,10 @@ export class WorldView {
     g.strokeCircle(p.x, p.y, 7);
     g.lineBetween(p.x - 10, p.y, p.x + 10, p.y);
     g.lineBetween(p.x, p.y - 10, p.x, p.y + 10);
+    for (let i = this.sprites.length; i < this.imagePool.length; i++)
+      this.imagePool[i]?.setVisible(false);
+    for (let i = this.labels.length; i < this.labelPool.length; i++)
+      this.labelPool[i]?.setVisible(false);
     this.parent.dataset.zoom = String(this.camera.zoom);
     this.parent.dataset.orientation = String(this.camera.view * 90);
     this.parent.dataset.presentation = this.strategicRoles ? 'strategic' : 'detailed';

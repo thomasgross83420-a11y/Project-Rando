@@ -1,6 +1,8 @@
 # Target tablet validation
 
-Target named by the user: Lenovo Tab M10 FHD Plus. Device optimization must
+Target confirmed from the user's four screenshots: Lenovo Tab M10 FHD Plus,
+model TB-X606F, Android 10, 4.00 GB RAM, 64.00 GB storage, MediaTek Helio P22T
+and 1920×1200 panel. Chrome reports 154.0.8037.126 on Android 10. Device optimization must
 preserve the complete blueprint and visual/mechanical detail. Measurements,
 rather than the product name alone, determine rendering and scheduling changes.
 
@@ -9,8 +11,8 @@ rather than the product name alone, determine rendering and scheduling changes.
 [Lenovo's Tab M10 FHD Plus (2nd Gen) specification](https://psref.lenovo.com/syspool/Sys/PDF/Lenovo_Tablets/Tab_M10_FHD_Plus_2nd_Gen/Tab_M10_FHD_Plus_2nd_Gen_Spec.PDF)
 (edition 2023-06-15) lists Helio P22T / PowerVR GE8320, 2/3/4 GB RAM variants,
 a 1920×1200 panel and Android 9 or later. It names TB-X606F/X606X and a voice
-variant. These are candidate family specifications, not a confirmed identification
-of the user's hardware, installed OS or available memory.
+variant. The screenshots identify the 4 GB TB-X606F; they do not measure currently
+available memory or GPU performance.
 
 [Chrome's current Android requirements](https://support.google.com/chrome/answer/95346?co=GENIE.Platform%3DAndroid&hl=en)
 state Android 10 and up. This describes current Chrome installation requirements;
@@ -23,12 +25,20 @@ Those checks establish reflow and interaction behavior in that browser. They
 cannot establish PowerVR GPU performance, Android audio lifecycle, touch latency,
 available memory, TalkBack behavior or local download durability.
 
-## Information requested from the user
+## Target identification completed
 
-Tablet model code, Android version, browser name/version. Settings → About tablet
-and Chrome → Settings → About Chrome normally provide them. This resolves the
-variant/runtime uncertainty without lowering the game scope. No passwords,
-serial number, account information or credentials are needed.
+The supplied screenshots resolve model, installed Android/browser and RAM variant.
+No further target-identification input is needed. Screenshots are not committed:
+the first contains unrelated personal/network details. Only relevant hardware and
+runtime fields are recorded. Browser viewport/DPR, free memory and GPU timing
+remain measurement questions; panel resolution does not establish CSS viewport.
+
+MDN browser-compat-data checked 2026-10-08 records Chrome support for BigInt from
+67, crypto.randomUUID from92, Object.hasOwn from93 and structuredClone from98;
+Chrome Android entries mirror those records. The reported154 browser exceeds
+these version minima. crypto.randomUUID still requires a secure context, and
+API version support is not proof of actual storage/GPU/audio reliability.
+Actual automated runs remain Chromium151, not154 or Android.
 
 ## Next measured pass
 

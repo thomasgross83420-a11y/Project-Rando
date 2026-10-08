@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-08",
+  "source": "User supplied four About tablet / About Chrome screenshots",
+  "model": "Lenovo TB-X606F",
+  "productName": "Lenovo Tab M10 FHD Plus",
+  "android": "10",
+  "browserName": "Chrome",
+  "browserVersionReported": "154.0.8037.126",
+  "ramGBReported": 4,
+  "storageGBReported": 64,
+  "cpuReported": "MediaTek Helio P22T Tab Octa-core 2.3G",
+  "panelPixelsReported": {
+    "width": 1920,
+    "height": 1200
+  },
+  "browserCSSViewportMeasured": null,
+  "browserDPRMeasured": null,
+  "freeMemoryMeasured": null,
+  "gpuTimingMeasured": false,
+  "physicalGameplayTested": false,
+  "automatedBrowser": "Chromium151.0.7922.173 desktop",
+  "compatibilityReferences": {
+    "structuredClone": {
+      "url": "https://raw.githubusercontent.com/mdn/browser-compat-data/main/api/_globals/structuredClone.json",
+      "chrome": {
+        "version_added": "98"
+      },
+      "chrome_android": "mirror"
+    },
+    "randomUUID": {
+      "url": "https://raw.githubusercontent.com/mdn/browser-compat-data/main/api/Crypto.json",
+      "chrome": {
+        "version_added": "92"
+      },
+      "chrome_android": "mirror",
+      "secureContextRequired": true
+    },
+    "Object.hasOwn": {
+      "url": "https://raw.githubusercontent.com/mdn/browser-compat-data/main/javascript/builtins/Object.json",
+      "chrome": {
+        "version_added": "93"
+      },
+      "chrome_android": "mirror"
+    },
+    "BigInt": {
+      "url": "https://raw.githubusercontent.com/mdn/browser-compat-data/main/javascript/builtins/BigInt.json",
+      "chrome": {
+        "version_added": "67"
+      },
+      "chrome_android": "mirror"
+    }
+  },
+  "notes": [
+    "Relevant device/runtime fields only; original screenshots are not redistributed.",
+    "Installed version exceeds researched API minima; hardware reliability and secure-origin behavior still require actual runtime checks."
+  ]
+}

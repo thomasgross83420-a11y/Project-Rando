@@ -1,0 +1,89 @@
+{
+  "cases": [
+    {
+      "case": "portrait-base",
+      "pixelsIdentical": true,
+      "hitBoundsIdentical": true,
+      "cameraIdentical": true,
+      "imagesBefore": 261135,
+      "imagesAfter": 1,
+      "destroyedBefore": 261661,
+      "destroyedAfter": 0,
+      "medianBeforeMs": 12.699999995529652,
+      "medianAfterMs": 2.0999999940395355,
+      "p95BeforeMs": 26.100000001490116,
+      "p95AfterMs": 4.299999997019768
+    },
+    {
+      "case": "portrait-field",
+      "pixelsIdentical": true,
+      "hitBoundsIdentical": true,
+      "cameraIdentical": true,
+      "imagesBefore": 292734,
+      "imagesAfter": 0,
+      "destroyedBefore": 293423,
+      "destroyedAfter": 0,
+      "medianBeforeMs": 15.400000005960464,
+      "medianAfterMs": 2,
+      "p95BeforeMs": 23,
+      "p95AfterMs": 4
+    },
+    {
+      "case": "portrait-close",
+      "pixelsIdentical": true,
+      "hitBoundsIdentical": true,
+      "cameraIdentical": true,
+      "imagesBefore": 65286,
+      "imagesAfter": 0,
+      "destroyedBefore": 65286,
+      "destroyedAfter": 0,
+      "medianBeforeMs": 2.399999998509884,
+      "medianAfterMs": 0.6999999955296516,
+      "p95BeforeMs": 6.4000000059604645,
+      "p95AfterMs": 1.5
+    },
+    {
+      "case": "portrait-ghost",
+      "pixelsIdentical": true,
+      "hitBoundsIdentical": true,
+      "cameraIdentical": true,
+      "imagesBefore": 261216,
+      "imagesAfter": 1,
+      "destroyedBefore": 261823,
+      "destroyedAfter": 0,
+      "medianBeforeMs": 13,
+      "medianAfterMs": 1.4000000059604645,
+      "p95BeforeMs": 20.69999999552965,
+      "p95AfterMs": 3.899999998509884
+    },
+    {
+      "case": "landscape-field",
+      "pixelsIdentical": true,
+      "hitBoundsIdentical": true,
+      "cameraIdentical": true,
+      "imagesBefore": 292653,
+      "imagesAfter": 0,
+      "destroyedBefore": 293321,
+      "destroyedAfter": 0,
+      "medianBeforeMs": 16.799999997019768,
+      "medianAfterMs": 1.6000000014901161,
+      "p95BeforeMs": 29.299999997019768,
+      "p95AfterMs": 4.399999998509884
+    },
+    {
+      "case": "landscape-close",
+      "pixelsIdentical": true,
+      "hitBoundsIdentical": true,
+      "cameraIdentical": true,
+      "imagesBefore": 59049,
+      "imagesAfter": 0,
+      "destroyedBefore": 59130,
+      "destroyedAfter": 0,
+      "medianBeforeMs": 2.899999998509884,
+      "medianAfterMs": 0.6999999955296516,
+      "p95BeforeMs": 6,
+      "p95AfterMs": 1.5
+    }
+  ],
+  "physicalAndroidCertified": false
+}

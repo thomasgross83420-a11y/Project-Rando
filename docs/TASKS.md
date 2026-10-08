@@ -93,3 +93,15 @@ exclusion and interrupted rearm, before adding its production artwork/state
 machine. Do not substitute a stationary Node's post-combat loop for those mobile
 contracts. Promotion/sale/emergency tombstones and full results analysis remain
 separate Gate3 work; the current teaching fight cannot set full campaign pacing.
+
+## Dependency-ready after build0.2.9
+
+Exact tablet identification is resolved. Shared scene redraw allocation is
+measured and corrected with no pixel or simulation change. Actual tablet
+performance/lifecycle still needs a playable secure origin and observations;
+the manual pinned preview is prepared separately. Continue the individual
+Engineer finite-stock/rearm contract before mobile actor/channel integration:
+six uninterrupted seconds, one source per trap, eight completed additions per
+agent (not per visual member), temporary-first use and no permanent stock bank.
+Keep the future kernel distinct from an enabled/animated Engineer until its
+movement, priority, repair, weapon, capture and artwork contracts all pass.
