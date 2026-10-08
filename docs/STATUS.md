@@ -115,3 +115,10 @@ All143 unit and68 production browser checks pass, including 100%/200% layout,
 touch gestures, purchases, complete battles, saves and backups. Balance, save
 formats and simulation versions are unchanged. See TOUCH_FIELD_REVIEW.md and
 evidence/TOUCH_FIELD_TESTS.json; public release is recorded in PUBLIC_PREVIEW.md.
+
+0.2.11 publication: pinned source23754abc513320b4d25b5bcaae23ca4a8b6315de
+is deployed by successful manual run37777948348. CI passes all143 unit checks.
+All38 public files match;24 live scenarios are verified, with initial22 passes
+and two explicit follow-ups retained. An actual public0.2.10 save remains
+unchanged through takeover, reload and practice start. See PUBLIC_PREVIEW.md and
+evidence/TOUCH_FIELD_LIVE.json.

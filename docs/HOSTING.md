@@ -1,6 +1,23 @@
 # Free GitHub delivery evidence
 
-## Current startup/control update — 2026-10-08
+## Current touch interface update — 2026-10-08
+
+The live preview builds `23754abc513320b4d25b5bcaae23ca4a8b6315de`,
+version `0.2.11-touch-field`. [PR 17](https://github.com/thomasgross83420-a11y/Project-Rando/pull/17)
+changes only main's source pin and README. The manual-only workflow remains
+on standard runners with pinned actions and one-day artifact retention.
+[Run 37777948348](https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37777948348)
+passed CI and deployment. All 143 unit and 68 local production-browser checks
+pass. All 24 selected live scenarios are verified, including a separate paid
+battle follow-up prepared to handle the intentional performance pause through
+visible Resume and lower speed when needed; it completed at 4× without pausing. The landscape matrix is also checked
+with a larger timing budget and unchanged assertions. Both attempts are
+recorded. All 38 public
+files match the tested build. An actual
+0.2.10 public save remains unchanged through the update, takeover, reload and
+practice start. See [current verification](PUBLIC_PREVIEW.md).
+
+## Previous startup/control update — 2026-10-08
 
 The live preview now builds `29837e8718f301c07eed9324b78acc323a29e8f0`,
 version `0.2.10-startup-recovery`. [PR 15](https://github.com/thomasgross83420-a11y/Project-Rando/pull/15)

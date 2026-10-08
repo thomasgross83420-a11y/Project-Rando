@@ -78,3 +78,21 @@ See [local evidence](evidence/TOUCH_FIELD_TESTS.json),
 Publication and actual public-origin checks are recorded in
 [public preview verification](PUBLIC_PREVIEW.md). Desktop Chromium with native emulated touch is
 not a measurement of the Lenovo tablet's GPU performance or Android browser chrome.
+
+## Public update
+
+[Play the updated game](https://thomasgross83420-a11y.github.io/Project-Rando/?build=0.2.11-touch-field).
+The existing origin and save formats are retained. The title build label is
+`0.2.11-touch-field`. Open Siege → Tutorial Practice for the free battle.
+Records contains Data Management and backups.
+
+All 38 public files match the tested build; 24 public scenarios are verified.
+The initial live invocation passed 22 and the two follow-ups pass: the landscape
+matrix with a larger time budget and paid victory at 4× after the first wait hit
+a performance pause. Initial results are retained in
+[live evidence](evidence/TOUCH_FIELD_LIVE.json). A real public 0.2.10 save survived
+publication unchanged and started practice.
+[Public portrait](evidence/touch-public-portrait.png),
+[landscape](evidence/touch-public-landscape.png), and open Build menus in
+[portrait](evidence/touch-public-build-portrait.png) and
+[landscape](evidence/touch-public-build-landscape.png) were visually inspected.

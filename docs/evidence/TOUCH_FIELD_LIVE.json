@@ -1,0 +1,731 @@
+{
+  "build": "0.2.11-touch-field",
+  "source": "23754abc513320b4d25b5bcaae23ca4a8b6315de",
+  "deployment": {
+    "run_id": 37777948348,
+    "url": "https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37777948348",
+    "conclusion": "success",
+    "main_merge": "d9b616256a836c8a3d8675c4122286b249649fab",
+    "completed_utc": "2026-10-08T12:37:33Z",
+    "ci_unit_tests": 143,
+    "ci_unit_files": 31,
+    "type_lint_scenario_build": "passed"
+  },
+  "assets": {
+    "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+    "source": "23754abc513320b4d25b5bcaae23ca4a8b6315de",
+    "https_certificate_validation": true,
+    "verified_files": 38,
+    "files": [
+      {
+        "path": "THIRD_PARTY_NOTICES.txt",
+        "status": 200,
+        "mime": "text/plain",
+        "bytes": 284630,
+        "sha256": "0c1677ecd236df2d3657cbbcc75abc08315327d88acb5c339008d218da8dd48e",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/app-DDcsbyvw.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1347417,
+        "sha256": "39df934a04e8ebccc57838f251172486418b5443cde59b68ade77d89a0e6dbb1",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/alert.core.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 27244,
+        "sha256": "3b102957104f73fccd2ac6aca0a2e6e08eab400d8b4b590192f170a763cac448",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/alert.wave.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 20844,
+        "sha256": "7daa96d6c9b192bd862cb1a83f97c0650fe97c01ae5607a89357a81dbb2e30eb",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/manifest.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 8925,
+        "sha256": "03cf25256b4e669a262c9fb5ffeb7f043223dd728675acac436a633e454fba8d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/music.fracture.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3072044,
+        "sha256": "8c9a7cc92de47f02432fe14b2deadc78c638a438e46167177786f3848dd211a0",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/music.preparation.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3072044,
+        "sha256": "7ff2ab848fea55b8ec56ddb20b486b30c0df818a416cbd4295d4478c055145af",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/music.title.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3072044,
+        "sha256": "f9d89a42dc85e7756e7a4b988551ba5205aaaa5ecbd6b7de7c1739c3da7c7642",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.bulwark.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 5804,
+        "sha256": "bb24a903b5eac49b04798238738db8f321b394b4ef0587a754cc56fa59264680",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.challenge.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 17644,
+        "sha256": "7063882770bf5bbcd4b5ecc3b43a52fd3a2531fc80aee4d479f5dc64e3555332",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.holdfast.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 22444,
+        "sha256": "92c6d991e9820b59399fd69074299576ca97a69afa6cee74932fcbdd66f43553",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.impact.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 4204,
+        "sha256": "89483ec8e8a1bf99511e22c4f1cdee232bb319c5972e7f0bfcb3c01552320f33",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.interpose.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 14444,
+        "sha256": "7d44cfd5125f04169aee307f8b4b15bf0d21cbe25cfb6f0970dadd75f0e47ea6",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.melee.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 5164,
+        "sha256": "73edc6f7cc218caf9577e4156f57199fb1793b99725462e819c7e93afc5b0c01",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.mine.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 20844,
+        "sha256": "44dd680024f1857d68b3cbaac0bcd4bd5e674c92720e516351aa78c7b1713cf5",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.repair.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 12844,
+        "sha256": "ffec83d3805a309a12f0a1deede7028c2498ccd9cc6ed1b07d3c6e9c072702dc",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.rifle.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3244,
+        "sha256": "5a0f402ed431262f53f54a6b6cc86ea75e79898aecefb804ca44cfff3c959cde",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/sfx.sentry.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3884,
+        "sha256": "2ea71d3fbdb4df7535809be96ff52d7c611f8332d10444db7657b6a146c842d2",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/stinger.defeat.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 76844,
+        "sha256": "70039d02db80cca01131f03827612a352281690939f6a5936397bda823a0a883",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/stinger.victory.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 76844,
+        "sha256": "26bf18aeb3ec29401e0fe5bd19f12d54515e17917859cffcaa50dc8de3bfb30d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/audio/ui.confirm.wav",
+        "status": 200,
+        "mime": "audio/wav",
+        "bytes": 3244,
+        "sha256": "8c4183b4e3f2906d8c5e04a4286adf0c072fff1ada8dc8df9a77dd02f99058b6",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/balance-study-_x9nLpwX.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1468,
+        "sha256": "557e39c0b7bfbf17835e80d681c9cab96dfbe94a58d89b782fde0e4014dc1a37",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/combat/atlas0.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 1038294,
+        "sha256": "f010a3d68c6ea2b244e7b9f6d5346b6506ba90c6660b7a5ff8103fa5f64e44fb",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/combat/manifest.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 731449,
+        "sha256": "5d6ca3e80b3b6e78967b9a1d6cbee167f4dba07931bbce1cebd836b08e623070",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/diagnostic-DNrnw64m.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 3043,
+        "sha256": "54cb08cce6bdaded75d1ecb30f938f3ecd859d93cc7de3900999c157daf45ac0",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/foundation.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 14896,
+        "sha256": "02f0da9d5ec4f0bc7d4a24d1c2bd2a1ee56382af1cab303b5a6b9252a54f20ce",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/foundation.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 349002,
+        "sha256": "d397c7f6333f7e60caf6420c50f99f5ee51e6baed5d23169feb9847f1584bd57",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/icon.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 2141,
+        "sha256": "bcdfbcc4c5789752013f3d8eb3881914fb84a788915f111087833d296abd4f2d",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/index-DQ8b3ye9.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1206,
+        "sha256": "a10207b442ac12b8303d95b89f2e47c88378a05a89d52a992aa0913020d4c91b",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/preload-helper-Cl7pOkUX.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1124,
+        "sha256": "989e1a374921cdeb43a03349e760593a196a91e7e6e055f9061657b8b57d96fc",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/roles.json",
+        "status": 200,
+        "mime": "application/json",
+        "bytes": 3285,
+        "sha256": "9693882fe946249b5cdacb4e7a4399aa884f2a3dc0d04478636a90a70c2715d8",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/roles.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 8321,
+        "sha256": "7a8a9aec353aaa2bc3265d49c68eb3f78fad87781a237a11998bb8b8bdfdcbf1",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/style-proof-close.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 128163,
+        "sha256": "0a19c329843159f762f96801e1873212969088e75848bf2174e6e8f68006b075",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/style-proof-default.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 32282,
+        "sha256": "0f378033a758ee393a7e1be3a7719fcc0bc96619f96116a29a896dbb4891ddc3",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/title-foundation.png",
+        "status": 200,
+        "mime": "image/png",
+        "bytes": 129260,
+        "sha256": "7c5ba99eabc67764b163517198ee7c21e3981372761c540430fa33768a07c553",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/world-DFVhNYXI.css",
+        "status": 200,
+        "mime": "text/css",
+        "bytes": 8156,
+        "sha256": "b2d539f32486a3443c722da5a6473966d2418bc087b558d93675591853966105",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "assets/world-yNTZ9QCw.js",
+        "status": 200,
+        "mime": "application/javascript",
+        "bytes": 1780648,
+        "sha256": "8ac075b4708bc03f6537b6908e477a53c8833c7f4400391939b726ddf1f68ba2",
+        "matches_local_tested_build": true
+      },
+      {
+        "path": "index.html",
+        "status": 200,
+        "mime": "text/html",
+        "bytes": 632,
+        "sha256": "df775e4c695aa690f38148f2c3534feba57cf94021f1fe28565ef841bb8511a2",
+        "matches_local_tested_build": true
+      }
+    ]
+  },
+  "live_browser": {
+    "scenario_count": 24,
+    "automatic_retries": 0,
+    "first_attempt": {
+      "stats": {
+        "startTime": "2026-10-08T12:37:49.052Z",
+        "duration": 379571.604,
+        "expected": 22,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "file": "campaign-ui.spec.ts",
+          "title": "the player can migrate, deploy existing assets, win, review committed XP and rearm the persisted mine once",
+          "ok": false,
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "duration_ms": 69687
+            }
+          ]
+        },
+        {
+          "file": "gate0.spec.ts",
+          "title": "Gate 0 production subpath, renderer, storage, gesture, audio and export",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 4055
+            }
+          ]
+        },
+        {
+          "file": "gate0.spec.ts",
+          "title": "viewport reflow, touch cancellation, semantic focus and production MIME",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 6192
+            }
+          ]
+        },
+        {
+          "file": "gate1.spec.ts",
+          "title": "campaign creation, free deployment, atomic purchase, Undo/Redo and reload",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 16902
+            }
+          ]
+        },
+        {
+          "file": "recovery.spec.ts",
+          "title": "mobile backup replaces selected wallets, preserves other slots/settings, reloads and rolls back without merging",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 13375
+            }
+          ]
+        },
+        {
+          "file": "startup-controls.spec.ts",
+          "title": "reload and reopening a closed page restore editing without changing campaigns",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 5144
+            }
+          ]
+        },
+        {
+          "file": "startup-controls.spec.ts",
+          "title": "another active tab can start New Game through confirmed takeover and the old controls refresh",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 5946
+            }
+          ]
+        },
+        {
+          "file": "startup-controls.spec.ts",
+          "title": "legacy ownership offers a working recovery from New Game instead of a gray dead end",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 3012
+            }
+          ]
+        },
+        {
+          "file": "startup-controls.spec.ts",
+          "title": "a failed writer transaction keeps title controls and a retry path available",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 964
+            }
+          ]
+        },
+        {
+          "file": "startup-controls.spec.ts",
+          "title": "failed storage probe offers explicit temporary play without breaking the title",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 1557
+            }
+          ]
+        },
+        {
+          "file": "startup-controls.spec.ts",
+          "title": "without Web Locks, closed legacy ownership still requires confirmation and saves remain unchanged",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 3145
+            }
+          ]
+        },
+        {
+          "file": "startup-controls.spec.ts",
+          "title": "title buttons and cancelled creation stay usable, and unfinished combat choices are clearly unavailable",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 3854
+            }
+          ]
+        },
+        {
+          "file": "startup-controls.spec.ts",
+          "title": "a campaign saved before an open failure remains loadable without retrying creation",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 2800
+            }
+          ]
+        },
+        {
+          "file": "startup-controls.spec.ts",
+          "title": "a rejected Web Lock request does not strand startup and can be retried",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 1111
+            }
+          ]
+        },
+        {
+          "file": "startup-controls.spec.ts",
+          "title": "writer quota errors stay recoverable without uncaught request-handler errors",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 1465
+            }
+          ]
+        },
+        {
+          "file": "startup-controls.spec.ts",
+          "title": "a displaced battle never automatically resumes after the other writer closes; takeover opens durable recovery",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 14280
+            }
+          ]
+        },
+        {
+          "file": "touch-layout.spec.ts",
+          "title": "field and collapsible menus fit 360\u00d7640 at 100% and 200%",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 21043
+            }
+          ]
+        },
+        {
+          "file": "touch-layout.spec.ts",
+          "title": "field and collapsible menus fit 412\u00d7915 at 100% and 200%",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 29711
+            }
+          ]
+        },
+        {
+          "file": "touch-layout.spec.ts",
+          "title": "field and collapsible menus fit 800\u00d71280 at 100% and 200%",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 52891
+            }
+          ]
+        },
+        {
+          "file": "touch-layout.spec.ts",
+          "title": "field and collapsible menus fit 1280\u00d7800 at 100% and 200%",
+          "ok": false,
+          "results": [
+            {
+              "status": "timedOut",
+              "retry": 0,
+              "duration_ms": 63653
+            }
+          ]
+        },
+        {
+          "file": "touch-layout.spec.ts",
+          "title": "field and collapsible menus fit 320\u00d7640 at 100% and 200%",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 19367
+            }
+          ]
+        },
+        {
+          "file": "touch-layout.spec.ts",
+          "title": "native touch pans in every direction, pinches about the midpoint, and continues with the remaining finger",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 14810
+            }
+          ]
+        },
+        {
+          "file": "touch-layout.spec.ts",
+          "title": "choosing a build closes the menu; pinch continuation never moves or buys the ghost",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 7485
+            }
+          ]
+        },
+        {
+          "file": "touch-layout.spec.ts",
+          "title": "battle keeps the field visible and observation tools collapsed; opening and closing works by touch",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 11326
+            }
+          ]
+        }
+      ]
+    },
+    "followup": {
+      "stats": {
+        "startTime": "2026-10-08T12:44:29.345Z",
+        "duration": 101856.777,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "file": "touch-landscape.spec.ts",
+          "title": "field and collapsible menus fit 1280\u00d7800 at 100% and 200%",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 61151
+            }
+          ]
+        },
+        {
+          "file": "touch-paid.spec.ts",
+          "title": "the player can migrate, deploy existing assets, win, review committed XP and rearm the persisted mine once",
+          "ok": true,
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration_ms": 39693
+            }
+          ]
+        }
+      ]
+    },
+    "explanation": [
+      "Initial paid battle wait timed out at the intentional performance pause in Cleanup at 4\u00d7. The follow-up supports visible Resume and 2\u00d7 when needed, and actually completed at 4\u00d7 without another pause; all original reward/rearm/reload assertions remain.",
+      "Initial landscape matrix exceeded the 60-second test budget during its final field measurement. The follow-up uses the same layout/menu/focus assertions and a 120-second budget. It passed in approximately 60 seconds.",
+      "No production source, published files, simulation, saves or assertions changed for these follow-ups. Initial failures are retained rather than reported as an entirely green first invocation."
+    ]
+  },
+  "paid_followup": {
+    "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+    "initialSpeed": "4\u00d7",
+    "finalSpeed": "4\u00d7",
+    "performanceResumes": 0,
+    "paidVictory": true,
+    "expectedXPAndRank": true,
+    "permanentMineRearmSpentOnce": true,
+    "retainedProgressAfterReload": true,
+    "productionSourceUnchanged": true
+  },
+  "public_save_update": {
+    "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+    "browser": "151.0.7922.173",
+    "old_source": "29837e8718f301c07eed9324b78acc323a29e8f0",
+    "new_source": "23754abc513320b4d25b5bcaae23ca4a8b6315de",
+    "actual_public_origin": true,
+    "existing_campaigns_unchanged": true,
+    "active_old_page_takeover_confirmed": true,
+    "next_reload_automatic": true,
+    "existing_campaign_practice_started": true,
+    "errors": []
+  },
+  "public_features": {
+    "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+    "browser": "151.0.7922.173",
+    "source": "Desktop Chromium on the actual public HTTPS origin; not physical Android acceptance",
+    "features": {
+      "url": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+      "origin": "https://thomasgross83420-a11y.github.io",
+      "secureContext": true,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "randomUUID": "function",
+      "BigInt": "function",
+      "structuredClone": "function",
+      "hasOwn": "function",
+      "IndexedDB": "function",
+      "WebAudio": "function",
+      "build": "Development preview 0.2.11-touch-field"
+    },
+    "viewports": [
+      {
+        "width": 800,
+        "height": 1280
+      },
+      {
+        "width": 1280,
+        "height": 800
+      }
+    ],
+    "errors": []
+  },
+  "evidence_log_sha256": {
+    "touch-live-browser.log": "9599ffe454696ba4d5fd3554a7ae49cc2f26278b407be2d3d1ba4a719fbec2ce",
+    "touch-live-followup-browser.log": "0050caee30e4c50f910359a1c640c70ec608b1bfae02c936fc4cc2d77a964daf",
+    "touch-pages-run.log": "5b43e53ac945d6620f4712edc31a97f9590bd1b3846e57cf709b535334c6bfc6",
+    "touch-upgrade.log": "bc7ed716b423b973da83a9a01a83131ea0c88092763b14792567c66a944b3cfb",
+    "touch-live-features.log": "13c4d8e9e6f78aa4745a196af5f9921967df0a64b3eb97b8a9055a29e0ab8b91"
+  },
+  "limits": "Desktop Chromium 151 with native emulated touch on real HTTPS origin, not physical Lenovo Android/GPU/IME/audio/TalkBack acceptance."
+}
