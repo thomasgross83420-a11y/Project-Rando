@@ -68,6 +68,8 @@ export const progressedOwnedSchema = legacyOwnedSchema.extend({
   enhancement: z.number().int().min(0).max(10),
   enhancementPaid: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
   permanentCharges: z.number().int().min(0).max(8).nullable(),
+  refundLocked: z.boolean(),
+  emergencyCreated: z.boolean(),
 });
 export const progressionCampaignSchema = legacyCampaignSchema.extend({
   schema: z.literal(2),
@@ -81,6 +83,7 @@ export const progressionCampaignSchema = legacyCampaignSchema.extend({
     .regex(/^(0|[1-9][0-9]{0,38})$/)
     .refine((s) => BigInt(s) <= (1n << 128n) - 1n),
   lifetimeXPSaturated: z.boolean(),
+  emergencyActive: z.boolean(),
   promotionCores: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
   coreHP: z
     .number()
@@ -129,10 +132,13 @@ export function migrateProgression(input: unknown): ProgressionCampaign {
     revision: before.revision + 1,
     lifetimeXP: '0',
     lifetimeXPSaturated: false,
+    emergencyActive: false,
     assets: before.assets.map((a) => ({
       ...a,
       enhancementPaid: 0,
       permanentCharges: a.type === 'friendly.proximity_mine' ? 1 : null,
+      refundLocked: false,
+      emergencyCreated: false,
     })),
   }) as ProgressionCampaign;
 }
@@ -321,6 +327,8 @@ export function applyCommand(before: Campaign, command: PreparationCommand): Cam
         ...a,
         enhancementPaid: 0,
         permanentCharges: a.type === 'friendly.proximity_mine' ? 1 : null,
+        refundLocked: false,
+        emergencyCreated: false,
       });
     else c.assets.push(a);
   } else {

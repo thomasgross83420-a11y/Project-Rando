@@ -36,8 +36,8 @@ export function bodyInvestment(a: ProgressedOwned): BodyInvestment {
     promotionCoresPaid: 0,
     warden: d.category === 'warden',
     core: false,
-    refundLocked: false,
-    emergencyCreated: false,
+    refundLocked: a.refundLocked,
+    emergencyCreated: a.emergencyCreated,
   };
 }
 export function previewProgression(before: ProgressionCampaign, command: ProgressionCommand) {
@@ -104,6 +104,10 @@ export function previewProgression(before: ProgressionCampaign, command: Progres
         break;
       }
       case 'sell': {
+        if (c.emergencyActive && a.refundLocked)
+          throw new Error(
+            'Selling an active emergency identity is not implemented; complete a siege first',
+          );
         if (a.type === c.warden)
           throw new Error('Select another owned Warden before selling this Warden');
         const q = quoteSale(

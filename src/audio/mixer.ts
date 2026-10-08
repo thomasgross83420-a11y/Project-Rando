@@ -27,6 +27,7 @@ export class AudioMixer {
   musicRevision = 0;
   state = 'Awaiting interaction';
   decoded = 0;
+  private paused = false;
   async unlock(): Promise<boolean> {
     try {
       this.context ??= new AudioContext();
@@ -46,7 +47,7 @@ export class AudioMixer {
         }
         this.configure(this.settings);
       }
-      await this.context.resume();
+      await this.resume();
       this.state = this.context.state === 'running' ? 'Enabled' : 'Blocked: use Enable Sound';
       return this.context.state === 'running';
     } catch (e) {
@@ -57,7 +58,7 @@ export class AudioMixer {
   configure(settings: AudioSettings): void {
     this.settings = audioSettings.parse(settings);
     this.muted = settings.muted;
-    if (this.master) this.master.gain.value = this.muted ? 0 : settings.master / 100;
+    if (this.master) this.master.gain.value = this.muted || this.paused ? 0 : settings.master / 100;
     for (const c of ['music', 'sfx', 'ui', 'alerts'] as const) {
       const g = this.channels[c];
       if (g) g.gain.value = settings[c] / 100;
@@ -145,13 +146,13 @@ export class AudioMixer {
     }
   }
   async play(key: string, priority = 1, shot = false, channel: Channel = 'sfx'): Promise<void> {
-    if (this.muted || !this.context || this.context.state !== 'running') return;
+    if (this.muted || this.paused || !this.context || this.context.state !== 'running') return;
     const now = this.context.currentTime * 1000;
     if (shot && now - (this.lastShot.get(key) ?? -Infinity) < 80) return;
     if (shot) this.lastShot.set(key, now);
     try {
       const buffer = await this.decode(key);
-      if (this.muted || this.context.state !== 'running') return;
+      if (this.muted || this.paused || this.context.state !== 'running') return;
       const atLimit =
         this.voices.length >= 24 || (shot && this.voices.filter((v) => v.shot).length >= 8);
       if (atLimit) {
@@ -179,10 +180,25 @@ export class AudioMixer {
     }
   }
   async suspend(): Promise<void> {
-    if (this.context?.state === 'running') await this.context.suspend();
+    // Silence the bus immediately even if the device refuses suspension.
+    this.paused = true;
+    this.configure(this.settings);
+    try {
+      if (this.context?.state === 'running') await this.context.suspend();
+    } catch (e) {
+      this.state = `Audio suspension unavailable: ${String(e)}`;
+    }
   }
   async resume(): Promise<void> {
-    if (this.context?.state === 'suspended') await this.context.resume();
+    try {
+      if (this.context?.state === 'suspended') await this.context.resume();
+      if (this.context?.state === 'running') {
+        this.paused = false;
+        this.configure(this.settings);
+      }
+    } catch (e) {
+      this.state = `Audio resume unavailable: ${String(e)}`;
+    }
   }
   stopMusic(): void {
     this.musicRevision++;

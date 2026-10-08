@@ -1,15 +1,17 @@
 import { z } from 'zod';
 import { canonical, hash } from '../sim/determinism';
-import { planIdentity } from '../sim/tutorial';
 import { campaignSchema, validateCampaign } from './campaign';
 import { emptyFence, fenceSchema, mergeFences, type ProgressFence } from './fence';
 import { BACKUP_BYTES, parseBackupJSON } from './json';
 import { preferencesSchema, type Preferences } from './preferences';
-import { practiceSchema, validatePracticeArmy, type PracticeStore } from './practice';
-import type { CampaignRepository } from './repository';
+import { practiceSchema, validatePracticeCheckpoint, type PracticeStore } from './practice';
+import { CampaignRepository } from './repository';
 import { sequenceSchema } from './sequence';
+import { runStateKey, runReceiptsKey } from './run-keys';
+import { RunJournalStore, stateSchema, receiptsSchema } from './run-journal';
+import { campaignTutorialRules, CAMPAIGN_RESULT_RULES } from '../progression/campaign-result';
 const snapshotSchema = z.object({ campaign: campaignSchema, fence: fenceSchema }).strict();
-const slotSchema = z
+const legacySlotSchema = z
   .object({
     campaign: campaignSchema,
     fence: fenceSchema,
@@ -18,17 +20,28 @@ const slotSchema = z
     practiceSequence: sequenceSchema,
   })
   .strict();
-const payloadSchema = z
+const resultSlotSchema = legacySlotSchema.extend({
+  run: stateSchema.nullable(),
+  receipts: receiptsSchema,
+});
+const slotSchema = z.union([legacySlotSchema, resultSlotSchema]);
+const legacyPayloadSchema = z
   .object({
     format: z.literal('resonance-bastion-backup'),
     schema: z.literal(1),
-    slots: z.array(slotSchema).min(1).max(3),
+    slots: z.array(legacySlotSchema).min(1).max(3),
     preferences: preferencesSchema.nullable(),
   })
   .strict();
-const envelopeSchema = payloadSchema
-  .extend({ checksum: z.string().regex(/^[a-f0-9]{64}$/) })
-  .strict();
+const resultPayloadSchema = legacyPayloadSchema.extend({
+  schema: z.literal(2),
+  slots: z.array(resultSlotSchema).min(1).max(3),
+});
+const digest = z.string().regex(/^[a-f0-9]{64}$/);
+const envelopeSchema = z.discriminatedUnion('schema', [
+  legacyPayloadSchema.extend({ checksum: digest }),
+  resultPayloadSchema.extend({ checksum: digest }),
+]);
 export type SlotBackup = z.infer<typeof slotSchema>;
 export type Backup = z.infer<typeof envelopeSchema>;
 export async function validateSlotBackup(input: unknown): Promise<SlotBackup> {
@@ -54,9 +67,44 @@ export async function validateSlotBackup(input: unknown): Promise<SlotBackup> {
       BigInt(cp.sequence) > BigInt(slot.practiceSequence)
     )
       throw new Error('Practice checkpoint base/sequence mismatch');
-    validatePracticeArmy(c, cp.army);
-    if (cp.identity !== (await planIdentity(cp.plan, cp.army)))
-      throw new Error('Practice checksum mismatch');
+    await validatePracticeCheckpoint(c, cp);
+  }
+  if ('run' in slot) {
+    const journals = new RunJournalStore(new CampaignRepository(undefined), campaignTutorialRules);
+    const receipts = await journals.validatedReceipts(slot.receipts);
+    if (
+      receipts.receipts.some(
+        (r) =>
+          r.runID.lineage !== slot.campaign.lineage ||
+          BigInt(r.runID.sequence) > BigInt(slot.fence.finalized),
+      )
+    )
+      throw new Error('Backup receipt lineage/fence mismatch');
+    if (slot.run) {
+      if (slot.practice)
+        throw new Error('Backup cannot contain simultaneous practice and paid run');
+      const state = await journals.validateState(slot.run),
+        cp = state.checkpoint;
+      if (canonical(cp.base) !== canonical(slot.campaign) || cp.slot !== slot.campaign.slot)
+        throw new Error('Backup run base mismatch');
+      if (
+        BigInt(cp.runID.sequence) > BigInt(slot.fence.allocated) ||
+        BigInt(cp.fence.finalized) > BigInt(slot.fence.finalized) ||
+        (BigInt(cp.runID.sequence) > BigInt(slot.fence.finalized) &&
+          canonical(cp.fence) !== canonical(slot.fence))
+      )
+        throw new Error('Backup active run fence mismatch');
+      for (const field of [
+        'campaign',
+        'mastery',
+        'roles',
+        'bosses',
+        'milestones',
+        'generated',
+      ] as const)
+        if (cp.fence[field].some((x) => !(slot.fence[field] as (string | number)[]).includes(x)))
+          throw new Error('Backup cannot erase retained run claims');
+    }
   }
   if (new TextEncoder().encode(canonical(slot)).byteLength > 8 * 1024 * 1024)
     throw new Error('Indispensable slot exceeds 8 MiB');
@@ -66,10 +114,17 @@ export async function createBackup(
   slots: SlotBackup[],
   preferences: Preferences | null,
 ): Promise<Backup> {
-  const payload = payloadSchema.parse({
+  const upgraded = slots.some((slot) => 'run' in slot || slot.campaign.schema === 2);
+  const payload = (upgraded ? resultPayloadSchema : legacyPayloadSchema).parse({
     format: 'resonance-bastion-backup',
-    schema: 1,
-    slots,
+    schema: upgraded ? 2 : 1,
+    slots: upgraded
+      ? slots.map((slot) =>
+          'run' in slot
+            ? slot
+            : { ...slot, run: null, receipts: { receipts: [], unpresented: null } },
+        )
+      : slots,
     preferences,
   });
   const ids = new Set<string>(),
@@ -123,6 +178,8 @@ interface RawSlot {
   previous: unknown;
   practice: unknown;
   sequence: unknown;
+  run: unknown;
+  receipts: unknown;
 }
 export interface RecoveryView {
   slots: RawSlot[];
@@ -133,16 +190,24 @@ export interface ImportSelection {
   source: number;
   destination: number;
 }
-const knownMetadataKey = (key: IDBValidKey): boolean =>
+const knownMetadataKey = (key: IDBValidKey, value?: unknown): boolean =>
   typeof key === 'string' &&
   (['preferences.v1', 'probe', 'lastOpened'].includes(key) ||
-    /^(practice\.(slot|sequence)\.[0-2]|fence\.[0-9a-fA-F-]{36})$/.test(key));
+    /^(practice\.(slot|sequence)\.[0-2]|receipts\.slot\.[0-2]|fence\.[0-9a-fA-F-]{36})$/.test(
+      key,
+    ) ||
+    (/^run\.slot\.[0-2]$/.test(key) &&
+      (value as { checkpoint?: { rulesID?: string } })?.checkpoint?.rulesID ===
+        CAMPAIGN_RESULT_RULES));
 export class BackupStore {
   private busy = false;
   constructor(
     readonly repo: CampaignRepository,
     readonly practice: PracticeStore,
   ) {}
+  private get journals() {
+    return new RunJournalStore(this.repo, campaignTutorialRules);
+  }
   async inspect(): Promise<RecoveryView> {
     if (!this.repo.database) {
       const slots: RawSlot[] = [];
@@ -152,6 +217,8 @@ export class BackupStore {
           previous: this.repo.memoryPrevious.get(slot),
           practice: this.practice.memory.get(slot),
           sequence: this.practice.memorySequence.get(slot),
+          run: this.journals.memory.get(slot),
+          receipts: this.journals.memoryReceipts.get(slot),
         });
       return structuredClone({
         slots,
@@ -168,10 +235,12 @@ export class BackupStore {
             previous: undefined,
             practice: undefined,
             sequence: undefined,
+            run: undefined,
+            receipts: undefined,
           })),
           fences: Record<string, ProgressFence> = Object.create(null),
           unknownKeys: string[] = [];
-        let pending = 13;
+        let pending = 19;
         const complete = () => {
           if (--pending === 0) done({ slots, fences, unknownKeys });
         };
@@ -181,6 +250,8 @@ export class BackupStore {
             ['previous', i, 'previous'],
             ['meta', `practice.slot.${i}`, 'practice'],
             ['meta', `practice.sequence.${i}`, 'sequence'],
+            ['meta', runStateKey(i), 'run'],
+            ['meta', runReceiptsKey(i), 'receipts'],
           ] as const) {
             const r = tx.objectStore(store).get(key);
             r.onsuccess = () => {
@@ -193,7 +264,7 @@ export class BackupStore {
         r.onsuccess = () => {
           const cur = r.result;
           if (cur) {
-            if (!knownMetadataKey(cur.key)) unknownKeys.push(String(cur.key));
+            if (!knownMetadataKey(cur.key, cur.value)) unknownKeys.push(String(cur.key));
             if (typeof cur.key === 'string' && cur.key.startsWith('fence.'))
               fences[cur.key.slice(6)] = cur.value;
             cur.continue();
@@ -226,6 +297,12 @@ export class BackupStore {
             : null,
           practice: raw.practice ?? null,
           practiceSequence: raw.sequence ?? '0',
+          ...(raw.run !== undefined || raw.receipts !== undefined || campaign.schema === 2
+            ? {
+                run: raw.run ?? null,
+                receipts: raw.receipts ?? { receipts: [], unpresented: null },
+              }
+            : {}),
         }),
       );
     }
@@ -258,6 +335,11 @@ export class BackupStore {
       const old = expected.slots[item.destination];
       if (!old) throw new Error('Missing destination snapshot');
       const current = old.campaign === undefined ? undefined : validateCampaign(old.campaign);
+      if (old.run !== undefined)
+        throw new Error('Resolve retained campaign run before replacing a slot');
+      const localReceipts = await this.journals.validatedReceipts(old.receipts);
+      if (localReceipts.unpresented)
+        throw new Error('Acknowledge committed Results before replacing a slot');
       if (old.practice !== undefined && canonical(old.practice) !== canonical(source.practice))
         throw new Error('Resolve the retained practice before importing a conflicting checkpoint');
       const revision = Math.max(current?.revision ?? 0, source.campaign.revision) + 1;
@@ -267,12 +349,42 @@ export class BackupStore {
         : null;
       const seq = sequenceSchema.parse(old.sequence ?? '0');
       const local = expected.fences[campaign.lineage] ?? emptyFence(campaign.lineage);
+      const sourceRun = 'run' in source ? source.run : null;
+      const run = sourceRun ? await this.journals.rebaseState(sourceRun, campaign) : null;
+      const incomingReceipts = await this.journals.validatedReceipts(
+        'receipts' in source ? source.receipts : undefined,
+      );
+      const receiptMap = new Map<string, (typeof incomingReceipts.receipts)[number]>();
+      for (const r of [
+        ...(current?.lineage === campaign.lineage ? localReceipts.receipts : []),
+        ...incomingReceipts.receipts,
+      ]) {
+        const id = canonical(r.runID),
+          earlier = receiptMap.get(id);
+        if (earlier && canonical(earlier) !== canonical(r))
+          throw new Error('Imported receipt identity conflict');
+        receiptMap.set(id, r);
+      }
+      const orderedReceipts = [...receiptMap.values()].sort((a, b) =>
+        BigInt(a.runID.sequence) < BigInt(b.runID.sequence) ? -1 : 1,
+      );
+      const retained = orderedReceipts.slice(-16),
+        unpresented = incomingReceipts.unpresented;
+      if (unpresented && !retained.some((r) => canonical(r.runID) === canonical(unpresented))) {
+        const receipt = orderedReceipts.find((r) => canonical(r.runID) === canonical(unpresented));
+        if (!receipt) throw new Error('Missing imported unpresented receipt');
+        retained.shift();
+        retained.unshift(receipt);
+      }
       next.set(
         item.destination,
         await validateSlotBackup({
           ...source,
           campaign,
           practice,
+          ...(run || retained.length || source.campaign.schema === 2 || 'run' in source
+            ? { run, receipts: { receipts: retained, unpresented } }
+            : {}),
           previous: current
             ? {
                 campaign: current,
@@ -332,6 +444,10 @@ export class BackupStore {
           tx.objectStore('meta').put(value.practiceSequence, `practice.sequence.${i}`);
           if (value.practice) tx.objectStore('meta').put(value.practice, `practice.slot.${i}`);
           else tx.objectStore('meta').delete(`practice.slot.${i}`);
+          if ('run' in value && value.run) tx.objectStore('meta').put(value.run, runStateKey(i));
+          else tx.objectStore('meta').delete(runStateKey(i));
+          if ('receipts' in value) tx.objectStore('meta').put(value.receipts, runReceiptsKey(i));
+          else tx.objectStore('meta').delete(runReceiptsKey(i));
         }
         for (const [lineage, fence] of combinedFences)
           tx.objectStore('meta').put(fence, `fence.${lineage}`);
@@ -348,6 +464,19 @@ export class BackupStore {
           else this.repo.memoryPrevious.delete(i);
           this.repo.memory.set(i, structuredClone(value.campaign));
           this.practice.memorySequence.set(i, value.practiceSequence);
+          if ('run' in value && value.run) {
+            this.journals.memory.set(i, structuredClone(value.run));
+            this.repo.activeRunSlots.add(i);
+          } else {
+            this.journals.memory.delete(i);
+            this.repo.activeRunSlots.delete(i);
+          }
+          if ('receipts' in value)
+            this.journals.memoryReceipts.set(i, structuredClone(value.receipts));
+          else this.journals.memoryReceipts.delete(i);
+          if ('receipts' in value && value.receipts.unpresented)
+            this.repo.unpresentedResultSlots.add(i);
+          else this.repo.unpresentedResultSlots.delete(i);
           if (value.practice) {
             this.practice.memory.set(i, value.practice);
             this.repo.practiceSlots.add(i);
@@ -363,6 +492,7 @@ export class BackupStore {
     const old = expected.slots[index];
     if (!old || old.previous === undefined) throw new Error('No previous snapshot available');
     if (old.practice !== undefined) throw new Error('Resolve retained practice before rollback');
+    if (old.run !== undefined) throw new Error('Resolve retained campaign run before rollback');
     const campaign = validateCampaign(old.previous);
     const backup = await createBackup(
       [
@@ -382,6 +512,9 @@ export class BackupStore {
     const old = expected.slots[index];
     if (!old || old.campaign === undefined) throw new Error('No campaign to delete');
     if (old.practice !== undefined) throw new Error('Resolve retained practice before deleting');
+    if (old.run !== undefined) throw new Error('Resolve retained campaign run before deleting');
+    if ((await this.journals.validatedReceipts(old.receipts)).unpresented)
+      throw new Error('Acknowledge committed Results before deleting');
     const c = validateCampaign(old.campaign);
     await this.write(
       expected,
@@ -389,6 +522,7 @@ export class BackupStore {
         tx.objectStore('campaigns').delete(index);
         tx.objectStore('previous').delete(index);
         tx.objectStore('meta').delete(`fence.${c.lineage}`);
+        tx.objectStore('meta').delete(runReceiptsKey(index));
         const r = tx.objectStore('meta').get('lastOpened');
         r.onsuccess = () => {
           if (r.result === index) tx.objectStore('meta').delete('lastOpened');
@@ -399,6 +533,8 @@ export class BackupStore {
         this.repo.memory.delete(index);
         this.repo.memoryPrevious.delete(index);
         this.repo.memoryFences.delete(c.lineage);
+        this.journals.memoryReceipts.delete(index);
+        this.repo.unpresentedResultSlots.delete(index);
       },
     );
   }
@@ -443,7 +579,7 @@ export class BackupStore {
                 this.repo.writer = undefined;
                 throw new Error('Read Only: writer changed');
               }
-              let pending = 13;
+              let pending = 19;
               const check = (actual: unknown, wanted: unknown) => {
                 if (canonical(actual ?? null) !== canonical(wanted ?? null))
                   throw new Error('Campaign or recovery data changed; review again');
@@ -455,6 +591,8 @@ export class BackupStore {
                   ['previous', i, 'previous'],
                   ['meta', `practice.slot.${i}`, 'practice'],
                   ['meta', `practice.sequence.${i}`, 'sequence'],
+                  ['meta', runStateKey(i), 'run'],
+                  ['meta', runReceiptsKey(i), 'receipts'],
                 ] as const) {
                   const q = tx.objectStore(store).get(key);
                   q.onsuccess = guard(() => check(q.result, expected.slots[i]?.[field]));
@@ -465,7 +603,7 @@ export class BackupStore {
               q.onsuccess = guard(() => {
                 const cur = q.result;
                 if (cur) {
-                  if (!knownMetadataKey(cur.key)) unknownKeys.push(String(cur.key));
+                  if (!knownMetadataKey(cur.key, cur.value)) unknownKeys.push(String(cur.key));
                   if (typeof cur.key === 'string' && cur.key.startsWith('fence.'))
                     fences[cur.key.slice(6)] = cur.value;
                   cur.continue();

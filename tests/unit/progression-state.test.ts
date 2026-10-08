@@ -28,9 +28,17 @@ it('migrates explicitly without altering identities, money, wounds or deployment
   expect(legacy.schema).toBe(1);
   expect(migrated.revision).toBe(1);
   expect(migrated.credits).toBe(600);
-  expect(migrated.assets.map(({ enhancementPaid: _e, permanentCharges: _p, ...a }) => a)).toEqual(
-    legacy.assets,
-  );
+  expect(
+    migrated.assets.map(
+      ({
+        enhancementPaid: _e,
+        permanentCharges: _p,
+        refundLocked: _r,
+        emergencyCreated: _c,
+        ...a
+      }) => a,
+    ),
+  ).toEqual(legacy.assets);
   repo.practiceSlots.add(0);
   await expect(repo.commit(migrated, legacy)).rejects.toThrow('run/practice');
   expect(repo.memory.get(0)).toEqual(legacy);

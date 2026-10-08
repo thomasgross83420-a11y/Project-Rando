@@ -73,7 +73,7 @@ it('commits a real authored victory exactly once, awards first-clear/discovery a
   const terminal = captureCampaignTerminal(b),
     pending = await store.buildPending(cp, terminal);
   expect(pending.rewards).toMatchObject({
-    bastionXP: '255',
+    bastionXP: '286',
     assetXPPool: '200',
     grantedAssetXP: '200',
     unusedAssetXP: '0',
@@ -81,7 +81,7 @@ it('commits a real authored victory exactly once, awards first-clear/discovery a
     firstClear: true,
     discovered: ['enemy.raider', 'enemy.runner'],
   });
-  expect(pending.after).toMatchObject({ rank: 2, accountXP: 155, promotionCores: 1 });
+  expect(pending.after).toMatchObject({ rank: 2, accountXP: 186, promotionCores: 1 });
   const next = pending.after;
   if (next.schema !== 2) throw new Error('Schema');
   const fixed = required(
@@ -99,12 +99,15 @@ it('commits a real authored victory exactly once, awards first-clear/discovery a
   expect(await store.finalize(cp, pending)).toEqual(receipt);
   expect(repo.memory.get(0)).toEqual(pending.after);
   expect(repo.memoryPrevious.get(0)).toEqual(c);
+  await expect(repo.commit({ ...next, revision: next.revision + 1 }, next)).rejects.toThrow(
+    'Acknowledge',
+  );
   await store.acknowledge(0, cp.runID);
   const repeat = await store.start(next, campaignTutorialPlan(), freezeCampaign(next));
   const repeatBattle = await Battle.createCampaign(repeat.plan, repeat.frozen);
   while (repeatBattle.state === 'Siege' || repeatBattle.state === 'Cleanup') repeatBattle.step();
   const repeated = await store.buildPending(repeat, captureCampaignTerminal(repeatBattle));
-  expect(repeated.rewards).toMatchObject({ bastionXP: '155', firstClear: false, discovered: [] });
+  expect(repeated.rewards).toMatchObject({ bastionXP: '186', firstClear: false, discovered: [] });
   expect(repeated.after.credits).toBeGreaterThan(next.credits);
 }, 120000);
 it('does not pay for abandonment, but finalized early defeat retains actual wounds and claims perceived-role discovery once', async () => {

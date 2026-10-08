@@ -17,6 +17,7 @@ import { canonical } from '../sim/determinism';
 import { CONTRIBUTION_POLICY, SCORE_PER_POINT, SCORE_PER_FIXED } from './contribution';
 import { allocateAssetXP, applyRankXP, levelUpBody } from './allocation';
 import { captureProfile, developingSlice } from './profile';
+import { fullRecoveryBudget } from './recovery-summary';
 const integer = z.number().int().min(0).max(Number.MAX_SAFE_INTEGER);
 const wide = z
   .string()
@@ -73,6 +74,9 @@ const aggregatesSchema = z
     perceivedHostiles: z.array(integer.min(1001).max(1024)).max(24),
     kills: integer.max(24),
     destroyedTP: integer.max(30),
+    admittedPackets: integer.max(24),
+    victoryQuiet: integer.max(60),
+    liveHostileProjectiles: z.literal(0),
   })
   .strict();
 const endSchema = z
@@ -138,6 +142,9 @@ export function captureCampaignTerminal(b: Battle) {
       perceivedHostiles: b.perceivedHostiles,
       kills: b.kills,
       destroyedTP: b.destroyedTP,
+      admittedPackets: b.packet,
+      victoryQuiet: b.victoryQuiet,
+      liveHostileProjectiles: b.projectiles.filter((p) => p.team === 'hostile').length,
     },
     rewardOriginBuckets: originBuckets(contributions.actors),
   };
@@ -268,7 +275,21 @@ function validateActors(frozen: FrozenCampaign, terminal: TerminalInput) {
       )
   )
     throw new Error('Terminal body/stock capture mismatch');
-  if (terminal.outcome === 'Victory' && (!core.body || kills !== 24))
+  if (
+    facts.admittedPackets !== ledger.actors.filter((a) => a.team === 'hostile').length ||
+    ledger.actors
+      .filter((a) => a.team === 'hostile')
+      .some((a) => a.id > 1000 + facts.admittedPackets)
+  )
+    throw new Error('Terminal admitted packet mismatch');
+  if (
+    terminal.outcome === 'Victory' &&
+    (!core.body ||
+      kills !== 24 ||
+      facts.admittedPackets !== 24 ||
+      facts.victoryQuiet !== 60 ||
+      facts.liveHostileProjectiles !== 0)
+  )
     throw new Error('Victory terminal condition mismatch');
   if (
     new Set(facts.perceivedHostiles).size !== facts.perceivedHostiles.length ||
@@ -296,8 +317,18 @@ export const campaignTutorialRules: RunRules = {
     const frozen = validateFrozenCampaign(c, cp.frozen),
       { facts, end, origins } = validateActors(frozen, terminal),
       claims = structuredClone(cp.fence);
+    const recoveryIDs = frozen.army.map((a) => a.uuid),
+      startingRecovery = fullRecoveryBudget(c, recoveryIDs);
     const first = !claims.campaign.includes('C01S01'),
       victory = terminal.outcome === 'Victory';
+    const plan = campaignTutorialSchema.parse(cp.plan);
+    const objectives = plan.objectives.filter(
+      (id) =>
+        victory &&
+        (id === 'objective.core_75'
+          ? end.coreHP * 4 >= coreBaseline.hp * 1024 * 3
+          : facts.contributions.actors.some((a) => a.type === c.warden && a.body > 0)),
+    );
     const roles = facts.perceivedHostiles
       .map((id) => facts.contributions.actors.find((a) => a.id === id)?.type)
       .filter(
@@ -317,7 +348,7 @@ export const campaignTutorialRules: RunRules = {
           policy: 'economy.duration_wave_v1',
           band: 1,
           runStartRank: c.rank,
-          difficulty: 'Standard',
+          difficulty: plan.difficulty,
           modifiers: [],
           mastery: false,
           challengeTier: 0,
@@ -331,6 +362,7 @@ export const campaignTutorialRules: RunRules = {
         terminal.outcome,
         {
           ...noAdditions,
+          objectives: objectives.length as 0 | 1 | 2,
           firstClearXP: first && victory ? 50 : 0,
           discoveryXP: 25 * discovered.length,
         },
@@ -363,6 +395,7 @@ export const campaignTutorialRules: RunRules = {
       const oldMax = maximumBody(a),
         p = allocation.allocations.find((p) => p.id === a.id);
       a.hp = e.hp;
+      if (victory) a.refundLocked = false;
       if (a.permanentCharges !== null) a.permanentCharges = e.permanentStock;
       if (p) {
         a.xp = p.xp;
@@ -378,7 +411,9 @@ export const campaignTutorialRules: RunRules = {
     c.accountXP = rank.progress;
     c.lifetimeXP = String(rank.lifetime);
     c.lifetimeXPSaturated = rank.saturated;
+    c.emergencyActive = false;
     c.revision++;
+    const recovery = fullRecoveryBudget(c, recoveryIDs);
     return {
       after: validateCampaign(c),
       claims,
@@ -396,12 +431,27 @@ export const campaignTutorialRules: RunRules = {
         unusedAssetXP: String(allocation.unused),
         allocations: allocation.allocations.map((a) => ({
           ...a,
+          previousXP: cp.base.assets.find((o) => o.id === a.id)?.xp,
+          previousLevel: cp.base.assets.find((o) => o.id === a.id)?.level,
           allocated: String(a.allocated),
           granted: String(a.granted),
           unused: String(a.unused),
         })),
         ranksCrossed: rank.crossed,
+        previousRank: cp.base.rank,
+        rank: c.rank,
+        rankProgress: c.accountXP,
+        creditsBefore: cp.base.credits,
+        creditsAfter: c.credits,
+        coreHP: c.coreHP,
+        recovery: {
+          ...recovery,
+          startingCredits: startingRecovery.credits,
+          grossLessFullRecovery: String(credits.credited - BigInt(recovery.credits)),
+          walletAfterFullRecovery: String(BigInt(c.credits) - BigInt(recovery.credits)),
+        },
         discovered,
+        objectives,
         firstClear: first && victory,
       },
     };

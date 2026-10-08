@@ -4,7 +4,12 @@ import { z } from 'zod';
 import { combat, type ActorDefinition } from '../data/combat';
 import { foundation } from '../data/foundation';
 import { validateCampaign, type ProgressionCampaign } from '../persistence/campaign';
-import { captureProfile, PROFILE_POLICY, type CapturedProfile } from '../progression/profile';
+import {
+  captureProfile,
+  bandDefinition,
+  PROFILE_POLICY,
+  type CapturedProfile,
+} from '../progression/profile';
 import { ACCURACY_POLICY } from '../progression/accuracy';
 import { CONTRIBUTION_POLICY } from '../progression/contribution';
 import { tutorialSchema, tutorialPlan, startSchema } from './tutorial';
@@ -15,8 +20,18 @@ export const campaignTutorialSchema = tutorialSchema.extend({
   mode: z.literal('campaign'),
   stage: z.literal('C01S01'),
   simulation: z.literal('rb-sim-v3'),
+  difficulty: z.enum(['Cadet', 'Standard']),
+  objectives: z.tuple([z.literal('objective.warden_survives'), z.literal('objective.core_75')]),
 });
 export type CampaignTutorialPlan = z.infer<typeof campaignTutorialSchema>;
+export const profiledPracticePlanSchema = campaignTutorialSchema
+  .omit({ stage: true })
+  .extend({ mode: z.literal('tutorial-practice') });
+export type ProfiledPracticePlan = z.infer<typeof profiledPracticePlanSchema>;
+export function profiledPracticePlan(): ProfiledPracticePlan {
+  const { stage: _stage, ...plan } = campaignTutorialPlan();
+  return profiledPracticePlanSchema.parse({ ...plan, mode: 'tutorial-practice' });
+}
 export const campaignStartAssetSchema = startSchema.extend({ hp: z.number().int().min(0) });
 const frozenAssetSchema = campaignStartAssetSchema.extend({
   level: z.number().int().min(1).max(100),
@@ -45,13 +60,17 @@ export interface CapturedCampaign {
   readonly profiles: Readonly<Record<number, CapturedProfile>>;
   readonly enemies: Readonly<Record<'enemy.runner' | 'enemy.raider', ActorDefinition>>;
 }
-export function campaignTutorialPlan(): CampaignTutorialPlan {
+export function campaignTutorialPlan(
+  difficulty: 'Cadet' | 'Standard' = 'Standard',
+): CampaignTutorialPlan {
   return campaignTutorialSchema.parse({
     ...tutorialPlan(),
     schema: 2,
     mode: 'campaign',
     stage: 'C01S01',
     simulation: 'rb-sim-v3',
+    difficulty,
+    objectives: ['objective.warden_survives', 'objective.core_75'],
   });
 }
 export function freezeCampaign(input: ProgressionCampaign): FrozenCampaign {
@@ -122,8 +141,8 @@ export function captureCampaign(input: unknown): CapturedCampaign {
     frozen,
     profiles: Object.freeze(profiles),
     enemies: Object.freeze({
-      'enemy.runner': Object.freeze(structuredClone(combat['enemy.runner'])),
-      'enemy.raider': Object.freeze(structuredClone(combat['enemy.raider'])),
+      'enemy.runner': bandDefinition('enemy.runner', 1),
+      'enemy.raider': bandDefinition('enemy.raider', 1),
     }),
   });
 }

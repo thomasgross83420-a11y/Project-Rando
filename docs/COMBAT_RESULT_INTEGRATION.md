@@ -1,99 +1,149 @@
 # Combat contribution and campaign integration
 
-Development continuation, 2026-10-08. This increment follows the progression
-balance audit; the blueprint's full roster and campaign remain the objective.
+Development continuation, 2026-10-08, application 0.2.6. This increment follows
+[the progression balance audit](PROGRESSION_BALANCE.md). The unchanged blueprint's
+full roster and campaign remain the objective; this is the first persistent
+Bulwark/Bastion C01S01 slice, not a completed campaign.
 
 ## Applied contribution
 
-The optional combat ledger observes applied outcomes. It never changes attack
-accuracy, damage, motion, targeting, cooldowns or random draw order. The legacy
-simulation snapshots remain unchanged when accounting is disabled.
+The optional ledger observes applied outcomes without changing targeting, damage,
+motion, cooldowns or random draw order. Untracked legacy snapshots stay unchanged.
 
-- Damage credit uses actual hostile body loss and shield absorption; overkill
-  cannot earn credit. Released projectiles retain credit after source death.
-- Repair credit is shared across providers and capped per recipient by initial
-  missing body plus actual hostile body damage. Zero-body recipients cannot heal.
-- Shield prevention is an ordered marginal counterfactual, after armor and
-  remaining-body caps. Holdfast receives only its remaining reduction. Their
-  combined credit cannot exceed the unprotected attack's possible body loss.
-- Stock use is separate from body damage. Temporary charges are spent first and
-  cannot become paid permanent stock. The current mine retains its body when its
-  permanent charge is spent.
-- Control and first-hidden-reveal kernels have exact fractional credit and caps;
-  those abilities are not implemented by the current combat roster and therefore
-  are rejected in this encounter's terminal adapter.
+- Damage credit uses actual hostile body loss and shield absorption, capped by
+  what remains. Released projectiles retain source credit after owner death.
+- Restoration credit is shared across providers and limited to initial missing
+  body plus actual hostile body damage. Healing never revives zero-body wrecks.
+- Shield prevention uses ordered counterfactual body damage after armor and
+  remaining-body caps; Holdfast earns only the remaining reduction. Their total
+  cannot exceed the unprotected attack's possible body loss.
+- Permanent mine stock is separate from body. Temporary stock spends first and
+  cannot become permanent paid stock. A spent mine retains its body.
+- Exact capped slow/root and first-hidden-reveal accounting kernels exist, but
+  these abilities are absent from this combat slice. Its terminal adapter rejects
+  invented control/reveal contribution.
 
-One body-point equivalent is 6,144,000 score units. This common denominator keeps
-60-tick percentage slow credit exact without floating point or per-tick rounding.
-The friendly participation loop does not scan retained defeated enemies.
+A body-point equivalent is 6,144,000 score units, retaining 60-tick percentage
+slow credit exactly. Living participation scans friendly actors, not all retained
+hostile corpses. The 70/30 contribution/participation XP allocation retains exact
+fractions and reports unused XP.
 
-## Saved progression and purchases
+## Player flow and saved progression
 
-Schema 1 remains valid. An explicit pure migration to schema 2 preserves every
-owned UUID, wallet, body value and deployment, increases revision once, and adds
-zero investment plus initial permanent stock. Legacy practice never consumed
-campaign stock. Repository guards prevent migration during a retained battle.
+Preparation offers Campaign Siege C01S01. A legacy campaign first shows explicit
+progression migration: schema 2 preserves owned UUIDs, money, wounds and placement,
+adds zero XP/investment and initial permanent stock, and increases revision once.
+Legacy practice never spent campaign stock. Schema 1 saves and old practice
+checkpoints remain valid; migration is blocked during retained attempts/results.
 
-Schema 2 validates XP-derived levels, rank progress, bounded lifetime XP, actual
-sequential enhancement investment and type-specific stock. It currently permits
-earned growth for the four implemented developing combat identities. Fixed
-objects have no XP; unfinished roster identities cannot receive fake development.
-Promotion stays at 1 star until the actual role perks and branches are supported.
+A separate rb-sim-v3 capture freezes deployed UUIDs, actual body, earned levels,
+purchased enhancements and permanent stock before loading combat. Empty starter
+layouts offer a confirmed, free placement of existing owned units. Custom layouts
+are preserved. Defenders still traverse and fight through continuous 360° headings;
+rendered facings do not restrict movement.
 
-Pure preparation previews use the existing exact repair, restore, rearm,
-enhancement and sale prices. Growth adds only the gained maximum body to a living
-asset. Wrecks remain zero through level or enhancement changes. Restore explicitly
-purchases half maximum body; repair does not substitute for Restore. These APIs
-are backend work; the existing preparation interface has not enabled them yet.
+Only four current developing types receive earned growth: Sentry, Rifle Squad,
+Repair Node and Bulwark. Fixed objects receive no XP. Unsupported roster identities
+receive no invented progression. Stars remain 1 until their actual perks and
+branches exist. The grown inspector/range overlay and purchase preview show actual
+current statistics rather than a global baseline shared across all instances.
 
-## First ordinary encounter
+Core repair, asset repair, Restore, permanent mine Rearm and level-gated Enhancement
+are explicit quoted purchases. Confirmation reports the exact price and resulting
+body, wallet, enhancement and stock; Enhancement also previews weapon/support
+statistics. Growth preserves absolute missing body on living units. Wreck upgrades
+stay at zero; Restore buys half maximum body. Rearming an empty living mine costs
+19 Credits and changes stock without repairing its body. Sale price kernels exist;
+Sale and promotion are not enabled in the preparation interface.
 
-C01S01 retains the 24-enemy, 30-TP, 90-second authored schedule. A separate
-`rb-sim-v3` campaign capture freezes the actual deployed UUIDs, level/enhancement,
-body and stock before battle. It cannot be supplied as an old practice or Study.
-Only implemented Bulwark/Bastion combat is admitted in this increment.
+Schema 2 validates XP-derived levels, rank progress, bounded lifetime XP, sequential
+paid enhancement investment, stock and emergency refund flags. Legacy version keys
+remain pinned for old saves; separate progression keys identify the new schemas.
 
-Terminal results capture the bounded ledger, final body/stock, perceived enemy
-IDs and destroyed quarter-TP by authored 20-second origin segment. Cosmetic
-events, delayed kill times and frame grouping do not determine payment. The
-adapter validates identities, score sums, participation, injury/restoration
-conservation, origin totals and final captures before deriving saved progression.
+## Encounter, reward and recovery budget
 
-A first full victory earns 255 Bastion XP (155 ordinary, 50 first-clear, two
-25-XP discoveries), 200 asset XP and 1 Core. It reaches Rank 2 with 155 progress.
-Repeat victories cannot reclaim first-clear or seen-role discovery. Ordinary
-repeat scaling still follows the existing band/rank formula. Finalized defeats
-retain actual damage and eligible partial rewards; abandoning an unfinalized
-attempt returns to its checkpoint without rewards or discovery claims.
+C01S01 retains its authored 24 enemies, 30 TP and 90-second director schedule, then
+unlimited Cleanup. Standard uses 0.35-second enemy decisions. Cadet uses 0.5-second
+decisions and 80% ordinary rewards; its authored tutorial packet schedule is not
+silently scaled down. Forecast lists Warden-survival and Core-at-least-75% optional
+objectives. Each earns 10% ordinary victory Bastion XP, capped at two; they do not
+increase Credits or asset XP.
 
-The existing two-phase result journal derives, seals, journals and atomically
-commits campaign, previous snapshot, receipt and monotonic claim fence. This
-increment does not yet enable paid encounters in the player interface: whole-slot
-backup/recovery and UI integration must preserve the new journals first.
+The tested Standard first victory earns 286 Bastion XP: 155 ordinary becomes 186
+with both objectives, plus 50 first-clear and two 25-XP discoveries. Rank becomes
+2 with 186 progress. The asset pool is 200 XP and the Core reward is 1. A repeat
+with both objectives at the tested starting rank earns 186 Bastion XP; first-clear
+and discovery cannot be reclaimed. The existing band/start-rank repeat policy still
+applies. Defeat saves actual wounds/stock and eligible partial rewards; abandoning
+an unfinished attempt returns to the captured beginning without rewards/claims.
 
-## Validation and boundaries
+Results show allocations, level changes, unused XP, rank changes, discoveries,
+objectives and wallet-cap excess. An optional full-recovery budget uses the same
+Restore/Repair/Rearm kernels as preparation, after earned level changes. It includes
+only the deployed army plus Core. Starting recovery cost is shown separately to
+avoid attributing pre-existing wounds to this battle. Reward-minus-budget and
+wallet-after-budget may be negative and are clearly advisory: no recovery purchase
+or automatic deduction occurs.
 
-Targeted tests exercise applied repair, armor-adjusted prevention, deterministic
-tracked/untracked equivalence, migration guards, investment/stock validation,
-wreck upgrades, exact recovery prices, real victory/repeat/abandonment and
-rechecksummed derived-field tampering. Full verification is recorded separately
-after completion. No Lenovo hardware, Android browser or TalkBack certification
-follows from these desktop tests.
+The terminal adapter checks identities, actual contribution, participation,
+restoration/injury conservation, permanent stock, admitted packet prefix, kills,
+quarter-TP origin segments and victory quiet before deriving the result. Reward
+origins follow authored spawn segments rather than kill timing or render frames.
+It rejects practice/Study terminals. The current hostile roster is melee-only;
+adding hostile ranged weapons requires widening and testing the projectile proof.
 
-Initial backend verification passed type checking, lint, all 113 unit tests,
-the existing deterministic scenario and production build. The extra non-null
-assertion warning was subsequently removed; the existing 14 lint informational
-diagnostics and Phaser bundle-size warning remain. Browser recovery checks are
-still required for the expanded backup path.
+## Emergency reconstruction and free practice
+
+When Core/selected Warden/owned damaging defense is not viable, Review Recovery
+first calculates the least-cost priced recovery. If affordable it spends Credits;
+otherwise the starter-slice emergency operation raises Core to at least 25% and
+eligible owned Warden/basic weapons to at least half current maximum body, reusing
+UUIDs, growth and investments. It never lowers healthy assets. Missing basics are
+created only when needed and ownership space permits. Obstructing deployments may
+be stored without deleting ownership. The 1024-asset conversion path requires an
+explicit selected non-Warden identity and warns of lost identity/XP.
+
+Subsidized identities have refund locks. Finalized victory clears locks only for
+deployed identities; emergency-created bodies keep zero base refund permanently.
+Recovery is outside Undo and cannot be tapped again once the defense is viable.
+The zero-Credit, zero-Core, all-wreck guided Bulwark/Bastion army wins the authored
+Cadet tutorial after reconstruction without paid repairs. Other Wardens/doctrines,
+all nine required emergency fixtures and emergency-sale tombstones remain open.
+The current API rejects selling an active locked emergency identity.
+
+Schema-2 free practice uses a separately captured full-body/full-stock clone with
+the actual owned levels and enhancements. Original wounds, wrecks, stock, wallet,
+XP and discovery remain untouched. Old v1/v2 practice replay keeps its own rules.
+
+## Atomic results, interruption and backup
+
+Before combat loads, the complete starting checkpoint is durable. Interrupted
+attempts restart from that beginning; there is no mid-battle/offline simulation.
+The two-phase journal derives and seals a terminal result, then atomically commits
+campaign, previous snapshot, receipt and monotonic claims while clearing the active
+run. Failed writes preserve the exact pending result for retry. Audio failure does
+not prevent accounting. Preparation and practice remain blocked until the saved
+result has been acknowledged; returning to Title keeps that summary recoverable.
+
+Whole-slot backups include active checkpoints, pending results and receipts.
+Importing into another slot rebinds only slot/base revision and recomputes dependent
+seals before the transaction; captured army/terminal/reward meaning stays unchanged.
+Newer local fences prevent older backups from paying again. Restore/Delete/Replace
+respect retained paid attempts and unpresented summaries. Native abort tests cover
+checkpoint import and receipt commit; they verify full rollback and exact retry.
+Metadata keys are shared by backup and run persistence, avoiding receipt omission.
+
+All sequence readers enforce unsigned 64-bit maximum 18,446,744,073,709,551,615;
+a 20-digit regex alone was insufficient. Namespace rollover remains future work.
 
 Cross-reference: [MDN IDBTransaction](https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction),
-checked 2026-10-08, explains that transactions alternate active/inactive between
-event-loop tasks and auto-commit when no outstanding requests remain. Hashing,
-schema validation and rebasing must therefore complete before opening the final
-write transaction; writer/base/state comparisons remain inside its request
-callbacks. Transaction completion is not a guarantee against sudden power loss.
+checked 2026-10-08. Transactions alternate active/inactive between event-loop tasks
+and auto-commit with no outstanding requests. Hashing, schema validation and rebasing
+finish before final writes; writer/base/state comparisons remain inside transaction
+callbacks. Completion is not proof against sudden OS/device power loss.
 
-Every sequence reader now uses the same actual unsigned 64-bit maximum
-18,446,744,073,709,551,615. A 20-digit regex alone did not enforce that limit.
-Namespace rollover remains a separate future implementation, not an invented
-larger counter.
+Full verification counts and artifact hashes are recorded in TEST_EVIDENCE.md and
+COMBAT_PROGRESSION_TESTS.json once the final checks finish. Desktop checks do not
+certify Lenovo hardware performance, Android sharing or TalkBack behavior. Full
+roster, animation contact authoring, earned promotions, later encounters, bosses,
+all doctrines, modes and release acceptance remain development work.

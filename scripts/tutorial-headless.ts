@@ -2,12 +2,15 @@ import { Battle } from '../src/sim/battle';
 import { hash } from '../src/sim/determinism';
 import { tutorialArmy } from '../tests/fixtures/tutorial';
 import { practiceSchema } from '../src/persistence/practice';
+import { createPracticeBattle } from '../src/sim/practice-battle';
 export async function runTutorial(input?: unknown): Promise<void> {
   const checkpoint = input ? practiceSchema.parse(input) : undefined;
   let expected = '';
   const results = [];
   for (const batch of checkpoint ? [12] : [1, 2, 4, 8, 12]) {
-    const b = await Battle.create(checkpoint?.army ?? tutorialArmy(), checkpoint?.plan);
+    const b = checkpoint
+      ? await createPracticeBattle(checkpoint)
+      : await Battle.create(tutorialArmy());
     let steps = 0;
     while ((b.state === 'Siege' || b.state === 'Cleanup') && steps++ < 21600)
       for (let i = 0; i < batch; i++) b.step();

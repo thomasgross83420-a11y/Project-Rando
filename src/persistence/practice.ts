@@ -1,9 +1,18 @@
 import { z } from 'zod';
 import type { CampaignRepository } from './repository';
-import { validateCampaign, type Campaign } from './campaign';
+import { validateCampaign, maximumBody, type Campaign, type ProgressionCampaign } from './campaign';
 import { foundation, type ContentID } from '../data/foundation';
 import { combat } from '../data/combat';
 import { sequenceSchema } from './sequence';
+import {
+  frozenCampaignSchema,
+  freezeCampaign,
+  profiledPracticePlanSchema,
+  profiledPracticePlan,
+} from '../sim/campaign-start';
+import { canonical, hash } from '../sim/determinism';
+import { receiptsSchema } from './run-journal';
+import { runReceiptsKey } from './run-keys';
 import {
   tutorialSchema,
   startSchema,
@@ -22,7 +31,7 @@ const terminalSchema = z
     coreHP: z.number().int().nonnegative().max(10240000),
   })
   .strict();
-export const practiceSchema = z
+const legacyPracticeSchema = z
   .object({
     schema: z.literal(1),
     kind: z.literal('tutorial-practice'),
@@ -36,6 +45,15 @@ export const practiceSchema = z
     terminal: terminalSchema.nullable(),
   })
   .strict();
+const profiledPracticeSchema = legacyPracticeSchema.extend({
+  schema: z.literal(2),
+  plan: profiledPracticePlanSchema,
+  frozen: frozenCampaignSchema,
+});
+export const practiceSchema = z.discriminatedUnion('schema', [
+  legacyPracticeSchema,
+  profiledPracticeSchema,
+]);
 export type PracticeCheckpoint = z.infer<typeof practiceSchema>;
 export const guidedPositions: [ContentID, number, number][] = [
   ['friendly.sentry', 24, 26],
@@ -53,6 +71,7 @@ export function practiceArmy(campaign: Campaign, guided = true): StartAsset[] {
     );
   const clone = structuredClone(campaign),
     used = new Set<string>();
+  if (clone.schema === 2) for (const a of clone.assets) a.hp = maximumBody(a);
   if (guided) {
     for (const a of clone.assets) a.placement = null;
     for (const [type, x, y] of guidedPositions) {
@@ -100,11 +119,12 @@ export function validatePracticeArmy(c: Campaign, army: StartAsset[]): void {
       ids.has(a.uuid) ||
       !owned ||
       owned.type !== a.type ||
-      owned.hp !== a.hp ||
+      (c.schema === 2 ? maximumBody(owned) : owned.hp) !== a.hp ||
       a.heading % 16384
     )
       throw new Error('Practice army ownership, health or heading mismatch');
     ids.add(a.uuid);
+    if (clone.schema === 2) owned.hp = a.hp;
     const rotation = a.heading / 16384,
       d = foundation[owned.type];
     if (
@@ -122,6 +142,40 @@ export function validatePracticeArmy(c: Campaign, army: StartAsset[]): void {
   )
     throw new Error('Tutorial requires the selected Bulwark / Bastion');
 }
+function freezePractice(c: ProgressionCampaign, army: StartAsset[]) {
+  validatePracticeArmy(c, army);
+  const clone = structuredClone(c);
+  clone.coreHP = 10000 * 1024;
+  for (const a of clone.assets) {
+    a.placement = null;
+    a.hp = maximumBody(a);
+    if (a.permanentCharges !== null) a.permanentCharges = 1;
+  }
+  for (const a of army) {
+    const owned = clone.assets.find((o) => o.id === a.uuid);
+    if (!owned) throw new Error('Practice owned identity missing');
+    owned.placement = { x: a.x, y: a.y, rotation: (a.heading / 16384) as 0 | 1 | 2 | 3 };
+  }
+  return freezeCampaign(clone);
+}
+export async function practiceIdentity(cp: PracticeCheckpoint): Promise<string> {
+  return cp.schema === 1
+    ? planIdentity(cp.plan, cp.army)
+    : hash({ plan: cp.plan, army: cp.army, frozen: cp.frozen });
+}
+export async function validatePracticeCheckpoint(
+  c: Campaign,
+  cp: PracticeCheckpoint,
+): Promise<void> {
+  validatePracticeArmy(c, cp.army);
+  if (cp.schema === 2) {
+    if (c.schema !== 2 || canonical(cp.frozen) !== canonical(freezePractice(c, cp.army)))
+      throw new Error('Practice frozen clone mismatch');
+  } else if (c.schema !== 1)
+    throw new Error('Legacy practice cannot silently downgrade progression');
+  if ((await practiceIdentity(cp)) !== cp.identity)
+    throw new Error('Practice identity failed; retained data preserved');
+}
 export class PracticeStore {
   readonly memory = new Map<number, PracticeCheckpoint>();
   readonly memorySequence = new Map<number, string>();
@@ -136,9 +190,7 @@ export class PracticeStore {
       throw new Error(
         'Retained practice belongs to a replaced campaign; export/recovery required before a new practice checkpoint.',
       );
-    validatePracticeArmy(c, valid.army);
-    if ((await planIdentity(valid.plan, valid.army)) !== valid.identity)
-      throw new Error('Practice identity failed; retained data preserved.');
+    await validatePracticeCheckpoint(c, valid);
     return valid;
   }
   private async transaction<T>(
@@ -183,7 +235,15 @@ export class PracticeStore {
               run.onsuccess = guard(() => {
                 if (run.result !== undefined)
                   throw new Error('Resolve retained campaign run before practice');
-                work(tx.objectStore('meta'), done, guard);
+                const receipts = tx.objectStore('meta').get(runReceiptsKey(c.slot));
+                receipts.onsuccess = guard(() => {
+                  if (
+                    receipts.result !== undefined &&
+                    receiptsSchema.parse(receipts.result).unpresented
+                  )
+                    throw new Error('Acknowledge committed Results before practice');
+                  work(tx.objectStore('meta'), done, guard);
+                });
               });
             });
           });
@@ -195,23 +255,29 @@ export class PracticeStore {
   }
   async start(c: Campaign, army: StartAsset[]): Promise<PracticeCheckpoint> {
     validatePracticeArmy(c, army);
-    const plan = tutorialPlan(),
-      identity = await planIdentity(plan, army),
+    const plan = c.schema === 2 ? profiledPracticePlan() : tutorialPlan(),
       base = {
-        schema: 1 as const,
+        schema: c.schema === 2 ? (2 as const) : (1 as const),
         kind: 'tutorial-practice' as const,
         slot: c.slot,
         lineage: c.lineage,
         revision: c.revision,
         plan,
         army,
-        identity,
+        identity: '',
         terminal: null,
+        ...(c.schema === 2 ? { frozen: freezePractice(c, army) } : {}),
       };
+    base.identity =
+      c.schema === 2
+        ? await hash({ plan, army, frozen: base.frozen })
+        : await planIdentity(tutorialSchema.parse(plan), army);
     if (!this.repository.database) {
       if (!this.repository.writer) throw new Error('Read Only');
       if (this.repository.activeRunSlots.has(c.slot))
         throw new Error('Resolve retained campaign run before practice');
+      if (this.repository.unpresentedResultSlots.has(c.slot))
+        throw new Error('Acknowledge committed Results before practice');
       if (this.memory.has(c.slot))
         throw new Error('Existing practice must be restarted or discarded');
       const sequence = String(BigInt(this.memorySequence.get(c.slot) ?? '0') + 1n),

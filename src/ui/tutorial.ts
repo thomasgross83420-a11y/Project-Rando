@@ -6,7 +6,8 @@ import type { PreferencesStore } from '../persistence/preferences';
 import type { CampaignRepository } from '../persistence/repository';
 import { CombatRenderer } from '../render/combat';
 import { WorldView } from '../render/world';
-import { Battle, type BattleEvent } from '../sim/battle';
+import type { Battle, BattleEvent } from '../sim/battle';
+import { createPracticeBattle } from '../sim/practice-battle';
 import { BattleClock } from '../sim/clock';
 import { hash } from '../sim/determinism';
 import { U } from '../sim/fixed';
@@ -28,6 +29,9 @@ const safe = (s: string) =>
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;');
 export class TutorialSession {
+  protected get paidEncounter() {
+    return false;
+  }
   readonly store: PracticeStore;
   checkpoint: PracticeCheckpoint | undefined;
   battle: Battle | undefined;
@@ -58,7 +62,7 @@ export class TutorialSession {
   ) {
     this.store = practiceStore(repo);
     parent.innerHTML =
-      '<h2>Tutorial Practice</h2><p class="notice">Disposable clone · No campaign Credits, XP, damage, claims or discoveries. Gate 2 combat slice; campaign result progression arrives in Gate 3.</p><p id="battle-status" role="status"></p><div id="battle-content"></div><dialog id="battle-dialog" aria-labelledby="battle-dialog-heading"><h2 id="battle-dialog-heading"></h2><div id="battle-dialog-body"></div><button id="battle-close">Cancel / close</button></dialog>';
+      '<h2>Tutorial Practice</h2><p class="notice">Disposable clone · No campaign Credits, XP, damage, claims or discoveries. Free combat practice with the currently implemented roster.</p><p id="battle-status" role="status"></p><div id="battle-content"></div><dialog id="battle-dialog" aria-labelledby="battle-dialog-heading"><h2 id="battle-dialog-heading"></h2><div id="battle-dialog-body"></div><button id="battle-close">Cancel / close</button></dialog>';
     this.dialog = this.el('battle-dialog') as HTMLDialogElement;
     this.button('battle-close', () => this.dialog.close());
     this.dialog.addEventListener('close', () => {
@@ -152,7 +156,7 @@ export class TutorialSession {
           (this.el('practice-army') as HTMLSelectElement).value === 'guided',
         );
         this.el('practice-preview').innerHTML =
-          '<p>Clone only; original placements, current Credit reserve and investments stay intact. Selected Warden: Bulwark. Baseline L1/1★/E0, current body health.</p><ul>' +
+          `<p>Clone only; original placements, current Credit reserve and investments stay intact. Selected Warden: Bulwark. ${this.campaign.schema === 2 ? 'Owned earned levels and purchased enhancements; full clone health and trap stock.' : 'Baseline L1/1★/E0, current body health.'}</p><ul>` +
           army
             .map(
               (a) =>
@@ -232,8 +236,11 @@ export class TutorialSession {
     const cp = this.checkpoint;
     if (!cp || cp.terminal) throw new Error('No active checkpoint');
     if (!this.repo.writer) throw new Error('Read Only: restart requires explicit writer ownership');
+    await this.launchRuntime(await createPracticeBattle(cp), cp.sequence);
+  }
+  protected async launchRuntime(battleInput: Battle, sequence: string): Promise<void> {
     this.stopRuntime();
-    this.battle = await Battle.create(cp.army, cp.plan);
+    this.battle = battleInput;
     this.lastEventSequence = 0;
     this.lastHUD = -1;
     this.terminalSaving = false;
@@ -242,9 +249,13 @@ export class TutorialSession {
       '<div id="battle-hud" aria-label="Battle survival and state"><div><p id="core-health"></p><p id="warden-health"></p><p id="battle-time" aria-live="off"></p></div><button id="battle-pause">Pause</button></div><p id="checkpoint-label">' +
       (this.repo.temporary ? 'Temporary checkpoint · closing loses it' : 'Checkpoint Saved') +
       ' · starting sequence ' +
-      safe(cp.sequence) +
+      safe(sequence) +
       ' · no exact mid-battle resume</p><div id="battle-critical" role="alert" hidden><p id="battle-critical-text"></p><button id="battle-critical-ack">Acknowledge critical warning</button></div><section id="battle-world" aria-label="Autonomous battlefield"></section><nav aria-label="Battle observation tools"><label>Speed <select id="battle-speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select></label><button id="battle-camera">Camera</button><button id="battle-map">Map</button><button id="battle-inspect">Inspection</button><button id="battle-mute" aria-pressed="false">Mute</button><button id="battle-enable-sound" hidden>Enable Sound</button></nav><div id="battle-captions" role="status"></div><details id="battle-inspector"><summary>Known friendly assets and detected contacts</summary><label>Inspect entity <select id="battle-entity"></select></label><div id="battle-details" aria-live="off"></div><button id="battle-jump">Jump to selected</button><button id="battle-range" aria-pressed="false">Selected Range</button></details><details><summary>Observed event history</summary><ol id="battle-history"></ol></details>';
     this.world = new WorldView(this.el('battle-world'), (s) => this.status(s), true);
+    for (const control of this.parent.querySelectorAll<HTMLButtonElement | HTMLSelectElement>(
+      '#battle-content button, #battle-content select',
+    ))
+      control.disabled = true;
     this.world.backgroundOnly = true;
     this.world.highContrast = this.preferences.value.highContrast;
     this.world.onRendererPause = () => this.clock?.pause('renderer');
@@ -317,6 +328,10 @@ export class TutorialSession {
       },
     );
     this.bindRuntime();
+    for (const control of this.parent.querySelectorAll<HTMLButtonElement | HTMLSelectElement>(
+      '#battle-content button, #battle-content select',
+    ))
+      control.disabled = false;
     this.audio.configure(this.preferences.value.audio);
     if (this.audio.context?.state === 'running') void this.audio.music('music.fracture');
     else this.el('battle-enable-sound').hidden = false;
@@ -459,10 +474,10 @@ export class TutorialSession {
     if (second === this.lastHUD) return;
     this.lastHUD = second;
     this.el('core-health').textContent =
-      `${b.core.hp * 4 < b.core.maxHP ? '⚠ Core critical · ' : ''}Core ${Math.ceil(b.core.hp / U)} / 10000 Integrity`;
+      `${b.core.hp * 4 < b.core.maxHP ? '⚠ Core critical · ' : ''}Core ${Math.ceil(b.core.hp / U)} / ${Math.ceil(b.core.maxHP / U)} Integrity`;
     const w = b.entities.find((e) => e.type === 'warden.bulwark');
     this.el('warden-health').textContent =
-      `${w?.hp === 0 ? '× Incapacitated · ' : w && w.hp * 100 < w.maxHP * 30 ? '⚠ Low Health · ' : ''}Bulwark ${Math.ceil((w?.hp ?? 0) / U)} / 2500 Health`;
+      `${w?.hp === 0 ? '× Incapacitated · ' : w && w.hp * 100 < w.maxHP * 30 ? '⚠ Low Health · ' : ''}Bulwark ${Math.ceil((w?.hp ?? 0) / U)} / ${Math.ceil((w?.maxHP ?? 0) / U)} Health`;
     const critical = b.core.hp * 4 < b.core.maxHP || w?.hp === 0;
     if (!critical) this.acknowledgedCritical = false;
     this.el('battle-critical').hidden = !critical || this.acknowledgedCritical;
@@ -603,7 +618,7 @@ export class TutorialSession {
           : 'Last-known contact expired.');
       return;
     }
-    const d = combat[e.type],
+    const d = b.definition(e),
       target = b.get(e.target);
     this.el('battle-details').innerHTML =
       '<h3>' +
@@ -642,7 +657,14 @@ export class TutorialSession {
           's · ' +
           (d.weapon.range / U).toFixed(2) +
           ' GU boundary range · ' +
-          (d.weapon.speed ? d.weapon.accuracy + '% accuracy · ' : 'unmissable contact · ') +
+          (d.weapon.speed
+            ? (() => {
+                const p = b.profile(e.id)?.accuracy;
+                return p
+                  ? ((100 * p.numerator) / p.denominator).toFixed(2) + '% accuracy · '
+                  : d.weapon.accuracy + '% accuracy · ';
+              })()
+            : 'unmissable contact · ') +
           (e.type === 'friendly.rifle_squad'
             ? 'Three visual troopers / one attack. Injury output ' +
               Math.round((0.5 + (0.5 * e.hp) / e.maxHP) * 100) +
@@ -651,7 +673,7 @@ export class TutorialSession {
           '</p>'
         : '') +
       (e.type === 'friendly.repair_node'
-        ? '<p>25 Integrity/s, Core half. Living mechanical allies (including self), 5 GU and LOS. First pulse after 0.25s; no wreck revival or overheal.</p>'
+        ? `<p>${(((b.profile(e.id)?.repair?.perPulse ?? 6400) * 4) / U).toFixed(2)} Integrity/s, Core half. Living mechanical allies (including self), ${((b.profile(e.id)?.repair?.range ?? 5 * U) / U).toFixed(2)} GU and LOS. First pulse after 0.25s; no wreck revival or overheal.</p>`
         : '') +
       (e.type === 'friendly.proximity_mine'
         ? '<p>Charges ' +
@@ -775,8 +797,8 @@ export class TutorialSession {
   pauseMenu(): void {
     this.clock?.pause('manual');
     this.modal(
-      'Paused — autonomous tutorial',
-      '<button id="battle-resume">Resume</button><button id="battle-settings">Audio Settings</button><button id="battle-accessibility">Accessibility</button><button id="battle-restart">Restart From Checkpoint</button><button id="battle-surrender">Surrender Practice</button><button id="battle-title">Return Title</button><p>Restart discards this attempt and uses the same saved start. Returning Title retains an interruption checkpoint. Surrender finalizes practice defeat, with no campaign mutation.</p>',
+      this.paidEncounter ? 'Paused — campaign siege' : 'Paused — autonomous tutorial',
+      `<button id="battle-resume">Resume</button><button id="battle-settings">Audio Settings</button><button id="battle-accessibility">Accessibility</button><button id="battle-restart">Restart From Checkpoint</button><button id="battle-surrender">${this.paidEncounter ? 'Surrender Siege' : 'Surrender Practice'}</button><button id="battle-title">Return Title</button><p>Restart discards this attempt and uses the same saved start. Returning Title retains an interruption checkpoint. ${this.paidEncounter ? 'Surrender commits actual wounds, stock use and eligible partial rewards as defeat.' : 'Surrender finalizes practice defeat, with no campaign mutation.'}</p>`,
     );
     this.button('battle-resume', () => this.resume());
     /*resume bindings follow*/
@@ -801,7 +823,7 @@ export class TutorialSession {
     this.button('battle-restart', () =>
       this.modalConfirm(
         'Restart From Checkpoint',
-        'Discard current practice attempt; no partial progress is kept.',
+        'Discard current attempt; no partial progress is kept.',
         async () => {
           this.dialog.close();
           await this.launch();
@@ -810,8 +832,10 @@ export class TutorialSession {
     );
     this.button('battle-surrender', () =>
       this.modalConfirm(
-        'Surrender Practice',
-        'Finalize this clone as defeat. The real campaign receives no damage or rewards.',
+        this.paidEncounter ? 'Surrender Siege' : 'Surrender Practice',
+        this.paidEncounter
+          ? 'Finalize actual damage, stock use and eligible partial rewards as defeat.'
+          : 'Finalize this clone as defeat. The real campaign receives no damage or rewards.',
         () => {
           this.dialog.close();
           this.battle?.surrender();
@@ -977,7 +1001,7 @@ export class TutorialSession {
       (this.repo.temporary
         ? 'Temporary result retained in this session'
         : 'Practice Result Saved') +
-      '. Credits0 · XP0 · Promotion Cores0. Real assets, wallet, claims and placement are unchanged. This is the Gate2 analysis stub; campaign result transactions/progression remain Gate3.</p><button id="practice-again">Practice Again</button><button id="practice-finish">Discard Practice and Return Base</button><button id="practice-export-result">Export Practice Result</button>';
+      '. Credits0 · XP0 · Promotion Cores0. Real assets, wallet, claims and placement are unchanged. Practice is independent of campaign progression.</p><button id="practice-again">Practice Again</button><button id="practice-finish">Discard Practice and Return Base</button><button id="practice-export-result">Export Practice Result</button>';
     this.status('Practice result retained; no campaign progression claimed.');
     void this.audio
       .resume()

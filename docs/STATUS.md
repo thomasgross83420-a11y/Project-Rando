@@ -7,7 +7,7 @@ Authority: [unchanged blueprint](blueprint/Resonance_Bastion_Browser_Blueprint_F
 |0|Verified|Environment and static-subpath experiments in TEST_EVIDENCE.md|
 |1|Verified construction foundation|f3ee415 plus final FitBase preset/readability correction f2000cc; ten user closeout requirements in review/GATE1_CLOSEOUT.md|
 |2|Verified tutorial mechanics and initial production pipeline; reviewed 0.2.2 design direction approved, full per-asset motion refinement open|Real Bulwark/Bastion tutorial practice, bounded deployment/combat, durable checkpoint/results stub, original candidate animation/effects/audio; COMBAT_PIPELINE.md and TEST_EVIDENCE.md|
-|3|In progress|Current-slice backup/import/rollback and exact reward arithmetic verified; ordinary paid receipts/injuries/progression/emergency recovery remain open|
+|3|In progress|Current-slice backup/import/rollback and exact reward arithmetic verified; Bulwark/Bastion C01S01 paid receipts, injuries, earned progression, backup/recovery and starter emergency reconstruction implemented; full encounter/doctrine coverage, sale/promotion and pacing remain open|
 |4–8|Designed|Remaining tactics/roster/bosses/modes; final presentation/accessibility/release|
 
 Gate1: three retained slots, atomic construction/ownership/capacity/history, projection/camera/input, distinct FitBase/Field, named strategic selection, routes/reservations, actual landscape reflow and durable accessibility preferences. Conditional approval is recorded in review/USER_VISUAL_APPROVAL.md. It does not approve diagnostic Rifle/Runner views, every animation, staging or the full roster.
@@ -57,3 +57,14 @@ prices and both promotion gates; zero-missing-body repair quotes return zero.
 The current playable tutorial and retained v1/v2 replay rules are unchanged.
 These studies do not certify campaign pacing, full-roster balance or tablet
 performance. See PROGRESSION_BALANCE.md and the updated mobile review.
+
+2026-10-08 build 0.2.6: actual capped combat contribution and permanent stock now
+feed a versioned paid C01S01 result adapter. The player can explicitly migrate an
+old campaign, capture its deployed grown/wounded army, earn rewards, review saved
+results and purchase repair/restore/rearm/enhancement. Native whole-slot backups
+retain paid checkpoints/pending results/receipts and support exact failed-write
+retry. Schema-2 free practice uses owned grown profiles in a full-body/full-stock
+clone. The zero-wallet/all-wreck Bulwark/Bastion emergency Cadet win is tested;
+other Warden/doctrine fixtures remain open. Objective bonuses and an optional
+full-recovery budget are visible in results. This is Gate3 current-slice integration,
+not whole-campaign balance or Android acceptance. See COMBAT_RESULT_INTEGRATION.md.

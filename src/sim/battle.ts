@@ -5,6 +5,8 @@ import {
   campaignStartAssetSchema,
   type CampaignTutorialPlan,
   type CapturedCampaign,
+  profiledPracticePlanSchema,
+  type ProfiledPracticePlan,
 } from './campaign-start';
 import { accuracyPass } from '../progression/accuracy';
 import { rational } from '../economy/policy';
@@ -184,7 +186,7 @@ export class Battle {
   get observedShots(): readonly Readonly<ShotObservation>[] {
     return [...this.shotObservations.values()].map((s) => Object.freeze({ ...s }));
   }
-  private definition(e: Pick<Entity, 'id' | 'type'>) {
+  definition(e: Pick<Entity, 'id' | 'type'>) {
     return (
       this.profiles?.[e.id]?.definition ??
       (e.type === 'enemy.runner' || e.type === 'enemy.raider'
@@ -196,19 +198,26 @@ export class Battle {
   private get profiles() {
     return this.campaign?.profiles ?? this.study?.profiles;
   }
+  profile(id: number) {
+    return this.profiles?.[id];
+  }
   private get enemies() {
     return this.campaign?.enemies ?? this.study?.enemies;
   }
   constructor(
-    readonly plan: TutorialPlan | CampaignTutorialPlan,
+    readonly plan: TutorialPlan | CampaignTutorialPlan | ProfiledPracticePlan,
     readonly accuracy: RandomStream,
     army: readonly StartAsset[],
     private readonly study?: CapturedStudy,
     private readonly campaign?: CapturedCampaign,
+    private readonly profiledPractice = false,
   ) {
     if (plan.mode === 'campaign') {
       campaignTutorialSchema.parse(plan);
-      if (!campaign || study) throw new Error('Campaign capture required');
+      if (!campaign || study || profiledPractice) throw new Error('Campaign capture required');
+    } else if (profiledPractice) {
+      profiledPracticePlanSchema.parse(plan);
+      if (!campaign || study) throw new Error('Profiled practice capture required');
     } else {
       tutorialSchema.parse(plan);
       if (campaign) throw new Error('Campaign capture cannot run as legacy practice');
@@ -296,6 +305,24 @@ export class Battle {
       army,
       undefined,
       campaign,
+    );
+    await b.startAccounting(army);
+    return b;
+  }
+  static async createProfiledPractice(planInput: unknown, frozenInput: unknown): Promise<Battle> {
+    const { captureCampaign } = await import('./campaign-start');
+    const plan = profiledPracticePlanSchema.parse(planInput),
+      campaign = captureCampaign(frozenInput);
+    const army = campaign.frozen.army.map(
+      ({ level: _l, enhancement: _e, permanentStock: _s, ...a }) => a,
+    );
+    const b = new Battle(
+      plan,
+      await RandomStream.seeded(plan.seed, 'accuracy', plan.simulation),
+      army,
+      undefined,
+      campaign,
+      true,
     );
     await b.startAccounting(army);
     return b;
@@ -1462,10 +1489,12 @@ export class Battle {
       );
     // 3. Perception and stable due decisions.
     this.perceive();
+    const hostileDecision = this.plan.difficulty === 'Cadet' ? 30 : 21;
     for (const e of this.entities)
       if (
         e.hp > 0 &&
-        this.tick % (e.team === 'friendly' ? 15 : 21) === e.id % (e.team === 'friendly' ? 15 : 21)
+        this.tick % (e.team === 'friendly' ? 15 : hostileDecision) ===
+          e.id % (e.team === 'friendly' ? 15 : hostileDecision)
       ) {
         this.chooseAbility(e);
         this.decide(e);
@@ -1607,7 +1636,7 @@ export class Battle {
     if (this.state === 'Victory' || this.state === 'Defeat') return;
     this.finish(
       'Defeat',
-      this.campaign
+      this.plan.mode === 'campaign'
         ? 'Confirmed campaign surrender; finalized partial result'
         : 'Confirmed practice surrender; no campaign rewards or damage',
     );
@@ -1616,7 +1645,10 @@ export class Battle {
     return {
       ...(this.study ? { study: this.study } : {}),
       ...(this.campaign
-        ? { campaign: this.campaign, perceivedHostiles: this.perceivedHostiles }
+        ? {
+            [this.profiledPractice ? 'practice' : 'campaign']: this.campaign,
+            perceivedHostiles: this.perceivedHostiles,
+          }
         : {}),
       ...(this.accounting ? { contributions: this.accounting.snapshot() } : {}),
       tick: this.tick,
