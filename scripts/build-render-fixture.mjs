@@ -1,16 +1,16 @@
 import { build } from 'vite';
 await build({
   configFile: false,
+  base: '/Project-Rando/',
   build: {
-    outDir: '.cache/run-journal-browser',
+    outDir: '.cache/render-reuse-browser',
     emptyOutDir: true,
     minify: false,
     lib: {
-      entry: 'scripts/run-journal-fixture.ts',
+      entry: 'scripts/render-performance-fixture.ts',
       formats: ['iife'],
-      name: 'RBRunFixture',
+      name: 'RBRenderFixture',
       fileName: () => 'fixture.js',
     },
   },
 });
-await import('./build-render-fixture.mjs');
