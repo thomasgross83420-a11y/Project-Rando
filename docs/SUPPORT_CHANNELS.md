@@ -45,7 +45,10 @@ The current support routine still implements Repair Node only. Engineer/Medic/Ba
 movement/repair planning, injury-scaled mobile support output, rearm channels,
 jamming and broader roster interactions remain their own development increments.
 This correction establishes one shared limit; it does not advertise those absent
-systems as finished. Full verification is recorded after its final suite completes.
+systems as finished. Full verification passes all131 unit tests in29 files, all44 browser checks,
+typecheck, lint, formatting, deterministic scenario and production build.
+Existing14 lint information diagnostics and build bundle/annotation warnings
+remain. Source/log hashes are in SUPPORT_CHANNEL_TESTS.json.
 
 Reproduce the four deterministic before/after fixtures with
 `npm run audit:support-channels`; machine evidence is SUPPORT_CHANNELS.json.
