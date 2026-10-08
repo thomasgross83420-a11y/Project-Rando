@@ -1,29 +1,17 @@
 # Project-Rando
-What can I say, it's just a bunch of rando I'm trying out.
 
-## Resonance Bastion playable preview
+## Resonance Bastion — complete playable first pass
 
-[Open Resonance Bastion](https://thomasgross83420-a11y.github.io/Project-Rando/)
+[Open the game directly](https://thomasgross83420-a11y.github.io/Project-Rando/?build=0.3.0-first-pass)
 
-Open the link in Chrome. Choose **New Game**, create a campaign, then select
-**Siege → Tutorial Practice → Begin Tutorial Practice** to try a battle. Saves are local
-to this browser and site; **Records → Data Management → Prepare Backup → Download Backup**
-exports a complete backup.
+[Read the first-pass review](https://thomasgross83420-a11y.github.io/Project-Rando/review/first-pass.html) · [Download the review file](https://thomasgross83420-a11y.github.io/Project-Rando/review/first-pass.md)
 
-This is the tested development checkpoint, including construction, 360° travel,
-tutorial combat, C01S01 paid progression, recovery, and tablet rendering reuse.
-The full campaign, roster, and final animation work remain in development.
-Physical Lenovo tablet performance is still awaiting device observations.
+Open in Chrome, choose **New game**, create your Bastion and confirm the starting inventory. Choose **Siege → Review forecast → Start siege**. Drag empty field space to pan, pinch to zoom, and tap assets to inspect them. Build, Army, Siege, Records and Manage open collapsible menus.
+
+Build **0.3.0-first-pass** contains the full friendly/enemy roster, phased bosses, campaign and additional modes, construction, progression, save recovery, original first-pass art/audio, ending and Master gallery. Comprehensive balance, animation, mechanic-interaction and tablet-performance scrutiny follows the user's first-pass review. Physical Lenovo performance has not been measured.
+
+Progress is local to this browser. **Manage → Data / backups → Export** offers backup sharing or download. First load and uncached resources require internet. Earlier preview saves remain separate and can be explicitly migrated through Data management.
 
 The manual deployment workflow builds pinned source
-[`151c105`](https://github.com/thomasgross83420-a11y/Project-Rando/tree/151c105195069ae419c36fd8f284fe40abd43275).
-Application work continues on development branches; publishing this preview
-does not merge that stack into `main`.
-
-Current preview: **0.2.12-rifle-joints**. The Rifle Squad now has authored joints,
-grounded gait, independent aiming, member-specific firing and consistent
-placement/combat art. Battles start framed around deployed defenders. The
-field-first touch interface and collapsible menus remain available. Existing
-campaigns and recovery stay supported. This remains an early development slice.
-
-[Read the current Rifle development review](https://github.com/thomasgross83420-a11y/Project-Rando/blob/codex/rifle-articulation/docs/RIFLE_ARTICULATION.md).
+[`fcd236b`](https://github.com/thomasgross83420-a11y/Project-Rando/tree/fcd236b64032f3439c886a7b5002ca3142fb0356).
+Application development remains on its development branches; publishing does not merge that stack into `main`.
