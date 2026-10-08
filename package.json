@@ -23,7 +23,8 @@
     "verify": "npm run typecheck && npm run lint && npm run test && npm run test:scenario && npm run build",
     "audit:economy": "vite build --ssr scripts/economy-analysis.ts --outDir .cache/economy && node scripts/economy-analysis.mjs",
     "audit:movement": "vite build --ssr scripts/movement-audit.ts --outDir .cache/movement && node scripts/movement-audit.mjs",
-    "audit:progression": "vite build --ssr scripts/progression-analysis.ts --outDir .cache/progression && node scripts/progression-analysis.mjs"
+    "audit:progression": "vite build --ssr scripts/progression-analysis.ts --outDir .cache/progression && node scripts/progression-analysis.mjs",
+    "audit:progression-balance": "vite build --ssr scripts/progression-balance.ts --outDir .cache/progression-balance && node scripts/progression-balance.mjs"
   },
   "dependencies": {
     "phaser": "3.90.0",

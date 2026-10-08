@@ -51,7 +51,21 @@ are verified independently. Next connect a versioned campaign-profile migration,
 frozen combat stats, real contribution accounting, permanent versus temporary
 trap stock and ending body capture. Then implement the production normal-result
 adapter, complete run/receipt backup-import and player-facing recovery/Results.
-Only after those checks may C01S01 become a paid campaign launch. The missing
-accuracy-growth equation is recorded for user clarification; all other specified
-growth fields can proceed independently. Counter namespace rollover, Endurance
+Only after those checks may C01S01 become a paid campaign launch. At that checkpoint the missing
+accuracy-growth equation was recorded for user clarification; the subsequent
+0.2.5 audit resolves this under the user’s engineering authorization. Counter namespace rollover, Endurance
 block boundaries, emergency viability and bounded full records remain open.
+
+
+## Dependency-ready after build 0.2.5
+
+Exact accuracy growth, sequential purchase quotes and frozen per-instance combat
+profiles are verified for the implemented slice. Controlled studies now retain
+input identity, band stats and actual projectile-contact diagnostics. Existing
+practice replays remain pinned. Next integrate the versioned widened campaign
+profile and actual contribution/body/stock capture into the production result
+adapter; add compatible ordinary-run backup/import before paid launches.
+Full rank-to-level pacing, acquisition/promotion timing, net-income targets and
+all-role balance require generated budgets, missing roster actions and real
+contribution weights. Continue staged combat and anatomy/contact work; do not
+scale opponents to player stats or increase prices to cancel progression.

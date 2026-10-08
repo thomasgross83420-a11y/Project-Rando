@@ -97,8 +97,12 @@ records and emergency reconstruction remain dependent work.
 
 The blueprint explicitly says accuracy grows with level and gives Sentry 90%
 at Level 1 and 95% at Level 100, but §§9/25E/27A define no accuracy-growth equation.
-The proposed linear +5 percentage-point rule (cap 100%, unmissable attacks unchanged)
-is a question pending user input. It has not been applied to game or growth data.
+At the 0.2.4 checkpoint this was pending clarification. The user subsequently
+authorized evidence-based engineering corrections and an audit of existing
+parameters. Build 0.2.5 resolves it under `accuracy.half-miss-v1`; see
+[progression balance decision](PROGRESSION_BALANCE.md). It is implemented in the
+exact kernel and isolated captured-stat studies, with no retroactive practice
+or campaign migration.
 No automatic level armor increase is inferred from unrelated armor perks.
 
 ## Research and verification method

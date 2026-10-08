@@ -1,0 +1,6890 @@
+{
+  "date": "2026-10-08",
+  "build": "0.2.5-progression-balance",
+  "profilePolicy": "progression.current-slice-v1",
+  "accuracyPolicy": "accuracy.half-miss-v1",
+  "scope": "Current-slice deterministic studies; authored 24-body / 30TP schedule, not generated campaign or late-game budgets",
+  "method": "Paired four accuracy seeds across identical layouts and schedules. Actual capped body damage and physical projectile contacts. Band affects declared health/damage/armor only. Full-health baseline; enhancements assumed purchased; no stars/perks. Body recovery quotes, not committed expenses or normal-run reward ratios.",
+  "limits": [
+    "Four seeds are a sensitivity sample, not statistical balance certification or player fun validation.",
+    "No real rank-to-level pacing, full threats, bosses, ranged enemies, difficulty budgets or net-income acceptance claim.",
+    "Quotes exclude mine rearm and do not establish the 10-35% recovery/gross target.",
+    "No live campaign stat changes or retroactive save migration."
+  ],
+  "cases": [
+    {
+      "id": "guided-L1-E0-band1",
+      "level": 1,
+      "enhancement": 0,
+      "band": 1,
+      "network": "guided",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 102.93333333333334,
+        "median": 107.28333333333333,
+        "max": 114.65
+      },
+      "bodyRecovery": {
+        "min": 24,
+        "median": 30.5,
+        "max": 54
+      }
+    },
+    {
+      "id": "guided-L10-E0-band2",
+      "level": 10,
+      "enhancement": 0,
+      "band": 2,
+      "network": "guided",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 102.16666666666667,
+        "median": 107.38333333333333,
+        "max": 109.2
+      },
+      "bodyRecovery": {
+        "min": 21,
+        "median": 23.5,
+        "max": 40
+      }
+    },
+    {
+      "id": "guided-L10-E1-band2",
+      "level": 10,
+      "enhancement": 1,
+      "band": 2,
+      "network": "guided",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 99.61666666666666,
+        "median": 106.23333333333333,
+        "max": 109.2
+      },
+      "bodyRecovery": {
+        "min": 22,
+        "median": 23,
+        "max": 29
+      }
+    },
+    {
+      "id": "guided-L25-E0-band5",
+      "level": 25,
+      "enhancement": 0,
+      "band": 5,
+      "network": "guided",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 104.83333333333333,
+        "median": 111.24166666666667,
+        "max": 114.73333333333333
+      },
+      "bodyRecovery": {
+        "min": 20,
+        "median": 22,
+        "max": 30
+      }
+    },
+    {
+      "id": "guided-L25-E2-band5",
+      "level": 25,
+      "enhancement": 2,
+      "band": 5,
+      "network": "guided",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 101.26666666666667,
+        "median": 105.94166666666666,
+        "max": 108.38333333333334
+      },
+      "bodyRecovery": {
+        "min": 20,
+        "median": 23,
+        "max": 29
+      }
+    },
+    {
+      "id": "guided-L50-E0-band10",
+      "level": 50,
+      "enhancement": 0,
+      "band": 10,
+      "network": "guided",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 100.2,
+        "median": 103.025,
+        "max": 106.51666666666667
+      },
+      "bodyRecovery": {
+        "min": 18,
+        "median": 23.5,
+        "max": 26
+      }
+    },
+    {
+      "id": "guided-L50-E5-band10",
+      "level": 50,
+      "enhancement": 5,
+      "band": 10,
+      "network": "guided",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 99.15,
+        "median": 99.5,
+        "max": 100.78333333333333
+      },
+      "bodyRecovery": {
+        "min": 16,
+        "median": 17,
+        "max": 20
+      }
+    },
+    {
+      "id": "guided-L75-E0-band15",
+      "level": 75,
+      "enhancement": 0,
+      "band": 15,
+      "network": "guided",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 99.28333333333333,
+        "median": 99.40833333333333,
+        "max": 107.68333333333334
+      },
+      "bodyRecovery": {
+        "min": 16,
+        "median": 20,
+        "max": 24
+      }
+    },
+    {
+      "id": "guided-L75-E7-band15",
+      "level": 75,
+      "enhancement": 7,
+      "band": 15,
+      "network": "guided",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 98.65,
+        "median": 98.65,
+        "max": 99
+      },
+      "bodyRecovery": {
+        "min": 10,
+        "median": 12,
+        "max": 14
+      }
+    },
+    {
+      "id": "guided-L100-E0-band20",
+      "level": 100,
+      "enhancement": 0,
+      "band": 20,
+      "network": "guided",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 99.03333333333333,
+        "median": 100.575,
+        "max": 107.18333333333334
+      },
+      "bodyRecovery": {
+        "min": 15,
+        "median": 19,
+        "max": 24
+      }
+    },
+    {
+      "id": "guided-L100-E10-band20",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "network": "guided",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 98.46666666666667,
+        "median": 98.575,
+        "max": 98.68333333333334
+      },
+      "bodyRecovery": {
+        "min": 11,
+        "median": 12,
+        "max": 13
+      }
+    },
+    {
+      "id": "guided-L100-E10-band1",
+      "level": 100,
+      "enhancement": 10,
+      "band": 1,
+      "network": "guided",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 96.76666666666667,
+        "median": 96.9,
+        "max": 96.98333333333333
+      },
+      "bodyRecovery": {
+        "min": 5,
+        "median": 6,
+        "max": 6
+      }
+    },
+    {
+      "id": "guided-L100-E10-band20-baseline-accuracy",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "network": "guided",
+      "accuracyGrowth": false,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 98.45,
+        "median": 98.59166666666667,
+        "max": 99.36666666666666
+      },
+      "bodyRecovery": {
+        "min": 9,
+        "median": 11,
+        "max": 17
+      }
+    },
+    {
+      "id": "mobile-L1-E0-band20",
+      "level": 1,
+      "enhancement": 0,
+      "band": 20,
+      "network": "mobile",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 113.78333333333333,
+        "median": 115.29166666666666,
+        "max": 116.78333333333333
+      },
+      "bodyRecovery": {
+        "min": 374,
+        "median": 383.5,
+        "max": 408
+      }
+    },
+    {
+      "id": "mobile-L100-E0-band20",
+      "level": 100,
+      "enhancement": 0,
+      "band": 20,
+      "network": "mobile",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 99.35,
+        "median": 101.31666666666666,
+        "max": 102.58333333333333
+      },
+      "bodyRecovery": {
+        "min": 184,
+        "median": 189.5,
+        "max": 198
+      }
+    },
+    {
+      "id": "mobile-L100-E10-band20",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "network": "mobile",
+      "accuracyGrowth": true,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 98.25,
+        "median": 98.375,
+        "max": 98.75
+      },
+      "bodyRecovery": {
+        "min": 61,
+        "median": 66.5,
+        "max": 70
+      }
+    },
+    {
+      "id": "mobile-L100-E10-band20-baseline-accuracy",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "network": "mobile",
+      "accuracyGrowth": false,
+      "runs": 4,
+      "outcomes": [
+        "Victory",
+        "Victory",
+        "Victory",
+        "Victory"
+      ],
+      "combatSeconds": {
+        "min": 98.25,
+        "median": 100.31666666666666,
+        "max": 102.91666666666667
+      },
+      "bodyRecovery": {
+        "min": 63,
+        "median": 74,
+        "max": 79
+      }
+    }
+  ],
+  "accuracyReferences": [
+    {
+      "base": 80,
+      "levels": [
+        {
+          "level": 1,
+          "numerator": "4",
+          "denominator": "5",
+          "percent": 80
+        },
+        {
+          "level": 10,
+          "numerator": "89",
+          "denominator": "110",
+          "percent": 80.9090909090909
+        },
+        {
+          "level": 25,
+          "numerator": "136",
+          "denominator": "165",
+          "percent": 82.42424242424242
+        },
+        {
+          "level": 50,
+          "numerator": "841",
+          "denominator": "990",
+          "percent": 84.94949494949495
+        },
+        {
+          "level": 75,
+          "numerator": "433",
+          "denominator": "495",
+          "percent": 87.47474747474747
+        },
+        {
+          "level": 100,
+          "numerator": "9",
+          "denominator": "10",
+          "percent": 90
+        }
+      ]
+    },
+    {
+      "base": 85,
+      "levels": [
+        {
+          "level": 1,
+          "numerator": "17",
+          "denominator": "20",
+          "percent": 85
+        },
+        {
+          "level": 10,
+          "numerator": "377",
+          "denominator": "440",
+          "percent": 85.68181818181819
+        },
+        {
+          "level": 25,
+          "numerator": "191",
+          "denominator": "220",
+          "percent": 86.81818181818181
+        },
+        {
+          "level": 50,
+          "numerator": "1171",
+          "denominator": "1320",
+          "percent": 88.71212121212122
+        },
+        {
+          "level": 75,
+          "numerator": "299",
+          "denominator": "330",
+          "percent": 90.60606060606061
+        },
+        {
+          "level": 100,
+          "numerator": "37",
+          "denominator": "40",
+          "percent": 92.5
+        }
+      ]
+    },
+    {
+      "base": 90,
+      "levels": [
+        {
+          "level": 1,
+          "numerator": "9",
+          "denominator": "10",
+          "percent": 90
+        },
+        {
+          "level": 10,
+          "numerator": "199",
+          "denominator": "220",
+          "percent": 90.45454545454545
+        },
+        {
+          "level": 25,
+          "numerator": "301",
+          "denominator": "330",
+          "percent": 91.21212121212122
+        },
+        {
+          "level": 50,
+          "numerator": "1831",
+          "denominator": "1980",
+          "percent": 92.47474747474747
+        },
+        {
+          "level": 75,
+          "numerator": "464",
+          "denominator": "495",
+          "percent": 93.73737373737374
+        },
+        {
+          "level": 100,
+          "numerator": "19",
+          "denominator": "20",
+          "percent": 95
+        }
+      ]
+    },
+    {
+      "base": 95,
+      "levels": [
+        {
+          "level": 1,
+          "numerator": "19",
+          "denominator": "20",
+          "percent": 95
+        },
+        {
+          "level": 10,
+          "numerator": "419",
+          "denominator": "440",
+          "percent": 95.22727272727273
+        },
+        {
+          "level": 25,
+          "numerator": "631",
+          "denominator": "660",
+          "percent": 95.60606060606061
+        },
+        {
+          "level": 50,
+          "numerator": "3811",
+          "denominator": "3960",
+          "percent": 96.23737373737374
+        },
+        {
+          "level": 75,
+          "numerator": "959",
+          "denominator": "990",
+          "percent": 96.86868686868686
+        },
+        {
+          "level": 100,
+          "numerator": "39",
+          "denominator": "40",
+          "percent": 97.5
+        }
+      ]
+    },
+    {
+      "base": 100,
+      "levels": [
+        {
+          "level": 1,
+          "numerator": "1",
+          "denominator": "1",
+          "percent": 100
+        },
+        {
+          "level": 10,
+          "numerator": "1",
+          "denominator": "1",
+          "percent": 100
+        },
+        {
+          "level": 25,
+          "numerator": "1",
+          "denominator": "1",
+          "percent": 100
+        },
+        {
+          "level": 50,
+          "numerator": "1",
+          "denominator": "1",
+          "percent": 100
+        },
+        {
+          "level": 75,
+          "numerator": "1",
+          "denominator": "1",
+          "percent": 100
+        },
+        {
+          "level": 100,
+          "numerator": "1",
+          "denominator": "1",
+          "percent": 100
+        }
+      ]
+    }
+  ],
+  "statReferences": [
+    {
+      "level": 1,
+      "enhancement": 0,
+      "body": 1200,
+      "damage": 40,
+      "intervalTicks": 48,
+      "range": 8,
+      "accuracyPercent": 90,
+      "rollWeightedDPS": 45
+    },
+    {
+      "level": 10,
+      "enhancement": 0,
+      "body": 1276.36328125,
+      "damage": 42.181640625,
+      "intervalTicks": 47,
+      "range": 8.109375,
+      "accuracyPercent": 90.45454545454545,
+      "rollWeightedDPS": 48.708780373549324
+    },
+    {
+      "level": 10,
+      "enhancement": 1,
+      "body": 1314.654296875,
+      "damage": 43.447265625,
+      "intervalTicks": 47,
+      "range": 8.109375,
+      "accuracyPercent": 90.45454545454545,
+      "rollWeightedDPS": 50.17024676619923
+    },
+    {
+      "level": 25,
+      "enhancement": 0,
+      "body": 1403.63671875,
+      "damage": 45.818359375,
+      "intervalTicks": 45,
+      "range": 8.291015625,
+      "accuracyPercent": 91.21212121212122,
+      "rollWeightedDPS": 55.72252998737375
+    },
+    {
+      "level": 25,
+      "enhancement": 2,
+      "body": 1487.8544921875,
+      "damage": 48.5673828125,
+      "intervalTicks": 45,
+      "range": 8.291015625,
+      "accuracyPercent": 91.21212121212122,
+      "rollWeightedDPS": 59.065786773989906
+    },
+    {
+      "level": 50,
+      "enhancement": 0,
+      "body": 1615.7578125,
+      "damage": 51.87890625,
+      "intervalTicks": 43,
+      "range": 8.59375,
+      "accuracyPercent": 92.47474747474747,
+      "rollWeightedDPS": 66.94170355443974
+    },
+    {
+      "level": 50,
+      "enhancement": 5,
+      "body": 1858.12109375,
+      "damage": 59.66015625,
+      "intervalTicks": 43,
+      "range": 8.59375,
+      "accuracyPercent": 92.47474747474747,
+      "rollWeightedDPS": 76.98220302589853
+    },
+    {
+      "level": 75,
+      "enhancement": 0,
+      "body": 1827.87890625,
+      "damage": 57.939453125,
+      "intervalTicks": 40,
+      "range": 8.896484375,
+      "accuracyPercent": 93.73737373737374,
+      "rollWeightedDPS": 81.46638257575758
+    },
+    {
+      "level": 75,
+      "enhancement": 7,
+      "body": 2211.7333984375,
+      "damage": 70.1064453125,
+      "intervalTicks": 40,
+      "range": 8.896484375,
+      "accuracyPercent": 93.73737373737374,
+      "rollWeightedDPS": 98.57391098484848
+    },
+    {
+      "level": 100,
+      "enhancement": 0,
+      "body": 2040,
+      "damage": 64,
+      "intervalTicks": 38,
+      "range": 9.2001953125,
+      "accuracyPercent": 95,
+      "rollWeightedDPS": 96
+    },
+    {
+      "level": 100,
+      "enhancement": 10,
+      "body": 2652,
+      "damage": 83.2001953125,
+      "intervalTicks": 38,
+      "range": 9.2001953125,
+      "accuracyPercent": 95,
+      "rollWeightedDPS": 124.80029296875
+    }
+  ],
+  "results": [
+    {
+      "case": "guided-L1-E0-band1",
+      "seed": "rb-tutorial-v1",
+      "level": 1,
+      "enhancement": 0,
+      "band": 1,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 114.65,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 100,
+        "friendly.rifle_squad": 2294.4736328125,
+        "friendly.sentry": 905.5263671875,
+        "enemy.raider": 840.5380859375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 120,
+          "accuracyPass": 102,
+          "intended": 100,
+          "otherHostile": 1,
+          "friendlySolid": 3,
+          "expired": 16,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 2,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 36,
+          "accuracyPass": 30,
+          "intended": 27,
+          "otherHostile": 2,
+          "friendlySolid": 1,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 5,
+          "failedButLandedIntended": 2
+        }
+      ],
+      "quotedBodyRecovery": 30,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1200,
+          "max": 1200
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1200,
+          "max": 1200
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 613.634765625,
+          "max": 900
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2500,
+          "max": 2500
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 800,
+          "max": 800
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 945.8271484375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "139e4abf23a6f907461ddb7dccef403e7cd37fbe9f4747451fdea8af5f15f040"
+    },
+    {
+      "case": "guided-L1-E0-band1",
+      "seed": "progression-paired-1",
+      "level": 1,
+      "enhancement": 0,
+      "band": 1,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 109.8,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 100,
+        "friendly.rifle_squad": 2173.9033203125,
+        "friendly.sentry": 1026.0966796875,
+        "enemy.raider": 697.3544921875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 110,
+          "accuracyPass": 95,
+          "intended": 94,
+          "otherHostile": 2,
+          "friendlySolid": 4,
+          "expired": 10,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 3,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 40,
+          "accuracyPass": 36,
+          "intended": 30,
+          "otherHostile": 1,
+          "friendlySolid": 1,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 6,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 31,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1200,
+          "max": 1200
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1200,
+          "max": 1200
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 581.81640625,
+          "max": 900
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2500,
+          "max": 2500
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 800,
+          "max": 800
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1120.8291015625,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "2ff5283f52e896c83869df0478aab940516df3c3dfcd06c46411200a14367dd2"
+    },
+    {
+      "case": "guided-L1-E0-band1",
+      "seed": "progression-paired-2",
+      "level": 1,
+      "enhancement": 0,
+      "band": 1,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 104.76666666666667,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 100,
+        "friendly.rifle_squad": 1943.19921875,
+        "friendly.sentry": 1256.80078125,
+        "enemy.raider": 636.3671875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 102,
+          "accuracyPass": 90,
+          "intended": 81,
+          "otherHostile": 9,
+          "friendlySolid": 0,
+          "expired": 12,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 50,
+          "accuracyPass": 44,
+          "intended": 37,
+          "otherHostile": 5,
+          "friendlySolid": 1,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 2
+        }
+      ],
+      "quotedBodyRecovery": 54,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1200,
+          "max": 1200
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1200,
+          "max": 1200
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 263.6328125,
+          "max": 900
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2500,
+          "max": 2500
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 800,
+          "max": 800
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "711b878bf37b27ade7c9d03cf58b1547504a2bad15a47683541f4c3422a5bdc0"
+    },
+    {
+      "case": "guided-L1-E0-band1",
+      "seed": "progression-paired-3",
+      "level": 1,
+      "enhancement": 0,
+      "band": 1,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 102.93333333333334,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 100,
+        "friendly.rifle_squad": 1943.208984375,
+        "friendly.sentry": 1256.791015625,
+        "enemy.raider": 286.365234375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 99,
+          "accuracyPass": 85,
+          "intended": 80,
+          "otherHostile": 7,
+          "friendlySolid": 1,
+          "expired": 11,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 3
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 45,
+          "accuracyPass": 41,
+          "intended": 32,
+          "otherHostile": 4,
+          "friendlySolid": 2,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 24,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1200,
+          "max": 1200
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1200,
+          "max": 1200
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 613.634765625,
+          "max": 900
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2500,
+          "max": 2500
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 800,
+          "max": 800
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "847cb32af415a79fbcbe1721cd5146b8b58e5ad4035aad2ace991b8f8394465e"
+    },
+    {
+      "case": "guided-L10-E0-band2",
+      "seed": "rb-tutorial-v1",
+      "level": 10,
+      "enhancement": 0,
+      "band": 2,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 102.16666666666667,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 103.5,
+        "friendly.rifle_squad": 2046.44921875,
+        "friendly.sentry": 1265.55078125,
+        "enemy.raider": 489.19921875,
+        "enemy.runner": 18.63671875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 98,
+          "accuracyPass": 84,
+          "intended": 69,
+          "otherHostile": 17,
+          "friendlySolid": 1,
+          "expired": 11,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 16,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 47,
+          "accuracyPass": 41,
+          "intended": 25,
+          "otherHostile": 11,
+          "friendlySolid": 0,
+          "expired": 11,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 16,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 40,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1276.36328125,
+          "max": 1276.36328125
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1276.36328125,
+          "max": 1276.36328125
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 449.4365234375,
+          "max": 957.2724609375
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2659.0908203125,
+          "max": 2659.0908203125
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 850.9091796875,
+          "max": 850.9091796875
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "6a068d36070a400c18174b5b9091c3bbf2a9beabc6e4ee396ba0adc4b725aef6"
+    },
+    {
+      "case": "guided-L10-E0-band2",
+      "seed": "progression-paired-1",
+      "level": 10,
+      "enhancement": 0,
+      "band": 2,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 109.2,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 103.5,
+        "friendly.rifle_squad": 2362.0830078125,
+        "friendly.sentry": 949.9169921875,
+        "enemy.raider": 649.5478515625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 111,
+          "accuracyPass": 97,
+          "intended": 98,
+          "otherHostile": 1,
+          "friendlySolid": 2,
+          "expired": 10,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 2,
+          "failedButLandedIntended": 3
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 37,
+          "accuracyPass": 35,
+          "intended": 29,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 6,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 25,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1276.36328125,
+          "max": 1276.36328125
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1276.36328125,
+          "max": 1276.36328125
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 696.3662109375,
+          "max": 957.2724609375
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2659.0908203125,
+          "max": 2659.0908203125
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 850.9091796875,
+          "max": 850.9091796875
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1111.3583984375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "a642a42fb3fde9639b41bbfa0270c058ee3cb53d32480ba2defa3d4baa3d540a"
+    },
+    {
+      "case": "guided-L10-E0-band2",
+      "seed": "progression-paired-2",
+      "level": 10,
+      "enhancement": 0,
+      "band": 2,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 109.11666666666666,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 103.5,
+        "friendly.rifle_squad": 2418.375,
+        "friendly.sentry": 893.625,
+        "enemy.raider": 467.45703125
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 113,
+          "accuracyPass": 100,
+          "intended": 99,
+          "otherHostile": 2,
+          "friendlySolid": 2,
+          "expired": 10,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 3,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 35,
+          "accuracyPass": 29,
+          "intended": 26,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 5,
+          "failedButLandedIntended": 2
+        }
+      ],
+      "quotedBodyRecovery": 21,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1276.36328125,
+          "max": 1276.36328125
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1276.36328125,
+          "max": 1276.36328125
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 728.9794921875,
+          "max": 957.2724609375
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2659.0908203125,
+          "max": 2659.0908203125
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 850.9091796875,
+          "max": 850.9091796875
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1260.8359375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "79598097274cf77c613db732b6924b3cf5a8ef4175ba1de510181cc64433f06e"
+    },
+    {
+      "case": "guided-L10-E0-band2",
+      "seed": "progression-paired-3",
+      "level": 10,
+      "enhancement": 0,
+      "band": 2,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 105.65,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 103.5,
+        "friendly.rifle_squad": 2218.1875,
+        "friendly.sentry": 1093.8125,
+        "enemy.raider": 260.90625,
+        "enemy.runner": 18.63671875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 103,
+          "accuracyPass": 91,
+          "intended": 87,
+          "otherHostile": 6,
+          "friendlySolid": 1,
+          "expired": 9,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 7,
+          "failedButLandedIntended": 3
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 40,
+          "accuracyPass": 36,
+          "intended": 28,
+          "otherHostile": 5,
+          "friendlySolid": 1,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 22,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1276.36328125,
+          "max": 1276.36328125
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1276.36328125,
+          "max": 1276.36328125
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 677.7294921875,
+          "max": 957.2724609375
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2659.0908203125,
+          "max": 2659.0908203125
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 850.9091796875,
+          "max": 850.9091796875
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "7c4765c34e734007f5e1eaddac872721c3cac125bc3f51f5ad35bed286c85c44"
+    },
+    {
+      "case": "guided-L10-E1-band2",
+      "seed": "rb-tutorial-v1",
+      "level": 10,
+      "enhancement": 1,
+      "band": 2,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 106.81666666666666,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 103.5,
+        "friendly.rifle_squad": 2208.4287109375,
+        "friendly.sentry": 1103.5712890625,
+        "enemy.raider": 260.90625,
+        "enemy.runner": 18.63671875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 106,
+          "accuracyPass": 90,
+          "intended": 85,
+          "otherHostile": 7,
+          "friendlySolid": 2,
+          "expired": 12,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 6,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 41,
+          "accuracyPass": 36,
+          "intended": 27,
+          "otherHostile": 3,
+          "friendlySolid": 0,
+          "expired": 11,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 22,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1314.654296875,
+          "max": 1314.654296875
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1314.654296875,
+          "max": 1314.654296875
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 706.4482421875,
+          "max": 985.9912109375
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2738.86328125,
+          "max": 2738.86328125
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 876.4365234375,
+          "max": 876.4365234375
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "b0b8b6797cae696955b436215a4ad02378eabc9e977e320cd31c0436721cae8e"
+    },
+    {
+      "case": "guided-L10-E1-band2",
+      "seed": "progression-paired-1",
+      "level": 10,
+      "enhancement": 1,
+      "band": 2,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 109.2,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 103.5,
+        "friendly.rifle_squad": 2369.1845703125,
+        "friendly.sentry": 942.8154296875,
+        "enemy.raider": 649.5478515625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 111,
+          "accuracyPass": 97,
+          "intended": 98,
+          "otherHostile": 1,
+          "friendlySolid": 2,
+          "expired": 10,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 2,
+          "failedButLandedIntended": 3
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 37,
+          "accuracyPass": 35,
+          "intended": 29,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 6,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 24,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1314.654296875,
+          "max": 1314.654296875
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1314.654296875,
+          "max": 1314.654296875
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 725.0849609375,
+          "max": 985.9912109375
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2738.86328125,
+          "max": 2738.86328125
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 876.4365234375,
+          "max": 876.4365234375
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1111.3583984375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "79d488f5da596a95b8c6bda832ad53121d7b9b40a04259d28f71c1f39a7c1876"
+    },
+    {
+      "case": "guided-L10-E1-band2",
+      "seed": "progression-paired-2",
+      "level": 10,
+      "enhancement": 1,
+      "band": 2,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 99.61666666666666,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 103.5,
+        "friendly.rifle_squad": 2003.5966796875,
+        "friendly.sentry": 1308.4033203125,
+        "enemy.raider": 358.74609375,
+        "enemy.runner": 18.63671875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 92,
+          "accuracyPass": 78,
+          "intended": 70,
+          "otherHostile": 10,
+          "friendlySolid": 2,
+          "expired": 10,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 45,
+          "accuracyPass": 41,
+          "intended": 30,
+          "otherHostile": 8,
+          "friendlySolid": 1,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 12,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 29,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1314.654296875,
+          "max": 1314.654296875
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1314.654296875,
+          "max": 1314.654296875
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 608.6083984375,
+          "max": 985.9912109375
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2738.86328125,
+          "max": 2738.86328125
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 876.4365234375,
+          "max": 876.4365234375
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "779a52ad9eebb7ee0c9c22177aaf47e7693d85bc691bc2fa028d7ea013aaeaae"
+    },
+    {
+      "case": "guided-L10-E1-band2",
+      "seed": "progression-paired-3",
+      "level": 10,
+      "enhancement": 1,
+      "band": 2,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 105.65,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 103.5,
+        "friendly.rifle_squad": 2229.1376953125,
+        "friendly.sentry": 1082.8623046875,
+        "enemy.raider": 260.90625,
+        "enemy.runner": 18.63671875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 103,
+          "accuracyPass": 91,
+          "intended": 87,
+          "otherHostile": 6,
+          "friendlySolid": 1,
+          "expired": 9,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 7,
+          "failedButLandedIntended": 3
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 40,
+          "accuracyPass": 36,
+          "intended": 28,
+          "otherHostile": 5,
+          "friendlySolid": 1,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 22,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1314.654296875,
+          "max": 1314.654296875
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1314.654296875,
+          "max": 1314.654296875
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 706.4482421875,
+          "max": 985.9912109375
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2738.86328125,
+          "max": 2738.86328125
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 876.4365234375,
+          "max": 876.4365234375
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "881414fc9d71ad2d48735d496860a0a762392cceb7f8488e1388989606d56c27"
+    },
+    {
+      "case": "guided-L25-E0-band5",
+      "seed": "rb-tutorial-v1",
+      "level": 25,
+      "enhancement": 0,
+      "band": 5,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 109.41666666666667,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 114,
+        "friendly.rifle_squad": 2399.7177734375,
+        "friendly.sentry": 1248.2822265625,
+        "enemy.raider": 627.0791015625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 112,
+          "accuracyPass": 93,
+          "intended": 88,
+          "otherHostile": 7,
+          "friendlySolid": 2,
+          "expired": 15,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 7,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 40,
+          "accuracyPass": 37,
+          "intended": 34,
+          "otherHostile": 2,
+          "friendlySolid": 1,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 4,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 20,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1403.63671875,
+          "max": 1403.63671875
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1403.63671875,
+          "max": 1403.63671875
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 842.7275390625,
+          "max": 1052.7275390625
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2924.2421875,
+          "max": 2924.2421875
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 935.7578125,
+          "max": 935.7578125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1082.9208984375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "66578a7e5f393927b62240048fa7cc452e464a5129775a02a45e975331c0783c"
+    },
+    {
+      "case": "guided-L25-E0-band5",
+      "seed": "progression-paired-1",
+      "level": 25,
+      "enhancement": 0,
+      "band": 5,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 114.73333333333333,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 114,
+        "friendly.rifle_squad": 2711.0068359375,
+        "friendly.sentry": 936.9931640625,
+        "enemy.raider": 883.7431640625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 120,
+          "accuracyPass": 104,
+          "intended": 99,
+          "otherHostile": 6,
+          "friendlySolid": 4,
+          "expired": 11,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 7,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 34,
+          "accuracyPass": 33,
+          "intended": 30,
+          "otherHostile": 1,
+          "friendlySolid": 0,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 3,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 22,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1403.63671875,
+          "max": 1403.63671875
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1403.63671875,
+          "max": 1403.63671875
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 842.7275390625,
+          "max": 1052.7275390625
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2924.2421875,
+          "max": 2924.2421875
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 935.7578125,
+          "max": 935.7578125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 826.2568359375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "529175b3830bbb390e6c4ab4be15f245d7d0844951ce6d0a23874d95031d00cd"
+    },
+    {
+      "case": "guided-L25-E0-band5",
+      "seed": "progression-paired-2",
+      "level": 25,
+      "enhancement": 0,
+      "band": 5,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 104.83333333333333,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 114,
+        "friendly.rifle_squad": 2406.2783203125,
+        "friendly.sentry": 1241.7216796875,
+        "enemy.raider": 767.0791015625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 103,
+          "accuracyPass": 91,
+          "intended": 93,
+          "otherHostile": 1,
+          "friendlySolid": 2,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 2,
+          "failedButLandedIntended": 4
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 45,
+          "accuracyPass": 40,
+          "intended": 36,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 4,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 30,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1403.63671875,
+          "max": 1403.63671875
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1403.63671875,
+          "max": 1403.63671875
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 702.7275390625,
+          "max": 1052.7275390625
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2924.2421875,
+          "max": 2924.2421875
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 935.7578125,
+          "max": 935.7578125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1082.9208984375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "060d3d541f5035b23abdf675f499d882501da4efd558ca147d91d0407576f633"
+    },
+    {
+      "case": "guided-L25-E0-band5",
+      "seed": "progression-paired-3",
+      "level": 25,
+      "enhancement": 0,
+      "band": 5,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 113.06666666666666,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 114,
+        "friendly.rifle_squad": 2745.2431640625,
+        "friendly.sentry": 902.7568359375,
+        "enemy.raider": 851.66015625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 117,
+          "accuracyPass": 107,
+          "intended": 107,
+          "otherHostile": 0,
+          "friendlySolid": 3,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 1,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 34,
+          "accuracyPass": 30,
+          "intended": 28,
+          "otherHostile": 1,
+          "friendlySolid": 1,
+          "expired": 4,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 3,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 22,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1403.63671875,
+          "max": 1403.63671875
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1403.63671875,
+          "max": 1403.63671875
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 842.7275390625,
+          "max": 1052.7275390625
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 2924.2421875,
+          "max": 2924.2421875
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 935.7578125,
+          "max": 935.7578125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 858.33984375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "e5f57727cc2735a44b673f6c4c6599dd8a90fdafac6c381603b948b8081f7cfc"
+    },
+    {
+      "case": "guided-L25-E2-band5",
+      "seed": "rb-tutorial-v1",
+      "level": 25,
+      "enhancement": 2,
+      "band": 5,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 103.71666666666667,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 114,
+        "friendly.rifle_squad": 2251.15234375,
+        "friendly.sentry": 1396.84765625,
+        "enemy.raider": 697.0791015625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 100,
+          "accuracyPass": 81,
+          "intended": 82,
+          "otherHostile": 2,
+          "friendlySolid": 2,
+          "expired": 14,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 1,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 44,
+          "accuracyPass": 41,
+          "intended": 32,
+          "otherHostile": 4,
+          "friendlySolid": 0,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 24,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1487.8544921875,
+          "max": 1487.8544921875
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1487.8544921875,
+          "max": 1487.8544921875
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 835.890625,
+          "max": 1115.890625
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3099.697265625,
+          "max": 3099.697265625
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 991.9033203125,
+          "max": 991.9033203125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1082.9208984375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "4e25b8b29f5f8e1e5c360981ef005578a2adcc67914cabfd9772dc13fed2b135"
+    },
+    {
+      "case": "guided-L25-E2-band5",
+      "seed": "progression-paired-1",
+      "level": 25,
+      "enhancement": 2,
+      "band": 5,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 108.16666666666667,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 114,
+        "friendly.rifle_squad": 2587.353515625,
+        "friendly.sentry": 1060.646484375,
+        "enemy.raider": 536.6640625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 108,
+          "accuracyPass": 96,
+          "intended": 90,
+          "otherHostile": 6,
+          "friendlySolid": 3,
+          "expired": 9,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 38,
+          "accuracyPass": 35,
+          "intended": 27,
+          "otherHostile": 1,
+          "friendlySolid": 0,
+          "expired": 10,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 22,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1487.8544921875,
+          "max": 1487.8544921875
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1487.8544921875,
+          "max": 1487.8544921875
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 835.890625,
+          "max": 1115.890625
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3099.697265625,
+          "max": 3099.697265625
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 991.9033203125,
+          "max": 991.9033203125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1243.3359375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "1b4955a95f04e241936f915c561dda6495508d0cdd8b51f8e8936685c78f28d9"
+    },
+    {
+      "case": "guided-L25-E2-band5",
+      "seed": "progression-paired-2",
+      "level": 25,
+      "enhancement": 2,
+      "band": 5,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 108.38333333333334,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 114,
+        "friendly.rifle_squad": 2654.447265625,
+        "friendly.sentry": 993.552734375,
+        "enemy.raider": 501.6640625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 108,
+          "accuracyPass": 97,
+          "intended": 95,
+          "otherHostile": 1,
+          "friendlySolid": 3,
+          "expired": 9,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 4,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 37,
+          "accuracyPass": 30,
+          "intended": 28,
+          "otherHostile": 0,
+          "friendlySolid": 3,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 3,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 20,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1487.8544921875,
+          "max": 1487.8544921875
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1487.8544921875,
+          "max": 1487.8544921875
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 870.890625,
+          "max": 1115.890625
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3099.697265625,
+          "max": 3099.697265625
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 991.9033203125,
+          "max": 991.9033203125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1243.3359375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "7a442dcb05ece0736b85434adfcc7611b15346a2fe406866e1186312b90e2bb8"
+    },
+    {
+      "case": "guided-L25-E2-band5",
+      "seed": "progression-paired-3",
+      "level": 25,
+      "enhancement": 2,
+      "band": 5,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 101.26666666666667,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 114,
+        "friendly.rifle_squad": 2314.1552734375,
+        "friendly.sentry": 1333.8447265625,
+        "enemy.raider": 449.166015625,
+        "enemy.runner": 93.33203125
+      },
+      "repairByRole": {
+        "friendly.repair_node": 73.33203125
+      },
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 95,
+          "accuracyPass": 85,
+          "intended": 73,
+          "otherHostile": 12,
+          "friendlySolid": 5,
+          "expired": 5,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 14,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 42,
+          "accuracyPass": 39,
+          "intended": 27,
+          "otherHostile": 8,
+          "friendlySolid": 1,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 12,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 29,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1487.8544921875,
+          "max": 1487.8544921875
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1487.8544921875,
+          "max": 1487.8544921875
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 710.890625,
+          "max": 1115.890625
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3099.697265625,
+          "max": 3099.697265625
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 991.9033203125,
+          "max": 991.9033203125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1435.833984375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "7a778e90c4755d1bae6fb00493ce7e0d63332dbe158ea45653fb9ed07a069b97"
+    },
+    {
+      "case": "guided-L50-E0-band10",
+      "seed": "rb-tutorial-v1",
+      "level": 50,
+      "enhancement": 0,
+      "band": 10,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 104.61666666666666,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 131.5,
+        "friendly.sentry": 1843.7978515625,
+        "friendly.rifle_squad": 2364.2021484375,
+        "enemy.raider": 740.57421875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 94,
+          "accuracyPass": 80,
+          "intended": 80,
+          "otherHostile": 3,
+          "friendlySolid": 0,
+          "expired": 11,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 3,
+          "failedButLandedIntended": 3
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 52,
+          "accuracyPass": 49,
+          "intended": 43,
+          "otherHostile": 2,
+          "friendlySolid": 0,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 6,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 25,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1615.7578125,
+          "max": 1615.7578125
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1615.7578125,
+          "max": 1615.7578125
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 899.998046875,
+          "max": 1211.818359375
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3366.1611328125,
+          "max": 3366.1611328125
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1077.171875,
+          "max": 1077.171875
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1071.24609375,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "4d4248c4bd1823af757404e804ffbff3ea7ca02f7d921ebd3282d499ce957042"
+    },
+    {
+      "case": "guided-L50-E0-band10",
+      "seed": "progression-paired-1",
+      "level": 50,
+      "enhancement": 0,
+      "band": 10,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 106.51666666666667,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 131.5,
+        "friendly.sentry": 1765.8583984375,
+        "friendly.rifle_squad": 2442.1416015625,
+        "enemy.raider": 519.701171875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 99,
+          "accuracyPass": 88,
+          "intended": 90,
+          "otherHostile": 1,
+          "friendlySolid": 3,
+          "expired": 5,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 0,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 46,
+          "accuracyPass": 45,
+          "intended": 38,
+          "otherHostile": 3,
+          "friendlySolid": 0,
+          "expired": 5,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 7,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 18,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1615.7578125,
+          "max": 1615.7578125
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1615.7578125,
+          "max": 1615.7578125
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 977.953125,
+          "max": 1211.818359375
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3366.1611328125,
+          "max": 3366.1611328125
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1077.171875,
+          "max": 1077.171875
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1214.1640625,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "1bdbe1139906adc1ce685d5e2c48d41abc318c906e4a094896c6101e9351312a"
+    },
+    {
+      "case": "guided-L50-E0-band10",
+      "seed": "progression-paired-2",
+      "level": 50,
+      "enhancement": 0,
+      "band": 10,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 101.43333333333334,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 131.5,
+        "friendly.sentry": 1994.2861328125,
+        "friendly.rifle_squad": 2213.7138671875,
+        "enemy.raider": 422.2568359375,
+        "enemy.runner": 44.544921875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 93,
+          "accuracyPass": 79,
+          "intended": 71,
+          "otherHostile": 13,
+          "friendlySolid": 1,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 13,
+          "failedButLandedIntended": 5
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 54,
+          "accuracyPass": 52,
+          "intended": 39,
+          "otherHostile": 9,
+          "friendlySolid": 0,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 13,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 26,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1615.7578125,
+          "max": 1615.7578125
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1615.7578125,
+          "max": 1615.7578125
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 816.4755859375,
+          "max": 1211.818359375
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3366.1611328125,
+          "max": 3366.1611328125
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1077.171875,
+          "max": 1077.171875
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1428.541015625,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "1908f7ec0bfb0355c75e598d0e796d55dca3752873e0c66b7bb7ad89ec564963"
+    },
+    {
+      "case": "guided-L50-E0-band10",
+      "seed": "progression-paired-3",
+      "level": 50,
+      "enhancement": 0,
+      "band": 10,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 100.2,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 131.5,
+        "friendly.sentry": 1988.283203125,
+        "friendly.rifle_squad": 2219.716796875,
+        "enemy.raider": 383.279296875,
+        "enemy.runner": 22.2724609375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 88,
+          "accuracyPass": 79,
+          "intended": 68,
+          "otherHostile": 13,
+          "friendlySolid": 1,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 13,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 51,
+          "accuracyPass": 48,
+          "intended": 39,
+          "otherHostile": 9,
+          "friendlySolid": 2,
+          "expired": 1,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 10,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 22,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1615.7578125,
+          "max": 1615.7578125
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1615.7578125,
+          "max": 1615.7578125
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 877.7255859375,
+          "max": 1211.818359375
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3366.1611328125,
+          "max": 3366.1611328125
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1077.171875,
+          "max": 1077.171875
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1428.541015625,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "ee65a79c33214412a0db071d270c1d1e9e98c92e0b641c66d99c437108efa6a2"
+    },
+    {
+      "case": "guided-L50-E5-band10",
+      "seed": "rb-tutorial-v1",
+      "level": 50,
+      "enhancement": 5,
+      "band": 10,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 99.38333333333334,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 131.5,
+        "friendly.sentry": 1940.62109375,
+        "friendly.rifle_squad": 2267.37890625,
+        "enemy.raider": 311.8203125
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 88,
+          "accuracyPass": 74,
+          "intended": 65,
+          "otherHostile": 12,
+          "friendlySolid": 2,
+          "expired": 9,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 10,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 54,
+          "accuracyPass": 47,
+          "intended": 33,
+          "otherHostile": 7,
+          "friendlySolid": 1,
+          "expired": 13,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 15,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 17,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1858.12109375,
+          "max": 1858.12109375
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1858.12109375,
+          "max": 1858.12109375
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1081.7705078125,
+          "max": 1393.5908203125
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3871.0859375,
+          "max": 3871.0859375
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1238.7470703125,
+          "max": 1238.7470703125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "33c504a0bddf3d8bc4b13de02030772471b0c9b970bccbc48a9800ea60d1a0c5"
+    },
+    {
+      "case": "guided-L50-E5-band10",
+      "seed": "progression-paired-1",
+      "level": 50,
+      "enhancement": 5,
+      "band": 10,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 100.78333333333333,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 131.5,
+        "friendly.sentry": 1930.5673828125,
+        "friendly.rifle_squad": 2277.4326171875,
+        "enemy.raider": 454.73828125,
+        "enemy.runner": 22.2724609375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 86,
+          "accuracyPass": 78,
+          "intended": 69,
+          "otherHostile": 11,
+          "friendlySolid": 1,
+          "expired": 5,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 11,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 47,
+          "accuracyPass": 43,
+          "intended": 34,
+          "otherHostile": 7,
+          "friendlySolid": 3,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 20,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1858.12109375,
+          "max": 1858.12109375
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1858.12109375,
+          "max": 1858.12109375
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1059.498046875,
+          "max": 1393.5908203125
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3871.0859375,
+          "max": 3871.0859375
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1238.7470703125,
+          "max": 1238.7470703125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1357.08203125,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "b10edbf656bf5bb0c6a2d0081c70a9076bab25d0c96c4550c7eeb43a63fa268f"
+    },
+    {
+      "case": "guided-L50-E5-band10",
+      "seed": "progression-paired-2",
+      "level": 50,
+      "enhancement": 5,
+      "band": 10,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 99.61666666666666,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 131.5,
+        "friendly.sentry": 1903.8671875,
+        "friendly.rifle_squad": 2304.1328125,
+        "enemy.raider": 344.3017578125
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 86,
+          "accuracyPass": 73,
+          "intended": 64,
+          "otherHostile": 14,
+          "friendlySolid": 0,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 11,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 48,
+          "accuracyPass": 46,
+          "intended": 33,
+          "otherHostile": 9,
+          "friendlySolid": 1,
+          "expired": 5,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 13,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 16,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1858.12109375,
+          "max": 1858.12109375
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1858.12109375,
+          "max": 1858.12109375
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1120.748046875,
+          "max": 1393.5908203125
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3871.0859375,
+          "max": 3871.0859375
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1238.7470703125,
+          "max": 1238.7470703125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1428.541015625,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "a552e9fad98e6e0ffb024ae458b6c45dfd4c4f9c26a45287f31ea2b5dc4c9e68"
+    },
+    {
+      "case": "guided-L50-E5-band10",
+      "seed": "progression-paired-3",
+      "level": 50,
+      "enhancement": 5,
+      "band": 10,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 99.15,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.proximity_mine": 131.5,
+        "friendly.sentry": 2069.98828125,
+        "friendly.rifle_squad": 2138.01171875,
+        "enemy.raider": 311.8203125
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 84,
+          "accuracyPass": 75,
+          "intended": 63,
+          "otherHostile": 12,
+          "friendlySolid": 2,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 14,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 50,
+          "accuracyPass": 47,
+          "intended": 39,
+          "otherHostile": 6,
+          "friendlySolid": 2,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 17,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1858.12109375,
+          "max": 1858.12109375
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1858.12109375,
+          "max": 1858.12109375
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1081.7705078125,
+          "max": 1393.5908203125
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3871.0859375,
+          "max": 3871.0859375
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1238.7470703125,
+          "max": 1238.7470703125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "59fa5983ef2087da820ac28f78f6e1b2873200f55756d96b5a4a279d8f64bb8b"
+    },
+    {
+      "case": "guided-L75-E0-band15",
+      "seed": "rb-tutorial-v1",
+      "level": 75,
+      "enhancement": 0,
+      "band": 15,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 99.53333333333333,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2450.208984375,
+        "friendly.rifle_squad": 2402.921875,
+        "friendly.proximity_mine": 63.869140625,
+        "enemy.raider": 386.5869140625,
+        "enemy.runner": 49.091796875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 87,
+          "accuracyPass": 77,
+          "intended": 62,
+          "otherHostile": 16,
+          "friendlySolid": 2,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 15,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 59,
+          "accuracyPass": 54,
+          "intended": 42,
+          "otherHostile": 11,
+          "friendlySolid": 0,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 14,
+          "failedButLandedIntended": 2
+        }
+      ],
+      "quotedBodyRecovery": 24,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1827.87890625,
+          "max": 1827.87890625
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1827.87890625,
+          "max": 1827.87890625
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 935.23046875,
+          "max": 1370.9091796875
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3808.0810546875,
+          "max": 3808.0810546875
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1218.5859375,
+          "max": 1218.5859375
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "4a0d814091e2c41418fba794295638debeb6fd396543c97db549e3ae3cf3051c"
+    },
+    {
+      "case": "guided-L75-E0-band15",
+      "seed": "progression-paired-1",
+      "level": 75,
+      "enhancement": 0,
+      "band": 15,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 107.68333333333334,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2012.9560546875,
+        "friendly.rifle_squad": 2840.1748046875,
+        "friendly.proximity_mine": 63.869140625,
+        "enemy.raider": 723.06640625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 103,
+          "accuracyPass": 96,
+          "intended": 94,
+          "otherHostile": 1,
+          "friendlySolid": 0,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 3,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 52,
+          "accuracyPass": 49,
+          "intended": 42,
+          "otherHostile": 2,
+          "friendlySolid": 1,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 7,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 16,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1827.87890625,
+          "max": 1827.87890625
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1827.87890625,
+          "max": 1827.87890625
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1199.0927734375,
+          "max": 1370.9091796875
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3808.0810546875,
+          "max": 3808.0810546875
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1218.5859375,
+          "max": 1218.5859375
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 948.75,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "443a11d20f4ab32a8baf8f259627be975c94bec55e24b69da661036504bb06d5"
+    },
+    {
+      "case": "guided-L75-E0-band15",
+      "seed": "progression-paired-2",
+      "level": 75,
+      "enhancement": 0,
+      "band": 15,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 99.28333333333333,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2446.7578125,
+        "friendly.rifle_squad": 2406.373046875,
+        "friendly.proximity_mine": 63.869140625,
+        "enemy.raider": 343.6328125
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 84,
+          "accuracyPass": 75,
+          "intended": 65,
+          "otherHostile": 12,
+          "friendlySolid": 1,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 11,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 58,
+          "accuracyPass": 55,
+          "intended": 45,
+          "otherHostile": 10,
+          "friendlySolid": 2,
+          "expired": 1,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 10,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 19,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1827.87890625,
+          "max": 1827.87890625
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1827.87890625,
+          "max": 1827.87890625
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1027.2763671875,
+          "max": 1370.9091796875
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3808.0810546875,
+          "max": 3808.0810546875
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1218.5859375,
+          "max": 1218.5859375
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "03a00676237c6dda280f68874fb988709633665fdd28bb2b9902efc1083b85e5"
+    },
+    {
+      "case": "guided-L75-E0-band15",
+      "seed": "progression-paired-3",
+      "level": 75,
+      "enhancement": 0,
+      "band": 15,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 99.28333333333333,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2460.5205078125,
+        "friendly.rifle_squad": 2392.6103515625,
+        "friendly.proximity_mine": 63.869140625,
+        "enemy.raider": 343.6328125,
+        "enemy.runner": 24.5458984375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 87,
+          "accuracyPass": 77,
+          "intended": 66,
+          "otherHostile": 12,
+          "friendlySolid": 0,
+          "expired": 9,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 13,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 58,
+          "accuracyPass": 56,
+          "intended": 45,
+          "otherHostile": 10,
+          "friendlySolid": 1,
+          "expired": 2,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 11,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 21,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 1827.87890625,
+          "max": 1827.87890625
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 1827.87890625,
+          "max": 1827.87890625
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1002.73046875,
+          "max": 1370.9091796875
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 3808.0810546875,
+          "max": 3808.0810546875
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1218.5859375,
+          "max": 1218.5859375
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "472e6e1b7321458861abe7c18c53902aed417af5f033dbfcd85e4ba1de8761dc"
+    },
+    {
+      "case": "guided-L75-E7-band15",
+      "seed": "rb-tutorial-v1",
+      "level": 75,
+      "enhancement": 7,
+      "band": 15,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 99,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2480.021484375,
+        "friendly.rifle_squad": 2390.986328125,
+        "friendly.proximity_mine": 45.9921875,
+        "enemy.raider": 300.6787109375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 78,
+          "accuracyPass": 71,
+          "intended": 59,
+          "otherHostile": 12,
+          "friendlySolid": 0,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 13,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 52,
+          "accuracyPass": 46,
+          "intended": 40,
+          "otherHostile": 6,
+          "friendlySolid": 2,
+          "expired": 4,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 7,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 14,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2211.7333984375,
+          "max": 2211.7333984375
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2211.7333984375,
+          "max": 2211.7333984375
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1358.12109375,
+          "max": 1658.7998046875
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 4607.77734375,
+          "max": 4607.77734375
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1474.4892578125,
+          "max": 1474.4892578125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "265436514b04104a3f9db3411d553a67c5273eda400c1787a182ecf666d334e9"
+    },
+    {
+      "case": "guided-L75-E7-band15",
+      "seed": "progression-paired-1",
+      "level": 75,
+      "enhancement": 7,
+      "band": 15,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 98.65,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2361.3798828125,
+        "friendly.rifle_squad": 2509.6279296875,
+        "friendly.proximity_mine": 45.9921875,
+        "enemy.raider": 214.7705078125
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 82,
+          "accuracyPass": 74,
+          "intended": 65,
+          "otherHostile": 9,
+          "friendlySolid": 1,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 10,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 51,
+          "accuracyPass": 48,
+          "intended": 38,
+          "otherHostile": 8,
+          "friendlySolid": 3,
+          "expired": 2,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 10,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 10,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2211.7333984375,
+          "max": 2211.7333984375
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2211.7333984375,
+          "max": 2211.7333984375
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1444.029296875,
+          "max": 1658.7998046875
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 4607.77734375,
+          "max": 4607.77734375
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1474.4892578125,
+          "max": 1474.4892578125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "4ebfb5aa84cf60d1dd3996758e0e5245bd6e7f48f7722223c0d5cc05b58177ef"
+    },
+    {
+      "case": "guided-L75-E7-band15",
+      "seed": "progression-paired-2",
+      "level": 75,
+      "enhancement": 7,
+      "band": 15,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 98.65,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2424.443359375,
+        "friendly.rifle_squad": 2446.564453125,
+        "friendly.proximity_mine": 45.9921875,
+        "enemy.raider": 257.724609375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 79,
+          "accuracyPass": 71,
+          "intended": 62,
+          "otherHostile": 10,
+          "friendlySolid": 0,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 50,
+          "accuracyPass": 47,
+          "intended": 38,
+          "otherHostile": 8,
+          "friendlySolid": 0,
+          "expired": 4,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 12,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2211.7333984375,
+          "max": 2211.7333984375
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2211.7333984375,
+          "max": 2211.7333984375
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1401.0751953125,
+          "max": 1658.7998046875
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 4607.77734375,
+          "max": 4607.77734375
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1474.4892578125,
+          "max": 1474.4892578125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "0cc77f4b8ec17b95f6cfb7a0b8e5ed0b1a9607789eb0f4ad24c9dfc10e194e74"
+    },
+    {
+      "case": "guided-L75-E7-band15",
+      "seed": "progression-paired-3",
+      "level": 75,
+      "enhancement": 7,
+      "band": 15,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 98.65,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2523.39453125,
+        "friendly.rifle_squad": 2347.61328125,
+        "friendly.proximity_mine": 45.9921875,
+        "enemy.raider": 257.724609375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 80,
+          "accuracyPass": 69,
+          "intended": 58,
+          "otherHostile": 11,
+          "friendlySolid": 3,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 13,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 49,
+          "accuracyPass": 49,
+          "intended": 40,
+          "otherHostile": 8,
+          "friendlySolid": 0,
+          "expired": 1,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 12,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2211.7333984375,
+          "max": 2211.7333984375
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2211.7333984375,
+          "max": 2211.7333984375
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1401.0751953125,
+          "max": 1658.7998046875
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 4607.77734375,
+          "max": 4607.77734375
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1474.4892578125,
+          "max": 1474.4892578125
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "e188de9e3a3dc1d69182932bf4c600b750303160e12aab2968736a0f41fa9291"
+    },
+    {
+      "case": "guided-L100-E0-band20",
+      "seed": "rb-tutorial-v1",
+      "level": 100,
+      "enhancement": 0,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 107.18333333333334,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2237.345703125,
+        "friendly.rifle_squad": 3183.8720703125,
+        "friendly.proximity_mine": 73.2822265625,
+        "enemy.raider": 660.9521484375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 100,
+          "accuracyPass": 93,
+          "intended": 92,
+          "otherHostile": 1,
+          "friendlySolid": 0,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 2,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 52,
+          "accuracyPass": 49,
+          "intended": 46,
+          "otherHostile": 1,
+          "friendlySolid": 2,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 4,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 15,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2040,
+          "max": 2040
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2040,
+          "max": 2040
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1342.2734375,
+          "max": 1530
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 4250,
+          "max": 4250
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1360,
+          "max": 1360
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1026.7744140625,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "f178ac8de3fead3626fe2e23ca5143de5bc29887def847a2604d07ac96cefd70"
+    },
+    {
+      "case": "guided-L100-E0-band20",
+      "seed": "progression-paired-1",
+      "level": 100,
+      "enhancement": 0,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 100.63333333333334,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2610.7802734375,
+        "friendly.rifle_squad": 2810.4375,
+        "friendly.proximity_mine": 73.2822265625,
+        "enemy.raider": 547.53515625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 88,
+          "accuracyPass": 82,
+          "intended": 70,
+          "otherHostile": 14,
+          "friendlySolid": 1,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 13,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 57,
+          "accuracyPass": 55,
+          "intended": 44,
+          "otherHostile": 10,
+          "friendlySolid": 1,
+          "expired": 2,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 11,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 21,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2040,
+          "max": 2040
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2040,
+          "max": 2040
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1154.546875,
+          "max": 1530
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 4250,
+          "max": 4250
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1360,
+          "max": 1360
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1327.91796875,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "6036da0ced04eceb384cd50f292031bdcf6d432e4820cfcef45fd9bb8f5dc135"
+    },
+    {
+      "case": "guided-L100-E0-band20",
+      "seed": "progression-paired-2",
+      "level": 100,
+      "enhancement": 0,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 100.51666666666667,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2616.0634765625,
+        "friendly.rifle_squad": 2805.154296875,
+        "friendly.proximity_mine": 73.2822265625,
+        "enemy.raider": 547.53515625,
+        "enemy.runner": 53.63671875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 88,
+          "accuracyPass": 79,
+          "intended": 70,
+          "otherHostile": 13,
+          "friendlySolid": 1,
+          "expired": 4,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 11,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 56,
+          "accuracyPass": 53,
+          "intended": 41,
+          "otherHostile": 10,
+          "friendlySolid": 1,
+          "expired": 4,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 12,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 24,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2040,
+          "max": 2040
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2040,
+          "max": 2040
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1100.91015625,
+          "max": 1530
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 4250,
+          "max": 4250
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1360,
+          "max": 1360
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1327.91796875,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "3b55b389bc83ba9ddbf128892e15a23028002d443f2cff29858350f52a95a3a7"
+    },
+    {
+      "case": "guided-L100-E0-band20",
+      "seed": "progression-paired-3",
+      "level": 100,
+      "enhancement": 0,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 99.03333333333333,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2605.755859375,
+        "friendly.rifle_squad": 2815.4619140625,
+        "friendly.proximity_mine": 73.2822265625,
+        "enemy.raider": 328.521484375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 87,
+          "accuracyPass": 83,
+          "intended": 70,
+          "otherHostile": 12,
+          "friendlySolid": 1,
+          "expired": 4,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 13,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 61,
+          "accuracyPass": 58,
+          "intended": 46,
+          "otherHostile": 9,
+          "friendlySolid": 2,
+          "expired": 4,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 12,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 17,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2040,
+          "max": 2040
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2040,
+          "max": 2040
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1201.478515625,
+          "max": 1530
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 4250,
+          "max": 4250
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1360,
+          "max": 1360
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "51a2ad428a8ab8547c32fab649704b665ba17043118e6a5bc9f433deb4c670d1"
+    },
+    {
+      "case": "guided-L100-E10-band20",
+      "seed": "rb-tutorial-v1",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 98.68333333333334,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2797.7470703125,
+        "friendly.rifle_squad": 2651.435546875,
+        "friendly.proximity_mine": 45.3173828125,
+        "enemy.raider": 281.58984375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 69,
+          "accuracyPass": 60,
+          "intended": 48,
+          "otherHostile": 13,
+          "friendlySolid": 0,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 12,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 46,
+          "accuracyPass": 45,
+          "intended": 38,
+          "otherHostile": 5,
+          "friendlySolid": 0,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 7,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 11,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1707.41015625,
+          "max": 1989
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1768,
+          "max": 1768
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "dbb0b62fbee06aca858ba4b2965ad25c3d6e87ca3c2f50947f143bf58812895e"
+    },
+    {
+      "case": "guided-L100-E10-band20",
+      "seed": "progression-paired-1",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 98.46666666666667,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2682.703125,
+        "friendly.rifle_squad": 2766.4794921875,
+        "friendly.proximity_mine": 45.3173828125,
+        "enemy.raider": 328.521484375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 67,
+          "accuracyPass": 61,
+          "intended": 49,
+          "otherHostile": 14,
+          "friendlySolid": 0,
+          "expired": 4,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 12,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 44,
+          "accuracyPass": 43,
+          "intended": 39,
+          "otherHostile": 4,
+          "friendlySolid": 0,
+          "expired": 1,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 4,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 13,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1660.478515625,
+          "max": 1989
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1768,
+          "max": 1768
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "0450505c81585a34458067bb48d1a9adab05a689ea2d5905d27ccba28ac9f557"
+    },
+    {
+      "case": "guided-L100-E10-band20",
+      "seed": "progression-paired-2",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 98.46666666666667,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2570.49609375,
+        "friendly.rifle_squad": 2878.6865234375,
+        "friendly.proximity_mine": 45.3173828125,
+        "enemy.raider": 328.521484375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 68,
+          "accuracyPass": 62,
+          "intended": 51,
+          "otherHostile": 14,
+          "friendlySolid": 0,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 12,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 46,
+          "accuracyPass": 42,
+          "intended": 38,
+          "otherHostile": 4,
+          "friendlySolid": 2,
+          "expired": 2,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 4,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 13,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1660.478515625,
+          "max": 1989
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1768,
+          "max": 1768
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "e519133f0eae3439b0e3839fc939fc4cf8bf7982c1f921557a65cc3dd5aa2cad"
+    },
+    {
+      "case": "guided-L100-E10-band20",
+      "seed": "progression-paired-3",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 98.68333333333334,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2503.4951171875,
+        "friendly.rifle_squad": 2945.6875,
+        "friendly.proximity_mine": 45.3173828125,
+        "enemy.raider": 281.58984375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 70,
+          "accuracyPass": 67,
+          "intended": 55,
+          "otherHostile": 13,
+          "friendlySolid": 0,
+          "expired": 2,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 13,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 45,
+          "accuracyPass": 41,
+          "intended": 35,
+          "otherHostile": 5,
+          "friendlySolid": 2,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 6,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 11,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1707.41015625,
+          "max": 1989
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1768,
+          "max": 1768
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "af9edbe25da278a1b9031691221c8a9daf59dff9f8de85a71dfe15e9eb896d92"
+    },
+    {
+      "case": "guided-L100-E10-band1",
+      "seed": "rb-tutorial-v1",
+      "level": 100,
+      "enhancement": 10,
+      "band": 1,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 96.9,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2137.494140625,
+        "friendly.rifle_squad": 1162.505859375,
+        "enemy.raider": 159.091796875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 36,
+          "accuracyPass": 33,
+          "intended": 24,
+          "otherHostile": 10,
+          "friendlySolid": 1,
+          "expired": 1,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 31,
+          "accuracyPass": 30,
+          "intended": 28,
+          "otherHostile": 1,
+          "friendlySolid": 0,
+          "expired": 2,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 2,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 6,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1829.908203125,
+          "max": 1989
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1768,
+          "max": 1768
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "90b4ed8a882dee7728ede93055d0a0dd2eec721592c076197ae14485f8feeff2"
+    },
+    {
+      "case": "guided-L100-E10-band1",
+      "seed": "progression-paired-1",
+      "level": 100,
+      "enhancement": 10,
+      "band": 1,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 96.76666666666667,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 1864.8203125,
+        "friendly.rifle_squad": 1435.1796875,
+        "enemy.raider": 159.091796875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 38,
+          "accuracyPass": 37,
+          "intended": 29,
+          "otherHostile": 9,
+          "friendlySolid": 0,
+          "expired": 0,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 32,
+          "accuracyPass": 30,
+          "intended": 23,
+          "otherHostile": 2,
+          "friendlySolid": 1,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 7,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 6,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1829.908203125,
+          "max": 1989
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1768,
+          "max": 1768
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "8638caf64bffc3e8c10b0adf3a52073b30a5ad57ca1f86d893849b6035742ec3"
+    },
+    {
+      "case": "guided-L100-E10-band1",
+      "seed": "progression-paired-2",
+      "level": 100,
+      "enhancement": 10,
+      "band": 1,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 96.9,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2010.0048828125,
+        "friendly.rifle_squad": 1289.9951171875,
+        "enemy.raider": 159.091796875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 38,
+          "accuracyPass": 35,
+          "intended": 26,
+          "otherHostile": 10,
+          "friendlySolid": 0,
+          "expired": 2,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 31,
+          "accuracyPass": 30,
+          "intended": 26,
+          "otherHostile": 1,
+          "friendlySolid": 1,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 4,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 6,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1829.908203125,
+          "max": 1989
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1768,
+          "max": 1768
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "2430a254ce497a6b342aea25ea127030fbd1c302d72d72776588e9d377c8a791"
+    },
+    {
+      "case": "guided-L100-E10-band1",
+      "seed": "progression-paired-3",
+      "level": 100,
+      "enhancement": 10,
+      "band": 1,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 96.98333333333333,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 1892.8330078125,
+        "friendly.rifle_squad": 1407.1669921875,
+        "enemy.raider": 127.2734375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 38,
+          "accuracyPass": 38,
+          "intended": 30,
+          "otherHostile": 8,
+          "friendlySolid": 0,
+          "expired": 0,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 30,
+          "accuracyPass": 26,
+          "intended": 22,
+          "otherHostile": 2,
+          "friendlySolid": 0,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 4,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 5,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1861.7265625,
+          "max": 1989
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1768,
+          "max": 1768
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "320abf88743444590ee38f0b61f5e53cbaa40fe8c53d02ddbf4068414b470223"
+    },
+    {
+      "case": "guided-L100-E10-band20-baseline-accuracy",
+      "seed": "rb-tutorial-v1",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": false,
+      "outcome": "Victory",
+      "combatSeconds": 99.36666666666666,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.rifle_squad": 2782.58203125,
+        "friendly.proximity_mine": 117.6650390625,
+        "friendly.sentry": 2594.2529296875,
+        "enemy.raider": 422.384765625,
+        "enemy.runner": 26.818359375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 74,
+          "accuracyPass": 63,
+          "intended": 52,
+          "otherHostile": 12,
+          "friendlySolid": 2,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 11,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 52,
+          "accuracyPass": 45,
+          "intended": 37,
+          "otherHostile": 6,
+          "friendlySolid": 2,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 17,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1539.796875,
+          "max": 1989
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1768,
+          "max": 1768
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "ecbed0aab01fa8ce383d5b87bdf131038f6483b463d3c4984601583ec78f5a97"
+    },
+    {
+      "case": "guided-L100-E10-band20-baseline-accuracy",
+      "seed": "progression-paired-1",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": false,
+      "outcome": "Victory",
+      "combatSeconds": 98.73333333333333,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2692.74609375,
+        "friendly.rifle_squad": 2756.4365234375,
+        "friendly.proximity_mine": 45.3173828125,
+        "enemy.raider": 234.658203125
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 71,
+          "accuracyPass": 59,
+          "intended": 52,
+          "otherHostile": 10,
+          "friendlySolid": 0,
+          "expired": 9,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 48,
+          "accuracyPass": 44,
+          "intended": 37,
+          "otherHostile": 7,
+          "friendlySolid": 1,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 9,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1754.341796875,
+          "max": 1989
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1768,
+          "max": 1768
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "df38ca3b32e48411a26d6cdfa85a53d80d69242181b4f3f41dd15c2b3d7f5b18"
+    },
+    {
+      "case": "guided-L100-E10-band20-baseline-accuracy",
+      "seed": "progression-paired-2",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": false,
+      "outcome": "Victory",
+      "combatSeconds": 98.45,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2603.40234375,
+        "friendly.rifle_squad": 2845.7802734375,
+        "friendly.proximity_mine": 45.3173828125,
+        "enemy.raider": 281.58984375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 73,
+          "accuracyPass": 63,
+          "intended": 53,
+          "otherHostile": 11,
+          "friendlySolid": 2,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 11,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 47,
+          "accuracyPass": 41,
+          "intended": 36,
+          "otherHostile": 6,
+          "friendlySolid": 2,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 6,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 11,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1707.41015625,
+          "max": 1989
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1768,
+          "max": 1768
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "3f79a9afc6281794a0681dd5d7df575261999f667e52ca151cc275258ed3b104"
+    },
+    {
+      "case": "guided-L100-E10-band20-baseline-accuracy",
+      "seed": "progression-paired-3",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": false,
+      "outcome": "Victory",
+      "combatSeconds": 98.45,
+      "kills": 24,
+      "coreRemaining": 10000,
+      "damageByRole": {
+        "friendly.sentry": 2631.33203125,
+        "friendly.rifle_squad": 2817.8505859375,
+        "friendly.proximity_mine": 45.3173828125,
+        "enemy.raider": 281.58984375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 70,
+          "accuracyPass": 60,
+          "intended": 50,
+          "otherHostile": 12,
+          "friendlySolid": 1,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 12,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "friendly.sentry",
+          "released": 47,
+          "accuracyPass": 44,
+          "intended": 39,
+          "otherHostile": 6,
+          "friendlySolid": 0,
+          "expired": 2,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 7,
+          "failedButLandedIntended": 2
+        }
+      ],
+      "quotedBodyRecovery": 11,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 10000,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 3,
+          "type": "friendly.sentry",
+          "body": 2652,
+          "max": 2652
+        },
+        {
+          "id": 4,
+          "type": "friendly.rifle_squad",
+          "body": 1707.41015625,
+          "max": 1989
+        },
+        {
+          "id": 5,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        },
+        {
+          "id": 6,
+          "type": "friendly.repair_node",
+          "body": 1768,
+          "max": 1768
+        },
+        {
+          "id": 7,
+          "type": "friendly.standard_barricade",
+          "body": 1500,
+          "max": 1500
+        },
+        {
+          "id": 8,
+          "type": "friendly.proximity_mine",
+          "body": 200,
+          "max": 200
+        }
+      ],
+      "hash": "806ba79c2cf662c9a14208f41ee11aa7577aa7a828a3386d39d08826e2f0264b"
+    },
+    {
+      "case": "mobile-L1-E0-band20",
+      "seed": "rb-tutorial-v1",
+      "level": 1,
+      "enhancement": 0,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 116.78333333333333,
+      "kills": 24,
+      "coreRemaining": 7129.919921875,
+      "damageByRole": {
+        "friendly.rifle_squad": 979.2763671875,
+        "enemy.runner": 417.9111328125,
+        "warden.bulwark": 4515.2236328125,
+        "enemy.raider": 3352.1689453125
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 58,
+          "accuracyPass": 48,
+          "intended": 47,
+          "otherHostile": 1,
+          "friendlySolid": 1,
+          "expired": 9,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 2,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 117,
+          "accuracyPass": 102,
+          "intended": 93,
+          "otherHostile": 10,
+          "friendlySolid": 6,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 408,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 7129.919921875,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 0,
+          "max": 900
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 2500,
+          "max": 2500
+        }
+      ],
+      "hash": "470be7a1d77137341f344bfb5e0ad39fb702809428ecdf79278929c5b6c61824"
+    },
+    {
+      "case": "mobile-L1-E0-band20",
+      "seed": "progression-paired-1",
+      "level": 1,
+      "enhancement": 0,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 115,
+      "kills": 24,
+      "coreRemaining": 7406.482421875,
+      "damageByRole": {
+        "friendly.rifle_squad": 1085.564453125,
+        "enemy.runner": 786.65625,
+        "warden.bulwark": 4408.935546875,
+        "enemy.raider": 2706.861328125
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 58,
+          "accuracyPass": 52,
+          "intended": 53,
+          "otherHostile": 0,
+          "friendlySolid": 2,
+          "expired": 3,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 0,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 110,
+          "accuracyPass": 100,
+          "intended": 90,
+          "otherHostile": 10,
+          "friendlySolid": 4,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 11,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 380,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 7406.482421875,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 0,
+          "max": 900
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 2500,
+          "max": 2500
+        }
+      ],
+      "hash": "7ae8696ae8a4550af5dfc14e39a583da02876de817d36983e4407c10b961d37d"
+    },
+    {
+      "case": "mobile-L1-E0-band20",
+      "seed": "progression-paired-2",
+      "level": 1,
+      "enhancement": 0,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 115.58333333333333,
+      "kills": 24,
+      "coreRemaining": 7467.9404296875,
+      "damageByRole": {
+        "friendly.rifle_squad": 1008.109375,
+        "enemy.runner": 811.2392578125,
+        "warden.bulwark": 4486.390625,
+        "enemy.raider": 2620.8203125
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 57,
+          "accuracyPass": 48,
+          "intended": 48,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 1,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 112,
+          "accuracyPass": 100,
+          "intended": 102,
+          "otherHostile": 2,
+          "friendlySolid": 4,
+          "expired": 4,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 1,
+          "failedButLandedIntended": 3
+        }
+      ],
+      "quotedBodyRecovery": 374,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 7467.9404296875,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 0,
+          "max": 900
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 2500,
+          "max": 2500
+        }
+      ],
+      "hash": "14f7aa7afa32d44142ac98836fab8ceb7f349169020cc8cce676b081c39dd745"
+    },
+    {
+      "case": "mobile-L1-E0-band20",
+      "seed": "progression-paired-3",
+      "level": 1,
+      "enhancement": 0,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 113.78333333333333,
+      "kills": 24,
+      "coreRemaining": 7338.8779296875,
+      "damageByRole": {
+        "friendly.rifle_squad": 977.26953125,
+        "enemy.runner": 639.158203125,
+        "warden.bulwark": 4517.23046875,
+        "enemy.raider": 2921.9638671875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 57,
+          "accuracyPass": 49,
+          "intended": 48,
+          "otherHostile": 0,
+          "friendlySolid": 2,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 2,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 112,
+          "accuracyPass": 102,
+          "intended": 93,
+          "otherHostile": 10,
+          "friendlySolid": 5,
+          "expired": 4,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 11,
+          "failedButLandedIntended": 2
+        }
+      ],
+      "quotedBodyRecovery": 387,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 7338.8779296875,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 0,
+          "max": 900
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 2500,
+          "max": 2500
+        }
+      ],
+      "hash": "74f833dc1654944caa2948b2265c1545a25bc3f0ecb8e83d21a7774ef4e91440"
+    },
+    {
+      "case": "mobile-L100-E0-band20",
+      "seed": "rb-tutorial-v1",
+      "level": 100,
+      "enhancement": 0,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 99.35,
+      "kills": 24,
+      "coreRemaining": 9225.6337890625,
+      "damageByRole": {
+        "friendly.rifle_squad": 3360.337890625,
+        "enemy.raider": 1788.123046875,
+        "enemy.runner": 516.2431640625,
+        "warden.bulwark": 2134.162109375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 132,
+          "accuracyPass": 119,
+          "intended": 123,
+          "otherHostile": 0,
+          "friendlySolid": 0,
+          "expired": 9,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 0,
+          "failedButLandedIntended": 4
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 36,
+          "accuracyPass": 34,
+          "intended": 29,
+          "otherHostile": 1,
+          "friendlySolid": 1,
+          "expired": 5,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 5,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 198,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 9225.6337890625,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 0,
+          "max": 1530
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 4250,
+          "max": 4250
+        }
+      ],
+      "hash": "19aa3615fe1ee388c6ed1247cbfdabe24f8e555c5b937ab1898de6e039d353fd"
+    },
+    {
+      "case": "mobile-L100-E0-band20",
+      "seed": "progression-paired-1",
+      "level": 100,
+      "enhancement": 0,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 102.58333333333333,
+      "kills": 24,
+      "coreRemaining": 9268.654296875,
+      "damageByRole": {
+        "friendly.rifle_squad": 3679.24609375,
+        "enemy.raider": 1745.1025390625,
+        "enemy.runner": 516.2431640625,
+        "warden.bulwark": 1815.25390625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 141,
+          "accuracyPass": 133,
+          "intended": 134,
+          "otherHostile": 0,
+          "friendlySolid": 0,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 2,
+          "failedButLandedIntended": 3
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 39,
+          "accuracyPass": 35,
+          "intended": 27,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 11,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 194,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 9268.654296875,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 0,
+          "max": 1530
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 4250,
+          "max": 4250
+        }
+      ],
+      "hash": "c0054fb4e3a560a947c1cd626ebdda0ba2581501e8a43833896e5aefc8fd453c"
+    },
+    {
+      "case": "mobile-L100-E0-band20",
+      "seed": "progression-paired-2",
+      "level": 100,
+      "enhancement": 0,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 101.53333333333333,
+      "kills": 24,
+      "coreRemaining": 9360.8408203125,
+      "damageByRole": {
+        "friendly.rifle_squad": 3574.6728515625,
+        "enemy.raider": 1702.08203125,
+        "enemy.runner": 467.0771484375,
+        "warden.bulwark": 1919.8271484375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 143,
+          "accuracyPass": 128,
+          "intended": 128,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 14,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 1,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 36,
+          "accuracyPass": 35,
+          "intended": 28,
+          "otherHostile": 0,
+          "friendlySolid": 0,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 184,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 9360.8408203125,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 0,
+          "max": 1530
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 4250,
+          "max": 4250
+        }
+      ],
+      "hash": "b76e9662819abe00db9ea67bb9167f468dfe0656e875661255730519011a6d42"
+    },
+    {
+      "case": "mobile-L100-E0-band20",
+      "seed": "progression-paired-3",
+      "level": 100,
+      "enhancement": 0,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 101.1,
+      "kills": 24,
+      "coreRemaining": 9354.6953125,
+      "damageByRole": {
+        "friendly.rifle_squad": 3685.3603515625,
+        "enemy.runner": 516.2431640625,
+        "enemy.raider": 1659.0615234375,
+        "warden.bulwark": 1809.1396484375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 145,
+          "accuracyPass": 136,
+          "intended": 134,
+          "otherHostile": 0,
+          "friendlySolid": 0,
+          "expired": 11,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 3,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 37,
+          "accuracyPass": 36,
+          "intended": 26,
+          "otherHostile": 1,
+          "friendlySolid": 0,
+          "expired": 10,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 10,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 185,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 9354.6953125,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 0,
+          "max": 1530
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 4250,
+          "max": 4250
+        }
+      ],
+      "hash": "025621f97bcb0df4a63350f7b3dcaeb4fddfccde53800234e57e5559bee402f9"
+    },
+    {
+      "case": "mobile-L100-E10-band20",
+      "seed": "rb-tutorial-v1",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 98.75,
+      "kills": 24,
+      "coreRemaining": 9803.3359375,
+      "damageByRole": {
+        "friendly.rifle_squad": 4517.390625,
+        "enemy.raider": 1173.291015625,
+        "enemy.runner": 196.6640625,
+        "warden.bulwark": 977.109375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 127,
+          "accuracyPass": 114,
+          "intended": 114,
+          "otherHostile": 0,
+          "friendlySolid": 0,
+          "expired": 13,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 1,
+          "failedButLandedIntended": 1
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 21,
+          "accuracyPass": 20,
+          "intended": 12,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 8,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 8,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 65,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 9803.3359375,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 815.708984375,
+          "max": 1989
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        }
+      ],
+      "hash": "694e131ec19d00245e6464b02d074f99063ad549162e311811b5cbfc81684dd6"
+    },
+    {
+      "case": "mobile-L100-E10-band20",
+      "seed": "progression-paired-1",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 98.5,
+      "kills": 24,
+      "coreRemaining": 9778.7529296875,
+      "damageByRole": {
+        "friendly.rifle_squad": 4511.6171875,
+        "enemy.raider": 1173.291015625,
+        "enemy.runner": 221.2470703125,
+        "warden.bulwark": 982.8828125
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 122,
+          "accuracyPass": 115,
+          "intended": 115,
+          "otherHostile": 0,
+          "friendlySolid": 0,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 0,
+          "failedButLandedIntended": 0
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 17,
+          "accuracyPass": 16,
+          "intended": 11,
+          "otherHostile": 0,
+          "friendlySolid": 0,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 5,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 68,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 9778.7529296875,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 815.708984375,
+          "max": 1989
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        }
+      ],
+      "hash": "2ff8c22b35be42f1a2bf53c5deb238167029799c98db80d26642bbb984b08d88"
+    },
+    {
+      "case": "mobile-L100-E10-band20",
+      "seed": "progression-paired-2",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 98.25,
+      "kills": 24,
+      "coreRemaining": 9778.7529296875,
+      "damageByRole": {
+        "friendly.rifle_squad": 4551.244140625,
+        "enemy.raider": 1220.22265625,
+        "enemy.runner": 221.2470703125,
+        "warden.bulwark": 943.255859375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 123,
+          "accuracyPass": 113,
+          "intended": 116,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 0,
+          "failedButLandedIntended": 3
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 18,
+          "accuracyPass": 15,
+          "intended": 11,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 4,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 70,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 9778.7529296875,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 768.77734375,
+          "max": 1989
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        }
+      ],
+      "hash": "6b27466e945a27911a5e173501406f606d9f36da6137171c2640f02e4484d323"
+    },
+    {
+      "case": "mobile-L100-E10-band20",
+      "seed": "progression-paired-3",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": true,
+      "outcome": "Victory",
+      "combatSeconds": 98.25,
+      "kills": 24,
+      "coreRemaining": 9803.3359375,
+      "damageByRole": {
+        "friendly.rifle_squad": 4641.42578125,
+        "enemy.raider": 1079.427734375,
+        "enemy.runner": 196.6640625,
+        "warden.bulwark": 853.07421875
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 122,
+          "accuracyPass": 115,
+          "intended": 116,
+          "otherHostile": 1,
+          "friendlySolid": 0,
+          "expired": 5,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 1,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 18,
+          "accuracyPass": 17,
+          "intended": 11,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 6,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 61,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 9803.3359375,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 909.572265625,
+          "max": 1989
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        }
+      ],
+      "hash": "db16574de5a9c4b2052b5d6516c2243ee42cfed9c4944457140a21242eaa056c"
+    },
+    {
+      "case": "mobile-L100-E10-band20-baseline-accuracy",
+      "seed": "rb-tutorial-v1",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": false,
+      "outcome": "Victory",
+      "combatSeconds": 102.91666666666667,
+      "kills": 24,
+      "coreRemaining": 9803.3359375,
+      "damageByRole": {
+        "friendly.rifle_squad": 4621.7646484375,
+        "enemy.raider": 1548.744140625,
+        "enemy.runner": 196.6640625,
+        "warden.bulwark": 872.7353515625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 142,
+          "accuracyPass": 119,
+          "intended": 122,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 19,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 0,
+          "failedButLandedIntended": 3
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 17,
+          "accuracyPass": 15,
+          "intended": 10,
+          "otherHostile": 0,
+          "friendlySolid": 0,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 5,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 79,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 9803.3359375,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 440.255859375,
+          "max": 1989
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        }
+      ],
+      "hash": "c605de3d26ac7227129f3e65d596884d1abc7b1c24c816351a074aa98221390e"
+    },
+    {
+      "case": "mobile-L100-E10-band20-baseline-accuracy",
+      "seed": "progression-paired-1",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": false,
+      "outcome": "Victory",
+      "combatSeconds": 101.16666666666667,
+      "kills": 24,
+      "coreRemaining": 9778.7529296875,
+      "damageByRole": {
+        "friendly.rifle_squad": 4553.478515625,
+        "enemy.raider": 1267.154296875,
+        "enemy.runner": 221.2470703125,
+        "warden.bulwark": 941.021484375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 131,
+          "accuracyPass": 111,
+          "intended": 116,
+          "otherHostile": 0,
+          "friendlySolid": 2,
+          "expired": 13,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 0,
+          "failedButLandedIntended": 5
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 20,
+          "accuracyPass": 20,
+          "intended": 11,
+          "otherHostile": 0,
+          "friendlySolid": 0,
+          "expired": 9,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 9,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 71,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 9778.7529296875,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 721.845703125,
+          "max": 1989
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        }
+      ],
+      "hash": "79fbce1a3ae96d82ba68b6e77d4f5e5d4ed1834f5fa416bc268c95cdf645bf33"
+    },
+    {
+      "case": "mobile-L100-E10-band20-baseline-accuracy",
+      "seed": "progression-paired-2",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": false,
+      "outcome": "Victory",
+      "combatSeconds": 99.46666666666667,
+      "kills": 24,
+      "coreRemaining": 9803.3359375,
+      "damageByRole": {
+        "friendly.rifle_squad": 4521.349609375,
+        "enemy.raider": 1501.8125,
+        "enemy.runner": 196.6640625,
+        "warden.bulwark": 973.150390625
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 137,
+          "accuracyPass": 119,
+          "intended": 125,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 11,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 0,
+          "failedButLandedIntended": 6
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 19,
+          "accuracyPass": 16,
+          "intended": 11,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 7,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 6,
+          "failedButLandedIntended": 1
+        }
+      ],
+      "quotedBodyRecovery": 77,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 9803.3359375,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 487.1875,
+          "max": 1989
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        }
+      ],
+      "hash": "4b1fa9fed9b1643698e53b5be1a98f387d825d39d32975135729d5cfd38711fb"
+    },
+    {
+      "case": "mobile-L100-E10-band20-baseline-accuracy",
+      "seed": "progression-paired-3",
+      "level": 100,
+      "enhancement": 10,
+      "band": 20,
+      "accuracyGrowth": false,
+      "outcome": "Victory",
+      "combatSeconds": 98.25,
+      "kills": 24,
+      "coreRemaining": 9803.3359375,
+      "damageByRole": {
+        "friendly.rifle_squad": 4555.853515625,
+        "enemy.raider": 1126.359375,
+        "enemy.runner": 196.6640625,
+        "warden.bulwark": 938.646484375
+      },
+      "repairByRole": {},
+      "shots": [
+        {
+          "role": "friendly.rifle_squad",
+          "released": 129,
+          "accuracyPass": 113,
+          "intended": 115,
+          "otherHostile": 0,
+          "friendlySolid": 0,
+          "expired": 14,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 0,
+          "failedButLandedIntended": 2
+        },
+        {
+          "role": "warden.bulwark",
+          "released": 18,
+          "accuracyPass": 16,
+          "intended": 11,
+          "otherHostile": 0,
+          "friendlySolid": 1,
+          "expired": 6,
+          "inFlight": 0,
+          "passedButDidNotLandIntended": 5,
+          "failedButLandedIntended": 0
+        }
+      ],
+      "quotedBodyRecovery": 63,
+      "friendlyEnd": [
+        {
+          "id": 1,
+          "type": "objective.harmonic_core",
+          "body": 9803.3359375,
+          "max": 10000
+        },
+        {
+          "id": 2,
+          "type": "friendly.rifle_squad",
+          "body": 862.640625,
+          "max": 1989
+        },
+        {
+          "id": 3,
+          "type": "warden.bulwark",
+          "body": 5525,
+          "max": 5525
+        }
+      ],
+      "hash": "a9584b40266d7511eb42a050d55d5a9c9030759ff19c4fed1c48aa324a6cbebc"
+    }
+  ],
+  "aggregation": "Median is the arithmetic mean of the two central observations for even sample sizes."
+}

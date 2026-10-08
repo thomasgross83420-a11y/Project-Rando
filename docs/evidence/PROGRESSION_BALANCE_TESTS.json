@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-08",
+  "build": "0.2.5-progression-balance",
+  "unitTests": 96,
+  "unitFiles": 20,
+  "browserTests": 34,
+  "browserRetries": 0,
+  "browserSkipped": 0,
+  "pairedCombatRuns": 68,
+  "pairedConfigurations": 17,
+  "seedsPerConfiguration": 4,
+  "checks": [
+    "typecheck",
+    "lint",
+    "format check",
+    "unit tests",
+    "deterministic Gate0 grouping",
+    "production build",
+    "full production browser suite",
+    "separate immutable-profile/no-global-mutation/regression fixtures",
+    "exact upgrade prices/gates",
+    "current-slice combat studies"
+  ],
+  "legacyReplayHashes": {
+    "rb-sim-v1": "8961c7817d3d73989a00c3e377387e6dde1ebeee16d219d5c397afc2be7839c7",
+    "rb-sim-v2": "1fc32c1de93483123a91b0b018aa0f90a36e508c406acc27b14f2990016ba8b6"
+  },
+  "productionStudyModuleRequest": {
+    "scope": "Desktop touch-viewport production practice startup only; not physical Android performance",
+    "studyModuleRequested": false,
+    "errors": [],
+    "scripts": [
+      "/Project-Rando/assets/index-Bm2QadpB.js",
+      "/Project-Rando/assets/preload-helper-Cl7pOkUX.js",
+      "/Project-Rando/assets/app-B0z9B_i-.js",
+      "/Project-Rando/assets/world-tH6j8fkm.js"
+    ]
+  },
+  "sourceSHA256": {
+    "src/progression/accuracy.ts": "a110bca3f612b69fce4c9a7fe2543a91772f1ebde06aae43826186edd4cb4497",
+    "src/progression/growth.ts": "70f23bbb4ace9aba5c90eb672f64f4a0f49977cae4960f2b5ef7264413b5c72a",
+    "src/progression/profile.ts": "e096c840718c4e2ce27700bab221ea7c5b5f62592ed00b73a5da4279a418b6df",
+    "src/progression/purchases.ts": "ecf5f526587ecfe8e2970dafc9dec6cd15889a105e8af551b8a5b107e2a70988",
+    "src/sim/balance-study.ts": "2c47547fcfb7b2aa8acf7837fceca51d1a853e68747016cfd76b01c5e5c43e4d",
+    "src/sim/battle.ts": "2cd9294a7af6fa740d84fc52d797d695c50ce876eac4af56cd7befb0428df77f",
+    "src/economy/recovery.ts": "f95f8f061e7579131b5456280fe99ba61608d7dc5d0a668c15ef8668ef5719d8",
+    "scripts/progression-balance.ts": "4245f78f3c06fc025f3ee8be83a0de1d80bec88b628c36fdeadeffd7cf5d370a",
+    "tests/unit/accuracy-profile.test.ts": "c40e09822983d4d16d1ea5b5e851f969154862bc0b0e35970de71b0afaf15ffc",
+    "tests/unit/upgrade-quotes.test.ts": "d0d13d898a1f18a3ae2a42058fdd5aa05ce5b01c510cbb20bc74da160ebabbbf",
+    "docs/evidence/PROGRESSION_BALANCE.json": "fd0c3c53cf5bca248b1437437f6fcff4ade8742e2c6166bc30901ed27a4370ca",
+    "docs/blueprint/Resonance_Bastion_Browser_Blueprint_Final.md": "9808229593b79b856f8f522dcffba591debe6334a3f60a61d1915cdd5e2900a6"
+  },
+  "logSHA256": {
+    "progression-verify-final.log": "bf215733010780c2d4d7bc7af611197193c7af1c800ff2fd00b8fba239a09231",
+    "progression-browser-final.log": "d32480c36f6935d7caa47ffb3ab43e4527bdffb8872447299cdd73fcb87ccdba",
+    "progression-new-tests-final.log": "b230237b24a84b35a8dc51908b6835fce3fbb8e51e56e89e2d80e64b33523586",
+    "progression-types-final.log": "de5747b66e88dc09998c6c5d86b149e421e779339107fc311cf1f50cc86c6140",
+    "progression-lint-final.log": "61af391d79028bd3078af6b2da20e630e9afc8b9bd031bca42f9e36cfa0324a8",
+    "progression-format-final.log": "80581320d45c8814fdf12c363db0bc46f93771b727f15cc3dd6c6bf49b8816f5",
+    "progression-balance-final.log": "358e5d4dcb522de1f4f1b682410a89a33cf7de40a6b93e8c98e66015e02ecb81",
+    "profile-network-proof.json": "cca3c0f1721c09a43d09d372a1e8d8664944dcf689304f7508d2a3369a072112",
+    "progression-spot-proof.json": "d406150374846d75f43ac5aa476456fa0bf0c58f20d2794e20eb045351432516"
+  },
+  "engineeringAccuracyDecision": "accuracy.half-miss-v1; user authorized evidence-based corrections; initial tuning, not final acceptance",
+  "physicalAndroidCertified": false,
+  "wholeGameBalanceCertified": false,
+  "paidCampaignProgressionEnabled": false,
+  "normalRunBackupImportComplete": false,
+  "notes": [
+    "Four seeds are a sensitivity sample, not statistical balance certification.",
+    "Median aggregation corrected from retained per-run rows; no simulation hash/result changed.",
+    "Only the implemented four developing identities have captured growth profiles.",
+    "Production practice keeps baseline stats and old replay identities.",
+    "Existing lint style information and Phaser chunk-size build warnings remain."
+  ],
+  "currentSourceStudyReplay": {
+    "case": "mobile-L100-E10-band20",
+    "seed": "rb-tutorial-v1",
+    "currentSourceReplayHash": "694e131ec19d00245e6464b02d074f99063ad549162e311811b5cbfc81684dd6",
+    "matched": true
+  }
+}

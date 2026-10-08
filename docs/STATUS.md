@@ -44,5 +44,16 @@ failed and uncertain-acknowledgment fixtures. Pinned rank/asset thresholds, exac
 XP allocation, specified growth and body/stock price quotes are verified kernels.
 No production paid-run adapter, widened campaign save profile or new encounter
 launch is enabled. Accuracy-growth equation is absent from the blueprint and
-awaits the user's response; no inferred formula is applied. See
+at that checkpoint awaited the user's response; no inferred formula was applied. See
 review/CAMPAIGN_RESULT_CONTRACTS.md and RUN_RESULT_CONTRACT.md.
+
+
+2026-10-07–08 build 0.2.5: the user authorized correcting unclear/unbalanced rules
+through evidence-based engineering. Accuracy is now an exact versioned
+half-miss curve, preserving initial roles and sub-percent gains. Per-instance
+captured profiles exercise specified growth in isolated combat studies, with
+separate roll/contact/damage observations. Sequential upgrade quotes use exact
+prices and both promotion gates; zero-missing-body repair quotes return zero.
+The current playable tutorial and retained v1/v2 replay rules are unchanged.
+These studies do not certify campaign pacing, full-roster balance or tablet
+performance. See PROGRESSION_BALANCE.md and the updated mobile review.

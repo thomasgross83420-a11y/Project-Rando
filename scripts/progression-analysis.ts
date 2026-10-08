@@ -14,6 +14,7 @@ import {
   type BodyInvestment,
 } from '../src/economy/recovery';
 import { rational } from '../src/economy/policy';
+import { ACCURACY_POLICY, grownAccuracy } from '../src/progression/accuracy';
 const id = (i: number) => `00000000-0000-4000-8000-${String(i).padStart(12, '0')}`;
 export function progressionEvidence() {
   const growth = Array.from({ length: 100 }, (_, i) => {
@@ -29,6 +30,10 @@ export function progressionEvidence() {
       damage: scaleFixed(40 * 1024, f.output) / 1024,
       rangeGU: grownRange(8 * 1024, level, e) / 1024,
       intervalTicks: ordinaryIntervalTicks(rational(4n, 5n), level),
+      accuracy: (() => {
+        const p = grownAccuracy(90, level);
+        return { numerator: String(p.n), denominator: String(p.d) };
+      })(),
     };
   });
   let conserved = 0;
@@ -63,7 +68,7 @@ export function progressionEvidence() {
     emergencyCreated: false,
   };
   return {
-    build: '0.2.4-campaign-result-contracts',
+    build: '0.2.5-progression-balance',
     scope:
       'Pure arithmetic and synthetic protocol fixtures; no live campaign rewards or stat changes',
     thresholdPolicy: thresholds.policy,
@@ -71,8 +76,7 @@ export function progressionEvidence() {
     assetThresholdCount: thresholds.assetCumulative.length,
     assetXPCap: ASSET_XP_CAP,
     conservedPermutationCases: conserved,
-    accuracyGrowth:
-      'Unspecified by blueprint; linear +5 percentage-point proposal awaits user input',
+    accuracyGrowth: ACCURACY_POLICY,
     growth,
     recoveryReferences: {
       sentryHalfBodyRepair: quoteRepair(a, 600 * 1024),
