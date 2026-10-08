@@ -3,7 +3,7 @@ What can I say, it's just a bunch of rando I'm trying out.
 
 ## Resonance Bastion
 
-The latest checkpoint is on `codex/support-channel-contracts`; `main`
+The latest checkpoint is on `codex/affordable-repair-previews`; `main`
 currently contains only the original repository introduction. Start with the
 [thread recovery record](docs/PROJECT_RECOVERY.md) for the recovered checkpoint,
 available reference files, verification, and the next development step.
@@ -49,10 +49,17 @@ new-schema free practice retains owned grown profiles in a full-body/full-stock 
 `npm run audit:combat-progression` produces eight real current-slice receipts.
 The full campaign/roster and physical tablet acceptance remain development work.
 
-Latest checkpoint: [support-channel correction](docs/SUPPORT_CHANNELS.md). New
+Previous checkpoint: [support-channel correction](docs/SUPPORT_CHANNELS.md). New
 rb-sim-v4 plans preserve two external repair sources plus eligible self-repair,
 while retained v1/v2/v3 rules keep their original replay. The whole published v3
 battle, checkpoint and pending-result hashes remain exact. All131 unit tests and
 44 browser checks pass, including native v3/v4 backup/import.
 [Mobile support review](docs/review/SUPPORT_CHANNEL_DELIVERY.md) supplements the
 paid-combat review. `npm run audit:support-channels` reproduces the four comparisons.
+
+Latest checkpoint: [repair choices](docs/AFFORDABLE_REPAIR.md). Full/25%/50%/exact
+and maximum-affordable previews use unchanged prices and require confirmation.
+All134 unit/47 browser checks pass; all9 affected UI cases also pass following
+confirmation-heading polish. [Current development review](docs/review/DEVELOPMENT_DELIVERY.md)
+provides the latest mobile PDF/ZIP. [Tablet validation](docs/TABLET_VALIDATION.md)
+records the hardware/runtime information needed next, without reducing game scope.

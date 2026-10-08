@@ -75,3 +75,11 @@ with exact injury credit, no overheal and no wreck revival. Published full v3
 battle/checkpoint/pending hashes remain exact; native backup/import tests both
 versions. All131 unit tests and44 browser checks pass. See SUPPORT_CHANNELS.md.
 Engineer/Medic moving channel/rearm contracts remain their next individual work.
+
+2026-10-08 build0.2.8: preparation offers Full/25%/50%/exact and separately
+confirmed maximum-affordable repairs using unchanged exact prices. Fractional
+affordability survives display rounding, cancel and native persistence; double
+confirmation spends once. Full134 unit/47 browser checks pass, then affected9
+browser checks pass after human-readable confirmation titles. See AFFORDABLE_REPAIR.md.
+Exact tablet model/Android/browser information has been requested to target the
+next physical/runtime checks; desktop emulation does not certify that device.

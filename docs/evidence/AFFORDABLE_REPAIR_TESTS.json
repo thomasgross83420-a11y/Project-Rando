@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-08",
+  "build": "0.2.8-affordable-repair",
+  "sourceCheckpoint": "7a988e13a57bea6de5668aaf4ab383a3424510be",
+  "unitTests": 134,
+  "unitFiles": 30,
+  "browserTests": 47,
+  "browserRetries": 0,
+  "browserSkipped": 0,
+  "fullSuiteBeforeConfirmationHeadingPolish": true,
+  "affectedBrowserTestsAfterHeadingPolish": 9,
+  "checks": [
+    "typecheck",
+    "lint",
+    "format check",
+    "full unit suite",
+    "deterministic scenario",
+    "production build",
+    "full production browser suite",
+    "fresh production build and all affected UI cases after heading polish"
+  ],
+  "notes": [
+    "Only human-readable confirmation headings changed after the full 134/47 suite; all nine affected browser cases passed afterward.",
+    "No simulation, price, save-schema or progression-policy change in this increment.",
+    "Actual tablet model/Android/browser information remains unknown."
+  ],
+  "sourceSHA256": {
+    "src/economy/recovery.ts": "ac197a1f1d027fae76618a3c946e3e18beff62497dcfef15b0f9ec862cc0406f",
+    "src/ui/progression.ts": "d131ffd72e89af9100b10d6dfe31fa04df39ae159571885ddea49d17a4816783",
+    "tests/unit/affordable-repair.test.ts": "5bac5e22ee0d8ed75dbec27a039b5248a5068f8aea9fd437e838f03605fc70ce",
+    "tests/browser/affordable-repair.spec.ts": "de14d80de884fcdf2109c3cb973a1440326bd336fec166f66b304302468748b5",
+    "docs/versions.json": "a15ad584eebf5b1abdb589544e0edb4f02ee4d7b03310c348f188d88c297c141"
+  },
+  "logSHA256": {
+    "affordable-verify.log": "5da0741e3921a24a7cea10dc761c1640b8cd29dfd7de3a57f49e0a837d18956e",
+    "affordable-browser-final.log": "39b64d65b9954c5f07d26d511318d5f8e9e4649bab43b5fe565504f4f57d9542",
+    "affordable-label-build.log": "9661512385a1755dbb8204fef3d08775a32f4cbe616717426c3cd8e1f1dbc9ba",
+    "affordable-label-browser.log": "64488c22aab1862323a1c39fdfbc4605e5dba95a8903425f9b5c9dd430dacf3a",
+    "affordable-final-format-check.log": "b9bc9831ec016f21ff1f99142ab5d2b786a4c4c8047d824e275c6003c0d4ead4",
+    "affordable-final-lint.log": "d6cb2ad55cc1de115b5f667e933eb83575786945ccfad367a70759c53080c4c7"
+  },
+  "physicalAndroidCertified": false,
+  "wholeGameBalanceCertified": false
+}
