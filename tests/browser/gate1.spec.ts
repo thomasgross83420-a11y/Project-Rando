@@ -105,9 +105,8 @@ test('second tab cannot edit until confirmed writer takeover; stale tab cannot c
   await other.getByRole('button', { name: /Sentry 2 · Stored/ }).click();
   await place(other, 18, 18);
   await expect(other.locator('#status')).toContainText('Saved:');
-  await page.getByRole('button', { name: /Sentry 2 · Stored/ }).click();
-  await place(page, 22, 22);
-  await expect(page.locator('#status')).toContainText('failed');
+  await expect(page.getByRole('button', { name: /Sentry 2 · Stored/ })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Take Over Editing', exact: true })).toBeVisible();
   await expect(page.locator('#account')).toContainText('Capacity 0/20');
   await other.close();
 });
@@ -122,7 +121,7 @@ test('explicit temporary session, native controls, viewport and 200% reflow', as
     });
   });
   await page.goto('./');
-  await expect(page.getByRole('button', { name: 'New Game', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'New Game', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: 'Start Temporary Session', exact: true }).click();
   await page.getByRole('button', { name: 'New Game', exact: true }).click();
   await page.getByRole('button', { name: 'Create campaign', exact: true }).first().click();

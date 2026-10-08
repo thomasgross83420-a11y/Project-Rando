@@ -3,7 +3,7 @@ What can I say, it's just a bunch of rando I'm trying out.
 
 ## Resonance Bastion
 
-The latest development checkpoint is on `codex/engineer-stock-contracts`;
+The latest development checkpoint is on `codex/startup-control-recovery`;
 `main` contains the public preview link and its manual deployment workflow.
 [Open the tested playable preview](https://thomasgross83420-a11y.github.io/Project-Rando/).
 Start with the
@@ -26,6 +26,11 @@ Assets use `/Project-Rando/` as the production base path. Build output and depen
 are not committed. The pinned preview is published and checked on its public
 HTTPS origin; physical Android verification remains open. See
 [public preview verification](docs/PUBLIC_PREVIEW.md).
+
+Current public build: **0.2.10-startup-recovery**. See
+[startup/control fixes](docs/STARTUP_CONTROL_RECOVERY.md),
+[60-check production browser evidence](docs/evidence/STARTUP_CONTROL_TESTS.json)
+and [live update/save verification](docs/evidence/STARTUP_CONTROL_LIVE.json).
 
 Previous checkpoint: [360° movement and recovery review](docs/review/OMNIDIRECTIONAL_RECOVERY.md),
 with [mobile PDF and ZIP downloads](docs/review/MOVEMENT_RECOVERY_DELIVERY.md).

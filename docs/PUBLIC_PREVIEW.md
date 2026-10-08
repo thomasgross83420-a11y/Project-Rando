@@ -14,7 +14,35 @@ site/browser preserves the save origin; changing device or origin requires
 explicit backup/import. Actual Android download durability remains a device
 check, even though browser download and import flows pass remotely.
 
-## Published source and verification
+## Current 0.2.10 startup/control update
+
+Published source: `29837e8718f301c07eed9324b78acc323a29e8f0`.
+[PR 15](https://github.com/thomasgross83420-a11y/Project-Rando/pull/15) updates
+the manual workflow's source pin and README only, merge
+`f619a2706fd07aedcc3addced5015e1cd364f358`.
+[Run 37755028365](https://github.com/thomasgross83420-a11y/Project-Rando/actions/runs/37755028365)
+passed build and deployment, finishing 09:14:00 UTC. CI passed all 143 unit tests,
+type/lint/scenario/build checks. All 60 local production browser checks passed
+without retries, skips or failures, including 11 new startup/control cases.
+
+All 38 deployed files match the tested build exactly over verified HTTPS.
+All 15 selected live-origin checks passed with zero retries, skips or failures.
+A separate actual-public-origin upgrade test created a save in 0.2.9 before
+deployment, retained the old live page, then opened 0.2.10 in the same isolated
+browser storage: takeover required confirmation, saved campaign bytes stayed
+unchanged, the next reload automatically regained editing, and practice started
+from the retained campaign. Portrait/landscape were inspected on the live update.
+
+See [fixes and locking contract](STARTUP_CONTROL_RECOVERY.md),
+[local evidence](evidence/STARTUP_CONTROL_TESTS.json),
+[live/upgrade evidence](evidence/STARTUP_CONTROL_LIVE.json) and
+[title after reload](evidence/startup-recovery-title.png).
+The title displays `0.2.10-startup-recovery`. An older saved owner may need one
+confirmed takeover; no browser data needs to be cleared. New combat combinations,
+campaign content and final art remain development work. Android performance
+remains separate from these desktop browser checks.
+
+## Initial 0.2.9 publication and verification
 
 Source: `bc7d60c4cc3eb229f6fdb3be9dce8eee0c2bebe1` (0.2.9 rendering reuse).
 The installed manual-only workflow runs on main but checks out that exact source.

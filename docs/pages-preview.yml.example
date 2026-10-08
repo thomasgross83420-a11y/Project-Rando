@@ -1,5 +1,5 @@
-# Prepared tablet-preview workflow; not installed or dispatched.
-# Publishes only the locally tested pinned source after user-approved hosting setup.
+# User authorized public tablet preview on 2026-10-08.
+# Publishes only the locally tested pinned source; no development-stack merge.
 # No automatic push/PR trigger, paid runner, custom domain or cache.
 name: Resonance Bastion tablet preview
 "on":
@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5 MIT
         with:
-          ref: bc7d60c4cc3eb229f6fdb3be9dce8eee0c2bebe1
+          ref: 29837e8718f301c07eed9324b78acc323a29e8f0
           persist-credentials: false
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6 MIT
         with:

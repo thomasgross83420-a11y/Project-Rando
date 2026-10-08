@@ -7,6 +7,7 @@ interface Writer {
   tabID: string;
   generation: number;
   leaseExpiry: number;
+  sessionLock?: true;
 }
 export class CampaignRepository {
   readonly tabID = crypto.randomUUID();
@@ -22,7 +23,14 @@ export class CampaignRepository {
   constructor(readonly database: Database | undefined) {
     this.temporary = !database;
   }
-  async acquire(takeOver = false): Promise<boolean> {
+  /** exclusiveSession is supplied only while WriterSession holds the Web Lock.
+   * A lock-managed record can be reclaimed when its page has closed; legacy
+   * records still require confirmed takeover, even after heartbeat expiry. */
+  async acquire(
+    takeOver = false,
+    exclusiveSession = false,
+    recoverClosedPage = false,
+  ): Promise<boolean> {
     if (!this.database) {
       this.writer = { tabID: this.tabID, generation: 1, leaseExpiry: Date.now() + 20000 };
       return true;
@@ -34,18 +42,28 @@ export class CampaignRepository {
         const store = tx.objectStore('writer'),
           r = store.get('active');
         r.onsuccess = () => {
-          const current = r.result as Writer | undefined;
-          if (current && current.tabID !== this.tabID && !takeOver) {
-            done(undefined);
-            return;
+          try {
+            const current = r.result as Writer | undefined;
+            if (
+              current &&
+              current.tabID !== this.tabID &&
+              !takeOver &&
+              !(exclusiveSession && current.sessionLock && recoverClosedPage)
+            ) {
+              done(undefined);
+              return;
+            }
+            const next = {
+              tabID: this.tabID,
+              generation: (current?.generation ?? 0) + (current?.tabID === this.tabID ? 0 : 1),
+              leaseExpiry: Date.now() + 20000,
+              ...(exclusiveSession ? { sessionLock: true as const } : {}),
+            };
+            store.put(next, 'active');
+            done(next);
+          } catch {
+            tx.abort();
           }
-          const next = {
-            tabID: this.tabID,
-            generation: (current?.generation ?? 0) + (current?.tabID === this.tabID ? 0 : 1),
-            leaseExpiry: Date.now() + 20000,
-          };
-          store.put(next, 'active');
-          done(next);
         };
       },
     );
@@ -59,15 +77,19 @@ export class CampaignRepository {
       const store = tx.objectStore('writer'),
         r = store.get('active');
       r.onsuccess = () => {
-        const current = r.result as Writer | undefined;
-        if (current?.tabID !== this.tabID || current.generation !== expected.generation) {
-          this.writer = undefined;
+        try {
+          const current = r.result as Writer | undefined;
+          if (current?.tabID !== this.tabID || current.generation !== expected.generation) {
+            this.writer = undefined;
+            done(undefined);
+            return;
+          }
+          current.leaseExpiry = Date.now() + 20000;
+          store.put(current, 'active');
           done(undefined);
-          return;
+        } catch {
+          tx.abort();
         }
-        current.leaseExpiry = Date.now() + 20000;
-        store.put(current, 'active');
-        done(undefined);
       };
     });
   }
@@ -174,13 +196,17 @@ export class CampaignRepository {
     await this.database.transaction(['writer', 'meta'], 'readwrite', (tx, done) => {
       const request = tx.objectStore('writer').get('active');
       request.onsuccess = () => {
-        const w = request.result as Writer | undefined;
-        if (w?.tabID !== this.tabID || w.generation !== this.writer?.generation) {
+        try {
+          const w = request.result as Writer | undefined;
+          if (w?.tabID !== this.tabID || w.generation !== this.writer?.generation) {
+            tx.abort();
+            return;
+          }
+          tx.objectStore('meta').put(slot, 'lastOpened');
+          done(undefined);
+        } catch {
           tx.abort();
-          return;
         }
-        tx.objectStore('meta').put(slot, 'lastOpened');
-        done(undefined);
       };
     });
   }

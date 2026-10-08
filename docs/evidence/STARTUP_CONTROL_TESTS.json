@@ -1,0 +1,515 @@
+{
+  "date": "2026-10-08",
+  "source": "29837e8718f301c07eed9324b78acc323a29e8f0",
+  "build": "0.2.10-startup-recovery",
+  "original_regression": "Reload after creating a campaign left New Game disabled in the earlier production build; regression failed before edits.",
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed; pre-existing nonfatal style diagnostics remain",
+    "changed_file_format": "passed",
+    "unit_tests": 143,
+    "unit_files": 31,
+    "scenario_hash": "90a7d118d4df7eb3e8808e78d7ffa875ddd970ab4961287daf1a719426936169",
+    "production_build": "passed"
+  },
+  "browser": {
+    "runtime": "desktop Chromium 151.0.7922.173",
+    "production_origin": "http://127.0.0.1:4173/Project-Rando/",
+    "stats": {
+      "startTime": "2026-10-08T09:04:19.125Z",
+      "duration": 434824.719,
+      "expected": 60,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "automatic_retries": 0,
+    "new_startup_checks": 11,
+    "cases": [
+      {
+        "name": "unaffordable full repair is preserved; affordable Core preview can cancel, then explicitly spend once",
+        "file": "affordable-repair.spec.ts",
+        "line": 52,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 3869
+      },
+      {
+        "name": "quarter, half and exact asset choices use max body, cap at missing body and preserve earned XP",
+        "file": "affordable-repair.spec.ts",
+        "line": 76,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 4502
+      },
+      {
+        "name": "a small asset wallet keeps the exact affordable fraction through persistence instead of charging a rounded display",
+        "file": "affordable-repair.spec.ts",
+        "line": 104,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 2984
+      },
+      {
+        "name": "the player can migrate, deploy existing assets, win, review committed XP and rearm the persisted mine once",
+        "file": "campaign-ui.spec.ts",
+        "line": 47,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 32091
+      },
+      {
+        "name": "a visible commit failure preserves the exact result and retry succeeds even if the audio device rejects suspension",
+        "file": "campaign-ui.spec.ts",
+        "line": 87,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 33498
+      },
+      {
+        "name": "earned enhancement preview quotes actual weapon changes and preserves a wreck until explicitly restored",
+        "file": "campaign-ui.spec.ts",
+        "line": 125,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 4281
+      },
+      {
+        "name": "reload restarts the captured beginning and abandoning an unfinished siege pays nothing",
+        "file": "campaign-ui.spec.ts",
+        "line": 167,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 7383
+      },
+      {
+        "name": "the recovery controls preserve a cash-poor wrecked campaign and explicitly commit its emergency repair outside Undo",
+        "file": "campaign-ui.spec.ts",
+        "line": 190,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 3277
+      },
+      {
+        "name": "progression controls and quoted purchases reflow in portrait and landscape at normal and 200% interface scale",
+        "file": "campaign-ui.spec.ts",
+        "line": 221,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 12314
+      },
+      {
+        "name": "Gate 0 production subpath, renderer, storage, gesture, audio and export",
+        "file": "gate0.spec.ts",
+        "line": 2,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 2214
+      },
+      {
+        "name": "IndexedDB abort is reported; failed open offers a temporary session",
+        "file": "gate0.spec.ts",
+        "line": 32,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 1569
+      },
+      {
+        "name": "actual WebGL context loss restores presentation",
+        "file": "gate0.spec.ts",
+        "line": 59,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 1484
+      },
+      {
+        "name": "viewport reflow, touch cancellation, semantic focus and production MIME",
+        "file": "gate0.spec.ts",
+        "line": 77,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 2698
+      },
+      {
+        "name": "global scale, reduced effects and high contrast persist across reload and campaigns",
+        "file": "gate1-closeout.spec.ts",
+        "line": 18,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 1405
+      },
+      {
+        "name": "Fit Base, role badges, four views, route feedback and named jump operate without mutating the wallet",
+        "file": "gate1-closeout.spec.ts",
+        "line": 37,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 5926
+      },
+      {
+        "name": "landscape has a real left tools / middle world / right details layout at normal and 200%, portrait reflows",
+        "file": "gate1-closeout.spec.ts",
+        "line": 71,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 5298
+      },
+      {
+        "name": "preference transaction failure retains session presentation and offers retry without touching campaign",
+        "file": "gate1-closeout.spec.ts",
+        "line": 109,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 2469
+      },
+      {
+        "name": "campaign creation, free deployment, atomic purchase, Undo/Redo and reload",
+        "file": "gate1.spec.ts",
+        "line": 18,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 5255
+      },
+      {
+        "name": "invalid placement and failed persistence preserve money and history",
+        "file": "gate1.spec.ts",
+        "line": 67,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 2621
+      },
+      {
+        "name": "second tab cannot edit until confirmed writer takeover; stale tab cannot commit",
+        "file": "gate1.spec.ts",
+        "line": 89,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 3523
+      },
+      {
+        "name": "explicit temporary session, native controls, viewport and 200% reflow",
+        "file": "gate1.spec.ts",
+        "line": 113,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 3284
+      },
+      {
+        "name": "high artwork selects the Core inspector in four views without purchasing; wizard cancel preserves slot",
+        "file": "gate1.spec.ts",
+        "line": 153,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 5997
+      },
+      {
+        "name": "native ghost drag and two-touch pinch/cancel never purchase",
+        "file": "gate1.spec.ts",
+        "line": 184,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 3323
+      },
+      {
+        "name": "hidden preparation retains a valid renderer through Title, scale and Continue",
+        "file": "gate1.spec.ts",
+        "line": 231,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 5347
+      },
+      {
+        "name": "injected background pauses without catch-up; keyboard audio settings persist through checkpoint reload",
+        "file": "gate2-accessibility.spec.ts",
+        "line": 2,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 13556
+      },
+      {
+        "name": "real tutorial is autonomous, paused, restarted from durable checkpoint, and saved as practice victory",
+        "file": "gate2.spec.ts",
+        "line": 16,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 92435
+      },
+      {
+        "name": "surrender result abort offers idempotent retry and leaves the real campaign intact",
+        "file": "gate2.spec.ts",
+        "line": 133,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 5767
+      },
+      {
+        "name": "competing tab takeover freezes the old battle and offers the retained checkpoint to the new writer",
+        "file": "gate2.spec.ts",
+        "line": 194,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 5266
+      },
+      {
+        "name": "mobile backup replaces selected wallets, preserves other slots/settings, reloads and rolls back without merging",
+        "file": "recovery.spec.ts",
+        "line": 59,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 6975
+      },
+      {
+        "name": "corrupt checksums and duplicate JSON are rejected before native storage changes; delete has an explicit preview",
+        "file": "recovery.spec.ts",
+        "line": 103,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 3823
+      },
+      {
+        "name": "a quota failure after writes were queued aborts all imported slots and leaves an exact retry",
+        "file": "recovery.spec.ts",
+        "line": 129,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 4902
+      },
+      {
+        "name": "writer takeover rejects a stale recovery preview and preserves the other writer campaign",
+        "file": "recovery.spec.ts",
+        "line": 158,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 4071
+      },
+      {
+        "name": "export includes native interrupted practice and import refuses to replace it with a conflicting older backup",
+        "file": "recovery.spec.ts",
+        "line": 178,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 5884
+      },
+      {
+        "name": "unknown future logical journals block backup/recovery rather than silently omitting pending state",
+        "file": "recovery.spec.ts",
+        "line": 208,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 8595
+      },
+      {
+        "name": "global accessibility is preserved unless the player explicitly applies included settings",
+        "file": "recovery.spec.ts",
+        "line": 240,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 10147
+      },
+      {
+        "name": "repeated pan/zoom/facing/ghost cycles keep a bounded pool and hide surplus without changing picking",
+        "file": "render-reuse.spec.ts",
+        "line": 33,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 3847
+      },
+      {
+        "name": "ghost/role/label state clears back to identical pixels and scene disposal releases retained objects",
+        "file": "render-reuse.spec.ts",
+        "line": 99,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 7313
+      },
+      {
+        "name": "rb-sim-v3 native IndexedDB preserves a real pending result across reload and a backup imported into a different slot",
+        "file": "result-backup.spec.ts",
+        "line": 34,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 8630
+      },
+      {
+        "name": "rb-sim-v4 native IndexedDB preserves a real pending result across reload and a backup imported into a different slot",
+        "file": "result-backup.spec.ts",
+        "line": 34,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 9190
+      },
+      {
+        "name": "an abort while importing the paid checkpoint rolls back every store and the exact same preview can retry",
+        "file": "result-backup.spec.ts",
+        "line": 97,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 8206
+      },
+      {
+        "name": "a real result commit abort leaves its exact pending journal and wallet intact, then retry pays once",
+        "file": "result-backup.spec.ts",
+        "line": 144,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 5489
+      },
+      {
+        "name": "native preflight failure rolls back checkpoint and allocation; exact retry starts sequence one",
+        "file": "run-journal.spec.ts",
+        "line": 51,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 1854
+      },
+      {
+        "name": "Step 1 failure keeps only durable checkpoint, offers exact in-memory recovery and retry survives reopen",
+        "file": "run-journal.spec.ts",
+        "line": 85,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 3403
+      },
+      {
+        "name": "Step 2 abort after queued body/wallet writes leaves every store unchanged, then exact retry commits once",
+        "file": "run-journal.spec.ts",
+        "line": 124,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 1999
+      },
+      {
+        "name": "lost commit acknowledgment reconciles a durable receipt after reopen without applying rewards again",
+        "file": "run-journal.spec.ts",
+        "line": 169,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 3340
+      },
+      {
+        "name": "writer takeover rejects stale result application while the new owner can retry the pinned pending result",
+        "file": "run-journal.spec.ts",
+        "line": 211,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 3921
+      },
+      {
+        "name": "active runs block preparation edits and current unsupported journals block backup rather than omit state",
+        "file": "run-journal.spec.ts",
+        "line": 243,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 2792
+      },
+      {
+        "name": "competing preflights and result writers cannot allocate or finalize a duplicate attempt",
+        "file": "run-journal.spec.ts",
+        "line": 265,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 3517
+      },
+      {
+        "name": "ordinary preflight and tutorial practice mutually exclude each other inside the native write boundary",
+        "file": "run-journal.spec.ts",
+        "line": 298,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 1720
+      },
+      {
+        "name": "reload and reopening a closed page restore editing without changing campaigns",
+        "file": "startup-controls.spec.ts",
+        "line": 27,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 5688
+      },
+      {
+        "name": "another active tab can start New Game through confirmed takeover and the old controls refresh",
+        "file": "startup-controls.spec.ts",
+        "line": 49,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 4748
+      },
+      {
+        "name": "legacy ownership offers a working recovery from New Game instead of a gray dead end",
+        "file": "startup-controls.spec.ts",
+        "line": 75,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 4590
+      },
+      {
+        "name": "a failed writer transaction keeps title controls and a retry path available",
+        "file": "startup-controls.spec.ts",
+        "line": 105,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 1576
+      },
+      {
+        "name": "failed storage probe offers explicit temporary play without breaking the title",
+        "file": "startup-controls.spec.ts",
+        "line": 134,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 1516
+      },
+      {
+        "name": "without Web Locks, closed legacy ownership still requires confirmation and saves remain unchanged",
+        "file": "startup-controls.spec.ts",
+        "line": 161,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 3240
+      },
+      {
+        "name": "title buttons and cancelled creation stay usable, and unfinished combat choices are clearly unavailable",
+        "file": "startup-controls.spec.ts",
+        "line": 176,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 5086
+      },
+      {
+        "name": "a campaign saved before an open failure remains loadable without retrying creation",
+        "file": "startup-controls.spec.ts",
+        "line": 207,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 2844
+      },
+      {
+        "name": "a rejected Web Lock request does not strand startup and can be retried",
+        "file": "startup-controls.spec.ts",
+        "line": 237,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 1428
+      },
+      {
+        "name": "writer quota errors stay recoverable without uncaught request-handler errors",
+        "file": "startup-controls.spec.ts",
+        "line": 259,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 1416
+      },
+      {
+        "name": "a displaced battle never automatically resumes after the other writer closes; takeover opens durable recovery",
+        "file": "startup-controls.spec.ts",
+        "line": 283,
+        "status": "passed",
+        "retry": 0,
+        "duration_ms": 16534
+      }
+    ]
+  },
+  "physical_android_acceptance": false,
+  "simulation_and_balance_changed": false,
+  "campaign_schema_changed": false,
+  "artwork_changed": false
+}
