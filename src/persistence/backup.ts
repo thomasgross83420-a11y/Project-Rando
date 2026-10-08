@@ -7,7 +7,7 @@ import { BACKUP_BYTES, parseBackupJSON } from './json';
 import { preferencesSchema, type Preferences } from './preferences';
 import { practiceSchema, validatePracticeArmy, type PracticeStore } from './practice';
 import type { CampaignRepository } from './repository';
-const sequenceSchema = z.string().regex(/^(0|[1-9][0-9]{0,19})$/);
+import { sequenceSchema } from './sequence';
 const snapshotSchema = z.object({ campaign: campaignSchema, fence: fenceSchema }).strict();
 const slotSchema = z
   .object({

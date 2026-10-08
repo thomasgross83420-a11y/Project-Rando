@@ -8,12 +8,10 @@ import { validateCampaign, campaignSchema, type Campaign } from './campaign';
 import { emptyFence, fenceSchema, type ProgressFence } from './fence';
 import { parseBackupJSON } from './json';
 import type { CampaignRepository } from './repository';
+import { sequenceSchema } from './sequence';
+export { sequenceSchema } from './sequence';
 const logicalJSON = z.json().transform((value): unknown => value);
 const digest = z.string().regex(/^[a-f0-9]{64}$/);
-export const sequenceSchema = z
-  .string()
-  .regex(/^(0|[1-9][0-9]{0,19})$/)
-  .refine((s) => BigInt(s) <= 18446744073709551615n, 'Unsigned 64-bit sequence overflow');
 const runIDSchema = z
   .object({ lineage: z.uuid().transform((s) => s.toLowerCase()), sequence: sequenceSchema })
   .strict();

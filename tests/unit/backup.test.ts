@@ -178,7 +178,7 @@ describe('complete bounded backup and atomic replacement', () => {
         fence,
         previous: { campaign: structuredClone(c), fence },
         practice: null,
-        practiceSequence: '99999999999999999999',
+        practiceSequence: '18446744073709551615',
       });
     }
     const backup = await createBackup(slots, null),
@@ -202,7 +202,15 @@ describe('complete bounded backup and atomic replacement', () => {
     expect(parsed.backup.slots[0]?.campaign.lineage).toBe(backup.slots[0]?.campaign.lineage);
     const original = slot.campaign.assets[0];
     if (!original) throw new Error('Missing asset');
-    slot.campaign.assets.push({ ...original, id: original.id.toLowerCase() });
+    if (slot.campaign.schema === 1) {
+      const a = slot.campaign.assets[0];
+      if (!a) throw new Error('Missing asset');
+      slot.campaign.assets.push({ ...a, id: a.id.toLowerCase() });
+    } else {
+      const a = slot.campaign.assets[0];
+      if (!a) throw new Error('Missing asset');
+      slot.campaign.assets.push({ ...a, id: a.id.toLowerCase() });
+    }
     await expect(createBackup([slot], null)).rejects.toThrow('Duplicate owned');
   });
   it('imports earlier unchecksummed foundation exports only with an explicit legacy marker', async () => {

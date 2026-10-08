@@ -3,6 +3,7 @@ import type { CampaignRepository } from './repository';
 import { validateCampaign, type Campaign } from './campaign';
 import { foundation, type ContentID } from '../data/foundation';
 import { combat } from '../data/combat';
+import { sequenceSchema } from './sequence';
 import {
   tutorialSchema,
   startSchema,
@@ -28,10 +29,7 @@ export const practiceSchema = z
     slot: z.number().int().min(0).max(2),
     lineage: z.uuid().transform((id) => id.toLowerCase()),
     revision: z.number().int().nonnegative(),
-    sequence: z
-      .string()
-      .regex(/^(0|[1-9][0-9]{0,19})$/)
-      .refine((s) => BigInt(s) <= 18446744073709551615n),
+    sequence: sequenceSchema,
     plan: tutorialSchema,
     army: z.array(startSchema).min(1).max(120),
     identity: z.string().regex(/^[a-f0-9]{64}$/),
@@ -230,10 +228,7 @@ export class PracticeStore {
           throw new Error('Existing practice checkpoint must be resolved');
         const counter = store.get(`practice.sequence.${c.slot}`);
         counter.onsuccess = guard(() => {
-          const old = z
-              .string()
-              .regex(/^(0|[1-9][0-9]{0,19})$/)
-              .parse(counter.result ?? '0'),
+          const old = sequenceSchema.parse(counter.result ?? '0'),
             sequence = String(BigInt(old) + 1n),
             checkpoint = practiceSchema.parse({ ...base, sequence });
           if (new TextEncoder().encode(JSON.stringify(checkpoint)).length > 1048576)
