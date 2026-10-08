@@ -15,6 +15,8 @@ const cases = [
   { id: 'guided-standard-two-paid-clears', difficulty: 'Standard', repeats: 2 },
   { id: 'owned-repair-stored-standard', difficulty: 'Standard', repeats: 1 },
   { id: 'rifle-starts-half-body-standard', difficulty: 'Standard', repeats: 1 },
+  { id: 'sentry-starts-half-body-with-repair', difficulty: 'Standard', repeats: 1 },
+  { id: 'sentry-starts-half-body-without-repair', difficulty: 'Standard', repeats: 1 },
   { id: 'zero-wallet-all-wreck-emergency-cadet', difficulty: 'Cadet', repeats: 1 },
   { id: 'immediate-surrender-standard', difficulty: 'Standard', repeats: 1 },
 ] as const;
@@ -22,7 +24,10 @@ export async function measureCombatProgression() {
   const records = [];
   for (const spec of cases) {
     let c = deployedCampaign();
-    if (spec.id === 'owned-repair-stored-standard') {
+    if (
+      spec.id === 'owned-repair-stored-standard' ||
+      spec.id === 'sentry-starts-half-body-without-repair'
+    ) {
       const a = c.assets.find((a) => a.type === 'friendly.repair_node');
       if (!a) throw new Error('Repair missing');
       a.placement = null;
@@ -31,6 +36,13 @@ export async function measureCombatProgression() {
       const a = c.assets.find((a) => a.type === 'friendly.rifle_squad');
       if (!a) throw new Error('Rifle missing');
       a.hp = maximumBody(a) / 2;
+    }
+    if (
+      spec.id === 'sentry-starts-half-body-with-repair' ||
+      spec.id === 'sentry-starts-half-body-without-repair'
+    ) {
+      for (const a of c.assets.filter((a) => a.type === 'friendly.sentry' && a.placement))
+        a.hp = maximumBody(a) / 2;
     }
     if (spec.id === 'zero-wallet-all-wreck-emergency-cadet') {
       c.coreHP = 0;
@@ -125,7 +137,7 @@ export async function measureCombatProgression() {
   }
   return {
     scope:
-      'Six real C01S01 receipts; one authored teaching schedule, not generated campaign balance',
+      'Eight real C01S01 receipts; one authored teaching schedule, not generated campaign balance',
     policy: campaignTutorialRules.id,
     limitations: [
       'One Warden/doctrine',

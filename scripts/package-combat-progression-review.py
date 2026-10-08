@@ -38,11 +38,13 @@ para('Optional recovery budget', head)
 para('Results show the full repair/restore/rearm cost and projected remaining reward/wallet. Starting wounds are reported separately. These are planning figures, not automatic charges. You can spend less and fight wounded, or keep Credits for another improvement.')
 story.append(PageBreak())
 para('Measured encounters and recovery', title)
-para('The evidence bundle contains six actual C01S01 terminal receipts, including a repaired repeat, stored Repair Node, half-body Rifle, emergency Cadet recovery and immediate surrender. Each result is journaled and finalized twice to confirm that the second request does not pay again.')
+para('The evidence bundle contains eight actual C01S01 terminal receipts, including a repaired repeat, stored Repair Node, half-body Rifle, emergency Cadet recovery and immediate surrender. Each result is journaled and finalized twice to confirm that the second request does not pay again.')
 labels = {
 'guided-standard-two-paid-clears':'Guided Standard',
 'owned-repair-stored-standard':'Repair Node stored',
 'rifle-starts-half-body-standard':'Rifle begins at half body',
+'sentry-starts-half-body-with-repair':'Half-body Sentries / Repair Node',
+'sentry-starts-half-body-without-repair':'Half-body Sentries / Node stored',
 'zero-wallet-all-wreck-emergency-cadet':'Zero-cash emergency / Cadet',
 'immediate-surrender-standard':'Immediate surrender',
 }
@@ -57,7 +59,7 @@ para('Recovery first offers the cheapest priced viable defense if affordable. Ot
 para('Free practice uses the owned grown army', head)
 para('The new-schema practice clone starts with full body and normal stock but retains earned levels and purchased enhancements. It never repairs the saved campaign or grants currency, XP or discovery. Old practice checkpoints retain their original replay rules.')
 para('The tutorial is a teaching encounter', head)
-para('These six deterministic receipts do not establish the required whole-game recovery/income ratio or long-term leveling pace. There are no ranged, air, stealth or boss threats in this slice. Prices and XP were not arbitrarily retuned to make the teaching scenario imitate later campaign balance. Generated budgets, three competent layouts and the required larger seed sets remain future balance work.')
+para('These eight deterministic receipts do not establish the required whole-game recovery/income ratio or long-term leveling pace. There are no ranged, air, stealth or boss threats in this slice. Prices and XP were not arbitrarily retuned to make the teaching scenario imitate later campaign balance. Generated budgets, three competent layouts and the required larger seed sets remain future balance work.')
 story.append(PageBreak())
 para('Save safety and verification', title)
 para(f"{verification['unitTests']} unit tests in {verification['unitFiles']} files and all {verification['browserTests']} browser checks pass. Type checking, lint, formatting, deterministic scenario and production build also pass. Browser checks exercise the actual UI and native IndexedDB, including failed imports and failed result commits.")
@@ -67,7 +69,7 @@ para('Additional defects corrected', head)
 para('Battle controls are disabled until handlers are ready, preventing a visible 4× choice from leaving combat at 1×. Failed-result recovery stops the old render loop before replacing its interface. Return Title restores the real title screen. Audio-device suspension/resume failure is contained; pausing silences the mixer immediately and cannot stop result accounting.')
 para('The interface was checked at normal and 200% scale in 412×915, 800×1280 and 1280×800 viewports. No horizontal overflow was detected. This is desktop emulation, not physical Lenovo performance or TalkBack certification.')
 para('Still in development', head)
-para('Other Warden/doctrine combinations, full roster, later campaign stages, enemy variants, bosses, promotions/signatures, all modes and complete results analysis remain open. Sale is not enabled in the interface; active emergency-sale recovery still requires its full identity/tombstone rules. Per-asset contact/anatomy refinement and actual Android measurements remain required. The repository is a development checkpoint, not a public deployed release.')
+para('Other Warden/doctrine combinations, full roster, later campaign stages, enemy variants, bosses, promotions/signatures, all modes and complete results analysis remain open. A four-Node follow-up identified self-repair incorrectly consuming an external slot; its versioned correction follows this checkpoint. Sale is not enabled in the interface; active emergency-sale recovery still requires its full identity/tombstone rules. Per-asset contact/anatomy refinement and actual Android measurements remain required. The repository is a development checkpoint, not a public deployed release.')
 para('Continuing work', head)
 para('Continue with individual support-channel and injury/action contracts, followed by the next dependency-ready roster element. Keep old replay versions compatible and compare actual mechanics, contribution and recovery together. No new creative choice is required to continue local engineering; physical-device acceptance needs a playable hosted build and your tablet observations when available.')
 para('Primary reference checked: MDN IDBTransaction (2026-10-08), active/inactive task boundaries and auto-commit. Crypto/schema rebasing completes before final write transactions. Original blueprint SHA-256 and source/test evidence are included in the ZIP.',small)
