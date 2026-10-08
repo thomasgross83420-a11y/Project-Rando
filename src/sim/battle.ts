@@ -1360,6 +1360,9 @@ export class Battle {
   private support(): void {
     const slots = new Map<number, number>(),
       reserved = new Map<number, number>();
+    // v1-v3 keep their retained replay rules. A permitted self channel is
+    // additional to v4's two EXTERNAL channels, not an extra external slot.
+    const externalOnly = this.plan.simulation === 'rb-sim-v4';
     for (const e of this.entities) {
       if (e.hp <= 0 || e.type !== 'friendly.repair_node') continue;
       const valid = (t: Entity): boolean =>
@@ -1368,7 +1371,7 @@ export class Battle {
         this.definition(t).mechanical &&
         boundary(e, t) <= (this.profiles?.[e.id]?.repair?.range ?? 5 * U) &&
         this.los(e, t, e.id) &&
-        (slots.get(t.id) ?? 0) < 2;
+        ((externalOnly && t.id === e.id) || (slots.get(t.id) ?? 0) < 2);
       const score = (t: Entity): number =>
         divRound(
           BigInt(Math.max(0, t.maxHP - t.hp - (reserved.get(t.id) ?? 0))) *
@@ -1407,7 +1410,7 @@ export class Battle {
         e.channelPulse = this.tick + 15;
         e.channelCommit = this.tick + 30;
       }
-      slots.set(t.id, (slots.get(t.id) ?? 0) + 1);
+      if (!externalOnly || t.id !== e.id) slots.set(t.id, (slots.get(t.id) ?? 0) + 1);
       const repair = this.profiles?.[e.id]?.repair,
         output = t.id === 1 ? (repair?.corePerPulse ?? 3200) : (repair?.perPulse ?? 6400);
       reserved.set(t.id, (reserved.get(t.id) ?? 0) + Math.min(output, t.maxHP - t.hp));

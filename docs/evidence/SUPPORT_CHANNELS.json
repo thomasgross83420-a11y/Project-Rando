@@ -1,0 +1,90 @@
+{
+  "scope": "Four-Node stationary support contract; no enemies admitted before tick 350; not battle balance/performance certification",
+  "policy": "rb-sim-v4 external-channel accounting",
+  "records": [
+    {
+      "order": "receiver-first",
+      "simulation": "rb-sim-v3",
+      "pulseTicks": 15,
+      "startingBody": 409600,
+      "maximumBody": 819200,
+      "at16": {
+        "body": 422400,
+        "selfChannels": 1,
+        "externalChannels": 1,
+        "restorationScore": "76800000",
+        "snapshotHash": "baff8805a507476da7b86b9cb574641cc64787e08cdcc811089bffd19c231182"
+      },
+      "at350": {
+        "body": 704000,
+        "restorationUsed": "294400",
+        "activeChannels": 2,
+        "totalRestorationScore": "1766400000",
+        "snapshotHash": "59d3b7addc0c88ee7e4ace3fe9ca0cec0e42e800081902d397df4bce6d0cc8b1"
+      }
+    },
+    {
+      "order": "receiver-first",
+      "simulation": "rb-sim-v4",
+      "pulseTicks": 15,
+      "startingBody": 409600,
+      "maximumBody": 819200,
+      "at16": {
+        "body": 428800,
+        "selfChannels": 1,
+        "externalChannels": 2,
+        "restorationScore": "115200000",
+        "snapshotHash": "83625bb12d535232dac0c2450e98370922a5243df8b8cc7e622c8c4325e9e31e"
+      },
+      "at350": {
+        "body": 819200,
+        "restorationUsed": "409600",
+        "activeChannels": 0,
+        "totalRestorationScore": "2457600000",
+        "snapshotHash": "add1f02b892b50ae73deadfb2c5476d526db145090595653fb9ab9dc68cbcc83"
+      }
+    },
+    {
+      "order": "receiver-last",
+      "simulation": "rb-sim-v3",
+      "pulseTicks": 15,
+      "startingBody": 409600,
+      "maximumBody": 819200,
+      "at16": {
+        "body": 422400,
+        "selfChannels": 0,
+        "externalChannels": 2,
+        "restorationScore": "76800000",
+        "snapshotHash": "1812444f754327b94f5fccbac5e3044351db659a04a23022d206b8b23d38b30a"
+      },
+      "at350": {
+        "body": 704000,
+        "restorationUsed": "294400",
+        "activeChannels": 2,
+        "totalRestorationScore": "1766400000",
+        "snapshotHash": "b9ba0b0d631efb748202b652c27967ded15534903a7e17b0f2eb0a2f1efc57b6"
+      }
+    },
+    {
+      "order": "receiver-last",
+      "simulation": "rb-sim-v4",
+      "pulseTicks": 15,
+      "startingBody": 409600,
+      "maximumBody": 819200,
+      "at16": {
+        "body": 428800,
+        "selfChannels": 1,
+        "externalChannels": 2,
+        "restorationScore": "115200000",
+        "snapshotHash": "a7c7c2da7ecdef934669a695f1af4dc9602613f2986a8a572579cd19699a6a8b"
+      },
+      "at350": {
+        "body": 819200,
+        "restorationUsed": "409600",
+        "activeChannels": 0,
+        "totalRestorationScore": "2457600000",
+        "snapshotHash": "ae82625d3d11ffe1ba0c8da4311efd86b58dc45dfb3b6e09c78065026165db8e"
+      }
+    }
+  ]
+}

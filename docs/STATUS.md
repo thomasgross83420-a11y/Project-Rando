@@ -68,3 +68,10 @@ clone. The zero-wallet/all-wreck Bulwark/Bastion emergency Cadet win is tested;
 other Warden/doctrine fixtures remain open. Objective bonuses and an optional
 full-recovery budget are visible in results. This is Gate3 current-slice integration,
 not whole-campaign balance or Android acceptance. See COMBAT_RESULT_INTEGRATION.md.
+
+2026-10-08 build0.2.7: a four-Node audit exposed self-repair consuming an external
+channel. Versioned v4 coordination now permits self plus two external sources,
+with exact injury credit, no overheal and no wreck revival. Published full v3
+battle/checkpoint/pending hashes remain exact; native backup/import tests both
+versions. All131 unit tests and44 browser checks pass. See SUPPORT_CHANNELS.md.
+Engineer/Medic moving channel/rearm contracts remain their next individual work.

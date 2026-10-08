@@ -3,7 +3,7 @@ What can I say, it's just a bunch of rando I'm trying out.
 
 ## Resonance Bastion
 
-The latest checkpoint is on `codex/combat-result-integration`; `main`
+The latest checkpoint is on `codex/support-channel-contracts`; `main`
 currently contains only the original repository introduction. Start with the
 [thread recovery record](docs/PROJECT_RECOVERY.md) for the recovered checkpoint,
 available reference files, verification, and the next development step.
@@ -40,7 +40,7 @@ accuracy growth, frozen per-asset stat profiles and exact purchase quotes now
 have deterministic comparisons. The existing playable practice keeps its pinned
 replay rules. `npm run audit:progression-balance` reproduces the measured studies.
 
-Latest checkpoint: [combat and paid progression](docs/COMBAT_RESULT_INTEGRATION.md)
+Previous checkpoint: [combat and paid progression](docs/COMBAT_RESULT_INTEGRATION.md)
 and [mobile review downloads](docs/review/COMBAT_PROGRESSION_DELIVERY.md). Bulwark/Bastion
 C01S01 now commits actual rewards, wounds, contribution XP and permanent stock.
 Preparation offers explicit repair/restore/rearm/enhancement; backup includes
@@ -48,3 +48,11 @@ paid checkpoints, pending results and receipts. Old practice replays remain pinn
 new-schema free practice retains owned grown profiles in a full-body/full-stock clone.
 `npm run audit:combat-progression` produces eight real current-slice receipts.
 The full campaign/roster and physical tablet acceptance remain development work.
+
+Latest checkpoint: [support-channel correction](docs/SUPPORT_CHANNELS.md). New
+rb-sim-v4 plans preserve two external repair sources plus eligible self-repair,
+while retained v1/v2/v3 rules keep their original replay. The whole published v3
+battle, checkpoint and pending-result hashes remain exact. All131 unit tests and
+44 browser checks pass, including native v3/v4 backup/import.
+[Mobile support review](docs/review/SUPPORT_CHANNEL_DELIVERY.md) supplements the
+paid-combat review. `npm run audit:support-channels` reproduces the four comparisons.

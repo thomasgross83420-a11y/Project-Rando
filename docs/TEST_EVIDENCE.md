@@ -485,3 +485,16 @@ also exactly matches its retained hash
   Counts/source/log hashes: evidence/COMBAT_PROGRESSION_TESTS.json.
   Mobile PDF/ZIP: review/COMBAT_PROGRESSION_DELIVERY.md. No public deployment,
   whole-game balance, Lenovo hardware, Android sharing or TalkBack certification.
+
+## 2026-10-08 — support coordination, build0.2.7
+
+All131 unit tests in29 files and44 production-browser checks passed without
+retries/skips; typecheck, lint, format check, deterministic scenario, production
+build and four before/after support fixtures passed. The injured Node receives
+self plus two external sources in v4, independently of recipient UUID order:
+18.75 Integrity at tick16 versus12.5 in v3. At tick350 exactly400 initial injury
+is restored/credited and channels release. Wreck sources/recipients cannot heal.
+Full v3 battle/checkpoint/pending hashes are compared with published0.2.6 values;
+v1/v2 hashes remain pinned. Native backup reload/cross-slot import pays v3/v4
+results once. Source/log hashes: evidence/SUPPORT_CHANNEL_TESTS.json.
+No Android performance or full support-roster acceptance is inferred.

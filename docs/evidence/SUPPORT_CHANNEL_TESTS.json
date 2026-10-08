@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-08",
+  "build": "0.2.7-support-contracts",
+  "sourceCheckpoint": "98f26a875a04914289466fe99646a20203953602",
+  "unitTests": 131,
+  "unitFiles": 29,
+  "browserTests": 44,
+  "browserRetries": 0,
+  "browserSkipped": 0,
+  "checks": [
+    "typecheck",
+    "lint",
+    "format check",
+    "full unit suite",
+    "deterministic scenario",
+    "production build",
+    "full production browser suite",
+    "v3/v4 native backup-import-finalize",
+    "published whole-v3 battle/checkpoint/pending hash regression"
+  ],
+  "sourceSHA256": {
+    "src/sim/battle.ts": "db96e17ddfe7b60b91cfcd0d06aebd1c87367c41f1e0480415c8f07584ec742f",
+    "src/sim/campaign-start.ts": "3d634366db8fc1ca1e9ddb1677f0a5b87afa07a8b7116f8ed2befd0362da84dc",
+    "src/persistence/campaign.ts": "09de54f3531f31614c63ab3264c4c49dbdafec525e8af54b0c2472c99dc6b442",
+    "src/progression/campaign-result.ts": "7800d9cb3b4f2472e9a23f37d0067a4f785f6476abf45a0d8b1186f345bffdfa",
+    "tests/unit/support-channels.test.ts": "9740e8460006a508918a8cc91690bd8ec8a095733c8cc6494c4b35fbe35c8190",
+    "tests/fixtures/support.ts": "5531248c6e2f79738675bbd6b4e1afbbc8b892dd29e7099b604a4fe6f3610fe4",
+    "tests/browser/result-backup.spec.ts": "ca880b04886894b7d59a9c6cf33eecc4715c886936763ae99ad5a91307719a1d",
+    "scripts/support-channel-analysis.ts": "659aab33fdfaff4c10d0c3e16e921d9c4267cad7c774b8f2117e87f2885490b2",
+    "docs/evidence/SUPPORT_CHANNELS.json": "ddf5732ca75b356d484dfbcc8ecf98ef1344e32cc39323fe6993cecf9642b839"
+  },
+  "logSHA256": {
+    "support-verify.log": "a0c55175ed6325485a1abc866dd4a676e5f9f9258242bd0a7038e3790ee8235d",
+    "support-browser.log": "adcf6d532a43bb5e27a303361bf5f3e46fa5d12f70551596497ebfd9c3f95db7",
+    "support-analysis.log": "e7290731ae8318ff25c78c0440a9ed24f731b32f51821b918da29445ffbcc049",
+    "support-format-check.log": "8a8d289884c10e23fa555a733b3e89ec61324d8c472ba7734373addec51e4382"
+  },
+  "physicalAndroidCertified": false,
+  "wholeGameBalanceCertified": false
+}
