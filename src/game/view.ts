@@ -1,3 +1,4 @@
+import { worldHeading, spriteDirection } from './facing';
 import { compareIDs } from './order';
 import Phaser from 'phaser';
 import art from '../../public/assets/full/runtime.json';
@@ -6,7 +7,7 @@ import {
   unproject,
   pan,
   zoomAt,
-  fitBase,
+  fitCombatStart,
   type Camera,
   type Point,
 } from '../render/projection';
@@ -14,7 +15,7 @@ import { ENTRANCES, analyzeRoutes } from '../construction/geometry';
 import { friendlyStats } from './stats';
 import { definition } from './catalog';
 import { footprint, landRects, solidAsset } from './construction';
-import { type GameState, maxHealth } from './model';
+import { type GameState, type Plan, maxHealth } from './model';
 import type { FullBattle, Entity } from './engine';
 interface DrawActor {
   id: string;
@@ -54,6 +55,12 @@ export class FullView {
   private overlay: Phaser.GameObjects.Graphics | undefined;
   contextLost = false;
   routesVisible = false;
+  forecast: Plan | null = null;
+  onPick: (ids: string[]) => void = () => {};
+  private routeKey = '';
+  private routeTraces: { radius: number; points: Point[] }[] = [];
+  private lastVisualKey = '';
+  private frameStarted = performance.now();
   private slowFrames = 0;
   private lastDraw = 0;
   private lastRenderCost = 0;
@@ -129,6 +136,9 @@ export class FullView {
       this.pointers.delete(e.pointerId);
       this.previousPair = null;
       this.multi = true;
+      this.drag = false;
+      this.last = null;
+      this.gestureStart = null;
     });
     parent.addEventListener(
       'wheel',
@@ -140,6 +150,7 @@ export class FullView {
       { passive: false },
     );
     parent.addEventListener('keydown', (e) => {
+      if ((e.target as HTMLElement).matches('input,select,textarea,button,summary')) return;
       const moves: Record<string, [number, number]> = {
         ArrowLeft: [40, 0],
         ArrowRight: [-40, 0],
@@ -256,14 +267,23 @@ export class FullView {
     this.camera.width = Math.max(1, Math.round(r.width));
     this.camera.height = Math.max(1, Math.round(r.height));
     this.game.scale.resize(this.camera.width, this.camera.height);
-    if (this.focusFit) fitBase(this.camera);
+    if (this.focusFit) this.fit();
   }
   fit() {
     this.focusFit = true;
-    fitBase(this.camera);
+    const defenders = this.battle
+      ? this.battle.alive(0).map((e) => ({ x: e.x / 1024, y: e.y / 1024 }))
+      : (this.state?.assets
+          .filter((a) => a.placement)
+          .map((a) => {
+            const r = footprint(a)!;
+            return { x: r.x + r.width / 2, y: r.y + r.height / 2 };
+          }) ?? []);
+    fitCombatStart(this.camera, [...defenders, { x: 28, y: 28 }, { x: 32, y: 32 }]);
   }
   rotate() {
     this.camera.view = ((this.camera.view + 1) % 4) as Camera['view'];
+    if (this.focusFit) this.fit();
   }
   zoom(factor: number) {
     this.focusFit = false;
@@ -327,7 +347,7 @@ export class FullView {
       this.last = p;
       return;
     }
-    if (this.gestureStart && Math.hypot(p.x - this.gestureStart.x, p.y - this.gestureStart.y) > 6)
+    if (this.gestureStart && Math.hypot(p.x - this.gestureStart.x, p.y - this.gestureStart.y) > 8)
       this.drag = true;
     if (this.ghost) {
       const g = unproject(p, this.camera);
@@ -341,15 +361,16 @@ export class FullView {
     this.previousPair = this.pair();
     if (!this.pointers.size && !this.multi && !this.drag) {
       const world = unproject(p, this.camera);
-      const record = [...this.hit]
+      const records = [...this.hit]
         .reverse()
-        .find(
+        .filter(
           (v) =>
             Math.abs(v.p.x - p.x) < Math.max(18, v.width / 2) &&
             p.y >= v.p.y - v.height &&
             p.y <= v.p.y + 8,
         );
-      this.onTap({ x: Math.floor(world.x), y: Math.floor(world.y) }, record?.id ?? null);
+      if (records.length > 1) this.onPick([...new Set(records.map((v) => v.id))]);
+      else this.onTap({ x: Math.floor(world.x), y: Math.floor(world.y) }, records[0]?.id ?? null);
     }
     if (!this.pointers.size) {
       this.gestureStart = null;
@@ -450,9 +471,17 @@ export class FullView {
       low =
         this.state.settings.quality === 'Low' ||
         (this.state.settings.quality === 'Auto' && this.slowFrames >= 90);
-    if (low && now - this.lastDraw < 32) return;
+    const visualKey = `${this.camera.x},${this.camera.y},${this.camera.zoom},${this.camera.view},${this.camera.width},${this.camera.height}|${this.selected}|${this.state.updated}|${this.routesVisible}|${this.forecast?.hash}|${JSON.stringify(this.ghost)}`;
+    if (now - this.lastDraw < (low || !this.battle ? 32 : 16)) return;
+    if (!this.battle && this.state.settings.reducedEffects && visualKey === this.lastVisualKey)
+      return;
+    this.lastVisualKey = visualKey;
     this.lastDraw = now;
-    this.frame = this.battle?.tick ?? this.frame + 1;
+    this.parent.dataset.cameraX = this.camera.x.toFixed(4);
+    this.parent.dataset.cameraY = this.camera.y.toFixed(4);
+    this.parent.dataset.zoom = this.camera.zoom.toFixed(4);
+    this.parent.dataset.view = String(this.camera.view);
+    this.frame = this.battle?.tick ?? Math.floor((now - this.frameStarted) * 0.06);
     this.graphics = this.floor!;
     let g = this.graphics;
     const z = this.camera.zoom;
@@ -484,6 +513,24 @@ export class FullView {
     this.graphics = this.overlay!;
     g = this.graphics;
     this.drawRoutes();
+    if (this.forecast && !this.battle)
+      for (const front of new Set(this.forecast.spawns.map((v) => v.entrance))) {
+        const origin = ENTRANCES[front]!,
+          end = { x: 30 + (origin.x - 30) * 0.34, y: 30 + (origin.y - 30) * 0.34 },
+          a = project(origin, this.camera),
+          b = project(end, this.camera),
+          angle = Math.atan2(b.y - a.y, b.x - a.x);
+        g.lineStyle(3, 0xf1b37c, 0.8);
+        g.lineBetween(a.x, a.y, b.x, b.y);
+        for (const sign of [-1, 1])
+          g.lineBetween(
+            b.x,
+            b.y,
+            b.x - Math.cos(angle + sign * 0.5) * 16,
+            b.y - Math.sin(angle + sign * 0.5) * 16,
+          );
+        this.label('Approach', b, '#ffce9d', 14);
+      }
     const actors: DrawActor[] = this.battle
       ? this.battle.entities
           .filter(
@@ -504,8 +551,8 @@ export class FullView {
               y: r.y + r.height / 2,
               hp: a.hp,
               maximum: maxHealth(a),
-              heading: (Math.round(16384 - (a.tactics.heading * 65536) / 360) + 65536) % 65536,
-              aim: (Math.round(16384 - (a.tactics.heading * 65536) / 360) + 65536) % 65536,
+              heading: worldHeading(d.speed ? a.tactics.heading : a.placement!.rotation * 90),
+              aim: worldHeading(a.tactics.heading),
               moving: false,
               firing: false,
               pose: 0,
@@ -561,6 +608,7 @@ export class FullView {
         this.coreShape!.setDepth(p.y);
         this.coreArt(p, a.hp / a.maximum);
         this.coreAppearance(p);
+        this.hit.push({ id: a.id, p, width: 90 * z, height: 86 * z });
         this.graphics = this.overlay!;
         continue;
       }
@@ -575,9 +623,7 @@ export class FullView {
       this.floor!.fillEllipse(foot.x, foot.y, 26 * z, 12 * z);
       const d = definition(a.type),
         dirCount = d.speed || d.category === 'boss' ? 8 : 4,
-        dir =
-          Math.round(((a.heading - this.camera.view * 16384 + 65536) / 65536) * dirCount) %
-          dirCount;
+        dir = spriteDirection(a.heading, this.camera.view, dirCount);
       const pose = this.battle ? a.pose : Math.floor(this.frame / 10) % 4;
       const group = a.side ? (d.category === 'boss' ? d.id : 'enemy-' + a.faction) : 'friendly';
       const sprite = this.image(
@@ -596,7 +642,7 @@ export class FullView {
         );
       if (a.hp === 0) sprite?.setTint(0x677477);
       else if (a.jammed) sprite?.setTint(0xcaa0d3);
-      const aimDir = Math.round(((a.aim - this.camera.view * 16384 + 65536) / 65536) * 8) % 8;
+      const aimDir = spriteDirection(a.aim, this.camera.view, 8);
       if (a.hp > 0 && d.weapon !== 'none' && d.weapon !== 'melee')
         this.image(`weapons|${a.type}|${aimDir}|${a.firing ? 1 : 0}`, p, p.y + 0.1, 2 * z);
       if (a.hp < a.maximum || a.id === this.selected || d.category === 'boss') {
@@ -697,6 +743,26 @@ export class FullView {
         }
       }
     }
+    if (!this.battle) {
+      const selected = this.state.assets.find(
+        (a) => a.id === this.selected && a.placement && a.type === 'friendly.incendiary_vent',
+      );
+      const vent =
+        this.ghost?.type === 'friendly.incendiary_vent' ? this.ghost : selected?.placement;
+      if (vent) {
+        const origin = { x: (vent.x + 0.5) * 1024, y: (vent.y + 0.5) * 1024 },
+          heading = vent.rotation * 16384,
+          points = [project({ x: origin.x / 1024, y: origin.y / 1024 }, this.camera)];
+        for (let i = 0; i <= 16; i++) {
+          const p = this.offset(origin, heading - 8192 + i * 1024, 3072);
+          points.push(project({ x: p.x / 1024, y: p.y / 1024 }, this.camera));
+        }
+        g.fillStyle(0xe7a77c, 0.16);
+        g.fillPoints(points, true);
+        g.lineStyle(2, 0xe7a77c, 0.8);
+        g.strokePoints(points, true);
+      }
+    }
     this.lastRenderCost = performance.now() - now;
     if (this.ghost) {
       const d = definition(this.ghost.type),
@@ -715,8 +781,8 @@ export class FullView {
     for (let i = this.labelsUsed; i < this.labels.length; i++) this.labels[i]!.setVisible(false);
   }
   private offset(p: Point, angle: number, magnitude: number) {
-    const a = (-angle / 65536) * Math.PI * 2;
-    return { x: p.x + Math.cos(a) * magnitude, y: p.y + Math.sin(a) * magnitude };
+    const a = (angle / 65536) * Math.PI * 2;
+    return { x: p.x + Math.sin(a) * magnitude, y: p.y - Math.cos(a) * magnitude };
   }
   private roleIcon(category: string, weapon: string) {
     return category === 'warden'
@@ -826,13 +892,21 @@ export class FullView {
     const obstacles = this.state.assets
       .filter((a) => a.placement && a.hp && solidAsset(a))
       .map((a) => footprint(a)!);
-    for (const radius of [0.35, 0.75])
-      for (const trace of analyzeRoutes(obstacles, [Math.round(radius * 1024)]).traces) {
-        if (!trace.valid) continue;
-        const points = trace.points.map((p) => project(p, this.camera));
-        this.graphics!.lineStyle(1, radius === 0.35 ? 0x88ccb9 : 0xd5ad72, 0.4);
-        this.graphics!.strokePoints(points, false);
-      }
+    const key = obstacles.map((r) => `${r.x},${r.y},${r.width},${r.height}`).join('|');
+    if (key !== this.routeKey) {
+      this.routeKey = key;
+      this.routeTraces = [];
+      for (const radius of [0.35, 0.75])
+        for (const trace of analyzeRoutes(obstacles, [Math.round(radius * 1024)]).traces)
+          if (trace.valid) this.routeTraces.push({ radius, points: trace.points });
+    }
+    for (const trace of this.routeTraces) {
+      this.graphics!.lineStyle(1, trace.radius === 0.35 ? 0x88ccb9 : 0xd5ad72, 0.4);
+      this.graphics!.strokePoints(
+        trace.points.map((p) => project(p, this.camera)),
+        false,
+      );
+    }
     for (const a of this.state.assets.filter((a) => a.placement && definition(a.type).speed > 0)) {
       const p = project(a.tactics.anchor, this.camera);
       this.graphics!.lineStyle(1, 0x8bd3db, 0.6);

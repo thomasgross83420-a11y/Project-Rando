@@ -1,3 +1,4 @@
+import { worldHeading } from './facing';
 import { compareIDs } from './order';
 /** Full first-pass fixed-tick action runtime. Saved starts/plans remain immutable;
  * combat bodies, temporary stock, shields and effects belong to this run only. */
@@ -258,8 +259,8 @@ export class FullBattle {
       e.hp = a.hp;
       e.eligibleRestoration = e.stats.health - a.hp;
       e.charges = a.charges;
-      e.heading = (Math.round(H / 4 - (a.tactics.heading * H) / 360) + H) % H;
-      e.aim = e.heading;
+      e.heading = worldHeading(e.d.speed ? a.tactics.heading : a.placement.rotation * 90);
+      e.aim = worldHeading(a.tactics.heading);
       if (!e.d.speed) e.rect = { x: fx(r.x), y: fx(r.y), width: fx(r.width), height: fx(r.height) };
       this.entities.push(e);
       this.performance.set(a.id, {
@@ -2471,12 +2472,18 @@ export class FullBattle {
     }
   }
   private traps(e: Entity): void {
+    const ventHeading = worldHeading((e.asset?.placement?.rotation ?? 0) * 90);
     const foes = this.alive(1)
       .filter(
         (v) =>
           !v.burrow &&
           (e.d.targets === 'both' || v.d.layer === 'ground') &&
-          boundary(e, v) <= e.stats.range,
+          boundary(e, v) <= e.stats.range &&
+          this.perceived(v) &&
+          (e.d.id !== 'friendly.incendiary_vent' ||
+            angleError(ventHeading, bearing({ x: v.x - e.x, y: v.y - e.y })) <= H / 8) &&
+          (e.d.id !== 'friendly.gravity_snare' ||
+            (!this.has(v, 'root') && (v.cooldowns.rootImmune ?? 0) <= this.tick)),
       )
       .sort((a, b) => boundary(e, a) - boundary(e, b) || a.id - b.id);
     if (e.d.id === 'friendly.slow_field') {
@@ -2502,7 +2509,8 @@ export class FullBattle {
         break;
       case 'friendly.incendiary_vent': {
         e.cooldowns.burnActivation = (e.cooldowns.burnActivation ?? 0) + 1;
-        const heading = (H / 4 - ((e.asset?.placement?.rotation ?? 0) * H) / 4 + H) % H;
+        const heading = ventHeading,
+          burned = new Set<number>();
         for (let i = 1; i <= 12; i++)
           this.schedule(
             e,
@@ -2515,7 +2523,10 @@ export class FullBattle {
                   angleError(heading, bearing({ x: v.x - e.x, y: v.y - e.y })) <= H / 8,
               )) {
                 this.damage(e, v, fx(10), 0, false);
-                this.status(v, 'burn', 10, 4, e);
+                if (!burned.has(v.id)) {
+                  this.status(v, 'burn', 10, 4, e);
+                  burned.add(v.id);
+                }
               }
             },
             true,

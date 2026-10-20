@@ -52,7 +52,8 @@ for (const [width, height] of [
     }
     await page.getByRole('button', { name: 'Open tactical map', exact: true }).click();
     await expect(page.locator('[data-map]')).toBeVisible();
-    await page.getByRole('button', { name: 'Front 6', exact: true }).click();
+    await page.getByText('Jump to a location', { exact: true }).click();
+    await page.getByRole('button', { name: 'South', exact: true }).click();
     await page.getByRole('button', { name: 'Close menu', exact: true }).click();
     await page.screenshot({ path: `test-results/full-${width}x${height}.png` });
   });
@@ -106,7 +107,7 @@ test('advanced mode forecasts, infrastructure and appearance controls are reacha
   test.setTimeout(120000);
   await seed(page, true);
   await page.getByRole('button', { name: 'Build', exact: true }).click();
-  await page.getByLabel('Category', { exact: true }).selectOption('infrastructure');
+  await page.getByLabel('Category', { exact: true }).selectOption('Infrastructure');
   await expect(page.getByText('Command Node', { exact: false }).first()).toBeVisible();
   await page.getByRole('button', { name: 'Close menu', exact: true }).click();
   await page.getByRole('button', { name: 'Manage', exact: true }).click();
@@ -126,6 +127,7 @@ test('advanced mode forecasts, infrastructure and appearance controls are reacha
     'Long Watch',
   ]) {
     await page.getByRole('button', { name: 'Siege', exact: true }).click();
+    await page.getByText('Other ways to play & difficulty', { exact: true }).click();
     await page.getByLabel('Mode', { exact: true }).selectOption(mode);
     await page
       .getByRole('button', {

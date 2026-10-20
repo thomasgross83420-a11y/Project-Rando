@@ -1,0 +1,339 @@
+{
+  "method": "Standard; fixed identities; legal guided force; affordable maintenance; face disclosed fronts; purchase policy after tutorial; first six attempts or defeat. Not an optimal strategy or universal balance certification.",
+  "policy": [
+    "friendly.sentry",
+    "friendly.sentry"
+  ],
+  "runs": [
+    {
+      "doctrine": "Bastion",
+      "attempt": 1,
+      "stage": 0,
+      "repeat": false,
+      "before": {
+        "rank": 1,
+        "credits": 600
+      },
+      "after": {
+        "rank": 2,
+        "credits": 935
+      },
+      "outcome": "Victory",
+      "corePercent": 99,
+      "wrecks": 0,
+      "maintenance": 0,
+      "reward": 335,
+      "seconds": 94.41666666666667,
+      "simulationMs": 478,
+      "slowestTickMs": 31
+    },
+    {
+      "doctrine": "Bastion",
+      "attempt": 2,
+      "stage": 1,
+      "repeat": false,
+      "before": {
+        "rank": 2,
+        "credits": 935
+      },
+      "after": {
+        "rank": 4,
+        "credits": 1305
+      },
+      "outcome": "Victory",
+      "corePercent": 78,
+      "wrecks": 0,
+      "maintenance": 30,
+      "reward": 900,
+      "seconds": 182.3,
+      "simulationMs": 3749,
+      "slowestTickMs": 39
+    },
+    {
+      "doctrine": "Bastion",
+      "attempt": 3,
+      "stage": 2,
+      "repeat": false,
+      "before": {
+        "rank": 4,
+        "credits": 1305
+      },
+      "after": {
+        "rank": 6,
+        "credits": 2170
+      },
+      "outcome": "Victory",
+      "corePercent": 79,
+      "wrecks": 0,
+      "maintenance": 273,
+      "reward": 1138,
+      "seconds": 242.06666666666666,
+      "simulationMs": 5094,
+      "slowestTickMs": 60
+    },
+    {
+      "doctrine": "Bastion",
+      "attempt": 4,
+      "stage": 3,
+      "repeat": false,
+      "before": {
+        "rank": 6,
+        "credits": 2170
+      },
+      "after": {
+        "rank": 7,
+        "credits": 3347
+      },
+      "outcome": "Victory",
+      "corePercent": 80,
+      "wrecks": 0,
+      "maintenance": 215,
+      "reward": 1392,
+      "seconds": 300.98333333333335,
+      "simulationMs": 6909,
+      "slowestTickMs": 40
+    },
+    {
+      "doctrine": "Bastion",
+      "attempt": 5,
+      "stage": 4,
+      "repeat": false,
+      "before": {
+        "rank": 7,
+        "credits": 3347
+      },
+      "after": {
+        "rank": 7,
+        "credits": 3720
+      },
+      "outcome": "Defeat",
+      "corePercent": 0,
+      "wrecks": 2,
+      "maintenance": 238,
+      "reward": 611,
+      "seconds": 236.41666666666666,
+      "simulationMs": 7221,
+      "slowestTickMs": 48
+    },
+    {
+      "doctrine": "Mobile",
+      "attempt": 1,
+      "stage": 0,
+      "repeat": false,
+      "before": {
+        "rank": 1,
+        "credits": 600
+      },
+      "after": {
+        "rank": 2,
+        "credits": 935
+      },
+      "outcome": "Victory",
+      "corePercent": 100,
+      "wrecks": 0,
+      "maintenance": 0,
+      "reward": 335,
+      "seconds": 93.65,
+      "simulationMs": 398,
+      "slowestTickMs": 33
+    },
+    {
+      "doctrine": "Mobile",
+      "attempt": 2,
+      "stage": 1,
+      "repeat": false,
+      "before": {
+        "rank": 2,
+        "credits": 935
+      },
+      "after": {
+        "rank": 4,
+        "credits": 1316
+      },
+      "outcome": "Victory",
+      "corePercent": 100,
+      "wrecks": 0,
+      "maintenance": 19,
+      "reward": 900,
+      "seconds": 181.28333333333333,
+      "simulationMs": 3422,
+      "slowestTickMs": 53
+    },
+    {
+      "doctrine": "Mobile",
+      "attempt": 3,
+      "stage": 2,
+      "repeat": false,
+      "before": {
+        "rank": 4,
+        "credits": 1316
+      },
+      "after": {
+        "rank": 6,
+        "credits": 2414
+      },
+      "outcome": "Victory",
+      "corePercent": 100,
+      "wrecks": 0,
+      "maintenance": 40,
+      "reward": 1138,
+      "seconds": 241.1,
+      "simulationMs": 4432,
+      "slowestTickMs": 36
+    },
+    {
+      "doctrine": "Mobile",
+      "attempt": 4,
+      "stage": 3,
+      "repeat": false,
+      "before": {
+        "rank": 6,
+        "credits": 2414
+      },
+      "after": {
+        "rank": 7,
+        "credits": 3806
+      },
+      "outcome": "Victory",
+      "corePercent": 100,
+      "wrecks": 0,
+      "maintenance": 0,
+      "reward": 1392,
+      "seconds": 300.98333333333335,
+      "simulationMs": 5748,
+      "slowestTickMs": 51
+    },
+    {
+      "doctrine": "Mobile",
+      "attempt": 5,
+      "stage": 4,
+      "repeat": false,
+      "before": {
+        "rank": 7,
+        "credits": 3806
+      },
+      "after": {
+        "rank": 7,
+        "credits": 4660
+      },
+      "outcome": "Defeat",
+      "corePercent": 0,
+      "wrecks": 1,
+      "maintenance": 25,
+      "reward": 879,
+      "seconds": 301.25,
+      "simulationMs": 6431,
+      "slowestTickMs": 51
+    },
+    {
+      "doctrine": "Chokepoint",
+      "attempt": 1,
+      "stage": 0,
+      "repeat": false,
+      "before": {
+        "rank": 1,
+        "credits": 600
+      },
+      "after": {
+        "rank": 2,
+        "credits": 935
+      },
+      "outcome": "Victory",
+      "corePercent": 97,
+      "wrecks": 0,
+      "maintenance": 0,
+      "reward": 335,
+      "seconds": 99.78333333333333,
+      "simulationMs": 643,
+      "slowestTickMs": 36
+    },
+    {
+      "doctrine": "Chokepoint",
+      "attempt": 2,
+      "stage": 1,
+      "repeat": false,
+      "before": {
+        "rank": 2,
+        "credits": 935
+      },
+      "after": {
+        "rank": 4,
+        "credits": 1301
+      },
+      "outcome": "Victory",
+      "corePercent": 87,
+      "wrecks": 0,
+      "maintenance": 34,
+      "reward": 900,
+      "seconds": 182.63333333333333,
+      "simulationMs": 6286,
+      "slowestTickMs": 51
+    },
+    {
+      "doctrine": "Chokepoint",
+      "attempt": 3,
+      "stage": 2,
+      "repeat": false,
+      "before": {
+        "rank": 4,
+        "credits": 1301
+      },
+      "after": {
+        "rank": 5,
+        "credits": 2284
+      },
+      "outcome": "Victory",
+      "corePercent": 73,
+      "wrecks": 0,
+      "maintenance": 155,
+      "reward": 1138,
+      "seconds": 242.23333333333332,
+      "simulationMs": 6481,
+      "slowestTickMs": 54
+    },
+    {
+      "doctrine": "Chokepoint",
+      "attempt": 4,
+      "stage": 3,
+      "repeat": false,
+      "before": {
+        "rank": 5,
+        "credits": 2284
+      },
+      "after": {
+        "rank": 7,
+        "credits": 3362
+      },
+      "outcome": "Victory",
+      "corePercent": 8,
+      "wrecks": 0,
+      "maintenance": 314,
+      "reward": 1392,
+      "seconds": 304.96666666666664,
+      "simulationMs": 8244,
+      "slowestTickMs": 37
+    },
+    {
+      "doctrine": "Chokepoint",
+      "attempt": 5,
+      "stage": 4,
+      "repeat": false,
+      "before": {
+        "rank": 7,
+        "credits": 3362
+      },
+      "after": {
+        "rank": 7,
+        "credits": 3105
+      },
+      "outcome": "Defeat",
+      "corePercent": 0,
+      "wrecks": 1,
+      "maintenance": 926,
+      "reward": 669,
+      "seconds": 254.03333333333333,
+      "simulationMs": 6286,
+      "slowestTickMs": 36
+    }
+  ]
+}

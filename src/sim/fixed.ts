@@ -1,4 +1,4 @@
-import headings from '../data/heading.json';
+import quarter from '../data/heading-quarter.json';
 export const U = 1024,
   H = 65536,
   TRIG = 1048576,
@@ -27,6 +27,13 @@ export function sqrtFloor(n: bigint): bigint {
   }
 }
 export function length(v: Vec): number {
+  const squared = v.x * v.x + v.y * v.y;
+  if (Number.isSafeInteger(squared) && squared < Number.MAX_SAFE_INTEGER - 200000000) {
+    let f = Math.floor(Math.sqrt(squared));
+    while (f * f > squared) f--;
+    while ((f + 1) * (f + 1) <= squared) f++;
+    return squared - f * f >= (f + 1) * (f + 1) - squared ? f + 1 : f;
+  }
   const n = BigInt(v.x) ** 2n + BigInt(v.y) ** 2n,
     f = sqrtFloor(n);
   return Number(n - f * f >= (f + 1n) * (f + 1n) - n ? f + 1n : f);
@@ -34,11 +41,18 @@ export function length(v: Vec): number {
 export const delta = (a: Vec, b: Vec): Vec => ({ x: b.x - a.x, y: b.y - a.y });
 export const distance = (a: Vec, b: Vec): number => length(delta(a, b));
 export function direction(h: number, magnitude = TRIG): Vec {
-  const v = headings[((h % H) + H) % H];
-  if (!v || v[0] === undefined || v[1] === undefined) throw new Error('Missing pinned heading');
+  const normalized = ((h % H) + H) % H,
+    quadrant = Math.floor(normalized / 16384),
+    offset = normalized % 16384,
+    a = quarter[offset],
+    b = quarter[16384 - offset];
+  if (a === undefined || b === undefined) throw new Error('Missing pinned heading');
+  const x = quadrant === 0 ? a : quadrant === 1 ? b : quadrant === 2 ? -a : -b,
+    y = quadrant === 0 ? -b : quadrant === 1 ? a : quadrant === 2 ? b : -a;
+  if (magnitude === TRIG) return { x, y };
   return {
-    x: divRound(BigInt(v[0]) * BigInt(magnitude), BigInt(TRIG)),
-    y: divRound(BigInt(v[1]) * BigInt(magnitude), BigInt(TRIG)),
+    x: divRound(BigInt(x) * BigInt(magnitude), BigInt(TRIG)),
+    y: divRound(BigInt(y) * BigInt(magnitude), BigInt(TRIG)),
   };
 }
 export function bearing(v: Vec): number {

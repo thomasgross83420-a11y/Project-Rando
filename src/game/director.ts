@@ -149,7 +149,14 @@ export async function compile(input: CompileInput): Promise<Plan> {
   if (input.mode === 'Endurance') {
     duration = 300;
     if (block === 3 || block === 6)
-      boss = input.boss ?? BOSSES.filter((d) => d.rank <= requiredRank).at(-1)?.id ?? null;
+      boss =
+        input.boss ??
+        BOSSES.filter(
+          (d) =>
+            d.rank <=
+            Math.min(requiredRank, (input.band ?? Math.floor((requiredRank - 1) / 5) + 1) * 5),
+        ).at(-1)?.id ??
+        null;
     else boss = null;
   }
   const band =

@@ -154,7 +154,7 @@ def sheet(group,defs,faction=None,weapons=False):
   poses=4 if weapons else 36
   for h in range(dirs):
    for pose in range(poses):
-    im=art(d,h,pose,faction,weapons);box=im.getbbox() or (0,0,1,1);pivot=[im.width/2-box[0],im.height-8-box[1]];frames.append((d,h,pose,im.crop(box),pivot))
+    im=art(d,h*8/dirs,pose,faction,weapons);box=im.getbbox() or (0,0,1,1);pivot=[im.width/2-box[0],im.height-8-box[1]];frames.append((d,h,pose,im.crop(box),pivot))
  atlas=None;drawx=drawy=rowheight=0;atlas_index=-1;dedup={}
  def flush():
   if atlas is None:return

@@ -665,3 +665,324 @@ button[data-system="pause"] {
     font-size: 0.75rem;
   }
 }
+
+/* Player experience edition: the battlefield owns a real, unobscured viewport. */
+:root {
+  font-size: calc(16px * var(--game-scale));
+  --paper: #e6ece7;
+  --muted: #afc2bc;
+  --gold: #edc57e;
+}
+#full-field {
+  top: calc(var(--hud-bottom, 82px) + var(--objective-height, 118px) + 18px);
+  bottom: 82px;
+}
+#app[data-panel="true"] #full-field {
+  top: calc(var(--hud-bottom, 82px) + 8px);
+  bottom: calc(var(--panel-height, 300px) + 96px);
+}
+#app[data-battle="true"] #full-field {
+  top: calc(var(--hud-bottom, 82px) + 8px);
+}
+#app[data-title="true"] #full-field {
+  inset: 0;
+}
+#full-panel {
+  background: #1a2c2cf7;
+  border-color: #648278;
+}
+.panel-heading {
+  gap: 8px;
+  padding: 8px 12px;
+}
+.panel-heading h2 {
+  flex: 1;
+}
+#full-objective {
+  position: absolute;
+  left: 16px;
+  right: 80px;
+  top: calc(var(--hud-bottom, 82px) + 10px);
+  z-index: 3;
+  max-width: 540px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--gold);
+  background: linear-gradient(90deg, #182c2ef2, #182c2e99);
+  border-radius: 0 12px 12px 0;
+}
+#full-objective .eyebrow {
+  display: block;
+  font-size: 0.62rem;
+  margin: 0 0 3px;
+}
+#full-objective strong {
+  display: block;
+  font-size: 1rem;
+}
+#full-objective p {
+  font-size: 0.8rem;
+  line-height: 1.35;
+  margin: 4px 0 8px;
+}
+.objective-actions {
+  display: flex;
+  gap: 8px;
+}
+.objective-actions button {
+  min-height: 48px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+#app[data-panel="true"] #full-objective,
+#app[data-title="true"] #full-objective,
+#app[data-battle="true"] #full-objective {
+  display: none;
+}
+.asset-intro,
+.beginning-preview,
+.placement-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.asset-intro > div,
+.placement-card > div {
+  min-width: 0;
+  flex: 1;
+}
+.asset-intro h3,
+.placement-card h3 {
+  margin: 0 0 5px;
+}
+.asset-intro p,
+.placement-card p {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 4px 0 8px;
+}
+.asset-portrait {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 64px;
+  height: 76px;
+  border: 1px solid #5a726a;
+  border-radius: 10px;
+  background: radial-gradient(ellipse at center, #416458, #172c30);
+  overflow: hidden;
+}
+.asset-portrait svg {
+  display: block;
+  width: 52px;
+  height: 64px;
+  image-rendering: pixelated;
+}
+.asset-card,
+.mission-card {
+  background: linear-gradient(130deg, #29433eaa, #21343188);
+  border: 1px solid #546f62;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 8px 0 12px;
+}
+.asset-card > button {
+  width: 100%;
+  margin-top: 10px;
+}
+.asset-card details {
+  margin-top: 6px;
+}
+.asset-card summary {
+  font-size: 0.8rem;
+}
+.health-meter {
+  height: 6px;
+  background: #0d2024;
+  border: 1px solid #5a726a;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 7px 0;
+}
+.health-meter i {
+  height: 100%;
+  display: block;
+  background: #8cd3af;
+}
+.health-meter.critical i {
+  background: #edac8a;
+}
+.army-row .asset-portrait {
+  width: 48px;
+  height: 58px;
+  flex: none;
+}
+.army-row .asset-portrait svg {
+  width: 40px;
+  height: 50px;
+}
+.army-row > div {
+  min-width: 0;
+}
+.army-row > button {
+  flex: none;
+}
+.list-tools {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0;
+  flex-wrap: wrap;
+}
+.list-tools button {
+  font-size: 0.85rem;
+  padding: 8px 10px;
+}
+.empty-state {
+  padding: 16px;
+  border: 1px dashed #647b70;
+  border-radius: 10px;
+  color: var(--muted);
+}
+.chapter-progress {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0 0;
+}
+.chapter-progress span {
+  width: 36px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #60746b;
+  border-radius: 6px;
+  color: var(--muted);
+}
+.chapter-progress .current {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.chapter-progress .complete {
+  background: #39664f;
+  color: #d8f2db;
+}
+.brief-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  border-block: 1px solid #526b5c;
+  padding: 10px 0;
+  margin: 10px 0;
+}
+.brief-facts span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.brief-facts strong {
+  font-size: 0.95rem;
+}
+.panel-cta {
+  position: sticky;
+  bottom: -18px;
+  z-index: 2;
+  background: #1a2c2cf5;
+  padding: 10px 0;
+  margin: 8px 0;
+}
+.panel-cta > button {
+  width: 100%;
+}
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+#app[data-panel="true"] #full-toast {
+  bottom: calc(var(--panel-height, 300px) + 96px);
+}
+@media (min-width: 900px) and (orientation: landscape) {
+  #full-panel {
+    width: 372px;
+  }
+  #app[data-panel="true"] #full-field {
+    left: 404px;
+    bottom: 82px;
+  }
+  #full-objective {
+    max-width: 500px;
+  }
+  #app[data-panel="true"] #full-toast {
+    left: calc(50% + 190px);
+    bottom: 92px;
+    max-width: calc(100% - 440px);
+  }
+}
+@media (max-width: 540px) {
+  #full-objective {
+    left: 8px;
+    right: 66px;
+    padding: 8px;
+  }
+  .asset-portrait {
+    width: 52px;
+    height: 66px;
+  }
+  .asset-intro {
+    gap: 9px;
+  }
+  .asset-card,
+  .mission-card {
+    padding: 10px;
+  }
+  .title-card {
+    max-height: calc(100svh - 32px);
+  }
+  .brief-facts {
+    gap: 10px;
+  }
+  #app[data-placing="true"] #full-panel {
+    max-height: 44svh;
+  }
+}
+.high-contrast .asset-card,
+.high-contrast .mission-card,
+.high-contrast #full-objective {
+  background: #102323;
+  border-color: #b8d6c8;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
+#full-bar button {
+  min-width: 0;
+  flex: 1 1 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.camera-tools button {
+  font-size: 22px;
+}
+.camera-tools button[data-nav="Map"] {
+  font-size: 16px;
+}
+#full-panel {
+  bottom: calc(var(--bar-height, 64px) + 8px);
+}
+#full-field {
+  bottom: calc(var(--bar-height, 64px) + 8px);
+}
+#app[data-panel="true"] #full-field {
+  bottom: calc(var(--panel-height, 300px) + var(--bar-height, 64px) + 24px);
+}
+@media (min-width: 900px) and (orientation: landscape) {
+  #full-panel {
+    bottom: calc(var(--bar-height, 64px) + 24px);
+  }
+  #app[data-panel="true"] #full-field {
+    bottom: calc(var(--bar-height, 64px) + 24px);
+  }
+}

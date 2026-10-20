@@ -1,3 +1,14 @@
+import {
+  CATEGORY_NAMES,
+  FRONT_NAMES,
+  portrait,
+  healthMeter,
+  roleSummary,
+  nextObjective,
+  nextCampaign,
+  maintenance,
+  threatBrief,
+} from './presentation';
 import { ENTRANCES } from '../construction/geometry';
 import { authored } from './authored';
 import { series, offers, closeSeries, encounterCode, readEncounterCode } from './watch';
@@ -12,6 +23,7 @@ import {
   BUILD,
   FULL_VERSION,
   newGame,
+  makeAsset,
   assertGame,
   maxHealth,
   type Asset,
@@ -57,9 +69,7 @@ import {
 } from './economy';
 import { friendlyStats } from './stats';
 import { Database } from '../persistence/database';
-import { migrateLegacy } from './migration';
 import type { ProgressFence } from '../persistence/fence';
-import { readBackup } from '../persistence/backup';
 import { hash } from '../sim/determinism';
 import thresholds from '../data/progression.json';
 import { combineResults } from './results';
@@ -97,6 +107,12 @@ class FullApp {
   private busy = false;
   private selected: string | null = null;
   private section = '';
+  private backStack: string[] = [];
+  private pendingPurchase = false;
+  private armyFilter = 'Deployed';
+  private bulkMode = false;
+  private helpStep = 0;
+  private picker: string[] = [];
   private actions = new Map<string, () => void | Promise<void>>();
   private actionID = 0;
   private history: GameState[] = [];
@@ -140,7 +156,7 @@ class FullApp {
   private pendingRecovery: Result | null = null;
   private messageTimer: ReturnType<typeof setTimeout> | undefined;
   constructor() {
-    this.root.innerHTML = `<div class="full-shell"><div id="full-field" role="application" tabindex="0" aria-label="Bastion field. Drag to pan. Pinch to zoom. Arrow keys pan, plus and minus zoom."></div><header id="full-hud"></header><div class="camera-tools" aria-label="Camera"><button data-nav="Map" aria-label="Open tactical map">Map</button><button data-system="fit" aria-label="Center base">⌖</button><button data-system="rotate" aria-label="Rotate view">↻</button></div><section id="full-panel" aria-label="Game menu" hidden></section><nav id="full-bar" aria-label="Preparation menus"></nav><section id="full-title"></section><div id="full-toast" role="status" aria-live="polite"></div></div>`;
+    this.root.innerHTML = `<div class="full-shell"><div id="full-field" role="application" tabindex="0" aria-label="Bastion field. Drag to pan. Pinch to zoom. Arrow keys pan, plus and minus zoom."></div><header id="full-hud"></header><div class="camera-tools" aria-label="Camera"><button data-nav="Map" aria-label="Open tactical map">Map</button><button data-system="fit" aria-label="Center base">⌖</button><button data-system="rotate" aria-label="Rotate view">↻</button></div><aside id="full-objective" aria-label="Current objective"></aside><section id="full-panel" aria-label="Game menu" hidden></section><nav id="full-bar" aria-label="Preparation menus"></nav><section id="full-title"></section><div id="full-toast" role="status" aria-live="polite"></div></div>`;
     this.panel = this.root.querySelector('#full-panel')!;
     this.title = this.root.querySelector('#full-title')!;
     this.hud = this.root.querySelector('#full-hud')!;
@@ -148,6 +164,9 @@ class FullApp {
       this.root.style.setProperty('--hud-bottom', `${this.hud.getBoundingClientRect().bottom}px`),
     ).observe(this.hud);
     this.bar = this.root.querySelector('#full-bar')!;
+    new ResizeObserver(() =>
+      this.root.style.setProperty('--bar-height', `${this.bar.getBoundingClientRect().height}px`),
+    ).observe(this.bar);
     this.toast = this.root.querySelector('#full-toast')!;
     this.view = new FullView(this.root.querySelector('#full-field')!);
     this.view.onTap = (p, id) => {
@@ -161,7 +180,19 @@ class FullApp {
         this.open('Inspect');
       }
     };
+    new ResizeObserver(() =>
+      this.root.style.setProperty(
+        '--objective-height',
+        `${this.root.querySelector('#full-objective')!.getBoundingClientRect().height}px`,
+      ),
+    ).observe(this.root.querySelector('#full-objective')!);
     this.view.onPlacement = (p) => this.ghost(p.x, p.y);
+    this.view.onPick = (ids) => {
+      this.picker = ids;
+      this.open('Choose asset');
+    };
+    this.root.addEventListener('toggle', () => this.syncLayout(), true);
+    new ResizeObserver(() => this.syncLayout()).observe(this.panel);
     this.root.addEventListener('click', (event) => {
       const map = (event.target as HTMLElement).closest<SVGElement>('[data-map]');
       if (map) {
@@ -184,6 +215,19 @@ class FullApp {
         this.speed = this.speed === 0.5 ? 1 : this.speed === 1 ? 2 : this.speed === 2 ? 4 : 0.5;
         this.updateHUD();
       } else if (system === 'close') this.close();
+      else if (system === 'back') this.goBack();
+      else if (system === 'zoom-in') this.view.zoom(1.2);
+      else if (system === 'zoom-out') this.view.zoom(1 / 1.2);
+      else if (system === 'learn') this.open('Field guide');
+      else if (system === 'repair') this.open('Recovery');
+      else if (system === 'next-siege')
+        void this.run(async () => {
+          const o = nextObjective(this.state!);
+          this.mode = o.mode;
+          this.stage = o.stage;
+          this.band = Math.floor((this.state!.rank - 1) / 5) + 1;
+          await this.generate();
+        });
       else if (nav) this.open(nav);
       else if (action) {
         this.audio.sound('ui:press');
@@ -192,7 +236,12 @@ class FullApp {
       }
     });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') this.close();
+      if ((e.target as HTMLElement).closest('dialog')) return;
+      if (e.key === 'Escape') {
+        if (this.section) this.goBack();
+        else if (this.battle && !this.paused) this.togglePause();
+      }
+      if ((e.target as HTMLElement).matches('input,select,textarea,button,summary,a')) return;
       if (
         e.key === ' ' &&
         this.battle &&
@@ -255,6 +304,7 @@ class FullApp {
       return;
     }
     this.busy = true;
+    this.root.setAttribute('aria-busy', 'true');
     if (button) button.disabled = true;
     try {
       if (this.state) await this.audio.enable(this.state.settings);
@@ -263,6 +313,7 @@ class FullApp {
       this.notify(error instanceof Error ? error.message : String(error));
     } finally {
       this.busy = false;
+      this.root.removeAttribute('aria-busy');
       if (button?.isConnected) button.disabled = false;
     }
   }
@@ -273,13 +324,15 @@ class FullApp {
     this.messageTimer = setTimeout(() => this.toast.classList.remove('visible'), 6500);
   }
   private async confirm(title: string, message: string, accept = 'Confirm'): Promise<boolean> {
+    const opener = document.activeElement as HTMLElement | null;
     const dialog = document.createElement('dialog');
-    dialog.innerHTML = `<h2>${escapeHTML(title)}</h2><p>${escapeHTML(message)}</p><div class="button-row"><button class="cancel">Cancel</button><button class="primary accept">${escapeHTML(accept)}</button></div>`;
+    dialog.innerHTML = `<h2>${escapeHTML(title)}</h2><p>${escapeHTML(message)}</p><div class="button-row"><button class="cancel" autofocus>Cancel</button><button class="primary accept">${escapeHTML(accept)}</button></div>`;
     document.body.append(dialog);
     return new Promise((resolve) => {
       const end = (ok: boolean) => {
         dialog.close();
         dialog.remove();
+        if (opener?.isConnected) opener.focus();
         resolve(ok);
       };
       dialog.querySelector('.cancel')!.addEventListener('click', () => end(false));
@@ -415,16 +468,75 @@ class FullApp {
             this.newMenu();
           })
         : ''
-    }</div><p class="build-label">First pass · ${BUILD}${this.temporary ? ' · Temporary Session' : ''}</p></div>`;
+    }</div><p class="build-label">Player experience edition · ${BUILD}${this.temporary ? ' · Temporary Session' : ''}</p></div>`;
     this.hud.innerHTML = '';
     this.bar.innerHTML = '';
+    this.syncLayout();
     void this.audio.play('title');
   }
   private titlePage(title: string, content: string) {
     this.title.innerHTML = `<div class="title-card"><h2>${title}</h2><div class="title-copy">${content}</div>${this.button('Back', () => this.showTitle())}</div>`;
   }
+  private fieldGuide(): string {
+    const steps = [
+      [
+        'Look around',
+        'Drag empty ground to pan. Pinch to zoom. Center base brings you back.',
+        () => {
+          this.close();
+          this.view.fit();
+        },
+      ],
+      [
+        'Inspect a defender',
+        'Tap a defender on the field, or open Army and choose Inspect.',
+        () => this.open('Army'),
+      ],
+      [
+        'Build safely',
+        'Choose a unit, preview its position, then Place. Cancel spends nothing.',
+        () => this.open('Build'),
+      ],
+      [
+        'Prepare for the attack',
+        'The briefing shows the approach and threats. Your units fight automatically.',
+        async () => {
+          const o = nextObjective(this.state!);
+          this.mode = o.mode;
+          this.stage = o.stage;
+          await this.generate();
+        },
+      ],
+    ] as const;
+    const step = steps[this.helpStep]!;
+    return `<p class="eyebrow">FIELD GUIDE · ${this.helpStep + 1}/${steps.length}</p><h3>${step[0]}</h3><p>${step[1]}</p><div class="panel-cta">${this.button('Try it', step[2], true)}</div><div class="button-row">${this.button(
+      'Previous',
+      () => {
+        this.helpStep--;
+        this.renderPanel();
+      },
+      false,
+      this.helpStep === 0,
+    )}${this.button(
+      'Next tip',
+      () => {
+        this.helpStep++;
+        this.renderPanel();
+      },
+      false,
+      this.helpStep === steps.length - 1,
+    )}</div>`;
+  }
   private newMenu() {
-    this.title.innerHTML = `<div class="title-card"><p class="eyebrow">A NEW STRONGHOLD</p><h2>Choose your beginning</h2>${this.input('Bastion name', 'My Bastion', 'new-name', 'text', 'maxlength="64"')}${this.select('Save slot', ['1', '2', '3'], '1', () => {}, 'new-slot')}${this.select('Doctrine', ['Bastion', 'Mobile', 'Chokepoint'], 'Bastion', () => {}, 'new-doctrine')}${this.select('Starting Warden', ['Bulwark', 'Ranger', 'Conductor'], 'Bulwark', () => {}, 'new-warden')}<p class="muted">Bastion favors stable defenses. Mobile starts with Engineers. Chokepoint starts with more route pieces and traps. Every beginning includes 600 reserve Credits.</p><div class="button-row">${this.button('Back', () => this.showTitle())}${this.button(
+    const free = [0, 1, 2].find((slot) => !this.slots.some((v) => v.slot === slot)) ?? 0;
+    const updateBeginning = () => {
+      const w = this.value('new-warden'),
+        d = this.value('new-doctrine'),
+        preview = this.title.querySelector('.beginning-preview');
+      if (preview)
+        preview.innerHTML = `${portrait('warden.' + w.toLowerCase())}<div><strong>${escapeHTML(w)} · ${escapeHTML(d)}</strong><p class="muted">A ready-to-play defense with 600 Credits for changes.</p></div>`;
+    };
+    this.title.innerHTML = `<div class="title-card"><p class="eyebrow">A NEW STRONGHOLD</p><h2>Your first Bastion</h2><p>Build a defense. Protect the Core. Your units handle the fighting.</p><div class="beginning-preview">${portrait('warden.bulwark')}<div><strong>A ready-to-play defense</strong><p class="muted">Bulwark, Sentries, squads and barriers.</p></div></div>${this.input('Bastion name', 'My Bastion', 'new-name', 'text', 'maxlength="64"')}<details><summary>Customize your beginning</summary>${this.select('Save slot', ['1', '2', '3'], String(free + 1), () => {}, 'new-slot')}${this.select('Doctrine', ['Bastion', 'Mobile', 'Chokepoint'], 'Bastion', updateBeginning, 'new-doctrine')}${this.select('Starting Warden', ['Bulwark', 'Ranger', 'Conductor'], 'Bulwark', updateBeginning, 'new-warden')}<p class="muted">Bastion favors stable defenses. Mobile starts with Engineers. Chokepoint starts with more route pieces and traps. Every beginning includes 600 reserve Credits.</p></details><div class="button-row">${this.button('Back', () => this.showTitle())}${this.button(
       'Create Bastion',
       async () => {
         const slot = Number(this.value('new-slot')) - 1,
@@ -453,7 +565,7 @@ class FullApp {
         if (
           !(await this.confirm(
             'Review your beginning',
-            `${s.name} · Slot ${s.slot + 1} · ${s.doctrine} · ${definition(s.warden).name}. 600 Credits, ${s.assets.map((a) => definition(a.type).name).join(', ')}. Guided preparation starts without any bonus grant.`,
+            `${s.name} · ${definition(s.warden).name} · ${s.doctrine}. Your free starting defense is placed for you, with 600 Credits available for changes.`,
             'Create',
           ))
         )
@@ -502,6 +614,7 @@ class FullApp {
                   throw new Error(
                     'Resolve the earlier preview’s interrupted or pending siege before copying it. Open Earlier Preview from Data management.',
                   );
+                const { migrateLegacy } = await import('./migration');
                 const converted = migrateLegacy(raw, fence);
                 if (
                   await this.confirm(
@@ -531,10 +644,34 @@ class FullApp {
     }
     if (this.state) this.view.state = this.state;
     this.section = '';
+    this.backStack = [];
     this.panel.hidden = true;
+    this.pendingPurchase = false;
     this.deployment = null;
     this.view.ghost = null;
+    this.syncLayout();
     this.root.querySelector<HTMLElement>('#full-field')?.focus({ preventScroll: true });
+  }
+  private goBack() {
+    const caller = this.backStack.pop();
+    if (caller) {
+      this.section = caller;
+      this.deployment = null;
+      this.pendingPurchase = false;
+      this.view.ghost = null;
+      this.renderPanel();
+    } else this.close();
+  }
+  private syncLayout() {
+    const visible = !!this.section && !this.panel.hidden;
+    this.root.dataset.panel = String(visible);
+    this.root.dataset.title = String(!this.title.hidden);
+    this.root.dataset.battle = String(!!this.battle);
+    this.root.dataset.placing = String(!!this.deployment);
+    this.root.style.setProperty(
+      '--panel-height',
+      `${visible ? this.panel.getBoundingClientRect().height : 0}px`,
+    );
   }
   private open(section: string) {
     if (this.section === section) {
@@ -545,6 +682,10 @@ class FullApp {
       this.paused = true;
       this.audio.pause(true);
     }
+    const roots = ['Build', 'Army', 'Siege', 'Records', 'Manage', 'Battle tools'];
+    if (roots.includes(section)) this.backStack = [];
+    else if (this.section) this.backStack.push(this.section);
+    this.toast.classList.remove('visible');
     this.section = section;
     this.title.hidden = true;
     this.panel.hidden = false;
@@ -566,6 +707,7 @@ class FullApp {
       ? `<button data-nav="Battle tools">Siege tools</button><button data-nav="Inspect">Inspect</button>`
       : `${['Build', 'Army', 'Siege', 'Records', 'Manage'].map((k) => `<button data-nav="${k}" ${this.section === k ? 'aria-current="page"' : ''}>${k}</button>`).join('')}`;
     if (this.section) this.renderPanel();
+    this.syncLayout();
   }
   private updateHUD() {
     if (!this.state) return;
@@ -576,14 +718,18 @@ class FullApp {
       if (!this.hud.querySelector('[data-system="pause"]'))
         this.hud.innerHTML =
           '<div><strong></strong><span class="hud-detail"></span></div><div class="hud-right"><span></span><div class="playback-buttons"><button data-system="speed">1×</button><button data-system="pause">Pause</button></div></div><div class="boss-status"></div>';
-      this.hud.querySelector('strong')!.textContent = b.plan.name;
+      this.hud.querySelector('strong')!.textContent = this.paused
+        ? 'Siege paused'
+        : b.plan.stage !== null
+          ? stageInfo(b.plan.stage).name.split(' · ').at(-1)!
+          : b.plan.mode;
       this.hud.dataset.critical =
         b.core.hp < b.core.stats.health * 0.25 || !w?.hp ? 'true' : 'false';
       this.hud.querySelector('.hud-detail')!.textContent =
-        `Core ${body(b.core.hp)}${b.core.hp < b.core.stats.health * 0.25 ? ' · Critical' : ''} · ${w ? `${definition(s.warden).name} ${body(w.hp)}` : ''}`;
+        `Core ${Math.round((b.core.hp / b.core.stats.health) * 100)}%${b.core.hp < b.core.stats.health * 0.25 ? ' · Critical' : ''} · ${w ? `${definition(s.warden).name} ${Math.round((w.hp / w.stats.health) * 100)}%` : ''}`;
       this.hud.querySelector('.hud-right span')!.textContent = this.intermission
         ? `Next block ${(this.intermission / 60).toFixed(1)}s`
-        : `${Math.floor(b.tick / 3600)}:${String(Math.floor(b.tick / 60) % 60).padStart(2, '0')} combat · ${b.directorTick >= b.plan.duration * 60 ? 'Cleanup' : b.populationHeld ? 'Deployment held' : `Deploy ${Math.floor(b.directorTick / 60)}/${b.plan.duration}s`}`;
+        : `${Math.floor(b.tick / 3600)}:${String(Math.floor(b.tick / 60) % 60).padStart(2, '0')} combat · ${b.directorTick >= b.plan.duration * 60 ? 'Cleanup' : b.populationHeld ? 'Deployment held' : `Waves ${Math.min(100, Math.floor((b.directorTick / (b.plan.duration * 60)) * 100))}%`}`;
       this.hud.querySelector('[data-system="pause"]')!.textContent = this.paused
         ? 'Resume'
         : 'Pause';
@@ -601,16 +747,35 @@ class FullApp {
       }
       return;
     }
+    const objective = nextObjective(s),
+      readiness = maintenance(s);
+    const objectiveHTML = `<span class="eyebrow">YOUR NEXT OBJECTIVE</span><strong>${escapeHTML(objective.title)}</strong><p>${escapeHTML(objective.detail)}</p><div class="objective-actions"><button class="primary" data-system="next-siege">Next siege →</button><button data-system="${readiness.cost ? 'repair' : 'learn'}">${readiness.cost ? 'Repair · ' + n(readiness.cost) + ' ◈' : 'How to play'}</button></div>`;
+    const objectiveElement = this.root.querySelector('#full-objective')!;
+    if (objectiveElement.innerHTML !== objectiveHTML) objectiveElement.innerHTML = objectiveHTML;
     const next = thresholds.rankNext[s.rank - 1] ?? 0;
-    this.hud.innerHTML = `<div><strong>${escapeHTML(s.name)}</strong><span class="hud-detail">Rank ${s.rank}${s.rank < 100 ? ` · ${n(s.rankXP)} / ${n(next)} XP` : ''}</span></div><div class="hud-right"><span class="wallet">◈ ${n(s.credits)} <span class="core-wallet">✦ ${n(s.cores)}</span></span><span class="save-indicator">${this.temporary ? 'Temporary' : this.writer ? 'Saved' : 'Read only'}</span></div>`;
+    const hudHTML = `<div><strong>${escapeHTML(s.name)}</strong><span class="hud-detail">Rank ${s.rank}${s.rank < 100 ? ` · ${n(s.rankXP)} / ${n(next)} XP` : ''}</span></div><div class="hud-right"><span class="wallet">◈ ${n(s.credits)} <span class="core-wallet">✦ ${n(s.cores)}</span></span><span class="save-indicator">${this.temporary ? 'Temporary' : this.writer ? 'Saved' : 'Read only'}</span></div>`;
+    if (this.hud.innerHTML !== hudHTML) this.hud.innerHTML = hudHTML;
   }
   private renderPanel() {
     this.actions.clear();
     if (!this.state && this.section !== 'Data') return;
     const s = this.state;
-    this.panel.innerHTML = `<div class="panel-heading"><h2>${escapeHTML(this.section)}</h2><button data-system="close" aria-label="Close menu">×</button></div><div class="panel-content">${this.content(s)}</div>`;
+    this.panel.innerHTML = `<div class="panel-heading">${this.backStack.length ? '<button data-system="back" aria-label="Back to previous menu">‹</button>' : ''}<h2>${escapeHTML(this.section)}</h2><button data-system="close" aria-label="Close menu">×</button></div><div class="panel-content">${this.content(s)}</div>`;
+    this.syncLayout();
   }
   private content(s: GameState | null): string {
+    if (this.section === 'Choose asset')
+      return this.picker
+        .map((id) => {
+          const a = s?.assets.find((a) => a.id === id);
+          return this.button(a ? definition(a.type).name : 'Harmonic Core', () => {
+            this.selected = id;
+            this.view.selected = id;
+            this.open('Inspect');
+          });
+        })
+        .join('');
+    if (this.section === 'Field guide') return this.fieldGuide();
     if (this.section === 'Data') return this.dataMenu();
     if (!s) return '';
     if (this.section === 'Map') return this.mapMenu(s);
@@ -664,74 +829,84 @@ class FullApp {
       const a = this.deployment,
         d = definition(a.type),
         g = this.view.ghost;
-      return `<h3>Place ${d.name}</h3><p>Touch the field to position it. Drag the ghost to adjust; two fingers move the camera.</p><p class="${this.ghostError ? 'error' : 'muted'}">${escapeHTML(this.ghostError || 'Placement is valid')}</p><div class="button-row">${this.button(
-        'Rotate footprint',
+      return `<div class="placement-card">${portrait(a.type)}<div><h3>Place ${d.name}</h3><p class="muted">${this.pendingPurchase ? `${n(d.cost)} Credits on placement` : 'Already owned'} · Touch the field to position it.</p></div></div><p class="${this.ghostError ? 'error' : 'muted'}">${escapeHTML(this.ghostError || 'Position is valid')}</p><div class="button-row">${this.button(
+        'Cancel',
         () => {
-          this.rotation = (this.rotation + 1) % 4;
-          if (g) this.ghost(g.x, g.y);
-        },
-      )}${this.button(
-        'Confirm placement',
-        async () => {
-          if (!g || !g.valid) throw new Error(this.ghostError || 'Choose a valid position');
-          await this.command((c) => place(c, a.id, g.x, g.y, this.rotation));
           this.deployment = null;
+          this.pendingPurchase = false;
           this.view.ghost = null;
-          this.open('Army');
+          this.renderPanel();
+        },
+      )}${this.button('Rotate', () => {
+        this.rotation = (this.rotation + 1) % 4;
+        if (g) this.ghost(g.x, g.y);
+      })}${this.button(
+        'Place',
+        async () => {
+          if (!g?.valid) throw Error(this.ghostError || 'Choose a valid position');
+          let id = a.id;
+          await this.command((c) => {
+            if (this.pendingPurchase) id = buy(c, a.type).id;
+            place(c, id, g.x, g.y, this.rotation);
+          });
+          this.selected = id;
+          this.view.selected = id;
+          this.deployment = null;
+          this.pendingPurchase = false;
+          this.view.ghost = null;
+          this.close();
+          this.notify(`${d.name} placed. Tap it to adjust.`);
         },
         true,
         !g?.valid,
-      )}${this.button('Cancel', () => {
-        this.deployment = null;
-        this.view.ghost = null;
-        this.renderPanel();
-      })}</div>`;
+      )}</div><details><summary>Precise placement</summary><div class="two-columns">${this.input('Cell X', String(g?.x ?? 24), 'place-x', 'number', 'min="6" max="53"')}${this.input('Cell Y', String(g?.y ?? 20), 'place-y', 'number', 'min="6" max="53"')}</div>${this.button('Preview cell', () => this.ghost(Number(this.value('place-x')), Number(this.value('place-y'))))}<div class="button-row">${[
+        ['Left', -1, 0],
+        ['Right', 1, 0],
+        ['Up', 0, -1],
+        ['Down', 0, 1],
+      ]
+        .map(([label, x, y]) =>
+          this.button(String(label), () => {
+            if (g) this.ghost(g.x + Number(x), g.y + Number(y));
+          }),
+        )
+        .join('')}</div></details>`;
     }
     const used = usage(s),
       lim = limits(s);
-    return `<p class="compact-stat">Capacity ${used.capacity}/${lim.capacity} · Route cells ${used.barriers}/${lim.barriers} · Traps ${used.traps}/${lim.traps}</p>${this.select(
+    const cards = (locked: boolean) =>
+      FRIENDLIES.filter((d) => d.category === this.buildCategory && d.rank > s.rank === locked)
+        .map((d) => {
+          const stored = s.assets.find((a) => a.type === d.id && !a.placement && a.hp),
+            reason =
+              d.rank > s.rank
+                ? `Rank ${d.rank}`
+                : !stored && s.credits < d.cost
+                  ? 'Need ' + n(d.cost - s.credits) + ' more Credits'
+                  : '';
+          return `<article class="asset-card"><div class="asset-intro">${portrait(d.id)}<div><h3>${d.name}</h3><p>${escapeHTML(roleSummary(d.id))}</p><span class="muted">${d.capacity} capacity · ${d.width}×${d.height}</span></div></div>${this.button(
+            reason || (stored ? 'Deploy stored' : `Build · ${n(d.cost)} ◈`),
+            () => {
+              this.pendingPurchase = !stored;
+              this.deploy(stored ?? makeAsset(d.id));
+            },
+            !locked,
+            !!reason,
+          )}<details><summary>Stats & role details</summary><p>${n(d.health)} body · ${d.armor} armor${d.damage ? ` · ${d.damage} / ${d.interval}s · ${d.range} range` : ''}</p><p>${escapeHTML(this.describe(d.id))}</p></details></article>`;
+        })
+        .join('');
+    return `<p class="compact-stat">${used.capacity}/${lim.capacity} capacity used</p>${this.select(
       'Category',
-      ['tower', 'mobile', 'support', 'trap', 'route', 'infrastructure'],
-      this.buildCategory,
+      Object.values(CATEGORY_NAMES),
+      CATEGORY_NAMES[this.buildCategory]!,
       (v) => {
-        this.buildCategory = v as Category;
+        this.buildCategory = Object.keys(CATEGORY_NAMES).find(
+          (k) => CATEGORY_NAMES[k as Category] === v,
+        ) as Category;
         this.renderPanel();
       },
       'build-category',
-    )}<div class="catalog-list">${FRIENDLIES.filter((d) => d.category === this.buildCategory)
-      .map((d) => {
-        const owned = s.assets.filter((a) => a.type === d.id && !a.placement).length;
-        return `<details class="menu-card"><summary><span>${d.name}</span><span>${d.rank > s.rank ? `Rank ${d.rank}` : `${n(d.cost)} ◈`}${owned ? ` · ${owned} stored` : ''}</span></summary><p>${escapeHTML(d.description || this.describe(d.id))}</p><p>${d.width}×${d.height} · ${d.capacity} capacity · ${n(d.health)} body · ${d.armor} armor${d.damage ? ` · ${d.damage} / ${d.interval}s · ${d.range} range` : ''}</p><div class="button-row">${
-          owned
-            ? this.button('Deploy stored', () => {
-                const a = s.assets.find((a) => a.type === d.id && !a.placement)!;
-                this.deploy(a);
-              })
-            : ''
-        }${this.button(
-          'Recruit / purchase',
-          async () => {
-            if (
-              s.settings.confirmSpending &&
-              !(await this.confirm(
-                'Purchase asset',
-                `${d.name} · ${n(d.cost)} Credits · starts in storage`,
-                'Purchase',
-              ))
-            )
-              return;
-            let id = '';
-            await this.command((c) => {
-              id = buy(c, d.id).id;
-            });
-            this.selected = id;
-            this.open('Inspect');
-          },
-          false,
-          d.rank > s.rank,
-        )}</div></details>`;
-      })
-      .join('')}</div><details><summary>Layout tools</summary><div class="button-row">${this.button(
+    )}<div class="catalog-list">${cards(false) || '<p>No assets unlocked in this category yet.</p>'}</div><details><summary>Later unlocks</summary>${cards(true) || '<p>All types in this category are unlocked.</p>'}</details><details><summary>Layout tools</summary><div class="button-row">${this.button(
       'Guided layout',
       async () => {
         if (
@@ -751,6 +926,7 @@ class FullApp {
   }
 
   private deploy(a: Asset) {
+    if (this.state?.assets.some((v) => v.id === a.id)) this.pendingPurchase = false;
     this.deployment = a;
     this.rotation = a.placement?.rotation ?? 0;
     this.section = 'Build';
@@ -760,7 +936,22 @@ class FullApp {
   }
   private ghost(x: number, y: number) {
     if (!this.deployment || !this.state) return;
-    const clone = structuredClone(this.state);
+    x = Math.floor(x);
+    y = Math.floor(y);
+    const old = this.view.ghost;
+    if (
+      old &&
+      old.type === this.deployment.type &&
+      old.x === x &&
+      old.y === y &&
+      old.rotation === this.rotation
+    )
+      return;
+    const clone = {
+      ...this.state,
+      assets: this.state.assets.map((a) => ({ ...a, tactics: { ...a.tactics } })),
+    };
+    if (this.pendingPurchase) clone.assets.push(structuredClone(this.deployment));
     let valid = true;
     this.ghostError = '';
     try {
@@ -775,45 +966,79 @@ class FullApp {
   private armyMenu(s: GameState): string {
     const used = usage(s),
       lim = limits(s);
-    return `<p class="compact-stat">${s.assets.length} owned · ${used.capacity}/${lim.capacity} capacity</p><div class="button-row">${this.button(
-      'Store selected',
-      () =>
-        this.bulkCommand((c) => {
-          for (const a of c.assets) if (this.bulk.has(a.id)) storeAsset(c, a);
-        }),
-      false,
-      !this.bulk.size,
-    )}${this.button('Move selected', () => this.open('Group move'), false, !this.bulk.size)}${this.button(
-      'Repair selected',
-      async () => {
-        const selected = s.assets.filter((a) => this.bulk.has(a.id)),
-          cost = selected.reduce((n, a) => n + repairQuote(a), 0);
-        if (
-          await this.confirm(
-            'Bulk repair',
-            `${selected.length} assets · ${n(cost)} Credits. Wrecks return at 50% body.`,
-          )
-        )
-          await this.bulkCommand((c) => {
-            for (const a of c.assets) if (this.bulk.has(a.id)) repair(c, a);
-          });
+    const visible = s.assets.filter(
+      (a) =>
+        this.armyFilter === 'All' ||
+        (this.armyFilter === 'Deployed'
+          ? !!a.placement
+          : this.armyFilter === 'Storage'
+            ? !a.placement
+            : a.hp < maxHealth(a) || a.charges === 0),
+    );
+    return `${this.select(
+      'Show assets',
+      ['Deployed', 'Storage', 'Needs care', 'All'],
+      this.armyFilter,
+      (v) => {
+        this.armyFilter = v;
+        this.renderPanel();
       },
-      false,
-      !this.bulk.size,
-    )}${this.button(
-      'Rearm selected',
-      async () => {
-        const cost = s.assets
-          .filter((a) => this.bulk.has(a.id))
-          .reduce((n, a) => n + rearmQuote(a), 0);
-        if (await this.confirm('Bulk rearm', `${n(cost)} Credits for all selected finite traps.`))
-          await this.bulkCommand((c) => {
-            for (const a of c.assets) if (this.bulk.has(a.id)) rearm(c, a);
-          });
+      'army-filter',
+    )}<div class="list-tools">${this.button(
+      this.bulkMode ? 'Done selecting' : 'Select several',
+      () => {
+        this.bulkMode = !this.bulkMode;
+        this.bulk.clear();
+        this.renderPanel();
       },
-      false,
-      !this.bulk.size,
-    )}</div><div class="army-list">${s.assets
+    )}${this.button('Repair & rearm', () => this.open('Recovery'))}</div><p class="compact-stat">${s.assets.length} owned · ${used.capacity}/${lim.capacity} capacity</p>${
+      this.bulkMode
+        ? `<div class="button-row">${this.button(
+            'Store selected',
+            () =>
+              this.bulkCommand((c) => {
+                for (const a of c.assets) if (this.bulk.has(a.id)) storeAsset(c, a);
+              }),
+            false,
+            !this.bulk.size,
+          )}${this.button('Move selected', () => this.open('Group move'), false, !this.bulk.size)}${this.button(
+            'Repair selected',
+            async () => {
+              const selected = s.assets.filter((a) => this.bulk.has(a.id)),
+                cost = selected.reduce((n, a) => n + repairQuote(a), 0);
+              if (
+                await this.confirm(
+                  'Bulk repair',
+                  `${selected.length} assets · ${n(cost)} Credits. Wrecks return at 50% body.`,
+                )
+              )
+                await this.bulkCommand((c) => {
+                  for (const a of c.assets) if (this.bulk.has(a.id)) repair(c, a);
+                });
+            },
+            false,
+            !this.bulk.size,
+          )}${this.button(
+            'Rearm selected',
+            async () => {
+              const cost = s.assets
+                .filter((a) => this.bulk.has(a.id))
+                .reduce((n, a) => n + rearmQuote(a), 0);
+              if (
+                await this.confirm(
+                  'Bulk rearm',
+                  `${n(cost)} Credits for all selected finite traps.`,
+                )
+              )
+                await this.bulkCommand((c) => {
+                  for (const a of c.assets) if (this.bulk.has(a.id)) rearm(c, a);
+                });
+            },
+            false,
+            !this.bulk.size,
+          )}</div>`
+        : ''
+    }<div class="army-list">${!visible.length ? '<p class="empty-state">' + (this.armyFilter === 'Storage' ? 'No assets in storage. Buy from Build or store a deployed asset.' : 'Your force is ready. No assets need care.') + '</p>' : ''}${visible
       .slice()
       .sort(
         (a, b) =>
@@ -822,14 +1047,18 @@ class FullApp {
       )
       .map(
         (a) =>
-          `<article class="army-row"><button class="check" aria-label="Select ${definition(a.type).name} for bulk action" data-action="${this.register(
-            () => {
-              if (this.bulk.has(a.id)) this.bulk.delete(a.id);
-              else if (this.bulk.size < 40) this.bulk.add(a.id);
-              else throw new Error('Bulk commands are limited to 40 assets');
-              this.renderPanel();
-            },
-          )}">${this.bulk.has(a.id) ? '☑' : '□'}</button><div><strong>${definition(a.type).name}</strong><p>${a.placement ? 'Deployed' : 'Stored'} · ${body(a.hp)}/${body(maxHealth(a))}${definition(a.type).profile ? ` · L${a.level} · ${a.stars}★ E${a.enhancement}` : ''}${a.charges !== null ? ` · ${a.charges} charges` : ''}</p></div>${this.button(
+          `<article class="army-row">${portrait(a.type)}${
+            this.bulkMode
+              ? `<button class="check" aria-label="Select ${definition(a.type).name} for bulk action" data-action="${this.register(
+                  () => {
+                    if (this.bulk.has(a.id)) this.bulk.delete(a.id);
+                    else if (this.bulk.size < 40) this.bulk.add(a.id);
+                    else throw new Error('Bulk commands are limited to 40 assets');
+                    this.renderPanel();
+                  },
+                )}">${this.bulk.has(a.id) ? '☑' : '□'}</button>`
+              : ''
+          }<div><strong>${definition(a.type).name}</strong><p>${a.placement ? 'Deployed' : 'Stored'} · ${body(a.hp)}/${body(maxHealth(a))}${definition(a.type).profile ? ` · L${a.level} · ${a.stars}★ E${a.enhancement}` : ''}${a.charges !== null ? ` · ${a.charges} charges` : ''}</p>${healthMeter(a.hp, maxHealth(a))}</div>${this.button(
             'Inspect',
             () => {
               this.selected = a.id;
@@ -922,7 +1151,7 @@ class FullApp {
       p = PROMOTIONS.find((p) => p.star === a.stars + 1),
       repairCost = repairQuote(a),
       q = saleQuote(a);
-    return `<h3>${d.name}</h3><p>${this.describe(a.type)}</p>${
+    return `<div class="asset-intro">${portrait(a.type)}<div><h3>${d.name}</h3><p>${escapeHTML(roleSummary(a.type))}</p>${healthMeter(a.hp, maxHealth(a))}</div></div><details><summary>Mechanics & role details</summary><p>${this.describe(a.type)}</p></details>${
       d.category === 'warden' && s.rank >= 5
         ? this.select(
             'Warden doctrine preference',
@@ -1154,30 +1383,30 @@ class FullApp {
       ...(s.rank >= 90 ? ['Cataclysm' as const] : []),
     ];
     let specifics = '';
-    if (this.mode === 'Campaign')
-      specifics = CHAPTERS.map(
+    if (this.mode === 'Campaign') {
+      const info = stageInfo(this.stage),
+        ready = s.rank >= info.rank && (!this.stage || s.stages.includes(this.stage - 1));
+      specifics = `<article class="mission-card"><p class="eyebrow">CHAPTER ${info.chapter + 1} · ${CHAPTERS[info.chapter]}</p><h3>${escapeHTML(info.name.split(' · ').at(-1)!)}</h3><p>${info.index === 4 ? 'Boss siege' : 'Siege ' + (info.index + 1) + ' of 5'} · ${s.stages.includes(this.stage) ? 'Cleared' : ready ? 'Ready' : 'Requires Rank ' + info.rank}</p><div class="chapter-progress" aria-label="Chapter progress">${Array.from({ length: 5 }, (_, i) => `<span class="${s.stages.includes(info.chapter * 5 + i) ? 'complete' : i === info.index ? 'current' : ''}">${i === 4 ? '✦' : i + 1}</span>`).join('')}</div></article><details><summary>Campaign stages · ${s.stages.length}/40 cleared</summary>${CHAPTERS.map(
         (title, ch) =>
-          `<details ${Math.floor(this.stage / 5) === ch ? 'open' : ''}><summary>${ch + 1}. ${title} · Rank ${CHAPTER_RANKS[ch]}</summary><div class="stage-grid">${Array.from(
+          `<details><summary>${ch + 1}. ${title} · Rank ${CHAPTER_RANKS[ch]}</summary><div class="stage-grid">${Array.from(
             { length: 5 },
             (_, i) => ch * 5 + i,
           )
-            .map((stage) => {
-              const info = stageInfo(stage),
-                unlocked = (!stage || s.stages.includes(stage - 1)) && s.rank >= info.rank;
-              return this.button(
-                `${s.stages.includes(stage) ? '✓ ' : ''}Stage ${(stage % 5) + 1}${stage % 5 === 4 ? ' · Boss' : ''}${this.stage === stage ? ' ◇' : ''}`,
+            .map((stage) =>
+              this.button(
+                `${s.stages.includes(stage) ? '✓ ' : ''}Stage ${(stage % 5) + 1}${stage % 5 === 4 ? ' · Boss' : ''}${stage === this.stage ? ' ◇' : ''}`,
                 () => {
                   this.stage = stage;
                   this.forecast = null;
                   this.renderPanel();
                 },
                 false,
-                !unlocked,
-              );
-            })
+                s.rank < stageInfo(stage).rank || (!!stage && !s.stages.includes(stage - 1)),
+              ),
+            )
             .join('')}</div></details>`,
-      ).join('');
-    else if (this.mode === 'Archive')
+      ).join('')}</details>`;
+    } else if (this.mode === 'Archive')
       specifics = s.archive.length
         ? s.archive
             .map(
@@ -1345,7 +1574,7 @@ class FullApp {
             : ''
         }</details>`;
     }
-    return `${this.select(
+    return `<details><summary>Other ways to play & difficulty</summary>${this.select(
       'Mode',
       modes,
       this.mode,
@@ -1364,7 +1593,7 @@ class FullApp {
         this.forecast = null;
       },
       'siege-difficulty',
-    )}${specifics}${this.mode !== 'Archive' ? this.button(this.mode === 'Long Watch' ? 'Next sortie / review offers' : 'Review forecast', () => this.generate(), true) : ''}${this.button('Import encounter code', () => this.importEncounter())}`;
+    )}</details>${specifics}${this.mode !== 'Archive' ? this.button(this.mode === 'Long Watch' ? 'Next sortie / review offers' : 'Review forecast', () => this.generate(), true) : ''}<details><summary>Shared encounters</summary>${this.button('Import encounter code', () => this.importEncounter())}</details>`;
   }
   private async generate() {
     if (!this.state) return;
@@ -1472,7 +1701,32 @@ class FullApp {
     const roles = [...new Set(p.spawns.map((v) => v.type))],
       threat = p.spawns.reduce((n, v) => n + v.qtp / 4, 0),
       fronts = [...new Set(p.spawns.map((v) => v.entrance))];
-    return `<h3>${escapeHTML(p.name)}</h3><p>${p.faction} · ${p.difficulty} · Band ${p.band} · ${p.duration}s deployment${p.mode === 'Endurance' ? ` × ${p.blocks} blocks` : ''} + cleanup</p><p>${n(threat)} planned Threat Points · ${fronts.length} active fronts · ${p.spawns.length} deployments${p.boss ? ` · ${definition(p.boss).name} at 180s` : ''}</p><svg class="pressure-chart" viewBox="0 0 300 64" role="img" aria-label="Planned wave pressure">${p.pressure.map((v, i) => `<rect x="${(i * 300) / p.pressure.length}" y="${60 - v * 0.55}" width="${300 / p.pressure.length - 2}" height="${v * 0.55}" fill="#7bc9cf"/>`).join('')}</svg>${warnings.map((w) => `<p class="notice">${w}</p>`).join('')}<p class="muted">Combat is autonomous. Camera, pause, sound and inspection remain available. ${p.mode === 'Calibration' ? 'This practice session earns nothing and does not injure your owned force.' : `Body losses and finite stock persist. Repeat reward factor ${(Math.min(1, (p.band + 2) / (Math.floor((s.rank - 1) / 5) + 1)) * 100).toFixed(0)}%${p.stage !== null && !s.stages.includes(p.stage) ? ' (first unclaimed campaign attempt: 100%)' : ''}.`}</p><details><summary>Enemy composition and counters</summary>${roles.map((id) => `<p><strong>${definition(id).name}</strong> · ${this.enemyCounter(id)}</p>`).join('')}</details><details><summary>Seed and versions</summary><p class="break-word">${escapeHTML(p.seed)}</p><p>${FULL_VERSION} · ${p.hash.slice(0, 16)}</p><p>Composition uses declared progression and seed, independent of your wallet, body condition and force strength.</p></details><div class="button-row">${this.button('Back', () => this.open('Siege'))}${this.button('Export encounter code', () => this.shareEncounter(p))}${this.button(p.mode === 'Calibration' ? 'Start practice' : 'Start siege', () => this.startSiege(p), true)}</div>`;
+    this.view.forecast = p;
+    const brief = threatBrief(p),
+      cannotStart = shown.coreHP <= 0 || !units.some((a) => definition(a.type).weapon !== 'none'),
+      readiness = maintenance(s);
+    return `<article class="mission-card"><p class="eyebrow">${p.mode === 'Calibration' ? 'FREE PRACTICE' : p.difficulty.toUpperCase() + ' SIEGE'}</p><h3>${escapeHTML(p.stage !== null ? stageInfo(p.stage).name.split(' · ').at(-1)! : p.name)}</h3><div class="brief-facts"><div><span>Attack from</span><strong>${brief.fronts}</strong></div><div><span>Deployment</span><strong>${Math.floor(p.duration / 60)}m ${p.duration % 60 ? `${p.duration % 60}s` : ''}${p.blocks > 1 ? ` × ${p.blocks}` : ''}</strong></div></div><p><strong>${brief.summary}</strong></p><p class="muted">${brief.counter}</p></article>${p.stage === 1 ? '<p class="notice">This siege is stronger. Face the approach and consider adding a Sentry or Rifle Squad with your earned Credits.</p>' : ''}${warnings.map((w) => `<p class="notice">${w}</p>`).join('')}${cannotStart ? '<p class="notice">Restore the Core and deploy a living damage dealer before starting.</p>' : ''}<div class="panel-cta">${this.button(p.mode === 'Calibration' ? 'Start practice' : 'Start siege', () => this.startSiege(p), true, cannotStart)}</div><div class="button-row">${this.button(
+      'Adjust defenses',
+      () => {
+        this.close();
+        this.open('Build');
+      },
+    )}${
+      p.stage !== null && p.stage < 5 && fronts.length === 1
+        ? this.button('Face this attack', async () => {
+            if (
+              await this.confirm(
+                'Face this attack',
+                'Rearrange compatible owned defenders toward this approach. Other assets may return to storage. Credits are unchanged.',
+                'Rearrange',
+              )
+            ) {
+              await this.command((c) => guidedLayout(c, fronts[0]!));
+              this.view.fit();
+            }
+          })
+        : ''
+    }${readiness.cost && !p.practice ? this.button(`Repair · ${n(readiness.cost)} ◈`, () => this.open('Recovery')) : ''}</div><p class="muted">${p.practice ? 'Practice earns nothing and leaves your real force unchanged.' : 'Survive all waves and clear the attackers. Damage and spent trap charges remain afterward.'}</p><details><summary>Enemy roles & counters</summary>${roles.map((id) => `<p><strong>${definition(id).name}</strong> · ${this.enemyCounter(id)}</p>`).join('')}</details><details><summary>Wave pressure & encounter details</summary><p>${p.faction} · Band ${p.band} · ${n(threat)} threat · ${fronts.length} fronts · ${p.spawns.length} deployments${p.boss ? ' · Boss at 3:00' : ''}</p><svg class="pressure-chart" viewBox="0 0 300 64" role="img" aria-label="Planned wave pressure">${p.pressure.map((v, i) => `<rect x="${(i * 300) / p.pressure.length}" y="${60 - v * 0.55}" width="${300 / p.pressure.length - 2}" height="${v * 0.55}" fill="#7bc9cf"/>`).join('')}</svg><p class="break-word">Seed: ${escapeHTML(p.seed)}</p>${this.button('Export encounter code', () => this.shareEncounter(p))}</details>`;
   }
   private enemyCounter(id: string): string {
     const tag = id.split('.').at(-1)!;
@@ -1594,6 +1848,9 @@ class FullApp {
           e.signatureShots = this.state.active.signatureShots[e.owned] ?? 0;
         }
     this.view.battle = this.battle;
+    this.view.forecast = null;
+    this.speed = 1;
+    this.view.fit();
     this.paused = false;
     this.accumulator = 0;
     this.lastFrame = performance.now();
@@ -1743,6 +2000,8 @@ class FullApp {
     await this.save(after);
     this.state = after;
     this.record = r;
+    this.resultsTab = 'Summary';
+    this.stage = nextCampaign(after);
     this.battle = null;
     this.view.battle = null;
     this.view.state = after;
@@ -1798,11 +2057,24 @@ class FullApp {
           }
         },
       )}</div>`;
-    const deployed = s.assets.filter((a) => a.placement),
-      cost =
-        Math.ceil((10240000 - s.coreHP) / 10240) +
-        deployed.reduce((n, a) => n + repairQuote(a) + rearmQuote(a), 0);
-    return `<h3>Core and readiness</h3><p>Core ${body(s.coreHP)} / 10,000 Integrity</p>${this.button(`Repair Core · ${n(Math.ceil((10240000 - s.coreHP) / 10240))} ◈`, () => this.command((c) => repair(c, null)), false, s.coreHP === 10240000)}<details><summary>Partial repairs</summary><div class="button-row">${[0.25, 0.5].map((f) => this.button(`${f * 100}% missing Core body`, () => this.command((c) => repair(c, null, f)))).join('')}${this.button(
+    const { cost } = maintenance(s);
+    return `<div class="panel-cta">${this.button(
+      cost ? `Restore force · ${n(cost)} ◈` : 'Force ready',
+      async () => {
+        if (
+          await this.confirm(
+            'Restore force',
+            `${n(cost)} Credits restores the Core, all deployed bodies including wrecks, and trap charges.`,
+            'Restore',
+          )
+        )
+          await this.command((c) => {
+            maintenance(c, true);
+          });
+      },
+      true,
+      !cost || cost > s.credits,
+    )}</div><h3>Core and readiness</h3><p>Core ${body(s.coreHP)} / 10,000 Integrity</p>${this.button(`Repair Core · ${n(Math.ceil((10240000 - s.coreHP) / 10240))} ◈`, () => this.command((c) => repair(c, null)), false, s.coreHP === 10240000)}<details><summary>Partial repairs</summary><div class="button-row">${[0.25, 0.5].map((f) => this.button(`${f * 100}% missing Core body`, () => this.command((c) => repair(c, null, f)))).join('')}${this.button(
       'Maximum affordable Core repair',
       () =>
         this.command((c) => {
@@ -1817,15 +2089,11 @@ class FullApp {
         if (
           await this.confirm(
             'Restore readiness',
-            `${n(cost)} Credits. All deployed living bodies become full; wrecks return at half body and finite traps receive full permanent stock.`,
+            `${n(cost)} Credits restores full deployed health, including wrecks, and finite trap stock.`,
           )
         )
           await this.command((c) => {
-            repair(c, null);
-            for (const a of c.assets.filter((a) => a.placement)) {
-              repair(c, a);
-              rearm(c, a);
-            }
+            maintenance(c, true);
           });
       },
     )}<details><summary>Emergency recovery</summary><p>At zero Credits, assistance raises the Core to at least 25% and restores a basic defending force to at least half body. Subsidized assets cannot be sold for a profit. A paid victory unlocks existing refund locks.</p>${this.button('Request emergency assistance', () => this.command((c) => emergency(c), false), false, s.credits > 0)}</details>`;
@@ -1884,14 +2152,14 @@ class FullApp {
     const jump = (x: number, y: number) => {
       this.view.jump({ x, y });
     };
-    return `<p>North stays at the top. Tap a broad region to move the camera. Cyan marks allies; ochre marks perceived hostiles. Air contacts use diamonds.</p>${this.view.tacticalMap()}<div class="button-row">${this.button('Jump to Core', () => jump(30, 30))}${this.button('Jump to Warden', () => jump(warden ? warden.x / 1024 : 30, warden ? warden.y / 1024 : 34))}${this.button(
+    return `<p>North stays at the top. Tap a broad region to move the camera. Cyan marks allies; ochre marks perceived hostiles. Air contacts use diamonds.</p>${this.view.tacticalMap()}<div class="button-row"><button data-system="zoom-out" aria-label="Zoom out">− Zoom</button><button data-system="zoom-in" aria-label="Zoom in">+ Zoom</button></div><details><summary>Jump to a location</summary><div class="button-row">${this.button('Jump to Core', () => jump(30, 30))}${this.button('Jump to Warden', () => jump(warden ? warden.x / 1024 : 30, warden ? warden.y / 1024 : 34))}${this.button(
       boss ? 'Jump to boss' : 'Boss not located',
       () => {
         if (boss) jump(boss.x / 1024, boss.y / 1024);
       },
       false,
       !boss,
-    )}${ENTRANCES.map((p, i) => this.button('Front ' + (i + 1), () => jump(p.x, p.y))).join('')}</div>${this.battle ? '<p>Map inspection pauses combat. Close the map and press Resume when ready.</p>' : ''}<details><summary>Routes and tactics</summary>${this.button(
+    )}${ENTRANCES.map((p, i) => this.button(FRONT_NAMES[i]!, () => jump(p.x, p.y))).join('')}</div></details>${this.battle ? '<p>Map inspection pauses combat. Close the map and press Resume when ready.</p>' : ''}<details><summary>Routes and tactics</summary>${this.button(
       this.view.routesVisible ? 'Hide routes and anchors' : 'Show routes and anchors',
       () => {
         this.view.routesVisible = !this.view.routesVisible;
@@ -1935,7 +2203,7 @@ class FullApp {
       'Unlocks',
     ];
     if (this.resultsTab === 'Summary')
-      details = `<h3>${r.practice ? 'Practice · ' : ''}${r.outcome}</h3><p>${escapeHTML(r.plan.name)} · ${Math.floor(r.seconds)} combat seconds</p><div class="result-stats"><div><strong>${body(r.coreHP)}</strong><span>Core Integrity</span></div><div><strong>${r.wrecks}</strong><span>Owned wrecks</span></div><div><strong>${n(r.credits)}</strong><span>Credits earned</span></div></div><p>${r.practice ? 'Owned body, stock, wallet and progress are unchanged.' : 'Rewards and ending body are already committed. Returning to base cannot collect them again.'}</p>${!r.practice && this.state ? `<p>Estimated deployed recovery: ${n(Math.ceil((10240000 - this.state.coreHP) / 10240) + this.state.assets.filter((a) => a.placement).reduce((sum, a) => sum + repairQuote(a) + rearmQuote(a), 0))} Credits. Net reward depends on your chosen repairs.</p>` : ''}`;
+      details = `<h3>${r.practice ? 'Practice · ' : ''}${r.outcome}</h3><p>${escapeHTML(r.plan.name)} · ${Math.floor(r.seconds)} combat seconds</p><div class="result-stats"><div><strong>${body(r.coreHP)}</strong><span>Core Integrity</span></div><div><strong>${r.wrecks}</strong><span>Owned wrecks</span></div><div><strong>${n(r.credits)}</strong><span>Credits earned</span></div></div><p>${r.practice ? 'Owned body, stock, wallet and progress are unchanged.' : 'Rewards and ending body are already committed. Returning to base cannot collect them again.'}</p>${!r.practice && this.state ? `<p>Estimated deployed recovery: ${n(maintenance(this.state).cost)} Credits. Net reward depends on your chosen repairs.</p>` : ''}`;
     if (this.resultsTab === 'Rewards')
       details = `<div class="result-stats"><div><strong>${n(r.credits)}</strong><span>Credits</span></div><div><strong>${n(r.xp)}</strong><span>Bastion XP</span></div><div><strong>${n(r.assetXP)}</strong><span>Asset XP pool</span></div><div><strong>${n(r.cores)}</strong><span>Promotion Cores</span></div></div><p>Unused asset XP at level caps: ${n(r.unusedAssetXP)}</p><p>${r.bonuses.map(escapeHTML).join(' · ')}</p>${r.clipped !== '0' ? `<p>Wallet limit: ${r.clipped} excess was not credited.</p>` : ''}<details><summary>Destroyed-threat origins</summary><table><thead><tr><th>Block / segment</th><th>Destroyed / planned TP</th></tr></thead><tbody>${r.buckets.map((b) => `<tr><td>${b.block} / ${b.segment}</td><td>${b.destroyedQTP / 4} / ${b.plannedQTP / 4}</td></tr>`).join('')}</tbody></table></details>`;
     if (this.resultsTab === 'Friendly performance')
@@ -2038,7 +2306,7 @@ class FullApp {
   }
   private settingsMenu(s: GameState): string {
     const t = s.settings;
-    return `${this.input('Master volume (%)', String(Math.round(t.master * 100)), 'set-master', 'range', 'min="0" max="100"')}${this.input('Alerts volume (%)', String(Math.round(t.alerts * 100)), 'set-alerts', 'range', 'min="0" max="100"')}${this.select('Effects', ['Full', 'Reduced'], t.reducedEffects ? 'Reduced' : 'Full', () => {}, 'set-effects')}${this.select('Contrast', ['Standard', 'High'], t.highContrast ? 'High' : 'Standard', () => {}, 'set-contrast')}${this.select('UI scale', ['100', '125', '150', '175', '200'], String(t.uiScale), () => {}, 'set-scale')}${this.select('Render quality', ['Auto', 'High', 'Low'], t.quality, () => {}, 'set-quality')}${this.select('Sound', ['Enabled', 'Muted'], t.muted ? 'Muted' : 'Enabled', () => {}, 'set-muted')}${this.input('Music volume (%)', String(Math.round(t.music * 100)), 'set-music', 'range', 'min="0" max="100"')}${this.input('Effects volume (%)', String(Math.round(t.sfx * 100)), 'set-sfx', 'range', 'min="0" max="100"')}${this.input('UI volume (%)', String(Math.round(t.ui * 100)), 'set-ui', 'range', 'min="0" max="100"')}${this.select('Event captions', ['Enabled', 'Disabled'], t.captions ? 'Enabled' : 'Disabled', () => {}, 'set-captions')}${this.select('Spending review', ['Enabled', 'Disabled'], t.confirmSpending ? 'Enabled' : 'Disabled', () => {}, 'set-spend')}<p>Reduced effects keeps the same warning geometry and timing. Sound never controls battle time.</p>${this.button(
+    return `<details open><summary>Display</summary>${this.select('UI scale', ['100', '125', '150', '175', '200'], String(t.uiScale), () => {}, 'set-scale')}${this.select('Contrast', ['Standard', 'High'], t.highContrast ? 'High' : 'Standard', () => {}, 'set-contrast')}${this.select('Effects', ['Full', 'Reduced'], t.reducedEffects ? 'Reduced' : 'Full', () => {}, 'set-effects')}${this.select('Render quality', ['Auto', 'High', 'Low'], t.quality, () => {}, 'set-quality')}</details><details><summary>Audio</summary>${this.select('Sound', ['Enabled', 'Muted'], t.muted ? 'Muted' : 'Enabled', () => {}, 'set-muted')}${this.input('Master volume (%)', String(Math.round(t.master * 100)), 'set-master', 'range', 'min="0" max="100"')}${this.input('Alerts volume (%)', String(Math.round(t.alerts * 100)), 'set-alerts', 'range', 'min="0" max="100"')}${this.input('Music volume (%)', String(Math.round(t.music * 100)), 'set-music', 'range', 'min="0" max="100"')}${this.input('Effects volume (%)', String(Math.round(t.sfx * 100)), 'set-sfx', 'range', 'min="0" max="100"')}${this.input('UI volume (%)', String(Math.round(t.ui * 100)), 'set-ui', 'range', 'min="0" max="100"')}</details><details><summary>Guidance</summary>${this.select('Event captions', ['Enabled', 'Disabled'], t.captions ? 'Enabled' : 'Disabled', () => {}, 'set-captions')}${this.select('Spending review', ['Enabled', 'Disabled'], t.confirmSpending ? 'Enabled' : 'Disabled', () => {}, 'set-spend')}</details><div class="panel-cta">${this.button(
       'Apply settings',
       async () => {
         const after = structuredClone(this.state!);
@@ -2071,7 +2339,7 @@ class FullApp {
         this.notify('Settings applied');
       },
       true,
-    )}`;
+    )}</div>`;
   }
   private dataMenu(): string {
     const s = this.state;
@@ -2183,11 +2451,11 @@ class FullApp {
           incoming = await inspectFullBackup(text);
         } catch (fullError) {
           try {
-            const old = await readBackup(text),
+            const old = await (await import('../persistence/backup')).readBackup(text),
               slot = old.backup.slots[0]!;
             if ('run' in slot && slot.run)
               throw new Error('Resolve the earlier version run before migration');
-            incoming = migrateLegacy(slot.campaign, slot.fence);
+            incoming = (await import('./migration')).migrateLegacy(slot.campaign, slot.fence);
           } catch {
             throw fullError;
           }
@@ -2208,7 +2476,7 @@ class FullApp {
     input.click();
   }
   private help(): string {
-    return `<details open><summary>Your first siege</summary><p>Your guided layout uses the free starting force. Choose Siege → Campaign → Review forecast → Start siege. Combat is automatic. Survive the deployment and clear the remaining hostiles.</p></details><details><summary>Touch controls</summary><p>Drag an empty area of the field to pan. Pinch with two fingers to zoom around the midpoint. Touch an asset to inspect it. The crosshair centers the base; the curved arrow rotates the camera.</p><p>While placing, one finger moves the preview and two fingers move the camera. Confirm placement saves it. No purchases happen from touching the field.</p></details><details><summary>Build and recover</summary><p>Recruit into storage, then deploy on owned land. Check capacity, route cells, and trap limits. Store, move, repair, rearm, enhance, promote, and choose tactics through Army or the field inspector.</p><p>Injury reduces ordinary mobile weapon and support output. Wrecks stay owned. Repairing a wreck restores half body. Emergency recovery is available at zero Credits.</p></details><details><summary>Progression and replay</summary><p>Expeditions earn progression between rank-gated campaign stages. Campaign has 40 stages and eight bosses. Endurance and Long Watch unlock at Rank 30. Mastery unlocks after Campaign Complete. Rank 100 offers modifiers and challenge tiers.</p><p>Archive replays use the current army. Calibration is free and cannot earn currencies or campaign progress. Promotion requires both Bastion Rank and asset level; stars are purchased sequentially.</p></details><details><summary>Saving and interruption</summary><p>Preparation commands save before they are reported committed. Interrupted ordinary sieges restart the captured start. Endurance protects completed blocks and restarts only the current incomplete block. Results journal before a single atomic reward commit.</p><p>Export backups from Manage → Data. A second tab is read only until you explicitly take over editing. There is no offline progress.</p></details><details><summary>Keyboard access</summary><p>Tab moves between controls. Arrow keys pan the focused field. Plus/minus zoom. Space pauses a battle. Escape closes a panel. Menu drawers have internal scrolling; the field remains visible.</p></details>`;
+    return `<details open><summary>Your first siege</summary><p>Your guided layout uses the free starting force. Choose Next siege, read the briefing, then Start siege. Combat is automatic. Survive the deployment and clear the remaining hostiles.</p></details><details><summary>Touch controls</summary><p>Drag an empty area of the field to pan. Pinch with two fingers to zoom around the midpoint. Touch an asset to inspect it. The crosshair centers the base; the curved arrow rotates the camera.</p><p>While placing, one finger moves the preview and two fingers move the camera. Confirm placement saves it. No purchases happen from touching the field.</p></details><details><summary>Build and recover</summary><p>Choose an asset in Build, preview it, then Place. Cancel spends nothing. Check capacity, route cells, and trap limits. Store, move, repair, rearm, enhance, promote, and choose tactics through Army or the field inspector.</p><p>Injury reduces ordinary mobile weapon and support output. Wrecks stay owned. Repairing a wreck restores half body. Emergency recovery is available at zero Credits.</p></details><details><summary>Progression and replay</summary><p>Expeditions earn progression between rank-gated campaign stages. Campaign has 40 stages and eight bosses. Endurance and Long Watch unlock at Rank 30. Mastery unlocks after Campaign Complete. Rank 100 offers modifiers and challenge tiers.</p><p>Archive replays use the current army. Calibration is free and cannot earn currencies or campaign progress. Promotion requires both Bastion Rank and asset level; stars are purchased sequentially.</p></details><details><summary>Saving and interruption</summary><p>Preparation commands save before they are reported committed. Interrupted ordinary sieges restart the captured start. Endurance protects completed blocks and restarts only the current incomplete block. Results journal before a single atomic reward commit.</p><p>Export backups from Manage → Data. A second tab is read only until you explicitly take over editing. There is no offline progress.</p></details><details><summary>Keyboard access</summary><p>Tab moves between controls. Arrow keys pan the focused field. Plus/minus zoom. Space pauses a battle. Escape closes a panel. Menu drawers have internal scrolling; the field remains visible.</p></details>`;
   }
   private credits(): string {
     return `<p>Resonance Bastion is an original browser fortress-defense game developed from the final project blueprint for Thomas Gross.</p><p>Original native pixel artwork, joint poses, geometry, score and synthesized effects are authored within this repository. Source generators and manifests accompany the assets.</p><p>Phaser 3.90 (MIT), Zod (MIT), TypeScript, Vite, and the browser platform power the game.</p><p>Comprehensive balance, animation, interaction and real-device acceptance testing follows the first-pass review.</p>`;
@@ -2526,7 +2794,13 @@ class FullApp {
     if (this.battle && !this.paused && !this.busy && !this.battle.outcome) {
       this.accumulator += elapsed * this.speed;
       let steps = 0;
-      while (this.accumulator >= 1 / 60 && steps < 60 && !this.battle.outcome) {
+      const started = performance.now();
+      while (
+        this.accumulator >= 1 / 60 &&
+        steps < 60 &&
+        !this.battle.outcome &&
+        (steps === 0 || performance.now() - started < 8)
+      ) {
         this.battle.step();
         this.accumulator -= 1 / 60;
         steps++;
@@ -2554,7 +2828,7 @@ class FullApp {
       this.updateHUD();
       this.lastHUD = now;
     }
-    this.view.render();
+    if (!document.hidden) this.view.render();
     requestAnimationFrame((t) => this.frame(t));
   }
 }

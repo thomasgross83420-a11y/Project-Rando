@@ -143,14 +143,17 @@ export function place(s: GameState, id: string, x: number, y: number, rotation =
     y: y + Math.floor(definition(a.type).height / 2),
   };
 }
-export function guidedLayout(s: GameState): void {
+export function guidedLayout(s: GameState, front = 0): void {
   const next = structuredClone(s);
   for (const a of next.assets) a.placement = null;
   const counters: Record<string, number> = {};
   for (const a of next.assets) {
     const d = definition(a.type);
     if (d.category === 'warden') {
-      if (a.type === next.warden) a.placement = { x: 29, y: 33, rotation: 0 };
+      if (a.type === next.warden) {
+        a.placement = { x: 29, y: 33, rotation: 0 };
+        a.tactics.anchor = { x: 30, y: 34 };
+      }
       continue;
     }
     const n = counters[d.category] ?? 0;
@@ -171,6 +174,44 @@ export function guidedLayout(s: GameState): void {
       a.placement = { ...pos, rotation: 0 };
       a.tactics.anchor = { x: pos.x + 1, y: pos.y + 1 };
     }
+  }
+  const turns = front === 2 || front === 3 ? 1 : front === 4 ? 2 : front === 5 ? 3 : 0;
+  for (const a of next.assets.filter((a) => a.placement))
+    for (let turn = 0; turn < turns; turn++) {
+      const r = footprint(a)!;
+      if (definition(a.type).category !== 'warden')
+        a.placement = { x: 60 - r.y - r.height, y: r.x, rotation: (a.placement!.rotation + 1) % 4 };
+      a.tactics.anchor = { x: 60 - a.tactics.anchor.y, y: a.tactics.anchor.x };
+      a.tactics.heading = (270 + turns * 90) % 360;
+    }
+  for (const a of next.assets.filter(
+    (a) => a.placement && definition(a.type).category !== 'warden',
+  )) {
+    const r = footprint(a)!;
+    if (!overlaps(r, PAD)) continue;
+    const original = { ...a.placement! };
+    let found = false;
+    for (let distance = 1; distance <= 6 && !found; distance++)
+      for (const [dx, dy] of [
+        [distance, 0],
+        [-distance, 0],
+        [0, distance],
+        [0, -distance],
+      ]) {
+        const test = { ...r, x: r.x + dx!, y: r.y + dy! };
+        if (
+          overlaps(test, PAD) ||
+          overlaps(test, PRECINCT) ||
+          next.assets.some(
+            (other) => other.id !== a.id && other.placement && overlaps(test, footprint(other)!),
+          )
+        )
+          continue;
+        a.placement = { ...original, x: test.x, y: test.y };
+        a.tactics.anchor = { x: test.x + test.width / 2, y: test.y + test.height / 2 };
+        found = true;
+        break;
+      }
   }
   const errors = validateLayout(next);
   if (errors.length) throw new Error(errors.join('; '));
