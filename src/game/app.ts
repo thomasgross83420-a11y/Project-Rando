@@ -445,7 +445,10 @@ class FullApp {
     this.band = Math.floor((s.rank - 1) / 5) + 1;
     this.stage = Math.min(39, s.stages.length);
     this.title.hidden = true;
-    this.section = '';
+    this.close();
+    this.view.selected = null;
+    this.bulk.clear();
+    this.picker = [];
     this.record = null;
     this.forecast = null;
     this.view.fit();

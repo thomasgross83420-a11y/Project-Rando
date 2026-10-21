@@ -294,3 +294,44 @@ test('a stocked trap is a valid ground damage counter without a silently added W
   expect(after.assets).toEqual(before.assets);
   expect(after.credits).toBe(before.credits);
 });
+test('backup download, canceled import and confirmed restore preserve the owned force and claim fences', async ({
+  page,
+}) => {
+  await create(page);
+  const before = await saved(page);
+  await page.getByRole('button', { name: 'Manage', exact: true }).click();
+  await page.getByRole('button', { name: 'Data / backups', exact: true }).click();
+  const downloading = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export backup', exact: true }).click();
+  const download = await downloading,
+    path = test.info().outputPath('roundtrip-backup.json');
+  await download.saveAs(path);
+  let text = '';
+  for await (const chunk of await download.createReadStream()) text += chunk.toString();
+  const backup = JSON.parse(text);
+  expect(backup.campaign.assets).toEqual(before.assets);
+  expect(backup.campaign.credits).toBe(before.credits);
+  for (const confirm of [false, true]) {
+    const choosing = page.waitForEvent('filechooser');
+    await page.getByRole('button', { name: 'Import backup', exact: true }).click();
+    await (await choosing).setFiles(path);
+    await expect(page.locator('dialog')).toContainText('No wallets or inventories will be merged.');
+    await page
+      .locator('dialog')
+      .getByRole('button', {
+        name: confirm ? 'Replace' : 'Cancel',
+        exact: true,
+      })
+      .click();
+    if (confirm) await expect(page.locator('#full-panel')).toBeHidden();
+    const after = await saved(page);
+    expect(after.assets).toEqual(before.assets);
+    expect(after.credits).toBe(before.credits);
+    expect(after.sequence).toBe(before.sequence);
+    expect(after.finalized).toBe(before.finalized);
+    expect(after.receipts).toEqual(before.receipts);
+  }
+  await page.reload();
+  await page.getByRole('button', { name: /^Continue ·/ }).click();
+  expect((await saved(page)).assets).toEqual(before.assets);
+});
