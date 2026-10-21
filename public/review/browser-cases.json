@@ -1,0 +1,599 @@
+{
+  "method": "Complete browser suite followed by targeted correction reruns, a new backup regression and a clean final run of all current-game checks. Unique cases are merged by file/title using the latest result; initial failures remain recorded below. No skipped tests or retries.",
+  "runtimeCommit": "033759edd20c4d0681aac0426ae3b13389521747",
+  "runs": [
+    {
+      "name": "complete-suite",
+      "stats": {
+        "startTime": "2026-10-21T00:39:38.048Z",
+        "duration": 1028068.444,
+        "expected": 85,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "legacy-corrections",
+      "stats": {
+        "startTime": "2026-10-21T00:59:43.642Z",
+        "duration": 32086.551000000003,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "backup-before-load-fix",
+      "stats": {
+        "startTime": "2026-10-21T01:03:49.268Z",
+        "duration": 11554.179999999998,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "final-current-game",
+      "stats": {
+        "startTime": "2026-10-21T01:05:41.994Z",
+        "duration": 114064.926,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "uniqueCases": 90,
+  "passed": 90,
+  "corrections": [
+    "Persistence-fault injection now aborts campaign writes only; aborting every write also killed the unrelated writer-lease heartbeat before the tested transaction.",
+    "Four-view artwork interaction and six-layout/scale progression tests retain every assertion with explicit 60-second budgets.",
+    "Backup restoration left a stale visible drawer; loading now clears the drawer and transient placement/selection. Confirmed backup replacement and cancellation preserve ownership, wallet and claim fences across reload."
+  ],
+  "cases": [
+    {
+      "file": "affordable-repair.spec.ts",
+      "title": "unaffordable full repair is preserved; affordable Core preview can cancel, then explicitly spend once",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "affordable-repair.spec.ts",
+      "title": "quarter, half and exact asset choices use max body, cap at missing body and preserve earned XP",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "affordable-repair.spec.ts",
+      "title": "a small asset wallet keeps the exact affordable fraction through persistence instead of charging a rounded display",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "campaign-ui.spec.ts",
+      "title": "the player can migrate, deploy existing assets, win, review committed XP and rearm the persisted mine once",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "campaign-ui.spec.ts",
+      "title": "a visible commit failure preserves the exact result and retry succeeds even if the audio device rejects suspension",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "campaign-ui.spec.ts",
+      "title": "earned enhancement preview quotes actual weapon changes and preserves a wreck until explicitly restored",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "campaign-ui.spec.ts",
+      "title": "reload restarts the captured beginning and abandoning an unfinished siege pays nothing",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "campaign-ui.spec.ts",
+      "title": "the recovery controls preserve a cash-poor wrecked campaign and explicitly commit its emergency repair outside Undo",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "campaign-ui.spec.ts",
+      "title": "progression controls and quoted purchases reflow in portrait and landscape at normal and 200% interface scale",
+      "status": "expected",
+      "sourceRun": "legacy-corrections"
+    },
+    {
+      "file": "full-first-pass.spec.ts",
+      "title": "complete field and menus fit 360x640",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "full-first-pass.spec.ts",
+      "title": "complete field and menus fit 800x1280",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "full-first-pass.spec.ts",
+      "title": "complete field and menus fit 1280x800",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "full-first-pass.spec.ts",
+      "title": "title settings close and repeated new-game cancellation never strand controls",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "full-first-pass.spec.ts",
+      "title": "tutorial starts, pauses, changes speed, withdraws and produces persistent results",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "full-first-pass.spec.ts",
+      "title": "advanced mode forecasts, infrastructure and appearance controls are reachable",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "full-first-pass.spec.ts",
+      "title": "pending victory recovery commits once and remains finalized after reload",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "gate0.spec.ts",
+      "title": "Gate 0 production subpath, renderer, storage, gesture, audio and export",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate0.spec.ts",
+      "title": "IndexedDB abort is reported; failed open offers a temporary session",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate0.spec.ts",
+      "title": "actual WebGL context loss restores presentation",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate0.spec.ts",
+      "title": "viewport reflow, touch cancellation, semantic focus and production MIME",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate1-closeout.spec.ts",
+      "title": "global scale, reduced effects and high contrast persist across reload and campaigns",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate1-closeout.spec.ts",
+      "title": "Fit Base, role badges, four views, route feedback and named jump operate without mutating the wallet",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate1-closeout.spec.ts",
+      "title": "landscape and portrait keep the world visible while tools collapse at normal and 200%",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate1-closeout.spec.ts",
+      "title": "preference transaction failure retains session presentation and offers retry without touching campaign",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate1.spec.ts",
+      "title": "campaign creation, free deployment, atomic purchase, Undo/Redo and reload",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate1.spec.ts",
+      "title": "invalid placement and failed persistence preserve money and history",
+      "status": "expected",
+      "sourceRun": "legacy-corrections"
+    },
+    {
+      "file": "gate1.spec.ts",
+      "title": "second tab cannot edit until confirmed writer takeover; stale tab cannot commit",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate1.spec.ts",
+      "title": "explicit temporary session, native controls, viewport and 200% reflow",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate1.spec.ts",
+      "title": "high artwork selects the Core inspector in four views without purchasing; wizard cancel preserves slot",
+      "status": "expected",
+      "sourceRun": "legacy-corrections"
+    },
+    {
+      "file": "gate1.spec.ts",
+      "title": "native ghost drag and two-touch pinch/cancel never purchase",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate1.spec.ts",
+      "title": "hidden preparation retains a valid renderer through Title, scale and Continue",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate2-accessibility.spec.ts",
+      "title": "injected background pauses without catch-up; keyboard audio settings persist through checkpoint reload",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate2.spec.ts",
+      "title": "real tutorial is autonomous, paused, restarted from durable checkpoint, and saved as practice victory",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate2.spec.ts",
+      "title": "surrender result abort offers idempotent retry and leaves the real campaign intact",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "gate2.spec.ts",
+      "title": "competing tab takeover freezes the old battle and offers the retained checkpoint to the new writer",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "objective, briefing and touch controls fit 360x640",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "objective, briefing and touch controls fit 800x1280",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "objective, briefing and touch controls fit 1280x800",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "cancel spends nothing, invalid placement preserves the wallet and double confirmation buys once",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "nested Back restores its caller and Army filters explain an empty list",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "native focused buttons toggle pause once; map inspection needs explicit Resume",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "native touch pans in eight directions and pinches without changing the saved force",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "200% text, high contrast, map zoom alternatives and all camera orientations remain operable",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "touch sets a reviewed rally point without moving or repurchasing the defender",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "a long browser interruption pauses the siege until the player resumes",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "stalled cleanup opens recovery, restarts practice and preserves the real wallet and army",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "recovery.spec.ts",
+      "title": "mobile backup replaces selected wallets, preserves other slots/settings, reloads and rolls back without merging",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "recovery.spec.ts",
+      "title": "corrupt checksums and duplicate JSON are rejected before native storage changes; delete has an explicit preview",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "recovery.spec.ts",
+      "title": "a quota failure after writes were queued aborts all imported slots and leaves an exact retry",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "recovery.spec.ts",
+      "title": "writer takeover rejects a stale recovery preview and preserves the other writer campaign",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "recovery.spec.ts",
+      "title": "export includes native interrupted practice and import refuses to replace it with a conflicting older backup",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "recovery.spec.ts",
+      "title": "unknown future logical journals block backup/recovery rather than silently omitting pending state",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "recovery.spec.ts",
+      "title": "global accessibility is preserved unless the player explicitly applies included settings",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "render-reuse.spec.ts",
+      "title": "repeated pan/zoom/facing/ghost cycles keep a bounded pool and hide surplus without changing picking",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "render-reuse.spec.ts",
+      "title": "ghost/role/label state clears back to identical pixels and scene disposal releases retained objects",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "result-backup.spec.ts",
+      "title": "rb-sim-v3 native IndexedDB preserves a real pending result across reload and a backup imported into a different slot",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "result-backup.spec.ts",
+      "title": "rb-sim-v4 native IndexedDB preserves a real pending result across reload and a backup imported into a different slot",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "result-backup.spec.ts",
+      "title": "an abort while importing the paid checkpoint rolls back every store and the exact same preview can retry",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "result-backup.spec.ts",
+      "title": "a real result commit abort leaves its exact pending journal and wallet intact, then retry pays once",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "rifle-render.spec.ts",
+      "title": "preparation and legal/illegal Rifle ghosts share the authored three-member art without loading the legacy combat atlas",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "rifle-render.spec.ts",
+      "title": "Rifle moving fire uses three grounded members, independent gait/aim, one cropped rig per member and repeatable pixels through pause and camera rotation",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "run-journal.spec.ts",
+      "title": "native preflight failure rolls back checkpoint and allocation; exact retry starts sequence one",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "run-journal.spec.ts",
+      "title": "Step 1 failure keeps only durable checkpoint, offers exact in-memory recovery and retry survives reopen",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "run-journal.spec.ts",
+      "title": "Step 2 abort after queued body/wallet writes leaves every store unchanged, then exact retry commits once",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "run-journal.spec.ts",
+      "title": "lost commit acknowledgment reconciles a durable receipt after reopen without applying rewards again",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "run-journal.spec.ts",
+      "title": "writer takeover rejects stale result application while the new owner can retry the pinned pending result",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "run-journal.spec.ts",
+      "title": "active runs block preparation edits and current unsupported journals block backup rather than omit state",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "run-journal.spec.ts",
+      "title": "competing preflights and result writers cannot allocate or finalize a duplicate attempt",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "run-journal.spec.ts",
+      "title": "ordinary preflight and tutorial practice mutually exclude each other inside the native write boundary",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "startup-controls.spec.ts",
+      "title": "reload and reopening a closed page restore editing without changing campaigns",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "startup-controls.spec.ts",
+      "title": "another active tab can start New Game through confirmed takeover and the old controls refresh",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "startup-controls.spec.ts",
+      "title": "legacy ownership offers a working recovery from New Game instead of a gray dead end",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "startup-controls.spec.ts",
+      "title": "a failed writer transaction keeps title controls and a retry path available",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "startup-controls.spec.ts",
+      "title": "failed storage probe offers explicit temporary play without breaking the title",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "startup-controls.spec.ts",
+      "title": "without Web Locks, closed legacy ownership still requires confirmation and saves remain unchanged",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "startup-controls.spec.ts",
+      "title": "title buttons and cancelled creation stay usable, and unfinished combat choices are clearly unavailable",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "startup-controls.spec.ts",
+      "title": "a campaign saved before an open failure remains loadable without retrying creation",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "startup-controls.spec.ts",
+      "title": "a rejected Web Lock request does not strand startup and can be retried",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "startup-controls.spec.ts",
+      "title": "writer quota errors stay recoverable without uncaught request-handler errors",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "startup-controls.spec.ts",
+      "title": "a displaced battle never automatically resumes after the other writer closes; takeover opens durable recovery",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "touch-layout.spec.ts",
+      "title": "field and collapsible menus fit 360\u00d7640 at 100% and 200%",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "touch-layout.spec.ts",
+      "title": "field and collapsible menus fit 412\u00d7915 at 100% and 200%",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "touch-layout.spec.ts",
+      "title": "field and collapsible menus fit 800\u00d71280 at 100% and 200%",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "touch-layout.spec.ts",
+      "title": "field and collapsible menus fit 1280\u00d7800 at 100% and 200%",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "touch-layout.spec.ts",
+      "title": "field and collapsible menus fit 320\u00d7640 at 100% and 200%",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "touch-layout.spec.ts",
+      "title": "native touch pans in every direction, pinches about the midpoint, and continues with the remaining finger",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "touch-layout.spec.ts",
+      "title": "choosing a build closes the menu; pinch continuation never moves or buys the ghost",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "touch-layout.spec.ts",
+      "title": "battle keeps the field visible and observation tools collapsed; opening and closing works by touch",
+      "status": "expected",
+      "sourceRun": "complete-suite"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "backup download, canceled import and confirmed restore preserve the owned force and claim fences",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    },
+    {
+      "file": "player-experience.spec.ts",
+      "title": "a stocked trap is a valid ground damage counter without a silently added Warden",
+      "status": "expected",
+      "sourceRun": "final-current-game"
+    }
+  ]
+}

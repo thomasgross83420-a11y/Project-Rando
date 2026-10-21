@@ -1,5 +1,7 @@
 # Dependency-ordered queue
 
+> Historical development record. The current 0.4.0 implementation, checks and remaining limits are described in [the player-experience review](PLAYER_EXPERIENCE_REVIEW.md) and [blueprint addendum](BLUEPRINT_ADDENDUM_0.4.md). Earlier versions and counts below apply to their recorded checkpoints.
+
 | Gate | Dependency | Next coherent outcome | Acceptance |
 | --- | --- | --- | --- |
 | 0 | Full source ingestion / clean repository | Pin stack, shell, headless runner, storage/audio/renderer/input experiments; static subpath build | T03/T06/T14/T16/T19 relevant smoke fixtures |

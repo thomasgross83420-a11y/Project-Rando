@@ -1,0 +1,54 @@
+{
+  "method": "Quiet sequential desktop Chromium observations at 800×1280: ten seconds preparation and thirty seconds ordinary first siege at 1× combat speed, separately with 1× and 4× DevTools CPU throttling. rAF cadence is not physical Lenovo GPU FPS. No other audit workload intentionally ran during this measurement.",
+  "errors": [],
+  "runs": [
+    {
+      "cpuThrottle": 1,
+      "phase": "Preparation",
+      "wallSeconds": 10.051,
+      "samples": 300,
+      "medianFrameMs": 33.30000000000018,
+      "p95FrameMs": 66.69999999999891,
+      "maxFrameMs": 66.70000000000073,
+      "longTasks": 86,
+      "maxLongTaskMs": 60,
+      "combat": "◈ 600 ✦ 0"
+    },
+    {
+      "cpuThrottle": 1,
+      "phase": "Tutorial at 1× speed",
+      "wallSeconds": 30.011,
+      "samples": 826,
+      "medianFrameMs": 33.30000000000291,
+      "p95FrameMs": 66.70000000000073,
+      "maxFrameMs": 66.80000000000291,
+      "longTasks": 286,
+      "maxLongTaskMs": 62,
+      "combat": "0:29 combat · Waves 32%"
+    },
+    {
+      "cpuThrottle": 4,
+      "phase": "Preparation",
+      "wallSeconds": 10.014,
+      "samples": 222,
+      "medianFrameMs": 49.999999999999545,
+      "p95FrameMs": 66.69999999999982,
+      "maxFrameMs": 83.29999999999927,
+      "longTasks": 92,
+      "maxLongTaskMs": 75,
+      "combat": "◈ 600 ✦ 0"
+    },
+    {
+      "cpuThrottle": 4,
+      "phase": "Tutorial at 1× speed",
+      "wallSeconds": 30.016,
+      "samples": 580,
+      "medianFrameMs": 50,
+      "p95FrameMs": 66.70000000000437,
+      "maxFrameMs": 100,
+      "longTasks": 322,
+      "maxLongTaskMs": 92,
+      "combat": "0:29 combat · Waves 33%"
+    }
+  ]
+}

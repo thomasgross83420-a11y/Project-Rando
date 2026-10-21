@@ -1,0 +1,22 @@
+{
+  "method": "Same seeded 24-Apex-Carrier battle and legal rank100 starter force, fixed owned IDs; original BigInt collision oracle versus optimized collision. Actual state fingerprints must match. Shared-container elapsed timing is diagnostic.",
+  "reference": {
+    "fingerprint": "7b821fd46a0b660559ce8f4155b9695336f32922476639cdee4a536cd01c07d2",
+    "needsRecovery": true,
+    "seconds": 116,
+    "ms": 62456.283477,
+    "maxTick": 67.78538900000012,
+    "outcome": null,
+    "entities": 38
+  },
+  "optimized": {
+    "fingerprint": "7b821fd46a0b660559ce8f4155b9695336f32922476639cdee4a536cd01c07d2",
+    "needsRecovery": true,
+    "seconds": 116,
+    "ms": 17221.31957,
+    "maxTick": 54.40956499999447,
+    "outcome": null,
+    "entities": 38
+  },
+  "speedup": 3.6266839613034367
+}

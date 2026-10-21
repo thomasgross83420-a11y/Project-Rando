@@ -1,5 +1,7 @@
 # Public playable preview — 2026-10-08
 
+> Historical development record. The current 0.4.0 implementation, checks and remaining limits are described in [the player-experience review](PLAYER_EXPERIENCE_REVIEW.md) and [blueprint addendum](BLUEPRINT_ADDENDUM_0.4.md). Earlier versions and counts below apply to their recorded checkpoints.
+
 [Open Resonance Bastion](https://thomasgross83420-a11y.github.io/Project-Rando/)
 
 Open in Chrome. Choose **New Game**, **Create campaign**, review and create it,

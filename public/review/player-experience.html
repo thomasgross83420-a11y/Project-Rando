@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#17272c" />
+  <title>Resonance Bastion · player-experience review</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0 auto; max-width: 780px; padding: 24px 18px 48px; background: #121e24; color: #e4eceb; font: 17px/1.6 system-ui, sans-serif; }
+    h1 { line-height: 1.15; font-size: clamp(2rem, 7vw, 3.2rem); margin: .4em 0; }
+    h2 { font-size: 1.25rem; }
+    p { margin: .8em 0; }
+    a { color: #b8e6d8; overflow-wrap: anywhere; }
+    .eyebrow { letter-spacing: .12em; color: #d7b877; font-size: .8em; text-transform: uppercase; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; }
+    .actions a { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 16px; border: 1px solid #758e95; border-radius: 10px; color: #e4eceb; text-decoration: none; }
+    .actions .play { background: #d4b272; color: #18242a; border-color: #d4b272; font-weight: 750; }
+    details { padding: 14px; border: 1px solid #40545d; border-radius: 12px; margin: 14px 0; background: #182830; }
+    summary { cursor: pointer; min-height: 48px; display: list-item; align-content: center; font-weight: 700; }
+    li { padding: 4px 0; }
+    ul { padding-left: 22px; }
+    figure { margin: 26px 0; }
+    img { display: block; width: 100%; height: auto; border: 1px solid #40545d; border-radius: 10px; }
+    figcaption, .muted { color: #b1c5c8; font-size: .92em; }
+    :focus-visible { outline: 3px solid #f4c271; outline-offset: 4px; }
+    code { overflow-wrap: anywhere; }
+  </style>
+  <main>
+    <p class="eyebrow">Project Rando · 0.4.0 · 21 October 2026</p>
+    <h1>A clearer way to command your Bastion.</h1>
+    <p>The battlefield leads. Menus open when you need them. Your next siege, its threats and your preparation choices are easier to find.</p>
+    <nav class="actions" aria-label="Game and review">
+      <a class="play" href="../?build=0.4.0-player-experience">Play Resonance Bastion →</a>
+      <a href="player-experience.md" download="Resonance_Bastion_0.4_Review.md">Download review</a>
+    </nav>
+    <p class="muted">Use your usual Chrome profile to retain this site's saves. No PC, account or installation is required.</p>
+    <h2>What changed</h2>
+    <ul>
+      <li>A visible next objective, short siege brief and prominent Start action.</li>
+      <li>Closable menus, illustrated build cards, Army filters and optional detailed controls.</li>
+      <li>Touch pan and pinch, reviewed rally points, precise alternatives and safer placement.</li>
+      <li>Corrected movement, camera-relative facings, formations, trap behavior and recovery costs.</li>
+      <li>A more defined courtyard and faster collision calculations with matching combat results.</li>
+    </ul>
+    <figure>
+      <img src="field.png" width="800" height="1280" alt="Actual game capture: the starting defense occupies a green paved courtyard, with the next objective above and five preparation menu buttons below." loading="lazy" />
+      <figcaption>Actual browser capture of the revised starting field. Artwork remains native pixel art.</figcaption>
+    </figure>
+    <details>
+      <summary>Controls and getting started</summary>
+      <p>Create a Bastion, choose <strong>Next siege</strong>, read the short briefing, then choose <strong>Start siege</strong>. Defenders fight automatically.</p>
+      <p>Drag empty ground to pan. Pinch to zoom. Tap a defender to inspect it. Map and precise placement controls offer alternatives. A build preview spends nothing until Place succeeds.</p>
+      <p>During combat you can pause, inspect the map, change speed or open Siege tools. A long browser interruption pauses the fight until you resume.</p>
+      <p>Export progress through <strong>Manage → Data / backups → Export backup</strong>.</p>
+    </details>
+    <details>
+      <summary>Tests, balance and remaining limits</summary>
+      <div id="test-summary"><p><strong>189 unit/integration checks and 90 browser cases pass.</strong> The final current-game browser run passed all 20 cases without retries or skips. The downloadable review and <a href="evidence.json">test evidence</a> describe the complete runs, corrections and limits.</p></div>
+      <p>The combat sweep includes 63 cases across the campaign and additional modes. Its seeded force recorded 12 victories and 51 defeats. These are regression outcomes, not proof of 40 natural campaign clears.</p>
+      <p>Legal early-game comparisons found viable first-boss strategies for all three doctrines. A generic purchase plan did not work equally well for every doctrine. Long-term balance remains unproven.</p>
+      <p>Two extreme rendered stress runs exceeded ten minutes without page errors, but their frame times were poor under heavy throttling and shared-machine load. They do not certify Lenovo performance. Physical touch comfort, sound, pacing and frame rate still need your tablet.</p>
+      <p>The design review places the revised core journey around 8/10. Visual asset refinement is 7/10; whole-campaign balance and physical-device acceptance are not established. These are provisional judgments, not a claim that every aspect is finished.</p>
+    </details>
+    <details>
+      <summary>Design reasoning and research</summary>
+      <p>The interface follows progressive disclosure, clear current objectives, large touch targets and alternatives to gestures. Threat readability and deliberate preparation were compared with Subset Games' design postmortem; the game's continuous 360-degree movement is preserved.</p>
+      <p><a href="blueprint-addendum.md">Read the blueprint addendum and primary references</a>.</p>
+    </details>
+    <p class="muted">The original save database and schema are retained. Current corrected mechanics apply when restarting a captured battle. This release does not promise an old runtime's exact event sequence.</p>
+  </main>
+</html>

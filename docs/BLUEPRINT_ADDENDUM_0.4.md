@@ -44,9 +44,17 @@ The reviewed guided arrangement handles additional tower columns and additional 
 
 No baseline damage, hit rate, health, progression threshold, purchase price or reward multiplier was adjusted to manufacture favorable test results. Balance evaluation uses legal purchases, deployment, support and declared difficulty.
 
+Damage preflight includes stocked damaging traps and Razor Field, distinguishes healing/control-only effects, and respects Skyguard's enabled ground fallback. Missing required target layers produce a specific preparation explanation.
+
+The courtyard uses cached native-resolution pavement, inset border markings and restrained Core/Warden-pad details. Ground markings remain passable decoration; camera rotation remaps the world texture, including purchased terrain. Its texture dimensions and one-image draw remain unchanged.
+
+Collision broad-phase rejection and safe integer ratio rounding must match the original BigInt sweep's exact contact fractions. LOS uses a boolean rectangle helper preserving quantized corner contacts. The frozen reference oracle and seeded battle fingerprint are required regression checks.
+
 ## Compatibility and acceptance
 
 Existing schema and browser database names remain unchanged. Captured plans and owned assets are retained. Interrupted runs and Archive battles execute with the current corrected runtime; they are not a promise to reproduce an old implementation's exact combat events.
+
+Loading a new, continued or imported save clears the previous drawer, placement preview, selection and bulk selection. A restored fortress must never inherit a visible menu whose navigation state says it is closed. Backup cancellation leaves the saved force and claim fences unchanged; confirmed replacement is followed by a persisted reload check.
 
 An automated terminal defeat is a valid regression-test outcome, not evidence that the selected force was well balanced or that a stage was cleared. Seeded full-roster stress tests and natural-progression purchase tests must be reported separately. Physical Lenovo frame rate, touch comfort and long-term player enjoyment require actual-device and player review.
 
