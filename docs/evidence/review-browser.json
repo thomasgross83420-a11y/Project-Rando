@@ -1,0 +1,90 @@
+{
+  "method": "Static mobile review at360,800,1280CSSpixels, all disclosures open, no horizontal overflow, primary links/disclosures at least48pixels tall, every linked local resource HTTP200.",
+  "errors": [],
+  "rows": [
+    {
+      "width": 360,
+      "scrollWidth": 360,
+      "controls": [
+        {
+          "text": "Play Resonance Bastion →",
+          "height": 49.1875
+        },
+        {
+          "text": "Download review",
+          "height": 49.1875
+        },
+        {
+          "text": "Controls and getting started",
+          "height": 48
+        },
+        {
+          "text": "Tests, balance and remaining limits",
+          "height": 54.375
+        },
+        {
+          "text": "Design reasoning and research",
+          "height": 48
+        }
+      ]
+    },
+    {
+      "width": 800,
+      "scrollWidth": 800,
+      "controls": [
+        {
+          "text": "Play Resonance Bastion →",
+          "height": 49.1875
+        },
+        {
+          "text": "Download review",
+          "height": 49.1875
+        },
+        {
+          "text": "Controls and getting started",
+          "height": 48
+        },
+        {
+          "text": "Tests, balance and remaining limits",
+          "height": 48
+        },
+        {
+          "text": "Design reasoning and research",
+          "height": 48
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "scrollWidth": 1280,
+      "controls": [
+        {
+          "text": "Play Resonance Bastion →",
+          "height": 49.1875
+        },
+        {
+          "text": "Download review",
+          "height": 49.1875
+        },
+        {
+          "text": "Controls and getting started",
+          "height": 48
+        },
+        {
+          "text": "Tests, balance and remaining limits",
+          "height": 48
+        },
+        {
+          "text": "Design reasoning and research",
+          "height": 48
+        }
+      ]
+    }
+  ],
+  "links": [
+    "http://127.0.0.1:4173/Project-Rando/?build=0.4.0-player-experience",
+    "http://127.0.0.1:4173/Project-Rando/review/player-experience.md",
+    "http://127.0.0.1:4173/Project-Rando/review/evidence.json",
+    "http://127.0.0.1:4173/Project-Rando/review/blueprint-addendum.md"
+  ]
+}

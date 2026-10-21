@@ -14,7 +14,7 @@
       "recoveryPause": false,
       "seconds": 94.58333333333333,
       "corePercent": 100,
-      "simulationMs": 3745,
+      "simulationMs": 4112,
       "duplicateRewardRejected": true
     },
     {
@@ -30,7 +30,7 @@
       "recoveryPause": false,
       "seconds": 180.98333333333332,
       "corePercent": 72,
-      "simulationMs": 5537,
+      "simulationMs": 5144,
       "duplicateRewardRejected": true
     },
     {
@@ -46,7 +46,7 @@
       "recoveryPause": false,
       "seconds": 249.1,
       "corePercent": 0,
-      "simulationMs": 19667,
+      "simulationMs": 7395,
       "duplicateRewardRejected": true
     },
     {
@@ -62,7 +62,7 @@
       "recoveryPause": false,
       "seconds": 70.18333333333334,
       "corePercent": 0,
-      "simulationMs": 11702,
+      "simulationMs": 3238,
       "duplicateRewardRejected": true
     },
     {
@@ -78,7 +78,7 @@
       "recoveryPause": false,
       "seconds": 420.98333333333335,
       "corePercent": 100,
-      "simulationMs": 45658,
+      "simulationMs": 12600,
       "duplicateRewardRejected": true
     },
     {
@@ -94,7 +94,7 @@
       "recoveryPause": false,
       "seconds": 120.98333333333333,
       "corePercent": 100,
-      "simulationMs": 9386,
+      "simulationMs": 2329,
       "duplicateRewardRejected": true
     },
     {
@@ -110,7 +110,7 @@
       "recoveryPause": false,
       "seconds": 122.43333333333334,
       "corePercent": 0,
-      "simulationMs": 9991,
+      "simulationMs": 3008,
       "duplicateRewardRejected": true
     },
     {
@@ -126,7 +126,7 @@
       "recoveryPause": false,
       "seconds": 244.8,
       "corePercent": 98,
-      "simulationMs": 33781,
+      "simulationMs": 10623,
       "duplicateRewardRejected": true
     },
     {
@@ -142,7 +142,7 @@
       "recoveryPause": false,
       "seconds": 129.7,
       "corePercent": 0,
-      "simulationMs": 14816,
+      "simulationMs": 3378,
       "duplicateRewardRejected": true
     },
     {
@@ -158,7 +158,7 @@
       "recoveryPause": false,
       "seconds": 273.73333333333335,
       "corePercent": 0,
-      "simulationMs": 18265,
+      "simulationMs": 5914,
       "duplicateRewardRejected": true
     },
     {
@@ -174,7 +174,7 @@
       "recoveryPause": false,
       "seconds": 124.26666666666667,
       "corePercent": 100,
-      "simulationMs": 12423,
+      "simulationMs": 2753,
       "duplicateRewardRejected": true
     },
     {
@@ -190,7 +190,7 @@
       "recoveryPause": false,
       "seconds": 180.98333333333332,
       "corePercent": 100,
-      "simulationMs": 13602,
+      "simulationMs": 3928,
       "duplicateRewardRejected": true
     },
     {
@@ -206,7 +206,7 @@
       "recoveryPause": false,
       "seconds": 246.63333333333333,
       "corePercent": 91,
-      "simulationMs": 15264,
+      "simulationMs": 4865,
       "duplicateRewardRejected": true
     },
     {
@@ -222,7 +222,7 @@
       "recoveryPause": false,
       "seconds": 241.18333333333334,
       "corePercent": 0,
-      "simulationMs": 10998,
+      "simulationMs": 5946,
       "duplicateRewardRejected": true
     },
     {
@@ -238,7 +238,7 @@
       "recoveryPause": false,
       "seconds": 433.78333333333336,
       "corePercent": 0,
-      "simulationMs": 20833,
+      "simulationMs": 10338,
       "duplicateRewardRejected": true
     },
     {
@@ -254,7 +254,7 @@
       "recoveryPause": false,
       "seconds": 120.98333333333333,
       "corePercent": 100,
-      "simulationMs": 4503,
+      "simulationMs": 2689,
       "duplicateRewardRejected": true
     },
     {
@@ -270,7 +270,7 @@
       "recoveryPause": false,
       "seconds": 141.83333333333334,
       "corePercent": 0,
-      "simulationMs": 6958,
+      "simulationMs": 3887,
       "duplicateRewardRejected": true
     },
     {
@@ -286,7 +286,7 @@
       "recoveryPause": false,
       "seconds": 250.6,
       "corePercent": 87,
-      "simulationMs": 11565,
+      "simulationMs": 6717,
       "duplicateRewardRejected": true
     },
     {
@@ -302,7 +302,7 @@
       "recoveryPause": false,
       "seconds": 102.63333333333334,
       "corePercent": 0,
-      "simulationMs": 6193,
+      "simulationMs": 2744,
       "duplicateRewardRejected": true
     },
     {
@@ -318,7 +318,7 @@
       "recoveryPause": false,
       "seconds": 331.6333333333333,
       "corePercent": 0,
-      "simulationMs": 25361,
+      "simulationMs": 8221,
       "duplicateRewardRejected": true
     },
     {
@@ -334,7 +334,7 @@
       "recoveryPause": false,
       "seconds": 70,
       "corePercent": 0,
-      "simulationMs": 5301,
+      "simulationMs": 1931,
       "duplicateRewardRejected": true
     },
     {
@@ -350,7 +350,7 @@
       "recoveryPause": false,
       "seconds": 58.766666666666666,
       "corePercent": 0,
-      "simulationMs": 4307,
+      "simulationMs": 1468,
       "duplicateRewardRejected": true
     },
     {
@@ -366,7 +366,7 @@
       "recoveryPause": false,
       "seconds": 80.23333333333333,
       "corePercent": 0,
-      "simulationMs": 6971,
+      "simulationMs": 2847,
       "duplicateRewardRejected": true
     },
     {
@@ -382,7 +382,7 @@
       "recoveryPause": false,
       "seconds": 54.38333333333333,
       "corePercent": 0,
-      "simulationMs": 3086,
+      "simulationMs": 1498,
       "duplicateRewardRejected": true
     },
     {
@@ -398,7 +398,7 @@
       "recoveryPause": false,
       "seconds": 103.26666666666667,
       "corePercent": 0,
-      "simulationMs": 10409,
+      "simulationMs": 3305,
       "duplicateRewardRejected": true
     },
     {
@@ -414,7 +414,7 @@
       "recoveryPause": false,
       "seconds": 65.25,
       "corePercent": 0,
-      "simulationMs": 5145,
+      "simulationMs": 2021,
       "duplicateRewardRejected": true
     },
     {
@@ -430,7 +430,7 @@
       "recoveryPause": false,
       "seconds": 183.63333333333333,
       "corePercent": 0,
-      "simulationMs": 11580,
+      "simulationMs": 4915,
       "duplicateRewardRejected": true
     },
     {
@@ -446,7 +446,7 @@
       "recoveryPause": false,
       "seconds": 118.41666666666667,
       "corePercent": 0,
-      "simulationMs": 12625,
+      "simulationMs": 3872,
       "duplicateRewardRejected": true
     },
     {
@@ -462,7 +462,7 @@
       "recoveryPause": false,
       "seconds": 52.75,
       "corePercent": 0,
-      "simulationMs": 3842,
+      "simulationMs": 1466,
       "duplicateRewardRejected": true
     },
     {
@@ -478,7 +478,7 @@
       "recoveryPause": false,
       "seconds": 83.18333333333334,
       "corePercent": 0,
-      "simulationMs": 6533,
+      "simulationMs": 2570,
       "duplicateRewardRejected": true
     },
     {
@@ -494,7 +494,7 @@
       "recoveryPause": false,
       "seconds": 60.65,
       "corePercent": 0,
-      "simulationMs": 4440,
+      "simulationMs": 1826,
       "duplicateRewardRejected": true
     },
     {
@@ -510,7 +510,7 @@
       "recoveryPause": false,
       "seconds": 100.03333333333333,
       "corePercent": 0,
-      "simulationMs": 14955,
+      "simulationMs": 3948,
       "duplicateRewardRejected": true
     },
     {
@@ -526,7 +526,7 @@
       "recoveryPause": false,
       "seconds": 40.733333333333334,
       "corePercent": 0,
-      "simulationMs": 5968,
+      "simulationMs": 1459,
       "duplicateRewardRejected": true
     },
     {
@@ -542,7 +542,7 @@
       "recoveryPause": false,
       "seconds": 68.11666666666666,
       "corePercent": 0,
-      "simulationMs": 6355,
+      "simulationMs": 1966,
       "duplicateRewardRejected": true
     },
     {
@@ -558,7 +558,7 @@
       "recoveryPause": false,
       "seconds": 91.73333333333333,
       "corePercent": 0,
-      "simulationMs": 7427,
+      "simulationMs": 2898,
       "duplicateRewardRejected": true
     },
     {
@@ -574,7 +574,7 @@
       "recoveryPause": false,
       "seconds": 66.1,
       "corePercent": 0,
-      "simulationMs": 7024,
+      "simulationMs": 2631,
       "duplicateRewardRejected": true
     },
     {
@@ -590,7 +590,7 @@
       "recoveryPause": false,
       "seconds": 54.31666666666667,
       "corePercent": 0,
-      "simulationMs": 5568,
+      "simulationMs": 2001,
       "duplicateRewardRejected": true
     },
     {
@@ -606,7 +606,7 @@
       "recoveryPause": false,
       "seconds": 40.6,
       "corePercent": 0,
-      "simulationMs": 8069,
+      "simulationMs": 1845,
       "duplicateRewardRejected": true
     },
     {
@@ -622,7 +622,7 @@
       "recoveryPause": false,
       "seconds": 43.03333333333333,
       "corePercent": 0,
-      "simulationMs": 5158,
+      "simulationMs": 1757,
       "duplicateRewardRejected": true
     },
     {
@@ -638,7 +638,7 @@
       "recoveryPause": false,
       "seconds": 56.93333333333333,
       "corePercent": 0,
-      "simulationMs": 6318,
+      "simulationMs": 2074,
       "duplicateRewardRejected": true
     },
     {
@@ -654,7 +654,7 @@
       "recoveryPause": false,
       "seconds": 49.06666666666667,
       "corePercent": 0,
-      "simulationMs": 4038,
+      "simulationMs": 1700,
       "duplicateRewardRejected": true
     },
     {
@@ -670,7 +670,7 @@
       "recoveryPause": false,
       "seconds": 55.53333333333333,
       "corePercent": 0,
-      "simulationMs": 4459,
+      "simulationMs": 1865,
       "duplicateRewardRejected": true
     },
     {
@@ -686,7 +686,7 @@
       "recoveryPause": false,
       "seconds": 60.5,
       "corePercent": 0,
-      "simulationMs": 5605,
+      "simulationMs": 2073,
       "duplicateRewardRejected": true
     },
     {
@@ -702,7 +702,7 @@
       "recoveryPause": false,
       "seconds": 60.516666666666666,
       "corePercent": 0,
-      "simulationMs": 5248,
+      "simulationMs": 2121,
       "duplicateRewardRejected": true
     },
     {
@@ -718,7 +718,7 @@
       "recoveryPause": false,
       "seconds": 59.1,
       "corePercent": 0,
-      "simulationMs": 6776,
+      "simulationMs": 2905,
       "duplicateRewardRejected": true
     },
     {
@@ -734,7 +734,7 @@
       "recoveryPause": false,
       "seconds": 47.78333333333333,
       "corePercent": 0,
-      "simulationMs": 6009,
+      "simulationMs": 1754,
       "duplicateRewardRejected": true
     },
     {
@@ -750,7 +750,7 @@
       "recoveryPause": false,
       "seconds": 46.71666666666667,
       "corePercent": 0,
-      "simulationMs": 6344,
+      "simulationMs": 1580,
       "duplicateRewardRejected": true
     },
     {
@@ -766,7 +766,7 @@
       "recoveryPause": false,
       "seconds": 52.666666666666664,
       "corePercent": 0,
-      "simulationMs": 7230,
+      "simulationMs": 2274,
       "duplicateRewardRejected": true
     },
     {
@@ -782,7 +782,7 @@
       "recoveryPause": false,
       "seconds": 45,
       "corePercent": 0,
-      "simulationMs": 3795,
+      "simulationMs": 1591,
       "duplicateRewardRejected": true
     },
     {
@@ -798,7 +798,7 @@
       "recoveryPause": false,
       "seconds": 58.96666666666667,
       "corePercent": 0,
-      "simulationMs": 6559,
+      "simulationMs": 2303,
       "duplicateRewardRejected": true
     },
     {
@@ -814,7 +814,7 @@
       "recoveryPause": false,
       "seconds": 52.68333333333333,
       "corePercent": 0,
-      "simulationMs": 5097,
+      "simulationMs": 1926,
       "duplicateRewardRejected": true
     },
     {
@@ -830,7 +830,7 @@
       "recoveryPause": false,
       "seconds": 49.833333333333336,
       "corePercent": 0,
-      "simulationMs": 5446,
+      "simulationMs": 2221,
       "duplicateRewardRejected": true
     },
     {
@@ -846,7 +846,7 @@
       "recoveryPause": false,
       "seconds": 46.416666666666664,
       "corePercent": 0,
-      "simulationMs": 4617,
+      "simulationMs": 1868,
       "duplicateRewardRejected": true
     },
     {
@@ -862,7 +862,7 @@
       "recoveryPause": false,
       "seconds": 90.98333333333333,
       "corePercent": 96,
-      "simulationMs": 3971,
+      "simulationMs": 1985,
       "duplicateRewardRejected": true
     },
     {
@@ -878,7 +878,7 @@
       "recoveryPause": false,
       "seconds": 65.93333333333334,
       "corePercent": 0,
-      "simulationMs": 8564,
+      "simulationMs": 3373,
       "duplicateRewardRejected": true
     },
     {
@@ -894,7 +894,7 @@
       "recoveryPause": false,
       "seconds": 51.4,
       "corePercent": 0,
-      "simulationMs": 4770,
+      "simulationMs": 2222,
       "duplicateRewardRejected": true
     },
     {
@@ -910,7 +910,7 @@
       "recoveryPause": false,
       "seconds": 94.58333333333333,
       "corePercent": 100,
-      "simulationMs": 3713,
+      "simulationMs": 1975,
       "duplicateRewardRejected": true
     },
     {
@@ -926,7 +926,7 @@
       "recoveryPause": false,
       "seconds": 67.25,
       "corePercent": 0,
-      "simulationMs": 5348,
+      "simulationMs": 2195,
       "duplicateRewardRejected": true
     },
     {
@@ -942,7 +942,7 @@
       "recoveryPause": false,
       "seconds": 225.25,
       "corePercent": 0,
-      "simulationMs": 14023,
+      "simulationMs": 6619,
       "duplicateRewardRejected": true
     },
     {
@@ -958,7 +958,7 @@
       "recoveryPause": false,
       "seconds": 49.666666666666664,
       "corePercent": 0,
-      "simulationMs": 4202,
+      "simulationMs": 1687,
       "duplicateRewardRejected": true
     },
     {
@@ -974,7 +974,7 @@
       "recoveryPause": false,
       "seconds": 233.33333333333334,
       "corePercent": 0,
-      "simulationMs": 16973,
+      "simulationMs": 7724,
       "duplicateRewardRejected": true
     },
     {
@@ -990,7 +990,7 @@
       "recoveryPause": false,
       "seconds": 65.88333333333334,
       "corePercent": 0,
-      "simulationMs": 9815,
+      "simulationMs": 3006,
       "duplicateRewardRejected": true
     },
     {
@@ -1006,7 +1006,7 @@
       "recoveryPause": false,
       "seconds": 60.666666666666664,
       "corePercent": 0,
-      "simulationMs": 5819,
+      "simulationMs": 2241,
       "duplicateRewardRejected": true
     }
   ]

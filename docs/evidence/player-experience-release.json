@@ -30,7 +30,34 @@
     "defeats": 51,
     "recoveryPauses": 0,
     "duplicateClaimsRejected": true,
-    "scope": "All 40 campaign plans, 12 Mastery trials, late Expedition, Calibration, Boss Siege, Archive, Long Watch and six Endurance block plans. Seeded legal rank100 full ordinary roster; not a natural campaign or continuous six-block playthrough."
+    "scope": "All 40 campaign plans, 12 Mastery trials, late Expedition, Calibration, Boss Siege, Archive, Long Watch and six Endurance block plans. Seeded legal rank100 full ordinary roster; not a natural campaign or continuous six-block playthrough.",
+    "finalCollisionRerun": {
+      "method": "Repeat all63 legal seeded full-roster combat/reward cases with optimized collision; compare every recorded field except machine elapsed simulationMs against the pre-optimization audit. This compares the recorded outputs, not every internal final entity field. Separate stress-profile evidence compares a full-state fingerprint.",
+      "optimizedRuntimeCommit": "033759edd20c4d0681aac0426ae3b13389521747",
+      "referenceEvidenceSHA256": "95c864bbe1ae3bb8d74a3584a2f7af6f9f9e5d938f2ff72f057e3129410f0f89",
+      "cases": 63,
+      "allRecordedOutputsMatch": true,
+      "comparedFields": [
+        "index",
+        "mode",
+        "stage",
+        "code",
+        "name",
+        "hash",
+        "block",
+        "boss",
+        "outcome",
+        "recoveryPause",
+        "seconds",
+        "corePercent",
+        "duplicateRewardRejected"
+      ],
+      "outcomes": {
+        "Victory": 12,
+        "Defeat": 51
+      },
+      "recoveryPauses": 0
+    }
   },
   "collision": {
     "method": "Same seeded 24-Apex-Carrier battle and legal rank100 starter force, fixed owned IDs; original BigInt collision oracle versus optimized collision. Actual state fingerprints must match. Shared-container elapsed timing is diagnostic.",
@@ -141,5 +168,10 @@
     "Whole-campaign natural progression and endgame balance unproven.",
     "Extreme rendered stress frame times were poor, and concurrent workloads prevent a fair rendering before/after comparison.",
     "Visual asset refinement provisionally7/10; core-journey judgments around8/10 are design review, not measured player enjoyment."
-  ]
+  ],
+  "reviewPage": {
+    "layouts": 3,
+    "links": 4,
+    "pageErrors": 0
+  }
 }
