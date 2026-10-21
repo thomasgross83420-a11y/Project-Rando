@@ -125,7 +125,7 @@ export async function fullGameAudit(onRow: (row: unknown) => Promise<void>) {
       s = structuredClone(fixture),
       b = await FullBattle.create(s, plan),
       started = performance.now();
-    while (!b.outcome && b.tick < (plan.duration + 300) * 60) b.step();
+    while (!b.outcome && !b.needsRecovery && b.tick < (plan.duration + 300) * 60) b.step();
     if (
       b.population > 120 ||
       b.projectiles.length > 300 ||
@@ -138,6 +138,8 @@ export async function fullGameAudit(onRow: (row: unknown) => Promise<void>) {
       )
     )
       throw Error('Invalid simulation state ' + plan.name);
+    const recoveryPause = b.needsRecovery;
+    if (recoveryPause) b.surrender();
     if (!b.outcome)
       throw Error(
         `Unresolved ${plan.name}: ${JSON.stringify(b.alive(1).map((e) => ({ type: e.d.id, x: e.x / 1024, y: e.y / 1024, hp: e.hp, path: e.path })))}`,
@@ -164,6 +166,7 @@ export async function fullGameAudit(onRow: (row: unknown) => Promise<void>) {
       block: plan.block,
       boss: plan.boss,
       outcome: b.outcome,
+      recoveryPause,
       seconds: b.tick / 60,
       corePercent: Math.round(b.core.hp / 102400),
       simulationMs: Math.round(performance.now() - started),
@@ -174,7 +177,7 @@ export async function fullGameAudit(onRow: (row: unknown) => Promise<void>) {
   }
   return {
     method:
-      'Full combat and reward regression with a legal seeded Rank100 army containing every ordinary friendly role. Not a natural economy playthrough or a difficulty-balance certification. Standard 40 campaign stages, 12 Mastery trials, late mixed Expedition, Calibration and all six Endurance block plans. Each must terminate, preserve integer/cap invariants and reject duplicate reward claims.',
+      'Full combat and reward regression with a legal seeded Rank100 army containing every ordinary friendly role. Not a natural economy playthrough or a difficulty-balance certification. Standard 40 campaign stages, 12 Mastery trials, late mixed Expedition, Calibration and all six Endurance block plans. Each must terminate or explicitly enter the 90-second recovery pause followed by test withdrawal, preserve integer/cap invariants and reject duplicate reward claims.',
     rows,
   };
 }

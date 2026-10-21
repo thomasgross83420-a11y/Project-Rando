@@ -1,4 +1,4 @@
-import { newGame, maxHealth } from '../src/game/model';
+import { newGame, maxHealth, type GameState, type Plan } from '../src/game/model';
 import { guidedLayout, buy } from '../src/game/construction';
 import { compile, stageInfo } from '../src/game/director';
 import { FullBattle } from '../src/game/engine';
@@ -10,9 +10,16 @@ import {
   priceResult,
   claimResult,
 } from '../src/game/economy';
-export async function experienceBalanceAudit(policy: string[] = [], attempts = 6) {
+export async function experienceBalanceAudit(
+  policy: string[] = [],
+  attempts = 6,
+  reinforceBoss = false,
+  bossExtras: string[] = [],
+  doctrines: readonly ('Bastion' | 'Mobile' | 'Chokepoint')[] = ['Bastion', 'Mobile', 'Chokepoint'],
+  onBoss?: (s: GameState, p: Plan) => Promise<void>,
+) {
   const runs = [];
-  for (const doctrine of ['Bastion', 'Mobile', 'Chokepoint'] as const) {
+  for (const doctrine of doctrines) {
     const s = newGame('Balance audit', 0, doctrine, 'warden.bulwark');
     const pinIDs = () =>
       s.assets.forEach((a, i) => {
@@ -48,10 +55,21 @@ export async function experienceBalanceAudit(policy: string[] = [], attempts = 6
         pinIDs();
       }
       guidedLayout(s, stage ? plan.spawns[0]!.entrance : 0);
+      if (stage === 4 && onBoss) await onBoss(structuredClone(s), plan);
+      if (reinforceBoss && stage === 4 && !s.stages.includes(4)) {
+        for (const type of [
+          s.rank >= 7 ? 'friendly.rotary' : 'friendly.sentry',
+          s.rank >= 6 ? 'friendly.heavy_squad' : 'friendly.rifle_squad',
+        ])
+          buy(s, type);
+        for (const type of bossExtras) buy(s, type);
+        pinIDs();
+        guidedLayout(s, plan.spawns[0]!.entrance);
+      }
       const battle = await FullBattle.create(s, plan),
         started = performance.now();
       let slowestTick = 0;
-      while (!battle.outcome && battle.tick < (plan.duration + 180) * 60) {
+      while (!battle.outcome && !battle.needsRecovery && battle.tick < (plan.duration + 180) * 60) {
         const t = performance.now();
         battle.step();
         slowestTick = Math.max(slowestTick, performance.now() - t);
@@ -94,6 +112,8 @@ export async function experienceBalanceAudit(policy: string[] = [], attempts = 6
     method:
       'Standard; fixed identities; legal guided force; affordable maintenance; face disclosed fronts; purchase policy after tutorial; first six attempts or defeat. Not an optimal strategy or universal balance certification.',
     policy,
+    reinforceBoss,
+    bossExtras,
     runs,
   };
 }

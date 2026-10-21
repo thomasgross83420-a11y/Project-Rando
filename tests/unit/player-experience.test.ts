@@ -1,7 +1,7 @@
 import { it, expect } from 'vitest';
 import { findPath } from '../../src/game/navigation';
 import { edgeClear } from '../../src/construction/geometry';
-import { newGame, maxHealth } from '../../src/game/model';
+import { newGame, maxHealth, assertGame } from '../../src/game/model';
 import { guidedLayout, validateLayout } from '../../src/game/construction';
 import { maintenance, nextObjective, roleSummary } from '../../src/game/presentation';
 import { FRIENDLIES, definition } from '../../src/game/catalog';
@@ -56,6 +56,7 @@ it('all 54 starter/front combinations are legal, free and repeatable', () => {
           ids = s.assets.map((a) => a.id);
         guidedLayout(s, front);
         expect(validateLayout(s)).toEqual([]);
+        assertGame(s);
         expect(s.credits).toBe(600);
         expect(s.assets.map((a) => a.id)).toEqual(ids);
         const first = structuredClone(s.assets);
@@ -110,4 +111,14 @@ it('Endurance chooses bosses from the declared band even with a higher ranked ar
       if (block.boss) expect(definition(block.boss).rank).toBeLessThanOrEqual(band * 5);
     }
   }
+});
+it('touch and precise rally points reject blocked Core ground and preserve the deployment', async () => {
+  const { validateRallyPoint } = await import('../../src/game/rally');
+  const s = newGame('Rally', 0, 'Bastion', 'warden.bulwark');
+  guidedLayout(s);
+  const a = s.assets.find((a) => a.type === 'friendly.rifle_squad')!,
+    before = structuredClone(a);
+  expect(() => validateRallyPoint(s, a, { x: 30, y: 30 })).toThrow('blocked');
+  expect(() => validateRallyPoint(s, a, { x: 26, y: 32 })).not.toThrow();
+  expect(a).toEqual(before);
 });

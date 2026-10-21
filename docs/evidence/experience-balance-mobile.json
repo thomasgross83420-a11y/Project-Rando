@@ -1,0 +1,124 @@
+{
+  "method": "Standard; fixed identities; legal guided force; affordable maintenance; face disclosed fronts; purchase policy after tutorial; first six attempts or defeat. Not an optimal strategy or universal balance certification.",
+  "policy": [
+    "friendly.sentry",
+    "friendly.rifle_squad"
+  ],
+  "reinforceBoss": true,
+  "bossExtras": [
+    "friendly.sentry",
+    "friendly.repair_node"
+  ],
+  "runs": [
+    {
+      "doctrine": "Mobile",
+      "attempt": 1,
+      "stage": 0,
+      "repeat": false,
+      "before": {
+        "rank": 1,
+        "credits": 600
+      },
+      "after": {
+        "rank": 2,
+        "credits": 935
+      },
+      "outcome": "Victory",
+      "corePercent": 100,
+      "wrecks": 0,
+      "maintenance": 0,
+      "reward": 335,
+      "seconds": 93.65,
+      "simulationMs": 1169,
+      "slowestTickMs": 44
+    },
+    {
+      "doctrine": "Mobile",
+      "attempt": 2,
+      "stage": 1,
+      "repeat": false,
+      "before": {
+        "rank": 2,
+        "credits": 935
+      },
+      "after": {
+        "rank": 4,
+        "credits": 1266
+      },
+      "outcome": "Victory",
+      "corePercent": 100,
+      "wrecks": 0,
+      "maintenance": 19,
+      "reward": 900,
+      "seconds": 181.73333333333332,
+      "simulationMs": 4249,
+      "slowestTickMs": 60
+    },
+    {
+      "doctrine": "Mobile",
+      "attempt": 3,
+      "stage": 2,
+      "repeat": false,
+      "before": {
+        "rank": 4,
+        "credits": 1266
+      },
+      "after": {
+        "rank": 6,
+        "credits": 2353
+      },
+      "outcome": "Victory",
+      "corePercent": 100,
+      "wrecks": 0,
+      "maintenance": 51,
+      "reward": 1138,
+      "seconds": 241.95,
+      "simulationMs": 4137,
+      "slowestTickMs": 44
+    },
+    {
+      "doctrine": "Mobile",
+      "attempt": 4,
+      "stage": 3,
+      "repeat": false,
+      "before": {
+        "rank": 6,
+        "credits": 2353
+      },
+      "after": {
+        "rank": 7,
+        "credits": 3730
+      },
+      "outcome": "Victory",
+      "corePercent": 93,
+      "wrecks": 0,
+      "maintenance": 15,
+      "reward": 1392,
+      "seconds": 300.98333333333335,
+      "simulationMs": 5481,
+      "slowestTickMs": 64
+    },
+    {
+      "doctrine": "Mobile",
+      "attempt": 5,
+      "stage": 4,
+      "repeat": false,
+      "before": {
+        "rank": 7,
+        "credits": 3730
+      },
+      "after": {
+        "rank": 7,
+        "credits": 2924
+      },
+      "outcome": "Defeat",
+      "corePercent": 0,
+      "wrecks": 1,
+      "maintenance": 110,
+      "reward": 954,
+      "seconds": 317.95,
+      "simulationMs": 8290,
+      "slowestTickMs": 44
+    }
+  ]
+}

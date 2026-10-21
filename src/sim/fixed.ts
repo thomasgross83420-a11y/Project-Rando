@@ -59,12 +59,17 @@ export function bearing(v: Vec): number {
   if (!v.x && !v.y) return 0;
   const x = Math.abs(v.x),
     y = Math.abs(v.y);
+  const safeProducts =
+    Number.isInteger(x) &&
+    Number.isInteger(y) &&
+    Math.max(x, y) <= Math.floor(Number.MAX_SAFE_INTEGER / TRIG);
   let lo = 0,
     hi = 16384;
   while (lo < hi) {
     const m = (lo + hi) >> 1,
       d = direction(m);
-    if (BigInt(x) * BigInt(-d.y) > BigInt(y) * BigInt(d.x)) lo = m + 1;
+    if (safeProducts ? x * -d.y > y * d.x : BigInt(x) * BigInt(-d.y) > BigInt(y) * BigInt(d.x))
+      lo = m + 1;
     else hi = m;
   }
   let a = lo;

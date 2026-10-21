@@ -69,3 +69,55 @@ it('a root-immune nearer enemy does not waste or block a snare charge', async ()
   expect(second.statuses.some((s) => s.kind === 'root')).toBe(true);
   expect(enemy.statuses.some((s) => s.kind === 'root')).toBe(false);
 });
+it('Bulwark and Mender formations advance instead of pulling each other toward the boundary', async () => {
+  const s = newGame('Formation', 0, 'Bastion', 'warden.bulwark');
+  s.assets = [];
+  const p = await compile({
+      mode: 'Campaign',
+      stage: 0,
+      rank: 1,
+      seed: 'formation',
+      difficulty: 'Standard',
+    }),
+    b = await FullBattle.create(s, p),
+    spawn = b as unknown as { spawn(s: Spawn): boolean };
+  b.plan.spawns = [];
+  for (const [type, x, y] of [
+    ['enemy.bulwark', 50, 50],
+    ['enemy.bulwark', 49, 51],
+    ['enemy.mender', 53, 53],
+  ] as const) {
+    spawn.spawn({ ...p.spawns[0]!, type });
+    const e = b.alive(1).at(-1)!;
+    e.x = x * 1024;
+    e.y = y * 1024;
+    e.target = b.core.id;
+    e.nextDecision = 1e9;
+  }
+  const first = b.alive(1).map((e) => Math.hypot(e.x - b.core.x, e.y - b.core.y));
+  for (let i = 0; i < 600; i++) b.step();
+  for (const [i, e] of b.alive(1).entries())
+    expect(Math.hypot(e.x - b.core.x, e.y - b.core.y)).toBeLessThan(first[i]! - 2048);
+});
+it('a noncombat cleanup stalemate pauses safely and cannot invent damage or victory', async () => {
+  const s = newGame('Stalemate', 0, 'Bastion', 'warden.bulwark');
+  s.assets = [];
+  const p = await compile({
+      mode: 'Calibration',
+      rank: 100,
+      band: 20,
+      seed: 'stalemate',
+      difficulty: 'Standard',
+      calibration: { type: 'enemy.mender', count: 1, variant: 0, entrance: 0 },
+    }),
+    b = await FullBattle.create(s, p);
+  for (let i = 0; i < 12000 && !b.needsRecovery; i++) b.step();
+  expect(b.needsRecovery).toBe(true);
+  expect(b.outcome).toBeNull();
+  expect(b.core.hp).toBe(10240000);
+  const tick = b.tick;
+  b.step();
+  expect(b.tick).toBe(tick);
+  b.surrender();
+  expect(b.outcome).toBe('Defeat');
+});

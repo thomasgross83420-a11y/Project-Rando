@@ -199,6 +199,9 @@ export class FullBattle {
   readonly timeline: { second: number; friendly: number; enemy: number }[] = [];
   readonly heatmap = Array<number>(36).fill(0);
   readonly destroyed = new Map<number, number>();
+  needsRecovery = false;
+  private stalledTicks = 0;
+  private progressBodies = new Map<number, { hp: number; x: number; y: number }>();
   private nextID = 1;
   private armyFingerprint = '';
   private nextVisual = 1;
@@ -896,13 +899,16 @@ export class FullBattle {
       const support = this.alive(1)
         .filter((v) => SUPPORT_ROLES.has(v.d.id) && distance(e, v) <= fx(10) && this.los(e, v))
         .sort((a, b) => distance(e, a) - distance(e, b) || a.id - b.id)[0];
-      if (support && distance(e, support) > fx(2)) {
+      if (
+        support &&
+        distance(e, support) > fx(2) &&
+        distance(e, target) > distance(support, target)
+      ) {
         const delta = direction(
           bearing({ x: target.x - support.x, y: target.y - support.y }),
           fx(1.5),
         );
-        this.move(e, { x: support.x + delta.x, y: support.y + delta.y }, fx(0.4));
-        return true;
+        return this.move(e, { x: support.x + delta.x, y: support.y + delta.y }, fx(0.4));
       }
     }
     if (['enemy.herald', 'enemy.carrier', 'enemy.jammer'].includes(e.d.id)) {
@@ -1013,8 +1019,15 @@ export class FullBattle {
         distance(e.pathGoal, goal) > fx(1) ||
         this.tick - e.pathAt >= 120
       ) {
+        const terrainTiles = this.alive(0).filter(
+          (t) =>
+            t.rect &&
+            ['friendly.low_cover', 'friendly.resonance_channel', 'friendly.razor_field'].includes(
+              t.d.id,
+            ),
+        );
         e.path = findPath(e, goal, e.radius, solids, arrival, (p) => {
-          const terrain = this.alive(0).find(
+          const terrain = terrainTiles.find(
             (t) =>
               t.rect &&
               p.x >= t.rect.x &&
@@ -2255,16 +2268,18 @@ export class FullBattle {
               this.los(e, v),
           )
           .sort((a, b) => distance(a, this.core) - distance(b, this.core) || a.id - b.id)[0];
-        if (front)
-          this.move(
-            e,
-            {
-              x: front.x + Math.sign(front.x - this.core.x) * fx(2),
-              y: front.y + Math.sign(front.y - this.core.y) * fx(2),
-            },
-            fx(0.5),
+        if (front) {
+          const behind = direction(
+            bearing({ x: front.x - this.core.x, y: front.y - this.core.y }),
+            fx(2),
           );
-        else this.approach(e, this.core, fx(5));
+          const point = {
+            x: Math.max(e.radius, Math.min(61440 - e.radius, front.x + behind.x)),
+            y: Math.max(e.radius, Math.min(61440 - e.radius, front.y + behind.y)),
+          };
+          if (distance(e, point) > fx(0.5) && !this.move(e, point, fx(0.5)))
+            this.approach(e, this.core, fx(5));
+        } else this.approach(e, this.core, fx(5));
         return true;
       }
       if (engineer && this.tryRearm(e)) return true;
@@ -3649,7 +3664,7 @@ export class FullBattle {
     }
   }
   step(): void {
-    if (this.outcome) return;
+    if (this.outcome || this.needsRecovery) return;
     this.tick++;
     this.losCache.clear();
     const due = this.scheduled.filter((s) => s.due <= this.tick);
@@ -3910,6 +3925,38 @@ export class FullBattle {
         this.note('Siege cleared');
       }
     } else this.quiet = 0;
+    if (!this.outcome && this.tick % 120 === 0) {
+      let progress = false;
+      for (const e of this.alive()) {
+        const previous = this.progressBodies.get(e.id),
+          goal =
+            this.get(e.target) ??
+            (e.asset
+              ? { x: fx(e.asset.tactics.anchor.x), y: fx(e.asset.tactics.anchor.y) }
+              : this.core);
+        if (
+          !previous ||
+          previous.hp !== e.hp ||
+          distance(previous, goal) - distance(e, goal) >= fx(0.15)
+        )
+          progress = true;
+      }
+      const bodies = new Map(this.alive().map((e) => [e.id, { hp: e.hp, x: e.x, y: e.y }]));
+      if ([...this.progressBodies.keys()].some((id) => !bodies.has(id))) progress = true;
+      this.progressBodies = bodies;
+      const next = this.plan.spawns[this.spawnCursor],
+        upcoming =
+          (!this.populationHeld && next && next.tick - this.directorTick <= 1800) ||
+          this.scheduled.some((s) => s.due - this.tick <= 1800) ||
+          this.warnings.some((w) => w.due - this.tick <= 1800);
+      this.stalledTicks = progress || upcoming ? 0 : this.stalledTicks + 120;
+      if (this.stalledTicks >= 5400) {
+        this.needsRecovery = true;
+        this.note(
+          'No progress for 90 seconds. Restart the checkpoint or withdraw to revise your defense.',
+        );
+      }
+    }
     this.effects = this.effects.filter((e) => e.until > this.tick);
     this.corpses = this.corpses.filter((c) => c.expires > this.tick && !c.claimed);
     if (this.tick % 60 === 0) {

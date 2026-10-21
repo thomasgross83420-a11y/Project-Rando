@@ -188,7 +188,14 @@ export function guidedLayout(s: GameState, front = 0): void {
     (a) => a.placement && definition(a.type).category !== 'warden',
   )) {
     const r = footprint(a)!;
-    if (!overlaps(r, PAD)) continue;
+    if (
+      !overlaps(r, PAD) &&
+      !overlaps(r, PRECINCT) &&
+      !next.assets.some(
+        (other) => other.id !== a.id && other.placement && overlaps(r, footprint(other)!),
+      )
+    )
+      continue;
     const original = { ...a.placement! };
     let found = false;
     for (let distance = 1; distance <= 6 && !found; distance++)
@@ -208,7 +215,10 @@ export function guidedLayout(s: GameState, front = 0): void {
         )
           continue;
         a.placement = { ...original, x: test.x, y: test.y };
-        a.tactics.anchor = { x: test.x + test.width / 2, y: test.y + test.height / 2 };
+        a.tactics.anchor = {
+          x: test.x + Math.floor(test.width / 2),
+          y: test.y + Math.floor(test.height / 2),
+        };
         found = true;
         break;
       }

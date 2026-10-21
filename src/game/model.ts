@@ -3,7 +3,7 @@ import { definition, FRIENDLIES, type Faction } from './catalog';
 import { growthFactors, scaleFixed } from '../progression/growth';
 import { assetLevel } from '../progression/allocation';
 export const FULL_VERSION = 'rb-full-first-pass-v1';
-export const BUILD = '0.3.0-first-pass';
+export const BUILD = '0.4.0-player-experience';
 const point = z
   .object({ x: z.number().int().min(0).max(59), y: z.number().int().min(0).max(59) })
   .strict();

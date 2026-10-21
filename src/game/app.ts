@@ -1,3 +1,4 @@
+import { validateRallyPoint } from './rally';
 import {
   CATEGORY_NAMES,
   FRONT_NAMES,
@@ -113,6 +114,8 @@ class FullApp {
   private bulkMode = false;
   private helpStep = 0;
   private picker: string[] = [];
+  private anchorTarget: string | null = null;
+  private panelReturnFocus: HTMLElement | null = null;
   private actions = new Map<string, () => void | Promise<void>>();
   private actionID = 0;
   private history: GameState[] = [];
@@ -170,6 +173,25 @@ class FullApp {
     this.toast = this.root.querySelector('#full-toast')!;
     this.view = new FullView(this.root.querySelector('#full-field')!);
     this.view.onTap = (p, id) => {
+      if (this.anchorTarget && this.state) {
+        const asset = this.state.assets.find((a) => a.id === this.anchorTarget)!;
+        void this.run(async () => {
+          validateRallyPoint(this.state!, asset, p);
+          if (
+            await this.confirm(
+              'Set rally point',
+              `${definition(asset.type).name} will guard ground ${p.x}, ${p.y}. This is a preparation tactic; it does not move the deployment.`,
+              'Set point',
+            )
+          )
+            await this.command((c) => {
+              c.assets.find((a) => a.id === asset.id)!.tactics.anchor = p;
+            });
+          this.anchorTarget = null;
+          this.open('Tactics');
+        });
+        return;
+      }
       if (this.deployment) {
         this.ghost(p.x, p.y);
         return;
@@ -218,7 +240,10 @@ class FullApp {
       else if (system === 'back') this.goBack();
       else if (system === 'zoom-in') this.view.zoom(1.2);
       else if (system === 'zoom-out') this.view.zoom(1 / 1.2);
-      else if (system === 'learn') this.open('Field guide');
+      else if (system === 'cancel-anchor') {
+        this.anchorTarget = null;
+        this.open('Tactics');
+      } else if (system === 'learn') this.open('Field guide');
       else if (system === 'repair') this.open('Recovery');
       else if (system === 'next-siege')
         void this.run(async () => {
@@ -633,6 +658,7 @@ class FullApp {
     }${this.button('Back', () => this.showTitle())}</div>`;
   }
   private close() {
+    this.anchorTarget = null;
     if (this.returnTitle) {
       this.returnTitle = false;
       if (this.settingsOnly) {
@@ -650,7 +676,10 @@ class FullApp {
     this.deployment = null;
     this.view.ghost = null;
     this.syncLayout();
-    this.root.querySelector<HTMLElement>('#full-field')?.focus({ preventScroll: true });
+    (this.panelReturnFocus?.isConnected
+      ? this.panelReturnFocus
+      : this.root.querySelector<HTMLElement>('#full-field')
+    )?.focus({ preventScroll: true });
   }
   private goBack() {
     const caller = this.backStack.pop();
@@ -674,6 +703,7 @@ class FullApp {
     );
   }
   private open(section: string) {
+    this.anchorTarget = null;
     if (this.section === section) {
       this.close();
       return;
@@ -686,6 +716,7 @@ class FullApp {
     if (roots.includes(section)) this.backStack = [];
     else if (this.section) this.backStack.push(this.section);
     this.toast.classList.remove('visible');
+    if (!this.section) this.panelReturnFocus = document.activeElement as HTMLElement | null;
     this.section = section;
     this.title.hidden = true;
     this.panel.hidden = false;
@@ -749,7 +780,10 @@ class FullApp {
     }
     const objective = nextObjective(s),
       readiness = maintenance(s);
-    const objectiveHTML = `<span class="eyebrow">YOUR NEXT OBJECTIVE</span><strong>${escapeHTML(objective.title)}</strong><p>${escapeHTML(objective.detail)}</p><div class="objective-actions"><button class="primary" data-system="next-siege">Next siege →</button><button data-system="${readiness.cost ? 'repair' : 'learn'}">${readiness.cost ? 'Repair · ' + n(readiness.cost) + ' ◈' : 'How to play'}</button></div>`;
+    let objectiveHTML = `<span class="eyebrow">YOUR NEXT OBJECTIVE</span><strong>${escapeHTML(objective.title)}</strong><p>${escapeHTML(objective.detail)}</p><div class="objective-actions"><button class="primary" data-system="next-siege">Next siege →</button><button data-system="${readiness.cost ? 'repair' : 'learn'}">${readiness.cost ? 'Repair · ' + n(readiness.cost) + ' ◈' : 'How to play'}</button></div>`;
+    if (this.anchorTarget)
+      objectiveHTML =
+        '<strong>Choose a rally point</strong><p>Tap clear ground. The point will be reviewed before saving.</p><button data-system="cancel-anchor">Cancel</button>';
     const objectiveElement = this.root.querySelector('#full-objective')!;
     if (objectiveElement.innerHTML !== objectiveHTML) objectiveElement.innerHTML = objectiveHTML;
     const next = thresholds.rankNext[s.rank - 1] ?? 0;
@@ -767,12 +801,20 @@ class FullApp {
     if (this.section === 'Choose asset')
       return this.picker
         .map((id) => {
-          const a = s?.assets.find((a) => a.id === id);
-          return this.button(a ? definition(a.type).name : 'Harmonic Core', () => {
-            this.selected = id;
-            this.view.selected = id;
-            this.open('Inspect');
-          });
+          const a = s?.assets.find((a) => a.id === id),
+            contact = this.battle?.entities.find((e) => (e.owned ?? String(e.id)) === id);
+          return this.button(
+            a
+              ? definition(a.type).name
+              : contact
+                ? contact.d.name + (contact.side ? ' · Enemy' : '')
+                : 'Harmonic Core',
+            () => {
+              this.selected = id;
+              this.view.selected = id;
+              this.open('Inspect');
+            },
+          );
         })
         .join('');
     if (this.section === 'Field guide') return this.fieldGuide();
@@ -1273,7 +1315,19 @@ class FullApp {
     const a = s.assets.find((a) => a.id === this.selected);
     if (!a) return '<p>Select an owned asset first.</p>';
     const t = a.tactics;
-    return `<h3>${definition(a.type).name}</h3><p>Tactics are captured at siege start. Anchor coordinates refer to the ground field, independently of the camera.</p>${this.select('Posture', ['Defensive', 'Balanced', 'Aggressive'], t.posture, () => {}, 'tactic-posture')}${this.select('Core priority', ['Low', 'Normal', 'High'], t.core, () => {}, 'tactic-core')}${this.select('Automatic abilities', ['Frequent', 'Balanced', 'Conservative', 'Emergency', 'Disabled'], t.ability, () => {}, 'tactic-ability')}${this.select('Spacing', ['Compact', 'Balanced', 'Spread'], t.spacing, () => {}, 'tactic-spacing')}${this.input('Anchor X', String(t.anchor.x), 'anchor-x', 'number', 'min="6" max="53"')}${this.input('Anchor Y', String(t.anchor.y), 'anchor-y', 'number', 'min="6" max="53"')}<details><summary>Sector and secondary anchor</summary>${this.select('Sector', ['0', '1', '2', '3', '4', '5', '6'], String(t.sector), () => {}, 'tactic-sector')}${this.input('World heading (degrees from north)', String(t.heading), 'tactic-heading', 'number', 'min="0" max="359"')}${this.input('Secondary X (blank for none)', t.secondary ? String(t.secondary.x) : '', 'secondary-x', 'number', 'min="6" max="53"')}${this.input('Secondary Y', t.secondary ? String(t.secondary.y) : '', 'secondary-y', 'number', 'min="6" max="53"')}</details><details><summary>Target priority order</summary>${t.priorities.map((v, i) => this.select(`Priority ${i + 1}`, ['Core threats', 'Support', 'Elite', 'Air', 'Nearest'], v, () => {}, 'priority-' + i)).join('')}</details>${a.type === 'friendly.controlled_gate' ? this.select('Gate policy', ['Open', 'Closed', 'Allied passage'], t.gate, () => {}, 'tactic-gate') : ''}${a.type === 'friendly.skyguard' ? this.select('Ground fallback', ['Enabled', 'Disabled'], t.groundFallback ? 'Enabled' : 'Disabled', () => {}, 'tactic-fallback') : ''}<div class="button-row">${this.button(
+    return `<h3>${definition(a.type).name}</h3><p>Set your plan before the siege. Units fight and move automatically.</p>${this.select('Posture', ['Defensive', 'Balanced', 'Aggressive'], t.posture, () => {}, 'tactic-posture')}<p class="muted">Defensive stays close. Balanced holds weapon range. Aggressive pursues farther.</p>${
+      definition(a.type).speed && a.placement
+        ? this.button(
+            'Choose rally point on field',
+            () => {
+              this.close();
+              this.anchorTarget = a.id;
+              this.updateHUD();
+            },
+            true,
+          )
+        : ''
+    }<details><summary>Abilities, spacing & precise rally point</summary>${this.select('Core priority', ['Low', 'Normal', 'High'], t.core, () => {}, 'tactic-core')}${this.select('Automatic abilities', ['Frequent', 'Balanced', 'Conservative', 'Emergency', 'Disabled'], t.ability, () => {}, 'tactic-ability')}${this.select('Spacing', ['Compact', 'Balanced', 'Spread'], t.spacing, () => {}, 'tactic-spacing')}${this.input('Anchor X', String(t.anchor.x), 'anchor-x', 'number', 'min="0" max="59"')}${this.input('Anchor Y', String(t.anchor.y), 'anchor-y', 'number', 'min="0" max="59"')}</details><details><summary>Sector and secondary anchor</summary>${this.select('Sector', ['0', '1', '2', '3', '4', '5', '6'], String(t.sector), () => {}, 'tactic-sector')}${this.input('World heading (degrees from north)', String(t.heading), 'tactic-heading', 'number', 'min="0" max="359"')}${this.input('Secondary X (blank for none)', t.secondary ? String(t.secondary.x) : '', 'secondary-x', 'number', 'min="0" max="59"')}${this.input('Secondary Y', t.secondary ? String(t.secondary.y) : '', 'secondary-y', 'number', 'min="0" max="59"')}</details><details><summary>Target priority order</summary>${t.priorities.map((v, i) => this.select(`Priority ${i + 1}`, ['Core threats', 'Support', 'Elite', 'Air', 'Nearest'], v, () => {}, 'priority-' + i)).join('')}</details>${a.type === 'friendly.controlled_gate' ? this.select('Gate policy', ['Open', 'Closed', 'Allied passage'], t.gate, () => {}, 'tactic-gate') : ''}${a.type === 'friendly.skyguard' ? this.select('Ground fallback', ['Enabled', 'Disabled'], t.groundFallback ? 'Enabled' : 'Disabled', () => {}, 'tactic-fallback') : ''}<div class="button-row">${this.button(
       'Save tactics',
       async () => {
         const next = structuredClone(t);
@@ -1282,12 +1336,14 @@ class FullApp {
         next.ability = this.value('tactic-ability') as typeof t.ability;
         next.spacing = this.value('tactic-spacing') as typeof t.spacing;
         next.anchor = { x: Number(this.value('anchor-x')), y: Number(this.value('anchor-y')) };
+        validateRallyPoint(s, a, next.anchor);
         next.sector = Number(this.value('tactic-sector'));
         next.heading = Number(this.value('tactic-heading'));
         next.secondary =
           this.value('secondary-x') && this.value('secondary-y')
             ? { x: Number(this.value('secondary-x')), y: Number(this.value('secondary-y')) }
             : null;
+        if (next.secondary) validateRallyPoint(s, a, next.secondary);
         next.priorities = Array.from({ length: 5 }, (_, i) =>
           this.value('priority-' + i),
         ) as typeof t.priorities;
@@ -1705,7 +1761,7 @@ class FullApp {
     const brief = threatBrief(p),
       cannotStart = shown.coreHP <= 0 || !units.some((a) => definition(a.type).weapon !== 'none'),
       readiness = maintenance(s);
-    return `<article class="mission-card"><p class="eyebrow">${p.mode === 'Calibration' ? 'FREE PRACTICE' : p.difficulty.toUpperCase() + ' SIEGE'}</p><h3>${escapeHTML(p.stage !== null ? stageInfo(p.stage).name.split(' · ').at(-1)! : p.name)}</h3><div class="brief-facts"><div><span>Attack from</span><strong>${brief.fronts}</strong></div><div><span>Deployment</span><strong>${Math.floor(p.duration / 60)}m ${p.duration % 60 ? `${p.duration % 60}s` : ''}${p.blocks > 1 ? ` × ${p.blocks}` : ''}</strong></div></div><p><strong>${brief.summary}</strong></p><p class="muted">${brief.counter}</p></article>${p.stage === 1 ? '<p class="notice">This siege is stronger. Face the approach and consider adding a Sentry or Rifle Squad with your earned Credits.</p>' : ''}${warnings.map((w) => `<p class="notice">${w}</p>`).join('')}${cannotStart ? '<p class="notice">Restore the Core and deploy a living damage dealer before starting.</p>' : ''}<div class="panel-cta">${this.button(p.mode === 'Calibration' ? 'Start practice' : 'Start siege', () => this.startSiege(p), true, cannotStart)}</div><div class="button-row">${this.button(
+    return `<article class="mission-card"><p class="eyebrow">${p.mode === 'Calibration' ? 'FREE PRACTICE' : p.difficulty.toUpperCase() + ' SIEGE'}</p><h3>${escapeHTML(p.stage !== null ? stageInfo(p.stage).name.split(' · ').at(-1)! : p.name)}</h3><div class="brief-facts"><div><span>Attack from</span><strong>${brief.fronts}</strong></div><div><span>Deployment</span><strong>${Math.floor(p.duration / 60)}m ${p.duration % 60 ? `${p.duration % 60}s` : ''}${p.blocks > 1 ? ` × ${p.blocks}` : ''}</strong></div></div><p><strong>${brief.summary}</strong></p><p class="muted">${brief.counter}</p></article>${p.stage === 4 ? '<p class="notice">First boss siege. Reinforce before starting: cover the approach with overlapping fire and protect your repair support. Spend your reserve on stronger unlocked defenders: Heavy Squads at Rank 6, Rotary at Rank 7.</p>' : ''}${p.stage === 1 ? '<p class="notice">This siege is stronger. Face the approach and consider adding a Sentry or Rifle Squad with your earned Credits.</p>' : ''}${warnings.map((w) => `<p class="notice">${w}</p>`).join('')}${cannotStart ? '<p class="notice">Restore the Core and deploy a living damage dealer before starting.</p>' : ''}<div class="panel-cta">${this.button(p.mode === 'Calibration' ? 'Start practice' : 'Start siege', () => this.startSiege(p), true, cannotStart)}</div><div class="button-row">${this.button(
       'Adjust defenses',
       () => {
         this.close();
@@ -1869,6 +1925,13 @@ class FullApp {
   }
   private togglePause() {
     if (!this.battle) return;
+    if (this.battle.needsRecovery) {
+      this.notify(
+        'Review the stalled siege: restart its checkpoint or withdraw to revise your defense.',
+      );
+      this.open('Battle tools');
+      return;
+    }
     if (document.hidden || this.view.contextLost) {
       this.notify('Resume is unavailable while the browser is hidden or restoring graphics');
       return;
@@ -1882,13 +1945,22 @@ class FullApp {
   private battleMenu(): string {
     if (!this.battle) return '<p>No siege is running.</p>';
     const b = this.battle;
-    return `<p>${b.populationHeld ? 'Deployment held at the 120-body population/position gate; combat continues.' : b.directorTick >= b.plan.duration * 60 ? 'Cleanup: all remaining hostiles must be cleared.' : 'Deployment is proceeding on the director clock.'}</p><p>${b.alive(1).filter((e) => b.perceived(e)).length} visible contacts · Hidden contacts possible</p><div class="button-row">${this.button(this.paused ? 'Resume' : 'Pause', () => this.togglePause())}${this.button(
+    return `${b.needsRecovery ? '<p class="notice">No progress for 90 seconds. The siege is paused safely. Restart or withdraw to change your defense.</p>' : ''}<p>${b.populationHeld ? 'Deployment held at the 120-body population/position gate; combat continues.' : b.directorTick >= b.plan.duration * 60 ? 'Cleanup: all remaining hostiles must be cleared.' : 'Deployment is proceeding on the director clock.'}</p><p>${b.alive(1).filter((e) => b.perceived(e)).length} visible contacts · Hidden contacts possible</p><div class="button-row">${this.button(this.paused ? 'Resume' : 'Pause', () => this.togglePause())}${this.button(
       `Speed ${this.speed}×`,
       () => {
         this.speed = this.speed === 0.5 ? 1 : this.speed === 1 ? 2 : this.speed === 2 ? 4 : 0.5;
         this.renderPanel();
       },
-    )}${this.button('Sound / settings', () => this.open('Settings'))}${this.button(
+    )}${this.button('Restart checkpoint', async () => {
+      if (
+        await this.confirm(
+          'Restart checkpoint',
+          'Discard this incomplete attempt and restart its captured checkpoint. No new rewards or losses are committed.',
+          'Restart',
+        )
+      )
+        await this.startSiege(this.state?.active?.plan ?? b.plan, !!this.state?.active);
+    })}${this.button('Sound / settings', () => this.open('Settings'))}${this.button(
       'Withdraw',
       async () => {
         if (
@@ -2792,18 +2864,25 @@ class FullApp {
       }
     }
     if (this.battle && !this.paused && !this.busy && !this.battle.outcome) {
-      this.accumulator += elapsed * this.speed;
+      this.accumulator = Math.min(this.accumulator + elapsed * this.speed, 0.25 * this.speed);
       let steps = 0;
       const started = performance.now();
       while (
         this.accumulator >= 1 / 60 &&
         steps < 60 &&
         !this.battle.outcome &&
+        !this.battle.needsRecovery &&
         (steps === 0 || performance.now() - started < 8)
       ) {
         this.battle.step();
         this.accumulator -= 1 / 60;
         steps++;
+      }
+      if (this.battle.needsRecovery && !this.paused) {
+        this.paused = true;
+        this.audio.pause(true);
+        this.open('Battle tools');
+        this.notify('Siege paused: no progress. Restart or withdraw to adjust your defense.');
       }
       for (const effect of this.battle.effects)
         if (effect.id > this.lastEffect) {

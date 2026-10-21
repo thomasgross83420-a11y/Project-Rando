@@ -193,3 +193,32 @@ test('200% text, high contrast, map zoom alternatives and all camera orientation
   await page.screenshot({ path: 'test-results/experience-200-percent.png' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(800);
 });
+test('touch sets a reviewed rally point without moving or repurchasing the defender', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 800, height: 1280 });
+  await create(page);
+  const before = await saved(page);
+  await page.getByRole('button', { name: 'Army', exact: true }).click();
+  const row = page.locator('.army-row').filter({ hasText: 'Rifle Squad' }).first();
+  await row.getByRole('button', { name: 'Inspect', exact: true }).click();
+  await page.getByRole('button', { name: 'Tactics', exact: true }).click();
+  await page.getByRole('button', { name: 'Choose rally point on field', exact: true }).click();
+  const field = page.locator('#full-field');
+  await expect(page.locator('#full-panel')).toBeHidden();
+  const r = (await field.boundingBox())!,
+    cx = Number(await field.getAttribute('data-camera-x')),
+    cy = Number(await field.getAttribute('data-camera-y')),
+    z = Number(await field.getAttribute('data-zoom'));
+  await page.touchscreen.tap(
+    r.x + r.width / 2 + 16 * z * (26.3 - cx - (32.3 - cy)),
+    r.y + r.height / 2 + 8 * z * (26.3 - cx + (32.3 - cy)),
+  );
+  await page.locator('dialog').getByRole('button', { name: 'Set point', exact: true }).click();
+  const after = await saved(page),
+    old = before.assets.find((a) => a.type === 'friendly.rifle_squad')!,
+    updated = after.assets.find((a) => a.id === old.id)!;
+  expect(updated.tactics.anchor).toEqual({ x: 26, y: 32 });
+  expect(updated.placement).toEqual(old.placement);
+  expect(after.credits).toBe(before.credits);
+});
