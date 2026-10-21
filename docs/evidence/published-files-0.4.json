@@ -1,0 +1,1748 @@
+{
+  "source": "b284d3c2a7858545b18d28eff6e55cbacf0bd086",
+  "baseURL": "https://thomasgross83420-a11y.github.io/Project-Rando/",
+  "files": 348,
+  "method": "Every built static file fetched from the public Pages origin and compared byte-for-byte by SHA256 with local dist; unique source query and cache revalidation headers.",
+  "results": [
+    {
+      "path": "THIRD_PARTY_NOTICES.txt",
+      "sha256": "0c1677ecd236df2d3657cbbcc75abc08315327d88acb5c339008d218da8dd48e",
+      "bytes": 284630
+    },
+    {
+      "path": "index.html",
+      "sha256": "7cb28aa6f143b27094e3c6c9848115bef124c5c13ccc0a2d6247c5778b27d412",
+      "bytes": 632
+    },
+    {
+      "path": "assets/index-CkSY-_iL.js",
+      "sha256": "2fceabc89e1e9bf7ff47220639ff0f9ddb47fcc516043d7e5182e4d3855ea10f",
+      "bytes": 1544
+    },
+    {
+      "path": "assets/roles.png",
+      "sha256": "7a8a9aec353aaa2bc3265d49c68eb3f78fad87781a237a11998bb8b8bdfdcbf1",
+      "bytes": 8321
+    },
+    {
+      "path": "assets/mixer-DjhdsJ_S.js",
+      "sha256": "85b1bb8d4f1ccd0f19728c6b54cf86c2dec8f776c6353089074486823717509f",
+      "bytes": 11111
+    },
+    {
+      "path": "assets/backup-CqYCbjia.js",
+      "sha256": "0d68d5b0b4cac2b37514adb371146647170e3774ef3ed681793523eb74d5f84f",
+      "bytes": 66239
+    },
+    {
+      "path": "assets/app-CrrVHeEF.js",
+      "sha256": "2767209aaec22f7e2b683b48cb2a8b27f2d1573c585bac75e12238a9ee326312",
+      "bytes": 147010
+    },
+    {
+      "path": "assets/balance-study-BAmd0-VY.js",
+      "sha256": "6d5121a52edc70e38aec49f619ba13593561feea1826edff9c070aa098ea99b5",
+      "bytes": 1530
+    },
+    {
+      "path": "assets/foundation.json",
+      "sha256": "02f0da9d5ec4f0bc7d4a24d1c2bd2a1ee56382af1cab303b5a6b9252a54f20ce",
+      "bytes": 14896
+    },
+    {
+      "path": "assets/diagnostic-BwsRSMkQ.js",
+      "sha256": "457df9fcfcca2eebc5f171e4f217d2a420b51cf81ad03a91e4b48a19c20a2822",
+      "bytes": 3145
+    },
+    {
+      "path": "assets/style-proof-default.png",
+      "sha256": "0f378033a758ee393a7e1be3a7719fcc0bc96619f96116a29a896dbb4891ddc3",
+      "bytes": 32282
+    },
+    {
+      "path": "assets/roles.json",
+      "sha256": "9693882fe946249b5cdacb4e7a4399aa884f2a3dc0d04478636a90a70c2715d8",
+      "bytes": 3285
+    },
+    {
+      "path": "assets/app-sE--u7uY.js",
+      "sha256": "15571edd5c35e195a18012a26e596afa9d8f108359e187c4a5bb516b66020d94",
+      "bytes": 572737
+    },
+    {
+      "path": "assets/world-B01axsOl.js",
+      "sha256": "b21cd20e339a44f06b010076d34282488ff247b760f5e732c6d3d705998283b7",
+      "bytes": 690618
+    },
+    {
+      "path": "assets/foundation.png",
+      "sha256": "d397c7f6333f7e60caf6420c50f99f5ee51e6baed5d23169feb9847f1584bd57",
+      "bytes": 349002
+    },
+    {
+      "path": "assets/preload-helper-Cl7pOkUX.js",
+      "sha256": "989e1a374921cdeb43a03349e760593a196a91e7e6e055f9061657b8b57d96fc",
+      "bytes": 1124
+    },
+    {
+      "path": "assets/icon.png",
+      "sha256": "bcdfbcc4c5789752013f3d8eb3881914fb84a788915f111087833d296abd4f2d",
+      "bytes": 2141
+    },
+    {
+      "path": "assets/world-DFVhNYXI.css",
+      "sha256": "b2d539f32486a3443c722da5a6473966d2418bc087b558d93675591853966105",
+      "bytes": 8156
+    },
+    {
+      "path": "assets/collision-DjzgGrFP.js",
+      "sha256": "45711d98f18c6755e2da0f09b52c89431509a7978ce1496452e674e520f5fe44",
+      "bytes": 123503
+    },
+    {
+      "path": "assets/style-proof-close.png",
+      "sha256": "0a19c329843159f762f96801e1873212969088e75848bf2174e6e8f68006b075",
+      "bytes": 128163
+    },
+    {
+      "path": "assets/campaign-BpMi5VsB.js",
+      "sha256": "de5db0bc508cae1d4ad6a3e435e6fab2adc3e4023085be81cc5e7075224fa72d",
+      "bytes": 14168
+    },
+    {
+      "path": "assets/projection-UKy1bmwM.js",
+      "sha256": "f00457cee577552aa47c650b82aeaf4f8bded4aa73644d86a94f3b65cedfa2be",
+      "bytes": 1323377
+    },
+    {
+      "path": "assets/app-C3fUYCl5.css",
+      "sha256": "8a12f0036c65eb92d474b1ad58dfd090b2ee0ad4156258476e6194dd8e1029e8",
+      "bytes": 13901
+    },
+    {
+      "path": "assets/title-foundation.png",
+      "sha256": "7c5ba99eabc67764b163517198ee7c21e3981372761c540430fa33768a07c553",
+      "bytes": 129260
+    },
+    {
+      "path": "assets/migration-BQ2-7N9H.js",
+      "sha256": "2a951736e206730a42cbc0026527124de05069323d4e7fca30ac3bd71d1d606b",
+      "bytes": 1507
+    },
+    {
+      "path": "review/first-pass.md",
+      "sha256": "7983c3e348680d16aa0f09ef8077abbd7bc09d1bcf943c706d27aef0801288af",
+      "bytes": 5257
+    },
+    {
+      "path": "review/first-pass.html",
+      "sha256": "7f8285348aa92321dae14127f293ca115a6a51ea33014ad27ea35978aeb4900c",
+      "bytes": 5944
+    },
+    {
+      "path": "review/player-experience.html",
+      "sha256": "81c56cbc5ef37b7033a6f5ef6f72596a0c5a0c79ba724fd0e563ce404c4bdc88",
+      "bytes": 6070
+    },
+    {
+      "path": "review/player-experience.md",
+      "sha256": "4ff1eab2752a50a4586f923db07dfd4ef5c9b1a11eb2d85b90886e7d8c0d8a85",
+      "bytes": 10896
+    },
+    {
+      "path": "review/blueprint-addendum.md",
+      "sha256": "5b850a46a44c0dddfbb2a1fb0a407d0837bd15598c8dd5e71c25662da9e36bec",
+      "bytes": 9785
+    },
+    {
+      "path": "review/evidence.json",
+      "sha256": "72b560286c113993b448b10d25aa6ce26c36f3838ebfe0638caf4c27c7c32ea7",
+      "bytes": 6149
+    },
+    {
+      "path": "review/browser-cases.json",
+      "sha256": "caebf9fecd71d8ca8f273a25b5dc31f75079b4736dec566de7508ffa3b109791",
+      "bytes": 21939
+    },
+    {
+      "path": "review/field.png",
+      "sha256": "c0d4d8e23a4adcae4cf9c96b3598c68e582b52ccdf59159c1a5b5e2789539ccf",
+      "bytes": 164141
+    },
+    {
+      "path": "assets/audio/music.preparation.wav",
+      "sha256": "7ff2ab848fea55b8ec56ddb20b486b30c0df818a416cbd4295d4478c055145af",
+      "bytes": 3072044
+    },
+    {
+      "path": "assets/audio/sfx.challenge.wav",
+      "sha256": "7063882770bf5bbcd4b5ecc3b43a52fd3a2531fc80aee4d479f5dc64e3555332",
+      "bytes": 17644
+    },
+    {
+      "path": "assets/audio/sfx.impact.wav",
+      "sha256": "89483ec8e8a1bf99511e22c4f1cdee232bb319c5972e7f0bfcb3c01552320f33",
+      "bytes": 4204
+    },
+    {
+      "path": "assets/audio/sfx.melee.wav",
+      "sha256": "73edc6f7cc218caf9577e4156f57199fb1793b99725462e819c7e93afc5b0c01",
+      "bytes": 5164
+    },
+    {
+      "path": "assets/audio/alert.core.wav",
+      "sha256": "3b102957104f73fccd2ac6aca0a2e6e08eab400d8b4b590192f170a763cac448",
+      "bytes": 27244
+    },
+    {
+      "path": "assets/audio/alert.wave.wav",
+      "sha256": "7daa96d6c9b192bd862cb1a83f97c0650fe97c01ae5607a89357a81dbb2e30eb",
+      "bytes": 20844
+    },
+    {
+      "path": "assets/audio/stinger.defeat.wav",
+      "sha256": "70039d02db80cca01131f03827612a352281690939f6a5936397bda823a0a883",
+      "bytes": 76844
+    },
+    {
+      "path": "assets/audio/sfx.rifle.wav",
+      "sha256": "5a0f402ed431262f53f54a6b6cc86ea75e79898aecefb804ca44cfff3c959cde",
+      "bytes": 3244
+    },
+    {
+      "path": "assets/audio/sfx.bulwark.wav",
+      "sha256": "bb24a903b5eac49b04798238738db8f321b394b4ef0587a754cc56fa59264680",
+      "bytes": 5804
+    },
+    {
+      "path": "assets/audio/sfx.holdfast.wav",
+      "sha256": "92c6d991e9820b59399fd69074299576ca97a69afa6cee74932fcbdd66f43553",
+      "bytes": 22444
+    },
+    {
+      "path": "assets/audio/sfx.interpose.wav",
+      "sha256": "7d44cfd5125f04169aee307f8b4b15bf0d21cbe25cfb6f0970dadd75f0e47ea6",
+      "bytes": 14444
+    },
+    {
+      "path": "assets/audio/sfx.sentry.wav",
+      "sha256": "2ea71d3fbdb4df7535809be96ff52d7c611f8332d10444db7657b6a146c842d2",
+      "bytes": 3884
+    },
+    {
+      "path": "assets/audio/ui.confirm.wav",
+      "sha256": "8c4183b4e3f2906d8c5e04a4286adf0c072fff1ada8dc8df9a77dd02f99058b6",
+      "bytes": 3244
+    },
+    {
+      "path": "assets/audio/stinger.victory.wav",
+      "sha256": "26bf18aeb3ec29401e0fe5bd19f12d54515e17917859cffcaa50dc8de3bfb30d",
+      "bytes": 76844
+    },
+    {
+      "path": "assets/audio/music.title.wav",
+      "sha256": "f9d89a42dc85e7756e7a4b988551ba5205aaaa5ecbd6b7de7c1739c3da7c7642",
+      "bytes": 3072044
+    },
+    {
+      "path": "assets/audio/sfx.mine.wav",
+      "sha256": "44dd680024f1857d68b3cbaac0bcd4bd5e674c92720e516351aa78c7b1713cf5",
+      "bytes": 20844
+    },
+    {
+      "path": "assets/audio/manifest.json",
+      "sha256": "03cf25256b4e669a262c9fb5ffeb7f043223dd728675acac436a633e454fba8d",
+      "bytes": 8925
+    },
+    {
+      "path": "assets/audio/sfx.repair.wav",
+      "sha256": "ffec83d3805a309a12f0a1deede7028c2498ccd9cc6ed1b07d3c6e9c072702dc",
+      "bytes": 12844
+    },
+    {
+      "path": "assets/audio/music.fracture.wav",
+      "sha256": "8c9a7cc92de47f02432fe14b2deadc78c638a438e46167177786f3848dd211a0",
+      "bytes": 3072044
+    },
+    {
+      "path": "assets/full/enemy-Iron-0.png",
+      "sha256": "ef69e7d920d0ab0bcc22236eff57ad5caf8e81a241ae20cdaade09e4ddad7afd",
+      "bytes": 7601
+    },
+    {
+      "path": "assets/full/boss.prism_sovereign-0.png",
+      "sha256": "b3e794265e5019a34f9f90b296479f535416b992c34315e9ff75ec9efeaf9bd0",
+      "bytes": 1911
+    },
+    {
+      "path": "assets/full/weapons-0.png",
+      "sha256": "ca7b8db7e5a0bc3423b4e95844f4023d8fd61cbacc05617170d5e895046519aa",
+      "bytes": 7076
+    },
+    {
+      "path": "assets/full/boss.black_conductor-0.png",
+      "sha256": "adc2d6c746abc7a16fa50a10c2973d179177e3047d9a6f73f4813388e26475da",
+      "bytes": 2343
+    },
+    {
+      "path": "assets/full/weapons-1.png",
+      "sha256": "3d9db252d2dd743d9f563cd9552034cd421919464dc6a99809cf62d4f21545a2",
+      "bytes": 22180
+    },
+    {
+      "path": "assets/full/weapons-2.png",
+      "sha256": "f3406f7e6b7cdee0f254762261d887ac669070256806410a31fddb69d43ba482",
+      "bytes": 20315
+    },
+    {
+      "path": "assets/full/enemy-Fracture-0.png",
+      "sha256": "9a75a7ce0c2bb0046b03727cf3e3ded50e9c91d0080eb92894eb32ef37ae8b42",
+      "bytes": 7676
+    },
+    {
+      "path": "assets/full/campaign-ending.png",
+      "sha256": "17845ea73f591ccdfab4b01198f6e4ec41848431e522721fac3e88d64d879d91",
+      "bytes": 11242
+    },
+    {
+      "path": "assets/full/runtime.json",
+      "sha256": "9c01f805b80c8292a5711d2276acdcf805cff3ef1f524c06ceeb6aae5cb23c68",
+      "bytes": 259129
+    },
+    {
+      "path": "assets/full/enemy-Maw-0.png",
+      "sha256": "32d3ebe856fdad08953c9e2053b970a3abebe028153a92c51d95135b59486183",
+      "bytes": 7932
+    },
+    {
+      "path": "assets/full/boss.root_below-0.png",
+      "sha256": "36e367f1e11a9e8cab686bc63491f5813597426ce9f494c05dd41b71da709379",
+      "bytes": 2380
+    },
+    {
+      "path": "assets/full/enemy-Hollow-0.png",
+      "sha256": "ae9de3b32815f2efed52ced33330c6c5ca26993c017d6e36794cf8b7cc4c68b5",
+      "bytes": 9050
+    },
+    {
+      "path": "assets/full/boss.choir_dreadnought-0.png",
+      "sha256": "777665925f0c776ac028c96be7ab2039dfffcd0174e17a44c91abfbfcfc7f831",
+      "bytes": 1573
+    },
+    {
+      "path": "assets/full/boss.silent_crown-0.png",
+      "sha256": "adc2d6c746abc7a16fa50a10c2973d179177e3047d9a6f73f4813388e26475da",
+      "bytes": 2343
+    },
+    {
+      "path": "assets/full/friendly-0.png",
+      "sha256": "aba467c187f515545b4b51f3dedcf3efa11516b493507ae2563a8cead540ca4a",
+      "bytes": 28947
+    },
+    {
+      "path": "assets/full/boss.gorger_titan-0.png",
+      "sha256": "36e367f1e11a9e8cab686bc63491f5813597426ce9f494c05dd41b71da709379",
+      "bytes": 2380
+    },
+    {
+      "path": "assets/full/boss.shatterstorm-0.png",
+      "sha256": "b3e794265e5019a34f9f90b296479f535416b992c34315e9ff75ec9efeaf9bd0",
+      "bytes": 1911
+    },
+    {
+      "path": "assets/full/boss.marshal-0.png",
+      "sha256": "5576b43b1d2640b3bc8c6fca5bc47d18048924cf67c34dec4521cb5b57b7e2fd",
+      "bytes": 2330
+    },
+    {
+      "path": "assets/full/bastion-master.png",
+      "sha256": "323aba8f62a56afbca74513394d0423ad345fbadb9230c2fe79b8afb386178e2",
+      "bytes": 12350
+    },
+    {
+      "path": "assets/full/manifest.json",
+      "sha256": "18f3f6170727db262f8e22ae017c956a73e27692ea01c8c3e83eeb6097a3fe9c",
+      "bytes": 3341451
+    },
+    {
+      "path": "assets/combat/rifle-joints-r1.png",
+      "sha256": "6f515788d495baf3bcfbfd4016ba08705e5e71336239961a86c7302e76837d18",
+      "bytes": 103431
+    },
+    {
+      "path": "assets/combat/atlas0.png",
+      "sha256": "f010a3d68c6ea2b244e7b9f6d5346b6506ba90c6660b7a5ff8103fa5f64e44fb",
+      "bytes": 1038294
+    },
+    {
+      "path": "assets/combat/manifest.json",
+      "sha256": "cc3f5cdf575d016082a1538bc85ec012e0a5e3c15cf1b1baf0ca77b3e5100544",
+      "bytes": 771152
+    },
+    {
+      "path": "assets/combat/rifle-rig.json",
+      "sha256": "524257287c625d8de7407dd9e06a892cb4973d645f6b4e18a2501a7443ea9dee",
+      "bytes": 231101
+    },
+    {
+      "path": "assets/full/audio/music.hollow.ogg",
+      "sha256": "1166e1fb0fb4be7fb909a22aae429777df593499921b9ff9313f7142baa88e61",
+      "bytes": 857750
+    },
+    {
+      "path": "assets/full/audio/stinger.victory.ogg",
+      "sha256": "39c8a97316d8ebd8ac6e502fc226ca4cc0b56c981b910d4ef1cb645ec9c66e96",
+      "bytes": 22476
+    },
+    {
+      "path": "assets/full/audio/music.preparation.ogg",
+      "sha256": "2a47e9cd8866ae25affe1177d287c6f18b965b189970b57c36cc5592f437a52d",
+      "bytes": 789789
+    },
+    {
+      "path": "assets/full/audio/music.endurance.ogg",
+      "sha256": "d65e446c97cc65df4d3f62a5796db75fa15eac4cbdfcc08d79d55583ac43aa73",
+      "bytes": 1459021
+    },
+    {
+      "path": "assets/full/audio/music.iron.ogg",
+      "sha256": "fb6306d49af7a78984bb3c3bb94bd7c20218d126139bd11421a11e69fed4477f",
+      "bytes": 691418
+    },
+    {
+      "path": "assets/full/audio/music.boss.ogg",
+      "sha256": "9e8c5063cfe317894ab3d4dbc086bf51fc6667a2801dc71ee75dc20d47903416",
+      "bytes": 1154146
+    },
+    {
+      "path": "assets/full/audio/music.title.ogg",
+      "sha256": "0cacd341afe4c5e41e6c7b39039ee3b5adb362630242d7686f52af3f827e3f67",
+      "bytes": 832400
+    },
+    {
+      "path": "assets/full/audio/music.maw.ogg",
+      "sha256": "f0c077ab534668304bfef22e2988ddfd856723f63ba7c56f11abdda92c1ba2ed",
+      "bytes": 772549
+    },
+    {
+      "path": "assets/full/audio/stinger.defeat.ogg",
+      "sha256": "e8c83356ebbcc818f458a48f1b513bd9efa3b766085b3756826e26f0c06976b5",
+      "bytes": 21645
+    },
+    {
+      "path": "assets/full/audio/manifest.json",
+      "sha256": "56428ff23c1e66dc9528b269f3b72537a13f632d4e5038d764d167376b683bb5",
+      "bytes": 2002
+    },
+    {
+      "path": "assets/full/audio/music.fracture.ogg",
+      "sha256": "f7e817f5f2f9415a934edc87157ed1dc4b3da90ddc842da607131fbe1cbfdc1a",
+      "bytes": 688053
+    },
+    {
+      "path": "content/full/campaign-24-Master.json",
+      "sha256": "da0ac16be5b6cfe274349e9510d077b02cd5a952de65e25bfa0d0b994120752a",
+      "bytes": 37766
+    },
+    {
+      "path": "content/full/campaign-13-Veteran.json",
+      "sha256": "199ba861078c53a26e44ce980e38dece79c51a4821db945e830b0b69d3304272",
+      "bytes": 22873
+    },
+    {
+      "path": "content/full/mastery-4-Standard.json",
+      "sha256": "f0af82145f7a008f4ad7c2bfd6408b506b14d49e44686f03f808a5b4a2be064c",
+      "bytes": 50991
+    },
+    {
+      "path": "content/full/campaign-16-Cadet.json",
+      "sha256": "1d3ee916806e4549866db6ce9a2c10fc91a1fd778560d71a69722164e2c4da25",
+      "bytes": 9107
+    },
+    {
+      "path": "content/full/campaign-36-Master.json",
+      "sha256": "d12c03901c1287fdc54c7ff4030d5b6fe2cb449af591fa65427d6a483d2dbbe7",
+      "bytes": 29037
+    },
+    {
+      "path": "content/full/campaign-4-Standard.json",
+      "sha256": "b5fddbca1ac2f027511621e2f5cc1dea1f807d9c6e4dfc3ca96eada5158ff460",
+      "bytes": 36300
+    },
+    {
+      "path": "content/full/campaign-34-Veteran.json",
+      "sha256": "ecdbc7be90ef9dfbbfc45107d9c817cfbca61dd377603b8f14703c196a37dcbe",
+      "bytes": 49389
+    },
+    {
+      "path": "content/full/campaign-1-Cataclysm.json",
+      "sha256": "5d25a09774c0b934a4af20a0f8674ee24c1245699769ed3a5f239da5c522c0d7",
+      "bytes": 30319
+    },
+    {
+      "path": "content/full/campaign-2-Standard.json",
+      "sha256": "a279825ad25c2f5006408933f01618ad96653f28bf5cede1b7d679a292fbd881",
+      "bytes": 23448
+    },
+    {
+      "path": "content/full/campaign-15-Veteran.json",
+      "sha256": "eec6d3110d0c0be5bd39ece070221893265a1bdffb03914245f7d6bf46655048",
+      "bytes": 7964
+    },
+    {
+      "path": "content/full/campaign-6-Cataclysm.json",
+      "sha256": "d92b40ab3ca5ae32a0207d8838508be83be5e3af84397daacbadd0e5f880d3ce",
+      "bytes": 16295
+    },
+    {
+      "path": "content/full/campaign-18-Standard.json",
+      "sha256": "bd4a7fb92474a5ba8a5ebc5cfaafff904b7abf288bff05c087aee61e6e04c092",
+      "bytes": 20553
+    },
+    {
+      "path": "content/full/campaign-11-Standard.json",
+      "sha256": "351041a571693d4a1912e63a64f66322f17b37464ef4a0455cb83135ea469d0e",
+      "bytes": 11389
+    },
+    {
+      "path": "content/full/campaign-26-Cataclysm.json",
+      "sha256": "7f4426998051c63df92d0142b53243430561e9a0e19fae0c333a41a88dcb5370",
+      "bytes": 23572
+    },
+    {
+      "path": "content/full/campaign-1-Master.json",
+      "sha256": "8696411508aae5cb2b7346d7b91e7748d74b00ad536609d3a28242067b97d688",
+      "bytes": 25118
+    },
+    {
+      "path": "content/full/campaign-27-Master.json",
+      "sha256": "c2c4bbc61388fe9e8b381fc991ca4fceae8cd83be64dee9c39cecdabb771a8ae",
+      "bytes": 27328
+    },
+    {
+      "path": "content/full/campaign-20-Master.json",
+      "sha256": "b81c3dd51bce0048abc057913e6541375904b6928125e57d57ca67800bae81bb",
+      "bytes": 11742
+    },
+    {
+      "path": "content/full/campaign-10-Master.json",
+      "sha256": "447e36eb5cc48b104cffac739eb49a9b9ab0cf8ce0cf6741d0b58841d7d5a75f",
+      "bytes": 10799
+    },
+    {
+      "path": "content/full/campaign-0-Cadet.json",
+      "sha256": "98334a328d82e9486490b1740bd8b6076c04ac0d09e752ea58b508fd0dfca32b",
+      "bytes": 3719
+    },
+    {
+      "path": "content/full/campaign-3-Cataclysm.json",
+      "sha256": "2f6105661cd672593e1c4959948ac196cc2c3abdde29b6e5573e45fe815a7665",
+      "bytes": 51856
+    },
+    {
+      "path": "content/full/campaign-18-Master.json",
+      "sha256": "d6d29e9ffd1c9887d9be74b808db11d517907a51a14bb35d00004a0b18136546",
+      "bytes": 28710
+    },
+    {
+      "path": "content/full/campaign-36-Standard.json",
+      "sha256": "05f6ccc0c7143ad048222dc74fff6eaf1b3651add64cf5f5bc289ccda45698bd",
+      "bytes": 20472
+    },
+    {
+      "path": "content/full/mastery-2-Cataclysm.json",
+      "sha256": "761a921044565b22ffcfbebd66f20feccc7e2cf6c993886c3a59ddec49ceb801",
+      "bytes": 82675
+    },
+    {
+      "path": "content/full/campaign-2-Cataclysm.json",
+      "sha256": "128a308a44c20e246824f0c5b163e68b34bbe549fa003ba7be405288a3943ae2",
+      "bytes": 40382
+    },
+    {
+      "path": "content/full/campaign-25-Cadet.json",
+      "sha256": "6634303d7f6960edc0bcdbe73b7555ca7c4839dfafa8705a416a07046fc029ac",
+      "bytes": 7429
+    },
+    {
+      "path": "content/full/campaign-14-Standard.json",
+      "sha256": "6f7367340a09ae34cb3745feb888f6b035239f4e5b54c7af9d8fc3efe9c3b9c7",
+      "bytes": 23630
+    },
+    {
+      "path": "content/full/campaign-2-Master.json",
+      "sha256": "31d3ca58200233082fde4c9beac13ad020914ef52dca78db9a49719d61c7757f",
+      "bytes": 33664
+    },
+    {
+      "path": "content/full/campaign-32-Master.json",
+      "sha256": "121dc3169bc0229236150d1151b616b3c3447029877de10fce737223c11e5525",
+      "bytes": 33445
+    },
+    {
+      "path": "content/full/mastery-7-Cadet.json",
+      "sha256": "1944c2e0fe92dc460922aafcc2270210a183b1cbc10579dfe7065faf07da83c4",
+      "bytes": 35934
+    },
+    {
+      "path": "content/full/campaign-26-Veteran.json",
+      "sha256": "a13427e67e7eee173510d67cf44fd39afadd43eef7f55f248ec5a44552bb312c",
+      "bytes": 17106
+    },
+    {
+      "path": "content/full/mastery-10-Standard.json",
+      "sha256": "81187d6a048fbb6d17e337a3c770437ec059df822a6229790c356e481bf54dcd",
+      "bytes": 37197
+    },
+    {
+      "path": "content/full/mastery-9-Cadet.json",
+      "sha256": "d68bc948e8944e2d70dff1545e2ac819d94f3b55a1131606c2f80e27bd515bb2",
+      "bytes": 25756
+    },
+    {
+      "path": "content/full/campaign-28-Veteran.json",
+      "sha256": "fddc393d697ecf99de8657ae33603a3242f5ee15c4a3adf01a644901e4ae9c2c",
+      "bytes": 32102
+    },
+    {
+      "path": "content/full/campaign-20-Cataclysm.json",
+      "sha256": "694938679a4f9ca7c2078ef0804fb571c9197e80ccc14fd5aed6a58f8a71ddcb",
+      "bytes": 13738
+    },
+    {
+      "path": "content/full/campaign-39-Cataclysm.json",
+      "sha256": "2433657fcef7698b139d18bef225f06a22828725477d3c4133141f66a80e415e",
+      "bytes": 81522
+    },
+    {
+      "path": "content/full/campaign-38-Cadet.json",
+      "sha256": "13afef63bc6357bff85b313fc34d1afba6c4f13ab49a4821eb969b3925bb0600",
+      "bytes": 30610
+    },
+    {
+      "path": "content/full/campaign-23-Master.json",
+      "sha256": "93684370eb91af4c8d7a8c8f814d24da148a32a96e1364c759477173c617471d",
+      "bytes": 32314
+    },
+    {
+      "path": "content/full/campaign-15-Cataclysm.json",
+      "sha256": "a78c719f8fa6651ef0c7f75d10708d7abea4c0f633c07543bdf7050d50189b75",
+      "bytes": 11790
+    },
+    {
+      "path": "content/full/campaign-25-Cataclysm.json",
+      "sha256": "c8c8982cf62e41e9bcab66c3ba308d75514f73b1498342ff26018536b3587a99",
+      "bytes": 14729
+    },
+    {
+      "path": "content/full/campaign-16-Veteran.json",
+      "sha256": "1e1ecf0b0c3f14eb7cc89313b328ff0f391a7b9916f89db2a061d232a28d54ad",
+      "bytes": 13657
+    },
+    {
+      "path": "content/full/campaign-20-Veteran.json",
+      "sha256": "418eb0f8c84ae4a8fe40ee62d51485c86134a06d274a1ef5537239f052b46f3c",
+      "bytes": 9121
+    },
+    {
+      "path": "content/full/mastery-8-Cataclysm.json",
+      "sha256": "594d084121ee959b7a9a15b2d9b02dd8c02ca0712621a40ab3ba6795930932b8",
+      "bytes": 69119
+    },
+    {
+      "path": "content/full/mastery-6-Standard.json",
+      "sha256": "9a2e6ebcbc2d5d343c71e9bcab781162fde12234a734d81ea68b32a5186aa91a",
+      "bytes": 47310
+    },
+    {
+      "path": "content/full/campaign-36-Veteran.json",
+      "sha256": "f42e572ef0d0c4fb7c1394b7a069f2dcffe83bfd9222cd3caa8c2409444c1641",
+      "bytes": 23849
+    },
+    {
+      "path": "content/full/campaign-9-Master.json",
+      "sha256": "7415cc977d0f49bcc47a0d577ac2e4e19a42a97e3f8bbaf755895253dbcb8bdd",
+      "bytes": 27284
+    },
+    {
+      "path": "content/full/campaign-14-Master.json",
+      "sha256": "c2ab6c1c3a01c2813cbd9d24503517059332fb4cb845fd2ae37c5eb6b688fd7e",
+      "bytes": 34613
+    },
+    {
+      "path": "content/full/campaign-25-Standard.json",
+      "sha256": "c6411accbeeb73cfb4b29d1545313df93d42b0478e09d57cd5014649a59c3735",
+      "bytes": 9858
+    },
+    {
+      "path": "content/full/campaign-31-Master.json",
+      "sha256": "8365c971af5d82a810753cf312cdbf3ce6a226cb9cd4e7db1b89e17067bba7a6",
+      "bytes": 27459
+    },
+    {
+      "path": "content/full/campaign-3-Master.json",
+      "sha256": "6d5b168c60a4e91e7cbc1c7adb5cc22ef8ad8588f55ea2fe6d9b98d54135ba91",
+      "bytes": 43114
+    },
+    {
+      "path": "content/full/campaign-9-Cataclysm.json",
+      "sha256": "7beae2249a2768ffa0a034ecd180ed19b86efb1f779694207d1f6e304de79d62",
+      "bytes": 33873
+    },
+    {
+      "path": "content/full/campaign-21-Master.json",
+      "sha256": "b9251d6d536d416966749dc374f63ad00ef9e40e936f3013754f644fe16dad91",
+      "bytes": 18496
+    },
+    {
+      "path": "content/full/campaign-22-Cataclysm.json",
+      "sha256": "160281bfd36ffe64118f57a36c0e30ae904015e6a784db06ba54fa534ecc1d03",
+      "bytes": 32146
+    },
+    {
+      "path": "content/full/campaign-6-Master.json",
+      "sha256": "e89c89e1eb0cd85159ea16d4a1f8f3963746ceda949fd9a5765ee3b630b133a6",
+      "bytes": 13881
+    },
+    {
+      "path": "content/full/campaign-37-Veteran.json",
+      "sha256": "9d6ca00777f2b12372b8c9200ae6a684cf486ce601a97d7ddddfeff0c842b118",
+      "bytes": 31964
+    },
+    {
+      "path": "content/full/campaign-10-Cadet.json",
+      "sha256": "ded5cc9b2bd6dc534d3f493105688aec241c4da97ba75f1f6d1888cf48bc2aaa",
+      "bytes": 6395
+    },
+    {
+      "path": "content/full/campaign-4-Veteran.json",
+      "sha256": "d0866bb9069d3ddbb6ab4a28a0af6250ee2dc7c47497d2a8b453b14b737d3b26",
+      "bytes": 44329
+    },
+    {
+      "path": "content/full/campaign-13-Master.json",
+      "sha256": "e5d003e893f58e9d357d9782cd24c60497ae8506beb2d172e1d7837f9ed22613",
+      "bytes": 27720
+    },
+    {
+      "path": "content/full/campaign-29-Cataclysm.json",
+      "sha256": "ef27aa01657fc4568a3c17caf1913dc395e3cb64f3e4f241645d7b15af04f35a",
+      "bytes": 55932
+    },
+    {
+      "path": "content/full/campaign-21-Standard.json",
+      "sha256": "61e69bd3e03de1c1e4295cdf7c22d0308cae0b988f9284789f74bbddf9ca5f61",
+      "bytes": 13487
+    },
+    {
+      "path": "content/full/campaign-8-Master.json",
+      "sha256": "c22a4f97d576df4c90f4d889694488923adc30262d2d2ad443e8b8e049ba5886",
+      "bytes": 22355
+    },
+    {
+      "path": "content/full/campaign-28-Cataclysm.json",
+      "sha256": "32636cc5026a8a24399d38416612bc6df4235c3478e4b72d64927ac6b6539efb",
+      "bytes": 45668
+    },
+    {
+      "path": "content/full/campaign-18-Veteran.json",
+      "sha256": "7a9c4f4de44b22727005faeb16babc943796927b400e2b7e52c4ccfda6aa4eb5",
+      "bytes": 23369
+    },
+    {
+      "path": "content/full/campaign-23-Veteran.json",
+      "sha256": "19370f95185f9f470ccdf35e2f34ab47bcc9d8df77ce606529b71053d76cda1a",
+      "bytes": 27888
+    },
+    {
+      "path": "content/full/campaign-19-Standard.json",
+      "sha256": "3482e1b119600c6b8cca7447aa6c4da69221e7b4492647c97ddeba68489b48d1",
+      "bytes": 23604
+    },
+    {
+      "path": "content/full/campaign-30-Veteran.json",
+      "sha256": "f03dbe9800a9b38ddb84512da523d096a5ba0a782aaf6a0634f8cc9cb995cf39",
+      "bytes": 13086
+    },
+    {
+      "path": "content/full/campaign-0-Master.json",
+      "sha256": "d3fb1ef5dcca548f8ac30855e6209905412917e2623ba8cb1bc262429a2b51fb",
+      "bytes": 3720
+    },
+    {
+      "path": "content/full/campaign-28-Cadet.json",
+      "sha256": "87008bc6dce3593d9631b9ceb8cece7cdaf5b624cc53e4be56cb8f071371cf0b",
+      "bytes": 22115
+    },
+    {
+      "path": "content/full/mastery-0-Cadet.json",
+      "sha256": "1d8cec35a580410796493a37b9092fcef12d9ec9b3ebeb0fd6bee4d1c530b006",
+      "bytes": 38722
+    },
+    {
+      "path": "content/full/mastery-5-Standard.json",
+      "sha256": "672c8099b6a01abd3d6e16758c10fea714708f9ac111d8ff6226c5effe790550",
+      "bytes": 48655
+    },
+    {
+      "path": "content/full/campaign-29-Standard.json",
+      "sha256": "3aa75d2ca091d191d248a296a18a769aeb3dfef3b330bf3aa1bdaba7fe3070eb",
+      "bytes": 33103
+    },
+    {
+      "path": "content/full/campaign-23-Cataclysm.json",
+      "sha256": "5f0fb68c1e9f1a62e2138c504b74274ae76afe024c4c1b735c84f67d31d54fc8",
+      "bytes": 38796
+    },
+    {
+      "path": "content/full/mastery-11-Master.json",
+      "sha256": "e801e3268915e53ba8596260433bd6a11817d1b4e224c3308188efcf53a836bb",
+      "bytes": 49915
+    },
+    {
+      "path": "content/full/campaign-33-Cataclysm.json",
+      "sha256": "e3a6cf283381e6e22494cd2d1d86d7d578b61cf9dac76d7808fc455a0df9eddf",
+      "bytes": 55881
+    },
+    {
+      "path": "content/full/campaign-30-Cadet.json",
+      "sha256": "09a8f63114152dcc8d6bf1c01544145099c2b6b4bba74439e8e8e933e8e09056",
+      "bytes": 8528
+    },
+    {
+      "path": "content/full/campaign-25-Veteran.json",
+      "sha256": "76cee1364fa28f49b8b4e5f0cfb8c8838264e48615c24d3abfcdcf3563b8edbd",
+      "bytes": 10826
+    },
+    {
+      "path": "content/full/mastery-7-Cataclysm.json",
+      "sha256": "18d998fc31ed3f202474e00fde8f2c67c8e343fca098a9b2ff98f33c168ce3b2",
+      "bytes": 80656
+    },
+    {
+      "path": "content/full/campaign-9-Cadet.json",
+      "sha256": "0c43319e46acaaf5fc69dc79ba5d2d7de1ef83a700c107b627d7d1b2d1b414d8",
+      "bytes": 14178
+    },
+    {
+      "path": "content/full/campaign-5-Veteran.json",
+      "sha256": "5b8a0d1a22722137bfc66445caffae82ee58e99c7d84b88464a732c6fa088038",
+      "bytes": 8453
+    },
+    {
+      "path": "content/full/campaign-18-Cataclysm.json",
+      "sha256": "f4d1e67c64a98c355a12bff2f97dee70e25700eb5faae8992b35ab5dd6aa69da",
+      "bytes": 32830
+    },
+    {
+      "path": "content/full/campaign-8-Veteran.json",
+      "sha256": "a5c6652c38b146bb973bc41a45b052b9cf17c9573f9b21291ba4c1dc028e1145",
+      "bytes": 18948
+    },
+    {
+      "path": "content/full/campaign-12-Master.json",
+      "sha256": "a578ba6019aa587833f6d5270e71d73ee67f1715100a12f0c7da79c485c42bc9",
+      "bytes": 21761
+    },
+    {
+      "path": "content/full/campaign-15-Standard.json",
+      "sha256": "9a1722c566ce5c574ba51cb3e7d933fa1f5391565e8f7a60426170b563fa9b41",
+      "bytes": 6645
+    },
+    {
+      "path": "content/full/mastery-1-Standard.json",
+      "sha256": "2b0ed466457325e50119b8a4c965ed326c09baa5e25285193944c4385feb6c91",
+      "bytes": 45093
+    },
+    {
+      "path": "content/full/campaign-11-Cataclysm.json",
+      "sha256": "ca28a5832428ac0e1965a973bc708e3c8814e89c8794736ca6182f25a172baf2",
+      "bytes": 18744
+    },
+    {
+      "path": "content/full/campaign-38-Standard.json",
+      "sha256": "712770a566d5ec1d1f3ae5d8dca39748fe50dfc57e4287c8b77145b5d0211ad1",
+      "bytes": 37088
+    },
+    {
+      "path": "content/full/mastery-1-Cataclysm.json",
+      "sha256": "7ad38be313ffa48a3ba9838e3d39747690987cd5fb35eefd230b765c64d7c080",
+      "bytes": 80215
+    },
+    {
+      "path": "content/full/campaign-30-Standard.json",
+      "sha256": "06c6c189e4902d7fc3a51ca2a95caa2c487b631fbd6ac54f4f23b8e3b325a5d8",
+      "bytes": 10256
+    },
+    {
+      "path": "content/full/campaign-17-Veteran.json",
+      "sha256": "a016fd8140aa591b909270598a12d754961f2b3c5ea40526229fa32fa4e6da36",
+      "bytes": 16721
+    },
+    {
+      "path": "content/full/campaign-24-Cataclysm.json",
+      "sha256": "3c43d2fe348af4f2455e3aaf929de37c252e461fe88498f7d7eab80c2f525b1f",
+      "bytes": 45938
+    },
+    {
+      "path": "content/full/campaign-8-Cadet.json",
+      "sha256": "41747c86e4d41b1f82fa9ab787488e97b6dfde01e669ab1e0be342014bbd8b74",
+      "bytes": 12842
+    },
+    {
+      "path": "content/full/campaign-2-Veteran.json",
+      "sha256": "9ff0f289bd4fb414fbadd773d466910c35132aec955e970f375a67c3abe37bf3",
+      "bytes": 27683
+    },
+    {
+      "path": "content/full/mastery-1-Veteran.json",
+      "sha256": "1311250a96244163d624f68104a9b18e036f4a20991f15f22a8394088da09c45",
+      "bytes": 55688
+    },
+    {
+      "path": "content/full/campaign-33-Veteran.json",
+      "sha256": "a7cee2161636b6db20ed191f9d42eb3f26bcf1f8c3287d4a1bc3d4da0815d4b5",
+      "bytes": 37874
+    },
+    {
+      "path": "content/full/mastery-8-Standard.json",
+      "sha256": "3e0f1e69231d88e1c0015d126ab5337195d4db082b3e83eb15b3dbd2ee1ab2c5",
+      "bytes": 40600
+    },
+    {
+      "path": "content/full/campaign-27-Cataclysm.json",
+      "sha256": "aee8038170be60b612e155f3cd730dae9c584bf1d6e3df45d59d71e6595d636e",
+      "bytes": 31986
+    },
+    {
+      "path": "content/full/campaign-35-Standard.json",
+      "sha256": "3b9bb5d2ca87c521e48c465e5f65e9cc7fd66f1d398994c96c4948b4efd50a79",
+      "bytes": 13253
+    },
+    {
+      "path": "content/full/mastery-3-Veteran.json",
+      "sha256": "7df33b2c59533f454afb72e7744c72dfa5a1a69652cf0f30f1cd3851646e7b38",
+      "bytes": 54942
+    },
+    {
+      "path": "content/full/mastery-2-Standard.json",
+      "sha256": "aa80908679c9ef5c950d050128354e0e85813330f696b682778c7b8be25d3558",
+      "bytes": 49362
+    },
+    {
+      "path": "content/full/campaign-38-Veteran.json",
+      "sha256": "9f6563f4a51f0e8a60ba85141e48e858eb4c81cfe308062aaf8d4e81b0151b31",
+      "bytes": 44663
+    },
+    {
+      "path": "content/full/campaign-37-Cadet.json",
+      "sha256": "543d551ef716a189e024f6212d8692d4d955b80482340632ed9d5955728cd93b",
+      "bytes": 21628
+    },
+    {
+      "path": "content/full/campaign-17-Cadet.json",
+      "sha256": "1f699a8cc6a9da243ec9ab8198b672292a7e1d27583a60f99532f9b8490bea21",
+      "bytes": 11427
+    },
+    {
+      "path": "content/full/campaign-4-Cadet.json",
+      "sha256": "8140b6d5b6a6b598651cdfbf95f63e200772cced5c6f3ee7f871e579c6985b0e",
+      "bytes": 26915
+    },
+    {
+      "path": "content/full/campaign-28-Master.json",
+      "sha256": "57fbcf3338936c43b6e8fdab3007115d6e1b85bdbbf216df7acae07986e33269",
+      "bytes": 37659
+    },
+    {
+      "path": "content/full/campaign-6-Veteran.json",
+      "sha256": "d2380156784995c5f75d461390aa6c317ea64d69047442a37f409284b8c6e8ee",
+      "bytes": 10747
+    },
+    {
+      "path": "content/full/campaign-0-Cataclysm.json",
+      "sha256": "6ab92845c44b1c702b29b6049d653efdae4a73b1a298bad1ec4b6dd9877fd659",
+      "bytes": 3723
+    },
+    {
+      "path": "content/full/campaign-35-Master.json",
+      "sha256": "ec8bef52b3400b386f62c1f941017a39fb3e850f9b7f9e622bcd413913185a13",
+      "bytes": 19608
+    },
+    {
+      "path": "content/full/campaign-33-Standard.json",
+      "sha256": "523d3a2b567d0052e1aa3e3c5c2d4191148ba537782f83220fd870b08b6d29a9",
+      "bytes": 32225
+    },
+    {
+      "path": "content/full/campaign-13-Cataclysm.json",
+      "sha256": "aaa3287433a7ae12a9349417cb5436c91ebcb3108b90106902b5ba2f479c1bb5",
+      "bytes": 33074
+    },
+    {
+      "path": "content/full/mastery-6-Cadet.json",
+      "sha256": "7a117d58f80d6b9c94406b1c98e0c66982ebb103d1acc09ba456a8f57f0e57ab",
+      "bytes": 34836
+    },
+    {
+      "path": "content/full/campaign-4-Master.json",
+      "sha256": "b7778fa123910d4b7805afde394bde7f3b0a960dbc1e181203d0ca75cd4d4b24",
+      "bytes": 54482
+    },
+    {
+      "path": "content/full/campaign-2-Cadet.json",
+      "sha256": "991b97462d99995099395f3652bd2d6314931ecd6d50bf746b658008cdcc3d93",
+      "bytes": 17590
+    },
+    {
+      "path": "content/full/campaign-30-Cataclysm.json",
+      "sha256": "6eae32972ad5070870222a83caf0abc0fc6f5eee446c780beec59f07806047e4",
+      "bytes": 18372
+    },
+    {
+      "path": "content/full/campaign-17-Standard.json",
+      "sha256": "57709e16dd02d7dd5cddf93d9a8d92bce9b25941d90ad0ae0b409832b8d13411",
+      "bytes": 14667
+    },
+    {
+      "path": "content/full/mastery-6-Master.json",
+      "sha256": "93e927509df760d7449357b185cfe726d395868f77535f029fbfe7bb5ed3d6e3",
+      "bytes": 67734
+    },
+    {
+      "path": "content/full/campaign-16-Standard.json",
+      "sha256": "8ae0dff86499a4a843fda3e1693aa6e3a70bd4e917364a92b3f774f30456b410",
+      "bytes": 11510
+    },
+    {
+      "path": "content/full/mastery-6-Veteran.json",
+      "sha256": "a40d678b2189731424723372d41eac4ec415c932a0722d0559c927f52ec6ec6e",
+      "bytes": 57504
+    },
+    {
+      "path": "content/full/campaign-21-Veteran.json",
+      "sha256": "20abd0a0e162be2aa32a13547d6ecedb0d967955ea0ed5593b712fb581cff03d",
+      "bytes": 15228
+    },
+    {
+      "path": "content/full/mastery-3-Cadet.json",
+      "sha256": "63b6f63af2fc2bb677d32fbaf64d5f8c844c31e132f9cf39a57b49ea97f2659f",
+      "bytes": 35393
+    },
+    {
+      "path": "content/full/mastery-4-Veteran.json",
+      "sha256": "9af61ddc01a4e354df7eccf5c2a3cf04ba9032dc69f5051ce00f41d90ccbede7",
+      "bytes": 59060
+    },
+    {
+      "path": "content/full/campaign-35-Cadet.json",
+      "sha256": "7cbcf0a4eeb844d0a2db59edc6d647afb918a2993a0d085f25a917e7b3a742a1",
+      "bytes": 10490
+    },
+    {
+      "path": "content/full/campaign-37-Standard.json",
+      "sha256": "1510ed64e4c35a21fd3a8232d99bcc4ea567d458cc8220472da9b1d9b9470a06",
+      "bytes": 26592
+    },
+    {
+      "path": "content/full/campaign-9-Veteran.json",
+      "sha256": "cc41b950845cfcb4ad32ea196fd81d9fe96c657f29fb7ee3d29b5744549a97ee",
+      "bytes": 21546
+    },
+    {
+      "path": "content/full/mastery-8-Cadet.json",
+      "sha256": "23be0ec43ae8ead888aaa487b2e0cac24a78d4ce4359981a4bedfed3005c1f7d",
+      "bytes": 30765
+    },
+    {
+      "path": "content/full/mastery-0-Cataclysm.json",
+      "sha256": "1df4fd3b252e1055c5b2fa71bd8f07f2c2ccd329d53a1dc62c2a096ddf5806f0",
+      "bytes": 81480
+    },
+    {
+      "path": "content/full/campaign-32-Veteran.json",
+      "sha256": "759568df554fa83bccc78a4d630f38f6a83da7031c69dc2c650ddff419a3642a",
+      "bytes": 28113
+    },
+    {
+      "path": "content/full/mastery-10-Master.json",
+      "sha256": "95d6c388e1ea20e4abdad6d79670395dee713b6fffc20446f2039f6c240ae7fd",
+      "bytes": 53079
+    },
+    {
+      "path": "content/full/campaign-5-Cataclysm.json",
+      "sha256": "fcc652fab263ee8d74b0d338d7334be0daa885444bd053d60a22e20d501ea36b",
+      "bytes": 10985
+    },
+    {
+      "path": "content/full/mastery-2-Veteran.json",
+      "sha256": "45d08c6e1d77e5f4a23451ea45f4d38ff0a2759d63f236fdf572d0f09631aa81",
+      "bytes": 58802
+    },
+    {
+      "path": "content/full/campaign-8-Standard.json",
+      "sha256": "f350f161713f3c4f14d963f30a1640a73b65c0730da6fa5f07d464cef9469261",
+      "bytes": 15907
+    },
+    {
+      "path": "content/full/mastery-8-Veteran.json",
+      "sha256": "c249ba8036f2a287637eab0601a8165cc52b4cc6bb096b4c43e850fa6873e076",
+      "bytes": 49672
+    },
+    {
+      "path": "content/full/campaign-38-Cataclysm.json",
+      "sha256": "bad6bb047ef016c45b4251b4eb322dbc7361b4cdfc8a6203d9d91015a6186506",
+      "bytes": 65243
+    },
+    {
+      "path": "content/full/campaign-26-Standard.json",
+      "sha256": "c95c4c70ab4668813dc3494d8a0dde1bb5a96d4df448abadff1f28011ad062fd",
+      "bytes": 13483
+    },
+    {
+      "path": "content/full/campaign-12-Veteran.json",
+      "sha256": "4e3f241cdc89f962dacbcf3822fb94bbee0260a8243a44fb2fe186e4b933ebd6",
+      "bytes": 18069
+    },
+    {
+      "path": "content/full/mastery-4-Master.json",
+      "sha256": "74f8c02aa05e2b5a8f5fbf09825d085a41500ff7985cd7e4e0c7f95d8670c159",
+      "bytes": 72365
+    },
+    {
+      "path": "content/full/campaign-0-Veteran.json",
+      "sha256": "d9ab059e747f05e986ed146840ea3c56fe38f4416fa298a3b1e1106a2b6398af",
+      "bytes": 3721
+    },
+    {
+      "path": "content/full/campaign-1-Cadet.json",
+      "sha256": "22746d0e87259fe5ef1e38ff4de5b4469e998a75cdfcf91ee900714944c98b01",
+      "bytes": 12715
+    },
+    {
+      "path": "content/full/mastery-10-Cadet.json",
+      "sha256": "84d3f9c1fc37a89575a38c955fffd210cf00c313d1ff30ea4ccfe426b9023a84",
+      "bytes": 29833
+    },
+    {
+      "path": "content/full/campaign-12-Cadet.json",
+      "sha256": "c396a7d6d17f766a580f7bfcfb7fde20dce351e5b94f02e8664f5592d4b09b43",
+      "bytes": 11540
+    },
+    {
+      "path": "content/full/mastery-0-Veteran.json",
+      "sha256": "046712e62224b1b61ad0b250358bc98065cf3b3c15a39436774f0e89dae80fce",
+      "bytes": 58016
+    },
+    {
+      "path": "content/full/campaign-24-Cadet.json",
+      "sha256": "936ebbe842155aee7ab42f761f3f0489e698b211e7584c85cecdbfa6093e6805",
+      "bytes": 20238
+    },
+    {
+      "path": "content/full/mastery-9-Veteran.json",
+      "sha256": "e91bc49e16eabe31a0b6607f85b7d3e976394d9722c2e25ba40aed687c8c1079",
+      "bytes": 39408
+    },
+    {
+      "path": "content/full/campaign-7-Veteran.json",
+      "sha256": "f3ba68070b061400f5388c8f0703b6f027493965ffcfe5285bf4222c07b91ce2",
+      "bytes": 14777
+    },
+    {
+      "path": "content/full/campaign-31-Cataclysm.json",
+      "sha256": "1b2a4be70f8bddc47098ddfd664b8dcc54e704e91b2574c88e757e7746361715",
+      "bytes": 32550
+    },
+    {
+      "path": "content/full/mastery-11-Cataclysm.json",
+      "sha256": "075b26c06669e8524d5cfa10fa9c40748fd624ab66cb5fce09e185e687f56a3e",
+      "bytes": 59508
+    },
+    {
+      "path": "content/full/campaign-1-Veteran.json",
+      "sha256": "04de446577ceb1d12b6cbc54a6377ea188736da4f20a692b9f838a4b0ce84be7",
+      "bytes": 20533
+    },
+    {
+      "path": "content/full/campaign-18-Cadet.json",
+      "sha256": "e27ba45435f365946d8698ac09f0b94a4b589459de2f1a0a591a3bc7ed76d90d",
+      "bytes": 15211
+    },
+    {
+      "path": "content/full/campaign-3-Veteran.json",
+      "sha256": "7d579b172edc0d5af814eb56e656fceee425a22b287bd5dec370ccafc473045d",
+      "bytes": 35751
+    },
+    {
+      "path": "content/full/campaign-11-Veteran.json",
+      "sha256": "552cc4dc33b29a43394019987275a7b8946c2076c847280bbf51e48c5b601207",
+      "bytes": 13592
+    },
+    {
+      "path": "content/full/campaign-37-Master.json",
+      "sha256": "9104a6c0f7abb5834c350c24e864b2b4324e5fe11ed691668e12d22cc7032548",
+      "bytes": 39390
+    },
+    {
+      "path": "content/full/campaign-35-Veteran.json",
+      "sha256": "7974b832ee30eb098d748660251f5570c34cbee3fc2e81da444216a6ab95e8c6",
+      "bytes": 15427
+    },
+    {
+      "path": "content/full/campaign-34-Cataclysm.json",
+      "sha256": "9bff42c633b069eb8c33b60199613d513175a19cd5a50ba4642f4acd5531738c",
+      "bytes": 71901
+    },
+    {
+      "path": "content/full/campaign-33-Master.json",
+      "sha256": "404ead24519fb9380b0d51d1943c8c2a87c12d9c2fad25bcff2dc25dd1837823",
+      "bytes": 46380
+    },
+    {
+      "path": "content/full/campaign-19-Cataclysm.json",
+      "sha256": "4c47b9871935fcac416ab46bc2680e9e2aa2f85f576003b18902d1652d759948",
+      "bytes": 41634
+    },
+    {
+      "path": "content/full/campaign-32-Cataclysm.json",
+      "sha256": "b8ee4c9114c8482981f6ee9c464c8aed89eac7ab0a5f081ba9c2d1127b480577",
+      "bytes": 40157
+    },
+    {
+      "path": "content/full/campaign-1-Standard.json",
+      "sha256": "ec057b1c66649b61fe27359d31cf7448c5127edfb3711fc03ee8b5052380b3ea",
+      "bytes": 16809
+    },
+    {
+      "path": "content/full/campaign-16-Master.json",
+      "sha256": "23c01993c224c74b97b9f1ebe20d020b1f7adf0d9d652cefd22b2f743a1bda0b",
+      "bytes": 15462
+    },
+    {
+      "path": "content/full/mastery-2-Cadet.json",
+      "sha256": "c07a20ac2efef266c1aeffdc3a5986012ea50b8d12e0361852366b28a5f773ec",
+      "bytes": 36934
+    },
+    {
+      "path": "content/full/campaign-25-Master.json",
+      "sha256": "1d9af9373c59343596d0295752b898018248f0c5318fb5b881cff0b2406b5d9a",
+      "bytes": 12760
+    },
+    {
+      "path": "content/full/campaign-15-Cadet.json",
+      "sha256": "c421218963e4075440fe23ab35c28f5048c12132afe306cab1713647546f6fb9",
+      "bytes": 5212
+    },
+    {
+      "path": "content/full/campaign-20-Cadet.json",
+      "sha256": "f00e2512eccda2d280d96a62b178254975dbae27f34a6a234d0dde1aa7caafc7",
+      "bytes": 6383
+    },
+    {
+      "path": "content/full/campaign-10-Veteran.json",
+      "sha256": "2955f924159f1134f3a3d2279e6484b9aa67c325daa0921eb380e13af86f0146",
+      "bytes": 8975
+    },
+    {
+      "path": "content/full/campaign-13-Standard.json",
+      "sha256": "9e5baf26283519c7f81673d4d77d9b66b9bee15a7acede281fada67ed06d40cb",
+      "bytes": 19879
+    },
+    {
+      "path": "content/full/mastery-4-Cadet.json",
+      "sha256": "9cfab4cda4a54363fe2424b5a0104dfa9a4fd024ced27e49e50fcd761a845029",
+      "bytes": 37618
+    },
+    {
+      "path": "content/full/campaign-29-Cadet.json",
+      "sha256": "ae2b9baec477892f60d473f5e31b6067642e4b56cdb42fa5e900db2539cb0e40",
+      "bytes": 24598
+    },
+    {
+      "path": "content/full/campaign-31-Standard.json",
+      "sha256": "94d7fe14dae7fa4344189e5dfd9719bd8ffc2626c368fa0197a8ee00f5def909",
+      "bytes": 19164
+    },
+    {
+      "path": "content/full/campaign-29-Master.json",
+      "sha256": "bb6fa99dcb804b3e8f00b129ca5ba64e1f62c2539e2af4ea761c5a73402c75bf",
+      "bytes": 46552
+    },
+    {
+      "path": "content/full/campaign-17-Master.json",
+      "sha256": "3ca2e15ad5369838bfd31445ee4a9073bad721a2e86deb7d8ee16232cb3754f2",
+      "bytes": 20219
+    },
+    {
+      "path": "content/full/campaign-15-Master.json",
+      "sha256": "f75292c91840c0e35f9ce894394e3fec2cbd838f9eb63203983e0edc1da646fe",
+      "bytes": 9758
+    },
+    {
+      "path": "content/full/campaign-31-Veteran.json",
+      "sha256": "d0b1bf21568a2a22e6989eedc4804f0a43c4822a2ed48ae3c34c98cc3e16f07b",
+      "bytes": 23259
+    },
+    {
+      "path": "content/full/campaign-27-Veteran.json",
+      "sha256": "ffd357b169bcd7c77ea3dc07d24c2c4ea7bd524272cc3215066e190240e9a68d",
+      "bytes": 23750
+    },
+    {
+      "path": "content/full/campaign-5-Standard.json",
+      "sha256": "9d37ffdc5965a8d3edf055949d6c5204e7a431692ecd8608247f16632ba13efb",
+      "bytes": 6539
+    },
+    {
+      "path": "content/full/mastery-1-Master.json",
+      "sha256": "056b46b0946d33a42c838b15adbb26064d7b032d5064e82c6f467b84ed71e5ed",
+      "bytes": 66767
+    },
+    {
+      "path": "content/full/campaign-30-Master.json",
+      "sha256": "4184ebf2f4a5f98fa372671bcfa2ec3715dc5d18b568970e1ad552374a6c2e9d",
+      "bytes": 15539
+    },
+    {
+      "path": "content/full/campaign-26-Cadet.json",
+      "sha256": "ee960691ab8b2a9d1688a40d149448a36ae94edea038cadac063a472395ea55a",
+      "bytes": 10576
+    },
+    {
+      "path": "content/full/campaign-22-Master.json",
+      "sha256": "598454b4cab67e2d492454e75f554c0540228f9f190ac402c5a14c86d02a7980",
+      "bytes": 27609
+    },
+    {
+      "path": "content/full/mastery-9-Master.json",
+      "sha256": "dd11b41a28708d04d3465236d862f564cf188203eb777e2f6ccb48bf3685ef77",
+      "bytes": 47609
+    },
+    {
+      "path": "content/full/campaign-24-Standard.json",
+      "sha256": "7c5e78f243fc0b82852118c37d471a2722cfac5f599e28fc73cb6e9f23573ffe",
+      "bytes": 26357
+    },
+    {
+      "path": "content/full/campaign-27-Standard.json",
+      "sha256": "729a07ee247f192b02c2b742748759dffec95dd6547dccece5fef8d2e1d47ec6",
+      "bytes": 19709
+    },
+    {
+      "path": "content/full/campaign-34-Master.json",
+      "sha256": "a2630c396bed5c884c750632cc91310660e866b3ba4aee9134196b0c25acc8b0",
+      "bytes": 59761
+    },
+    {
+      "path": "content/full/campaign-36-Cadet.json",
+      "sha256": "47328e6e26057d12c6103172d64aa876c7f811a1b0dd5926a35dd99e2d56e0f2",
+      "bytes": 15981
+    },
+    {
+      "path": "content/full/campaign-10-Standard.json",
+      "sha256": "2a8c8ac934dcd77d19cf061f4b0ffef8111540fcaf101ad074443efbb84a1d98",
+      "bytes": 7630
+    },
+    {
+      "path": "content/full/mastery-11-Veteran.json",
+      "sha256": "993ee085ff9977b01b9996260fddd6e5e583b274ccb59bf8ed7c740bb720be8b",
+      "bytes": 43016
+    },
+    {
+      "path": "content/full/campaign-21-Cadet.json",
+      "sha256": "5abc3184887c83f5100b9d902d5c47fe1cdbf860794a71c0f7ab0d69acf27246",
+      "bytes": 10731
+    },
+    {
+      "path": "content/full/campaign-39-Standard.json",
+      "sha256": "440412fa5cdd70bd0ce4089858c18f9d7ac7980e91016fae4086ddd6d9e94553",
+      "bytes": 46696
+    },
+    {
+      "path": "content/full/mastery-10-Cataclysm.json",
+      "sha256": "5578fae42a35f5f481d7b61effb764829aac77454398ad097e2e102a696c2fc4",
+      "bytes": 64834
+    },
+    {
+      "path": "content/full/mastery-5-Cataclysm.json",
+      "sha256": "38c30063577c45894be8ea97245d76d07504e35900e94a593c90a4d7fa4ecefb",
+      "bytes": 80528
+    },
+    {
+      "path": "content/full/campaign-34-Standard.json",
+      "sha256": "b29089fb09eb6b8fac5b26518b3af6b9dd6f16c4610fc8d65355124b3deaecd3",
+      "bytes": 43118
+    },
+    {
+      "path": "content/full/campaign-4-Cataclysm.json",
+      "sha256": "4f27d4de9451fb20f05a5d8a07803ce479c42c8e15a5799389ee353deb9490ea",
+      "bytes": 65621
+    },
+    {
+      "path": "content/full/mastery-5-Cadet.json",
+      "sha256": "25fe1c6cda2a8db599507bccaaa9669a0d3c1255d59a5ce3aaeec633cbee3b16",
+      "bytes": 36844
+    },
+    {
+      "path": "content/full/mastery-6-Cataclysm.json",
+      "sha256": "037e141c9169276fdda0db51c8233798dc859b93ae06fd6f20612652fc37ad3f",
+      "bytes": 82752
+    },
+    {
+      "path": "content/full/campaign-7-Cataclysm.json",
+      "sha256": "dcbcafff898eef0580c055ef28453d577720eeb748cca9b66afbac0f9d18bc03",
+      "bytes": 21206
+    },
+    {
+      "path": "content/full/campaign-31-Cadet.json",
+      "sha256": "628ca73ec87d2a3d3c350bbf8c72f147a8659edf8939a1509848514d2e08b138",
+      "bytes": 15354
+    },
+    {
+      "path": "content/full/campaign-22-Veteran.json",
+      "sha256": "821e018dd895112637a6d8d44fd030ce9c36d34275953fd90305a61b48f057e6",
+      "bytes": 22410
+    },
+    {
+      "path": "content/full/campaign-14-Cadet.json",
+      "sha256": "998e9542169254e33845a8cd18dd69e2ebc34a13738993c47423652b992aee34",
+      "bytes": 18122
+    },
+    {
+      "path": "content/full/mastery-11-Standard.json",
+      "sha256": "ef2013415479bb80bbe474022f552e2be88d343845874c0ecb50ee28d12987d0",
+      "bytes": 34569
+    },
+    {
+      "path": "content/full/campaign-19-Cadet.json",
+      "sha256": "4eccccd2d0c83d666aeb364388be7440f90aa8564694e737f7258b2729e5d69d",
+      "bytes": 17634
+    },
+    {
+      "path": "content/full/mastery-5-Master.json",
+      "sha256": "3a93b457dbf1b8500618aa559530337cb483ebd5c4591f838d68a058dcc0992d",
+      "bytes": 68166
+    },
+    {
+      "path": "content/full/campaign-39-Veteran.json",
+      "sha256": "4c19d7c28475a560655c70a9ed104ea66c4a3b85ed0492754c13fac57882605c",
+      "bytes": 56709
+    },
+    {
+      "path": "content/full/campaign-14-Cataclysm.json",
+      "sha256": "948a98ca1e29ff2f10ad382adb112656429f29c93893a876bcf1068dcbc0cc64",
+      "bytes": 41746
+    },
+    {
+      "path": "content/full/campaign-38-Master.json",
+      "sha256": "6d3cc885ba7e2719ff205aa8773ea9609fcd526d1d45860ab52efe0d6ccb7d56",
+      "bytes": 53242
+    },
+    {
+      "path": "content/full/campaign-35-Cataclysm.json",
+      "sha256": "25093c36f2553c618c4a43aa15c9da63f5e096cd9291e8f405b19a9af27ea912",
+      "bytes": 22868
+    },
+    {
+      "path": "content/full/campaign-37-Cataclysm.json",
+      "sha256": "454dc6cd8c3aa353b05bcd3da264ed684a58284ac78819b368f23d2e9aabccf2",
+      "bytes": 47060
+    },
+    {
+      "path": "content/full/campaign-5-Master.json",
+      "sha256": "3708989eeb43f52a13fab8d5eb1e860e5b0fc2dbc497db5cb8fe191c9c200bed",
+      "bytes": 9062
+    },
+    {
+      "path": "content/full/campaign-29-Veteran.json",
+      "sha256": "3788505a5ef822a26e73f5ddfc335bc5b1b0953698a0d5ff26c7a09d8db28fba",
+      "bytes": 38928
+    },
+    {
+      "path": "content/full/mastery-9-Standard.json",
+      "sha256": "36b62d01ea614c3f707785c8ba502b9d59c301dff6e8f7240f2460451fe1a5bc",
+      "bytes": 33749
+    },
+    {
+      "path": "content/full/campaign-32-Standard.json",
+      "sha256": "975793c7186a556a7b5b6439b81b39d9fa31da78288841a4cc3245d7ed095b18",
+      "bytes": 23999
+    },
+    {
+      "path": "content/full/campaign-21-Cataclysm.json",
+      "sha256": "a25e7b2533b8fd3ad92f18b8176cf6e8897265bf8e23937c572fe0a1cf4488f7",
+      "bytes": 21782
+    },
+    {
+      "path": "content/full/mastery-7-Master.json",
+      "sha256": "c3e0563463903798285eaf98ebcf0d5f6c2cf3ca69b1e962d1c6a64b5adf8296",
+      "bytes": 67005
+    },
+    {
+      "path": "content/full/mastery-11-Cadet.json",
+      "sha256": "904c95e86c5fc8b7b3b7d636d3969a456f304a5d723f666f6ac9328c38c18fed",
+      "bytes": 27942
+    },
+    {
+      "path": "content/full/campaign-20-Standard.json",
+      "sha256": "90346a8c36178f130e10e5bd0a0341701720255eb34c98c8ea405f21d084e59c",
+      "bytes": 8377
+    },
+    {
+      "path": "content/full/mastery-5-Veteran.json",
+      "sha256": "85c4c384ef7b300feb9a603f52832e2087b560d015ba55f879eb52c37163df76",
+      "bytes": 57143
+    },
+    {
+      "path": "content/full/campaign-32-Cadet.json",
+      "sha256": "7ee29d83c01e820af3b57119c1492e790a9945d65476666de2d99c6f3681a681",
+      "bytes": 18898
+    },
+    {
+      "path": "content/full/campaign-34-Cadet.json",
+      "sha256": "742cc6ce9fa66b2e96c036c5e3edacb99232d5d160d055ae9342219141d889ca",
+      "bytes": 31471
+    },
+    {
+      "path": "content/full/campaign-9-Standard.json",
+      "sha256": "b7926066c1880773bbd5b539010481c85a378e693c85c2f10d540c1568ec1724",
+      "bytes": 18352
+    },
+    {
+      "path": "content/full/campaign-10-Cataclysm.json",
+      "sha256": "adcb1b073ba3c1b411616fe25f089b8e6a9f970c81dec9910604de9f73ce0d73",
+      "bytes": 12518
+    },
+    {
+      "path": "content/full/mastery-4-Cataclysm.json",
+      "sha256": "39618cc4c96bcee77912336b2f6b8df4a925197f44315ef0dc8d43056343e6c1",
+      "bytes": 84312
+    },
+    {
+      "path": "content/full/mastery-9-Cataclysm.json",
+      "sha256": "6cb71a02fc11baa5e7714fa0ee110b5fb883e04a858bcc0798e184af4b75681c",
+      "bytes": 57452
+    },
+    {
+      "path": "content/full/campaign-26-Master.json",
+      "sha256": "3323a5e74b950381eecfe06a8d73356137d3d9d07bf84280ac41ca2d86298a41",
+      "bytes": 19774
+    },
+    {
+      "path": "content/full/mastery-10-Veteran.json",
+      "sha256": "b532b2b2268448235279662effe8d2e5571a1c0636c196f19c3f7dd470c07a6e",
+      "bytes": 46285
+    },
+    {
+      "path": "content/full/campaign-39-Master.json",
+      "sha256": "b0b276019c30641026eb0a3cdb45a89225acf65480172390ab54ea4743596172",
+      "bytes": 66874
+    },
+    {
+      "path": "content/full/campaign-7-Cadet.json",
+      "sha256": "b4484fbf2330d66e8e30b05e4e1baf1c64a590a143368125d4dd691a9b05bce8",
+      "bytes": 10147
+    },
+    {
+      "path": "content/full/campaign-12-Standard.json",
+      "sha256": "a6df5d8c2d7b7a41080c0923a878eaf2aca295ed0074c4412ca89bfc01850d99",
+      "bytes": 15111
+    },
+    {
+      "path": "content/full/campaign-14-Veteran.json",
+      "sha256": "cf067029a3e55776c75a35bbde46000882d35c3dcebd843eed837ca1ad31410c",
+      "bytes": 28249
+    },
+    {
+      "path": "content/full/mastery-1-Cadet.json",
+      "sha256": "316f78c81066be585cea62a14437f0039f86f00966b18a28dedafe2670665d63",
+      "bytes": 34498
+    },
+    {
+      "path": "content/full/campaign-3-Cadet.json",
+      "sha256": "64795d1c6439cc15775ecd23370b6839e4b4fc42d060833b540f24da9ad63f17",
+      "bytes": 22636
+    },
+    {
+      "path": "content/full/campaign-11-Cadet.json",
+      "sha256": "b69fb313d756807f35b8175d8ca7d488c578c7790939180b4932522f3f8a9e88",
+      "bytes": 9535
+    },
+    {
+      "path": "content/full/campaign-19-Veteran.json",
+      "sha256": "00dd8969abd75a3a0774b60d0fffacb86f96d93d2fa2f63f81d61db42480f3c2",
+      "bytes": 27868
+    },
+    {
+      "path": "content/full/campaign-28-Standard.json",
+      "sha256": "f18d4fe45681606d5e2d68aec15a271aff3eb22df5ddee651228effb15555f81",
+      "bytes": 26087
+    },
+    {
+      "path": "content/full/campaign-17-Cataclysm.json",
+      "sha256": "adf6bcb02713b504b52821b1bc47aaadfaaf8657444e196c94227df12fcd330e",
+      "bytes": 23871
+    },
+    {
+      "path": "content/full/mastery-3-Master.json",
+      "sha256": "c75c6b3e9677de4698b596457fbce33e2c23fe81a6d2ece396c3dd4b446e89f0",
+      "bytes": 65955
+    },
+    {
+      "path": "content/full/campaign-27-Cadet.json",
+      "sha256": "de205859187393169b8dfbdd278730754e0df3b9dadece9d7c0e72f7139396a1",
+      "bytes": 14813
+    },
+    {
+      "path": "content/full/campaign-11-Master.json",
+      "sha256": "4b9f70d12b49e7faf0f9b869a2dbdb463627596f7df495cfd2de3e6cadc32a0f",
+      "bytes": 16043
+    },
+    {
+      "path": "content/full/campaign-3-Standard.json",
+      "sha256": "90dbd8298b9d2f48f0c26005f5fcf83a1571523984b3c509b880121940a64fa2",
+      "bytes": 30126
+    },
+    {
+      "path": "content/full/campaign-7-Standard.json",
+      "sha256": "dc432eff1020cebc3964ac848da45be380a0448b5e59522eeb25d4098277948a",
+      "bytes": 11990
+    },
+    {
+      "path": "content/full/mastery-7-Standard.json",
+      "sha256": "916c545799cb464fe41ab4d6e4f69555e503d75074e366b5d74452a275f1b3bc",
+      "bytes": 47033
+    },
+    {
+      "path": "content/full/index.json",
+      "sha256": "9aefc2640300fca3e1df01be82f226ac452248183b8c42766af84ce19b32c8c6",
+      "bytes": 25898
+    },
+    {
+      "path": "content/full/mastery-8-Master.json",
+      "sha256": "0fd040fad5ae51fbc826eaa51d76f96c8e3cca7d1ec3fa428328b88eda9e2c3b",
+      "bytes": 58261
+    },
+    {
+      "path": "content/full/mastery-0-Standard.json",
+      "sha256": "f9305cf233cf1bec7df8b49ada4568332ce3c916d4455a513fc18ae4a203b96a",
+      "bytes": 47826
+    },
+    {
+      "path": "content/full/campaign-22-Standard.json",
+      "sha256": "17705d75106062c393f306b143f74a09bad4fb08bbad300674ec06c5f92abd79",
+      "bytes": 18507
+    },
+    {
+      "path": "content/full/mastery-2-Master.json",
+      "sha256": "cbba06dc2658c14215c274fda0e1624221ee2be50b4de51ce9ad2759a889210e",
+      "bytes": 71238
+    },
+    {
+      "path": "content/full/campaign-8-Cataclysm.json",
+      "sha256": "d328518026ba96d55f59dcfcd1d5db8084d45eba8c242a3a45298424715a5fbe",
+      "bytes": 26361
+    },
+    {
+      "path": "content/full/campaign-5-Cadet.json",
+      "sha256": "dfcfc31771f8e57ccedf1e62cab8efa4ab0e65fc1dd227cdacc0bfe3f1d68ef0",
+      "bytes": 5331
+    },
+    {
+      "path": "content/full/campaign-19-Master.json",
+      "sha256": "b8421ceff6b3e9d6ceb13b0406bed94f21b4cb5787f7b09366a2bf7c7d219457",
+      "bytes": 34221
+    },
+    {
+      "path": "content/full/campaign-22-Cadet.json",
+      "sha256": "2b4da9ec0dcdc3e68331c34835bbf34e83a4b14e04c044bc39adbabb1131b425",
+      "bytes": 15478
+    },
+    {
+      "path": "content/full/campaign-0-Standard.json",
+      "sha256": "92cbe8fce2d9c50fa588cd751cf6131bfbc3e57e9f898c0fc286fd095df7df8d",
+      "bytes": 3722
+    },
+    {
+      "path": "content/full/campaign-23-Cadet.json",
+      "sha256": "03ed05cd7b751eeb9e88fde2b25e3c5b597d6853e610fa90bec347d820e6a2c7",
+      "bytes": 19600
+    },
+    {
+      "path": "content/full/campaign-23-Standard.json",
+      "sha256": "5e0cf6bba05dcde8547ba5435daefec68a4dc4ace53a648d26d55d3e84f58abe",
+      "bytes": 23529
+    },
+    {
+      "path": "content/full/campaign-36-Cataclysm.json",
+      "sha256": "c9b6813e2bbe9747a20cff373016af307164c35e3e9ca210e942b7fb70b01afc",
+      "bytes": 35683
+    },
+    {
+      "path": "content/full/campaign-6-Standard.json",
+      "sha256": "af10f74cb6195eaa6eadfc9b3fe2f0ff21a287a836dbb1e0a639512d4de1e65f",
+      "bytes": 9901
+    },
+    {
+      "path": "content/full/mastery-7-Veteran.json",
+      "sha256": "fdb60dca6d4f8f49a2d7031b708d627449e30392c955d869c2f5937fc4448c4e",
+      "bytes": 54545
+    },
+    {
+      "path": "content/full/campaign-39-Cadet.json",
+      "sha256": "371ce292cfe41d00411d01f8091ce7bdbde5bca55112e8c1e11da0eef39f9fef",
+      "bytes": 35921
+    },
+    {
+      "path": "content/full/mastery-3-Cataclysm.json",
+      "sha256": "5da08769351dbe3c087d35437a0c653d5d1916bb051baf55696b8fe423c6d013",
+      "bytes": 82516
+    },
+    {
+      "path": "content/full/campaign-6-Cadet.json",
+      "sha256": "4e90f34b521dc9658264d160fe8e3e22f6b7581b919a7b269c45a1dd4d7700d8",
+      "bytes": 7358
+    },
+    {
+      "path": "content/full/mastery-3-Standard.json",
+      "sha256": "33736e4f8f3267309be69bacd4a03d694e7503669b2ab5d2563aaa2bb8bf88b8",
+      "bytes": 45972
+    },
+    {
+      "path": "content/full/mastery-0-Master.json",
+      "sha256": "25bc81ef6058292ecada66fac6b7a743e18babcd86d0c9e01a7c0c97f7333a48",
+      "bytes": 69436
+    },
+    {
+      "path": "content/full/campaign-16-Cataclysm.json",
+      "sha256": "24e312bdd7a97d24f058a8ce33375aea33c1eba76521b68b8efff6d12bfe8151",
+      "bytes": 18576
+    },
+    {
+      "path": "content/full/campaign-12-Cataclysm.json",
+      "sha256": "6337b20d0c38c8d1c0160c3ef4148fb35abf751879b0d24a68ed8feea8a111c0",
+      "bytes": 26462
+    },
+    {
+      "path": "content/full/campaign-24-Veteran.json",
+      "sha256": "ab4a3981746e398c703ee1d700e5f3707a789ea72a491fa6b2d9ac4e7935c390",
+      "bytes": 31447
+    },
+    {
+      "path": "content/full/campaign-33-Cadet.json",
+      "sha256": "5734216b5675e1516b541dfa8364b51dd89422389026758250320e56e52495d2",
+      "bytes": 24588
+    },
+    {
+      "path": "content/full/campaign-7-Master.json",
+      "sha256": "5d4f89988cad00c605cf814ce4851c250f9581c4e011215cbf953524bf33e5d6",
+      "bytes": 18164
+    },
+    {
+      "path": "content/full/campaign-13-Cadet.json",
+      "sha256": "e2157514fb04fb28e766e6f34fd00815298360ed7490eb9766df9b28de365e08",
+      "bytes": 15538
+    }
+  ]
+}
