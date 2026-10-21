@@ -28,7 +28,7 @@ export function practiceClone(s: GameState, r: PracticeRules, p: Plan): GameStat
   }
   if (r.fullRepair) c.coreHP = 10240000;
   const w = c.assets.find((a) => a.type === r.warden)!;
-  if (!w.placement) w.placement = { x: 29, y: 33, rotation: 0 };
+  if (r.warden !== s.warden && !w.placement) w.placement = { x: 29, y: 33, rotation: 0 };
   const used = usage(c);
   for (const key of ['capacity', 'traps', 'barriers'] as const)
     if (used[key] > allowances[key])

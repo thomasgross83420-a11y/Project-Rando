@@ -1,0 +1,49 @@
+{
+  "method": "Alternative legal purchases from the captured Mobile checkpoint after four natural campaign victories; no injected currencies or levels. Same declared first boss, Standard. Tests positioning/support choices rather than adjusting stats.",
+  "rows": [
+    {
+      "name": "Steady overlapping fire",
+      "purchases": [
+        "friendly.sentry",
+        "friendly.sentry",
+        "friendly.sentry",
+        "friendly.sentry"
+      ],
+      "spend": 1000,
+      "reserve": 2620,
+      "outcome": "Victory",
+      "core": 73,
+      "seconds": 421.18333333333334,
+      "recovery": false
+    },
+    {
+      "name": "Rapid fire and stationary repair",
+      "purchases": [
+        "friendly.rotary",
+        "friendly.sentry",
+        "friendly.sentry",
+        "friendly.repair_node"
+      ],
+      "spend": 1350,
+      "reserve": 2270,
+      "outcome": "Victory",
+      "core": 100,
+      "seconds": 420.98333333333335,
+      "recovery": false
+    },
+    {
+      "name": "Heavy fire and repair",
+      "purchases": [
+        "friendly.rotary",
+        "friendly.heavy_squad",
+        "friendly.repair_node"
+      ],
+      "spend": 1400,
+      "reserve": 2220,
+      "outcome": "Defeat",
+      "core": 0,
+      "seconds": 373.9,
+      "recovery": false
+    }
+  ]
+}

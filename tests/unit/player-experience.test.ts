@@ -122,3 +122,72 @@ it('touch and precise rally points reject blocked Core ground and preserve the d
   expect(() => validateRallyPoint(s, a, { x: 26, y: 32 })).not.toThrow();
   expect(a).toEqual(before);
 });
+it('reviewed facing places rapid fire on the busy lane and resets headings when fronts change', async () => {
+  const { buy } = await import('../../src/game/construction'),
+    { ENTRANCES } = await import('../../src/construction/geometry');
+  const s = newGame('Fire lanes', 0, 'Mobile', 'warden.bulwark');
+  s.rank = 7;
+  s.credits = 5000;
+  buy(s, 'friendly.rotary');
+  buy(s, 'friendly.sentry');
+  guidedLayout(s, 1);
+  assertGame(s);
+  expect(validateLayout(s)).toEqual([]);
+  const front = ENTRANCES[1]!,
+    range = (a: (typeof s.assets)[number]) => {
+      const p = a.placement!;
+      return (p.x + 1 - front.x) ** 2 + (p.y + 1 - front.y) ** 2;
+    },
+    rotary = s.assets.find((a) => a.type === 'friendly.rotary')!;
+  for (const a of s.assets.filter((a) => a.type === 'friendly.sentry'))
+    expect(range(rotary)).toBeLessThanOrEqual(range(a));
+  guidedLayout(s, 5);
+  guidedLayout(s, 0);
+  expect(s.assets.filter((a) => a.placement).every((a) => a.tactics.heading === 270)).toBe(true);
+  assertGame(s);
+});
+it('practice preserves a stored selected Warden instead of silently adding it to the deployed force', async () => {
+  const { practiceClone } = await import('../../src/game/practice'),
+    { compile } = await import('../../src/game/director');
+  const s = newGame('Clone', 0, 'Bastion', 'warden.bulwark');
+  guidedLayout(s);
+  s.assets.find((a) => a.type === s.warden)!.placement = null;
+  const p = await compile({
+      mode: 'Calibration',
+      rank: 1,
+      seed: 'stored-warden',
+      difficulty: 'Standard',
+    }),
+    c = practiceClone(
+      s,
+      {
+        fullRepair: true,
+        capacity: 120,
+        barriers: 200,
+        traps: 40,
+        warden: s.warden,
+        flipBranches: false,
+        exclusions: [],
+      },
+      p,
+    );
+  expect(c.assets.map((a) => a.placement)).toEqual(s.assets.map((a) => a.placement));
+});
+it('the guided Mobile force actually deploys a newly unlocked Heavy Squad and remains within capacity', async () => {
+  const { buy, usage, limits } = await import('../../src/game/construction');
+  const s = newGame('Mobile growth', 0, 'Mobile', 'warden.bulwark');
+  s.rank = 7;
+  s.credits = 5000;
+  for (const type of [
+    'friendly.sentry',
+    'friendly.rifle_squad',
+    'friendly.rotary',
+    'friendly.heavy_squad',
+  ])
+    buy(s, type);
+  guidedLayout(s);
+  assertGame(s);
+  expect(validateLayout(s)).toEqual([]);
+  expect(s.assets.find((a) => a.type === 'friendly.heavy_squad')!.placement).not.toBeNull();
+  expect(usage(s).capacity).toBeLessThanOrEqual(limits(s).capacity);
+});

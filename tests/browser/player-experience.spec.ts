@@ -222,3 +222,51 @@ test('touch sets a reviewed rally point without moving or repurchasing the defen
   expect(updated.placement).toEqual(old.placement);
   expect(after.credits).toBe(before.credits);
 });
+test('a long browser interruption pauses the siege until the player resumes', async ({ page }) => {
+  await create(page);
+  await page.getByRole('button', { name: 'Next siege →', exact: true }).click();
+  await page.getByRole('button', { name: 'Start siege', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Pause', exact: true })).toBeVisible();
+  await page.evaluate(() => {
+    const end = performance.now() + 1200;
+    while (performance.now() < end) {
+      /* Simulate a real main-thread interruption. */
+    }
+  });
+  await expect(page.getByRole('button', { name: 'Resume', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Resume', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Pause', exact: true })).toBeVisible();
+});
+test('stalled cleanup opens recovery, restarts practice and preserves the real wallet and army', async ({
+  page,
+}) => {
+  test.setTimeout(90000);
+  await page.goto('./');
+  await page.getByRole('button', { name: 'New game', exact: true }).waitFor();
+  await page.addScriptTag({ path: '.cache/full-browser/fixture.js' });
+  const before = await page.evaluate(() => window.RBFullFixture.seedCoverageGap());
+  await page.reload();
+  await page.getByRole('button', { name: /^Continue ·/ }).click();
+  await page.getByRole('button', { name: 'Siege', exact: true }).click();
+  await page.getByText('Other ways to play & difficulty', { exact: true }).click();
+  await page.getByLabel('Mode', { exact: true }).selectOption('Calibration');
+  await page.getByLabel('Enemy role', { exact: true }).selectOption('Mender');
+  await page.getByLabel('Count', { exact: true }).fill('1');
+  await page.getByLabel('Entrance', { exact: true }).selectOption('5');
+  await page.getByRole('button', { name: 'Review forecast', exact: true }).click();
+  await page.getByRole('button', { name: 'Start practice', exact: true }).click();
+  await page.locator('[data-system="speed"]').click();
+  await page.locator('[data-system="speed"]').click();
+  await expect(page.getByText('No progress for 90 seconds.', { exact: false }).first()).toBeVisible(
+    { timeout: 60000 },
+  );
+  await page.getByRole('button', { name: 'Restart checkpoint', exact: true }).click();
+  await page.locator('dialog').getByRole('button', { name: 'Restart', exact: true }).click();
+  await expect(page.locator('[data-system="speed"]')).toHaveText('1×');
+  await page.getByRole('button', { name: 'Siege tools', exact: true }).click();
+  await page.getByRole('button', { name: 'Withdraw', exact: true }).click();
+  await page.locator('dialog').getByRole('button', { name: 'Withdraw', exact: true }).click();
+  const after = await saved(page);
+  expect(after.credits).toBe(before.credits);
+  expect(after.assets).toEqual(before.assets);
+});

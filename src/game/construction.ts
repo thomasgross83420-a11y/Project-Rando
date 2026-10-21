@@ -1,4 +1,11 @@
-import { analyzeRoutes, overlaps, PRECINCT, PAD, type Rect } from '../construction/geometry';
+import {
+  ENTRANCES,
+  analyzeRoutes,
+  overlaps,
+  PRECINCT,
+  PAD,
+  type Rect,
+} from '../construction/geometry';
 import { definition } from './catalog';
 import { makeAsset, maxHealth, type Asset, type GameState } from './model';
 export function footprint(a: Asset): Rect | null {
@@ -160,9 +167,9 @@ export function guidedLayout(s: GameState, front = 0): void {
     counters[d.category] = n + 1;
     const pos =
       d.category === 'tower'
-        ? { x: 22, y: 24 + n * 6 }
+        ? { x: 22 - 4 * Math.floor(n / 4), y: 24 + (n % 4) * 6 }
         : d.category === 'mobile'
-          ? { x: 25, y: 25 + n * 5 }
+          ? { x: 25 + 4 * Math.floor(n / 4), y: 25 + (n % 4) * 5 }
           : ['support', 'infrastructure'].includes(d.category)
             ? { x: 25, y: 35 + n * 3 }
             : d.category === 'trap'
@@ -170,7 +177,7 @@ export function guidedLayout(s: GameState, front = 0): void {
               : d.category === 'route'
                 ? { x: 17 + Math.floor(n / 4) * 2, y: 20 + (n % 4) * 3 }
                 : null;
-    if (pos && pos.y + d.height <= 46) {
+    if (pos && pos.x >= 12 && pos.y + d.height <= 46) {
       a.placement = { ...pos, rotation: 0 };
       a.tactics.anchor = { x: pos.x + 1, y: pos.y + 1 };
     }
@@ -223,6 +230,47 @@ export function guidedLayout(s: GameState, front = 0): void {
         break;
       }
   }
+  // Put the strongest compatible tower on the approach lane. This only runs
+  // for the explicitly reviewed guided arrangement, never for manual layouts.
+  const frontPoint = ENTRANCES[front]!,
+    groups = new Map<string, Asset[]>();
+  for (const a of next.assets.filter(
+    (a) => a.placement && definition(a.type).category === 'tower',
+  )) {
+    const r = footprint(a)!,
+      key = `${r.width}x${r.height}`;
+    const group = groups.get(key) ?? [];
+    group.push(a);
+    groups.set(key, group);
+  }
+  for (const group of groups.values()) {
+    const slots = group
+      .map((a) => ({ ...a.placement! }))
+      .sort((a, b) => {
+        const shape = footprint(group[0]!)!,
+          cx = (p: typeof a) => p.x + shape.width / 2,
+          cy = (p: typeof a) => p.y + shape.height / 2;
+        return (
+          (cx(a) - frontPoint.x) ** 2 +
+            (cy(a) - frontPoint.y) ** 2 -
+            ((cx(b) - frontPoint.x) ** 2 + (cy(b) - frontPoint.y) ** 2) ||
+          a.x - b.x ||
+          a.y - b.y
+        );
+      });
+    group.sort(
+      (a, b) =>
+        definition(b.type).damage / definition(b.type).interval -
+        definition(a.type).damage / definition(a.type).interval,
+    );
+    group.forEach((a, i) => {
+      a.placement = slots[i]!;
+      const r = footprint(a)!;
+      a.tactics.anchor = { x: r.x + Math.floor(r.width / 2), y: r.y + Math.floor(r.height / 2) };
+    });
+  }
+  for (const a of next.assets.filter((a) => a.placement))
+    a.tactics.heading = (270 + turns * 90) % 360;
   const errors = validateLayout(next);
   if (errors.length) throw new Error(errors.join('; '));
   s.assets = next.assets;

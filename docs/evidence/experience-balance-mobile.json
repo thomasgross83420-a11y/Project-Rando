@@ -5,10 +5,7 @@
     "friendly.rifle_squad"
   ],
   "reinforceBoss": true,
-  "bossExtras": [
-    "friendly.sentry",
-    "friendly.repair_node"
-  ],
+  "bossExtras": [],
   "runs": [
     {
       "doctrine": "Mobile",
@@ -29,8 +26,8 @@
       "maintenance": 0,
       "reward": 335,
       "seconds": 93.65,
-      "simulationMs": 1169,
-      "slowestTickMs": 44
+      "simulationMs": 709,
+      "slowestTickMs": 39
     },
     {
       "doctrine": "Mobile",
@@ -46,13 +43,13 @@
         "credits": 1266
       },
       "outcome": "Victory",
-      "corePercent": 100,
+      "corePercent": 99,
       "wrecks": 0,
       "maintenance": 19,
       "reward": 900,
-      "seconds": 181.73333333333332,
-      "simulationMs": 4249,
-      "slowestTickMs": 60
+      "seconds": 181.61666666666667,
+      "simulationMs": 3901,
+      "slowestTickMs": 41
     },
     {
       "doctrine": "Mobile",
@@ -65,16 +62,16 @@
       },
       "after": {
         "rank": 6,
-        "credits": 2353
+        "credits": 2336
       },
       "outcome": "Victory",
       "corePercent": 100,
       "wrecks": 0,
-      "maintenance": 51,
+      "maintenance": 68,
       "reward": 1138,
-      "seconds": 241.95,
-      "simulationMs": 4137,
-      "slowestTickMs": 44
+      "seconds": 241.63333333333333,
+      "simulationMs": 3705,
+      "slowestTickMs": 38
     },
     {
       "doctrine": "Mobile",
@@ -83,20 +80,20 @@
       "repeat": false,
       "before": {
         "rank": 6,
-        "credits": 2353
+        "credits": 2336
       },
       "after": {
         "rank": 7,
-        "credits": 3730
+        "credits": 3721
       },
       "outcome": "Victory",
-      "corePercent": 93,
+      "corePercent": 97,
       "wrecks": 0,
-      "maintenance": 15,
+      "maintenance": 7,
       "reward": 1392,
       "seconds": 300.98333333333335,
-      "simulationMs": 5481,
-      "slowestTickMs": 64
+      "simulationMs": 4583,
+      "slowestTickMs": 49
     },
     {
       "doctrine": "Mobile",
@@ -105,20 +102,20 @@
       "repeat": false,
       "before": {
         "rank": 7,
-        "credits": 3730
+        "credits": 3721
       },
       "after": {
         "rank": 7,
-        "credits": 2924
+        "credits": 3514
       },
       "outcome": "Defeat",
       "corePercent": 0,
       "wrecks": 1,
-      "maintenance": 110,
-      "reward": 954,
-      "seconds": 317.95,
-      "simulationMs": 8290,
-      "slowestTickMs": 44
+      "maintenance": 71,
+      "reward": 914,
+      "seconds": 306.15,
+      "simulationMs": 7179,
+      "slowestTickMs": 48
     }
   ]
 }

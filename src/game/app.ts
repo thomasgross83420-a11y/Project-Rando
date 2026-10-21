@@ -285,9 +285,18 @@ class FullApp {
       }
       this.lastFrame = performance.now();
     });
-    window.addEventListener('pagehide', () => {
-      this.paused = true;
-    });
+    const pauseForInterruption = () => {
+      if (this.battle) {
+        this.paused = true;
+        this.audio.pause(true);
+        this.lastFrame = performance.now();
+        this.updateHUD();
+      }
+    };
+    document.addEventListener('freeze', pauseForInterruption);
+    document.addEventListener('resume', pauseForInterruption);
+    window.addEventListener('orientationchange', pauseForInterruption);
+    window.addEventListener('pagehide', pauseForInterruption);
     requestAnimationFrame((t) => this.frame(t));
     void this.boot();
   }
@@ -2844,7 +2853,13 @@ class FullApp {
     setTimeout(() => URL.revokeObjectURL(url), 30000);
   }
   private frame(now: number) {
-    const elapsed = Math.min(0.25, Math.max(0, (now - this.lastFrame) / 1000));
+    const gap = Math.max(0, (now - this.lastFrame) / 1000);
+    if (gap > 1 && this.battle && !this.paused) {
+      this.paused = true;
+      this.audio.pause(true);
+      this.notify('Paused after a browser interruption. Resume when ready.');
+    }
+    const elapsed = Math.min(0.25, gap);
     this.lastFrame = now;
     if (this.view.contextLost && this.battle && !this.paused) {
       this.paused = true;

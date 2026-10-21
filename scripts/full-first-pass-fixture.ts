@@ -88,3 +88,18 @@ export async function read() {
   return validateSnapshot(value);
 }
 export { FULL_VERSION };
+export async function seedCoverageGap() {
+  const s = await seed(true);
+  for (const a of s.assets) a.placement = null;
+  s.assets.find((a) => a.type === 'friendly.sentry')!.placement = { x: 12, y: 12, rotation: 0 };
+  validateSnapshot(s);
+  const database = await db();
+  await new Promise<void>((resolve, reject) => {
+    const tx = database.transaction('campaigns', 'readwrite');
+    tx.objectStore('campaigns').put(s, 0);
+    tx.oncomplete = () => resolve();
+    tx.onabort = () => reject(tx.error);
+  });
+  database.close();
+  return s;
+}
