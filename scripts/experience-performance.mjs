@@ -2,7 +2,8 @@ import { createServer } from 'node:http';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, extname } from 'node:path';
 import { chromium } from '@playwright/test';
-const root = resolve('.cache/performance-dist'),
+const root = resolve(process.env.RB_PERF_DIST || '.cache/performance-dist'),
+  port = Number(process.env.RB_PERF_PORT || 4175),
   mime = {
     '.html': 'text/html',
     '.js': 'text/javascript',
@@ -26,7 +27,7 @@ const server = createServer(async (req, res) => {
     res.end('Not found');
   }
 });
-await new Promise((r) => server.listen(4175, '127.0.0.1', r));
+await new Promise((r) => server.listen(port, '127.0.0.1', r));
 const browser = await chromium.launch({
     executablePath: '/usr/bin/chromium',
     args: ['--no-sandbox'],
@@ -69,7 +70,7 @@ async function sample() {
   });
 }
 try {
-  await page.goto('http://127.0.0.1:4175/Project-Rando/');
+  await page.goto(`http://127.0.0.1:${port}/Project-Rando/`);
   await page.getByRole('button', { name: 'New game', exact: true }).click();
   await page.getByRole('button', { name: 'Create Bastion', exact: true }).click();
   await page.getByRole('button', { name: 'Create', exact: true }).click();
@@ -147,7 +148,7 @@ try {
   };
   await mkdir('docs/evidence', { recursive: true });
   await writeFile(
-    'docs/evidence/experience-performance.json',
+    process.env.RB_PERF_OUTPUT || 'docs/evidence/experience-performance.json',
     JSON.stringify(report, null, 2) + '\n',
   );
 } finally {

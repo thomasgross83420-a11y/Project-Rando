@@ -103,3 +103,22 @@ export async function seedCoverageGap() {
   database.close();
   return s;
 }
+export async function seedTrapDefense() {
+  const s = await seed(true);
+  for (const a of s.assets) a.placement = null;
+  s.assets.find((a) => a.type === 'friendly.proximity_mine')!.placement = {
+    x: 20,
+    y: 20,
+    rotation: 0,
+  };
+  validateSnapshot(s);
+  const database = await db();
+  await new Promise<void>((resolve, reject) => {
+    const tx = database.transaction('campaigns', 'readwrite');
+    tx.objectStore('campaigns').put(s, 0);
+    tx.oncomplete = () => resolve();
+    tx.onabort = () => reject(tx.error);
+  });
+  database.close();
+  return s;
+}

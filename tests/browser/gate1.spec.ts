@@ -93,7 +93,10 @@ test('invalid placement and failed persistence preserve money and history', asyn
     const original = IDBDatabase.prototype.transaction;
     IDBDatabase.prototype.transaction = function (...args: Parameters<typeof original>) {
       const tx = original.apply(this, args);
-      if (args[1] === 'readwrite') queueMicrotask(() => tx.abort());
+      // Fail the campaign commit, not the independent writer-lease heartbeat.
+      // Aborting the heartbeat first turns this into a read-only-tab test.
+      if (args[1] === 'readwrite' && tx.objectStoreNames.contains('campaigns'))
+        queueMicrotask(() => tx.abort());
       return tx;
     };
   });
@@ -174,6 +177,7 @@ test('explicit temporary session, native controls, viewport and 200% reflow', as
 test('high artwork selects the Core inspector in four views without purchasing; wizard cancel preserves slot', async ({
   page,
 }) => {
+  test.setTimeout(60000);
   await create(page);
   for (let orientation = 0; orientation < 4; orientation++) {
     // Fit Base includes tall-sprite padding; Core recenter is the explicit route

@@ -1,3 +1,4 @@
+import { damageLayers, hasCounter } from './readiness';
 import { validateRallyPoint } from './rally';
 import {
   CATEGORY_NAMES,
@@ -1743,14 +1744,11 @@ class FullApp {
     const shown = p.practice ? practiceClone(s, p.practice, p) : s;
     const units = shown.assets.filter((a) => a.placement && a.hp),
       warnings: string[] = [];
-    if (!units.some((a) => definition(a.type).weapon !== 'none'))
+    if (!units.some((a) => damageLayers(a).length))
       warnings.push('No operational attack assets deployed.');
     if (!units.some((a) => a.type === s.warden))
       warnings.push('Selected Warden is stored or incapacitated.');
-    if (
-      p.spawns.some((v) => definition(v.type).layer === 'air') &&
-      !units.some((a) => definition(a.type).targets !== 'ground')
-    )
+    if (p.spawns.some((v) => definition(v.type).layer === 'air') && !hasCounter(units, 'air'))
       warnings.push('Airborne threats require operational air-capable defenders.');
     if (
       p.spawns.some((v) => v.type === 'enemy.veil' || v.type === 'enemy.mole') &&
@@ -1768,9 +1766,13 @@ class FullApp {
       fronts = [...new Set(p.spawns.map((v) => v.entrance))];
     this.view.forecast = p;
     const brief = threatBrief(p),
-      cannotStart = shown.coreHP <= 0 || !units.some((a) => definition(a.type).weapon !== 'none'),
+      missingLayers = (['ground', 'air'] as const).filter(
+        (layer) =>
+          p.spawns.some((v) => definition(v.type).layer === layer) && !hasCounter(units, layer),
+      ),
+      cannotStart = shown.coreHP <= 0 || missingLayers.length > 0,
       readiness = maintenance(s);
-    return `<article class="mission-card"><p class="eyebrow">${p.mode === 'Calibration' ? 'FREE PRACTICE' : p.difficulty.toUpperCase() + ' SIEGE'}</p><h3>${escapeHTML(p.stage !== null ? stageInfo(p.stage).name.split(' · ').at(-1)! : p.name)}</h3><div class="brief-facts"><div><span>Attack from</span><strong>${brief.fronts}</strong></div><div><span>Deployment</span><strong>${Math.floor(p.duration / 60)}m ${p.duration % 60 ? `${p.duration % 60}s` : ''}${p.blocks > 1 ? ` × ${p.blocks}` : ''}</strong></div></div><p><strong>${brief.summary}</strong></p><p class="muted">${brief.counter}</p></article>${p.stage === 4 ? '<p class="notice">First boss siege. Reinforce before starting: cover the approach with overlapping fire and protect your repair support. Spend your reserve on stronger unlocked defenders: Heavy Squads at Rank 6, Rotary at Rank 7.</p>' : ''}${p.stage === 1 ? '<p class="notice">This siege is stronger. Face the approach and consider adding a Sentry or Rifle Squad with your earned Credits.</p>' : ''}${warnings.map((w) => `<p class="notice">${w}</p>`).join('')}${cannotStart ? '<p class="notice">Restore the Core and deploy a living damage dealer before starting.</p>' : ''}<div class="panel-cta">${this.button(p.mode === 'Calibration' ? 'Start practice' : 'Start siege', () => this.startSiege(p), true, cannotStart)}</div><div class="button-row">${this.button(
+    return `<article class="mission-card"><p class="eyebrow">${p.mode === 'Calibration' ? 'FREE PRACTICE' : p.difficulty.toUpperCase() + ' SIEGE'}</p><h3>${escapeHTML(p.stage !== null ? stageInfo(p.stage).name.split(' · ').at(-1)! : p.name)}</h3><div class="brief-facts"><div><span>Attack from</span><strong>${brief.fronts}</strong></div><div><span>Deployment</span><strong>${Math.floor(p.duration / 60)}m ${p.duration % 60 ? `${p.duration % 60}s` : ''}${p.blocks > 1 ? ` × ${p.blocks}` : ''}</strong></div></div><p><strong>${brief.summary}</strong></p><p class="muted">${brief.counter}</p></article>${p.stage === 4 ? '<p class="notice">First boss siege. Reinforce before starting: cover the approach with overlapping fire and protect your repair support. Spend your reserve on stronger unlocked defenders: Heavy Squads at Rank 6, Rotary at Rank 7.</p>' : ''}${p.stage === 1 ? '<p class="notice">This siege is stronger. Face the approach and consider adding a Sentry or Rifle Squad with your earned Credits.</p>' : ''}${warnings.map((w) => `<p class="notice">${w}</p>`).join('')}${cannotStart ? `<p class="notice">${shown.coreHP <= 0 ? 'Restore the Core before starting.' : `Deploy a working ${missingLayers.join(' and ')} damage counter before starting.`}</p>` : ''}<div class="panel-cta">${this.button(p.mode === 'Calibration' ? 'Start practice' : 'Start siege', () => this.startSiege(p), true, cannotStart)}</div><div class="button-row">${this.button(
       'Adjust defenses',
       () => {
         this.close();
@@ -1828,20 +1830,10 @@ class FullApp {
       throw new Error('Complete the preceding campaign stage first');
     const practice = (p.originMode ?? p.mode) === 'Calibration';
     const check = p.practice ? practiceClone(s, p.practice, p) : s,
-      force = check.assets.filter(
-        (a) => a.placement && a.hp && definition(a.type).weapon !== 'none',
-      );
+      force = check.assets.filter((a) => damageLayers(a).length);
     for (const layer of ['air', 'ground'] as const)
-      if (
-        p.spawns.some((v) => definition(v.type).layer === layer) &&
-        !force.some(
-          (a) =>
-            definition(a.type).targets === layer ||
-            (definition(a.type).targets === 'both' &&
-              !(layer === 'ground' && a.type === 'friendly.skyguard' && !a.tactics.groundFallback)),
-        )
-      )
-        throw new Error(
+      if (p.spawns.some((v) => definition(v.type).layer === layer) && !hasCounter(force, layer))
+        throw Error(
           `No operational ${layer} damage counter. Repair or deploy a defender before starting.`,
         );
     let start = structuredClone(s);

@@ -1,4 +1,4 @@
-import { divRound, sqrtFloor, FRACTION, type Vec, distance } from './fixed';
+import { divRound, productRatio, sqrtFloor, FRACTION, type Vec, distance } from './fixed';
 import type { Rect } from '../construction/geometry';
 export interface Shape extends Vec {
   radius: number;
@@ -25,8 +25,8 @@ export function nearest(p: Vec, t: Shape): Vec {
   const d = distance(p, t);
   return d
     ? {
-        x: t.x + divRound(BigInt(p.x - t.x) * BigInt(t.radius), BigInt(d)),
-        y: t.y + divRound(BigInt(p.y - t.y) * BigInt(t.radius), BigInt(d)),
+        x: t.x + productRatio(p.x - t.x, t.radius, d),
+        y: t.y + productRatio(p.y - t.y, t.radius, d),
       }
     : { x: t.x, y: t.y };
 }
@@ -57,8 +57,8 @@ function rectangle(a: Vec, b: Vec, r: Rect): number | null {
     if (!d) {
       if (v < min || v > max) return null;
     } else {
-      const t1 = divRound(BigInt(min - v) * BigInt(FRACTION), BigInt(Math.abs(d))) * Math.sign(d),
-        t2 = divRound(BigInt(max - v) * BigInt(FRACTION), BigInt(Math.abs(d))) * Math.sign(d);
+      const t1 = productRatio(min - v, FRACTION, Math.abs(d)) * Math.sign(d),
+        t2 = productRatio(max - v, FRACTION, Math.abs(d)) * Math.sign(d);
       lo = Math.max(lo, Math.min(t1, t2));
       hi = Math.min(hi, Math.max(t1, t2));
       if (lo > hi) return null;
@@ -66,25 +66,70 @@ function rectangle(a: Vec, b: Vec, r: Rect): number | null {
   }
   return lo;
 }
+/** Boolean equivalent of sweep(..., rectangle, 0). Preserve quantized corner
+ * contacts while avoiding two duplicate slabs and four BigInt circle sweeps. */
+export function intersectsRectangle(a: Vec, b: Vec, r: Rect): boolean {
+  if (rectangle(a, b, r) !== null) return true;
+  const dx = b.x - a.x,
+    dy = b.y - a.y,
+    aa = dx * dx + dy * dy;
+  if (!aa) return false;
+  for (const x of [r.x, r.x + r.width])
+    for (const y of [r.y, r.y + r.height]) {
+      const px = x - a.x,
+        py = y - a.y,
+        cross = px * dy - py * dx,
+        dot = px * dx + py * dy;
+      if (
+        !Number.isSafeInteger(cross) ||
+        !Number.isSafeInteger(dot * FRACTION) ||
+        !Number.isSafeInteger((FRACTION + 1) * aa)
+      ) {
+        if (circle(a, b, { x, y }, 0) !== null) return true;
+      } else if (cross === 0 && -aa < dot * FRACTION && dot * FRACTION < (FRACTION + 1) * aa)
+        return true;
+    }
+  return false;
+}
 export function sweep(a: Vec, b: Vec, t: Shape, projectileRadius = 51): number | null {
-  if (!t.rect) return circle(a, b, t, t.radius + projectileRadius);
+  // For integer map rays shorter than FRACTION on each axis, one quantum
+  // cannot reach across a whole fixed unit outside this conservative box.
   const r = t.rect,
+    minX = r ? Math.min(r.x, r.x + r.width) : t.x - t.radius,
+    maxX = r ? Math.max(r.x, r.x + r.width) : t.x + t.radius,
+    minY = r ? Math.min(r.y, r.y + r.height) : t.y - t.radius,
+    maxY = r ? Math.max(r.y, r.y + r.height) : t.y + t.radius;
+  if (
+    projectileRadius >= 0 &&
+    t.radius >= 0 &&
+    Math.abs(b.x - a.x) < FRACTION &&
+    Math.abs(b.y - a.y) < FRACTION &&
+    [a.x, a.y, b.x, b.y, minX, maxX, minY, maxY, projectileRadius].every(Number.isSafeInteger) &&
+    (Math.max(a.x, b.x) + projectileRadius < minX ||
+      Math.min(a.x, b.x) - projectileRadius > maxX ||
+      Math.max(a.y, b.y) + projectileRadius < minY ||
+      Math.min(a.y, b.y) - projectileRadius > maxY)
+  )
+    return null;
+  if (!t.rect) return circle(a, b, t, t.radius + projectileRadius);
+  const rect = t.rect,
     contacts = [
       rectangle(a, b, {
-        x: r.x - projectileRadius,
-        y: r.y,
-        width: r.width + 2 * projectileRadius,
-        height: r.height,
+        x: rect.x - projectileRadius,
+        y: rect.y,
+        width: rect.width + 2 * projectileRadius,
+        height: rect.height,
       }),
       rectangle(a, b, {
-        x: r.x,
-        y: r.y - projectileRadius,
-        width: r.width,
-        height: r.height + 2 * projectileRadius,
+        x: rect.x,
+        y: rect.y - projectileRadius,
+        width: rect.width,
+        height: rect.height + 2 * projectileRadius,
       }),
     ];
-  for (const x of [r.x, r.x + r.width])
-    for (const y of [r.y, r.y + r.height]) contacts.push(circle(a, b, { x, y }, projectileRadius));
+  for (const x of [rect.x, rect.x + rect.width])
+    for (const y of [rect.y, rect.y + rect.height])
+      contacts.push(circle(a, b, { x, y }, projectileRadius));
   const actual = contacts.filter((f): f is number => f !== null);
   return actual.length ? Math.min(...actual) : null;
 }

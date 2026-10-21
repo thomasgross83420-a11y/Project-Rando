@@ -7,6 +7,29 @@ export interface Vec {
   x: number;
   y: number;
 }
+/** Exact integer ratio rounding without BigInt allocation inside safe bounds. */
+export function ratioRound(n: number, d: number): number {
+  if (
+    !Number.isSafeInteger(n) ||
+    !Number.isSafeInteger(d) ||
+    d <= 0 ||
+    Math.abs(n) > Number.MAX_SAFE_INTEGER - d
+  )
+    return divRound(BigInt(n), BigInt(d));
+  const sign = n < 0 ? -1 : 1,
+    a = Math.abs(n);
+  let q = Math.floor(a / d);
+  while (q * d > a) q--;
+  while ((q + 1) * d <= a) q++;
+  const remainder = a - q * d;
+  return sign * (q + (remainder >= d - remainder ? 1 : 0)) || 0;
+}
+export function productRatio(n: number, m: number, d: number): number {
+  const product = n * m;
+  return Number.isSafeInteger(product)
+    ? ratioRound(product, d)
+    : divRound(BigInt(n) * BigInt(m), BigInt(d));
+}
 export function divRound(n: bigint, d: bigint): number {
   if (d <= 0n) throw new Error('Invalid divisor');
   const sign = n < 0n ? -1n : 1n,

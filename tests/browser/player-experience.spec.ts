@@ -270,3 +270,27 @@ test('stalled cleanup opens recovery, restarts practice and preserves the real w
   expect(after.credits).toBe(before.credits);
   expect(after.assets).toEqual(before.assets);
 });
+test('a stocked trap is a valid ground damage counter without a silently added Warden', async ({
+  page,
+}) => {
+  await page.goto('./');
+  await page.getByRole('button', { name: 'New game', exact: true }).waitFor();
+  await page.addScriptTag({ path: '.cache/full-browser/fixture.js' });
+  const before = await page.evaluate(() => window.RBFullFixture.seedTrapDefense());
+  await page.reload();
+  await page.getByRole('button', { name: /^Continue ·/ }).click();
+  await page.getByRole('button', { name: 'Siege', exact: true }).click();
+  await page.getByText('Other ways to play & difficulty', { exact: true }).click();
+  await page.getByLabel('Mode', { exact: true }).selectOption('Calibration');
+  await page.getByLabel('Count', { exact: true }).fill('1');
+  await page.getByRole('button', { name: 'Review forecast', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Start practice', exact: true })).toBeEnabled();
+  await page.getByRole('button', { name: 'Start practice', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Pause', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Siege tools', exact: true }).click();
+  await page.getByRole('button', { name: 'Withdraw', exact: true }).click();
+  await page.locator('dialog').getByRole('button', { name: 'Withdraw', exact: true }).click();
+  const after = await saved(page);
+  expect(after.assets).toEqual(before.assets);
+  expect(after.credits).toBe(before.credits);
+});

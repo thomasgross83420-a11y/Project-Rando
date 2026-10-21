@@ -15,7 +15,7 @@ import {
   divRound,
   type Vec,
 } from '../sim/fixed';
-import { boundary, nearest, sweep, type Shape } from '../sim/collision';
+import { boundary, nearest, sweep, intersectsRectangle, type Shape } from '../sim/collision';
 import { hash, RandomStream } from '../sim/determinism';
 import { accuracyPass, buffAccuracy } from '../progression/accuracy';
 import { spendFiniteCharge, EngineerRearm, type RearmObservation } from '../sim/finite-stock';
@@ -565,7 +565,7 @@ export class FullBattle {
         continue;
       if (e.d.id === 'friendly.low_cover') continue;
       if (e.d.id === 'friendly.controlled_gate' && e.gateOpen) continue;
-      if (sweep(a, end, e, 0) !== null) {
+      if (intersectsRectangle(a, end, e.rect)) {
         this.losCache.set(key, false);
         return false;
       }

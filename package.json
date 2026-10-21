@@ -30,7 +30,9 @@
     "audit:full-content": "python3 scripts/audit-full-content.py",
     "audit:experience": "vite build --ssr scripts/experience-balance-audit.ts --outDir .cache/experience-audit && node scripts/experience-balance-audit.mjs",
     "audit:game": "vite build --ssr scripts/full-game-audit.ts --outDir .cache/full-game-audit && node scripts/full-game-audit.mjs",
-    "test:experience": "node scripts/build-full-first-pass-fixture.mjs && playwright test tests/browser/full-first-pass.spec.ts tests/browser/player-experience.spec.ts"
+    "test:experience": "node scripts/build-full-first-pass-fixture.mjs && playwright test tests/browser/full-first-pass.spec.ts tests/browser/player-experience.spec.ts",
+    "audit:boss-choices": "node scripts/boss-comparison.mjs",
+    "audit:collision": "node scripts/compare-collision-profile.mjs"
   },
   "dependencies": {
     "phaser": "3.90.0",

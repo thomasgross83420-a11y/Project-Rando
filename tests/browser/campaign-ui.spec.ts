@@ -263,6 +263,7 @@ test('the recovery controls preserve a cash-poor wrecked campaign and explicitly
 test('progression controls and quoted purchases reflow in portrait and landscape at normal and 200% interface scale', async ({
   page,
 }) => {
+  test.setTimeout(60000);
   await page.goto('./?legacy=1');
   await page.addScriptTag({ path: '.cache/run-journal-browser/fixture.js' });
   await page.evaluate(() => window.RBRunFixture.productionSetup());

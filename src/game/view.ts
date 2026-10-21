@@ -4,6 +4,7 @@ import Phaser from 'phaser';
 import art from '../../public/assets/full/runtime.json';
 import {
   project,
+  rotate,
   unproject,
   pan,
   zoomAt,
@@ -58,6 +59,7 @@ export class FullView {
   forecast: Plan | null = null;
   onPick: (ids: string[]) => void = () => {};
   private routeKey = '';
+  private terrainKey = '';
   private routeTraces: { radius: number; points: Point[] }[] = [];
   private lastVisualKey = '';
   private frameStarted = performance.now();
@@ -215,52 +217,103 @@ export class FullView {
   }
   private makeTerrain() {
     if (!this.scene) return;
-    const t = this.scene.textures.createCanvas('full.terrain', 1024, 512);
+    const land = this.state ? landRects(this.state) : [{ x: 12, y: 12, width: 36, height: 36 }];
+    this.terrainKey = JSON.stringify([land, this.camera.view, this.state?.appearance.ground ?? '']);
+    const t = this.scene.textures.exists('full.terrain')
+      ? (this.scene.textures.get('full.terrain') as Phaser.Textures.CanvasTexture)
+      : this.scene.textures.createCanvas('full.terrain', 1024, 512);
     if (!t) return;
     const ctx = t.context;
-    ctx.fillStyle = '#253238';
-    ctx.beginPath();
-    ctx.moveTo(512, 0);
-    ctx.lineTo(1024, 256);
-    ctx.lineTo(512, 512);
-    ctx.lineTo(0, 256);
-    ctx.closePath();
-    ctx.fill();
-    for (let x = 0; x < 60; x++)
-      for (let y = 0; y < 60; y++) {
-        const px = 512 + (x - y) * 8.533,
-          py = (x + y) * 4.266;
-        const hash = (x * 1619 + y * 3137) % 37;
-        ctx.fillStyle = hash < 8 ? '#2b383c' : hash < 12 ? '#26383c' : '#29343a';
-        ctx.beginPath();
-        ctx.moveTo(px, py);
-        ctx.lineTo(px + 8.533, py + 4.266);
-        ctx.lineTo(px, py + 8.533);
-        ctx.lineTo(px - 8.533, py + 4.266);
-        ctx.closePath();
-        ctx.fill();
-        if (hash % 9 === 0) {
-          ctx.fillStyle = '#364247';
-          ctx.fillRect(px - 2, py + 4, 3, 1);
-        }
-        if ((x < 9 || x > 50 || y < 9 || y > 50) && hash < 5) {
-          ctx.fillStyle = '#455354';
-          ctx.fillRect(px - 2, py, 3, 4);
-          ctx.fillStyle = '#18282d';
-          ctx.fillRect(px, py + 3, 3, 2);
+    ctx.clearRect(0, 0, 1024, 512);
+    ctx.imageSmoothingEnabled = false;
+    const owned = (x: number, y: number) =>
+      land.some((r) => x >= r.x && x < r.x + r.width && y >= r.y && y < r.y + r.height);
+    const point = (x: number, y: number) => {
+      const p = rotate({ x: x - 30, y: y - 30 }, this.camera.view);
+      return {
+        x: Math.round(512 + ((p.x - p.y) * 128) / 15),
+        y: Math.round(256 + ((p.x + p.y) * 64) / 15),
+      };
+    };
+    const polygon = (points: Point[], fill: string, stroke?: string) => {
+      ctx.beginPath();
+      points.forEach((p, i) => {
+        if (i) ctx.lineTo(p.x, p.y);
+        else ctx.moveTo(p.x, p.y);
+      });
+      ctx.closePath();
+      ctx.fillStyle = fill;
+      ctx.fill();
+      if (stroke) {
+        ctx.strokeStyle = stroke;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    };
+    for (let y = 0; y < 60; y++)
+      for (let x = 0; x < 60; x++) {
+        const hash = (x * 1619 + y * 3137 + x * y * 19) % 101,
+          isOwned = owned(x, y),
+          corners = [point(x, y), point(x + 1, y), point(x + 1, y + 1), point(x, y + 1)],
+          center = point(x + 0.5, y + 0.5);
+        const precinct = x >= 27 && x < 33 && y >= 27 && y < 33,
+          pad = x >= 29 && x < 31 && y >= 33 && y < 35;
+        const floor = pad
+          ? '#414c3d'
+          : precinct
+            ? '#3a534f'
+            : isOwned
+              ? ['#2a403e', '#2d4541', '#304741', '#2c423f'][hash % 4]!
+              : ['#202d32', '#243236', '#263337', '#233034'][hash % 4]!;
+        polygon(corners, floor, isOwned ? '#304a45' : undefined);
+        if (isOwned) {
+          if ((x + y) % 4 === 0) {
+            ctx.strokeStyle = '#405c53';
+            ctx.beginPath();
+            ctx.moveTo(corners[0]!.x, corners[0]!.y);
+            ctx.lineTo(corners[1]!.x, corners[1]!.y);
+            ctx.stroke();
+          }
+          if (hash % 13 === 0) {
+            ctx.fillStyle = '#587067';
+            ctx.fillRect(center.x - 1, center.y, 2, 1);
+          }
+          if ((x === 29 || y === 29) && !precinct && !pad) {
+            const a = point(x + 0.25, y + 0.5),
+              b = point(x + 0.75, y + 0.5);
+            ctx.strokeStyle = '#65877c';
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+            ctx.fillStyle = '#8bac95';
+            ctx.fillRect(center.x, center.y, 1, 1);
+          }
+          const edges = [
+            [x, y - 1, 0, 1],
+            [x + 1, y, 1, 2],
+            [x, y + 1, 2, 3],
+            [x - 1, y, 3, 0],
+          ];
+          for (const [nx, ny, i, j] of edges)
+            if (!owned(nx!, ny!)) {
+              const a = corners[i!]!,
+                b = corners[j!]!;
+              ctx.strokeStyle = pad ? '#bda476' : '#708575';
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
+        } else if (hash < 16) {
+          ctx.fillStyle = '#354348';
+          ctx.fillRect(center.x - 2, center.y, 3, 1);
+          ctx.fillStyle = '#1b292f';
+          ctx.fillRect(center.x, center.y + 1, 2, 1);
         }
       }
-    ctx.strokeStyle = '#465459';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(512, 0);
-    ctx.lineTo(1024, 256);
-    ctx.lineTo(512, 512);
-    ctx.lineTo(0, 256);
-    ctx.closePath();
-    ctx.stroke();
     t.refresh();
-    this.terrain = this.scene.add.image(0, 0, 'full.terrain').setDepth(-1000);
+    if (!this.terrain) this.terrain = this.scene.add.image(0, 0, 'full.terrain').setDepth(-1000);
   }
   private resize() {
     const r = this.parent.getBoundingClientRect();
@@ -475,6 +528,12 @@ export class FullView {
     if (now - this.lastDraw < (low || !this.battle ? 32 : 16)) return;
     if (!this.battle && this.state.settings.reducedEffects && visualKey === this.lastVisualKey)
       return;
+    const terrainKey = JSON.stringify([
+      landRects(this.state),
+      this.camera.view,
+      this.state.appearance.ground ?? '',
+    ]);
+    if (terrainKey !== this.terrainKey) this.makeTerrain();
     this.lastVisualKey = visualKey;
     this.lastDraw = now;
     this.parent.dataset.cameraX = this.camera.x.toFixed(4);
